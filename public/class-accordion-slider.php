@@ -19,7 +19,7 @@ class Accordion_Slider {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
 		// activate the plugin when a new blog is added
-		add_action( 'wpmu_new_blog', array( $this, 'activate_new_blog') );
+		add_action( 'wpmu_new_blog', array( $this, 'activate_new_blog' ) );
 
 		// load the public CSS and JavaScript
 		add_action( 'wp_enqueue_styles', array( $this, 'enqueue_styles' ) );
@@ -37,7 +37,7 @@ class Accordion_Slider {
 		Return the instance of the class
 	*/
 	public static function get_instance() {
-		if (self::$instance == null) {
+		if ( self::$instance == null ) {
 			self::$instance = new self;
 		}
 
@@ -92,7 +92,7 @@ class Accordion_Slider {
 		Executed when a new blog is activated within a WPMU environment
 	*/
 	public function activate_new_blog( $blog_id ) {
-		if ( did_action( 'wpmu_new_blog' ) !== 1) {
+		if ( did_action( 'wpmu_new_blog' ) !== 1 ) {
 			return 1;
 		}
 
@@ -116,7 +116,59 @@ class Accordion_Slider {
 		Executed for a single blog when the plugin is activated
 	*/
 	private static function single_activate() {
+		global $wpdb;
+		$prefix = $wpdb->prefix;
+		$table_name = $prefix . 'accslider_accordions';
 
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
+		// when the slider is activated for the first time, the tables don't exist, so we need to create them
+		if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name ) {
+			$create_accordions_table = "CREATE TABLE ". $prefix . "accslider_accordions (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				name varchar(100) NOT NULL,
+				settings text NOT NULL,
+				created varchar(11) NOT NULL,
+				modified varchar(11) NOT NULL,
+				PRIMARY KEY (id)
+				) DEFAULT CHARSET=utf8;";
+			
+			$create_panels_table = "CREATE TABLE ". $prefix . "accslider_panels (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				accordion_id mediumint(9) NOT NULL,
+				label varchar(100) NOT NULL,
+				position mediumint(9) NOT NULL,
+				visibility varchar(20) NOT NULL,
+				background text NOT NULL,
+				background_retina text NOT NULL,
+				background_alt text NOT NULL,
+				background_title text NOT NULL,
+				background_width mediumint(9) NOT NULL,
+				background_height mediumint(9) NOT NULL,
+				background_opened text NOT NULL,
+				background_opened_retina text NOT NULL,
+				background_opened_alt text NOT NULL,
+				background_opened_title text NOT NULL,
+				background_opened_width mediumint(9) NOT NULL,
+				background_opened_height mediumint(9) NOT NULL,
+				background_link text NOT NULL,
+				background_link_title text NOT NULL,
+				html_content text NOT NULL,
+				PRIMARY KEY (id)
+				) DEFAULT CHARSET=utf8;";
+			
+			$create_layers_table = "CREATE TABLE ". $prefix . "accslider_layers (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				panel_id mediumint(9) NOT NULL,
+				content text NOT NULL,
+				settings text NOT NULL,
+				PRIMARY KEY (id)
+				) DEFAULT CHARSET=utf8;";
+																		   						
+			dbDelta($create_accordions_table);
+			dbDelta($create_panels_table);
+			dbDelta($create_layers_table);
+		}
 	}
 
 	/*
@@ -141,13 +193,27 @@ class Accordion_Slider {
 		Load the public CSS
 	*/
 	public function enqueue_styles() {
-		wp_enqueue_styles( $this->plugin_slug . '-plugin-style', plugins_url( 'assets/css/accordion-slider.min.css', __FILE__ ), array(), self::VERSION );
+		wp_enqueue_style( $this->plugin_slug . '-plugin-style', plugins_url( 'assets/css/accordion-slider.min.css', __FILE__ ), array(), self::VERSION );
 	}
 
 	/*
 		Load the public JavaScript
 	*/
 	public function enqueue_scripts() {
-		wp_enqueue_scripts( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/jquery.accordionSlider.min.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/jquery.accordionSlider.min.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+	}
+
+	public function load_accordion( $id ) {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'accslider_accordions';
+		$result = $wpdb->get_row( "SELECT * FROM $table_name WHERE id = $id", ARRAY_A );
+		
+		if ( $result ) {
+			$result['settings'] = unserialize( $result['settings'] );
+
+			return $result;
+		} else {
+			return false;	
+		}
 	}
 }
