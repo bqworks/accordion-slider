@@ -1,0 +1,137 @@
+.accordion-slider-admin .editor-wrapper {
+	float: left;
+	width: 100%;
+	margin-right: -440px;
+}
+
+.accordion-slider-admin .editor-body {
+	margin-right: 440px;
+}
+
+.accordion-slider-admin .inner-sidebar {
+	float: right;
+	width: 400px;
+}
+
+.admin-panel {
+	display: inline-block;
+	width: 32%;
+	margin: 1% 2% 1% 0;
+}
+
+.admin-panel:nth-child(3n) {
+	margin-right: 0;
+}
+
+.panel-image {
+	height: 170px;
+	background: #EEE;
+}
+
+.panel-buttons {
+	height: 44px;
+	background: #F9F9F9;
+	text-align: center;
+}
+
+.panel-buttons .button-secondary {
+	margin: 10px 5px;
+	border-color: #DDD;
+}
+
+.panel-controls {
+
+}
+
+.modal-overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: #000;
+	opacity: 0.7;
+	z-index: 1000;
+}
+
+.background-image-editor {
+	position: absolute;
+	width: 650px;
+	height: 520px;
+	padding: 30px;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #FFF;
+	z-index: 1001;
+}
+
+.background-image-editor .close-editor {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.background-image-editor .close-editor:before {
+	content: '×';
+}
+
+.background-image-editor .fieldset {
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+
+.background-image-editor .heading {
+	margin: 0 0 10px 0;
+	font-size: 20px;
+	font-weight: normal;
+	line-height: 1;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #DDD;
+}
+
+.background-image-editor .image-loader {
+	width: 170px;
+	height: 110px;
+	background-color: #EEE;
+	float: left;
+}
+
+.background-image-editor .data-fields {
+	margin-left: 190px;
+}
+
+.background-image-editor .data-fields label {
+	
+}
+
+.background-image-editor .data-fields input {
+	background-color: #FCFCFC;
+	border: none;
+	border-bottom: 1px dashed #DDDDDD;
+	margin-left: 10px;
+	width: 358px;
+}
+
+.background-image-editor .link .data-fields {
+	margin-left: 0;
+}
+
+.background-image-editor .link .data-fields input {
+	width: 605px;
+}
+
+.background-image-editor .add-background-opened-image,
+.background-image-editor .add-link  {
+	margin-right: 10px;
+}
+
+.background-image-editor .close,
+.background-image-editor .save  {
+	float: right;
+	margin-left: 10px;
+}

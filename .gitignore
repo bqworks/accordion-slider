@@ -13,3 +13,4 @@ Icon
 
 *.sublime-project
 *.sublime-workspace
+/notes.md
