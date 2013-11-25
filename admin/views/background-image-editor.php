@@ -27,8 +27,8 @@
 		</table>
 	</div>
 
-	<div class="fieldset background-opened-image">
-		<h3 class="heading">Background Opened Image</h3>
+	<div class="fieldset opened-background-image">
+		<h3 class="heading">Opened Background Image</h3>
 		<div class="image-loader"></div>
 		<table class="data-fields">
 			<tbody>
@@ -69,7 +69,7 @@
 	</div>
 
 	<div class="buttons">
-		<a class="button-secondary add-background-opened-image" href="#">Add Background Opened Image</a>
+		<a class="button-secondary add-opened-background-image" href="#">Add Opened Background Image</a>
 		<a class="button-secondary add-link" href="#">Add Link</a>
 		<a class="button-secondary save" href="#">Save</a>
 		<a class="button-secondary close" href="#">Close</a>
