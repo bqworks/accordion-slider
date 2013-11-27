@@ -26,6 +26,11 @@
 .panel-image {
 	height: 170px;
 	background: #EEE;
+	overflow: hidden;
+}
+
+.panel-image img {
+	max-width: 100%;
 }
 
 .panel-buttons {
@@ -68,7 +73,7 @@
 	z-index: 1001;
 }
 
-.background-image-editor .close-editor {
+.background-image-editor .close-x {
 	position: absolute;
 	right: 10px;
 	top: 10px;
@@ -76,7 +81,7 @@
 	cursor: pointer;
 }
 
-.background-image-editor .close-editor:before {
+.background-image-editor .close-x:before {
 	content: '×';
 }
 
@@ -130,8 +135,8 @@
 	margin-right: 10px;
 }
 
-.background-image-editor .close,
-.background-image-editor .save  {
+.background-image-editor .buttons .close,
+.background-image-editor .buttons .save  {
 	float: right;
 	margin-left: 10px;
 }

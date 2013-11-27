@@ -1,6 +1,6 @@
 <div class="modal-overlay"></div>
 <div class="background-image-editor">
-	<span class="close-editor"></span>
+	<span class="close-x"></span>
 
 	<div class="fieldset background-image">
 		<h3 class="heading">Background Image</h3>
@@ -9,19 +9,19 @@
 			<tbody>
 				<tr>
 					<td><label>Source:</label></td>
-					<td><input type="text"></td>
+					<td><input name="background_source" type="text" /></td>
 				</tr>
 				<tr>
 					<td><label>Alt:</label></td>
-					<td><input type="text"></td>
+					<td><input name="background_alt" type="text" /></td>
 				</tr>
 				<tr>
 					<td><label>Title:</label></td>
-					<td><input type="text"></td>
+					<td><input name="background_title" type="text" /></td>
 				</tr>
 				<tr>
 					<td><label>Retina Source:</label></td>
-					<td><input type="text"></td>
+					<td><input name="background_retina_source" type="text" /></td>
 				</tr>
 			</tbody>
 		</table>
@@ -34,19 +34,19 @@
 			<tbody>
 				<tr>
 					<td><label>Source:</label></td>
-					<td><input type="text"></td>
+					<td><input name="opened_background_source" type="text" /></td>
 				</tr>
 				<tr>
 					<td><label>Alt:</label></td>
-					<td><input type="text"></td>
+					<td><input name="opened_background_alt" type="text" /></td>
 				</tr>
 				<tr>
 					<td><label>Title:</label></td>
-					<td><input type="text"></td>
+					<td><input name="opened_background_title" type="text" /></td>
 				</tr>
 				<tr>
 					<td><label>Retina Source:</label></td>
-					<td><input type="text"></td>
+					<td><input name="opened_background_retina_source" type="text" /></td>
 				</tr>
 			</tbody>
 		</table>
@@ -58,11 +58,11 @@
 			<tbody>
 				<tr>
 					<td><label>URL:</label></td>
-					<td><input type="text"></td>
+					<td><input name="background_link" type="text" /></td>
 				</tr>
 				<tr>
 					<td><label>Title:</label></td>
-					<td><input type="text"></td>
+					<td><input name="background_link_title" type="text" /></td>
 				</tr>
 			</tbody>
 		</table>

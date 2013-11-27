@@ -7,16 +7,22 @@
             <div class="editor-wrapper meta-box-sortables">
                 <div class="editor-body">
                     <div id="titlediv">
-                    	<input name="name" id="title" type="text" value="My accordion"/>
+                    	<input name="name" id="title" type="text" value="<?php echo $accordion_name; ?>" />
                     </div>
 					
 					<div id="panels-container">
                     	<?php
-	                    	$this->create_panel();
-	                    	$this->create_panel();
-	                    	$this->create_panel();
-	                    	$this->create_panel();
-	                    	$this->create_panel();
+                    		if ( isset( $panels ) ) {
+                    			if ( ! empty( $panels ) ) {
+                    				foreach ( $panels as $panel ) {
+
+                    					$this->create_panel( $panel );
+                    				}
+                    			}
+                    		} else {
+                    			$this->create_panel( false );
+                    			$this->create_panel( false );
+                    		}
 	                    ?>
                     </div>
                 </div>
@@ -25,7 +31,8 @@
             <div class="inner-sidebar meta-box-sortables ui-sortable">
 				<div class="postbox action">
 					<div class="inside">
-						
+						<input type="submit" name="submit" class="button-primary" value="Update" />
+						<a class="button preview-slider" href="">Preview</a>
 					</div>
 				</div>
 				

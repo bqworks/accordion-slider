@@ -118,13 +118,13 @@ class Accordion_Slider {
 	private static function single_activate() {
 		global $wpdb;
 		$prefix = $wpdb->prefix;
-		$table_name = $prefix . 'accslider_accordions';
+		$table_name = $prefix . 'accordionslider_accordions';
 
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
 		// when the slider is activated for the first time, the tables don't exist, so we need to create them
 		if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name ) {
-			$create_accordions_table = "CREATE TABLE ". $prefix . "accslider_accordions (
+			$create_accordions_table = "CREATE TABLE ". $prefix . "accordionslider_accordions (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				name varchar(100) NOT NULL,
 				settings text NOT NULL,
@@ -133,20 +133,20 @@ class Accordion_Slider {
 				PRIMARY KEY (id)
 				) DEFAULT CHARSET=utf8;";
 			
-			$create_panels_table = "CREATE TABLE ". $prefix . "accslider_panels (
+			$create_panels_table = "CREATE TABLE ". $prefix . "accordionslider_panels (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				accordion_id mediumint(9) NOT NULL,
 				label varchar(100) NOT NULL,
 				position mediumint(9) NOT NULL,
 				visibility varchar(20) NOT NULL,
-				background text NOT NULL,
-				background_retina text NOT NULL,
+				background_source text NOT NULL,
+				background_retina_source text NOT NULL,
 				background_alt text NOT NULL,
 				background_title text NOT NULL,
 				background_width mediumint(9) NOT NULL,
 				background_height mediumint(9) NOT NULL,
-				background_opened text NOT NULL,
-				background_opened_retina text NOT NULL,
+				background_opened_source text NOT NULL,
+				background_opened_retina_source text NOT NULL,
 				background_opened_alt text NOT NULL,
 				background_opened_title text NOT NULL,
 				background_opened_width mediumint(9) NOT NULL,
@@ -157,7 +157,7 @@ class Accordion_Slider {
 				PRIMARY KEY (id)
 				) DEFAULT CHARSET=utf8;";
 			
-			$create_layers_table = "CREATE TABLE ". $prefix . "accslider_layers (
+			$create_layers_table = "CREATE TABLE ". $prefix . "accordionslider_layers (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				panel_id mediumint(9) NOT NULL,
 				content text NOT NULL,
@@ -165,9 +165,9 @@ class Accordion_Slider {
 				PRIMARY KEY (id)
 				) DEFAULT CHARSET=utf8;";
 																		   						
-			dbDelta($create_accordions_table);
-			dbDelta($create_panels_table);
-			dbDelta($create_layers_table);
+			dbDelta( $create_accordions_table );
+			dbDelta( $create_panels_table );
+			dbDelta( $create_layers_table );
 		}
 	}
 
@@ -204,12 +204,22 @@ class Accordion_Slider {
 
 	public function load_accordion( $id ) {
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'accslider_accordions';
+		$table_name = $wpdb->prefix . 'accordionslider_accordions';
 		$result = $wpdb->get_row( "SELECT * FROM $table_name WHERE id = $id", ARRAY_A );
-		
-		if ( $result ) {
-			$result['settings'] = unserialize( $result['settings'] );
 
+		if ( ! is_null( $result ) ) {
+			return $result;
+		} else {
+			return false;	
+		}
+	}
+
+	public function load_panels( $id ) {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'accordionslider_panels';
+		$result = $wpdb->get_results( "SELECT * FROM $table_name WHERE accordion_id = $id", ARRAY_A );
+
+		if ( ! is_null( $result ) ) {
 			return $result;
 		} else {
 			return false;	

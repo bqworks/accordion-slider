@@ -1,6 +1,12 @@
 <div class="admin-panel">
 	<div class="panel-image"> 
-
+		<?php 
+			if ( $panel_image !== '' ) {
+				echo '<img src="' . $panel_image . '" />';
+			} else {
+				echo '<p>Add an image</p>';
+			}
+		?>
 	</div>
 
 	<div class="panel-buttons"> 
@@ -13,3 +19,4 @@
 
 	</div>
 </div>
+
