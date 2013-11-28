@@ -35,7 +35,7 @@
 						'panels': []
 					};
 
-					$('#panels-container').find('.admin-panel').each(function(index) {
+					$('#panels-container').find('.panel').each(function(index) {
 						accordionData.panels[index] = that.getPanel(index).getData();
 					});
 
@@ -63,7 +63,7 @@
 		initPanels: function() {
 			var that = this;
 
-			$('#panels-container').find('.admin-panel').each(function(index) {
+			$('#panels-container').find('.panel').each(function(index) {
 				that.createPanel($(this), index);
 			});
 		},
@@ -117,12 +117,15 @@
 
 		currentPanel: null,
 
+		currentPanelIndex: 0,
+
 		currentPanelData: null,
 
 		open: function(index) {
 			var that = this;
 
 			this.currentPanel = AccordionSliderAdmin.getPanel(index);
+			this.currentPanelIndex = index;
 			this.currentPanelData = this.currentPanel.getData();
 
 			$.ajax({
@@ -155,10 +158,18 @@
 				var $this = $(this),
 					name = $this.attr('name');
 
-				if (typeof that.currentPanelData[name] !== 'undefined') {
+				if (that.currentPanelData[name] !== '') {
 					$this.val(that.currentPanelData[name]);
 				}
 			});
+
+			if (this.currentPanelData['background_source'] !== '') {
+				$('<img src="' + this.currentPanelData['background_source'] + '" />').appendTo(editor.find('.background-image .image-loader'));
+			}
+
+			if (this.currentPanelData['opened_background_source'] !== '') {
+				$('<img src="' + this.currentPanelData['opened_background_source'] + '" />').appendTo(editor.find('.opened-background-image .image-loader'));
+			}
 		},
 
 		save: function() {
@@ -174,6 +185,16 @@
 				}
 			});
 
+			if (this.currentPanelData['background_source'] !== '') {
+				var panelImage = $('#panels-container').find('.panel').eq(this.currentPanelIndex).find('.panel-image');
+
+				if (panelImage.find('img').length) {
+					panelImage.find('img').attr('src', this.currentPanelData['background_source']);
+				} else {
+					$('<img src="' + this.currentPanelData['background_source'] + '" />').appendTo(panelImage);
+				}
+			}
+
 			this.close();
 		},
 
@@ -183,8 +204,45 @@
 			$('body').find('.modal-overlay, .background-image-editor').remove();
 		},
 
-		openMediaLibrary: function() {
-			
+		openMediaLibrary: function(event) {
+			var target = $(event.target).parents('.fieldset').hasClass('opened-background-image') === true ? 'opened-background-image' : 'background-image';
+
+			if (typeof wp != 'undefined' && wp.media && wp.media.editor) {
+				wp.media.editor.send.attachment = function(props, attachment) {
+					var url = attachment.sizes[props.size].url,
+						alt = attachment.alt,
+						title = attachment.title,
+						imageLoader;
+
+					if (target === 'background-image') {
+						imageLoader = editor.find('.background-image .image-loader');
+
+						if (imageLoader.find('img').length) {
+							imageLoader.find('img').attr('src', attachment.sizes.medium.url);
+						} else {
+							$('<img src="' + attachment.sizes.medium.url + '" />').appendTo(imageLoader);
+						}
+
+						editor.find('input[name="background_source"]').val(url);
+						editor.find('input[name="background_alt"]').val(alt);
+						editor.find('input[name="background_title"]').val(title);
+					} else if (target === 'opened-background-image') {
+						imageLoader = editor.find('.opened-background-image .image-loader');
+
+						if (imageLoader.find('img').length) {
+							imageLoader.find('img').attr('src', attachment.sizes.medium.url);
+						} else {
+							$('<img src="' + attachment.sizes.medium.url + '" />').appendTo(imageLoader);
+						}
+
+						editor.find('input[name="opened_background_source"]').val(url);
+						editor.find('input[name="opened_background_alt"]').val(alt);
+						editor.find('input[name="opened_background_title"]').val(title);
+					}
+				};
+
+				wp.media.editor.open('media-loader');
+			}
 		}
 	};
 

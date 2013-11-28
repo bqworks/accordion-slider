@@ -65,6 +65,10 @@ class Accordion_Slider_Admin {
 		$screen = get_current_screen();
 
 		if ( in_array( $screen->id, $this->plugin_screen_hook_suffixes ) ) {
+			if ( function_exists( 'wp_enqueue_media' ) ) {
+		    	wp_enqueue_media();
+			}
+
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/accordion-slider-admin.js', __FILE__ ), array( 'jquery' ), Accordion_Slider::VERSION );
 
 			wp_localize_script( $this->plugin_slug . '-admin-script', 'as_js_vars', array(
@@ -191,12 +195,12 @@ class Accordion_Slider_Admin {
 							'background_title' => isset( $panel_data['background_title'] ) ? $panel_data['background_title'] : '',
 							'background_width' => isset( $panel_data['background_width'] ) ? $panel_data['background_width'] : '',
 							'background_height' => isset( $panel_data['background_height'] ) ? $panel_data['background_height'] : '',
-							'background_opened_source' => isset( $panel_data['background_opened_source'] ) ? $panel_data['background_opened_source'] : '',
-							'background_opened_retina_source' => isset( $panel_data['background_opened_retina_source'] ) ? $panel_data['background_opened_retina_source'] : '',
-							'background_opened_alt' => isset( $panel_data['background_opened_alt'] ) ? $panel_data['background_opened_alt'] : '',
-							'background_opened_title' => isset( $panel_data['background_opened_title'] ) ? $panel_data['background_opened_title'] : '',
-							'background_opened_width' => isset( $panel_data['background_opened_width'] ) ? $panel_data['background_opened_width'] : '',
-							'background_opened_height' => isset( $panel_data['background_opened_height'] ) ? $panel_data['background_opened_height'] : '',
+							'opened_background_source' => isset( $panel_data['opened_background_source'] ) ? $panel_data['opened_background_source'] : '',
+							'opened_background_retina_source' => isset( $panel_data['opened_background_retina_source'] ) ? $panel_data['opened_background_retina_source'] : '',
+							'opened_background_alt' => isset( $panel_data['opened_background_alt'] ) ? $panel_data['opened_background_alt'] : '',
+							'opened_background_title' => isset( $panel_data['opened_background_title'] ) ? $panel_data['opened_background_title'] : '',
+							'opened_background_width' => isset( $panel_data['opened_background_width'] ) ? $panel_data['opened_background_width'] : '',
+							'opened_background_height' => isset( $panel_data['opened_background_height'] ) ? $panel_data['opened_background_height'] : '',
 							'background_link' => isset( $panel_data['background_link'] ) ? $panel_data['background_link'] : '',
 							'background_link_title' => isset( $panel_data['background_link_title'] ) ? $panel_data['background_link_title'] : '',
 							'html_content' => isset( $panel_data['content'] ) ? $panel_data['content'] : '');

@@ -1,4 +1,4 @@
-<div class="admin-panel">
+<div class="panel">
 	<div class="panel-image"> 
 		<?php 
 			if ( $panel_image !== '' ) {
