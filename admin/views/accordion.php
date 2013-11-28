@@ -15,7 +15,6 @@
                     		if ( isset( $panels ) ) {
                     			if ( ! empty( $panels ) ) {
                     				foreach ( $panels as $panel ) {
-
                     					$this->create_panel( $panel );
                     				}
                     			}
@@ -35,14 +34,57 @@
 						<a class="button preview-slider" href="">Preview</a>
 					</div>
 				</div>
-				
-				<div class="postbox">
-					<div class="handlediv"></div>
-					<h3 class="hndle">General</h3>
-					<div class="inside">
-					
-					</div>
-				</div>			   
+                
+                <div id="sidebar-settings">
+                    <?php 
+                        $settings = Accordion_Slider_Settings::getSettings();
+
+                        foreach ( $settings as $group ) {
+                            ?>
+                            <div class="postbox">
+                                <div class="handlediv"></div>
+                                <h3 class="hndle"><?php echo $group['label']; ?></h3>
+                                <div class="inside">
+                                    <table>
+                                        <tbody>
+                                            <?php
+                                                foreach ( $group['list'] as $name => $setting ) {
+                                            ?>
+                                                <tr>
+                                                    <td>
+                                                        <?php echo $setting['label']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                            $value = isset( $accordion_settings ) && isset( $accordion_settings[$name] ) ? $accordion_settings[$name] : $setting['default_value'];
+
+                                                            if ( $setting['type'] === 'number' || $setting['type'] === 'mixed' ) {
+                                                                echo '<input class="setting" type="text" name="' . $name . '" value="' . $value . '" />';
+                                                            } else if ( $setting['type'] === 'boolean' ) {
+                                                                echo '<input class="setting" type="checkbox" name="' . $name . '"' . ( $value === true ? ' checked="checked"' : '' ) . ' />';
+                                                            } else if ( $setting['type'] === 'select' ) {
+                                                                echo'<select class="setting" name="' . $name . '">';
+                                                                
+                                                                foreach ( $setting['available_values'] as $value_name => $value_label ) {
+                                                                    echo '<option value="' . $value_name . '"' . ( $value == $value_name ? ' selected="selected"' : '' ) . '>' . $value_label . '</option>';
+                                                                }
+                                                                
+                                                                echo '</select>';
+                                                            }
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                                }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    ?>
+                </div>
             </div>
         </div>
 	</form>

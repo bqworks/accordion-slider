@@ -1,16 +1,16 @@
 .accordion-slider-admin .editor-wrapper {
 	float: left;
 	width: 100%;
-	margin-right: -440px;
+	margin-right: -390px;
 }
 
 .accordion-slider-admin .editor-body {
-	margin-right: 440px;
+	margin-right: 390px;
 }
 
 .accordion-slider-admin .inner-sidebar {
 	float: right;
-	width: 400px;
+	width: 350px;
 }
 
 .admin-panel {
@@ -46,6 +46,22 @@
 
 .panel-controls {
 
+}
+
+.action .preview-slider {
+	margin-left: 6px;
+}
+
+#sidebar-settings td {
+	padding: 5px;
+}
+
+#sidebar-settings .setting {
+	margin-left: 30px;
+}
+
+#sidebar-settings input[type=text] {
+	width: 50px;
 }
 
 .modal-overlay {
@@ -114,7 +130,7 @@
 	
 }
 
-.background-image-editor .data-fields input {
+.background-image-editor .data-fields .field {
 	background-color: #FCFCFC;
 	border: none;
 	border-bottom: 1px dashed #DDDDDD;
@@ -126,7 +142,7 @@
 	margin-left: 0;
 }
 
-.background-image-editor .link .data-fields input {
+.background-image-editor .link .data-fields .field {
 	width: 605px;
 }
 

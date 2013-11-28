@@ -39,6 +39,11 @@
 						accordionData.panels[index] = that.getPanel(index).getData();
 					});
 
+					$('#sidebar-settings').find('.setting').each(function() {
+						var setting = $(this);
+						accordionData.settings[setting.attr('name')] = setting.attr('type') === 'checkbox' ? setting.is(':checked') : setting.val();
+					});
+
 					var accordionDataString = JSON.stringify(accordionData);
 
 					$.ajax({
@@ -139,12 +144,14 @@
 
 			editor.find('.close, .close-x').on('click', $.proxy(this.close, this));
 			editor.find('.save').on('click', $.proxy(this.save, this));
+
+			editor.find('.image-loader').on('click', $.proxy(this.openMediaLibrary, this));
 		},
 
 		populateFields: function() {
 			var that = this;
 
-			editor.find('input').each(function() {
+			editor.find('.field').each(function() {
 				var $this = $(this),
 					name = $this.attr('name');
 
@@ -159,7 +166,7 @@
 
 			var that = this;
 
-			editor.find('input').each(function() {
+			editor.find('.field').each(function() {
 				var $this = $(this);
 
 				if ($this.val().length !== 0) {
@@ -174,6 +181,10 @@
 			event.preventDefault();
 
 			$('body').find('.modal-overlay, .background-image-editor').remove();
+		},
+
+		openMediaLibrary: function() {
+			
 		}
 	};
 

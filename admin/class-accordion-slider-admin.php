@@ -114,6 +114,7 @@ class Accordion_Slider_Admin {
 			if ( $accordion !== false ) {
 				$accordion_id = $accordion['id'];
 				$accordion_name = $accordion['name'];
+				$accordion_settings = json_decode( $accordion['settings'], true );
 
 				$panels = $this->plugin->load_panels( $accordion_id );
 
@@ -160,7 +161,7 @@ class Accordion_Slider_Admin {
 
 		if ( $id === -1 ) {
 			$wpdb->insert($wpdb->prefix . 'accordionslider_accordions', array( 'name' => $name, 
-																				'settings' => serialize( $settings ),
+																				'settings' => json_encode( $settings ),
 																				'created' => date( 'm-d-Y' ), 
 																				'modified' => date( 'm-d-Y' ) ), 
 																		array( '%s', '%s', '%s', '%s' ) );
@@ -170,7 +171,7 @@ class Accordion_Slider_Admin {
 			ChromePhp::log($id);
 		} else {
 			$wpdb->update($wpdb->prefix . 'accordionslider_accordions', array('name' => $name, 
-																			 'settings' => serialize($settings),
+																			 'settings' => json_encode( $settings ),
 																			 'modified' => date('m-d-Y')),
 																	   array('id' => $id), 
 																	   array('%s', '%s', '%s'), 
