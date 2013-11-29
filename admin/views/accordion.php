@@ -10,7 +10,7 @@
                     	<input name="name" id="title" type="text" value="<?php echo $accordion_name; ?>" />
                     </div>
 					
-					<div id="panels-container">
+					<div class="panels-container">
                     	<?php
                     		if ( isset( $panels ) ) {
                     			if ( ! empty( $panels ) ) {
@@ -19,7 +19,6 @@
                     				}
                     			}
                     		} else {
-                    			$this->create_panel( false );
                     			$this->create_panel( false );
                     		}
 	                    ?>
@@ -31,11 +30,11 @@
 				<div class="postbox action">
 					<div class="inside">
 						<input type="submit" name="submit" class="button-primary" value="Update" />
-						<a class="button preview-slider" href="">Preview</a>
+						<a class="button preview-accordion" href="#">Preview</a>
 					</div>
 				</div>
                 
-                <div id="sidebar-settings">
+                <div class="sidebar-settings">
                     <?php 
                         $settings = Accordion_Slider_Settings::getSettings();
 
@@ -88,4 +87,13 @@
             </div>
         </div>
 	</form>
+    
+    <div class="add-panel-group">
+        <a class="button add-panel" href="#">Add Panel <span class="add-panel-arrow">&#9660</span></a>
+        <ul class="panel-type">
+            <li><a href="#" data-type="empty">Empty Panel</a></li>
+            <li><a href="#" data-type="images">Image(s) Panel</a></li>
+            <li><a href="#" data-type="dynamic">Dynamic Panel</a></li>
+        </ul>
+    </div>
 </div>

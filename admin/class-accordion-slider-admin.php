@@ -23,9 +23,10 @@ class Accordion_Slider_Admin {
 
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 
-		add_action( 'wp_ajax_accordion_slider_get_background_image_editor', array( $this, 'get_background_image_editor' ) );
+		add_action( 'wp_ajax_accordion_slider_get_accordion_data', array( $this, 'get_accordion_data' ) );
 		add_action( 'wp_ajax_accordion_slider_update_accordion', array( $this, 'update_accordion' ) );
-		add_action( 'wp_ajax_accordion_slider_get_accordion', array( $this, 'get_accordion' ) );
+		add_action( 'wp_ajax_accordion_slider_get_new_panel', array( $this, 'get_new_panel' ) );
+		add_action( 'wp_ajax_accordion_slider_get_background_image_editor', array( $this, 'get_background_image_editor' ) );
 	}
 
 	/*
@@ -118,7 +119,7 @@ class Accordion_Slider_Admin {
 			if ( $accordion !== false ) {
 				$accordion_id = $accordion['id'];
 				$accordion_name = $accordion['name'];
-				$accordion_settings = json_decode( $accordion['settings'], true );
+				$accordion_settings = json_decode( stripslashes( $accordion['settings'] ), true );
 
 				$panels = $this->plugin->load_panels( $accordion_id );
 
@@ -147,8 +148,38 @@ class Accordion_Slider_Admin {
 		include( 'views/panel.php' );
 	}
 
+	public function get_new_panel() {
+		if ( isset( $_POST['data'] ) ) {
+			$data = json_decode( stripslashes( $_POST['data'] ), true );
+
+			foreach ( $data as $element ) {
+				$panel_image = $element['background_source'];
+				include( 'views/panel.php' );
+			}
+
+			die();
+		} else {
+			include( 'views/panel.php' );
+		}
+	}
+
 	public function get_background_image_editor() {
+		$data = json_decode( stripslashes( $_POST['data'] ), true );
+
 		include( 'views/background-image-editor.php' );
+
+		die();
+	}
+
+	public function get_accordion_data() {
+		$id = $_GET['id'];
+
+		$accordion = $this->plugin->load_accordion( $_GET['id'] );
+		$panels = $this->plugin->load_panels( $_GET['id'] );
+
+		$data = array( 'settings' => $accordion['settings'], 'panels' => $panels );
+
+		echo json_encode( $data );
 
 		die();
 	}
@@ -211,19 +242,6 @@ class Accordion_Slider_Admin {
 		}
 
 		echo $id; 
-
-		die();
-	}
-
-	public function get_accordion() {
-		$id = $_GET['id'];
-
-		$accordion = $this->plugin->load_accordion( $_GET['id'] );
-		$panels = $this->plugin->load_panels( $_GET['id'] );
-
-		$data = array( 'settings' => $accordion['settings'], 'panels' => $panels );
-
-		echo json_encode($data);
 
 		die();
 	}

@@ -1,10 +1,8 @@
 <div class="panel">
 	<div class="panel-image"> 
 		<?php 
-			if ( $panel_image !== '' ) {
+			if ( isset ( $panel_image ) && $panel_image !== '' ) {
 				echo '<img src="' . $panel_image . '" />';
-			} else {
-				echo '<p>Add an image</p>';
 			}
 		?>
 	</div>

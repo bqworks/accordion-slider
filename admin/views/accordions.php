@@ -69,9 +69,9 @@
 	</tfoot>
 	</table>
     
-    <div id="new-accordion-button">    
+    <div class="new-accordion-button">    
 		<a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=accordion-slider-new' ); ?>"><?php _e( 'Create New Accordion', 'accordion-slider' ); ?></a>
-        <a class="button-secondary" id="import-accordion" href=""><?php _e( 'Import Accordion', 'accordion-slider' ); ?></a>
+        <a class="button-secondary" class="import-accordion" href=""><?php _e( 'Import Accordion', 'accordion-slider' ); ?></a>
     </div>    
     
 </div>
