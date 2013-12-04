@@ -1,6 +1,6 @@
 <div class="wrap accordion-slider-admin">
 	<?php screen_icon(); ?>
-	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+	<h2><?php echo isset( $_GET['action'] ) && $_GET['action'] === 'edit' ? 'Edit Accordion' : 'Add New Accordion'; ?></h2>
 
 	<form action="" method="post">
     	<div class="metabox-holder has-right-sidebar">

@@ -98,7 +98,7 @@ class Accordion_Slider_Admin {
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
 			$this->plugin_slug,
-			__( 'Accordion Slider - All Accordions', $this->plugin_slug ),
+			__( 'All Accordions', $this->plugin_slug ),
 			__( 'All Accordions', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
@@ -107,7 +107,7 @@ class Accordion_Slider_Admin {
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
 			$this->plugin_slug,
-			__( 'Accordion Slider - Add New', $this->plugin_slug ),
+			__( 'Add New Accordion', $this->plugin_slug ),
 			__( 'Add New', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug . '-new',
