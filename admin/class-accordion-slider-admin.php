@@ -25,8 +25,11 @@ class Accordion_Slider_Admin {
 
 		add_action( 'wp_ajax_accordion_slider_get_accordion_data', array( $this, 'get_accordion_data' ) );
 		add_action( 'wp_ajax_accordion_slider_update_accordion', array( $this, 'update_accordion' ) );
-		add_action( 'wp_ajax_accordion_slider_get_new_panel', array( $this, 'get_new_panel' ) );
-		add_action( 'wp_ajax_accordion_slider_get_background_image_editor', array( $this, 'get_background_image_editor' ) );
+		add_action( 'wp_ajax_accordion_slider_delete_accordion', array( $this, 'delete_accordion' ) );
+		add_action( 'wp_ajax_accordion_slider_add_panels', array( $this, 'add_panels' ) );
+		add_action( 'wp_ajax_accordion_slider_load_background_image_editor', array( $this, 'load_background_image_editor' ) );
+		add_action( 'wp_ajax_accordion_slider_add_breakpoint', array( $this, 'add_breakpoint' ) );
+		add_action( 'wp_ajax_accordion_slider_add_breakpoint_setting', array( $this, 'add_breakpoint_setting' ) );
 	}
 
 	/*
@@ -75,7 +78,7 @@ class Accordion_Slider_Admin {
 			wp_localize_script( $this->plugin_slug . '-admin-script', 'as_js_vars', array(
 				'admin' => admin_url( 'admin.php' ),
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'page' => isset( $_GET['page'] ) && ( $_GET['page'] === 'accordion-slider-new' || isset( $_GET['id'] ) ) ? 'single' : 'all',
+				'page' => isset( $_GET['page'] ) && ( $_GET['page'] === 'accordion-slider-new' || ( isset( $_GET['id'] ) && isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) ) ? 'single' : 'all',
 				'id' => isset( $_GET['id'] ) ? $_GET['id'] : -1
 			) );
 		}
@@ -113,7 +116,7 @@ class Accordion_Slider_Admin {
 	}
 
 	public function display_accordion_page() {
-		if ( isset( $_GET['id'] ) && isset( $_GET['action'] ) ) {
+		if ( isset( $_GET['id'] ) && isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
 			$accordion = $this->plugin->load_accordion( $_GET['id'] );
 
 			if ( $accordion !== false ) {
@@ -148,29 +151,6 @@ class Accordion_Slider_Admin {
 		include( 'views/panel.php' );
 	}
 
-	public function get_new_panel() {
-		if ( isset( $_POST['data'] ) ) {
-			$data = json_decode( stripslashes( $_POST['data'] ), true );
-
-			foreach ( $data as $element ) {
-				$panel_image = $element['background_source'];
-				include( 'views/panel.php' );
-			}
-
-			die();
-		} else {
-			include( 'views/panel.php' );
-		}
-	}
-
-	public function get_background_image_editor() {
-		$data = json_decode( stripslashes( $_POST['data'] ), true );
-
-		include( 'views/background-image-editor.php' );
-
-		die();
-	}
-
 	public function get_accordion_data() {
 		$id = $_GET['id'];
 
@@ -202,8 +182,6 @@ class Accordion_Slider_Admin {
 																		array( '%s', '%s', '%s', '%s' ) );
 			
 			$id = $wpdb->insert_id;
-
-			ChromePhp::log($id);
 		} else {
 			$wpdb->update($wpdb->prefix . 'accordionslider_accordions', array('name' => $name, 
 																			 'settings' => json_encode( $settings ),
@@ -244,5 +222,76 @@ class Accordion_Slider_Admin {
 		echo $id; 
 
 		die();
+	}
+
+	public function delete_accordion() {
+		global $wpdb;
+
+		$id = intval( $_POST['id'] );
+
+		$wpdb->query("DELETE FROM " . $wpdb->prefix . "accordionslider_panels WHERE accordion_id = $id");
+		$wpdb->query("DELETE FROM " . $wpdb->prefix . "accordionslider_accordions WHERE id =$id");
+
+		echo $id; 
+
+		die();
+	}
+
+	public function add_panels() {
+		if ( isset( $_POST['data'] ) ) {
+			$data = json_decode( stripslashes( $_POST['data'] ), true );
+
+			foreach ( $data as $element ) {
+				$this->create_panel( $element );
+			}
+		} else {
+			$this->create_panel( false );
+		}
+
+		die();
+	}
+
+	public function load_background_image_editor() {
+		$data = json_decode( stripslashes( $_POST['data'] ), true );
+
+		include( 'views/background-image-editor.php' );
+
+		die();
+	}
+
+	public function add_breakpoint() {
+		include( 'views/breakpoint.php' );
+
+		die();
+	}
+
+	public function add_breakpoint_setting() {
+		$setting_name = $_GET['data'];
+
+		echo $this->create_breakpoint_setting( $setting_name, false );
+
+		die();
+	}
+
+	public function create_breakpoint_setting( $name, $value ) {
+		$setting = Accordion_Slider_Settings::getSettingInfo( $name );
+		$setting_value = $value !== false ? $value : $setting['default_value'];
+		$setting_html = '';
+
+		if ( $setting['type'] === 'number' || $setting['type'] === 'mixed' ) {
+            $setting_html = '<tr><td><label>' . $setting['label'] . '</label></td><td class="setting-cell"><input class="breakpoint-setting" type="text" name="' . $name . '" value="' . $setting_value . '" /><span class="remove-breakpoint-setting"></span></td></tr>';
+        } else if ( $setting['type'] === 'boolean' ) {
+            $setting_html = '<tr><td><label>' . $setting['label'] . '</label></td><td class="setting-cell"><input class="breakpoint-setting" type="checkbox" name="' . $name . '"' . ( $setting_value === true ? ' checked="checked"' : '' ) . ' /><span class="remove-breakpoint-setting"></span></td></tr>';
+        } else if ( $setting['type'] === 'select' ) {
+            $setting_html ='<tr><td><label>' . $setting['label'] . '</label></td><td class="setting-cell"><select class="breakpoint-setting" name="' . $name . '">';
+            
+            foreach ( $setting['available_values'] as $value_name => $value_label ) {
+                $setting_html .= '<option value="' . $value_name . '"' . ( $setting_value == $value_name ? ' selected="selected"' : '' ) . '>' . $value_label . '</option>';
+            }
+            
+            $setting_html .= '</select><span class="remove-breakpoint-setting"></span></td></tr>';
+        }
+
+        return $setting_html;
 	}
 }

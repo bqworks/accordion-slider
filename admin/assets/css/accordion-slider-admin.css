@@ -1,3 +1,19 @@
+.new-accordion-buttons {
+	margin-top: 20px;
+}
+
+.accordion-list tr:nth-child(2n+1) {
+	background-color: #F9F9F9;
+}
+
+.accordion-slider-admin .metabox-holder {
+	overflow: hidden;
+}
+
+.accordion-slider-admin .metabox-holder {
+	overflow: hidden;
+}
+
 .accordion-slider-admin .editor-wrapper {
 	float: left;
 	width: 100%;
@@ -29,7 +45,7 @@
 
 .panel-image {
 	height: 170px;
-	background: #EEE;
+	background: #E0E0E0;
 	overflow: hidden;
 }
 
@@ -39,7 +55,7 @@
 
 .panel-buttons {
 	height: 44px;
-	background: #F9F9F9;
+	background: #F5F5F5;
 	text-align: center;
 }
 
@@ -54,6 +70,8 @@
 
 .add-panel-group {
 	float: left;
+	overflow: hidden;
+	margin: 10px 0 100px;
 }
 
 .add-panel-group:hover .panel-type {
@@ -91,6 +109,14 @@
 	text-decoration: none;
 }
 
+.action {
+	background-color: #F5F5F5;
+}
+
+.action .inside {
+	padding-bottom: 0;
+}
+
 .action .preview-accordion {
 	margin-left: 6px;
 }
@@ -101,6 +127,11 @@
 
 .sidebar-settings .setting {
 	margin-left: 30px;
+}
+
+.sidebar-settings input,
+.sidebar-settings select {
+	font-size: 12px;
 }
 
 .sidebar-settings input[type=text] {
@@ -119,9 +150,9 @@
 }
 
 .background-image-editor {
-	position: absolute;
-	width: 650px;
-	height: 520px;
+	position: fixed;
+	width: 660px;
+	height: 560px;
 	padding: 30px;
 	margin: auto;
 	top: 0;
@@ -161,7 +192,7 @@
 .clear-fieldset {
 	float: right;
 	font-size: 12px;
-	margin-top: 10px;
+	margin-top: 6px;
 	color: #F00;
 	padding: 2px;
 	cursor: pointer;
@@ -180,7 +211,7 @@
 .background-image-editor .image-loader {
 	float: left;
 	width: 170px;
-	height: 110px;
+	height: 120px;
 	background-color: #EEE;
 	overflow: hidden;
 	text-align: center;
@@ -188,12 +219,12 @@
 }
 
 .background-image-editor .image-loader img {
-	width: 100%;
+	height: 100%;
 }
 
 .background-image-editor .image-loader .no-image {
 	width: 100%;
-	line-height: 110px;
+	line-height: 120px;
 	margin: 0;
 }
 
@@ -206,11 +237,9 @@
 }
 
 .background-image-editor .data-fields .field {
-	background-color: #FCFCFC;
-	border: none;
-	border-bottom: 1px dashed #DDDDDD;
 	margin-left: 10px;
-	width: 358px;
+	width: 363px;
+	font-size: 12px;
 }
 
 .background-image-editor .link .data-fields {
@@ -218,7 +247,7 @@
 }
 
 .background-image-editor .link .data-fields .field {
-	width: 605px;
+	width: 612px;
 }
 
 .background-image-editor .add-opened-background-image,
@@ -230,4 +259,83 @@
 .background-image-editor .buttons .save  {
 	float: right;
 	margin-left: 10px;
+}
+
+.breakpoints-box .inside {
+	margin: 0;
+	padding: 0;
+}
+
+.breakpoints-box .add-breakpoint {
+	display: block;
+	margin: 10px;
+	text-align: center;
+}
+
+.breakpoint-header {
+	width: 100%;
+	padding: 5px 10px;
+	background-color: #F7F7F7;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.add-setting-group {
+	margin: 10px 10px 30px;
+}
+
+.breakpoints-box table {
+	margin-left: 5px;
+}
+
+.remove-breakpoint,
+.remove-breakpoint-setting {
+	display: none;
+	position: absolute;
+	right: 10px;
+	font-size: 15px;
+	margin-top: 3px;
+	cursor: pointer;
+}
+
+.breakpoint-header:hover .remove-breakpoint,
+.breakpoint-settings tr:hover .remove-breakpoint-setting {
+	display: inline;
+}
+
+.remove-breakpoint:before,
+.remove-breakpoint-setting:before {
+	content: '×';
+}
+
+.breakpoint-settings td {
+	white-space: nowrap;
+}
+
+.breakpoint-settings .setting-cell {
+	width: 99%
+}
+
+.delete-dialog {
+	position: fixed;
+	width: 330px;
+	height: 90px;
+	background-color: #FFF;
+	padding: 10px 20px;
+	z-index: 1001;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.dialog-question {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.dialog-buttons {
+	text-align: right;
 }

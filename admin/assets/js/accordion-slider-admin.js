@@ -19,20 +19,44 @@
 					that.updateAccordion();
 				});
 
-				$( '.add-panel, .panel-type a[data-type="empty"]' ).click(function( event ) {
+				$( '.add-panel, .panel-type a[data-type="empty"]' ).on( 'click', function( event ) {
 					event.preventDefault();
 					that.addEmptyPanel();
 				});
 
-				$( '.panel-type a[data-type="images"]' ).click(function( event ) {
+				$( '.panel-type a[data-type="images"]' ).on( 'click', function( event ) {
 					event.preventDefault();
 					that.addImagesPanel();
 				});
 
-				$( '.panel-type a[data-type="dynamic"]' ).click(function( event ) {
+				$( '.panel-type a[data-type="dynamic"]' ).on( 'click', function( event ) {
 					event.preventDefault();
 					that.addDynamicPanel();
 				});
+
+				$( '.add-breakpoint' ).on( 'click', function( event ) {
+					event.preventDefault();
+					that.addBreakpoint();
+				});
+
+				$( '.breakpoints' ).on( 'click', '.add-setting', function( event ) {
+					event.preventDefault();
+
+					var name = $( this ).siblings( '.setting-selector' ).val(),
+						context = $( this ).parents( '.breakpoint' ).find( '.breakpoint-settings' );
+
+					that.addBreakpointSetting( name, context );
+				});
+
+				$( '.breakpoints' ).on( 'click', '.remove-breakpoint', function( event ) {
+					$( this ).parents( '.breakpoint' ).remove();
+				});
+
+				$( '.breakpoints' ).on( 'click', '.remove-breakpoint-setting', function( event ) {
+					$( this ).parents( 'tr' ).remove();
+				});
+			} else if ( as_js_vars.page === 'all' ) {
+				
 			}
 		},
 
@@ -48,7 +72,7 @@
 
 					$.each( accordionData.panels, function( index, element ) {
 						that.getPanel( index ).setData( element );
-					} );
+					});
 				}
 			});
 		},
@@ -72,6 +96,23 @@
 				accordionData.settings[ setting.attr( 'name' ) ] = setting.attr( 'type' ) === 'checkbox' ? setting.is( ':checked' ) : setting.val();
 			});
 
+			var breakpoints = {};
+
+			$( '.breakpoints' ).find( '.breakpoint' ).each(function() {
+				var breakpointGroup = $( this ),
+					breakpoint = breakpoints[ breakpointGroup.find( 'input[name="breakpoint_width"]' ).val() ] = {};
+
+				breakpointGroup.find( '.breakpoint-setting' ).each(function() {
+					var breakpointSetting = $( this );
+
+					breakpoint[ breakpointSetting.attr( 'name' ) ] = breakpointSetting.attr( 'type' ) === 'checkbox' ? breakpointSetting.is( ':checked' ) : breakpointSetting.val();
+				});
+			});
+
+			if ( ! $.isEmptyObject( breakpoints ) ) {
+				accordionData.settings.breakpoints = breakpoints;
+			}
+
 			var accordionDataString = JSON.stringify( accordionData );
 
 			$.ajax({
@@ -84,70 +125,6 @@
 					}
 				}
 			});
-		},
-
-		addEmptyPanel: function() {
-			var that = this;
-
-			$.ajax({
-				url: as_js_vars.ajaxurl,
-				type: 'post',
-				data: { action: 'accordion_slider_get_new_panel' },
-				complete: function( data ) {
-					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) );
-
-					that.initPanel( panel, panel.index() );
-				}
-			});
-		},
-
-		addImagesPanel: function() {
-			var that = this,
-				selectedImages = [];
-
-			if ( typeof wp != 'undefined' && wp.media && wp.media.editor ) {
-				var sendReference = wp.media.editor.send.attachment,
-					insertReference = wp.media.editor.insert;
-
-				wp.media.editor.send.attachment = function( props, attachment ) {
-					var url = attachment.sizes[ props.size ].url,
-						alt = attachment.alt,
-						title = attachment.title;
-
-					selectedImages.push( { background_source: url, background_alt: alt, background_title: title } );
-				};
-
-				wp.media.editor.insert = function( prop ) {
-					$.ajax({
-						url: as_js_vars.ajaxurl,
-						type: 'post',
-						data: { action: 'accordion_slider_get_new_panel', data: JSON.stringify( selectedImages ) },
-						complete: function( data ) {
-							var lastIndex = $( '.panels-container' ).find( '.panel' ).length - 1,
-								panels = $( '.panels-container' ).append( data.responseText );
-
-							panels.find( '.panel:gt(' + lastIndex + ')' ).each(function( index ) {
-								var panel = $( this ),
-									panelIndex = lastIndex + 1 + index;
-
-								that.initPanel( panel, panelIndex );
-								that.getPanel( panelIndex ).setData( selectedImages[ index ] );
-							});
-						}
-					});
-
-					//wp.media.editor.send.attachment = sendReference;
-					wp.media.editor.insert = sendReference;
-				};
-
-				wp.media.editor.open( 'media-loader' );
-			}
-		},
-
-		addDynamicPanel: function() {
-			var that = this;
-
-			
 		},
 
 		initPanels: function() {
@@ -165,6 +142,94 @@
 
 		getPanel: function( index ) {
 			return this.panels[index];
+		},
+
+		addEmptyPanel: function() {
+			var that = this;
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_add_panels' },
+				complete: function( data ) {
+					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) );
+
+					that.initPanel( panel, panel.index() );
+				}
+			});
+		},
+
+		addImagesPanel: function() {
+			var that = this,
+				selectedImages = [];
+
+			if ( typeof wp != 'undefined' && wp.media && wp.media.editor ) {
+				var insertReference = wp.media.editor.insert;
+
+				wp.media.editor.send.attachment = function( props, attachment ) {
+					var url = attachment.sizes[ props.size ].url,
+						alt = attachment.alt,
+						title = attachment.title;
+
+					selectedImages.push( { background_source: url, background_alt: alt, background_title: title } );
+				};
+
+				wp.media.editor.insert = function( prop ) {
+					$.ajax({
+						url: as_js_vars.ajaxurl,
+						type: 'post',
+						data: { action: 'accordion_slider_add_panels', data: JSON.stringify( selectedImages ) },
+						complete: function( data ) {
+							var lastIndex = $( '.panels-container' ).find( '.panel' ).length - 1,
+								panels = $( '.panels-container' ).append( data.responseText );
+
+							panels.find( '.panel:gt(' + lastIndex + ')' ).each(function( index ) {
+								var panel = $( this ),
+									panelIndex = lastIndex + 1 + index;
+
+								that.initPanel( panel, panelIndex );
+								that.getPanel( panelIndex ).setData( selectedImages[ index ] );
+							});
+						}
+					});
+
+					wp.media.editor.insert = insertReference;
+				};
+
+				wp.media.editor.open( 'media-loader' );
+			}
+		},
+
+		addDynamicPanel: function() {
+			var that = this;
+
+			
+		},
+
+		addBreakpoint: function() {
+			var that = this;
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'get',
+				data: { action: 'accordion_slider_add_breakpoint' },
+				complete: function( data ) {
+					$( data.responseText ).appendTo( $( '.breakpoints' ) );
+				}
+			});
+		},
+
+		addBreakpointSetting: function( name, context) {
+			var that = this;
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'get',
+				data: { action: 'accordion_slider_add_breakpoint_setting', data: name },
+				complete: function( data ) {
+					$( data.responseText ).appendTo( context );
+				}
+			});
 		}
 	};
 
@@ -218,7 +283,7 @@
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				dataType: 'html',
-				data: { action: 'accordion_slider_get_background_image_editor', data: JSON.stringify( this.currentPanelData ) },
+				data: { action: 'accordion_slider_load_background_image_editor', data: JSON.stringify( this.currentPanelData ) },
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();

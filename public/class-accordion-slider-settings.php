@@ -334,7 +334,7 @@ class Accordion_Slider_Settings {
 					'description' => ''
 				),
 				'pauseVideoAction' => array(
-					'label' => 'PauseV ideo Action',
+					'label' => 'Pause Video Action',
 					'type' => 'select',
 					'default_value' => 'none',
 					'available_values' => array(
@@ -358,11 +358,69 @@ class Accordion_Slider_Settings {
 			)
 		)
 	);
+
+	protected static $settings_map = array(
+		'width' => 'appearance',
+		'height' => 'appearance',
+		'responsive' => 'appearance',
+		'responsiveMode' => 'appearance',
+		'aspectRatio' => 'appearance',
+		'orientation' => 'appearance',
+		'shadow' => 'appearance',
+		'panelDistance' => 'appearance',
+		'panelOverlap' => 'appearance',
+		'visiblePanels' => 'appearance',
+		'startPanel' => 'appearance',
+		'startPage' => 'appearance',
+		'openedPanelSize' => 'animations',
+		'maxOpenedPanelSize' => 'animations',
+		'openPanelOn' => 'animations',
+		'closePanelsOnMouseOut' => 'animations',
+		'mouseDelay' => 'animations',
+		'openPanelDuration' => 'animations',
+		'closePanelDuration' => 'animations',
+		'pageScrollDuration' => 'animations',
+		'pageScrollEasing' => 'animations',
+		'autoplay' => 'autoplay',
+		'autoplayDelay' => 'autoplay',
+		'autoplayDirection' => 'autoplay',
+		'autoplayOnHover' => 'autoplay',
+		'mouseWheel' => 'mouse_wheel',
+		'mouseWheelSensitivity' => 'mouse_wheel',
+		'mouseWheelTarget' => 'mouse_wheel',
+		'keyboard' => 'keyboard',
+		'keyboardOnlyOnFocus' => 'keyboard',
+		'swapBackgroundDuration' => 'swap_background',
+		'fadeOutBackground' => 'swap_background',
+		'touchSwipe' => 'touch_swipe',
+		'touchSwipeThreshold' => 'touch_swipe',
+		'openPanelVideoAction' => 'video',
+		'closePanelVideoAction' => 'video',
+		'playVideoAction' => 'video',
+		'pauseVideoAction' => 'video',
+		'endVideoAction' => 'video'
+	);
+
+	protected static $breakpoint_settings = array('width', 'height', 'responsive', 'responsiveMode', 'aspectRatio', 'orientation', 'panelDistance', 'visiblePanels');
 	
 	/*
 		Return the settings
 	*/
 	public static function getSettings() {
 		return self::$settings;
+	}
+
+	/*
+		Return the breakpoint settings
+	*/
+	public static function getBreakpointSettings() {
+		return self::$breakpoint_settings;
+	}
+
+	/*
+		Return the information of a setting
+	*/
+	public static function getSettingInfo( $setting_name ) {
+		return self::$settings[self::$settings_map[$setting_name]]['list'][$setting_name];
 	}
 }

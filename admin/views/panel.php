@@ -8,8 +8,8 @@
 	</div>
 
 	<div class="panel-buttons"> 
-		<a class="button-secondary edit-background-image" href="#">Background Image</a>
-		<a class="button-secondary edit-html-content" href="#">HTML Content</a>
+		<a class="button-secondary edit-background-image" href="#">Image</a>
+		<a class="button-secondary edit-html-content" href="#">HTML</a>
 		<a class="button-secondary edit-layers" href="#">Layers</a>
 	</div>
 

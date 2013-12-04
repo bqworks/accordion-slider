@@ -4,7 +4,7 @@
 
 	<form action="" method="post">
     	<div class="metabox-holder has-right-sidebar">
-            <div class="editor-wrapper meta-box-sortables">
+            <div class="editor-wrapper">
                 <div class="editor-body">
                     <div id="titlediv">
                     	<input name="name" id="title" type="text" value="<?php echo $accordion_name; ?>" />
@@ -22,6 +22,15 @@
                     			$this->create_panel( false );
                     		}
 	                    ?>
+                    </div>
+
+                    <div class="add-panel-group">
+                        <a class="button add-panel" href="#">Add Panel <span class="add-panel-arrow">&#9660</span></a>
+                        <ul class="panel-type">
+                            <li><a href="#" data-type="empty">Empty Panel</a></li>
+                            <li><a href="#" data-type="images">Image(s) Panel</a></li>
+                            <li><a href="#" data-type="dynamic">Dynamic Panel</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -51,7 +60,7 @@
                                             ?>
                                                 <tr>
                                                     <td>
-                                                        <?php echo $setting['label']; ?>
+                                                        <label><?php echo $setting['label']; ?></label>
                                                     </td>
                                                     <td>
                                                         <?php
@@ -83,17 +92,27 @@
                             <?php
                         }
                     ?>
+                    <div class="postbox breakpoints-box">
+                        <div class="handlediv"></div>
+                        <h3 class="hndle">Breakpoints</h3>
+                        <div class="inside">
+                            <div class="breakpoints">
+                                <?php
+                                    if ( isset( $accordion_settings['breakpoints'] ) ) {
+                                        $breakpoints = $accordion_settings['breakpoints'];
+
+                                        foreach ( $breakpoints as $breakpoint_width => $breakpoint_settings ) {
+                                            include( 'breakpoint.php' );
+                                        }
+                                    }
+                                ?>
+                            </div>
+                            <a class="button add-breakpoint" href="#">Add Breakpoint</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 	</form>
     
-    <div class="add-panel-group">
-        <a class="button add-panel" href="#">Add Panel <span class="add-panel-arrow">&#9660</span></a>
-        <ul class="panel-type">
-            <li><a href="#" data-type="empty">Empty Panel</a></li>
-            <li><a href="#" data-type="images">Image(s) Panel</a></li>
-            <li><a href="#" data-type="dynamic">Dynamic Panel</a></li>
-        </ul>
-    </div>
 </div>
