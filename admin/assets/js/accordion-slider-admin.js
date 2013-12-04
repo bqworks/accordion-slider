@@ -55,8 +55,13 @@
 				$( '.breakpoints' ).on( 'click', '.remove-breakpoint-setting', function( event ) {
 					$( this ).parents( 'tr' ).remove();
 				});
+
 			} else if ( as_js_vars.page === 'all' ) {
-				
+
+				$( '.delete-accordion' ).on( 'click', function( event ) {
+					event.preventDefault();
+					that.deleteAccordion( $( this ) );
+				});
 			}
 		},
 
@@ -125,6 +130,67 @@
 					}
 				}
 			});
+		},
+
+		deleteAccordion: function( target ) {
+			var url = target.attr( 'href' ),
+				urlArray = url.split( '&' ).splice( 1 ),
+				id,
+				action,
+				row = target.parents( 'tr' );
+
+			$.each( urlArray, function( index, element ) {
+				var elementArray = element.split( '=' );
+
+				if ( elementArray[ 0 ] === 'id' ) {
+					id = parseInt( elementArray[ 1 ], 10 );
+				} else if ( elementArray[ 0 ] === 'action' ) {
+					action = elementArray[ 1 ];
+				}
+			});
+
+			if ( action !== 'delete' ) {
+				return;
+			}
+
+			var dialog = $(
+				'<div class="modal-overlay"></div>' +
+				'<div class="delete-dialog">' +
+				'	<p class="dialog-question">Are you sure you want to delete this accordion?</p>' +
+				'	<div class="dialog-buttons">' +
+				'		<a class="button dialog-ok" href="#">Yes</a>' +
+				'		<a class="button dialog-cancel" href="#">Cancel</a>' +
+				'	</div>' +
+				'</div>'
+			).appendTo( 'body' );
+
+			dialog.find( '.dialog-ok' ).on( 'click', function( event ) {
+				event.preventDefault();
+
+				$.ajax({
+					url: as_js_vars.ajaxurl,
+					type: 'post',
+					data: { action: 'accordion_slider_delete_accordion', id: id },
+					complete: function( data ) {
+						if ( id === parseInt( data.responseText, 10 ) ) {
+							row.fadeOut( 300, function() {
+								row.remove();
+							});
+						}
+					}
+				});
+
+				dialog.remove();
+			} );
+
+			dialog.find( '.dialog-cancel' ).on( 'click', function( event ) {
+				event.preventDefault();
+				dialog.remove();
+			} );
+
+			dialog.find( '.modal-overlay' ).on( 'click', function(  ) {
+				dialog.remove();
+			} );
 		},
 
 		initPanels: function() {

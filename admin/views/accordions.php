@@ -2,7 +2,7 @@
 	<?php screen_icon(); ?>
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
        
-	<table class="widefat">
+	<table class="widefat accordion-list">
 	<thead>
 	<tr>
 		<th width="5%"><?php _e( 'ID', 'accordion-slider' ); ?></th>
@@ -37,18 +37,9 @@
 						'<td>' . $accordion->modified . '</td>' .
 						'<td>' .
 							  '<a href="'. admin_url('admin.php?page=accordion-slider&id=' . $accordion_id) . '&action=edit">' . __('Edit', 'accordion-slider') . '</a> | ' .
-							  
-							  '<a class="preview-accordion" href="">' . 
-							  		__('Preview', 'accordion-slider') . 
-							  '</a> | ' .
-							  
-							  '<a class="delete-accordion" href="">' . 
-							  		__('Delete', 'accordion-slider') . 
-							  '</a> | ' .
-							  
-							  '<a class="duplicate-accordion" href="">' . 
-							  		__('Duplicate', 'accordion-slider') . 
-							  '</a>';
+							  '<a class="preview-accordion" href="">' . __('Preview', 'accordion-slider') . '</a> | ' .
+							  '<a class="delete-accordion" href="'. admin_url('admin.php?page=accordion-slider&id=' . $accordion_id) . '&action=delete">' . __('Delete', 'accordion-slider') . '</a> | ' .
+							  '<a class="duplicate-accordion" href="">' . __('Duplicate', 'accordion-slider') . '</a>';
 							  
 				echo	'</td>' .
 					'</tr>';
@@ -69,7 +60,7 @@
 	</tfoot>
 	</table>
     
-    <div class="new-accordion-button">    
+    <div class="new-accordion-buttons">    
 		<a class="button-secondary" href="<?php echo admin_url( 'admin.php?page=accordion-slider-new' ); ?>"><?php _e( 'Create New Accordion', 'accordion-slider' ); ?></a>
         <a class="button-secondary" class="import-accordion" href=""><?php _e( 'Import Accordion', 'accordion-slider' ); ?></a>
     </div>    
