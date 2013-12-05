@@ -141,16 +141,6 @@ class Accordion_Slider_Admin {
 		include_once( 'views/accordion.php' );
 	}
 
-	public function create_panel( $data ) {
-		$panel_image = '';
-
-		if ( $data !== false && $data['background_source'] !== '' ) {
-			$panel_image = $data['background_source'];
-		}
-
-		include( 'views/panel.php' );
-	}
-
 	public function get_accordion_data() {
 		$id = $_GET['id'];
 
@@ -237,6 +227,16 @@ class Accordion_Slider_Admin {
 		die();
 	}
 
+	public function create_panel( $data ) {
+		$panel_image = '';
+
+		if ( $data !== false && $data['background_source'] !== '' ) {
+			$panel_image = $data['background_source'];
+		}
+
+		include( 'views/panel.php' );
+	}
+	
 	public function add_panels() {
 		if ( isset( $_POST['data'] ) ) {
 			$data = json_decode( stripslashes( $_POST['data'] ), true );

@@ -226,44 +226,34 @@
 		},
 
 		addImagesPanel: function() {
-			var that = this,
-				selectedImages = [];
+			var that = this;
 
-			if ( typeof wp != 'undefined' && wp.media && wp.media.editor ) {
-				var insertReference = wp.media.editor.insert;
+			
+			MediaLoader.open(function( selection ) {
+				var images = [];
 
-				wp.media.editor.send.attachment = function( props, attachment ) {
-					var url = attachment.sizes[ props.size ].url,
-						alt = attachment.alt,
-						title = attachment.title;
+				$.each( selection, function( index, element ) {
+					images.push( { background_source: element.url, background_alt: element.alt, background_title: element.title } );
+				} );
 
-					selectedImages.push( { background_source: url, background_alt: alt, background_title: title } );
-				};
+				$.ajax({
+					url: as_js_vars.ajaxurl,
+					type: 'post',
+					data: { action: 'accordion_slider_add_panels', data: JSON.stringify( images ) },
+					complete: function( data ) {
+						var lastIndex = $( '.panels-container' ).find( '.panel' ).length - 1,
+							panels = $( '.panels-container' ).append( data.responseText );
 
-				wp.media.editor.insert = function( prop ) {
-					$.ajax({
-						url: as_js_vars.ajaxurl,
-						type: 'post',
-						data: { action: 'accordion_slider_add_panels', data: JSON.stringify( selectedImages ) },
-						complete: function( data ) {
-							var lastIndex = $( '.panels-container' ).find( '.panel' ).length - 1,
-								panels = $( '.panels-container' ).append( data.responseText );
+						panels.find( '.panel:gt(' + lastIndex + ')' ).each(function( index ) {
+							var panel = $( this ),
+								panelIndex = lastIndex + 1 + index;
 
-							panels.find( '.panel:gt(' + lastIndex + ')' ).each(function( index ) {
-								var panel = $( this ),
-									panelIndex = lastIndex + 1 + index;
-
-								that.initPanel( panel, panelIndex );
-								that.getPanel( panelIndex ).setData( selectedImages[ index ] );
-							});
-						}
-					});
-
-					wp.media.editor.insert = insertReference;
-				};
-
-				wp.media.editor.open( 'media-loader' );
-			}
+							that.initPanel( panel, panelIndex );
+							that.getPanel( panelIndex ).setData( images[ index ] );
+						});
+					}
+				});
+			});
 		},
 
 		addDynamicPanel: function() {
@@ -317,14 +307,39 @@
 
 				BackgroundImageEditor.open( that.index );
 			});
+
+			this.$element.find( '.panel-image' ).on( 'click', function( event ) {
+				MediaLoader.open(function( selection ) {
+					var image = selection[ 0 ];
+
+					that.setData( { background_source: image.url, background_alt: image.alt, background_title: image.title } );
+					that.updateBackgroundImage();
+				});
+			});
 		},
 
 		getData: function() {
 			return this.panelData;
 		},
 
-		setData: function(data) {
+		setData: function( data ) {
 			this.panelData = data;
+		},
+
+		updateBackgroundImage: function() {
+			var panelImage = this.$element.find( '.panel-image' );
+
+			if ( this.panelData[ 'background_source' ] !== '' ) {
+				if ( panelImage.find( 'img' ).length ) {
+					panelImage.find( 'img' ).attr( 'src', this.panelData[ 'background_source' ] );
+				} else {
+					panelImage.find( '.no-image' ).remove();
+					$( '<img src="' + this.panelData[ 'background_source' ] + '" />' ).appendTo( panelImage );
+				}
+			} else if ( panelImage.find( 'img' ).length ) {
+				panelImage.find( 'img' ).remove();
+				$( '<p class="no-image">Click to add image</p>' ).appendTo( panelImage );
+			}
 		}
 	};
 
@@ -334,15 +349,12 @@
 
 		currentPanel: null,
 
-		currentPanelIndex: 0,
-
 		currentPanelData: null,
 
 		open: function( index ) {
 			var that = this;
 
 			this.currentPanel = AccordionSliderAdmin.getPanel( index );
-			this.currentPanelIndex = index;
 			this.currentPanelData = this.currentPanel.getData();
 
 			$.ajax({
@@ -377,18 +389,7 @@
 			});
 
 			this.currentPanel.setData( this.currentPanelData );
-
-			var panelImage = $( '.panels-container' ).find( '.panel' ).eq( this.currentPanelIndex ).find( '.panel-image' );
-
-			if ( this.currentPanelData[ 'background_source' ] !== '' ) {
-				if ( panelImage.find( 'img' ).length ) {
-					panelImage.find( 'img' ).attr( 'src', this.currentPanelData[ 'background_source' ] );
-				} else {
-					$( '<img src="' + this.currentPanelData[ 'background_source' ] + '" />' ).appendTo( panelImage );
-				}
-			} else if ( panelImage.find( 'img' ).length ) {
-				panelImage.find( 'img' ).remove();
-			}
+			this.currentPanel.updateBackgroundImage();
 
 			this.close();
 		},
@@ -400,46 +401,29 @@
 		},
 
 		openMediaLibrary: function( event ) {
-			var target = $( event.target ).parents( '.fieldset' ).hasClass( 'opened-background-image' ) === true ? 'opened-background-image' : 'background-image';
+			var target = $( event.target ).parents( '.fieldset' ).hasClass( 'opened-background-image' ) === true ? 'opened-background' : 'background',
+				imageLoader = editor.find( '.' + target + '-image .image-loader' );
 
-			if ( typeof wp != 'undefined' && wp.media && wp.media.editor ) {
-				wp.media.editor.send.attachment = function( props, attachment ) {
-					var url = attachment.sizes[ props.size ].url,
-						alt = attachment.alt,
-						title = attachment.title,
-						imageLoader;
+			MediaLoader.open(function( selection ) {
+				var image = selection[ 0 ];
 
-					if ( target === 'background-image' ) {
-						imageLoader = editor.find( '.background-image .image-loader' );
+				if ( imageLoader.find( 'img' ).length !== 0 ) {
+					imageLoader.find( 'img' ).attr( 'src', image.url );
+				} else {
+					imageLoader.find( '.no-image' ).remove();
+					$( '<img src="' + image.url + '" />' ).appendTo( imageLoader );
+				}
 
-						if ( imageLoader.find( 'img' ).length !== 0 ) {
-							imageLoader.find( 'img' ).attr( 'src', attachment.sizes.medium.url );
-						} else {
-							imageLoader.find( '.no-image' ).remove();
-							$( '<img src="' + attachment.sizes.medium.url + '" />' ).appendTo( imageLoader );
-						}
-
-						editor.find( 'input[name="background_source"]' ).val( url );
-						editor.find( 'input[name="background_alt"]' ).val( alt );
-						editor.find( 'input[name="background_title"]' ).val( title );
-					} else if ( target === 'opened-background-image' ) {
-						imageLoader = editor.find( '.opened-background-image .image-loader' );
-
-						if ( imageLoader.find( 'img' ).length !== 0 ) {
-							imageLoader.find( 'img' ).attr( 'src', attachment.sizes.medium.url );
-						} else {
-							imageLoader.find( '.no-image' ).remove();
-							$( '<img src="' + attachment.sizes.medium.url + '" />' ).appendTo( imageLoader );
-						}
-
-						editor.find( 'input[name="opened_background_source"]' ).val( url );
-						editor.find( 'input[name="opened_background_alt"]' ).val( alt );
-						editor.find( 'input[name="opened_background_title"]' ).val( title );
-					}
-				};
-
-				wp.media.editor.open( 'media-loader' );
-			}
+				if ( target === 'background' ) {
+					editor.find( 'input[name="background_source"]' ).val( image.url );
+					editor.find( 'input[name="background_alt"]' ).val( image.alt );
+					editor.find( 'input[name="background_title"]' ).val( image.title );
+				} else if ( target === 'opened-background' ) {
+					editor.find( 'input[name="opened_background_source"]' ).val( image.url );
+					editor.find( 'input[name="opened_background_alt"]' ).val( image.alt );
+					editor.find( 'input[name="opened_background_title"]' ).val( image.title );
+				}
+			});
 		},
 
 		clearFieldset: function( event ) {
@@ -453,6 +437,31 @@
 				$( '<p class="no-image">Click to add image</p>' ).appendTo( imageLoader );
 			}
 		}
+	};
+
+	var MediaLoader = {
+
+		open: function( callback ) {
+			var selection = [],
+				insertReference = wp.media.editor.insert;
+			
+			wp.media.editor.send.attachment = function( props, attachment ) {
+				var url = attachment.sizes[ props.size ].url,
+					alt = attachment.alt,
+					title = attachment.title;
+
+				selection.push( { url: url, alt: alt, title: title } );
+			};
+
+			wp.media.editor.insert = function( prop ) {
+				callback.call(this, selection);
+
+				wp.media.editor.insert = insertReference;
+			};
+
+			wp.media.editor.open( 'media-loader' );
+		}
+
 	};
 
 	$( document ).ready(function() {
