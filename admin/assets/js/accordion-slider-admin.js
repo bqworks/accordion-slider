@@ -5,64 +5,72 @@
 		panels: [],
 
 		init: function() {
+			if ( as_js_vars.page === 'single' ) {
+				this.initSingleAccordionPage();
+			} else if ( as_js_vars.page === 'all' ) {
+				this.initAllAccordionsPage();
+			}
+		},
+
+		initSingleAccordionPage: function() {
 			var that = this;
 
-			if ( as_js_vars.page === 'single' ) {
-				this.initPanels();
+			this.initPanels();
 
-				if ( as_js_vars.id !== -1)  {
-					this.loadAccordionData();
-				}
-
-				$( 'form' ).on( 'submit', function( event ) {
-					event.preventDefault();
-					that.updateAccordion();
-				});
-
-				$( '.add-panel, .panel-type a[data-type="empty"]' ).on( 'click', function( event ) {
-					event.preventDefault();
-					that.addEmptyPanel();
-				});
-
-				$( '.panel-type a[data-type="images"]' ).on( 'click', function( event ) {
-					event.preventDefault();
-					that.addImagesPanel();
-				});
-
-				$( '.panel-type a[data-type="dynamic"]' ).on( 'click', function( event ) {
-					event.preventDefault();
-					that.addDynamicPanel();
-				});
-
-				$( '.add-breakpoint' ).on( 'click', function( event ) {
-					event.preventDefault();
-					that.addBreakpoint();
-				});
-
-				$( '.breakpoints' ).on( 'click', '.add-setting', function( event ) {
-					event.preventDefault();
-
-					var name = $( this ).siblings( '.setting-selector' ).val(),
-						context = $( this ).parents( '.breakpoint' ).find( '.breakpoint-settings' );
-
-					that.addBreakpointSetting( name, context );
-				});
-
-				$( '.breakpoints' ).on( 'click', '.remove-breakpoint', function( event ) {
-					$( this ).parents( '.breakpoint' ).remove();
-				});
-
-				$( '.breakpoints' ).on( 'click', '.remove-breakpoint-setting', function( event ) {
-					$( this ).parents( 'tr' ).remove();
-				});
-
-			} else if ( as_js_vars.page === 'all' ) {
-
-				$( '.delete-accordion' ).on( 'click', function( event ) {
-					event.preventDefault();
-					that.deleteAccordion( $( this ) );
-				});
+			if ( as_js_vars.id !== -1) {
+				this.loadAccordionData();
 			}
+
+			$( 'form' ).on( 'submit', function( event ) {
+				event.preventDefault();
+				that.updateAccordion();
+			});
+
+			$( '.add-panel, .panel-type a[data-type="empty"]' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.addEmptyPanel();
+			});
+
+			$( '.panel-type a[data-type="images"]' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.addImagesPanel();
+			});
+
+			$( '.panel-type a[data-type="dynamic"]' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.addDynamicPanel();
+			});
+
+			$( '.add-breakpoint' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.addBreakpoint();
+			});
+
+			$( '.breakpoints' ).on( 'click', '.add-setting', function( event ) {
+				event.preventDefault();
+
+				var name = $( this ).siblings( '.setting-selector' ).val(),
+					context = $( this ).parents( '.breakpoint' ).find( '.breakpoint-settings' );
+
+				that.addBreakpointSetting( name, context );
+			});
+
+			$( '.breakpoints' ).on( 'click', '.remove-breakpoint', function( event ) {
+				$( this ).parents( '.breakpoint' ).remove();
+			});
+
+			$( '.breakpoints' ).on( 'click', '.remove-breakpoint-setting', function( event ) {
+				$( this ).parents( 'tr' ).remove();
+			});
+		},
+
+		initAllAccordionsPage: function() {
+			var that = this;
+
+			$( '.delete-accordion' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.deleteAccordion( $( this ) );
+			});
 		},
 
 		loadAccordionData: function() {
@@ -144,18 +152,12 @@
 
 				if ( elementArray[ 0 ] === 'id' ) {
 					id = parseInt( elementArray[ 1 ], 10 );
-				} else if ( elementArray[ 0 ] === 'action' ) {
-					action = elementArray[ 1 ];
 				}
 			});
 
-			if ( action !== 'delete' ) {
-				return;
-			}
-
 			var dialog = $(
 				'<div class="modal-overlay"></div>' +
-				'<div class="delete-dialog">' +
+				'<div class="delete-accordion-dialog">' +
 				'	<p class="dialog-question">Are you sure you want to delete this accordion?</p>' +
 				'	<div class="dialog-buttons">' +
 				'		<a class="button dialog-ok" href="#">Yes</a>' +
@@ -186,11 +188,11 @@
 			dialog.find( '.dialog-cancel' ).on( 'click', function( event ) {
 				event.preventDefault();
 				dialog.remove();
-			} );
+			});
 
-			dialog.find( '.modal-overlay' ).on( 'click', function(  ) {
+			dialog.find( '.modal-overlay' ).on( 'click', function( event ) {
 				dialog.remove();
-			} );
+			});
 		},
 
 		initPanels: function() {
@@ -202,12 +204,12 @@
 		},
 
 		initPanel: function( element, index ) {
-			var panel = new AdminPanel( element, index );
+			var panel = new Panel( element, index );
 			this.panels.push( panel );
 		},
 
 		getPanel: function( index ) {
-			return this.panels[index];
+			return this.panels[ index ];
 		},
 
 		addEmptyPanel: function() {
@@ -227,7 +229,6 @@
 
 		addImagesPanel: function() {
 			var that = this;
-
 			
 			MediaLoader.open(function( selection ) {
 				var images = [];
@@ -258,8 +259,14 @@
 
 		addDynamicPanel: function() {
 			var that = this;
+		},
 
-			
+		removePanel: function( index ) {
+			this.panels.splice( index, 1 );
+
+			$.each( this.panels, function( index, element ) {
+				element.setIndex( index );
+			});
 		},
 
 		addBreakpoint: function() {
@@ -289,7 +296,7 @@
 		}
 	};
 
-	var AdminPanel = function( element, index ) {
+	var Panel = function( element, index ) {
 		this.$element = element;
 		this.index = index;
 		this.panelData = {};
@@ -297,7 +304,7 @@
 		this.init();
 	};
 
-	AdminPanel.prototype = {
+	Panel.prototype = {
 
 		init: function() {
 			var that = this;
@@ -316,6 +323,49 @@
 					that.updateBackgroundImage();
 				});
 			});
+
+			this.$element.find( '.delete-panel' ).on( 'click', function( event ) {
+				event.preventDefault();
+
+				var dialog = $(
+					'<div class="modal-overlay"></div>' +
+					'<div class="delete-panel-dialog">' +
+					'	<p class="dialog-question">Are you sure you want to delete this panel?</p>' +
+					'	<div class="dialog-buttons">' +
+					'		<a class="button dialog-ok" href="#">Yes</a>' +
+					'		<a class="button dialog-cancel" href="#">Cancel</a>' +
+					'	</div>' +
+					'</div>'
+				).appendTo( 'body' );
+
+				dialog.find( '.dialog-ok' ).on( 'click', function( event ) {
+					event.preventDefault();
+
+					AccordionSliderAdmin.removePanel( that.index );
+					dialog.remove();
+
+					that.$element.fadeOut( 500, function() {
+						that.$element.remove();
+					});
+				});
+
+				dialog.find( '.dialog-cancel' ).on( 'click', function( event ) {
+					event.preventDefault();
+					dialog.remove();
+				});
+
+				dialog.find( '.modal-overlay' ).on( 'click', function( event ) {
+					dialog.remove();
+				});
+			});
+		},
+
+		getIndex: function() {
+			return this.index;
+		},
+
+		setIndex: function( index ) {
+			this.index = index;
 		},
 
 		getData: function() {
