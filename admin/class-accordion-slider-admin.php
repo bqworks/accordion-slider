@@ -26,6 +26,7 @@ class Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_get_accordion_data', array( $this, 'get_accordion_data' ) );
 		add_action( 'wp_ajax_accordion_slider_update_accordion', array( $this, 'update_accordion' ) );
 		add_action( 'wp_ajax_accordion_slider_delete_accordion', array( $this, 'delete_accordion' ) );
+		add_action( 'wp_ajax_accordion_slider_duplicate_accordion', array( $this, 'duplicate_accordion' ) );
 		add_action( 'wp_ajax_accordion_slider_add_panels', array( $this, 'add_panels' ) );
 		add_action( 'wp_ajax_accordion_slider_load_background_image_editor', array( $this, 'load_background_image_editor' ) );
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint', array( $this, 'add_breakpoint' ) );
@@ -221,7 +222,7 @@ class Accordion_Slider_Admin {
 							'opened_background_height' => isset( $panel_data['opened_background_height'] ) ? $panel_data['opened_background_height'] : '',
 							'background_link' => isset( $panel_data['background_link'] ) ? $panel_data['background_link'] : '',
 							'background_link_title' => isset( $panel_data['background_link_title'] ) ? $panel_data['background_link_title'] : '',
-							'html_content' => isset( $panel_data['content'] ) ? $panel_data['content'] : '');
+							'html_content' => isset( $panel_data['html_content'] ) ? $panel_data['html_content'] : '');
 
 			$panel_data_types = array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s' );
 
@@ -229,6 +230,65 @@ class Accordion_Slider_Admin {
 		}
 
 		echo $id; 
+
+		die();
+	}
+
+	public function duplicate_accordion() {
+		global $wpdb;
+
+		$nonce = $_POST['nonce'];
+		$original_accordion_id = $_POST['id'];
+
+		if ( ! wp_verify_nonce( $nonce, 'duplicate-accordion' . $original_accordion_id ) ) {
+			die( 'This action was stopped for security purposes.' );
+		}
+
+		$accordion = $this->plugin->load_accordion( $original_accordion_id );
+
+		if ( $accordion !== false ) {
+			$accordion_name = $accordion['name'];
+			$accordion_created = date( 'm-d-Y' );
+			$accordion_modified = $accordion_created;
+
+			$wpdb->insert($wpdb->prefix . 'accordionslider_accordions', array( 'name' => $accordion_name, 
+																				'settings' => $accordion['settings'],
+																				'created' => $accordion_created, 
+																				'modified' => $accordion_modified ), 
+																		array( '%s', '%s', '%s', '%s' ) );
+			
+			$accordion_id = $wpdb->insert_id;
+
+			$panels = $this->plugin->load_panels( $original_accordion_id );
+
+			foreach ( $panels as $panel ) {
+				$new_panel = array('accordion_id' => $accordion_id,
+								'label' => $panel['label'],
+								'position' => $panel['position'],
+								'visibility' => $panel['visibility'],
+								'background_source' => $panel['background_source'],
+								'background_retina_source' => $panel['background_retina_source'],
+								'background_alt' => $panel['background_alt'],
+								'background_title' => $panel['background_title'],
+								'background_width' => $panel['background_width'],
+								'background_height' => $panel['background_height'],
+								'opened_background_source' => $panel['opened_background_source'],
+								'opened_background_retina_source' => $panel['opened_background_retina_source'],
+								'opened_background_alt' => $panel['opened_background_alt'],
+								'opened_background_title' => $panel['opened_background_title'],
+								'opened_background_width' => $panel['opened_background_width'],
+								'opened_background_height' => $panel['opened_background_height'],
+								'background_link' => $panel['background_link'],
+								'background_link_title' => $panel['background_link_title'],
+								'html_content' => $panel['html_content']);
+
+				$new_panel_data_types = array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s' );
+
+				$wpdb->insert( $wpdb->prefix . 'accordionslider_panels', $new_panel, $new_panel_data_types );
+			}
+
+			echo include( 'views/accordions_row.php' );
+		}
 
 		die();
 	}

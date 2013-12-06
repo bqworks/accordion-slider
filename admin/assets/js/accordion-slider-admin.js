@@ -67,9 +67,14 @@
 		initAllAccordionsPage: function() {
 			var that = this;
 
-			$( '.delete-accordion' ).on( 'click', function( event ) {
+			$( '.accordions-list' ).on( 'click', '.delete-accordion', function( event ) {
 				event.preventDefault();
 				that.deleteAccordion( $( this ) );
+			});
+
+			$( '.accordions-list' ).on( 'click', '.duplicate-accordion', function( event ) {
+				event.preventDefault();
+				that.duplicateAccordion( $( this ) );
 			});
 		},
 
@@ -157,7 +162,6 @@
 				} else if ( elementArray[ 0 ] === 'da_nonce' ) {
 					nonce = elementArray[ 1 ];
 				}
-
 			});
 
 			var dialog = $(
@@ -188,7 +192,7 @@
 				});
 
 				dialog.remove();
-			} );
+			});
 
 			dialog.find( '.dialog-cancel' ).on( 'click', function( event ) {
 				event.preventDefault();
@@ -200,12 +204,68 @@
 			});
 		},
 
+		duplicateAccordion: function( target ) {
+			var url = target.attr( 'href' ),
+				urlArray = url.split( '&' ).splice( 1 ),
+				id,
+				nonce;
+
+			$.each( urlArray, function( index, element ) {
+				var elementArray = element.split( '=' );
+
+				if ( elementArray[ 0 ] === 'id' ) {
+					id = parseInt( elementArray[ 1 ], 10 );
+				} else if ( elementArray[ 0 ] === 'dua_nonce' ) {
+					nonce = elementArray[ 1 ];
+				}
+			});
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_duplicate_accordion', id: id, nonce: nonce },
+				complete: function( data ) {
+					var row = $( data.responseText ).appendTo( $( '.accordions-list tbody' ) );
+					
+					row.hide().fadeIn();
+				}
+			});
+		},
+
 		initPanels: function() {
 			var that = this;
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index ) {
 				that.initPanel( $( this ), index );
 			});
+
+			/*var selectedPanel,
+				init = false,
+				zIndex;
+
+			$( '.panels-container' ).on( 'mousedown', '.panel-image', function( event ) {
+				selectedPanel = $( this ).parents( '.panel' );
+
+				$( 'body' ).on( 'mousemove', function( event ) {
+					event.preventDefault();
+
+					if ( init === false ) {
+						selectedPanel.css({
+							'position': 'absolute',
+							'z-index': 1000
+						});
+					}
+
+					selectedPanel.css({
+						'left': event.originalEvent.clientX,
+						'top': event.originalEvent.clientY
+					});
+				});
+
+				$( '.panels-container' ).on( 'mouseup', '.panel-image', function( event ) {
+					event.preventDefault();
+				});
+			});*/
 		},
 
 		initPanel: function( element, index ) {
@@ -240,7 +300,7 @@
 
 				$.each( selection, function( index, element ) {
 					images.push( { background_source: element.url, background_alt: element.alt, background_title: element.title } );
-				} );
+				});
 
 				$.ajax({
 					url: as_js_vars.ajaxurl,
@@ -362,6 +422,12 @@
 				dialog.find( '.modal-overlay' ).on( 'click', function( event ) {
 					dialog.remove();
 				});
+			});
+
+			this.$element.find( '.duplicate-panel' ).on( 'click', function( event ) {
+				event.preventDefault();
+
+
 			});
 		},
 

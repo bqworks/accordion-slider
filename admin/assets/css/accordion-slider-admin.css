@@ -2,7 +2,7 @@
 	margin-top: 20px;
 }
 
-.accordion-list tr:nth-child(2n+1) {
+.accordions-list tr:nth-child(2n+1) {
 	background-color: #F9F9F9;
 }
 
