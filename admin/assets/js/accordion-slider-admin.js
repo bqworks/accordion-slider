@@ -392,42 +392,13 @@
 			this.$element.find( '.delete-panel' ).on( 'click', function( event ) {
 				event.preventDefault();
 
-				var dialog = $(
-					'<div class="modal-overlay"></div>' +
-					'<div class="delete-panel-dialog">' +
-					'	<p class="dialog-question">' + as_js_vars.panel_delete + '</p>' +
-					'	<div class="dialog-buttons">' +
-					'		<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
-					'		<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
-					'	</div>' +
-					'</div>'
-				).appendTo( 'body' );
-
-				dialog.find( '.dialog-ok' ).on( 'click', function( event ) {
-					event.preventDefault();
-
-					AccordionSliderAdmin.removePanel( that.index );
-					dialog.remove();
-
-					that.$element.fadeOut( 500, function() {
-						that.$element.remove();
-					});
-				});
-
-				dialog.find( '.dialog-cancel' ).on( 'click', function( event ) {
-					event.preventDefault();
-					dialog.remove();
-				});
-
-				dialog.find( '.modal-overlay' ).on( 'click', function( event ) {
-					dialog.remove();
-				});
+				that.deletePanel();
 			});
 
 			this.$element.find( '.duplicate-panel' ).on( 'click', function( event ) {
 				event.preventDefault();
 
-
+				that.duplicatePanel();
 			});
 		},
 
@@ -461,6 +432,64 @@
 				panelImage.find( 'img' ).remove();
 				$( '<p class="no-image">' + as_js_vars.no_image + '</p>' ).appendTo( panelImage );
 			}
+		},
+
+		deletePanel: function() {
+			var that = this;
+			
+			var dialog = $(
+				'<div class="modal-overlay"></div>' +
+				'<div class="delete-panel-dialog">' +
+				'	<p class="dialog-question">' + as_js_vars.panel_delete + '</p>' +
+				'	<div class="dialog-buttons">' +
+				'		<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
+				'		<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
+				'	</div>' +
+				'</div>'
+			).appendTo( 'body' );
+
+			dialog.find( '.dialog-ok' ).on( 'click', function( event ) {
+				event.preventDefault();
+
+				AccordionSliderAdmin.removePanel( that.index );
+				dialog.remove();
+
+				that.$element.fadeOut( 500, function() {
+					that.$element.remove();
+				});
+			});
+
+			dialog.find( '.dialog-cancel' ).on( 'click', function( event ) {
+				event.preventDefault();
+				dialog.remove();
+			});
+
+			dialog.find( '.modal-overlay' ).on( 'click', function( event ) {
+				dialog.remove();
+			});
+		},
+
+		duplicatePanel: function() {
+			var that = this;
+
+			var images = [ {
+				background_source: that.panelData.background_source,
+				background_alt: that.panelData.background_alt,
+				background_title: that.panelData.background_title
+			} ];
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_add_panels', data: JSON.stringify( images ) },
+				complete: function( data ) {
+					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) ),
+						index = panel.index();
+
+					AccordionSliderAdmin.initPanel( panel, index );
+					AccordionSliderAdmin.getPanel( index ).setData( that.panelData );
+				}
+			});
 		}
 	};
 
