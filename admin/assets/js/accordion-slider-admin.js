@@ -17,7 +17,7 @@
 
 			this.initPanels();
 
-			if ( as_js_vars.id !== -1) {
+			if ( parseInt( as_js_vars.id, 10 ) !== -1) {
 				this.loadAccordionData();
 			}
 
@@ -79,7 +79,7 @@
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'get',
-				data: { action: 'accordion_slider_get_accordion_data', id: as_js_vars.id },
+				data: { action: 'accordion_slider_get_accordion_data', id: as_js_vars.id, nonce: as_js_vars.lad_nonce },
 				complete: function( data ) {
 					var accordionData = JSON.parse( data.responseText );
 
@@ -97,7 +97,8 @@
 				'id': as_js_vars.id,
 				'name': $( 'input#title' ).val(),
 				'settings': {},
-				'panels': []
+				'panels': [],
+				'nonce': as_js_vars.ua_nonce
 			};
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index ) {
@@ -145,6 +146,7 @@
 				urlArray = url.split( '&' ).splice( 1 ),
 				id,
 				action,
+				nonce,
 				row = target.parents( 'tr' );
 
 			$.each( urlArray, function( index, element ) {
@@ -152,16 +154,19 @@
 
 				if ( elementArray[ 0 ] === 'id' ) {
 					id = parseInt( elementArray[ 1 ], 10 );
+				} else if ( elementArray[ 0 ] === 'da_nonce' ) {
+					nonce = elementArray[ 1 ];
 				}
+
 			});
 
 			var dialog = $(
 				'<div class="modal-overlay"></div>' +
 				'<div class="delete-accordion-dialog">' +
-				'	<p class="dialog-question">Are you sure you want to delete this accordion?</p>' +
+				'	<p class="dialog-question">' + as_js_vars.accordion_delete + '</p>' +
 				'	<div class="dialog-buttons">' +
-				'		<a class="button dialog-ok" href="#">Yes</a>' +
-				'		<a class="button dialog-cancel" href="#">Cancel</a>' +
+				'		<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
+				'		<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
 				'	</div>' +
 				'</div>'
 			).appendTo( 'body' );
@@ -172,7 +177,7 @@
 				$.ajax({
 					url: as_js_vars.ajaxurl,
 					type: 'post',
-					data: { action: 'accordion_slider_delete_accordion', id: id },
+					data: { action: 'accordion_slider_delete_accordion', id: id, nonce: nonce },
 					complete: function( data ) {
 						if ( id === parseInt( data.responseText, 10 ) ) {
 							row.fadeOut( 300, function() {
@@ -330,10 +335,10 @@
 				var dialog = $(
 					'<div class="modal-overlay"></div>' +
 					'<div class="delete-panel-dialog">' +
-					'	<p class="dialog-question">Are you sure you want to delete this panel?</p>' +
+					'	<p class="dialog-question">' + as_js_vars.panel_delete + '</p>' +
 					'	<div class="dialog-buttons">' +
-					'		<a class="button dialog-ok" href="#">Yes</a>' +
-					'		<a class="button dialog-cancel" href="#">Cancel</a>' +
+					'		<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
+					'		<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
 					'	</div>' +
 					'</div>'
 				).appendTo( 'body' );
@@ -388,7 +393,7 @@
 				}
 			} else if ( panelImage.find( 'img' ).length ) {
 				panelImage.find( 'img' ).remove();
-				$( '<p class="no-image">Click to add image</p>' ).appendTo( panelImage );
+				$( '<p class="no-image">' + as_js_vars.no_image + '</p>' ).appendTo( panelImage );
 			}
 		}
 	};
@@ -484,7 +489,7 @@
 
 			if ( imageLoader.find( 'img' ).length !== 0 ) {
 				imageLoader.find( 'img' ).remove();
-				$( '<p class="no-image">Click to add image</p>' ).appendTo( imageLoader );
+				$( '<p class="no-image">' + as_js_vars.no_image + '</p>' ).appendTo( imageLoader );
 			}
 		}
 	};

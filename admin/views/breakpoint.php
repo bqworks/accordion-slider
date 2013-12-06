@@ -1,6 +1,6 @@
 <div class="breakpoint">
 	<div class="breakpoint-header">
-		Window maximum width: <input type="text" name="breakpoint_width" value="<?php echo isset( $breakpoint_width ) ? $breakpoint_width : ''; ?>" />
+		<?php _e( 'Window maximum width:', 'accordion-slider' ); ?><input type="text" name="breakpoint_width" value="<?php echo isset( $breakpoint_width ) ? esc_attr( $breakpoint_width ) : ''; ?>" />
 		<span class="remove-breakpoint"></span>
 	</div>
 	<table>
@@ -26,6 +26,6 @@
 				}
 			?>
 		</select>
-		<a class="button add-setting" href="#">Add Option</a>
+		<a class="button add-setting" href="#"><?php _e( 'Add Option', 'accordion-slider' ); ?></a>
 	</div>
 </div>

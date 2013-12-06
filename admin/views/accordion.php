@@ -7,7 +7,7 @@
             <div class="editor-wrapper">
                 <div class="editor-body">
                     <div id="titlediv">
-                    	<input name="name" id="title" type="text" value="<?php echo $accordion_name; ?>" />
+                    	<input name="name" id="title" type="text" value="<?php echo esc_attr( $accordion_name ); ?>" />
                     </div>
 					
 					<div class="panels-container">
@@ -25,11 +25,11 @@
                     </div>
 
                     <div class="add-panel-group">
-                        <a class="button add-panel" href="#">Add Panel <span class="add-panel-arrow">&#9660</span></a>
+                        <a class="button add-panel" href="#"><?php _e( 'Add Panel', 'accordion-slider' ); ?> <span class="add-panel-arrow">&#9660</span></a>
                         <ul class="panel-type">
-                            <li><a href="#" data-type="empty">Empty Panel</a></li>
-                            <li><a href="#" data-type="images">Image(s) Panel</a></li>
-                            <li><a href="#" data-type="dynamic">Dynamic Panel</a></li>
+                            <li><a href="#" data-type="empty"><?php _e( 'Empty Panel', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="images"><?php _e( 'Image(s) Panel', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="dynamic"><?php _e( 'Dynamic Panel', 'accordion-slider' ); ?></a></li>
                         </ul>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
 				<div class="postbox action">
 					<div class="inside">
 						<input type="submit" name="submit" class="button-primary" value="Update" />
-						<a class="button preview-accordion" href="#">Preview</a>
+						<a class="button preview-accordion" href="#"><?php _e( 'Preview', 'accordion-slider' ); ?></a>
 					</div>
 				</div>
                 
@@ -67,14 +67,14 @@
                                                             $value = isset( $accordion_settings ) && isset( $accordion_settings[$name] ) ? $accordion_settings[$name] : $setting['default_value'];
 
                                                             if ( $setting['type'] === 'number' || $setting['type'] === 'mixed' ) {
-                                                                echo '<input class="setting" type="text" name="' . $name . '" value="' . $value . '" />';
+                                                                echo '<input class="setting" type="text" name="' . $name . '" value="' . esc_attr( $value ) . '" />';
                                                             } else if ( $setting['type'] === 'boolean' ) {
                                                                 echo '<input class="setting" type="checkbox" name="' . $name . '"' . ( $value === true ? ' checked="checked"' : '' ) . ' />';
                                                             } else if ( $setting['type'] === 'select' ) {
                                                                 echo'<select class="setting" name="' . $name . '">';
                                                                 
                                                                 foreach ( $setting['available_values'] as $value_name => $value_label ) {
-                                                                    echo '<option value="' . $value_name . '"' . ( $value == $value_name ? ' selected="selected"' : '' ) . '>' . $value_label . '</option>';
+                                                                    echo '<option value="' . $value_name . '"' . ( $value === $value_name ? ' selected="selected"' : '' ) . '>' . $value_label . '</option>';
                                                                 }
                                                                 
                                                                 echo '</select>';
@@ -94,7 +94,7 @@
                     ?>
                     <div class="postbox breakpoints-box">
                         <div class="handlediv"></div>
-                        <h3 class="hndle">Breakpoints</h3>
+                        <h3 class="hndle"><?php _e( 'Breakpoints', 'accordion-slider' ); ?></h3>
                         <div class="inside">
                             <div class="breakpoints">
                                 <?php
@@ -107,7 +107,7 @@
                                     }
                                 ?>
                             </div>
-                            <a class="button add-breakpoint" href="#">Add Breakpoint</a>
+                            <a class="button add-breakpoint" href="#"><?php _e( 'Add Breakpoint', 'accordion-slider' ); ?></a>
                         </div>
                     </div>
                 </div>

@@ -205,7 +205,8 @@ class Accordion_Slider {
 	public function load_accordion( $id ) {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'accordionslider_accordions';
-		$result = $wpdb->get_row( "SELECT * FROM $table_name WHERE id = $id", ARRAY_A );
+
+		$result = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table_name WHERE id = %d", $id ), ARRAY_A );
 
 		if ( ! is_null( $result ) ) {
 			return $result;
@@ -217,7 +218,7 @@ class Accordion_Slider {
 	public function load_panels( $id ) {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'accordionslider_panels';
-		$result = $wpdb->get_results( "SELECT * FROM $table_name WHERE accordion_id = $id", ARRAY_A );
+		$result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE accordion_id = %d", $id ), ARRAY_A );
 
 		if ( ! is_null( $result ) ) {
 			return $result;

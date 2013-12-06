@@ -75,11 +75,20 @@ class Accordion_Slider_Admin {
 
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/accordion-slider-admin.js', __FILE__ ), array( 'jquery' ), Accordion_Slider::VERSION );
 
+			$id = isset( $_GET['id'] ) ? $_GET['id'] : -1;
+
 			wp_localize_script( $this->plugin_slug . '-admin-script', 'as_js_vars', array(
 				'admin' => admin_url( 'admin.php' ),
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'page' => isset( $_GET['page'] ) && ( $_GET['page'] === 'accordion-slider-new' || ( isset( $_GET['id'] ) && isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) ) ? 'single' : 'all',
-				'id' => isset( $_GET['id'] ) ? $_GET['id'] : -1
+				'id' => $id,
+				'lad_nonce' => wp_create_nonce( 'load-accordion-data' . $id ),
+				'ua_nonce' => wp_create_nonce( 'update-accordion' . $id ),
+				'no_image' => __( 'Click to add image', 'accordion-slider' ),
+				'accordion_delete' => __( 'Are you sure you want to delete this accordion?', 'accordion-slider' ),
+				'panel_delete' => __( 'Are you sure you want to delete this panel?', 'accordion-slider' ),
+				'yes' => __( 'Yes', 'accordion-slider' ),
+				'cancel' => __( 'Cancel', 'accordion-slider' )
 			) );
 		}
 	}
@@ -142,7 +151,12 @@ class Accordion_Slider_Admin {
 	}
 
 	public function get_accordion_data() {
+		$nonce = $_GET['nonce'];
 		$id = $_GET['id'];
+
+		if ( ! wp_verify_nonce( $nonce, 'load-accordion-data' . $id ) ) {
+			die( 'This action was stopped for security purposes.' );
+		}
 
 		$accordion = $this->plugin->load_accordion( $_GET['id'] );
 		$panels = $this->plugin->load_panels( $_GET['id'] );
@@ -159,10 +173,15 @@ class Accordion_Slider_Admin {
 
 		$accordion_data = json_decode( stripslashes( $_POST['data'] ), true );
 
+		$nonce = $accordion_data['nonce'];
 		$id = intval( $accordion_data['id'] );
 		$name = $accordion_data['name'];
 		$settings = $accordion_data['settings'];
 		$panels_data = $accordion_data['panels'];
+
+		if ( ! wp_verify_nonce( $nonce, 'update-accordion' . $id ) ) {
+			die( 'This action was stopped for security purposes.' );
+		}
 
 		if ( $id === -1 ) {
 			$wpdb->insert($wpdb->prefix . 'accordionslider_accordions', array( 'name' => $name, 
@@ -173,14 +192,14 @@ class Accordion_Slider_Admin {
 			
 			$id = $wpdb->insert_id;
 		} else {
-			$wpdb->update($wpdb->prefix . 'accordionslider_accordions', array('name' => $name, 
-																			 'settings' => json_encode( $settings ),
-																			 'modified' => date('m-d-Y')),
-																	   array('id' => $id), 
-																	   array('%s', '%s', '%s'), 
-																	   array('%d'));
+			$wpdb->update( $wpdb->prefix . 'accordionslider_accordions', array( 'name' => $name, 
+																			 	'settings' => json_encode( $settings ),
+																			 	'modified' => date( 'm-d-Y' ) ),
+																	   	array( 'id' => $id ), 
+																	   	array( '%s', '%s', '%s' ), 
+																	   	array( '%d' ) );
 				
-			$wpdb->query("DELETE FROM " . $wpdb->prefix . "accordionslider_panels WHERE accordion_id = $id");
+			$wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "accordionslider_panels WHERE accordion_id = %d", $id ) );
 		}
 
 		foreach ( $panels_data as $panel_data ) {
@@ -217,10 +236,16 @@ class Accordion_Slider_Admin {
 	public function delete_accordion() {
 		global $wpdb;
 
+		$nonce = $_POST['nonce'];
 		$id = intval( $_POST['id'] );
 
-		$wpdb->query("DELETE FROM " . $wpdb->prefix . "accordionslider_panels WHERE accordion_id = $id");
-		$wpdb->query("DELETE FROM " . $wpdb->prefix . "accordionslider_accordions WHERE id =$id");
+		if ( ! wp_verify_nonce( $nonce, 'delete-accordion' . $id ) ) {
+			die( 'This action was stopped for security purposes.' );
+		}
+
+		$wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "accordionslider_panels WHERE accordion_id = %d", $id ) );
+
+		$wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "accordionslider_accordions WHERE id = %d", $id ) );
 
 		echo $id; 
 
@@ -279,7 +304,7 @@ class Accordion_Slider_Admin {
 		$setting_html = '';
 
 		if ( $setting['type'] === 'number' || $setting['type'] === 'mixed' ) {
-            $setting_html = '<tr><td><label>' . $setting['label'] . '</label></td><td class="setting-cell"><input class="breakpoint-setting" type="text" name="' . $name . '" value="' . $setting_value . '" /><span class="remove-breakpoint-setting"></span></td></tr>';
+            $setting_html = '<tr><td><label>' . $setting['label'] . '</label></td><td class="setting-cell"><input class="breakpoint-setting" type="text" name="' . $name . '" value="' . esc_attr( $setting_value ) . '" /><span class="remove-breakpoint-setting"></span></td></tr>';
         } else if ( $setting['type'] === 'boolean' ) {
             $setting_html = '<tr><td><label>' . $setting['label'] . '</label></td><td class="setting-cell"><input class="breakpoint-setting" type="checkbox" name="' . $name . '"' . ( $setting_value === true ? ' checked="checked"' : '' ) . ' /><span class="remove-breakpoint-setting"></span></td></tr>';
         } else if ( $setting['type'] === 'select' ) {

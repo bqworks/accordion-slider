@@ -2,22 +2,22 @@
 	<div class="panel-image"> 
 		<?php 
 			if ( isset ( $panel_image ) && $panel_image !== '' ) {
-				echo '<img src="' . $panel_image . '" />';
+				echo '<img src="' . esc_url( $panel_image ) . '" />';
 			} else {
-				echo '<p class="no-image">Click to add image</p>';
+				echo '<p class="no-image">' . __( 'Click to add image', 'accordion-slider' ) . '</p>';
 			}
 		?>
 	</div>
 
 	<div class="panel-controls">
-		<a class="delete-panel" href="#">Delete</a>
-		<a class="duplicate-panel" href="#">Duplicate</a>
-		<a class="toggle-visibility" href="#">Visibility</a>
+		<a class="delete-panel" href="#"><?php _e( 'Delete', 'accordion-slider' ); ?></a>
+		<a class="duplicate-panel" href="#"><?php _e( 'Duplicate', 'accordion-slider' ); ?></a>
+		<a class="toggle-visibility" href="#"><?php _e( 'Visibility', 'accordion-slider' ); ?></a>
 	</div>
 
 	<div class="panel-buttons"> 
-		<a class="button-secondary edit-background-image" href="#">Image</a>
-		<a class="button-secondary edit-html-content" href="#">HTML</a>
-		<a class="button-secondary edit-layers" href="#">Layers</a>
+		<a class="button-secondary edit-background-image" href="#"><?php _e( 'Image', 'accordion-slider' ); ?></a>
+		<a class="button-secondary edit-html-content" href="#"><?php _e( 'HTML', 'accordion-slider' ); ?></a>
+		<a class="button-secondary edit-layers" href="#"><?php _e( 'Layers', 'accordion-slider' ); ?></a>
 	</div>
 </div>

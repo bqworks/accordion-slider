@@ -1,6 +1,6 @@
 <div class="wrap accordion-slider-admin">
 	<?php screen_icon(); ?>
-	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+	<h2><?php _e( 'All Accordions' ); ?></h2>
        
 	<table class="widefat accordion-list">
 	<thead>
@@ -29,19 +29,21 @@
 			foreach ( $accordions as $accordion ) {
 				$accordion_id = $accordion->id;
 				$accordion_name = stripslashes( $accordion->name );
-				
+				$nonce = wp_create_nonce( 'delete-accordion' . $accordion_id );
+				$edit_url = admin_url( 'admin.php?page=accordion-slider&id=' . $accordion_id . '&action=edit' );
+				$delete_url = admin_url( 'admin.php?page=accordion-slider&id=' . $accordion_id . '&action=delete' ) . '&da_nonce=' . $nonce;
+
 				echo '<tr>'.
-						'<td>' . $accordion_id . '</td>' .
-						'<td>' . $accordion_name . '</td>' .
-						'<td>' . $accordion->created . '</td>' .
-						'<td>' . $accordion->modified . '</td>' .
-						'<td>' .
-							  '<a href="'. admin_url('admin.php?page=accordion-slider&id=' . $accordion_id) . '&action=edit">' . __('Edit', 'accordion-slider') . '</a> | ' .
-							  '<a class="preview-accordion" href="">' . __('Preview', 'accordion-slider') . '</a> | ' .
-							  '<a class="delete-accordion" href="'. admin_url('admin.php?page=accordion-slider&id=' . $accordion_id) . '&action=delete">' . __('Delete', 'accordion-slider') . '</a> | ' .
-							  '<a class="duplicate-accordion" href="">' . __('Duplicate', 'accordion-slider') . '</a>';
-							  
-				echo	'</td>' .
+					'	<td>' . $accordion_id . '</td>' .
+					'	<td>' . esc_html( $accordion_name ) . '</td>' .
+					'	<td>' . $accordion->created . '</td>' .
+					'	<td>' . $accordion->modified . '</td>' .
+					'	<td>' .
+					'		<a href="' . $edit_url . '">' . __( 'Edit', 'accordion-slider' ) . '</a> | ' .
+					'		<a class="preview-accordion" href="">' . __( 'Preview', 'accordion-slider' ) . '</a> | ' .
+					'		<a class="delete-accordion" href="' . $delete_url . '">' . __( 'Delete', 'accordion-slider' ) . '</a> | ' .
+					'		<a class="duplicate-accordion" href="">' . __( 'Duplicate', 'accordion-slider' ) . '</a>' .
+					'	</td>' .
 					'</tr>';
 			}
 		}
