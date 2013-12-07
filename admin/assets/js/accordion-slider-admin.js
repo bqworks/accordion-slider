@@ -175,7 +175,7 @@
 				'</div>'
 			).appendTo( 'body' );
 
-			dialog.find( '.dialog-ok' ).on( 'click', function( event ) {
+			dialog.find( '.dialog-ok' ).one( 'click', function( event ) {
 				event.preventDefault();
 
 				$.ajax({
@@ -194,12 +194,12 @@
 				dialog.remove();
 			});
 
-			dialog.find( '.dialog-cancel' ).on( 'click', function( event ) {
+			dialog.find( '.dialog-cancel' ).one( 'click', function( event ) {
 				event.preventDefault();
 				dialog.remove();
 			});
 
-			dialog.find( '.modal-overlay' ).on( 'click', function( event ) {
+			dialog.find( '.modal-overlay' ).one( 'click', function( event ) {
 				dialog.remove();
 			});
 		},
@@ -269,8 +269,62 @@
 		},
 
 		initPanel: function( element, index ) {
+			var that = this;
+
 			var panel = new Panel( element, index );
 			this.panels.push( panel );
+
+			panel.on( 'duplicatePanel', function( event ) {
+				var images = [ {
+					background_source: event.panelData.background_source,
+					background_alt: event.panelData.background_alt,
+					background_title: event.panelData.background_title
+				} ];
+
+				$.ajax({
+					url: as_js_vars.ajaxurl,
+					type: 'post',
+					data: { action: 'accordion_slider_add_panels', data: JSON.stringify( images ) },
+					complete: function( data ) {
+						var panel = $( data.responseText ).appendTo( $( '.panels-container' ) ),
+							index = panel.index();
+
+						that.initPanel( panel, index );
+						that.getPanel( index ).setData( event.panelData );
+					}
+				});
+			});
+
+			panel.on( 'deletePanel', function( event ) {
+				var index = event.index,
+					dialog = $(
+					'<div class="modal-overlay"></div>' +
+					'<div class="delete-panel-dialog">' +
+					'	<p class="dialog-question">' + as_js_vars.panel_delete + '</p>' +
+					'	<div class="dialog-buttons">' +
+					'		<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
+					'		<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
+					'	</div>' +
+					'</div>'
+				).appendTo( 'body' );
+
+				dialog.find( '.dialog-ok' ).one( 'click', function( event ) {
+					event.preventDefault();
+
+					that.removePanel( index );
+					dialog.remove();
+					panel.remove();
+				});
+
+				dialog.find( '.dialog-cancel' ).one( 'click', function( event ) {
+					event.preventDefault();
+					dialog.remove();
+				});
+
+				dialog.find( '.modal-overlay' ).one( 'click', function( event ) {
+					dialog.remove();
+				});
+			});
 		},
 
 		getPanel: function( index ) {
@@ -308,9 +362,10 @@
 					data: { action: 'accordion_slider_add_panels', data: JSON.stringify( images ) },
 					complete: function( data ) {
 						var lastIndex = $( '.panels-container' ).find( '.panel' ).length - 1,
-							panels = $( '.panels-container' ).append( data.responseText );
+							panels = $( '.panels-container' ).append( data.responseText ),
+							indexes = lastIndex === -1 ? '' : ':gt(' + lastIndex + ')';
 
-						panels.find( '.panel:gt(' + lastIndex + ')' ).each(function( index ) {
+						panels.find( '.panel' + indexes ).each(function( index ) {
 							var panel = $( this ),
 								panelIndex = lastIndex + 1 + index;
 
@@ -327,6 +382,9 @@
 		},
 
 		removePanel: function( index ) {
+			this.panels[ index ].off( 'duplicatePanel' );
+			this.panels[ index ].off( 'deletePanel' );
+
 			this.panels.splice( index, 1 );
 
 			$.each( this.panels, function( index, element ) {
@@ -365,6 +423,7 @@
 		this.$element = element;
 		this.index = index;
 		this.panelData = {};
+		this.events = $( {} );
 
 		this.init();
 	};
@@ -391,14 +450,12 @@
 
 			this.$element.find( '.delete-panel' ).on( 'click', function( event ) {
 				event.preventDefault();
-
-				that.deletePanel();
+				that.trigger( { type: 'deletePanel', index: that.index } );
 			});
 
 			this.$element.find( '.duplicate-panel' ).on( 'click', function( event ) {
 				event.preventDefault();
-
-				that.duplicatePanel();
+				that.trigger( { type: 'duplicatePanel', panelData: that.panelData } );
 			});
 		},
 
@@ -434,62 +491,27 @@
 			}
 		},
 
-		deletePanel: function() {
-			var that = this;
-			
-			var dialog = $(
-				'<div class="modal-overlay"></div>' +
-				'<div class="delete-panel-dialog">' +
-				'	<p class="dialog-question">' + as_js_vars.panel_delete + '</p>' +
-				'	<div class="dialog-buttons">' +
-				'		<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
-				'		<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
-				'	</div>' +
-				'</div>'
-			).appendTo( 'body' );
+		remove: function() {
+			this.$element.find( '.edit-background-image' ).off( 'click' );
+			this.$element.find( '.panel-image' ).off( 'click' );
+			this.$element.find( '.delete-panel' ).off( 'click' );
+			this.$element.find( '.duplicate-panel' ).off( 'click' );
 
-			dialog.find( '.dialog-ok' ).on( 'click', function( event ) {
-				event.preventDefault();
-
-				AccordionSliderAdmin.removePanel( that.index );
-				dialog.remove();
-
-				that.$element.fadeOut( 500, function() {
-					that.$element.remove();
-				});
-			});
-
-			dialog.find( '.dialog-cancel' ).on( 'click', function( event ) {
-				event.preventDefault();
-				dialog.remove();
-			});
-
-			dialog.find( '.modal-overlay' ).on( 'click', function( event ) {
-				dialog.remove();
+			this.$element.fadeOut( 500, function() {
+				$( this ).remove();
 			});
 		},
 
-		duplicatePanel: function() {
-			var that = this;
+		on: function( type, handler ) {
+			this.events.on( type, handler );
+		},
 
-			var images = [ {
-				background_source: that.panelData.background_source,
-				background_alt: that.panelData.background_alt,
-				background_title: that.panelData.background_title
-			} ];
+		off: function( type ) {
+			this.events.off( type );
+		},
 
-			$.ajax({
-				url: as_js_vars.ajaxurl,
-				type: 'post',
-				data: { action: 'accordion_slider_add_panels', data: JSON.stringify( images ) },
-				complete: function( data ) {
-					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) ),
-						index = panel.index();
-
-					AccordionSliderAdmin.initPanel( panel, index );
-					AccordionSliderAdmin.getPanel( index ).setData( that.panelData );
-				}
-			});
+		trigger: function( type ) {
+			this.events.triggerHandler( type );
 		}
 	};
 
@@ -523,7 +545,7 @@
 			editor = $( '.background-image-editor' );
 
 			editor.find( '.close, .close-x' ).on( 'click', $.proxy( this.close, this ) );
-			editor.find( '.save' ).on( 'click', $.proxy( this.save, this ));
+			editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
 			editor.find( '.image-loader' ).on( 'click', $.proxy( this.openMediaLibrary, this ) );
 			editor.find( '.clear-fieldset' ).on( 'click', $.proxy( this.clearFieldset, this ) );
 		},
@@ -546,6 +568,11 @@
 
 		close: function() {
 			event.preventDefault();
+
+			editor.find( '.close, .close-x' ).off( 'click' );
+			editor.find( '.save' ).off( 'click' );
+			editor.find( '.image-loader' ).off( 'click' );
+			editor.find( '.clear-fieldset' ).off( 'click' );
 
 			$( 'body' ).find( '.modal-overlay, .background-image-editor' ).remove();
 		},
