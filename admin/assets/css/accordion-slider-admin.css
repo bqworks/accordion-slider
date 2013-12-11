@@ -44,6 +44,14 @@
 	margin-right: 0;
 }
 
+.panel.placeholder {
+	border: 1px dashed #333;
+	background-color: #DDD;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 .panel-image {
 	height: 170px;
 	background: #E0E0E0;

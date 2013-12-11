@@ -106,8 +106,8 @@
 				'nonce': as_js_vars.ua_nonce
 			};
 
-			$( '.panels-container' ).find( '.panel' ).each(function( index ) {
-				accordionData.panels[ index ] = that.getPanel( index ).getData();
+			$( '.panels-container' ).find( '.panel' ).each(function( index, element ) {
+				accordionData.panels[ index ] = that.getPanel( $( element ).attr('data-index') ).getData();
 			});
 
 			$( '.sidebar-settings' ).find( '.setting' ).each(function() {
@@ -237,35 +237,34 @@
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index ) {
 				that.initPanel( $( this ), index );
+				$( this ).attr( 'data-index', index);
 			});
 
-			/*var selectedPanel,
-				init = false,
-				zIndex;
+			var target,
+				placeholde;
 
-			$( '.panels-container' ).on( 'mousedown', '.panel-image', function( event ) {
-				selectedPanel = $( this ).parents( '.panel' );
+			$( '.panel' ).on( 'dragstart', function( event ) {
+				target = $( this );
+				
+				placeholder = $( '<div class="panel placeholder" style="height: ' + $( this ).height() + 'px"></div>' );
 
-				$( 'body' ).on( 'mousemove', function( event ) {
-					event.preventDefault();
-
-					if ( init === false ) {
-						selectedPanel.css({
-							'position': 'absolute',
-							'z-index': 1000
-						});
-					}
-
-					selectedPanel.css({
-						'left': event.originalEvent.clientX,
-						'top': event.originalEvent.clientY
-					});
-				});
-
-				$( '.panels-container' ).on( 'mouseup', '.panel-image', function( event ) {
+				placeholder.on( 'dragover', function( event ) {
 					event.preventDefault();
 				});
-			});*/
+
+				event.originalEvent.dataTransfer.setData( 'text/html', target.html() );
+			}).on( 'dragend', function( event ) {
+				target.insertAfter( placeholder );
+				placeholder.remove();
+			}).on( 'dragenter', function( event ) {
+				if ( $( this ).index() >= placeholder.index() )
+					placeholder.insertAfter( $( this ) );
+				else
+					placeholder.insertBefore( $( this ) );
+			}).on( 'dragover', function( event ) {
+				event.preventDefault();
+				target.detach();
+			});
 		},
 
 		initPanel: function( element, index ) {
@@ -275,60 +274,83 @@
 			this.panels.push( panel );
 
 			panel.on( 'duplicatePanel', function( event ) {
-				var images = [ {
-					background_source: event.panelData.background_source,
-					background_alt: event.panelData.background_alt,
-					background_title: event.panelData.background_title
-				} ];
-
-				$.ajax({
-					url: as_js_vars.ajaxurl,
-					type: 'post',
-					data: { action: 'accordion_slider_add_panels', data: JSON.stringify( images ) },
-					complete: function( data ) {
-						var panel = $( data.responseText ).appendTo( $( '.panels-container' ) ),
-							index = panel.index();
-
-						that.initPanel( panel, index );
-						that.getPanel( index ).setData( event.panelData );
-					}
-				});
+				that.duplicatePanel( event.panelData );
 			});
 
 			panel.on( 'deletePanel', function( event ) {
-				var index = event.index,
-					dialog = $(
-					'<div class="modal-overlay"></div>' +
-					'<div class="delete-panel-dialog">' +
-					'	<p class="dialog-question">' + as_js_vars.panel_delete + '</p>' +
-					'	<div class="dialog-buttons">' +
-					'		<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
-					'		<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
-					'	</div>' +
-					'</div>'
-				).appendTo( 'body' );
-
-				dialog.find( '.dialog-ok' ).one( 'click', function( event ) {
-					event.preventDefault();
-
-					that.removePanel( index );
-					dialog.remove();
-					panel.remove();
-				});
-
-				dialog.find( '.dialog-cancel' ).one( 'click', function( event ) {
-					event.preventDefault();
-					dialog.remove();
-				});
-
-				dialog.find( '.modal-overlay' ).one( 'click', function( event ) {
-					dialog.remove();
-				});
+				that.deletePanel( event.index );
 			});
 		},
 
 		getPanel: function( index ) {
 			return this.panels[ index ];
+		},
+
+		removePanel: function( index ) {
+			this.panels[ index ].off( 'duplicatePanel' );
+			this.panels[ index ].off( 'deletePanel' );
+
+			this.panels.splice( index, 1 );
+
+			$.each( this.panels, function( index, element ) {
+				element.setIndex( index );
+			});
+		},
+
+		duplicatePanel: function( panelData ) {
+			var that = this;
+
+			var images = [ {
+				background_source: panelData.background_source,
+				background_alt: panelData.background_alt,
+				background_title: panelData.background_title
+			} ];
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_add_panels', data: JSON.stringify( images ) },
+				complete: function( data ) {
+					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) ),
+						index = panel.index();
+
+					that.initPanel( panel, index );
+					that.getPanel( index ).setData( panelData );
+				}
+			});
+		},
+
+		deletePanel: function( index ) {
+			var that = this;
+
+			var panel = that.getPanel( index ),
+				dialog = $(
+				'<div class="modal-overlay"></div>' +
+				'<div class="delete-panel-dialog">' +
+				'	<p class="dialog-question">' + as_js_vars.panel_delete + '</p>' +
+				'	<div class="dialog-buttons">' +
+				'		<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
+				'		<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
+				'	</div>' +
+				'</div>'
+			).appendTo( 'body' );
+
+			dialog.find( '.dialog-ok' ).one( 'click', function( event ) {
+				event.preventDefault();
+
+				that.removePanel( index );
+				dialog.remove();
+				panel.remove();
+			});
+
+			dialog.find( '.dialog-cancel' ).one( 'click', function( event ) {
+				event.preventDefault();
+				dialog.remove();
+			});
+
+			dialog.find( '.modal-overlay' ).one( 'click', function( event ) {
+				dialog.remove();
+			});
 		},
 
 		addEmptyPanel: function() {
@@ -379,17 +401,6 @@
 
 		addDynamicPanel: function() {
 			var that = this;
-		},
-
-		removePanel: function( index ) {
-			this.panels[ index ].off( 'duplicatePanel' );
-			this.panels[ index ].off( 'deletePanel' );
-
-			this.panels.splice( index, 1 );
-
-			$.each( this.panels, function( index, element ) {
-				element.setIndex( index );
-			});
 		},
 
 		addBreakpoint: function() {
@@ -475,6 +486,17 @@
 			this.panelData = data;
 		},
 
+		remove: function() {
+			this.$element.find( '.edit-background-image' ).off( 'click' );
+			this.$element.find( '.panel-image' ).off( 'click' );
+			this.$element.find( '.delete-panel' ).off( 'click' );
+			this.$element.find( '.duplicate-panel' ).off( 'click' );
+
+			this.$element.fadeOut( 500, function() {
+				$( this ).remove();
+			});
+		},
+
 		updateBackgroundImage: function() {
 			var panelImage = this.$element.find( '.panel-image' );
 
@@ -489,17 +511,6 @@
 				panelImage.find( 'img' ).remove();
 				$( '<p class="no-image">' + as_js_vars.no_image + '</p>' ).appendTo( panelImage );
 			}
-		},
-
-		remove: function() {
-			this.$element.find( '.edit-background-image' ).off( 'click' );
-			this.$element.find( '.panel-image' ).off( 'click' );
-			this.$element.find( '.delete-panel' ).off( 'click' );
-			this.$element.find( '.duplicate-panel' ).off( 'click' );
-
-			this.$element.fadeOut( 500, function() {
-				$( this ).remove();
-			});
 		},
 
 		on: function( type, handler ) {

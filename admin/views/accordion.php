@@ -27,9 +27,9 @@
                     <div class="add-panel-group">
                         <a class="button add-panel" href="#"><?php _e( 'Add Panel', 'accordion-slider' ); ?> <span class="add-panel-arrow">&#9660</span></a>
                         <ul class="panel-type">
-                            <li><a href="#" data-type="empty"><?php _e( 'Empty Panel', 'accordion-slider' ); ?></a></li>
                             <li><a href="#" data-type="images"><?php _e( 'Image(s) Panel', 'accordion-slider' ); ?></a></li>
                             <li><a href="#" data-type="dynamic"><?php _e( 'Dynamic Panel', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="empty"><?php _e( 'Empty Panel', 'accordion-slider' ); ?></a></li>
                         </ul>
                     </div>
                 </div>
