@@ -107,7 +107,7 @@
 			};
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index, element ) {
-				accordionData.panels[ index ] = that.getPanel( $( element ).attr('data-index') ).getData();
+				accordionData.panels[ index ] = that.getPanel( parseInt( $( element ).attr('data-index'), 10) ).getData();
 			});
 
 			$( '.sidebar-settings' ).find( '.setting' ).each(function() {
@@ -283,18 +283,25 @@
 		},
 
 		getPanel: function( index ) {
-			return this.panels[ index ];
+			var that = this,
+				panel;
+
+			$.each( that.panels, function( elementIndex, element ) {
+				if ( element.index === index ) {
+					panel = element;
+					return false;
+				}
+			});
+
+			return panel;
 		},
 
 		removePanel: function( index ) {
-			this.panels[ index ].off( 'duplicatePanel' );
-			this.panels[ index ].off( 'deletePanel' );
+			var panel = this.getPanel( index );
+			panel.off( 'duplicatePanel' );
+			panel.off( 'deletePanel' );
 
 			this.panels.splice( index, 1 );
-
-			$.each( this.panels, function( index, element ) {
-				element.setIndex( index );
-			});
 		},
 
 		duplicatePanel: function( panelData ) {
