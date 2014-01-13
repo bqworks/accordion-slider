@@ -16,19 +16,19 @@
 			<tbody>
 				<tr>
 					<td><label><?php _e( 'Source:', 'accordion-slider' ); ?></label></td>
-					<td><input class="field" type="text" name="background_source" value="<?php echo isset( $data['background_source'] ) ? $data['background_source'] : ''; ?>" /></td>
+					<td><input class="field" type="text" name="background_source" value="<?php echo isset( $data['background_source'] ) ? esc_attr( $data['background_source'] ) : ''; ?>" /></td>
 				</tr>
 				<tr>
 					<td><label><?php _e( 'Alt:', 'accordion-slider' ); ?></label></td>
-					<td><input class="field" type="text" name="background_alt" value="<?php echo isset( $data['background_alt'] ) ? $data['background_alt'] : ''; ?>" /></td>
+					<td><input class="field" type="text" name="background_alt" value="<?php echo isset( $data['background_alt'] ) ? esc_attr( $data['background_alt'] ) : ''; ?>" /></td>
 				</tr>
 				<tr>
 					<td><label><?php _e( 'Title:', 'accordion-slider' ); ?></label></td>
-					<td><input class="field" type="text" name="background_title" value="<?php echo isset( $data['background_title'] ) ? $data['background_title'] : ''; ?>" /></td>
+					<td><input class="field" type="text" name="background_title" value="<?php echo isset( $data['background_title'] ) ? esc_attr( $data['background_title'] ) : ''; ?>" /></td>
 				</tr>
 				<tr>
 					<td><label><?php _e( 'Retina Source:', 'accordion-slider' ); ?></label></td>
-					<td><input class="field" type="text" name="background_retina_source" value="<?php echo isset( $data['background_retina_source'] ) ? $data['background_retina_source'] : ''; ?>" /></td>
+					<td><input class="field" type="text" name="background_retina_source" value="<?php echo isset( $data['background_retina_source'] ) ? esc_attr( $data['background_retina_source'] ) : ''; ?>" /></td>
 				</tr>
 			</tbody>
 		</table>
