@@ -46,7 +46,18 @@ class Accordion_Slider_Settings {
 		'endVideoAction' => 'video'
 	);
 
-	protected static $breakpoint_settings = array('width', 'height', 'responsive', 'responsiveMode', 'aspectRatio', 'orientation', 'panelDistance', 'visiblePanels');
+	protected static $breakpoint_settings = array(
+		'width',
+		'height',
+		'responsive',
+		'responsiveMode',
+		'aspectRatio',
+		'orientation',
+		'panelDistance',
+		'visiblePanels'
+	);
+
+	protected static $layer_settings = array();
 	
 
 	/*
@@ -427,5 +438,148 @@ class Accordion_Slider_Settings {
 	*/
 	public static function getSettingInfo( $setting_name ) {
 		return self::$settings[self::$settings_map[$setting_name]]['list'][$setting_name];
+	}
+
+	/*
+		Return the settings
+	*/
+	public static function getLayerSettings() {
+		if ( empty( self::$layer_settings ) ) {
+			self::$layer_settings = array(
+				'width' => array(
+					'label' => __( 'Width', 'accordion-slider' ),
+					'type' => 'mixed',
+					'default_value' => 'auto',
+					'description' => ''
+				),
+				'height' => array(
+					'label' => __( 'Height', 'accordion-slider' ),
+					'type' => 'mixed',
+					'default_value' => 'auto',
+					'description' => ''
+				),
+				'position' => array(
+					'label' => __( 'Position', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => 'topLeft',
+					'available_values' => array(
+						'topLeft' => __( 'Top Left', 'accordion-slider' ),
+						'topRight' => __( 'Top Right', 'accordion-slider' ),
+						'bottomLeft' => __( 'Bottom Left', 'accordion-slider' ),
+						'bottomRight' => __( 'Bottom Right', 'accordion-slider' )
+					),
+					'description' => ''
+				),
+				'horizontal' => array(
+					'label' => __( 'Horizontal', 'accordion-slider' ),
+					'type' => 'mixed',
+					'default_value' => 'auto',
+					'description' => ''
+				),
+				'vertical' => array(
+					'label' => __( 'Vertical', 'accordion-slider' ),
+					'type' => 'mixed',
+					'default_value' => 'auto',
+					'description' => ''
+				),
+				'black_background' => array(
+					'label' => __( 'Black Background', 'accordion-slider' ),
+					'type' => 'boolean',
+					'default_value' => true,
+					'description' => ''
+				),
+				'white_background' => array(
+					'label' => __( 'White Background', 'accordion-slider' ),
+					'type' => 'boolean',
+					'default_value' => true,
+					'description' => ''
+				),
+				'padding' => array(
+					'label' => __( 'Padding', 'accordion-slider' ),
+					'type' => 'boolean',
+					'default_value' => true,
+					'description' => ''
+				),
+				'round_corners' => array(
+					'label' => __( 'Round Corners', 'accordion-slider' ),
+					'type' => 'boolean',
+					'default_value' => true,
+					'description' => ''
+				),
+				'display' => array(
+					'label' => __( 'Display', 'accordion-slider' ),
+					'type' => 'radio',
+					'default_value' => 'always',
+					'available_values' => array(
+						'always' => __( 'Always', 'accordion-slider' ),
+						'opened' => __( 'When panel is opened', 'accordion-slider' ),
+						'closed' => __( 'When panel is closed', 'accordion-slider' )
+					),
+					'description' => ''
+				),
+				'show_transition' => array(
+					'label' => __( 'Show Transition', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => 'left',
+					'available_values' => array(
+						'left' => __( 'Left', 'accordion-slider' ),
+						'right' => __( 'Right', 'accordion-slider' ),
+						'top' => __( 'Top', 'accordion-slider' ),
+						'bottom' => __( 'Bottom', 'accordion-slider' )
+					),
+					'description' => ''
+				),
+				'show_offset' => array(
+					'label' => __( 'Show Offset', 'accordion-slider' ),
+					'type' => 'number',
+					'default_value' => 50,
+					'description' => ''
+				),
+				'show_delay' => array(
+					'label' => __( 'Show Delay', 'accordion-slider' ),
+					'type' => 'number',
+					'default_value' => 10,
+					'description' => ''
+				),
+				'show_duration' => array(
+					'label' => __( 'Show Duration', 'accordion-slider' ),
+					'type' => 'number',
+					'default_value' => 400,
+					'description' => ''
+				),
+				'hide_transition' => array(
+					'label' => __( 'Hide Transition', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => 'left',
+					'available_values' => array(
+						'left' => __( 'Left', 'accordion-slider' ),
+						'right' => __( 'Right', 'accordion-slider' ),
+						'top' => __( 'Top', 'accordion-slider' ),
+						'bottom' => __( 'Bottom', 'accordion-slider' )
+					),
+					'description' => ''
+				),
+				'hide_offset' => array(
+					'label' => __( 'Hide Offset', 'accordion-slider' ),
+					'type' => 'number',
+					'default_value' => 50,
+					'description' => ''
+				),
+				'hide_delay' => array(
+					'label' => __( 'Hide Delay', 'accordion-slider' ),
+					'type' => 'number',
+					'default_value' => 10,
+					'description' => ''
+				),
+				'hide_duration' => array(
+					'label' => __( 'Hide Duration', 'accordion-slider' ),
+					'type' => 'number',
+					'default_value' => 400,
+					'description' => ''
+				)
+			);
+		}
+
+		return self::$layer_settings;
 	}
 }

@@ -226,4 +226,16 @@ class Accordion_Slider {
 			return false;	
 		}
 	}
+
+	public function load_layers( $id ) {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'accordionslider_layers';
+		$result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE panel_id = %d", $id ), ARRAY_A );
+
+		if ( ! is_null( $result ) ) {
+			return $result;
+		} else {
+			return false;	
+		}
+	}
 }

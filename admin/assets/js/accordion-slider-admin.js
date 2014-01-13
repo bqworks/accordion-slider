@@ -89,7 +89,7 @@
 					var accordionData = JSON.parse( data.responseText );
 
 					$.each( accordionData.panels, function( index, element ) {
-						that.getPanel( index ).setData( element );
+						that.getPanel( index ).setData( 'all', element );
 					});
 				}
 			});
@@ -107,7 +107,7 @@
 			};
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index, element ) {
-				accordionData.panels[ index ] = that.getPanel( parseInt( $( element ).attr('data-index'), 10) ).getData();
+				accordionData.panels[ index ] = that.getPanel( parseInt( $( element ).attr('data-index'), 10) ).getData( 'all' );
 			});
 
 			$( '.sidebar-settings' ).find( '.setting' ).each(function() {
@@ -308,9 +308,9 @@
 			var that = this;
 
 			var images = [ {
-				background_source: panelData.background_source,
-				background_alt: panelData.background_alt,
-				background_title: panelData.background_title
+				background_source: panelData.background.background_source,
+				background_alt: panelData.background.background_alt,
+				background_title: panelData.background.background_title
 			} ];
 
 			$.ajax({
@@ -322,7 +322,7 @@
 						index = panel.index();
 
 					that.initPanel( panel, index );
-					that.getPanel( index ).setData( panelData );
+					that.getPanel( index ).setData( 'all', panelData );
 				}
 			});
 		},
@@ -399,7 +399,7 @@
 								panelIndex = lastIndex + 1 + index;
 
 							that.initPanel( panel, panelIndex );
-							that.getPanel( panelIndex ).setData( images[ index ] );
+							that.getPanel( panelIndex ).setData( 'background', images[ index ] );
 						});
 					}
 				});
@@ -440,7 +440,7 @@
 	var Panel = function( element, index ) {
 		this.$element = element;
 		this.index = index;
-		this.panelData = {};
+		this.panelData = { background: {}, layers: {}, html: {} };
 		this.events = $( {} );
 
 		this.init();
@@ -461,9 +461,15 @@
 				MediaLoader.open(function( selection ) {
 					var image = selection[ 0 ];
 
-					that.setData( { background_source: image.url, background_alt: image.alt, background_title: image.title } );
+					that.setData( 'background', { background_source: image.url, background_alt: image.alt, background_title: image.title } );
 					that.updateBackgroundImage();
 				});
+			});
+
+			this.$element.find( '.edit-layers' ).on( 'click', function( event ) {
+				event.preventDefault();
+
+				LayersEditor.open( that.index );
 			});
 
 			this.$element.find( '.delete-panel' ).on( 'click', function( event ) {
@@ -485,12 +491,28 @@
 			this.index = index;
 		},
 
-		getData: function() {
-			return this.panelData;
+		getData: function( target ) {
+			if ( target === 'all' ) {
+				return this.panelData;
+			} else if ( target === 'background' ) {
+				return this.panelData.background;
+			} else if ( target === 'layers' ) {
+				return this.panelData.layers;
+			} else if ( target === 'html' ) {
+				return this.panelData.html;
+			}
 		},
 
-		setData: function( data ) {
-			this.panelData = data;
+		setData: function( target, data ) {
+			if ( target === 'all' ) {
+				this.panelData = data;
+			} else if ( target === 'background' ) {
+				this.panelData.background = data;
+			} else if ( target === 'layers' ) {
+				this.panelData.layers = data;
+			} else if ( target === 'html' ) {
+				this.panelData.html = data;
+			}
 		},
 
 		remove: function() {
@@ -507,12 +529,12 @@
 		updateBackgroundImage: function() {
 			var panelImage = this.$element.find( '.panel-image' );
 
-			if ( this.panelData[ 'background_source' ] !== '' ) {
+			if ( this.panelData.background[ 'background_source' ] !== '' ) {
 				if ( panelImage.find( 'img' ).length ) {
-					panelImage.find( 'img' ).attr( 'src', this.panelData[ 'background_source' ] );
+					panelImage.find( 'img' ).attr( 'src', this.panelData.background[ 'background_source' ] );
 				} else {
 					panelImage.find( '.no-image' ).remove();
-					$( '<img src="' + this.panelData[ 'background_source' ] + '" />' ).appendTo( panelImage );
+					$( '<img src="' + this.panelData.background[ 'background_source' ] + '" />' ).appendTo( panelImage );
 				}
 			} else if ( panelImage.find( 'img' ).length ) {
 				panelImage.find( 'img' ).remove();
@@ -539,19 +561,19 @@
 
 		currentPanel: null,
 
-		currentPanelData: null,
+		backgroundData: null,
 
 		open: function( index ) {
 			var that = this;
 
 			this.currentPanel = AccordionSliderAdmin.getPanel( index );
-			this.currentPanelData = this.currentPanel.getData();
+			this.backgroundData = this.currentPanel.getData( 'background' );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				dataType: 'html',
-				data: { action: 'accordion_slider_load_background_image_editor', data: JSON.stringify( this.currentPanelData ) },
+				data: { action: 'accordion_slider_load_background_image_editor', data: JSON.stringify( this.backgroundData ) },
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
@@ -575,10 +597,10 @@
 
 			editor.find( '.field' ).each(function() {
 				var field = $( this );
-				that.currentPanelData[ field.attr('name') ] = field.val();
+				that.backgroundData[ field.attr('name') ] = field.val();
 			});
 
-			this.currentPanel.setData( this.currentPanelData );
+			this.currentPanel.setData( 'background', this.backgroundData );
 			this.currentPanel.updateBackgroundImage();
 
 			this.close();
@@ -634,6 +656,134 @@
 		}
 	};
 
+	var LayersEditor = {
+
+		editor: null,
+
+		currentPanel:null,
+
+		layersData: null,
+
+		counter: 0,
+
+		open: function( index ) {
+			var that = this;
+
+			this.currentPanel = AccordionSliderAdmin.getPanel( index );
+			this.layersData = AccordionSliderAdmin.getPanel( index ).getData( 'layers' );
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				dataType: 'html',
+				data: { action: 'accordion_slider_load_layers_editor', data: JSON.stringify( this.layersData ) },
+				complete: function( data ) {
+					$( 'body' ).append( data.responseText );
+					that.init();
+				}
+			});
+		},
+
+		init: function() {
+			var that = this;
+
+			this.counter = 0;
+
+			editor = $( '.layers-editor' );
+
+			editor.find( '.add-new-layer' ).on( 'click', $.proxy( this.addNewLayer, this ) );
+			editor.find( '.close' ).on( 'click', $.proxy( this.close, this ) );
+			editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
+
+			var layersList = editor.find( '.layers-list' );
+
+			layersList.find( '.layers-list-item' ).each(function( index, element ) {
+				that.counter = Math.max( parseInt( $( element ).attr( 'data-id' ), 10 ),  that.counter );
+			});
+
+			layersList.on( 'click', '.layers-list-item', function( event ) {
+				var layerID = $( this ).attr( 'data-id' );
+
+				layersList.find( '.selected-layers-list-item' ).removeClass( 'selected-layers-list-item' );
+				$( this ).addClass( 'selected-layers-list-item' );
+
+				editor.find( '.selected-layer-settings' ).removeClass( 'selected-layer-settings' );
+				editor.find( '#layer-settings-' + layerID ).addClass( 'selected-layer-settings' );
+			});
+
+			layersList.find( '.layers-list-item' ).first().trigger( 'click' );
+		},
+
+		save: function() {
+			event.preventDefault();
+
+			var that = this,
+				layers = [];
+
+			editor.find( '.layer-settings' ).each( function( index, element ) {
+				var counter = $( element ).attr( 'data-id' ),
+					layer = {};
+
+				layer.id = counter;
+				layer.name = editor.find( '.layers-list-item[data-id="' + counter + '"]' ).text();
+				layer.settings = {};
+
+				$( element ).find( '.field' ).each(function() {
+					var field = $( this ),
+						type = field.attr( 'type' );
+
+					if ( type === 'radio' ) {
+						if ( field.is( ':checked' ) ) {
+							layer.settings[ field.attr( 'name' ).split( '-' )[ 0 ] ] = field.val();
+						}
+					} else if (type === 'checkbox' ) {
+						layer.settings[ field.attr( 'name' ) ] = field.is( ':checked' );
+					} else {
+						layer.settings[ field.attr( 'name' ) ] = field.val();
+					}
+				});
+
+				layers.push( layer) ;
+			});
+
+			this.currentPanel.setData( 'layers', layers );
+
+			this.close();
+		},
+
+		close: function() {
+			event.preventDefault();
+
+			editor.find( '.close' ).off( 'click' );
+			editor.find( '.save' ).off( 'click' );
+
+			$( 'body' ).find( '.modal-overlay, .layers-editor' ).remove();
+		},
+
+		addNewLayer: function() {
+			event.preventDefault();
+
+			var that = this;
+
+			this.counter++;
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				dataType: 'html',
+				data: { action: 'accordion_slider_add_layer_settings', data: this.counter },
+				complete: function( data ) {
+					$( '.layers-settings' ).append( data.responseText );
+
+					var layersList = editor.find( '.layers-list' ),
+						layerListItem = $( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).appendTo( layersList );
+
+					layerListItem.trigger( 'click' );
+				}
+			});
+		}
+	};
+
 	var MediaLoader = {
 
 		open: function( callback ) {
@@ -649,7 +799,7 @@
 			};
 
 			wp.media.editor.insert = function( prop ) {
-				callback.call(this, selection);
+				callback.call( this, selection );
 
 				wp.media.editor.insert = insertReference;
 			};

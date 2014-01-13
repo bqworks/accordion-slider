@@ -29,6 +29,8 @@ class Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_duplicate_accordion', array( $this, 'duplicate_accordion' ) );
 		add_action( 'wp_ajax_accordion_slider_add_panels', array( $this, 'add_panels' ) );
 		add_action( 'wp_ajax_accordion_slider_load_background_image_editor', array( $this, 'load_background_image_editor' ) );
+		add_action( 'wp_ajax_accordion_slider_load_layers_editor', array( $this, 'load_layers_editor' ) );
+		add_action( 'wp_ajax_accordion_slider_add_layer_settings', array( $this, 'add_layer_settings' ) );
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint', array( $this, 'add_breakpoint' ) );
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint_setting', array( $this, 'add_breakpoint_setting' ) );
 	}
@@ -160,7 +162,44 @@ class Accordion_Slider_Admin {
 		}
 
 		$accordion = $this->plugin->load_accordion( $_GET['id'] );
-		$panels = $this->plugin->load_panels( $_GET['id'] );
+		$panels_raw = $this->plugin->load_panels( $_GET['id'] );
+
+		$panels = array();
+
+		if ( ! empty( $panels_raw ) ) {
+			foreach ( $panels_raw as $panel_raw ) {
+				$panel = array(
+					'id' => $panel_raw['id'],
+					'label' => $panel_raw['label'],
+					'position' => $panel_raw['position'],
+					'visibility' => $panel_raw['visibility'],
+				);
+
+				$panel['background'] = array();
+
+				foreach ( $panel_raw as $key => $value ) {
+					if ( strpos( $key, 'background' ) !== false ) {
+						$panel['background'][$key] = $value;
+					}
+				}
+
+				$layers = $this->plugin->load_layers( $panel_raw['id'] );
+
+				$panel['layers'] = array();
+
+				foreach ( $layers as $layer_raw ) {
+					$layer = array();
+
+					$layer['id'] = $layer_raw['id'];
+					$layer['name'] = $layer_raw['name'];
+					$layer['settings'] = json_decode( stripslashes( $layer_raw['settings'] ), true );
+
+					array_push( $panel['layers'], $layer );
+				}
+
+				array_push( $panels, $panel );
+			}
+		}
 
 		$data = array( 'settings' => $accordion['settings'], 'panels' => $panels );
 
@@ -201,6 +240,8 @@ class Accordion_Slider_Admin {
 																	   	array( '%d' ) );
 				
 			$wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "accordionslider_panels WHERE accordion_id = %d", $id ) );
+
+			$wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "accordionslider_layers WHERE accordion_id = %d", $id ) );
 		}
 
 		foreach ( $panels_data as $panel_data ) {
@@ -208,25 +249,40 @@ class Accordion_Slider_Admin {
 							'label' => isset( $panel_data['label'] ) ? $panel_data['label'] : '',
 							'position' => isset( $panel_data['position'] ) ? $panel_data['position'] : '',
 							'visibility' => isset( $panel_data['visibility'] ) ? $panel_data['visibility'] : '',
-							'background_source' => isset( $panel_data['background_source'] ) ? $panel_data['background_source'] : '',
-							'background_retina_source' => isset( $panel_data['background_retina_source'] ) ? $panel_data['background_retina_source'] : '',
-							'background_alt' => isset( $panel_data['background_alt'] ) ? $panel_data['background_alt'] : '',
-							'background_title' => isset( $panel_data['background_title'] ) ? $panel_data['background_title'] : '',
-							'background_width' => isset( $panel_data['background_width'] ) ? $panel_data['background_width'] : '',
-							'background_height' => isset( $panel_data['background_height'] ) ? $panel_data['background_height'] : '',
-							'opened_background_source' => isset( $panel_data['opened_background_source'] ) ? $panel_data['opened_background_source'] : '',
-							'opened_background_retina_source' => isset( $panel_data['opened_background_retina_source'] ) ? $panel_data['opened_background_retina_source'] : '',
-							'opened_background_alt' => isset( $panel_data['opened_background_alt'] ) ? $panel_data['opened_background_alt'] : '',
-							'opened_background_title' => isset( $panel_data['opened_background_title'] ) ? $panel_data['opened_background_title'] : '',
-							'opened_background_width' => isset( $panel_data['opened_background_width'] ) ? $panel_data['opened_background_width'] : '',
-							'opened_background_height' => isset( $panel_data['opened_background_height'] ) ? $panel_data['opened_background_height'] : '',
-							'background_link' => isset( $panel_data['background_link'] ) ? $panel_data['background_link'] : '',
-							'background_link_title' => isset( $panel_data['background_link_title'] ) ? $panel_data['background_link_title'] : '',
-							'html_content' => isset( $panel_data['html_content'] ) ? $panel_data['html_content'] : '');
+							'background_source' => isset( $panel_data['background']['background_source'] ) ? $panel_data['background']['background_source'] : '',
+							'background_retina_source' => isset( $panel_data['background']['background_retina_source'] ) ? $panel_data['background']['background_retina_source'] : '',
+							'background_alt' => isset( $panel_data['background']['background_alt'] ) ? $panel_data['background']['background_alt'] : '',
+							'background_title' => isset( $panel_data['background']['background_title'] ) ? $panel_data['background']['background_title'] : '',
+							'background_width' => isset( $panel_data['background']['background_width'] ) ? $panel_data['background']['background_width'] : '',
+							'background_height' => isset( $panel_data['background']['background_height'] ) ? $panel_data['background']['background_height'] : '',
+							'opened_background_source' => isset( $panel_data['background']['opened_background_source'] ) ? $panel_data['background']['opened_background_source'] : '',
+							'opened_background_retina_source' => isset( $panel_data['background']['opened_background_retina_source'] ) ? $panel_data['background']['opened_background_retina_source'] : '',
+							'opened_background_alt' => isset( $panel_data['background']['opened_background_alt'] ) ? $panel_data['background']['opened_background_alt'] : '',
+							'opened_background_title' => isset( $panel_data['background']['opened_background_title'] ) ? $panel_data['background']['opened_background_title'] : '',
+							'opened_background_width' => isset( $panel_data['background']['opened_background_width'] ) ? $panel_data['background']['opened_background_width'] : '',
+							'opened_background_height' => isset( $panel_data['background']['opened_background_height'] ) ? $panel_data['background']['opened_background_height'] : '',
+							'background_link' => isset( $panel_data['background']['background_link'] ) ? $panel_data['background']['background_link'] : '',
+							'background_link_title' => isset( $panel_data['background']['background_link_title'] ) ? $panel_data['background']['background_link_title'] : '',
+							'html_content' => isset( $panel_data['background']['html_content'] ) ? $panel_data['background']['html_content'] : '');
 
 			$panel_data_types = array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s' );
 
 			$wpdb->insert( $wpdb->prefix . 'accordionslider_panels', $panel, $panel_data_types );
+
+			if ( ! empty( $panel_data[ 'layers' ] ) ) {
+				$panel_id = $wpdb->insert_id;
+				$layers_data = $panel_data[ 'layers' ];
+
+				foreach ( $layers_data as $layer_data ) {
+					$layer = array('accordion_id' => $id,
+									'panel_id' => $panel_id,
+									'name' => $layer_data['name'],
+									'settings' =>  json_encode( $layer_data['settings'] ),
+									'content' => '');
+
+					$wpdb->insert( $wpdb->prefix . 'accordionslider_layers', $layer, array( '%d', '%d', '%s', '%s', '%s' ) );
+				}
+			}
 		}
 
 		echo $id; 
@@ -340,6 +396,26 @@ class Accordion_Slider_Admin {
 		$data = json_decode( stripslashes( $_POST['data'] ), true );
 
 		include( 'views/background-image-editor.php' );
+
+		die();
+	}
+
+	public function load_layers_editor() {
+		$entries = json_decode( stripslashes( $_POST['data'] ), true );
+
+		$layer_settings = Accordion_Slider_Settings::getLayerSettings();
+
+		include( 'views/layers-editor.php' );
+
+		die();
+	}
+
+	public function add_layer_settings() {
+		$layer_id = $_POST['data'];
+
+		$layer_default_settings = Accordion_Slider_Settings::getLayerSettings();
+
+		include( 'views/layer-settings.php' );
 
 		die();
 	}

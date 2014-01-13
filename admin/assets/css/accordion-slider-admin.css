@@ -194,10 +194,9 @@
 	z-index: 1000;
 }
 
-.background-image-editor {
+.background-image-editor,
+.layers-editor {
 	position: fixed;
-	width: 660px;
-	height: 560px;
 	padding: 30px;
 	margin: auto;
 	top: 0;
@@ -206,6 +205,17 @@
 	right: 0;
 	background-color: #FFF;
 	z-index: 1001;
+}
+
+.background-image-editor {
+	width: 660px;
+	height: 560px;
+}
+
+.layers-editor {
+	width: 960px;
+	height: 580px;
+	padding: 0;
 }
 
 .background-image-editor .close-x {
@@ -301,9 +311,111 @@
 }
 
 .background-image-editor .buttons .close,
-.background-image-editor .buttons .save  {
+.background-image-editor .buttons .save,
+.layers-editor .buttons .close,
+.layers-editor .buttons .save  {
 	float: right;
 	margin-left: 10px;
+}
+
+.layers-editor .viewport {
+	width: 100%;
+	height: 400px;
+	background-color: #EEE;
+}
+
+.layers-editor .controls {
+	padding: 10px;
+	overflow: hidden;
+}
+
+.layers-editor .controls .left {
+	float: left;
+}
+
+.layers-editor .controls .right {
+	margin: 4px 0 0 150px;
+	position: relative;
+}
+
+.layers-editor .buttons {
+	padding: 0 10px 10px;
+}
+
+.layers-editor .layers-list {
+	width: 130px;
+	height: 120px;
+	overflow: auto;
+	margin: 0;
+}
+
+.layers-editor .layers-list-item {
+	background-color: #EEE;
+	padding: 4px 5px;
+	margin: 5px 0;
+	cursor: pointer;
+}
+
+.layers-editor .selected-layers-list-item {
+	border: 1px solid #999;
+}
+
+.layers-editor .layers-list-item:first-child {
+	margin-top: 0;
+}
+
+.layers-editor .layers-list-item:last-child {
+	margin-bottom: 0;
+}
+
+.layers-editor .field {
+	margin: 0 18px 0 8px;
+}
+
+.layers-editor input[type="text"] {
+	width: 70px;
+}
+
+.layers-editor .layer-settings {
+    display: none;
+}
+
+.layers-editor .selected-layer-settings {
+    display: block;
+}
+
+.layers-editor .layer-settings > ul > li {
+    float: left;
+}
+
+.layers-editor .tab {
+    display: none;
+}
+
+.layers-editor .tab-label {
+    font-size: 14px;
+    margin-right: 20px;
+    color: #0074a2;
+}
+
+.layers-editor .tab:checked ~ .tab-label,
+.layers-editor .tab-label:hover {
+    text-decoration: underline;
+}
+
+.layers-editor .setting-fields {
+    display: none;
+    position: absolute;
+    top: 33px;
+    left: 0;
+}
+
+.layers-editor .tab:checked ~ .setting-fields {
+    display: block;
+}
+
+.layers-editor .tab:checked ~ .setting-fields {
+    display: block;
 }
 
 .breakpoints-box .inside {
