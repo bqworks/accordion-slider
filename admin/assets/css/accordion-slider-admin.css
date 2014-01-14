@@ -428,6 +428,12 @@
     display: block;
 }
 
+.layers-editor .layer-text {
+	width: 790px;
+	height: 80px;
+	margin: 0;
+}
+
 .breakpoints-box .inside {
 	margin: 0;
 	padding: 0;

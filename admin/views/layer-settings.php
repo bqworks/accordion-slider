@@ -1,7 +1,14 @@
 <li id="layer-settings-<?php echo $layer_id; ?>" class="layer-settings" data-id="<?php echo $layer_id; ?>">
 	<ul>
 		<li>
-			<input type="radio" checked="checked" name="tab-<?php echo $layer_id; ?>" class="tab" id="style-tab-<?php echo $layer_id; ?>">
+			<input type="radio" name="tab-<?php echo $layer_id; ?>" class="tab" id="content-tab-<?php echo $layer_id; ?>" checked="checked">
+			<label for="content-tab-<?php echo $layer_id; ?>" class="tab-label"><?php _e( 'Content', 'accordion-slider' ); ?></label>
+			<div class="setting-fields">
+				<textarea class="layer-text"><?php echo esc_textarea( $layer_content ); ?></textarea>
+			</div>
+		</li>
+		<li>
+			<input type="radio" name="tab-<?php echo $layer_id; ?>" class="tab" id="style-tab-<?php echo $layer_id; ?>">
 			<label for="style-tab-<?php echo $layer_id; ?>" class="tab-label"><?php _e( 'Style', 'accordion-slider' ); ?></label>
 			<div class="setting-fields">
 				<label><?php _e( 'Width', 'accordion-slider' ); ?></label>
@@ -110,14 +117,6 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
-		</li>
-		
-		<li>
-			<input type="radio" name="tab-<?php echo $layer_id; ?>" class="tab" id="content-tab-<?php echo $layer_id; ?>">
-			<label for="content-tab-<?php echo $layer_id; ?>" class="tab-label"><?php _e( 'Content', 'accordion-slider' ); ?></label>
-			<div class="setting-fields">
-			
 			</div>
 		</li>
 	</ul>

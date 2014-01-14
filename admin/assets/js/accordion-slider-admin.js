@@ -760,6 +760,7 @@
 
 				layer.id = counter;
 				layer.name = editor.find( '.layers-list-item[data-id="' + counter + '"]' ).text();
+				layer.content = $( element ).find( '.layer-text' ).val();
 				layer.settings = {};
 
 				$( element ).find( '.field' ).each(function() {
@@ -805,7 +806,7 @@
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				dataType: 'html',
-				data: { action: 'accordion_slider_add_layer_settings', data: this.counter },
+				data: { action: 'accordion_slider_add_layer_settings', id: this.counter },
 				complete: function( data ) {
 					$( '.layers-settings' ).append( data.responseText );
 
@@ -821,16 +822,58 @@
 			event.preventDefault();
 
 			var selectedLayer = editor.find( '.selected-layers-list-item' ),
-				selectedLayerID = parseInt( selectedLayer.attr( 'data-id' ), 10 );
+				selectedLayerID = parseInt( selectedLayer.attr( 'data-id' ), 10 ),
+				nextLayer = selectedLayer.prev();
+
+			if ( nextLayer.length === 0 )
+				nextLayer = selectedLayer.next();
 
 			selectedLayer.remove();
 			editor.find( '.layer-settings[data-id="' + selectedLayerID + '"]' ).remove();
+
+			nextLayer.trigger( 'click' );
 		},
 
 		duplicateLayer: function() {
 			event.preventDefault();
 
-			
+			var that = this,
+				selectedLayer = editor.find( '.selected-layers-list-item' ),
+				selectedLayerID = parseInt( selectedLayer.attr( 'data-id' ), 10 ),
+				selectedSettings = editor.find( '.layer-settings[data-id="' + selectedLayerID + '"]' ),
+				layerSettings = {};
+
+			this.counter++;
+
+			selectedSettings.find( '.field' ).each(function() {
+				var field = $( this ),
+					type = field.attr( 'type' );
+
+				if ( type === 'radio' ) {
+					if ( field.is( ':checked' ) ) {
+						layerSettings[ field.attr( 'name' ).split( '-' )[ 0 ] ] = field.val();
+					}
+				} else if ( type === 'checkbox' ) {
+					layerSettings[ field.attr( 'name' ) ] = field.is( ':checked' );
+				} else {
+					layerSettings[ field.attr( 'name' ) ] = field.val();
+				}
+			});
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				dataType: 'html',
+				data: { action: 'accordion_slider_add_layer_settings', id: this.counter, settings: layerSettings },
+				complete: function( data ) {
+					$( '.layers-settings' ).append( data.responseText );
+
+					var layersList = editor.find( '.layers-list' ),
+						layerListItem = $( '<li class="layers-list-item" data-id="' + that.counter + '">' + selectedLayer.text() + '</li>' ).appendTo( layersList );
+
+					layerListItem.trigger( 'click' );
+				}
+			});
 		}
 	};
 

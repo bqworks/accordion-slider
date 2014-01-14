@@ -192,6 +192,7 @@ class Accordion_Slider_Admin {
 
 					$layer['id'] = $layer_raw['id'];
 					$layer['name'] = $layer_raw['name'];
+					$layer['content'] = $layer_raw['content'];
 					$layer['settings'] = json_decode( stripslashes( $layer_raw['settings'] ), true );
 
 					array_push( $panel['layers'], $layer );
@@ -277,8 +278,9 @@ class Accordion_Slider_Admin {
 					$layer = array('accordion_id' => $id,
 									'panel_id' => $panel_id,
 									'name' => $layer_data['name'],
-									'settings' =>  json_encode( $layer_data['settings'] ),
-									'content' => '');
+									'content' => $layer_data['content'],
+									'settings' =>  json_encode( $layer_data['settings'] )
+									);
 
 					$wpdb->insert( $wpdb->prefix . 'accordionslider_layers', $layer, array( '%d', '%d', '%s', '%s', '%s' ) );
 				}
@@ -411,7 +413,13 @@ class Accordion_Slider_Admin {
 	}
 
 	public function add_layer_settings() {
-		$layer_id = $_POST['data'];
+		$layer_id = $_POST['id'];
+		$layer_settings;
+
+		if ( isset( $_POST['settings'] ) ) {
+			$layer_settings = $_POST['settings'];
+		}
+
 		$layer_default_settings = Accordion_Slider_Settings::getLayerSettings();
 
 		include( 'views/layer-settings.php' );
