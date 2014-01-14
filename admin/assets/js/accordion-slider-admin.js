@@ -694,6 +694,9 @@
 			editor = $( '.layers-editor' );
 
 			editor.find( '.add-new-layer' ).on( 'click', $.proxy( this.addNewLayer, this ) );
+			editor.find( '.delete-layer' ).on( 'click', $.proxy( this.deleteLayer, this ) );
+			editor.find( '.duplicate-layer' ).on( 'click', $.proxy( this.duplicateLayer, this ) );
+
 			editor.find( '.close' ).on( 'click', $.proxy( this.close, this ) );
 			editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
 
@@ -812,6 +815,22 @@
 					layerListItem.trigger( 'click' );
 				}
 			});
+		},
+
+		deleteLayer: function() {
+			event.preventDefault();
+
+			var selectedLayer = editor.find( '.selected-layers-list-item' ),
+				selectedLayerID = parseInt( selectedLayer.attr( 'data-id' ), 10 );
+
+			selectedLayer.remove();
+			editor.find( '.layer-settings[data-id="' + selectedLayerID + '"]' ).remove();
+		},
+
+		duplicateLayer: function() {
+			event.preventDefault();
+
+			
 		}
 	};
 
