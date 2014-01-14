@@ -39,6 +39,9 @@
 
 				<input class="field" type="checkbox" name="round_corners" <?php echo isset( $layer_settings['round_corners'] ) && $layer_settings['round_corners'] === true ? 'checked="checked"' : ''; ?>/>
 				<label><?php _e( 'Round Corners', 'accordion-slider' ); ?></label>
+
+				<label><?php _e( 'Custom Class', 'accordion-slider' ); ?></label>
+				<input class="field" type="text" name="custom_class" value="<?php echo isset( $layer_settings['custom_class'] ) ? esc_attr( $layer_settings['custom_class'] ) : $layer_default_settings['custom_class']['default_value']; ?>" />
 			</div>
 		</li>
 

@@ -350,6 +350,7 @@
 }
 
 .layers-editor .layers-list-item {
+	position: relative;
 	background-color: #EEE;
 	padding: 4px 5px;
 	margin: 5px 0;
@@ -366,6 +367,15 @@
 
 .layers-editor .layers-list-item:last-child {
 	margin-bottom: 0;
+}
+
+.layers-editor .layers-list-item input {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100% !important;
+	height: 100%;
+	margin: 0;
 }
 
 .layers-editor .field {

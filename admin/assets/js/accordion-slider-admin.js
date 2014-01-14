@@ -237,7 +237,6 @@
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index ) {
 				that.initPanel( $( this ), index );
-				$( this ).attr( 'data-index', index);
 			});
 
 			var target,
@@ -280,6 +279,8 @@
 			panel.on( 'deletePanel', function( event ) {
 				that.deletePanel( event.index );
 			});
+
+			element.attr( 'data-index', index);
 		},
 
 		getPanel: function( index ) {
@@ -685,7 +686,8 @@
 		},
 
 		init: function() {
-			var that = this;
+			var that = this,
+				isEditingLayerName = false;
 
 			this.counter = 0;
 
@@ -712,6 +714,35 @@
 			});
 
 			layersList.find( '.layers-list-item' ).first().trigger( 'click' );
+
+			layersList.on( 'dblclick', '.layers-list-item', function( event ) {
+				if ( isEditingLayerName === true ) {
+					return;
+				}
+
+				isEditingLayerName = true;
+
+				var item = $( this ),
+					name = item.text();
+
+				var input = $( '<input type="text" value="' + name + '" />' ).appendTo( item );
+			});
+
+			layersList.on( 'selectstart', '.layers-list-item', function( event ) {
+				event.preventDefault();
+			});
+
+			editor.on( 'click', function( event ) {
+				if ( ! $( event.target ).is( 'input' ) && isEditingLayerName === true ) {
+					isEditingLayerName = false;
+
+					var input = layersList.find( 'input' ),
+						name = input.val();
+
+					input.parent( '.layers-list-item' ).text( name );
+					input.remove();
+				}
+			});
 		},
 
 		save: function() {

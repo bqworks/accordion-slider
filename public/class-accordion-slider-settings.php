@@ -506,6 +506,12 @@ class Accordion_Slider_Settings {
 					'default_value' => true,
 					'description' => ''
 				),
+				'custom_class' => array(
+					'label' => __( 'Custom Class', 'accordion-slider' ),
+					'type' => 'text',
+					'default_value' => '',
+					'description' => ''
+				),
 				'display' => array(
 					'label' => __( 'Display', 'accordion-slider' ),
 					'type' => 'radio',
