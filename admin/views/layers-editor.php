@@ -7,9 +7,9 @@
 	<div class="controls">
 		<ul class="left layers-list">
 			<?php
-				foreach ( $entries as $key => $value ) {
-					$layer_id = $value[ 'id' ];
-					$layer_name = $value[ 'name' ];
+				foreach ( $layers as $layer ) {
+					$layer_id = $layer[ 'id' ];
+					$layer_name = $layer[ 'name' ];
 					echo '<li class="layers-list-item" data-id="' . $layer_id . '">' . $layer_name . '</li>';
 				}
 			?>
@@ -17,9 +17,9 @@
 
 		<ul class="right layers-settings">
 			<?php
-				foreach ( $entries as $key => $data ) {
-					$layer_id = $data[ 'id' ];
-					$layer_settings = $data[ 'settings' ];
+				foreach ( $layers as $layer ) {
+					$layer_id = $layer[ 'id' ];
+					$layer_settings = $layer[ 'settings' ];
 					include( 'layer-settings.php' );
 				}
 			?>

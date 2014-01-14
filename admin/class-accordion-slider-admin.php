@@ -401,9 +401,9 @@ class Accordion_Slider_Admin {
 	}
 
 	public function load_layers_editor() {
-		$entries = json_decode( stripslashes( $_POST['data'] ), true );
+		$layers = json_decode( stripslashes( $_POST['data'] ), true );
 
-		$layer_settings = Accordion_Slider_Settings::getLayerSettings();
+		$layer_default_settings = Accordion_Slider_Settings::getLayerSettings();
 
 		include( 'views/layers-editor.php' );
 
@@ -412,7 +412,6 @@ class Accordion_Slider_Admin {
 
 	public function add_layer_settings() {
 		$layer_id = $_POST['data'];
-
 		$layer_default_settings = Accordion_Slider_Settings::getLayerSettings();
 
 		include( 'views/layer-settings.php' );

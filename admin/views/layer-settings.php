@@ -27,16 +27,16 @@
 				<input class="field" type="text" name="vertical" value="<?php echo isset( $layer_settings['vertical'] ) ? esc_attr( $layer_settings['vertical'] ) : $layer_default_settings['vertical']['default_value']; ?>" />
 
 				<br/><br/>
-				
+
 				<input class="field" type="checkbox" name="black_background" <?php echo isset( $layer_settings['black_background'] ) && $layer_settings['black_background'] === true ? 'checked="checked"' : ''; ?>/>
 				<label><?php _e( 'Black Background', 'accordion-slider' ); ?></label>
-				
+
 				<input class="field" type="checkbox" name="white_background" <?php echo isset( $layer_settings['white_background'] ) && $layer_settings['white_background'] === true ? 'checked="checked"' : ''; ?>/>
 				<label><?php _e( 'White Background', 'accordion-slider' ); ?></label>
-				
+
 				<input class="field" type="checkbox" name="padding" <?php echo isset( $layer_settings['padding'] ) && $layer_settings['padding'] === true ? 'checked="checked"' : ''; ?>/>
 				<label><?php _e( 'Padding', 'accordion-slider' ); ?></label>
-				
+
 				<input class="field" type="checkbox" name="round_corners" <?php echo isset( $layer_settings['round_corners'] ) && $layer_settings['round_corners'] === true ? 'checked="checked"' : ''; ?>/>
 				<label><?php _e( 'Round Corners', 'accordion-slider' ); ?></label>
 			</div>
