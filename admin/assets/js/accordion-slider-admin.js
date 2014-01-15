@@ -309,9 +309,7 @@
 			var that = this;
 
 			var images = [ {
-				background_source: panelData.background.background_source,
-				background_alt: panelData.background.background_alt,
-				background_title: panelData.background.background_title
+				background_source: panelData.background.background_source
 			} ];
 
 			$.ajax({
@@ -383,7 +381,7 @@
 				var images = [];
 
 				$.each( selection, function( index, element ) {
-					images.push( { background_source: element.url, background_alt: element.alt, background_title: element.title } );
+					images.push( { background_source: element.url, background_alt: element.alt, background_title: element.title,  background_width: element.width,  background_height: element.height } );
 				});
 
 				$.ajax({
@@ -462,7 +460,7 @@
 				MediaLoader.open(function( selection ) {
 					var image = selection[ 0 ];
 
-					that.setData( 'background', { background_source: image.url, background_alt: image.alt, background_title: image.title } );
+					that.setData( 'background', { background_source: image.url, background_alt: image.alt, background_title: image.title, background_width: image.width, background_height: image.height } );
 					that.updateBackgroundImage();
 				});
 			});
@@ -636,10 +634,14 @@
 					editor.find( 'input[name="background_source"]' ).val( image.url );
 					editor.find( 'input[name="background_alt"]' ).val( image.alt );
 					editor.find( 'input[name="background_title"]' ).val( image.title );
+					editor.find( 'input[name="background_width"]' ).val( image.width );
+					editor.find( 'input[name="background_height"]' ).val( image.height );
 				} else if ( target === 'opened-background' ) {
 					editor.find( 'input[name="opened_background_source"]' ).val( image.url );
 					editor.find( 'input[name="opened_background_alt"]' ).val( image.alt );
 					editor.find( 'input[name="opened_background_title"]' ).val( image.title );
+					editor.find( 'input[name="opened_background_width"]' ).val( image.width );
+					editor.find( 'input[name="opened_background_height"]' ).val( image.height );
 				}
 			});
 		},
@@ -886,9 +888,11 @@
 			wp.media.editor.send.attachment = function( props, attachment ) {
 				var url = attachment.sizes[ props.size ].url,
 					alt = attachment.alt,
-					title = attachment.title;
+					title = attachment.title,
+					width = attachment.width,
+					height = attachment.height;
 
-				selection.push( { url: url, alt: alt, title: title } );
+				selection.push( { url: url, alt: alt, title: title, width: width, height: height } );
 			};
 
 			wp.media.editor.insert = function( prop ) {

@@ -32,6 +32,8 @@
 				</tr>
 			</tbody>
 		</table>
+		<input class="field" type="hidden" name="background_width" value="<?php echo isset( $data['background_width'] ) ? esc_attr( $data['background_width'] ) : ''; ?>" />
+		<input class="field" type="hidden" name="background_height" value="<?php echo isset( $data['background_height'] ) ? esc_attr( $data['background_height'] ) : ''; ?>" />
 	</div>
 
 	<div class="fieldset opened-background-image">
@@ -65,6 +67,8 @@
 				</tr>
 			</tbody>
 		</table>
+		<input class="field" type="hidden" name="opened_background_width" value="<?php echo isset( $data['opened_background_width'] ) ? esc_attr( $data['opened_background_width'] ) : ''; ?>" />
+		<input class="field" type="hidden" name="opened_background_height" value="<?php echo isset( $data['opened_background_height'] ) ? esc_attr( $data['opened_background_height'] ) : ''; ?>" />
 	</div>
 
 	<div class="fieldset link">
