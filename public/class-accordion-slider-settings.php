@@ -473,13 +473,13 @@ class Accordion_Slider_Settings {
 				'horizontal' => array(
 					'label' => __( 'Horizontal', 'accordion-slider' ),
 					'type' => 'mixed',
-					'default_value' => 'auto',
+					'default_value' => '0',
 					'description' => ''
 				),
 				'vertical' => array(
 					'label' => __( 'Vertical', 'accordion-slider' ),
 					'type' => 'mixed',
-					'default_value' => 'auto',
+					'default_value' => '0',
 					'description' => ''
 				),
 				'black_background' => array(
@@ -491,7 +491,7 @@ class Accordion_Slider_Settings {
 				'white_background' => array(
 					'label' => __( 'White Background', 'accordion-slider' ),
 					'type' => 'boolean',
-					'default_value' => true,
+					'default_value' => false,
 					'description' => ''
 				),
 				'padding' => array(
@@ -503,7 +503,7 @@ class Accordion_Slider_Settings {
 				'round_corners' => array(
 					'label' => __( 'Round Corners', 'accordion-slider' ),
 					'type' => 'boolean',
-					'default_value' => true,
+					'default_value' => false,
 					'description' => ''
 				),
 				'custom_class' => array(

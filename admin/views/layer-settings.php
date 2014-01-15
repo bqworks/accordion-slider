@@ -4,7 +4,7 @@
 			<input type="radio" name="tab-<?php echo $layer_id; ?>" class="tab" id="content-tab-<?php echo $layer_id; ?>" checked="checked">
 			<label for="content-tab-<?php echo $layer_id; ?>" class="tab-label"><?php _e( 'Content', 'accordion-slider' ); ?></label>
 			<div class="setting-fields">
-				<textarea class="layer-text"><?php echo esc_textarea( $layer_content ); ?></textarea>
+				<textarea class="layer-text"><?php echo isset( $layer_content ) ? esc_textarea( $layer_content ) : ''; ?></textarea>
 			</div>
 		</li>
 		<li>
@@ -35,16 +35,16 @@
 
 				<br/><br/>
 
-				<input class="field" type="checkbox" name="black_background" <?php echo isset( $layer_settings['black_background'] ) && $layer_settings['black_background'] === true ? 'checked="checked"' : ''; ?>/>
+				<input class="field" type="checkbox" name="black_background" <?php echo ( isset( $layer_settings['black_background'] ) && $layer_settings['black_background'] === true ) || ( ! isset( $layer_settings['black_background'] ) &&  $layer_default_settings['black_background']['default_value'] === true ) ? 'checked="checked"' : ''; ?>/>
 				<label><?php _e( 'Black Background', 'accordion-slider' ); ?></label>
 
-				<input class="field" type="checkbox" name="white_background" <?php echo isset( $layer_settings['white_background'] ) && $layer_settings['white_background'] === true ? 'checked="checked"' : ''; ?>/>
+				<input class="field" type="checkbox" name="white_background" <?php echo ( isset( $layer_settings['white_background'] ) && $layer_settings['white_background'] === true ) || ( ! isset( $layer_settings['white_background'] ) &&  $layer_default_settings['white_background']['default_value'] === true ) ? 'checked="checked"' : ''; ?>/>
 				<label><?php _e( 'White Background', 'accordion-slider' ); ?></label>
 
-				<input class="field" type="checkbox" name="padding" <?php echo isset( $layer_settings['padding'] ) && $layer_settings['padding'] === true ? 'checked="checked"' : ''; ?>/>
+				<input class="field" type="checkbox" name="padding" <?php echo ( isset( $layer_settings['padding'] ) && $layer_settings['padding'] === true ) || ( ! isset( $layer_settings['padding'] ) &&  $layer_default_settings['padding']['default_value'] === true ) ? 'checked="checked"' : ''; ?>/>
 				<label><?php _e( 'Padding', 'accordion-slider' ); ?></label>
 
-				<input class="field" type="checkbox" name="round_corners" <?php echo isset( $layer_settings['round_corners'] ) && $layer_settings['round_corners'] === true ? 'checked="checked"' : ''; ?>/>
+				<input class="field" type="checkbox" name="round_corners" <?php echo ( isset( $layer_settings['round_corners'] ) && $layer_settings['round_corners'] === true ) || ( ! isset( $layer_settings['round_corners'] ) && $layer_default_settings['round_corners']['default_value'] === true ) ? 'checked="checked"' : ''; ?>/>
 				<label><?php _e( 'Round Corners', 'accordion-slider' ); ?></label>
 
 				<label><?php _e( 'Custom Class', 'accordion-slider' ); ?></label>
