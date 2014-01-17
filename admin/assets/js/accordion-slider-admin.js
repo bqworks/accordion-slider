@@ -711,7 +711,9 @@
 				that.counter = Math.max( that.counter, layerData.id );
 			});
 
-			this.layers[ 0 ].triggerSelect();
+			if ( this.layers.length !== 0 ) {
+				this.layers[ 0 ].triggerSelect();
+			}
 		},
 
 		initViewport: function() {
