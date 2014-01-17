@@ -1138,7 +1138,8 @@
 			var that = this,
 				position = this.$layerSettings.find( '.setting[name="position"]' ).val().toLowerCase(),
 				horizontalPosition = position.indexOf( 'right' ) !== -1 ? 'right' : 'left',
-				verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top';
+				verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top',
+				customClass = this.$layerSettings.find( '.setting[name="custom_class"]' ).val();
 
 			this.$layerSettings.find( '.setting[name="width"]' ).on( 'change', function() {
 				that.$viewportLayer.css( 'width', $( this ).val() );
@@ -1203,6 +1204,14 @@
 				} else {
 					that.$viewportLayer.removeClass( 'as-rounded' );
 				}
+			});
+
+			this.$layerSettings.find( '.setting[name="custom_class"]' ).on( 'change', function(event) {
+				that.$viewportLayer.removeClass( customClass );
+
+				customClass = $( this ).val();
+
+				that.$viewportLayer.addClass( customClass );
 			});
 
 			this.$layerSettings.find( '.content' ).on( 'input', function() {
