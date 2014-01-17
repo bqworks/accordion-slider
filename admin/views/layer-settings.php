@@ -1,15 +1,15 @@
-<li id="layer-settings-<?php echo $layer_id; ?>" class="layer-settings" data-id="<?php echo $layer_id; ?>">
+<li id="layer-settings-<?php echo esc_attr( $layer_id ); ?>" class="layer-settings" data-id="<?php echo esc_attr( $layer_id ); ?>">
 	<ul>
 		<li>
-			<input type="radio" name="tab-<?php echo $layer_id; ?>" class="tab" id="content-tab-<?php echo $layer_id; ?>" checked="checked">
-			<label for="content-tab-<?php echo $layer_id; ?>" class="tab-label"><?php _e( 'Content', 'accordion-slider' ); ?></label>
+			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="tab" id="content-tab-<?php echo esc_attr( $layer_id ); ?>" checked="checked">
+			<label for="content-tab-<?php echo esc_attr( $layer_id ); ?>" class="tab-label"><?php _e( 'Content', 'accordion-slider' ); ?></label>
 			<div class="setting-fields">
 				<textarea class="content"><?php echo isset( $layer_content ) ? esc_textarea( $layer_content ) : 'New layer'; ?></textarea>
 			</div>
 		</li>
 		<li>
-			<input type="radio" name="tab-<?php echo $layer_id; ?>" class="tab" id="style-tab-<?php echo $layer_id; ?>">
-			<label for="style-tab-<?php echo $layer_id; ?>" class="tab-label"><?php _e( 'Style', 'accordion-slider' ); ?></label>
+			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="tab" id="style-tab-<?php echo $layer_id; ?>">
+			<label for="style-tab-<?php echo esc_attr( $layer_id ); ?>" class="tab-label"><?php _e( 'Style', 'accordion-slider' ); ?></label>
 			<div class="setting-fields">
 				<label><?php _e( 'Width', 'accordion-slider' ); ?></label>
 				<input class="setting" type="text" name="width" value="<?php echo isset( $layer_settings['width'] ) ? esc_attr( $layer_settings['width'] ) : $layer_default_settings['width']['default_value']; ?>" />
@@ -53,8 +53,8 @@
 		</li>
 
 		<li>
-			<input type="radio" name="tab-<?php echo $layer_id; ?>" class="tab" id="effects-tab-<?php echo $layer_id; ?>">
-			<label for="effects-tab-<?php echo $layer_id; ?>" class="tab-label"><?php _e( 'Effects', 'accordion-slider' ); ?></label>
+			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="tab" id="effects-tab-<?php echo esc_attr( $layer_id ); ?>">
+			<label for="effects-tab-<?php echo esc_attr( $layer_id ); ?>" class="tab-label"><?php _e( 'Effects', 'accordion-slider' ); ?></label>
 			<div class="setting-fields">
 				<table>
 					<tbody>
@@ -64,7 +64,7 @@
 								<?php
 									foreach ( $layer_default_settings['display']['available_values'] as $value_name => $value_label ) {
 										$checked = ( isset( $layer_settings['display'] ) && $value_name === $layer_settings['display'] ) || ( ! isset( $layer_settings['display'] ) && $value_name === $layer_default_settings['display']['default_value'] ) ? ' checked="checked"' : '' ;
-										echo '<input class="setting" type="radio" name="display-' . $layer_id . '" id="display-' . $value_name . '-' . $layer_id . '" value="' . $value_name . '"' . $checked . ' /><label for="display-' . $value_name . '-' . $layer_id . '">' . $value_label . '</label>';
+										echo '<input class="setting" type="radio" name="display-' . esc_attr( $layer_id ) . '" id="display-' . $value_name . '-' . esc_attr( $layer_id ) . '" value="' . $value_name . '"' . $checked . ' /><label for="display-' . $value_name . '-' . esc_attr( $layer_id ) . '">' . $value_label . '</label>';
 			                        }
 								?>
 							</td>
