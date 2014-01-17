@@ -1,5 +1,4 @@
 <div class="wrap accordion-slider-admin">
-	<?php screen_icon(); ?>
 	<h2><?php _e( 'All Accordions' ); ?></h2>
        
 	<table class="widefat accordions-list">

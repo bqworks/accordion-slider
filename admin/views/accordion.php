@@ -1,5 +1,4 @@
 <div class="wrap accordion-slider-admin">
-	<?php screen_icon(); ?>
 	<h2><?php echo isset( $_GET['action'] ) && $_GET['action'] === 'edit' ? 'Edit Accordion' : 'Add New Accordion'; ?></h2>
 
 	<form action="" method="post">
