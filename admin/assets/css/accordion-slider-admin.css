@@ -58,6 +58,16 @@
 	overflow: hidden;
 	text-align: center;
 	cursor: pointer;
+	background-image:
+	    -moz-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%),
+	    -moz-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%);
+    background-image:
+	    -webkit-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%),
+	    -webkit-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%);
+    -moz-background-size: 20px 20px;
+    -webkit-background-size: 21px 21px;
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
 }
 
 .panel-image .no-image {
@@ -321,7 +331,17 @@
 .layers-editor .viewport {
 	width: 100%;
 	height: 400px;
-	background-color: #EEE;
+	border-bottom: 1px solid #DDD;
+	background-image:
+	    -moz-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%),
+	    -moz-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%);
+    background-image:
+	    -webkit-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%),
+	    -webkit-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%);
+    -moz-background-size: 20px 20px;
+    -webkit-background-size: 21px 21px;
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
 }
 
 .layers-editor .as-layer {
