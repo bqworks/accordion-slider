@@ -457,7 +457,7 @@
     display: block;
 }
 
-.layers-editor .layer-text {
+.layers-editor .content {
 	width: 790px;
 	height: 80px;
 	margin: 0;
@@ -469,6 +469,10 @@
 
 .layers-editor .viewport-layers {
 	position: absolute;
+}
+
+.layers-editor .viewport-layer {
+	cursor: move;
 }
 
 .breakpoints-box .inside {

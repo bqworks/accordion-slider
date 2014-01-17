@@ -667,6 +667,8 @@
 
 		layersData: null,
 
+		layers: [],
+
 		counter: 0,
 
 		open: function( index ) {
@@ -694,16 +696,22 @@
 
 			editor = $( '.layers-editor' );
 
-			this.initViewport();
-			this.initLayersList();
-			this.initViewportLayers();
-
 			editor.find( '.add-new-layer' ).on( 'click', $.proxy( this.addNewLayer, this ) );
 			editor.find( '.delete-layer' ).on( 'click', $.proxy( this.deleteLayer, this ) );
 			editor.find( '.duplicate-layer' ).on( 'click', $.proxy( this.duplicateLayer, this ) );
 
 			editor.find( '.close' ).on( 'click', $.proxy( this.close, this ) );
 			editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
+
+			this.initViewport();
+
+			$.each( this.layersData, function( index, layerData ) {
+				that.createLayer( layerData.id, layerData );
+
+				that.counter = Math.max( that.counter, layerData.id );
+			});
+
+			this.layers[ 0 ].triggerSelect();
 		},
 
 		initViewport: function() {
@@ -741,161 +749,28 @@
 				'height': imageHeight,
 				'left': viewportImage.position().left,
 				'top': viewportImage.position().top
-			} );
+			});
 		},
 
-		initLayersList: function() {
+		createLayer: function( id, data ) {
 			var that = this,
-				isEditingLayerName = false,
-				layersList = editor.find( '.layers-list' );
+				layer = new Layer( id, data, editor );
 
-			layersList.find( '.layers-list-item' ).each(function( index, element ) {
-				that.counter = Math.max( parseInt( $( element ).attr( 'data-id' ), 10 ),  that.counter );
-			});
+			this.layers.push( layer );
 
-			layersList.on( 'click', '.layers-list-item', function( event ) {
-				var layerID = $( this ).attr( 'data-id' );
+			layer.on( 'select', function( event ) {
+				$.each( that.layers, function( index, layer ) {
+					if ( layer.isSelected() === true ) {
+						layer.deselect();
+					}
 
-				layersList.find( '.selected-layers-list-item' ).removeClass( 'selected-layers-list-item' );
-				$( this ).addClass( 'selected-layers-list-item' );
-
-				editor.find( '.selected-layer-settings' ).removeClass( 'selected-layer-settings' );
-				editor.find( '#layer-settings-' + layerID ).addClass( 'selected-layer-settings' );
-			});
-
-			layersList.find( '.layers-list-item' ).first().trigger( 'click' );
-
-			layersList.on( 'dblclick', '.layers-list-item', function( event ) {
-				if ( isEditingLayerName === true ) {
-					return;
-				}
-
-				isEditingLayerName = true;
-
-				var item = $( this ),
-					name = item.text();
-
-				var input = $( '<input type="text" value="' + name + '" />' ).appendTo( item );
-			});
-
-			layersList.on( 'selectstart', '.layers-list-item', function( event ) {
-				event.preventDefault();
-			});
-
-			editor.on( 'click', function( event ) {
-				if ( ! $( event.target ).is( 'input' ) && isEditingLayerName === true ) {
-					isEditingLayerName = false;
-
-					var input = layersList.find( 'input' ),
-						name = input.val();
-
-					input.parent( '.layers-list-item' ).text( name );
-					input.remove();
-				}
-			});
-		},
-
-		initViewportLayers: function() {
-			var that = this;
-
-			$.each( this.layersData, function( index, layerData ) {
-				that.createViewportLayer( layerData );
-			});
-		},
-
-		createViewportLayer: function( data ) {
-			var viewportLayers = editor.find( '.viewport-layers' ),
-				layer = $( '<div class="viewport-layer as-layer">' + data.content + '</div>' ).appendTo( viewportLayers ),
-				classes = '';
-
-			if ( data.settings.black_background === true ) {
-				classes += ' as-black';
-			}
-
-			if ( data.settings.white_background === true ) {
-				classes += ' as-white';
-			}
-
-			if ( data.settings.padding === true ) {
-				classes += ' as-padding';
-			}
-
-			if ( data.settings.round_corners === true ) {
-				classes += ' as-rounded';
-			}
-
-			if ( data.settings.custom_class !== '' ) {
-				classes += ' ' + data.settings.custom_class;
-			}
-
-			layer.addClass( classes );
-
-			layer.css( { 'width': data.settings.width, 'height': data.settings.height } );
-
-			var position = data.settings.position.toLowerCase(),
-				horizontalPosition = position.indexOf('right') !== -1 ? 'right' : 'left',
-				verticalPosition = position.indexOf('bottom') !== -1 ? 'bottom' : 'top';
-
-			if ( data.settings.horizontal === 'center' ) {
-				layer.css( { 'width': layer.outerWidth( true ), 'marginLeft': 'auto', 'marginRight': 'auto', 'left': 0, 'right': 0 } );
-			} else {
-				suffix = data.settings.horizontal.indexOf( 'px' ) === -1 && data.settings.horizontal.indexOf( '%' ) === -1 ? 'px' : '';
-				layer.css( horizontalPosition, data.settings.horizontal + suffix );
-			}
-
-			if ( data.settings.vertical === 'center' ) {
-				layer.css( { 'height': layer.outerHeight( true ),  'marginTop': 'auto', 'marginBottom': 'auto', 'top': 0, 'bottom': 0 } );
-			} else {
-				suffix = data.settings.vertical.indexOf( 'px' ) === -1 && data.settings.vertical.indexOf( '%' ) === -1 ? 'px' : '';
-				layer.css( verticalPosition, data.settings.vertical + suffix );
-			}
-		},
-
-		save: function() {
-			event.preventDefault();
-
-			var that = this,
-				layers = [];
-
-			editor.find( '.layer-settings' ).each( function( index, element ) {
-				var counter = $( element ).attr( 'data-id' ),
-					layer = {};
-
-				layer.id = counter;
-				layer.name = editor.find( '.layers-list-item[data-id="' + counter + '"]' ).text();
-				layer.content = $( element ).find( '.layer-text' ).val();
-				layer.settings = {};
-
-				$( element ).find( '.field' ).each(function() {
-					var field = $( this ),
-						type = field.attr( 'type' );
-
-					if ( type === 'radio' ) {
-						if ( field.is( ':checked' ) ) {
-							layer.settings[ field.attr( 'name' ).split( '-' )[ 0 ] ] = field.val();
-						}
-					} else if (type === 'checkbox' ) {
-						layer.settings[ field.attr( 'name' ) ] = field.is( ':checked' );
-					} else {
-						layer.settings[ field.attr( 'name' ) ] = field.val();
+					if (layer.getID() === event.id) {
+						layer.select();
 					}
 				});
-
-				layers.push( layer) ;
 			});
 
-			this.currentPanel.setData( 'layers', layers );
-
-			this.close();
-		},
-
-		close: function() {
-			event.preventDefault();
-
-			editor.find( '.close' ).off( 'click' );
-			editor.find( '.save' ).off( 'click' );
-
-			$( 'body' ).find( '.modal-overlay, .layers-editor' ).remove();
+			layer.triggerSelect();
 		},
 
 		addNewLayer: function() {
@@ -911,12 +786,10 @@
 				dataType: 'html',
 				data: { action: 'accordion_slider_add_layer_settings', id: this.counter },
 				complete: function( data ) {
-					$( '.layers-settings' ).append( data.responseText );
+					$( data.responseText ).appendTo( $( '.layers-settings' ) );
+					$( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).appendTo( editor.find( '.layers-list' ) );
 
-					var layersList = editor.find( '.layers-list' ),
-						layerListItem = $( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).appendTo( layersList );
-
-					layerListItem.trigger( 'click' );
+					that.createLayer( that.counter, false );
 				}
 			});
 		},
@@ -924,42 +797,37 @@
 		deleteLayer: function() {
 			event.preventDefault();
 
-			var selectedLayer = editor.find( '.selected-layers-list-item' ),
-				selectedLayerID = parseInt( selectedLayer.attr( 'data-id' ), 10 ),
-				nextLayer = selectedLayer.prev();
+			var that = this,
+				removedIndex;
 
-			if ( nextLayer.length === 0 )
-				nextLayer = selectedLayer.next();
+			$.each( this.layers, function( index, layer ) {
+				if ( layer.isSelected() === true ) {
+					layer.destroy();
+					that.layers.splice( index, 1 );
+					removedIndex = index;
 
-			selectedLayer.remove();
-			editor.find( '.layer-settings[data-id="' + selectedLayerID + '"]' ).remove();
+					return false;
+				}
+			});
 
-			nextLayer.trigger( 'click' );
+			if ( removedIndex === 0 ) {
+				this.layers[ 0 ].triggerSelect();
+			} else {
+				this.layers[ removedIndex - 1 ].triggerSelect();
+			}
 		},
 
 		duplicateLayer: function() {
 			event.preventDefault();
 
 			var that = this,
-				selectedLayer = editor.find( '.selected-layers-list-item' ),
-				selectedLayerID = parseInt( selectedLayer.attr( 'data-id' ), 10 ),
-				selectedSettings = editor.find( '.layer-settings[data-id="' + selectedLayerID + '"]' ),
-				layerSettings = {};
+				layerData;
 
 			this.counter++;
 
-			selectedSettings.find( '.field' ).each(function() {
-				var field = $( this ),
-					type = field.attr( 'type' );
-
-				if ( type === 'radio' ) {
-					if ( field.is( ':checked' ) ) {
-						layerSettings[ field.attr( 'name' ).split( '-' )[ 0 ] ] = field.val();
-					}
-				} else if ( type === 'checkbox' ) {
-					layerSettings[ field.attr( 'name' ) ] = field.is( ':checked' );
-				} else {
-					layerSettings[ field.attr( 'name' ) ] = field.val();
+			$.each( this.layers, function( index, layer ) {
+				if ( layer.isSelected() === true ) {
+					layerData = layer.getData();
 				}
 			});
 
@@ -967,17 +835,379 @@
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				dataType: 'html',
-				data: { action: 'accordion_slider_add_layer_settings', id: this.counter, settings: layerSettings },
+				data: { action: 'accordion_slider_add_layer_settings', id: this.counter, content: layerData.content, settings: JSON.stringify( layerData.settings ) },
 				complete: function( data ) {
-					$( '.layers-settings' ).append( data.responseText );
+					$( data.responseText ).appendTo( $( '.layers-settings' ) );
+					$( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).appendTo( editor.find( '.layers-list' ) );
 
-					var layersList = editor.find( '.layers-list' ),
-						layerListItem = $( '<li class="layers-list-item" data-id="' + that.counter + '">' + selectedLayer.text() + '</li>' ).appendTo( layersList );
-
-					layerListItem.trigger( 'click' );
+					that.createLayer( that.counter, layerData );
 				}
 			});
+		},
+
+		save: function() {
+			event.preventDefault();
+
+			var data = [];
+
+			$.each( this.layers, function( index, element ) {
+				data.push( element.getData() );
+			});
+			
+			this.currentPanel.setData( 'layers', data );
+
+			this.close();
+		},
+
+		close: function() {
+			event.preventDefault();
+
+			this.layers.length = 0;
+
+			editor.find( '.close' ).off( 'click' );
+			editor.find( '.save' ).off( 'click' );
+
+			$( 'body' ).find( '.modal-overlay, .layers-editor' ).remove();
 		}
+	};
+
+	var Layer = function( id, data, editor ) {
+		this.id = id;
+		this.data = data;
+		this.editor = editor;
+
+		this.selected = false;
+		this.events = $( {} );
+
+		this.init();
+	};
+
+	Layer.prototype = {
+
+		init: function() {
+			this.$viewportLayers = this.editor.find( '.viewport-layers' );
+
+			this.$viewportLayer = $( '<div class="viewport-layer as-layer"></div>' ).appendTo( this.$viewportLayers );
+			this.$layerListItem = this.editor.find( '.layers-list-item[data-id="' + this.id + '"]' );
+			this.$layerSettings = this.editor.find( '.layer-settings[data-id="' + this.id + '"]' );
+
+			this.initViewportLayer();
+			this.initLayerDragging();
+			this.initLayerListItem();
+			this.initLayerSettings();
+		},
+
+		getData: function() {
+			var data = {};
+
+			data.id = this.id;
+			data.name = this.$layerListItem.text();
+			data.content = this.$layerSettings.find( '.content' ).val();
+			data.settings = {};
+
+			this.$layerSettings.find( '.setting' ).each(function() {
+				var settingField = $( this ),
+					type = settingField.attr( 'type' );
+
+				if ( type === 'radio' ) {
+					if ( settingField.is( ':checked' ) ) {
+						data.settings[ settingField.attr( 'name' ).split( '-' )[ 0 ] ] = settingField.val();
+					}
+				} else if (type === 'checkbox' ) {
+					data.settings[ settingField.attr( 'name' ) ] = settingField.is( ':checked' );
+				} else {
+					data.settings[ settingField.attr( 'name' ) ] = settingField.val();
+				}
+			});
+
+			return data;
+		},
+
+		getID: function() {
+			return this.id;
+		},
+
+		select: function() {
+			this.selected = true;
+
+			this.$layerListItem.addClass( 'selected-layers-list-item' );
+			this.$layerSettings.addClass( 'selected-layer-settings' );
+		},
+
+		deselect: function() {
+			this.selected = false;
+
+			this.$layerListItem.removeClass( 'selected-layers-list-item' );
+			this.$layerSettings.removeClass( 'selected-layer-settings' );
+		},
+
+		triggerSelect: function() {
+			this.trigger( { type: 'select', id: this.id } );
+		},
+
+		isSelected: function() {
+			return this.selected;
+		},
+
+		destroy: function() {
+			this.$viewportLayer.off( 'mousedown' );
+			this.$viewportLayer.off( 'mouseup' );
+			this.$viewportLayer.off( 'click' );
+
+			this.$layerListItem.off( 'click' );
+			this.$layerListItem.off( 'dblclick' );
+			this.$layerListItem.off( 'selectstart' );
+
+			this.editor.off( 'mousemove.layer' + this.id );
+			this.editor.off( 'click.layer' + this.id );
+
+			this.$viewportLayer.remove();
+			this.$layerListItem.remove();
+			this.$layerSettings.remove();
+		},
+
+		on: function( type, handler ) {
+			this.events.on( type, handler );
+		},
+
+		off: function( type ) {
+			this.events.off( type );
+		},
+
+		trigger: function( type ) {
+			this.events.triggerHandler( type );
+		},
+
+		initViewportLayer: function() {
+			var that = this,
+				classes = '';
+
+			if ( this.data === false ) {
+				this.$viewportLayer.attr( 'data-id', this.id )
+									.addClass( 'as-black as-padding' )
+									.css( { 'width': 'auto', 'height': 'auto', 'left': 0, 'top': 0 } )
+									.text( 'New layer' );
+			} else {
+				this.$viewportLayer.attr( 'data-id', this.id );
+				this.$viewportLayer.html( this.data.content );
+
+				if ( this.data.settings.black_background === true ) {
+					classes += ' as-black';
+				}
+
+				if ( this.data.settings.white_background === true ) {
+					classes += ' as-white';
+				}
+
+				if ( this.data.settings.padding === true ) {
+					classes += ' as-padding';
+				}
+
+				if ( this.data.settings.round_corners === true ) {
+					classes += ' as-rounded';
+				}
+
+				if ( this.data.settings.custom_class !== '' ) {
+					classes += ' ' + this.data.settings.custom_class;
+				}
+
+				this.$viewportLayer.addClass( classes );
+
+				this.$viewportLayer.css( { 'width': this.data.settings.width, 'height': this.data.settings.height } );
+
+				var position = this.data.settings.position.toLowerCase(),
+					horizontalPosition = position.indexOf( 'right' ) !== -1 ? 'right' : 'left',
+					verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top';
+
+				if ( this.data.settings.horizontal === 'center' ) {
+					this.$viewportLayer.css( { 'width': this.$viewportLayer.outerWidth( true ), 'marginLeft': 'auto', 'marginRight': 'auto', 'left': 0, 'right': 0 } );
+				} else {
+					suffix = this.data.settings.horizontal.indexOf( 'px' ) === -1 && this.data.settings.horizontal.indexOf( '%' ) === -1 ? 'px' : '';
+					this.$viewportLayer.css( horizontalPosition, this.data.settings.horizontal + suffix );
+				}
+
+				if ( this.data.settings.vertical === 'center' ) {
+					this.$viewportLayer.css( { 'height': this.$viewportLayer.outerHeight( true ),  'marginTop': 'auto', 'marginBottom': 'auto', 'top': 0, 'bottom': 0 } );
+				} else {
+					suffix = this.data.settings.vertical.indexOf( 'px' ) === -1 && this.data.settings.vertical.indexOf( '%' ) === -1 ? 'px' : '';
+					this.$viewportLayer.css( verticalPosition, this.data.settings.vertical + suffix );
+				}
+			}
+
+			this.$viewportLayer.on( 'click', function() {
+				that.triggerSelect();
+			});
+		},
+
+		initLayerDragging: function() {
+			var that = this,
+				mouseX = 0,
+				mouseY = 0,
+				layerX = 0,
+				layerY = 0,
+				hasFocus = false,
+				autoRightBottom = false;
+
+			this.$viewportLayer.on( 'mousedown', function( event ) {
+				mouseX = event.pageX;
+				mouseY = event.pageY;
+				layerX = that.$viewportLayer[ 0 ].offsetLeft;
+				layerY = that.$viewportLayer[ 0 ].offsetTop;
+
+				hasFocus = true;
+			});
+
+			this.editor.on( 'mousemove.layer' + this.id, function( event ) {
+				if ( hasFocus === true ) {
+					that.$viewportLayer.css( { 'left': layerX + event.pageX - mouseX, 'top': layerY + event.pageY - mouseY } );
+
+					if ( autoRightBottom === false ) {
+						autoRightBottom = true;
+						that.$viewportLayer.css( { 'right': 'auto', 'bottom': 'auto' } );
+					}
+				}
+			});
+
+			this.$viewportLayer.on( 'mouseup', function( event ) {
+				var position = that.$layerSettings.find( '.setting[name="position"]' ).val().toLowerCase(),
+					horizontalPosition = position.indexOf( 'right' ) !== -1 ? 'right' : 'left',
+					verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top';
+
+				hasFocus = false;
+				autoRightBottom = false;
+
+				if ( horizontalPosition === 'left' ) {
+					that.$layerSettings.find( '.setting[name="horizontal"]' ).val( that.$viewportLayer.position().left );
+				} else if ( horizontalPosition === 'right' ) {
+					var right = that.editor.find( '.viewport-layers' ).width() - that.$viewportLayer.position().left - that.$viewportLayer.outerWidth( true );
+
+					that.$layerSettings.find( '.setting[name="horizontal"]' ).val( right );
+					that.$viewportLayer.css( { 'left': 'auto', 'right': right } );
+				}
+
+				if ( verticalPosition === 'top' ) {
+					that.$layerSettings.find( '.setting[name="vertical"]' ).val( that.$viewportLayer.position().top );
+				} else if ( verticalPosition === 'bottom' ) {
+					var bottom = that.editor.find( '.viewport-layers' ).height() - that.$viewportLayer.position().top - that.$viewportLayer.outerHeight( true );
+
+					that.$layerSettings.find( '.setting[name="vertical"]' ).val( bottom );
+					that.$viewportLayer.css( { 'top': 'auto', 'bottom': bottom } );
+				}
+			});
+		},
+
+		initLayerListItem: function() {
+			var that = this,
+				isEditingLayerName = false;
+
+			this.$layerListItem.on( 'click', function( event ) {
+				that.trigger( { type: 'select', id: that.id } );
+			});
+
+			this.$layerListItem.on( 'dblclick', function( event ) {
+				if ( isEditingLayerName === true ) {
+					return;
+				}
+
+				isEditingLayerName = true;
+
+				var name = that.$layerListItem.text();
+
+				var input = $( '<input type="text" value="' + name + '" />' ).appendTo( that.$layerListItem );
+			});
+
+			this.$layerListItem.on( 'selectstart', function( event ) {
+				event.preventDefault();
+			});
+
+			this.editor.on( 'click.layer' + this.id, function( event ) {
+				if ( ! $( event.target ).is( 'input' ) && isEditingLayerName === true ) {
+					isEditingLayerName = false;
+
+					var input = that.$layerListItem.find( 'input' );
+
+					that.$layerListItem.text( input.val() );
+					input.remove();
+				}
+			});
+		},
+
+		initLayerSettings: function() {
+			var that = this,
+				position = this.$layerSettings.find( '.setting[name="position"]' ).val().toLowerCase(),
+				horizontalPosition = position.indexOf( 'right' ) !== -1 ? 'right' : 'left',
+				verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top';
+
+			this.$layerSettings.find( '.setting[name="width"]' ).on( 'change', function() {
+				that.$viewportLayer.css( 'width', $( this ).val() );
+			});
+
+			this.$layerSettings.find( '.setting[name="height"]' ).on( 'change', function() {
+				that.$viewportLayer.css( 'height', $( this ).val() );
+			});
+
+			this.$layerSettings.find( '.setting[name="position"], .setting[name="horizontal"], .setting[name="vertical"]' ).on( 'change', function() {
+				var horizontal = that.$layerSettings.find( '.setting[name="horizontal"]' ).val(),
+					vertical = that.$layerSettings.find( '.setting[name="vertical"]' ).val();
+
+				position = that.$layerSettings.find( '.setting[name="position"]' ).val().toLowerCase();
+				horizontalPosition = position.indexOf( 'right' ) !== -1 ? 'right' : 'left';
+				verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top';
+
+				that.$viewportLayer.css( { 'top': 'auto', 'bottom': 'auto', 'left': 'auto', 'right': 'auto' } );
+
+				if ( horizontal === 'center' ) {
+					that.$viewportLayer.css( { 'width': that.$viewportLayer.outerWidth( true ), 'marginLeft': 'auto', 'marginRight': 'auto', 'left': 0, 'right': 0 } );
+				} else {
+					suffix = horizontal.indexOf( 'px' ) === -1 && horizontal.indexOf( '%' ) === -1 ? 'px' : '';
+					that.$viewportLayer.css( horizontalPosition, horizontal + suffix );
+				}
+
+				if ( vertical === 'center' ) {
+					that.$viewportLayer.css( { 'height': that.$viewportLayer.outerHeight( true ),  'marginTop': 'auto', 'marginBottom': 'auto', 'top': 0, 'bottom': 0 } );
+				} else {
+					suffix = vertical.indexOf( 'px' ) === -1 && vertical.indexOf( '%' ) === -1 ? 'px' : '';
+					that.$viewportLayer.css( verticalPosition, vertical + suffix );
+				}
+			});
+
+			this.$layerSettings.find( '.setting[name="black_background"]' ).on( 'change', function() {
+				if ( $( this ).is( ':checked' ) ) {
+					that.$viewportLayer.addClass( 'as-black' );
+				} else {
+					that.$viewportLayer.removeClass( 'as-black' );
+				}
+			});
+
+			this.$layerSettings.find( '.setting[name="white_background"]' ).on( 'change', function() {
+				if ( $( this ).is( ':checked' ) ) {
+					that.$viewportLayer.addClass( 'as-white' );
+				} else {
+					that.$viewportLayer.removeClass( 'as-white' );
+				}
+			});
+
+			this.$layerSettings.find( '.setting[name="padding"]' ).on( 'change', function() {
+				if ( $( this ).is( ':checked' ) ) {
+					that.$viewportLayer.addClass( 'as-padding' );
+				} else {
+					that.$viewportLayer.removeClass( 'as-padding' );
+				}
+			});
+
+			this.$layerSettings.find( '.setting[name="round_corners"]' ).on( 'change', function() {
+				if ( $( this ).is( ':checked' ) ) {
+					that.$viewportLayer.addClass( 'as-rounded' );
+				} else {
+					that.$viewportLayer.removeClass( 'as-rounded' );
+				}
+			});
+
+			this.$layerSettings.find( '.content' ).on( 'input', function() {
+				that.$viewportLayer.html( $( this ).val() );
+			});
+		}
+
 	};
 
 	var MediaLoader = {

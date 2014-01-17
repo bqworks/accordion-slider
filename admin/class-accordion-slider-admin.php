@@ -415,9 +415,14 @@ class Accordion_Slider_Admin {
 	public function add_layer_settings() {
 		$layer_id = $_POST['id'];
 		$layer_settings;
+		$layer_content;
 
 		if ( isset( $_POST['settings'] ) ) {
-			$layer_settings = $_POST['settings'];
+			$layer_settings = json_decode( stripslashes( $_POST['settings'] ), true );
+		}
+
+		if ( isset( $_POST['content'] ) ) {
+			$layer_content = $_POST['content'];
 		}
 
 		$layer_default_settings = Accordion_Slider_Settings::getLayerSettings();
