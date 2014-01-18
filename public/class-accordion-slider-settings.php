@@ -437,6 +437,10 @@ class Accordion_Slider_Settings {
 		Return the information of a setting
 	*/
 	public static function getSettingInfo( $setting_name ) {
+		if ( empty( self::$settings ) ) {
+			self::getSettings();
+		}
+
 		return self::$settings[self::$settings_map[$setting_name]]['list'][$setting_name];
 	}
 
