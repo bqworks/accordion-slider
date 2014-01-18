@@ -76,6 +76,11 @@
 				event.preventDefault();
 				that.duplicateAccordion( $( this ) );
 			});
+
+			$( '.accordions-list tbody' ).lightSortable( {
+				children: '.accordion-row',
+				placeholder: ''
+			} );
 		},
 
 		loadAccordionData: function() {
@@ -239,31 +244,10 @@
 				that.initPanel( $( this ), index );
 			});
 
-			var target,
-				placeholde;
-
-			$( '.panel' ).on( 'dragstart', function( event ) {
-				target = $( this );
-				
-				placeholder = $( '<div class="panel placeholder" style="height: ' + $( this ).height() + 'px"></div>' );
-
-				placeholder.on( 'dragover', function( event ) {
-					event.preventDefault();
-				});
-
-				event.originalEvent.dataTransfer.setData( 'text/html', target.html() );
-			}).on( 'dragend', function( event ) {
-				target.insertAfter( placeholder );
-				placeholder.remove();
-			}).on( 'dragenter', function( event ) {
-				if ( $( this ).index() >= placeholder.index() )
-					placeholder.insertAfter( $( this ) );
-				else
-					placeholder.insertBefore( $( this ) );
-			}).on( 'dragover', function( event ) {
-				event.preventDefault();
-				target.detach();
-			});
+			$( '.panels-container' ).lightSortable( {
+				children: '.panel',
+				placeholder: 'panel panel-placeholder'
+			} );
 		},
 
 		initPanel: function( element, index ) {
@@ -711,6 +695,11 @@
 				that.counter = Math.max( that.counter, layerData.id );
 			});
 
+			$( '.layers-list' ).lightSortable( {
+				children: '.layers-list-item',
+				placeholder: 'layers-list-item-placeholder'
+			} );
+
 			if ( this.layers.length !== 0 ) {
 				this.layers[ 0 ].triggerSelect();
 			}
@@ -868,6 +857,8 @@
 
 			editor.find( '.close' ).off( 'click' );
 			editor.find( '.save' ).off( 'click' );
+
+			$( '.layers-list' ).lightSortable( 'destroy' );
 
 			$( 'body' ).find( '.modal-overlay, .layers-editor' ).remove();
 		}
@@ -1253,3 +1244,167 @@
 	});
 
 })( jQuery );
+
+
+
+;(function( $, window, document ) {
+
+	var LightSortable = function( instance, options ) {
+
+		this.options = options;
+		this.$container = $( instance );
+		this.$selectedChild = null;
+		this.$placeholder = null;
+
+		this.currentMouseX = 0;
+		this.currentMouseY = 0;
+		this.panelInitialX = 0;
+		this.panelInitialY = 0;
+		this.initialMouseX = 0;
+		this.initialMouseY = 0;
+		this.isDragging = false;
+		
+		this.checkHover = 0;
+
+		this.uid = new Date().valueOf();
+
+		this.init();
+	};
+
+	LightSortable.prototype = {
+
+		init: function() {
+			this.$container.on( 'mousedown.lightSortable' + this.uid, $.proxy( this.onDragStart, this ) );
+			$( 'body' ).on( 'mousemove.lightSortable.' + this.uid, $.proxy( this.onDragging, this ) );
+			$( 'body' ).on( 'mouseup.lightSortable.' + this.uid, $.proxy( this.onDragEnd, this ) );
+		},
+
+		onDragStart: function( event ) {
+			if (event.which !== 1) {
+				return;
+			}
+			
+			this.$selectedChild = $( event.target ).is( this.options.children ) ? $( event.target ) : $( event.target ).parents( this.options.children );
+
+			if ( this.$selectedChild.length === 1 ) {
+				this.initialMouseX = event.pageX;
+				this.initialMouseY = event.pageY;
+				this.panelInitialX = this.$selectedChild.position().left;
+				this.panelInitialY = this.$selectedChild.position().top;
+			}
+		},
+
+		onDragging: function( event ) {
+			if ( this.$selectedChild === null )
+				return;
+
+			this.currentMouseX = event.pageX;
+			this.currentMouseY = event.pageY;
+
+			if ( ! this.isDragging ) {
+				this.isDragging = true;
+
+				var tag = this.$container.is( 'ul' ) || this.$container.is( 'ol' ) ? 'li' : 'div';
+
+				this.$placeholder = $( '<' + tag + '>' ).addClass( 'ls-ignore ' + this.options.placeholder )
+					.insertAfter( this.$selectedChild );
+
+				if ( this.$placeholder.width() === 0 ) {
+					this.$placeholder.css( 'width', this.$selectedChild.outerWidth() );
+				}
+
+				if ( this.$placeholder.height() === 0 ) {
+					this.$placeholder.css( 'height', this.$selectedChild.outerHeight() );
+				}
+
+				this.$selectedChild.css( {
+						'pointer-events': 'none',
+						'position': 'absolute',
+						left: this.$selectedChild.position().left,
+						top: this.$selectedChild.position().top,
+						width: this.$selectedChild.width(),
+						height: this.$selectedChild.height()
+					} )
+					.addClass( 'ls-ignore' );
+
+				this.$container.append( this.$selectedChild );
+
+				$( 'body' ).css( 'user-select', 'none' );
+
+				var that = this;
+
+				this.checkHover = setInterval( function() {
+
+					that.$container.find( that.options.children ).not( '.ls-ignore' ).each( function() {
+						var $currentChild = $( this );
+
+						if ( that.currentMouseX > $currentChild.offset().left &&
+							that.currentMouseX < $currentChild.offset().left + $currentChild.width() &&
+							that.currentMouseY > $currentChild.offset().top &&
+							that.currentMouseY < $currentChild.offset().top + $currentChild.height() ) {
+
+							if ( $currentChild.index() >= that.$placeholder.index() )
+								that.$placeholder.insertAfter( $currentChild );
+							else
+								that.$placeholder.insertBefore( $currentChild );
+						}
+					});
+				}, 200 );
+			}
+
+			this.$selectedChild.css( { 'left': this.currentMouseX - this.initialMouseX + this.panelInitialX, 'top': this.currentMouseY - this.initialMouseY + this.panelInitialY } );
+		},
+
+		onDragEnd: function() {
+			if ( this.isDragging ) {
+				this.isDragging = false;
+				$( 'body' ).css( 'user-select', '');
+
+				this.$selectedChild.css( { 'position': 'relative', left: '', top: '', width: '', height: '', 'pointer-events': 'auto' } )
+									.removeClass( 'ls-ignore' )
+									.insertAfter( this.$placeholder );
+
+				this.$placeholder.remove();
+
+				clearInterval( this.checkHover );
+			}
+
+			this.$selectedChild = null;
+		},
+
+		destroy: function() {
+			if ( this.isDragging ) {
+				this.onDragEnd();
+			}
+
+			this.$container.off( 'mousedown.lightSortable.' + this.uid );
+			$( 'body' ).off( 'mousemove.lightSortable.' + this.uid );
+			$( 'body' ).off( 'mouseup.lightSortable.' + this.uid );
+		}
+
+	};
+
+	$.fn.lightSortable = function( options ) {
+		var args = Array.prototype.slice.call( arguments, 1 );
+
+		return this.each(function() {
+			// instantiate the video controller or call a function on the current instance
+			if ( typeof $( this ).data( 'lightSortable' ) === 'undefined' ) {
+				var newInstance = new LightSortable( this, options );
+
+				// store a reference to the instance created
+				$( this ).data( 'lightSortable', newInstance );
+			} else if ( typeof options !== 'undefined' ) {
+				var	currentInstance = $( this ).data( 'lightSortable' );
+
+				// check the type of argument passed
+				if ( typeof currentInstance[ options ] === 'function' ) {
+					currentInstance[ options ].apply( currentInstance, args );
+				} else {
+					$.error( options + ' does not exist in lightSortable.' );
+				}
+			}
+		});
+	};
+
+})(jQuery, window, document);

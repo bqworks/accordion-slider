@@ -6,7 +6,7 @@
 	$delete_url = admin_url( 'admin.php?page=accordion-slider&id=' . $accordion_id . '&action=delete' ) . '&da_nonce=' . $delete_nonce;
 	$duplicate_url = admin_url( 'admin.php?page=accordion-slider&id=' . $accordion_id . '&action=duplicate' ) . '&dua_nonce=' . $duplicate_nonce;
 ?>
-<tr>
+<tr class="accordion-row">
 	<td><?php echo $accordion_id; ?></td>
 	<td><?php echo esc_html( $accordion_name ); ?></td>
 	<td><?php echo $accordion_created; ?></td>

@@ -44,7 +44,7 @@
 	margin-right: 0;
 }
 
-.panel.placeholder {
+.panel-placeholder {
 	border: 1px dashed #333;
 	background-color: #DDD;
 	-moz-box-sizing: border-box;
@@ -425,6 +425,14 @@
 	width: 100% !important;
 	height: 100%;
 	margin: 0;
+}
+
+.layers-list-item-placeholder {
+	border: 1px dashed #999;
+	background-color: #FEFEFE;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .layers-editor .field {
