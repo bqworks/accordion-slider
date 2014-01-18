@@ -62,6 +62,11 @@
 			$( '.breakpoints' ).on( 'click', '.remove-breakpoint-setting', function( event ) {
 				$( this ).parents( 'tr' ).remove();
 			});
+
+			$( '.breakpoints' ).lightSortable( {
+				children: '.breakpoint',
+				placeholder: ''
+			} );
 		},
 
 		initAllAccordionsPage: function() {
@@ -1283,7 +1288,7 @@
 			if (event.which !== 1) {
 				return;
 			}
-			
+
 			this.$selectedChild = $( event.target ).is( this.options.children ) ? $( event.target ) : $( event.target ).parents( this.options.children );
 
 			if ( this.$selectedChild.length === 1 ) {
