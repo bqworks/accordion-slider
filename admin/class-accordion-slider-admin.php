@@ -277,12 +277,13 @@ class Accordion_Slider_Admin {
 				foreach ( $layers_data as $layer_data ) {
 					$layer = array('accordion_id' => $id,
 									'panel_id' => $panel_id,
-									'name' => $layer_data['name'],
-									'content' => $layer_data['content'],
-									'settings' =>  json_encode( $layer_data['settings'] )
+									'position' => isset( $layer_data['position'] ) ? $layer_data['position'] : 0,
+									'name' => isset( $layer_data['name'] ) ? $layer_data['name'] : '',
+									'content' => isset( $layer_data['content'] ) ? $layer_data['content'] : '',
+									'settings' =>  isset( $layer_data['settings'] ) ? json_encode( $layer_data['settings'] ) : ''
 									);
 
-					$wpdb->insert( $wpdb->prefix . 'accordionslider_layers', $layer, array( '%d', '%d', '%s', '%s', '%s' ) );
+					$wpdb->insert( $wpdb->prefix . 'accordionslider_layers', $layer, array( '%d', '%d', '%d', '%s', '%s', '%s' ) );
 				}
 			}
 		}

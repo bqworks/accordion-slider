@@ -21,6 +21,7 @@
 					$layer_id = $layer[ 'id' ];
 					$layer_content = $layer[ 'content' ];
 					$layer_settings = $layer[ 'settings' ];
+
 					include( 'layer-settings.php' );
 				}
 			?>

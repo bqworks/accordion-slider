@@ -17,7 +17,7 @@
 
 			this.initPanels();
 
-			if ( parseInt( as_js_vars.id, 10 ) !== -1) {
+			if ( parseInt( as_js_vars.id, 10 ) !== -1 ) {
 				this.loadAccordionData();
 			}
 
@@ -117,7 +117,10 @@
 			};
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index, element ) {
-				accordionData.panels[ index ] = that.getPanel( parseInt( $( element ).attr('data-index'), 10) ).getData( 'all' );
+				var panelData = that.getPanel( parseInt( $( element ).attr('data-index'), 10) ).getData( 'all' );
+				panelData.position = parseInt( $( element ).attr( 'data-position' ), 10 );
+
+				accordionData.panels[ index ] = panelData;
 			});
 
 			$( '.sidebar-settings' ).find( '.setting' ).each(function() {
@@ -269,7 +272,8 @@
 				that.deletePanel( event.index );
 			});
 
-			element.attr( 'data-index', index);
+			element.attr( 'data-index', index );
+			element.attr( 'data-position', index );
 		},
 
 		getPanel: function( index ) {
@@ -652,7 +656,7 @@
 
 		editor: null,
 
-		currentPanel:null,
+		currentPanel: null,
 
 		layersData: null,
 
@@ -702,8 +706,21 @@
 
 			$( '.layers-list' ).lightSortable( {
 				children: '.layers-list-item',
-				placeholder: 'layers-list-item-placeholder'
+				placeholder: 'layers-list-item-placeholder',
+				sortEnd: function( event ) {
+					var layer = that.layers[ event.startPosition ];
+					that.layers.splice( event.startPosition, 1 );
+					that.layers.splice( event.endPosition, 0, layer );
+
+					$( '.layers-list' ).find( '.layers-list-item' ).each(function( index, element ) {
+						$( element ).attr( 'data-position', index );
+					});
+				}
 			} );
+
+			$( '.layers-list' ).find( '.layers-list-item' ).each(function( index, element ) {
+				$( element ).attr( 'data-position', index );
+			});
 
 			if ( this.layers.length !== 0 ) {
 				this.layers[ 0 ].triggerSelect();
@@ -783,7 +800,7 @@
 				data: { action: 'accordion_slider_add_layer_settings', id: this.counter },
 				complete: function( data ) {
 					$( data.responseText ).appendTo( $( '.layers-settings' ) );
-					$( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).appendTo( editor.find( '.layers-list' ) );
+					$( '<li class="layers-list-item" data-id="' + that.counter + '" data-position="' + that.layers.length + '">Layer ' + that.counter + '</li>' ).appendTo( editor.find( '.layers-list' ) );
 
 					that.createLayer( that.counter, false );
 				}
@@ -849,7 +866,7 @@
 			$.each( this.layers, function( index, element ) {
 				data.push( element.getData() );
 			});
-			
+
 			this.currentPanel.setData( 'layers', data );
 
 			this.close();
@@ -899,6 +916,7 @@
 			var data = {};
 
 			data.id = this.id;
+			data.position = parseInt( this.$layerListItem.attr( 'data-position' ), 10);
 			data.name = this.$layerListItem.text();
 			data.content = this.$layerSettings.find( '.content' ).val();
 			data.settings = {};
@@ -1273,12 +1291,18 @@
 
 		this.uid = new Date().valueOf();
 
+		this.events = $( {} );
+		this.startPosition = 0;
+		this.endPosition = 0;
+
 		this.init();
 	};
 
 	LightSortable.prototype = {
 
 		init: function() {
+			this.settings = $.extend({}, this.defaults, this.options);
+
 			this.$container.on( 'mousedown.lightSortable' + this.uid, $.proxy( this.onDragStart, this ) );
 			$( 'body' ).on( 'mousemove.lightSortable.' + this.uid, $.proxy( this.onDragging, this ) );
 			$( 'body' ).on( 'mouseup.lightSortable.' + this.uid, $.proxy( this.onDragEnd, this ) );
@@ -1289,13 +1313,15 @@
 				return;
 			}
 
-			this.$selectedChild = $( event.target ).is( this.options.children ) ? $( event.target ) : $( event.target ).parents( this.options.children );
+			this.$selectedChild = $( event.target ).is( this.settings.children ) ? $( event.target ) : $( event.target ).parents( this.settings.children );
 
 			if ( this.$selectedChild.length === 1 ) {
 				this.initialMouseX = event.pageX;
 				this.initialMouseY = event.pageY;
 				this.panelInitialX = this.$selectedChild.position().left;
 				this.panelInitialY = this.$selectedChild.position().top;
+
+				this.startPosition = this.$selectedChild.index();
 			}
 		},
 
@@ -1309,9 +1335,14 @@
 			if ( ! this.isDragging ) {
 				this.isDragging = true;
 
+				this.trigger( { type: 'sortStart' } );
+				if ( $.isFunction( this.settings.sortStart ) ) {
+					this.settings.sortStart.call( this, { type: 'sortStart' } );
+				}
+
 				var tag = this.$container.is( 'ul' ) || this.$container.is( 'ol' ) ? 'li' : 'div';
 
-				this.$placeholder = $( '<' + tag + '>' ).addClass( 'ls-ignore ' + this.options.placeholder )
+				this.$placeholder = $( '<' + tag + '>' ).addClass( 'ls-ignore ' + this.settings.placeholder )
 					.insertAfter( this.$selectedChild );
 
 				if ( this.$placeholder.width() === 0 ) {
@@ -1340,7 +1371,7 @@
 
 				this.checkHover = setInterval( function() {
 
-					that.$container.find( that.options.children ).not( '.ls-ignore' ).each( function() {
+					that.$container.find( that.settings.children ).not( '.ls-ignore' ).each( function() {
 						var $currentChild = $( this );
 
 						if ( that.currentMouseX > $currentChild.offset().left &&
@@ -1363,6 +1394,7 @@
 		onDragEnd: function() {
 			if ( this.isDragging ) {
 				this.isDragging = false;
+
 				$( 'body' ).css( 'user-select', '');
 
 				this.$selectedChild.css( { 'position': 'relative', left: '', top: '', width: '', height: '', 'pointer-events': 'auto' } )
@@ -1372,6 +1404,13 @@
 				this.$placeholder.remove();
 
 				clearInterval( this.checkHover );
+
+				this.endPosition = this.$selectedChild.index();
+
+				this.trigger( { type: 'sortEnd' } );
+				if ( $.isFunction( this.settings.sortEnd ) ) {
+					this.settings.sortEnd.call( this, { type: 'sortEnd', startPosition: this.startPosition, endPosition: this.endPosition } );
+				}
 			}
 
 			this.$selectedChild = null;
@@ -1385,6 +1424,24 @@
 			this.$container.off( 'mousedown.lightSortable.' + this.uid );
 			$( 'body' ).off( 'mousemove.lightSortable.' + this.uid );
 			$( 'body' ).off( 'mouseup.lightSortable.' + this.uid );
+		},
+
+		on: function( type, callback ) {
+			return this.events.on( type, callback );
+		},
+		
+		off: function( type ) {
+			return this.events.off( type );
+		},
+
+		trigger: function( data ) {
+			return this.events.triggerHandler( data );
+		},
+
+		defaults: {
+			placeholder: '',
+			sortStart: function() {},
+			sortEnd: function() {}
 		}
 
 	};

@@ -160,6 +160,7 @@ class Accordion_Slider {
 			$create_layers_table = "CREATE TABLE ". $prefix . "accordionslider_layers (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				panel_id mediumint(9) NOT NULL,
+				position mediumint(9) NOT NULL,
 				content text NOT NULL,
 				settings text NOT NULL,
 				PRIMARY KEY (id)
