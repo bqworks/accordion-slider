@@ -12,7 +12,7 @@
 					<div class="panels-container">
                     	<?php
                     		if ( isset( $panels ) ) {
-                    			if ( ! empty( $panels ) ) {
+                    			if ( $panels !== false ) {
                     				foreach ( $panels as $panel ) {
                     					$this->create_panel( $panel );
                     				}

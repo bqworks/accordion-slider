@@ -288,7 +288,7 @@ class Accordion_Slider_Admin {
 			}
 		}
 
-		echo $id; 
+		echo $id;
 
 		die();
 	}
@@ -310,7 +310,7 @@ class Accordion_Slider_Admin {
 			$accordion_created = date( 'm-d-Y' );
 			$accordion_modified = $accordion_created;
 
-			$wpdb->insert($wpdb->prefix . 'accordionslider_accordions', array( 'name' => $accordion_name, 
+			$wpdb->insert( $wpdb->prefix . 'accordionslider_accordions', array( 'name' => $accordion_name, 
 																				'settings' => $accordion['settings'],
 																				'created' => $accordion_created, 
 																				'modified' => $accordion_modified ), 
@@ -320,30 +320,51 @@ class Accordion_Slider_Admin {
 
 			$panels = $this->plugin->load_panels( $original_accordion_id );
 
-			foreach ( $panels as $panel ) {
-				$new_panel = array('accordion_id' => $accordion_id,
-								'label' => $panel['label'],
-								'position' => $panel['position'],
-								'visibility' => $panel['visibility'],
-								'background_source' => $panel['background_source'],
-								'background_retina_source' => $panel['background_retina_source'],
-								'background_alt' => $panel['background_alt'],
-								'background_title' => $panel['background_title'],
-								'background_width' => $panel['background_width'],
-								'background_height' => $panel['background_height'],
-								'opened_background_source' => $panel['opened_background_source'],
-								'opened_background_retina_source' => $panel['opened_background_retina_source'],
-								'opened_background_alt' => $panel['opened_background_alt'],
-								'opened_background_title' => $panel['opened_background_title'],
-								'opened_background_width' => $panel['opened_background_width'],
-								'opened_background_height' => $panel['opened_background_height'],
-								'background_link' => $panel['background_link'],
-								'background_link_title' => $panel['background_link_title'],
-								'html_content' => $panel['html_content']);
+			if ( $panels !== false ) {
+				foreach ( $panels as $panel ) {
+					$new_panel = array( 'accordion_id' => $accordion_id,
+										'label' => $panel['label'],
+										'position' => $panel['position'],
+										'visibility' => $panel['visibility'],
+										'background_source' => $panel['background_source'],
+										'background_retina_source' => $panel['background_retina_source'],
+										'background_alt' => $panel['background_alt'],
+										'background_title' => $panel['background_title'],
+										'background_width' => $panel['background_width'],
+										'background_height' => $panel['background_height'],
+										'opened_background_source' => $panel['opened_background_source'],
+										'opened_background_retina_source' => $panel['opened_background_retina_source'],
+										'opened_background_alt' => $panel['opened_background_alt'],
+										'opened_background_title' => $panel['opened_background_title'],
+										'opened_background_width' => $panel['opened_background_width'],
+										'opened_background_height' => $panel['opened_background_height'],
+										'background_link' => $panel['background_link'],
+										'background_link_title' => $panel['background_link_title'],
+										'html_content' => $panel['html_content']);
 
-				$new_panel_data_types = array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s' );
+					$new_panel_data_types = array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s' );
 
-				$wpdb->insert( $wpdb->prefix . 'accordionslider_panels', $new_panel, $new_panel_data_types );
+					$wpdb->insert( $wpdb->prefix . 'accordionslider_panels', $new_panel, $new_panel_data_types );
+
+					$panel_id = $panel['id'];
+					$new_panel_id = $wpdb->insert_id;
+
+					$layers = $this->plugin->load_layers( $panel_id );
+
+					if ( $layers !== false ) {
+						foreach ( $layers as $layer ) {
+							$layer = array('accordion_id' => $accordion_id,
+											'panel_id' => $new_panel_id,
+											'position' => $layer['position'],
+											'name' => $layer['name'],
+											'content' => $layer['content'],
+											'settings' =>  $layer['settings']
+											);
+
+							$wpdb->insert( $wpdb->prefix . 'accordionslider_layers', $layer, array( '%d', '%d', '%d', '%s', '%s', '%s' ) );
+						}
+					}
+				}
 			}
 
 			echo include( 'views/accordions_row.php' );
