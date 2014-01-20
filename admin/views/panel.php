@@ -2,7 +2,7 @@
 	<div class="panel-image"> 
 		<?php 
 			if ( isset ( $panel_image ) && $panel_image !== '' ) {
-				echo '<img draggable="false" src="' . esc_url( $panel_image ) . '" />';
+				echo '<img src="' . esc_url( $panel_image ) . '" />';
 			} else {
 				echo '<p class="no-image">' . __( 'Click to add image', 'accordion-slider' ) . '</p>';
 			}
