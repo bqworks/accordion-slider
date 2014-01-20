@@ -1311,7 +1311,7 @@
 		},
 
 		onDragStart: function( event ) {
-			if ( event.which !== 1 ) {
+			if ( event.which !== 1 || $( event.target ).is( 'select' ) || $( event.target ).is( 'input' ) ) {
 				return;
 			}
 
