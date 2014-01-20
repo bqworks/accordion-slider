@@ -128,20 +128,22 @@
 				accordionData.settings[ setting.attr( 'name' ) ] = setting.attr( 'type' ) === 'checkbox' ? setting.is( ':checked' ) : setting.val();
 			});
 
-			var breakpoints = {};
+			var breakpoints = [];
 
 			$( '.breakpoints' ).find( '.breakpoint' ).each(function() {
 				var breakpointGroup = $( this ),
-					breakpoint = breakpoints[ breakpointGroup.find( 'input[name="breakpoint_width"]' ).val() ] = {};
+					breakpoint = { 'breakpoint_width': breakpointGroup.find( 'input[name="breakpoint_width"]' ).val() };
 
 				breakpointGroup.find( '.breakpoint-setting' ).each(function() {
 					var breakpointSetting = $( this );
 
 					breakpoint[ breakpointSetting.attr( 'name' ) ] = breakpointSetting.attr( 'type' ) === 'checkbox' ? breakpointSetting.is( ':checked' ) : breakpointSetting.val();
 				});
+
+				breakpoints.push( breakpoint );
 			});
 
-			if ( ! $.isEmptyObject( breakpoints ) ) {
+			if ( breakpoints.length > 0 ) {
 				accordionData.settings.breakpoints = breakpoints;
 			}
 
@@ -1301,7 +1303,7 @@
 	LightSortable.prototype = {
 
 		init: function() {
-			this.settings = $.extend({}, this.defaults, this.options);
+			this.settings = $.extend( {}, this.defaults, this.options );
 
 			this.$container.on( 'mousedown.lightSortable' + this.uid, $.proxy( this.onDragStart, this ) );
 			$( 'body' ).on( 'mousemove.lightSortable.' + this.uid, $.proxy( this.onDragging, this ) );
@@ -1309,7 +1311,7 @@
 		},
 
 		onDragStart: function( event ) {
-			if (event.which !== 1) {
+			if ( event.which !== 1 ) {
 				return;
 			}
 

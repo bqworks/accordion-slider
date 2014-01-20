@@ -100,7 +100,7 @@
                                     if ( isset( $accordion_settings['breakpoints'] ) ) {
                                         $breakpoints = $accordion_settings['breakpoints'];
 
-                                        foreach ( $breakpoints as $breakpoint_width => $breakpoint_settings ) {
+                                        foreach ( $breakpoints as $breakpoint_settings ) {
                                             include( 'breakpoint.php' );
                                         }
                                     }
