@@ -44,9 +44,9 @@
                 
                 <div class="sidebar-settings">
                     <?php 
-                        $settings = Accordion_Slider_Settings::getSettings();
+                        $setting_groups = Accordion_Slider_Settings::getSettingGroups();
 
-                        foreach ( $settings as $group ) {
+                        foreach ( $setting_groups as $group ) {
                             ?>
                             <div class="postbox">
                                 <div class="handlediv"></div>
@@ -55,32 +55,33 @@
                                     <table>
                                         <tbody>
                                             <?php
-                                                foreach ( $group['list'] as $name => $setting ) {
+                                                foreach ( $group['list'] as $setting_name ) {
+                                                    $setting = Accordion_Slider_Settings::getSettings( $setting_name );
                                             ?>
-                                                <tr>
-                                                    <td>
-                                                        <label><?php echo $setting['label']; ?></label>
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                            $value = isset( $accordion_settings ) && isset( $accordion_settings[$name] ) ? $accordion_settings[$name] : $setting['default_value'];
+                                                    <tr>
+                                                        <td>
+                                                            <label><?php echo $setting['label']; ?></label>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                                $value = isset( $accordion_settings ) && isset( $accordion_settings[$setting_name] ) ? $accordion_settings[$setting_name] : $setting['default_value'];
 
-                                                            if ( $setting['type'] === 'number' || $setting['type'] === 'mixed' ) {
-                                                                echo '<input class="setting" type="text" name="' . $name . '" value="' . esc_attr( $value ) . '" />';
-                                                            } else if ( $setting['type'] === 'boolean' ) {
-                                                                echo '<input class="setting" type="checkbox" name="' . $name . '"' . ( $value === true ? ' checked="checked"' : '' ) . ' />';
-                                                            } else if ( $setting['type'] === 'select' ) {
-                                                                echo'<select class="setting" name="' . $name . '">';
-                                                                
-                                                                foreach ( $setting['available_values'] as $value_name => $value_label ) {
-                                                                    echo '<option value="' . $value_name . '"' . ( $value === $value_name ? ' selected="selected"' : '' ) . '>' . $value_label . '</option>';
+                                                                if ( $setting['type'] === 'number' || $setting['type'] === 'mixed' ) {
+                                                                    echo '<input class="setting" type="text" name="' . $setting_name . '" value="' . esc_attr( $value ) . '" />';
+                                                                } else if ( $setting['type'] === 'boolean' ) {
+                                                                    echo '<input class="setting" type="checkbox" name="' . $setting_name . '"' . ( $value === true ? ' checked="checked"' : '' ) . ' />';
+                                                                } else if ( $setting['type'] === 'select' ) {
+                                                                    echo'<select class="setting" name="' . $setting_name . '">';
+                                                                    
+                                                                    foreach ( $setting['available_values'] as $value_name => $value_label ) {
+                                                                        echo '<option value="' . $value_name . '"' . ( $value === $value_name ? ' selected="selected"' : '' ) . '>' . $value_label . '</option>';
+                                                                    }
+                                                                    
+                                                                    echo '</select>';
                                                                 }
-                                                                
-                                                                echo '</select>';
-                                                            }
-                                                        ?>
-                                                    </td>
-                                                </tr>
+                                                            ?>
+                                                        </td>
+                                                    </tr>
                                             <?php
                                                 }
                                             ?>

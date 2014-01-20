@@ -1270,8 +1270,6 @@
 
 })( jQuery );
 
-
-
 ;(function( $, window, document ) {
 
 	var LightSortable = function( instance, options ) {
@@ -1452,16 +1450,13 @@
 		var args = Array.prototype.slice.call( arguments, 1 );
 
 		return this.each(function() {
-			// instantiate the video controller or call a function on the current instance
 			if ( typeof $( this ).data( 'lightSortable' ) === 'undefined' ) {
 				var newInstance = new LightSortable( this, options );
 
-				// store a reference to the instance created
 				$( this ).data( 'lightSortable', newInstance );
 			} else if ( typeof options !== 'undefined' ) {
 				var	currentInstance = $( this ).data( 'lightSortable' );
 
-				// check the type of argument passed
 				if ( typeof currentInstance[ options ] === 'function' ) {
 					currentInstance[ options ].apply( currentInstance, args );
 				} else {

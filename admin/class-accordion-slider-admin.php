@@ -469,7 +469,7 @@ class Accordion_Slider_Admin {
 	}
 
 	public function create_breakpoint_setting( $name, $value ) {
-		$setting = Accordion_Slider_Settings::getSettingInfo( $name );
+		$setting = Accordion_Slider_Settings::getSettings( $name );
 		$setting_value = $value !== false ? $value : $setting['default_value'];
 		$setting_html = '';
 
