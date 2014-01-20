@@ -84,6 +84,7 @@
 	height: 44px;
 	background: #F5F5F5;
 	text-align: center;
+	cursor: move;
 }
 
 .panel-buttons .button-secondary {
@@ -403,7 +404,7 @@
 	background-color: #EEE;
 	padding: 4px 5px;
 	margin: 5px 0;
-	cursor: pointer;
+	cursor: move;
 }
 
 .layers-editor .selected-layers-list-item {
@@ -525,10 +526,11 @@
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	cursor: move;
 }
 
 .add-setting-group {
-	margin: 10px 10px 30px;
+	padding: 10px 10px 30px;
 }
 
 .breakpoints-box table {
