@@ -195,14 +195,14 @@ class Accordion_Slider {
 		Load the public CSS
 	*/
 	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_slug . '-plugin-style', plugins_url( 'assets/css/accordion-slider.min.css', __FILE__ ), array(), self::VERSION );
+		wp_register_style( $this->plugin_slug . '-plugin-style', plugins_url( 'assets/css/accordion-slider.min.css', __FILE__ ), array(), self::VERSION );
 	}
 
 	/*
 		Load the public JavaScript
 	*/
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/jquery.accordionSlider.min.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+		wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/jquery.accordionSlider.min.js', __FILE__ ), array( 'jquery' ), self::VERSION );
 	}
 
 	public function load_accordion( $id ) {
@@ -251,6 +251,9 @@ class Accordion_Slider {
 	}
 
 	public function get_accordion_slider( $id ) {
+		wp_enqueue_style( $this->plugin_slug . '-plugin-style');
+		wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
+
 		$accordion = $this->load_accordion( $id );
 		$accordion_settings = json_decode( $accordion['settings'], true);
 		$panels = $this->load_panels( $id );
@@ -369,7 +372,7 @@ class Accordion_Slider {
 			}
 		}
 
-		$content_html .= "\r\n" . '	</<div>';
+		$content_html .= "\r\n" . '	</div>';
 		$content_html .= "\r\n" . '</div>';
 
 		foreach ( $default_settings as $setting_name => $setting ) {
