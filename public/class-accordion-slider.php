@@ -394,6 +394,10 @@ class Accordion_Slider {
 			$breakpoints_js = "";
 
 			foreach ( $accordion_settings['breakpoints'] as $breakpoint ) {
+				if ( $breakpoint['breakpoint_width'] === '' ) {
+					continue;
+				}
+
 				if ( $breakpoints_js !== '' ) {
 					$breakpoints_js .= ',';
 				}
@@ -421,7 +425,11 @@ class Accordion_Slider {
 				$breakpoints_js .= "\r\n" . '				}';
 			}
 
-			$settings_js .= ',' . "\r\n" . '			breakpoints: {' . $breakpoints_js . "\r\n" . '		}';
+			if ( $settings_js !== '' ) {
+				$settings_js .= ',';
+			}
+
+			$settings_js .= "\r\n" . '			breakpoints: {' . $breakpoints_js . "\r\n" . '			}';
 		}
 
 		$accordion_js = "\r\n" . '<script type="text/javascript">' .
