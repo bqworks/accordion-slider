@@ -64,7 +64,7 @@
                                                         </td>
                                                         <td>
                                                             <?php
-                                                                $value = isset( $accordion_settings ) && isset( $accordion_settings[$setting_name] ) ? $accordion_settings[$setting_name] : $setting['default_value'];
+                                                                $value = isset( $accordion_settings ) && isset( $accordion_settings[ $setting_name ] ) ? $accordion_settings[ $setting_name ] : $setting['default_value'];
 
                                                                 if ( $setting['type'] === 'number' || $setting['type'] === 'mixed' ) {
                                                                     echo '<input class="setting" type="text" name="' . $setting_name . '" value="' . esc_attr( $value ) . '" />';

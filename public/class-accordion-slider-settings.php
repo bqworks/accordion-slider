@@ -350,7 +350,7 @@ class Accordion_Slider_Settings {
 		}
 
 		if ( ! is_null( $name ) ) {
-			return self::$settings[$name];
+			return self::$settings[ $name ];
 		}
 
 		return self::$settings;

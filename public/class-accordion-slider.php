@@ -22,8 +22,10 @@ class Accordion_Slider {
 		add_action( 'wpmu_new_blog', array( $this, 'activate_new_blog' ) );
 
 		// load the public CSS and JavaScript
-		add_action( 'wp_enqueue_styles', array( $this, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
+		add_shortcode( 'accordion_slider', array( $this, 'accordion_slider_shortcode' ) );
 	}
 
 	/*
@@ -238,5 +240,197 @@ class Accordion_Slider {
 		} else {
 			return false;	
 		}
+	}
+
+	public function accordion_slider_shortcode( $atts, $content = null ) {
+		extract( shortcode_atts( array(
+			'id' => '-1'
+		), $atts ) );
+
+		return $this->get_accordion_slider( $id );
+	}
+
+	public function get_accordion_slider( $id ) {
+		$accordion = $this->load_accordion( $id );
+		$accordion_settings = json_decode( $accordion['settings'], true);
+		$panels = $this->load_panels( $id );
+		$default_settings = Accordion_Slider_Settings::getSettings();
+ 		$default_layer_settings = Accordion_Slider_Settings::getLayerSettings();
+
+		$content_html = "";
+		$settings_js = "";
+
+		$content_html .= "\r\n" . '<div id="accordion-slider-' . $id . '" class="accordion-slider">';
+		$content_html .= "\r\n" . '	<div class="as-panels">';
+
+		if ( $panels !== false ) {
+			foreach ( $panels as $panel ) {
+				$content_html .= "\r\n" . '		<div class="as-panel">';
+
+				$is_background_image = isset( $panel['background_source'] ) && $panel['background_source'] !== '' ? true : false;
+				$is_opened_background_image = isset( $panel['opened_background_source'] ) && $panel['opened_background_source'] !== '' ? true : false;
+				$is_background_link = isset( $panel['background_link'] ) && $panel['background_link'] !== '' ? true : false;
+
+				$background_link = '';
+
+				if ( $is_background_link ) {
+					$background_link_href = ' href="' . $panel['background_link'] . '"';
+					$background_link_title = isset( $panel['background_link_title'] ) && $panel['background_link_title'] !== '' ? ' title="' . $panel['background_link_title'] . '"' : '';
+
+					$background_link = '<a' . $background_link_href . $background_link_title . '>';
+				}
+
+				if ( $is_background_image ) {
+					$background_source = ' src="' . $panel['background_source'] . '"';
+					$background_alt = isset( $panel['background_alt'] ) && $panel['background_alt'] !== '' ? ' alt="' . $panel['background_alt'] . '"' : '';
+					$background_title = isset( $panel['background_title'] ) && $panel['background_title'] !== '' ? ' title="' . $panel['background_title'] . '"' : '';
+					$background_width = isset( $panel['background_width'] ) && $panel['background_width'] !== '' ? ' width="' . $panel['background_width'] . '"' : '';
+					$background_height = isset( $panel['background_height'] ) && $panel['background_height'] !== '' ? ' height="' . $panel['background_height'] . '"' : '';
+
+					$background_image = '<img class="as-background"' . $background_source . $background_alt . $background_title . $background_width . $background_height . ' />';
+				
+					if ( $is_background_link === true &&  $is_opened_background_image === false ) {
+						$content_html .= "\r\n" . '			' . $background_link . "\r\n" . '				' . $background_image . "\r\n" . '			' . '</a>';
+					} else {
+						$content_html .= "\r\n" . '			' . $background_image;
+					}
+				}
+
+				if ( $is_opened_background_image ) {
+					$opened_background_source = ' src="' . $panel['opened_background_source'] . '"';
+					$opened_background_alt = isset( $panel['opened_background_alt'] ) && $panel['opened_background_alt'] !== '' ? ' alt="' . $panel['opened_background_alt'] . '"' : '';
+					$opened_background_title = isset( $panel['opened_background_title'] ) && $panel['opened_background_title'] !== '' ? ' title="' . $panel['opened_background_title'] . '"' : '';
+					$opened_background_width = isset( $panel['opened_background_width'] ) && $panel['opened_background_width'] !== '' ? ' width="' . $panel['opened_background_width'] . '"' : '';
+					$opened_background_height = isset( $panel['opened_background_height'] ) && $panel['opened_background_height'] !== '' ? ' height="' . $panel['opened_background_height'] . '"' : '';
+
+					$opened_background_image = '<img class="as-background-opened"' . $opened_background_source . $opened_background_alt . $opened_background_title . $opened_background_width . $opened_background_height . ' />';
+
+					if ( $is_background_link === true ) {
+						$content_html .= "\r\n" . '			' . $background_link . "\r\n" . '				' . $opened_background_image . "\r\n" . '			' . '</a>';
+					} else {
+						$content_html .= "\r\n" . '			' . $opened_background_image;
+					}
+				}
+
+				$layers = $this->load_layers( $panel['id'] );
+
+				if ( $layers !== false ) {
+					foreach ( $layers as $layer ) {
+						$layer_html = '';
+						$layer_classes = 'as-layer';
+						$layer_attributes = '';
+						$layer_content = $layer['content'];
+
+						$layer_settings = json_decode( $layer['settings'], true );
+
+						if ( isset( $layer_settings['display'] ) ) {
+							$layer_classes .= ' as-' . $layer_settings['display'];
+							unset( $layer_settings['display'] );
+						}
+
+						if ( isset( $layer_settings['black_background'] ) && $layer_settings['black_background'] === true ) {
+							$layer_classes .= ' as-black';
+							unset( $layer_settings['black_background'] );
+						}
+
+						if ( isset( $layer_settings['white_background'] ) && $layer_settings['white_background'] === true ) {
+							$layer_classes .= ' as-white';
+							unset( $layer_settings['white_background'] );
+						}
+
+						if ( isset( $layer_settings['round_corners'] ) && $layer_settings['round_corners'] === true ) {
+							$layer_classes .= ' as-rounded';
+							unset( $layer_settings['round_corners'] );
+						}
+
+						if ( isset( $layer_settings['padding'] ) && $layer_settings['padding'] === true ) {
+							$layer_classes .= ' as-padding';
+							unset( $layer_settings['padding'] );
+						}
+
+						if ( isset( $layer_settings['custom_class'] ) && $layer_settings['custom_class'] !== '' ) {
+							$layer_classes .= ' ' . $layer_settings['custom_class'];
+						}
+
+						foreach ( $layer_settings as $layer_settings_name => $layer_settings_value ) {
+							if ( $default_layer_settings[ $layer_settings_name ]['default_value'] != $layer_settings_value ) {
+								$layer_settings_name = str_replace('_', '-', $layer_settings_name);
+
+								$layer_attributes .= ' data-' . $layer_settings_name . '="' . $layer_settings_value . '"';
+							}
+						}
+
+						$content_html .= "\r\n" . '			' . '<div class="' . $layer_classes . '"' . $layer_attributes . '>' . $layer_content . '</div>';
+					}
+				}
+
+
+				$content_html .= "\r\n" . '		</div>';
+			}
+		}
+
+		$content_html .= "\r\n" . '	/<div>';
+		$content_html .= "\r\n" . '</div>';
+
+		foreach ( $default_settings as $setting_name => $setting ) {
+			$setting_default_value = $setting['default_value'];
+			$setting_value = $accordion_settings[ $setting_name ];
+
+			if ( $setting_value != $setting_default_value ) {
+				if ( $settings_js !== '' ) {
+					$settings_js .= ',';
+				}
+
+				$setting_value = is_numeric( $setting_value ) === false && is_bool( $setting_value ) === false ?  "'" . $setting_value . "'" : $setting_value;
+
+				$settings_js .= "\r\n" . '			' . $setting_name . ' : ' . $setting_value;
+			}
+		}
+
+		if ( isset ( $accordion_settings['breakpoints'] ) ) {
+			$breakpoints_js = "";
+
+			foreach ( $accordion_settings['breakpoints'] as $breakpoint ) {
+				if ( $breakpoints_js !== '' ) {
+					$breakpoints_js .= ',';
+				}
+
+				$breakpoints_js .= "\r\n" . '				' . $breakpoint['breakpoint_width'] . ': {';
+
+				unset( $breakpoint['breakpoint_width'] );
+
+				if ( ! empty( $breakpoint ) ) {
+					$breakpoint_setting_js = '';
+
+					foreach ( $breakpoint as $breakpoint_setting_name => $breakpoint_setting_value ) {
+						if ( $breakpoint_setting_js !== '' ) {
+							$breakpoint_setting_js .= ',';
+						}
+
+						$breakpoint_setting_value = is_numeric( $breakpoint_setting_value ) === false && is_bool( $breakpoint_setting_value ) === false ?  "'" . $breakpoint_setting_value . "'" : $breakpoint_setting_value;
+
+						$breakpoint_setting_js .= "\r\n" . '					' . $breakpoint_setting_name . ' : ' . $breakpoint_setting_value;
+					}
+
+					$breakpoints_js .= $breakpoint_setting_js;
+				}
+
+				$breakpoints_js .= "\r\n" . '				}';
+			}
+
+			$settings_js .= ',' . "\r\n" . '			breakpoints: {' . $breakpoints_js . "\r\n" . '		}';
+		}
+
+		$accordion_js = "\r\n" . '<script type="text/javascript">' .
+						"\r\n" . '	jQuery( document ).ready(function( $ ) {' .
+						"\r\n" . '		$( "#accordion-slider-' . $id . '" ).accordionSlider({' .
+											$settings_js .
+						"\r\n" . '		});' .
+						"\r\n" . '	});' .
+						"\r\n" . '</script>';
+
+		
+
+		return $content_html . "\r\n" . $accordion_js;
 	}
 }
