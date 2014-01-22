@@ -274,18 +274,18 @@ class Accordion_Slider {
 				$background_link = '';
 
 				if ( $is_background_link ) {
-					$background_link_href = ' href="' . $panel['background_link'] . '"';
-					$background_link_title = isset( $panel['background_link_title'] ) && $panel['background_link_title'] !== '' ? ' title="' . $panel['background_link_title'] . '"' : '';
+					$background_link_href = ' href="' . esc_url( $panel['background_link'] ) . '"';
+					$background_link_title = isset( $panel['background_link_title'] ) && $panel['background_link_title'] !== '' ? ' title="' . esc_attr( $panel['background_link_title'] ) . '"' : '';
 
 					$background_link = '<a' . $background_link_href . $background_link_title . '>';
 				}
 
 				if ( $is_background_image ) {
-					$background_source = ' src="' . $panel['background_source'] . '"';
-					$background_alt = isset( $panel['background_alt'] ) && $panel['background_alt'] !== '' ? ' alt="' . $panel['background_alt'] . '"' : '';
-					$background_title = isset( $panel['background_title'] ) && $panel['background_title'] !== '' ? ' title="' . $panel['background_title'] . '"' : '';
-					$background_width = isset( $panel['background_width'] ) && $panel['background_width'] !== '' ? ' width="' . $panel['background_width'] . '"' : '';
-					$background_height = isset( $panel['background_height'] ) && $panel['background_height'] !== '' ? ' height="' . $panel['background_height'] . '"' : '';
+					$background_source = ' src="' . esc_url( $panel['background_source'] ) . '"';
+					$background_alt = isset( $panel['background_alt'] ) && $panel['background_alt'] !== '' ? ' alt="' . esc_attr( $panel['background_alt'] ) . '"' : '';
+					$background_title = isset( $panel['background_title'] ) && $panel['background_title'] !== '' ? ' title="' . esc_attr( $panel['background_title'] ) . '"' : '';
+					$background_width = isset( $panel['background_width'] ) && $panel['background_width'] !== '' ? ' width="' . esc_attr( $panel['background_width'] ) . '"' : '';
+					$background_height = isset( $panel['background_height'] ) && $panel['background_height'] !== '' ? ' height="' . esc_attr( $panel['background_height'] ) . '"' : '';
 
 					$background_image = '<img class="as-background"' . $background_source . $background_alt . $background_title . $background_width . $background_height . ' />';
 				
@@ -297,11 +297,11 @@ class Accordion_Slider {
 				}
 
 				if ( $is_opened_background_image ) {
-					$opened_background_source = ' src="' . $panel['opened_background_source'] . '"';
-					$opened_background_alt = isset( $panel['opened_background_alt'] ) && $panel['opened_background_alt'] !== '' ? ' alt="' . $panel['opened_background_alt'] . '"' : '';
-					$opened_background_title = isset( $panel['opened_background_title'] ) && $panel['opened_background_title'] !== '' ? ' title="' . $panel['opened_background_title'] . '"' : '';
-					$opened_background_width = isset( $panel['opened_background_width'] ) && $panel['opened_background_width'] !== '' ? ' width="' . $panel['opened_background_width'] . '"' : '';
-					$opened_background_height = isset( $panel['opened_background_height'] ) && $panel['opened_background_height'] !== '' ? ' height="' . $panel['opened_background_height'] . '"' : '';
+					$opened_background_source = ' src="' . esc_url( $panel['opened_background_source'] ) . '"';
+					$opened_background_alt = isset( $panel['opened_background_alt'] ) && $panel['opened_background_alt'] !== '' ? ' alt="' . esc_attr( $panel['opened_background_alt'] ) . '"' : '';
+					$opened_background_title = isset( $panel['opened_background_title'] ) && $panel['opened_background_title'] !== '' ? ' title="' . esc_attr( $panel['opened_background_title'] ) . '"' : '';
+					$opened_background_width = isset( $panel['opened_background_width'] ) && $panel['opened_background_width'] !== '' ? ' width="' . esc_attr( $panel['opened_background_width'] ) . '"' : '';
+					$opened_background_height = isset( $panel['opened_background_height'] ) && $panel['opened_background_height'] !== '' ? ' height="' . esc_attr( $panel['opened_background_height'] ) . '"' : '';
 
 					$opened_background_image = '<img class="as-background-opened"' . $opened_background_source . $opened_background_alt . $opened_background_title . $opened_background_width . $opened_background_height . ' />';
 
@@ -349,18 +349,18 @@ class Accordion_Slider {
 						}
 
 						if ( isset( $layer_settings['custom_class'] ) && $layer_settings['custom_class'] !== '' ) {
-							$layer_classes .= ' ' . $layer_settings['custom_class'];
+							$layer_classes .= ' ' . sanitize_html_class( $layer_settings['custom_class'] );
 						}
 
 						foreach ( $layer_settings as $layer_settings_name => $layer_settings_value ) {
 							if ( $default_layer_settings[ $layer_settings_name ]['default_value'] != $layer_settings_value ) {
 								$layer_settings_name = str_replace('_', '-', $layer_settings_name);
 
-								$layer_attributes .= ' data-' . $layer_settings_name . '="' . $layer_settings_value . '"';
+								$layer_attributes .= ' data-' . $layer_settings_name . '="' . esc_attr( $layer_settings_value ) . '"';
 							}
 						}
 
-						$content_html .= "\r\n" . '			' . '<div class="' . $layer_classes . '"' . $layer_attributes . '>' . $layer_content . '</div>';
+						$content_html .= "\r\n" . '			' . '<div class="' .  $layer_classes . '"' . $layer_attributes . '>' . esc_html( $layer_content ) . '</div>';
 					}
 				}
 
@@ -369,7 +369,7 @@ class Accordion_Slider {
 			}
 		}
 
-		$content_html .= "\r\n" . '	/<div>';
+		$content_html .= "\r\n" . '	</<div>';
 		$content_html .= "\r\n" . '</div>';
 
 		foreach ( $default_settings as $setting_name => $setting ) {
