@@ -281,23 +281,16 @@
 		getPanel: function( index ) {
 			var that = this,
 				panel;
-
+			console.log(index);
 			$.each( that.panels, function( elementIndex, element ) {
 				if ( element.index === index ) {
+					console.log(index, element.index);
 					panel = element;
 					return false;
 				}
 			});
 
 			return panel;
-		},
-
-		removePanel: function( index ) {
-			var panel = this.getPanel( index );
-			panel.off( 'duplicatePanel' );
-			panel.off( 'deletePanel' );
-
-			this.panels.splice( index, 1 );
 		},
 
 		duplicatePanel: function( panelData ) {
@@ -339,9 +332,11 @@
 			dialog.find( '.dialog-ok' ).one( 'click', function( event ) {
 				event.preventDefault();
 
-				that.removePanel( index );
-				dialog.remove();
+				panel.off( 'duplicatePanel' );
+				panel.off( 'deletePanel' );
 				panel.remove();
+				that.panels.splice( index, 1 );
+				dialog.remove();
 			});
 
 			dialog.find( '.dialog-cancel' ).one( 'click', function( event ) {
