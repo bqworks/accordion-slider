@@ -18,6 +18,9 @@ class Accordion_Slider {
 		// load the plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
+		// register the widget
+		add_action( 'widgets_init', array( $this, 'register_widget' ) );
+
 		// activate the plugin when a new blog is added
 		add_action( 'wpmu_new_blog', array( $this, 'activate_new_blog' ) );
 
@@ -189,6 +192,10 @@ class Accordion_Slider {
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
 		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
+	}
+
+	public function register_widget() {
+		register_widget( 'Accordion_Slider_Widget' );
 	}
 
 	/*
