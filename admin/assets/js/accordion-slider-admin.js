@@ -281,10 +281,9 @@
 		getPanel: function( index ) {
 			var that = this,
 				panel;
-			console.log(index);
+
 			$.each( that.panels, function( elementIndex, element ) {
 				if ( element.index === index ) {
-					console.log(index, element.index);
 					panel = element;
 					return false;
 				}
@@ -335,8 +334,9 @@
 				panel.off( 'duplicatePanel' );
 				panel.off( 'deletePanel' );
 				panel.remove();
-				that.panels.splice( index, 1 );
 				dialog.remove();
+
+				that.panels.splice( $.inArray( panel, that.panels ), 1 );
 			});
 
 			dialog.find( '.dialog-cancel' ).one( 'click', function( event ) {
