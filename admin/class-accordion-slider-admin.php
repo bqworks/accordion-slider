@@ -25,6 +25,7 @@ class Accordion_Slider_Admin {
 
 		add_action( 'wp_ajax_accordion_slider_get_accordion_data', array( $this, 'get_accordion_data' ) );
 		add_action( 'wp_ajax_accordion_slider_update_accordion', array( $this, 'update_accordion' ) );
+		add_action( 'wp_ajax_accordion_slider_preview_accordion', array( $this, 'preview_accordion' ) );
 		add_action( 'wp_ajax_accordion_slider_delete_accordion', array( $this, 'delete_accordion' ) );
 		add_action( 'wp_ajax_accordion_slider_duplicate_accordion', array( $this, 'duplicate_accordion' ) );
 		add_action( 'wp_ajax_accordion_slider_add_panels', array( $this, 'add_panels' ) );
@@ -161,50 +162,9 @@ class Accordion_Slider_Admin {
 			die( 'This action was stopped for security purposes.' );
 		}
 
-		$accordion = $this->plugin->load_accordion( $_GET['id'] );
-		$panels_raw = $this->plugin->load_panels( $_GET['id'] );
+		$accordion = $this->plugin->get_accordion_from_db( $_GET['id'] );
 
-		$panels = array();
-
-		if ( ! empty( $panels_raw ) ) {
-			foreach ( $panels_raw as $panel_raw ) {
-				$panel = array(
-					'id' => $panel_raw['id'],
-					'label' => $panel_raw['label'],
-					'position' => $panel_raw['position'],
-					'visibility' => $panel_raw['visibility'],
-				);
-
-				$panel['background'] = array();
-
-				foreach ( $panel_raw as $key => $value ) {
-					if ( strpos( $key, 'background' ) !== false ) {
-						$panel['background'][$key] = $value;
-					}
-				}
-
-				$layers = $this->plugin->load_layers( $panel_raw['id'] );
-
-				$panel['layers'] = array();
-
-				foreach ( $layers as $layer_raw ) {
-					$layer = array();
-
-					$layer['id'] = $layer_raw['id'];
-					$layer['name'] = $layer_raw['name'];
-					$layer['content'] = $layer_raw['content'];
-					$layer['settings'] = json_decode( stripslashes( $layer_raw['settings'] ), true );
-
-					array_push( $panel['layers'], $layer );
-				}
-
-				array_push( $panels, $panel );
-			}
-		}
-
-		$data = array( 'settings' => $accordion['settings'], 'panels' => $panels );
-
-		echo json_encode( $data );
+		echo json_encode( $accordion );
 
 		die();
 	}
@@ -250,21 +210,21 @@ class Accordion_Slider_Admin {
 							'label' => isset( $panel_data['label'] ) ? $panel_data['label'] : '',
 							'position' => isset( $panel_data['position'] ) ? $panel_data['position'] : '',
 							'visibility' => isset( $panel_data['visibility'] ) ? $panel_data['visibility'] : '',
-							'background_source' => isset( $panel_data['background']['background_source'] ) ? $panel_data['background']['background_source'] : '',
-							'background_retina_source' => isset( $panel_data['background']['background_retina_source'] ) ? $panel_data['background']['background_retina_source'] : '',
-							'background_alt' => isset( $panel_data['background']['background_alt'] ) ? $panel_data['background']['background_alt'] : '',
-							'background_title' => isset( $panel_data['background']['background_title'] ) ? $panel_data['background']['background_title'] : '',
-							'background_width' => isset( $panel_data['background']['background_width'] ) ? $panel_data['background']['background_width'] : '',
-							'background_height' => isset( $panel_data['background']['background_height'] ) ? $panel_data['background']['background_height'] : '',
-							'opened_background_source' => isset( $panel_data['background']['opened_background_source'] ) ? $panel_data['background']['opened_background_source'] : '',
-							'opened_background_retina_source' => isset( $panel_data['background']['opened_background_retina_source'] ) ? $panel_data['background']['opened_background_retina_source'] : '',
-							'opened_background_alt' => isset( $panel_data['background']['opened_background_alt'] ) ? $panel_data['background']['opened_background_alt'] : '',
-							'opened_background_title' => isset( $panel_data['background']['opened_background_title'] ) ? $panel_data['background']['opened_background_title'] : '',
-							'opened_background_width' => isset( $panel_data['background']['opened_background_width'] ) ? $panel_data['background']['opened_background_width'] : '',
-							'opened_background_height' => isset( $panel_data['background']['opened_background_height'] ) ? $panel_data['background']['opened_background_height'] : '',
-							'background_link' => isset( $panel_data['background']['background_link'] ) ? $panel_data['background']['background_link'] : '',
-							'background_link_title' => isset( $panel_data['background']['background_link_title'] ) ? $panel_data['background']['background_link_title'] : '',
-							'html_content' => isset( $panel_data['background']['html_content'] ) ? $panel_data['background']['html_content'] : '');
+							'background_source' => isset( $panel_data['background_source'] ) ? $panel_data['background_source'] : '',
+							'background_retina_source' => isset( $panel_data['background_retina_source'] ) ? $panel_data['background_retina_source'] : '',
+							'background_alt' => isset( $panel_data['background_alt'] ) ? $panel_data['background_alt'] : '',
+							'background_title' => isset( $panel_data['background_title'] ) ? $panel_data['background_title'] : '',
+							'background_width' => isset( $panel_data['background_width'] ) ? $panel_data['background_width'] : '',
+							'background_height' => isset( $panel_data['background_height'] ) ? $panel_data['background_height'] : '',
+							'opened_background_source' => isset( $panel_data['opened_background_source'] ) ? $panel_data['opened_background_source'] : '',
+							'opened_background_retina_source' => isset( $panel_data['opened_background_retina_source'] ) ? $panel_data['opened_background_retina_source'] : '',
+							'opened_background_alt' => isset( $panel_data['opened_background_alt'] ) ? $panel_data['opened_background_alt'] : '',
+							'opened_background_title' => isset( $panel_data['opened_background_title'] ) ? $panel_data['opened_background_title'] : '',
+							'opened_background_width' => isset( $panel_data['opened_background_width'] ) ? $panel_data['opened_background_width'] : '',
+							'opened_background_height' => isset( $panel_data['opened_background_height'] ) ? $panel_data['opened_background_height'] : '',
+							'background_link' => isset( $panel_data['background_link'] ) ? $panel_data['background_link'] : '',
+							'background_link_title' => isset( $panel_data['background_link_title'] ) ? $panel_data['background_link_title'] : '',
+							'html_content' => isset( $panel_data['html_content'] ) ? $panel_data['html_content'] : '');
 
 			$panel_data_types = array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s' );
 
@@ -291,6 +251,14 @@ class Accordion_Slider_Admin {
 		echo $id;
 
 		die();
+	}
+
+	public function preview_accordion() {
+		$accordion = json_decode( stripslashes( $_POST['data'] ), true );
+
+		$this->plugin->output_accordion( $accordion );
+
+		die();	
 	}
 
 	public function duplicate_accordion() {

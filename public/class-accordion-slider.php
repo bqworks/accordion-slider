@@ -249,6 +249,40 @@ class Accordion_Slider {
 		}
 	}
 
+	public function get_accordion_from_db( $id ) {
+		$accordion = array();
+		$accordion_raw = $this->load_accordion( $id );
+		$accordion['id'] = $accordion_raw['id'];
+		$accordion['name'] = $accordion_raw['name'];
+		$accordion['settings'] = json_decode( stripslashes( $accordion_raw['settings'] ), true );
+		
+		$panels_raw = $this->load_panels( $id );
+
+		if ( $panels_raw !== false ) {
+			$accordion['panels'] = array();
+
+			foreach ( $panels_raw as $panel_raw ) {
+				$panel = $panel_raw;
+				$layers_raw = $this->load_layers( $panel_raw['id'] );
+
+				if ( $layers_raw !== false ) {
+					$panel['layers'] = array();
+
+					foreach ( $layers_raw as $layer_raw ) {
+						$layer = $layer_raw;
+						$layer['settings'] = json_decode( stripslashes( $layer_raw['settings'] ), true );
+
+						array_push( $panel['layers'], $layer );
+					}
+				}
+
+				array_push( $accordion['panels'], $panel );
+			}
+		}
+
+		return $accordion;
+	}
+
 	public function accordion_slider_shortcode( $atts, $content = null ) {
 		extract( shortcode_atts( array(
 			'id' => '-1'
@@ -258,22 +292,30 @@ class Accordion_Slider {
 	}
 
 	public function get_accordion_slider( $id ) {
-		wp_enqueue_style( $this->plugin_slug . '-plugin-style');
+		wp_enqueue_style( $this->plugin_slug . '-plugin-style' );
 		wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
 
-		$accordion = $this->load_accordion( $id );
-		$accordion_settings = json_decode( $accordion['settings'], true);
-		$panels = $this->load_panels( $id );
+		$accordion = $this->get_accordion_from_db( $id );
+		
+		return $this->output_accordion( $accordion );
+	}
+
+	public function output_accordion( $accordion ) {
+		$accordion_id = $accordion['id'];
+		$accordion_settings = $accordion['settings'];
+		
 		$default_settings = Accordion_Slider_Settings::getSettings();
  		$default_layer_settings = Accordion_Slider_Settings::getLayerSettings();
 
 		$content_html = "";
 		$settings_js = "";
 
-		$content_html .= "\r\n" . '<div id="accordion-slider-' . $id . '" class="accordion-slider">';
+		$content_html .= "\r\n" . '<div id="accordion-slider-' . $accordion_id . '" class="accordion-slider">';
 		$content_html .= "\r\n" . '	<div class="as-panels">';
 
-		if ( $panels !== false ) {
+		if ( isset( $accordion['panels'] ) ) {
+			$panels = $accordion['panels'];
+
 			foreach ( $panels as $panel ) {
 				$content_html .= "\r\n" . '		<div class="as-panel">';
 
@@ -322,16 +364,16 @@ class Accordion_Slider {
 					}
 				}
 
-				$layers = $this->load_layers( $panel['id'] );
+				if ( isset( $panel['layers'] ) ) {
+					$layers = $panel['layers'];
 
-				if ( $layers !== false ) {
 					foreach ( $layers as $layer ) {
 						$layer_html = '';
 						$layer_classes = 'as-layer';
 						$layer_attributes = '';
 						$layer_content = $layer['content'];
 
-						$layer_settings = json_decode( $layer['settings'], true );
+						$layer_settings = $layer['settings'];
 
 						if ( isset( $layer_settings['display'] ) ) {
 							$layer_classes .= ' as-' . $layer_settings['display'];
@@ -441,7 +483,7 @@ class Accordion_Slider {
 
 		$accordion_js = "\r\n" . '<script type="text/javascript">' .
 						"\r\n" . '	jQuery( document ).ready(function( $ ) {' .
-						"\r\n" . '		$( "#accordion-slider-' . $id . '" ).accordionSlider({' .
+						"\r\n" . '		$( "#accordion-slider-' . $accordion_id . '" ).accordionSlider({' .
 											$settings_js .
 						"\r\n" . '		});' .
 						"\r\n" . '	});' .

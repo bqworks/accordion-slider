@@ -26,6 +26,11 @@
 				that.updateAccordion();
 			});
 
+			$( 'preview-accordion' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.previewAccordion();
+			});
+
 			$( '.add-panel, .panel-type a[data-type="empty"]' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.addEmptyPanel();
@@ -98,14 +103,37 @@
 				complete: function( data ) {
 					var accordionData = JSON.parse( data.responseText );
 
-					$.each( accordionData.panels, function( index, element ) {
-						that.getPanel( index ).setData( 'all', element );
+					$.each( accordionData.panels, function( index, panel ) {
+						var panelData = { background: {}, layers: panel.layers, html: panel.html_content };
+
+						$.each( panel, function( settingName, settingValue ) {
+							if ( settingName.indexOf( 'background' ) !== -1 ) {
+								panelData.background[ settingName ] = settingValue;
+							}
+						});
+
+						that.getPanel( index ).setData( 'all', panelData );
 					});
 				}
 			});
 		},
 
 		updateAccordion: function() {
+			var accordionDataString = JSON.stringify( this.getAccordionData() );
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_update_accordion', data: accordionDataString },
+				complete: function( data ) {
+					if ( parseInt( as_js_vars.id, 10 ) === -1 && isNaN( data.responseText ) === false ) {
+						window.location = as_js_vars.admin + '?page=accordion-slider&id=' + data.responseText + '&action=edit';
+					}
+				}
+			});
+		},
+
+		getAccordionData: function() {
 			var that = this;
 
 			var accordionData = {
@@ -147,16 +175,18 @@
 				accordionData.settings.breakpoints = breakpoints;
 			}
 
-			var accordionDataString = JSON.stringify( accordionData );
+			return accordionData;
+		},
+
+		previewAccordion: function () {
+			var accordionDataString = JSON.stringify( this.getAccordionData() );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
-				data: { action: 'accordion_slider_update_accordion', data: accordionDataString },
+				data: { action: 'accordion_slider_preview_accordion', data: accordionDataString },
 				complete: function( data ) {
-					if ( parseInt( as_js_vars.id, 10 ) === -1 && isNaN( data.responseText ) === false ) {
-						window.location = as_js_vars.admin + '?page=accordion-slider&id=' + data.responseText + '&action=edit';
-					}
+					
 				}
 			});
 		},
@@ -482,7 +512,16 @@
 
 		getData: function( target ) {
 			if ( target === 'all' ) {
-				return this.panelData;
+				var allData = {};
+
+				$.each( this.panelData.background, function( settingName, settingValue ) {
+					allData[ settingName ] = settingValue;
+				});
+
+				allData[ 'layers' ] = this.panelData.layers;
+				allData[ 'html' ] = this.panelData.html;
+
+				return allData;
 			} else if ( target === 'background' ) {
 				return this.panelData.background;
 			} else if ( target === 'layers' ) {
