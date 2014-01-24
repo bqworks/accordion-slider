@@ -249,9 +249,14 @@ class Accordion_Slider {
 		}
 	}
 
-	public function get_accordion_from_db( $id ) {
+	public function get_accordion( $id ) {
 		$accordion = array();
 		$accordion_raw = $this->load_accordion( $id );
+
+		if ( $accordion_raw === false ) {
+			return false;
+		}
+
 		$accordion['id'] = $accordion_raw['id'];
 		$accordion['name'] = $accordion_raw['name'];
 		$accordion['settings'] = json_decode( stripslashes( $accordion_raw['settings'] ), true );
@@ -295,7 +300,7 @@ class Accordion_Slider {
 		wp_enqueue_style( $this->plugin_slug . '-plugin-style' );
 		wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
 
-		$accordion = $this->get_accordion_from_db( $id );
+		$accordion = $this->get_accordion( $id );
 		
 		return $this->output_accordion( $accordion );
 	}
