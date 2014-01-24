@@ -205,6 +205,39 @@
 	z-index: 1000;
 }
 
+.close-x {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.close-x:before {
+	content: '×';
+}
+
+.preview-window {
+	position: fixed;
+	width: 800px;
+	height: 400px;
+	padding: 20px 50px 100px;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #FFF;
+	z-index: 1001;
+}
+
+.preview-title {
+	font-size: 20px;
+	border-bottom: 1px solid #999;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+
 .background-image-editor,
 .layers-editor {
 	position: fixed;
@@ -227,18 +260,6 @@
 	width: 960px;
 	height: 580px;
 	padding: 0;
-}
-
-.background-image-editor .close-x {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	font-size: 30px;
-	cursor: pointer;
-}
-
-.background-image-editor .close-x:before {
-	content: '×';
 }
 
 .background-image-editor .fieldset {

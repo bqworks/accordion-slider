@@ -26,7 +26,7 @@
 				that.updateAccordion();
 			});
 
-			$( 'preview-accordion' ).on( 'click', function( event ) {
+			$( '.preview-accordion' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.previewAccordion();
 			});
@@ -179,16 +179,7 @@
 		},
 
 		previewAccordion: function () {
-			var accordionDataString = JSON.stringify( this.getAccordionData() );
-
-			$.ajax({
-				url: as_js_vars.ajaxurl,
-				type: 'post',
-				data: { action: 'accordion_slider_preview_accordion', data: accordionDataString },
-				complete: function( data ) {
-					
-				}
-			});
+			PreviewWindow.open( this.getAccordionData() );
 		},
 
 		deleteAccordion: function( target ) {
@@ -580,6 +571,72 @@
 
 		trigger: function( type ) {
 			this.events.triggerHandler( type );
+		}
+	};
+
+	var PreviewWindow = {
+
+		previewWindow: null,
+
+		accordion: null,
+
+		open: function( data ) {
+			var that = this;
+			this.accordionData = data;
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_preview_accordion', data: JSON.stringify( data ) },
+				complete: function( data ) {
+					$( 'body' ).append( data.responseText );
+					that.init();
+				}
+			});
+		},
+
+		init: function() {
+			var that = this;
+
+			this.previewWindow = $( '.preview-window' );
+			this.accordion = this.previewWindow.find( '.accordion-slider' );
+
+			this.previewWindow.find( '.close-x' ).on( 'click', $.proxy( this.close, this ) );
+
+			var accordionWidth = this.accordionData[ 'settings' ][ 'width' ],
+				accordionHeight = this.accordionData[ 'settings' ][ 'height' ],
+				isPercetageWidth = accordionWidth.indexOf( '%' ) !== -1,
+				isPercetageHeight =  accordionHeight.indexOf( '%' ) !== -1;
+
+			if ( isPercetageWidth === false ) {
+				accordionWidth = parseInt( accordionWidth, 10 );
+			}
+
+			if ( isPercetageHeight === false ) {
+				accordionHeight = parseInt( accordionHeight, 10 );
+			}
+
+			$( window ).on( 'resize', function() {
+				if ( isPercetageWidth === true || isPercetageHeight === true ) {
+					that.previewWindow.css( { width: $( window ).width() - 100, height: that.accordion.height() } );
+				} else if ( accordionWidth + 100 >= $( window ).width() ) {
+					that.previewWindow.css( { width: $( window ).width() - 100, height: that.accordion.height() } );
+				} else {
+					that.previewWindow.css( { width: accordionWidth, height: accordionHeight } );
+				}
+			});
+
+			$( window ).trigger( 'resize' );
+			$( window ).trigger( 'resize' );
+		},
+
+		close: function() {
+			event.preventDefault();
+
+			this.previewWindow.find( '.close-x' ).off( 'click' );
+
+			this.accordion.accordionSlider( 'destroy' );
+			$( 'body' ).find( '.modal-overlay, .preview-window' ).remove();
 		}
 	};
 

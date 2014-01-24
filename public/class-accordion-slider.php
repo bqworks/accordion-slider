@@ -438,7 +438,11 @@ class Accordion_Slider {
 					$settings_js .= ',';
 				}
 
-				$setting_value = is_numeric( $setting_value ) === false && is_bool( $setting_value ) === false ?  "'" . $setting_value . "'" : $setting_value;
+				if ( is_bool( $setting_value ) ) {
+					$setting_value = $setting_value === true ? 'true' : 'false';
+				} else if ( is_numeric( $setting_value ) === false ) {
+					$setting_value = "'" . $setting_value . "'";
+				}
 
 				$settings_js .= "\r\n" . '			' . $setting_name . ' : ' . $setting_value;
 			}
@@ -468,7 +472,11 @@ class Accordion_Slider {
 							$breakpoint_setting_js .= ',';
 						}
 
-						$breakpoint_setting_value = is_numeric( $breakpoint_setting_value ) === false && is_bool( $breakpoint_setting_value ) === false ?  "'" . $breakpoint_setting_value . "'" : $breakpoint_setting_value;
+						if ( is_bool( $breakpoint_setting_value ) ) {
+							$breakpoint_setting_value = $breakpoint_setting_value === true ? 'true' : 'false';
+						} else if ( is_numeric( $breakpoint_setting_value ) === false ) {
+							$breakpoint_setting_value = "'" . $breakpoint_setting_value . "'";
+						}
 
 						$breakpoint_setting_js .= "\r\n" . '					' . $breakpoint_setting_name . ' : ' . $breakpoint_setting_value;
 					}

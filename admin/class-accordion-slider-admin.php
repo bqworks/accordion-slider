@@ -58,6 +58,7 @@ class Accordion_Slider_Admin {
 		$screen = get_current_screen();
 
 		if ( in_array( $screen->id, $this->plugin_screen_hook_suffixes ) ) {
+			wp_enqueue_style( $this->plugin_slug . '-plugin-style', plugins_url( 'accordion-slider/public/assets/css/accordion-slider.min.css' ), array(), Accordion_Slider::VERSION );
 			wp_enqueue_style( $this->plugin_slug . '-admin-style', plugins_url( 'assets/css/accordion-slider-admin.css', __FILE__ ), array(), Accordion_Slider::VERSION );
 		}
 	}
@@ -77,6 +78,7 @@ class Accordion_Slider_Admin {
 		    	wp_enqueue_media();
 			}
 
+			wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'accordion-slider/public/assets/js/jquery.accordionSlider.min.js' ), array( 'jquery' ), Accordion_Slider::VERSION );
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/accordion-slider-admin.js', __FILE__ ), array( 'jquery' ), Accordion_Slider::VERSION );
 
 			$id = isset( $_GET['id'] ) ? $_GET['id'] : -1;
@@ -253,8 +255,9 @@ class Accordion_Slider_Admin {
 
 	public function preview_accordion() {
 		$accordion = json_decode( stripslashes( $_POST['data'] ), true );
+		$accordion_output = $this->plugin->output_accordion( $accordion );
 
-		$this->plugin->output_accordion( $accordion );
+		include( 'views/preview-window.php' );
 
 		die();	
 	}
