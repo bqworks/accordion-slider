@@ -4,6 +4,8 @@
 
 		panels: [],
 
+		panelCounter: 0,
+
 		init: function() {
 			if ( as_js_vars.page === 'single' ) {
 				this.initSingleAccordionPage();
@@ -145,7 +147,7 @@
 			};
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index, element ) {
-				var panelData = that.getPanel( parseInt( $( element ).attr('data-index'), 10) ).getData( 'all' );
+				var panelData = that.getPanel( parseInt( $( element ).attr('data-id'), 10) ).getData( 'all' );
 				panelData.position = parseInt( $( element ).attr( 'data-position' ), 10 );
 
 				accordionData.panels[ index ] = panelData;
@@ -272,7 +274,7 @@
 			var that = this;
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index ) {
-				that.initPanel( $( this ), index );
+				that.initPanel( $( this ) );
 			});
 
 			$( '.panels-container' ).lightSortable( {
@@ -281,10 +283,10 @@
 			} );
 		},
 
-		initPanel: function( element, index ) {
+		initPanel: function( element, data ) {
 			var that = this;
 
-			var panel = new Panel( element, index );
+			var panel = new Panel( element, this.panelCounter, data );
 			this.panels.push( panel );
 
 			panel.on( 'duplicatePanel', function( event ) {
@@ -292,19 +294,21 @@
 			});
 
 			panel.on( 'deletePanel', function( event ) {
-				that.deletePanel( event.index );
+				that.deletePanel( event.id );
 			});
 
-			element.attr( 'data-index', index );
-			element.attr( 'data-position', index );
+			element.attr( 'data-id', this.panelCounter );
+			element.attr( 'data-position', this.panelCounter );
+
+			this.panelCounter++;
 		},
 
-		getPanel: function( index ) {
+		getPanel: function( id ) {
 			var that = this,
 				panel;
 
-			$.each( that.panels, function( elementIndex, element ) {
-				if ( element.index === index ) {
+			$.each( that.panels, function( index, element ) {
+				if ( element.id === id ) {
 					panel = element;
 					return false;
 				}
@@ -325,19 +329,17 @@
 				type: 'post',
 				data: { action: 'accordion_slider_add_panels', data: JSON.stringify( images ) },
 				complete: function( data ) {
-					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) ),
-						index = panel.index();
+					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) );
 
-					that.initPanel( panel, index );
-					that.getPanel( index ).setData( 'all', panelData );
+					that.initPanel( panel, panelData );
 				}
 			});
 		},
 
-		deletePanel: function( index ) {
+		deletePanel: function( id ) {
 			var that = this;
 
-			var panel = that.getPanel( index ),
+			var panel = that.getPanel( id ),
 				dialog = $(
 				'<div class="modal-overlay"></div>' +
 				'<div class="delete-panel-dialog">' +
@@ -380,7 +382,7 @@
 				complete: function( data ) {
 					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) );
 
-					that.initPanel( panel, panel.index() );
+					that.initPanel( panel );
 				}
 			});
 		},
@@ -405,11 +407,9 @@
 							indexes = lastIndex === -1 ? '' : ':gt(' + lastIndex + ')';
 
 						panels.find( '.panel' + indexes ).each(function( index ) {
-							var panel = $( this ),
-								panelIndex = lastIndex + 1 + index;
+							var panel = $( this );
 
-							that.initPanel( panel, panelIndex );
-							that.getPanel( panelIndex ).setData( 'background', images[ index ] );
+							that.initPanel( panel, { background: images[ index ] } );
 						});
 					}
 				});
@@ -447,9 +447,10 @@
 		}
 	};
 
-	var Panel = function( element, index ) {
+	var Panel = function( element, id, data ) {
 		this.$element = element;
-		this.index = index;
+		this.id = id;
+		this.data = data;
 		this.panelData = { background: {}, layers: {}, html: {} };
 		this.events = $( {} );
 
@@ -464,7 +465,7 @@
 			this.$element.find( '.edit-background-image' ).on( 'click', function( event ) {
 				event.preventDefault();
 
-				BackgroundImageEditor.open( that.index );
+				BackgroundImageEditor.open( that.id );
 			});
 
 			this.$element.find( '.panel-image' ).on( 'click', function( event ) {
@@ -479,26 +480,22 @@
 			this.$element.find( '.edit-layers' ).on( 'click', function( event ) {
 				event.preventDefault();
 
-				LayersEditor.open( that.index );
+				LayersEditor.open( that.id );
 			});
 
 			this.$element.find( '.delete-panel' ).on( 'click', function( event ) {
 				event.preventDefault();
-				that.trigger( { type: 'deletePanel', index: that.index } );
+				that.trigger( { type: 'deletePanel', id: that.id } );
 			});
 
 			this.$element.find( '.duplicate-panel' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.trigger( { type: 'duplicatePanel', panelData: that.panelData } );
 			});
-		},
 
-		getIndex: function() {
-			return this.index;
-		},
-
-		setIndex: function( index ) {
-			this.index = index;
+			if ( typeof this.data !== 'undefined' ) {
+				this.setData( 'all', this.data );
+			}
 		},
 
 		getData: function( target ) {
@@ -648,10 +645,10 @@
 
 		backgroundData: null,
 
-		open: function( index ) {
+		open: function( id ) {
 			var that = this;
 
-			this.currentPanel = AccordionSliderAdmin.getPanel( index );
+			this.currentPanel = AccordionSliderAdmin.getPanel( id );
 			this.backgroundData = this.currentPanel.getData( 'background' );
 
 			$.ajax({
@@ -758,10 +755,10 @@
 
 		counter: 0,
 
-		open: function( index ) {
+		open: function( id ) {
 			var that = this;
 
-			this.currentPanel = AccordionSliderAdmin.getPanel( index );
+			this.currentPanel = AccordionSliderAdmin.getPanel( id );
 			this.layersData = this.currentPanel.getData( 'layers' );
 
 			$.ajax({
