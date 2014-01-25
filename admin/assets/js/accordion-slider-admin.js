@@ -79,6 +79,11 @@
 		initAllAccordionsPage: function() {
 			var that = this;
 
+			$( '.accordions-list' ).on( 'click', '.preview-accordion', function( event ) {
+				event.preventDefault();
+				that.previewAccordionAll( $( this ) );
+			});
+
 			$( '.accordions-list' ).on( 'click', '.delete-accordion', function( event ) {
 				event.preventDefault();
 				that.deleteAccordion( $( this ) );
@@ -180,15 +185,42 @@
 			return accordionData;
 		},
 
-		previewAccordion: function () {
+		previewAccordion: function() {
 			PreviewWindow.open( this.getAccordionData() );
+		},
+
+		previewAccordionAll: function( target ) {
+			var url = target.attr( 'href' ),
+				urlArray = url.split( '&' ).splice( 1 ),
+				nonce,
+				id;
+
+			$.each( urlArray, function( index, element ) {
+				var elementArray = element.split( '=' );
+
+				if ( elementArray[ 0 ] === 'id' ) {
+					id = parseInt( elementArray[ 1 ], 10 );
+				} else if ( elementArray[ 0 ] === 'lad_nonce' ) {
+					nonce = elementArray[ 1 ];
+				}
+			});
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'get',
+				data: { action: 'accordion_slider_get_accordion_data', id: id, nonce: nonce },
+				complete: function( data ) {
+					var accordionData = JSON.parse( data.responseText );
+
+					PreviewWindow.open( accordionData );
+				}
+			});
 		},
 
 		deleteAccordion: function( target ) {
 			var url = target.attr( 'href' ),
 				urlArray = url.split( '&' ).splice( 1 ),
 				id,
-				action,
 				nonce,
 				row = target.parents( 'tr' );
 
@@ -409,7 +441,7 @@
 						panels.find( '.panel' + indexes ).each(function( index ) {
 							var panel = $( this );
 
-							that.initPanel( panel, { background: images[ index ] } );
+							that.initPanel( panel, { background: images[ index ], layers: {}, html: {} } );
 						});
 					}
 				});
