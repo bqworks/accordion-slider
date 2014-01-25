@@ -667,12 +667,12 @@
 		},
 
 		init: function() {
-			editor = $( '.background-image-editor' );
+			this.editor = $( '.background-image-editor' );
 
-			editor.find( '.close, .close-x' ).on( 'click', $.proxy( this.close, this ) );
-			editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
-			editor.find( '.image-loader' ).on( 'click', $.proxy( this.openMediaLibrary, this ) );
-			editor.find( '.clear-fieldset' ).on( 'click', $.proxy( this.clearFieldset, this ) );
+			this.editor.find( '.close, .close-x' ).on( 'click', $.proxy( this.close, this ) );
+			this.editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
+			this.editor.find( '.image-loader' ).on( 'click', $.proxy( this.openMediaLibrary, this ) );
+			this.editor.find( '.clear-fieldset' ).on( 'click', $.proxy( this.clearFieldset, this ) );
 		},
 
 		save: function() {
@@ -680,7 +680,7 @@
 
 			var that = this;
 
-			editor.find( '.field' ).each(function() {
+			this.editor.find( '.field' ).each(function() {
 				var field = $( this );
 				that.backgroundData[ field.attr('name') ] = field.val();
 			});
@@ -694,17 +694,18 @@
 		close: function() {
 			event.preventDefault();
 
-			editor.find( '.close, .close-x' ).off( 'click' );
-			editor.find( '.save' ).off( 'click' );
-			editor.find( '.image-loader' ).off( 'click' );
-			editor.find( '.clear-fieldset' ).off( 'click' );
+			this.editor.find( '.close, .close-x' ).off( 'click' );
+			this.editor.find( '.save' ).off( 'click' );
+			this.editor.find( '.image-loader' ).off( 'click' );
+			this.editor.find( '.clear-fieldset' ).off( 'click' );
 
 			$( 'body' ).find( '.modal-overlay, .background-image-editor' ).remove();
 		},
 
 		openMediaLibrary: function( event ) {
-			var target = $( event.target ).parents( '.fieldset' ).hasClass( 'opened-background-image' ) === true ? 'opened-background' : 'background',
-				imageLoader = editor.find( '.' + target + '-image .image-loader' );
+			var that = this,
+				target = $( event.target ).parents( '.fieldset' ).hasClass( 'opened-background-image' ) === true ? 'opened-background' : 'background',
+				imageLoader = this.editor.find( '.' + target + '-image .image-loader' );
 
 			MediaLoader.open(function( selection ) {
 				var image = selection[ 0 ];
@@ -717,17 +718,17 @@
 				}
 
 				if ( target === 'background' ) {
-					editor.find( 'input[name="background_source"]' ).val( image.url );
-					editor.find( 'input[name="background_alt"]' ).val( image.alt );
-					editor.find( 'input[name="background_title"]' ).val( image.title );
-					editor.find( 'input[name="background_width"]' ).val( image.width );
-					editor.find( 'input[name="background_height"]' ).val( image.height );
+					that.editor.find( 'input[name="background_source"]' ).val( image.url );
+					that.editor.find( 'input[name="background_alt"]' ).val( image.alt );
+					that.editor.find( 'input[name="background_title"]' ).val( image.title );
+					that.editor.find( 'input[name="background_width"]' ).val( image.width );
+					that.editor.find( 'input[name="background_height"]' ).val( image.height );
 				} else if ( target === 'opened-background' ) {
-					editor.find( 'input[name="opened_background_source"]' ).val( image.url );
-					editor.find( 'input[name="opened_background_alt"]' ).val( image.alt );
-					editor.find( 'input[name="opened_background_title"]' ).val( image.title );
-					editor.find( 'input[name="opened_background_width"]' ).val( image.width );
-					editor.find( 'input[name="opened_background_height"]' ).val( image.height );
+					that.editor.find( 'input[name="opened_background_source"]' ).val( image.url );
+					that.editor.find( 'input[name="opened_background_alt"]' ).val( image.alt );
+					that.editor.find( 'input[name="opened_background_title"]' ).val( image.title );
+					that.editor.find( 'input[name="opened_background_width"]' ).val( image.width );
+					that.editor.find( 'input[name="opened_background_height"]' ).val( image.height );
 				}
 			});
 		},
@@ -780,14 +781,14 @@
 
 			this.counter = 0;
 
-			editor = $( '.layers-editor' );
+			this.editor = $( '.layers-editor' );
 
-			editor.find( '.add-new-layer' ).on( 'click', $.proxy( this.addNewLayer, this ) );
-			editor.find( '.delete-layer' ).on( 'click', $.proxy( this.deleteLayer, this ) );
-			editor.find( '.duplicate-layer' ).on( 'click', $.proxy( this.duplicateLayer, this ) );
+			this.editor.find( '.add-new-layer' ).on( 'click', $.proxy( this.addNewLayer, this ) );
+			this.editor.find( '.delete-layer' ).on( 'click', $.proxy( this.deleteLayer, this ) );
+			this.editor.find( '.duplicate-layer' ).on( 'click', $.proxy( this.duplicateLayer, this ) );
 
-			editor.find( '.close' ).on( 'click', $.proxy( this.close, this ) );
-			editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
+			this.editor.find( '.close' ).on( 'click', $.proxy( this.close, this ) );
+			this.editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
 
 			this.initViewport();
 
@@ -836,14 +837,14 @@
 				imageWidth = accordionWidth;
 			}
 
-			var viewport = editor.find( '.viewport' ),
+			var viewport = this.editor.find( '.viewport' ),
 				viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" width="' + imageWidth + '" height="' + imageHeight + '" />' ),
 				viewportLayers = $( '<div class="viewport-layers"></div>' );
 			
 			viewportImage.appendTo( viewport );
 			viewportLayers.appendTo( viewport );
 
-			editor.css( { 'width': Math.max( imageWidth, 960 ), 'height': imageHeight + 180 } );
+			this.editor.css( { 'width': Math.max( imageWidth, 960 ), 'height': imageHeight + 180 } );
 			viewport.css( 'height', imageHeight );
 
 			if ( imageWidth < 960 ) {
@@ -860,7 +861,7 @@
 
 		createLayer: function( id, data ) {
 			var that = this,
-				layer = new Layer( id, data, editor );
+				layer = new Layer( id, data, this.editor );
 
 			this.layers.push( layer );
 
@@ -970,8 +971,8 @@
 
 			this.layers.length = 0;
 
-			editor.find( '.close' ).off( 'click' );
-			editor.find( '.save' ).off( 'click' );
+			this.editor.find( '.close' ).off( 'click' );
+			this.editor.find( '.save' ).off( 'click' );
 
 			$( '.layers-list' ).lightSortable( 'destroy' );
 
