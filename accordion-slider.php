@@ -9,8 +9,6 @@
 	Author URI: http://bqworks.com
 */
 
-include('ChromePhp.php');
-
 // if the file is called directly, abort
 if ( ! defined( 'WPINC' ) ) {
 	die();
