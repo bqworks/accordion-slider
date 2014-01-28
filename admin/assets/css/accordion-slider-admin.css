@@ -238,8 +238,9 @@
 	margin-bottom: 20px;
 }
 
-.background-image-editor,
-.layers-editor {
+.background-image-editor {
+	width: 660px;
+	height: 560px;
 	position: fixed;
 	padding: 30px;
 	margin: auto;
@@ -249,17 +250,6 @@
 	right: 0;
 	background-color: #FFF;
 	z-index: 1001;
-}
-
-.background-image-editor {
-	width: 660px;
-	height: 560px;
-}
-
-.layers-editor {
-	width: 960px;
-	height: 580px;
-	padding: 0;
 }
 
 .background-image-editor .fieldset {
@@ -345,9 +335,25 @@
 .background-image-editor .buttons .close,
 .background-image-editor .buttons .save,
 .layers-editor .buttons .close,
-.layers-editor .buttons .save  {
+.layers-editor .buttons .save,
+.settings-editor .buttons .close,
+.settings-editor .buttons .save  {
 	float: right;
 	margin-left: 10px;
+}
+
+.layers-editor {
+	width: 960px;
+	height: 580px;
+	position: fixed;
+	padding: 0;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #FFF;
+	z-index: 1001;
 }
 
 .layers-editor .viewport {
@@ -523,6 +529,78 @@
 
 .layers-editor .viewport-layer {
 	cursor: move;
+}
+
+.settings-editor {
+	width: 330px;
+	height: 120px;
+	position: fixed;
+	padding: 30px;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #FFF;
+	z-index: 1001;
+}
+
+.settings-editor.posts {
+	height: 425px;
+}
+
+.settings-editor.gallery {
+	height: 260px;
+}
+
+.settings-editor.flickr {
+	height: 268px;
+}
+
+.settings-editor .heading {
+	margin: 0 0 10px 0;
+	font-size: 20px;
+	font-weight: normal;
+	line-height: 1;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #DDD;
+}
+
+.settings-editor table {
+	border: none;
+	border-spacing: 0;
+	width: 100%;
+}
+
+.settings-editor th,
+.settings-editor td {
+	padding-bottom: 10px;
+}
+
+.settings-editor th {
+	font-size: 14px;
+}
+
+.settings-editor th.label-cell {
+	text-align: left;
+}
+
+.settings-editor .setting-cell {
+	text-align: right;
+}
+
+.settings-editor select,
+.settings-editor input[type=text] {
+	width: 215px;
+	margin: 0;
+}
+
+.settings-editor input[type=checkbox] {
+	margin-right: 199px;
+}
+
+.settings-editor .buttons {
+	margin-top: 10px;
 }
 
 .breakpoints-box .inside {

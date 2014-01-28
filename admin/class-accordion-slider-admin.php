@@ -32,6 +32,8 @@ class Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_load_background_image_editor', array( $this, 'load_background_image_editor' ) );
 		add_action( 'wp_ajax_accordion_slider_load_layers_editor', array( $this, 'load_layers_editor' ) );
 		add_action( 'wp_ajax_accordion_slider_add_layer_settings', array( $this, 'add_layer_settings' ) );
+		add_action( 'wp_ajax_accordion_slider_load_settings_editor', array( $this, 'load_settings_editor' ) );
+		add_action( 'wp_ajax_accordion_slider_load_content_type_settings', array( $this, 'load_content_type_settings' ) );
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint', array( $this, 'add_breakpoint' ) );
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint_setting', array( $this, 'add_breakpoint_setting' ) );
 	}
@@ -399,6 +401,28 @@ class Accordion_Slider_Admin {
 		$layer_default_settings = Accordion_Slider_Settings::getLayerSettings();
 
 		include( 'views/layer-settings.php' );
+
+		die();
+	}
+
+	public function load_settings_editor() {
+		$settings = json_decode( stripslashes( $_POST['data'] ), true );
+
+		include( 'views/settings-editor.php' );
+
+		die();
+	}
+
+	public function load_content_type_settings() {
+		$type = $_POST['type'];
+
+		if ( $type === 'posts' ) {
+			include( 'views/posts-content-settings.php' );
+		} else if ( $type === 'gallery' ) {
+			include( 'views/gallery-images-settings.php' );
+		} else if ( $type === 'flickr' ) {
+			include( 'views/flickr-settings.php' );
+		}
 
 		die();
 	}

@@ -19,5 +19,6 @@
 		<a class="button-secondary edit-background-image" href="#"><?php _e( 'Image', 'accordion-slider' ); ?></a>
 		<a class="button-secondary edit-html-content" href="#"><?php _e( 'HTML', 'accordion-slider' ); ?></a>
 		<a class="button-secondary edit-layers" href="#"><?php _e( 'Layers', 'accordion-slider' ); ?></a>
+		<a class="button-secondary edit-settings" href="#"><?php _e( 'Settings', 'accordion-slider' ); ?></a>
 	</div>
 </div>

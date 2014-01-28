@@ -515,6 +515,12 @@
 				LayersEditor.open( that.id );
 			});
 
+			this.$element.find( '.edit-settings' ).on( 'click', function( event ) {
+				event.preventDefault();
+
+				SettingsEditor.open( that.id );
+			});
+
 			this.$element.find( '.delete-panel' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.trigger( { type: 'deletePanel', id: that.id } );
@@ -1354,6 +1360,91 @@
 			this.$layerSettings.find( '.content' ).on( 'input', function() {
 				that.$viewportLayer.html( $( this ).val() );
 			});
+		}
+
+	};
+
+	var SettingsEditor = {
+
+		editor: null,
+
+		currentPanel: null,
+
+		panelSettings: null,
+
+		layers: [],
+
+		counter: 0,
+
+		open: function( id ) {
+			var that = this;
+
+			this.currentPanel = AccordionSliderAdmin.getPanel( id );
+			this.panelSettings = this.currentPanel.getData( 'settings' );
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				dataType: 'html',
+				data: { action: 'accordion_slider_load_settings_editor', data: JSON.stringify( this.panelSettings ) },
+				complete: function( data ) {
+					$( 'body' ).append( data.responseText );
+					that.init();
+				}
+			});
+		},
+
+		init: function() {
+			var that = this;
+
+			this.editor = $( '.settings-editor' );
+			
+			this.editor.find( '.close, .close-x' ).on( 'click', $.proxy( this.close, this ) );
+			this.editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
+
+			this.editor.find( '.setting[name="content_type"]' ).on( 'change', function() {
+				var selection = $( this ).val();
+
+				if ( selection === 'static' ) {
+					that.editor.attr( 'class', 'settings-editor' );
+				} else if ( selection === 'posts' ) {
+					that.editor.attr( 'class', 'settings-editor posts' );
+				} else if ( selection === 'gallery' ) {
+					that.editor.attr( 'class', 'settings-editor gallery' );
+				} else if ( selection === 'flickr' ) {
+					that.editor.attr( 'class', 'settings-editor flickr' );
+				}
+
+				that.editor.find( '.content-type-settings' ).empty();
+
+				that.loadControls( $( this ).val() );
+			});
+		},
+
+		loadControls: function( type ) {
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_load_content_type_settings', type: type },
+				complete: function( data ) {
+					$( '.content-type-settings' ).append( data.responseText );
+				}
+			});
+		},
+
+		save: function() {
+			event.preventDefault();
+
+			this.close();
+		},
+
+		close: function() {
+			event.preventDefault();
+
+			this.editor.find( '.close, .close-x' ).off( 'click' );
+			this.editor.find( '.save' ).off( 'click' );
+
+			$( 'body' ).find( '.modal-overlay, .settings-editor' ).remove();
 		}
 
 	};
