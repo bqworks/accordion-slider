@@ -3,8 +3,12 @@
 		<label><?php _e( 'Post Type', 'accordion-slider' ); ?>:</label>
 	</td>
 	<td class="setting-cell">
-		<select class="setting" name="post_type">
-	
+		<select multiple class="setting" name="post_type">
+			<?php
+				foreach ( $data as $key => $value ) {
+					echo '<option value="' . $key . '">' . $value['label'] . '</option>';
+				}
+			?>
 		</select>
 	</td>
 </tr>
@@ -13,7 +17,7 @@
 		<label><?php _e( 'Taxonomy', 'accordion-slider' ); ?>:</label>
 	</td>
 	<td class="setting-cell">
-		<select class="setting" name="taxonomy">
+		<select multiple class="setting" name="taxonomy">
 	
 		</select>
 	</td>

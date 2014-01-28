@@ -36,6 +36,8 @@ class Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_load_content_type_settings', array( $this, 'load_content_type_settings' ) );
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint', array( $this, 'add_breakpoint' ) );
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint_setting', array( $this, 'add_breakpoint_setting' ) );
+		add_action( 'wp_ajax_accordion_slider_get_post_names', array( $this, 'get_post_names' ) );
+		add_action( 'wp_ajax_accordion_slider_get_taxonomies', array( $this, 'get_taxonomies' ) );
 	}
 
 	/*
@@ -406,8 +408,6 @@ class Accordion_Slider_Admin {
 	}
 
 	public function load_settings_editor() {
-		$settings = json_decode( stripslashes( $_POST['data'] ), true );
-
 		include( 'views/settings-editor.php' );
 
 		die();
@@ -417,12 +417,64 @@ class Accordion_Slider_Admin {
 		$type = $_POST['type'];
 
 		if ( $type === 'posts' ) {
+			$data = json_decode( stripslashes( $_POST['data'] ), true );
+
 			include( 'views/posts-content-settings.php' );
 		} else if ( $type === 'gallery' ) {
 			include( 'views/gallery-images-settings.php' );
 		} else if ( $type === 'flickr' ) {
 			include( 'views/flickr-settings.php' );
 		}
+
+		die();
+	}
+
+	public function get_post_names() {
+		$result = [];
+
+		$post_types = get_post_types( '', 'objects' );
+
+		unset( $post_types['attachment'] );
+		unset( $post_types['revision'] );
+		unset( $post_types['nav_menu_item'] );
+
+		foreach ( $post_types as $post_type ) {
+			$result[ $post_type->name ] = array( 'name' => $post_type->name , 'label' => $post_type->label );
+		}
+
+		echo json_encode( $result );
+
+		die();
+	}
+
+	public function get_taxonomies() {
+		$post_names = json_decode( stripslashes( $_GET['post_names'] ), true );
+		$result = [];
+
+		foreach ( $post_names as $post_name ) {
+			$result[ $post_name ] = array();
+
+			$taxonomies = get_object_taxonomies( $post_name, 'objects' );
+
+			foreach ( $taxonomies as $taxonomy ) {
+				$result[ $post_name ][ $taxonomy->name ] = array(
+					'name' => $taxonomy->name,
+					'label' => $taxonomy->label,
+					'terms' => array()
+				);
+
+				$terms = get_terms( $taxonomy->name, 'objects' );
+
+				foreach ( $terms as $term ) {
+					$result[ $post_name ][ $taxonomy->name ]['terms'][ $term->name ] = array(
+						'name' => $term->name,
+						'slug' => $term->slug
+					);
+				}
+			}
+		}
+
+		echo json_encode( $result );
 
 		die();
 	}

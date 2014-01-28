@@ -6,6 +6,8 @@
 
 		panelCounter: 0,
 
+		postsData: {},
+
 		init: function() {
 			if ( as_js_vars.page === 'single' ) {
 				this.initSingleAccordionPage();
@@ -476,6 +478,55 @@
 					$( data.responseText ).appendTo( context );
 				}
 			});
+		},
+
+		getPostNames: function( callback ) {
+			var that = this;
+			
+			if ( $.isEmptyObject( this.postsData ) ) {
+				$.ajax({
+					url: as_js_vars.ajaxurl,
+					type: 'get',
+					data: { action: 'accordion_slider_get_post_names' },
+					complete: function( data ) {
+						that.postsData = JSON.parse( data.responseText );
+						callback( that.postsData );
+					}
+				});
+			} else {
+				callback( this.postsData );
+			}
+		},
+
+		getTaxonomies: function( posts, callback ) {
+			var that = this;
+			
+			var postsToLoad = [];
+
+			$.each( posts, function( index, element ) {
+				if ( typeof that.postsData[ element ][ 'taxonomies' ] === 'undefined' ) {
+					postsToLoad.push( element );
+				}
+			});
+
+			if ( postsToLoad.length !== 0 ) {
+				$.ajax({
+					url: as_js_vars.ajaxurl,
+					type: 'get',
+					data: { action: 'accordion_slider_get_taxonomies', post_names: JSON.stringify( postsToLoad ) },
+					complete: function( data ) {
+						var response = JSON.parse( data.responseText );
+
+						$.each( response, function( name, taxonomy ) {
+							that.postsData[ name ][ 'taxonomies' ] = taxonomy;
+						});
+
+						callback( that.postsData );
+					}
+				});
+			} else {
+				callback( this.postsData );
+			}
 		}
 	};
 
@@ -1372,10 +1423,6 @@
 
 		panelSettings: null,
 
-		layers: [],
-
-		counter: 0,
-
 		open: function( id ) {
 			var that = this;
 
@@ -1403,33 +1450,74 @@
 			this.editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
 
 			this.editor.find( '.setting[name="content_type"]' ).on( 'change', function() {
-				var selection = $( this ).val();
-
-				if ( selection === 'static' ) {
-					that.editor.attr( 'class', 'settings-editor' );
-				} else if ( selection === 'posts' ) {
-					that.editor.attr( 'class', 'settings-editor posts' );
-				} else if ( selection === 'gallery' ) {
-					that.editor.attr( 'class', 'settings-editor gallery' );
-				} else if ( selection === 'flickr' ) {
-					that.editor.attr( 'class', 'settings-editor flickr' );
-				}
-
-				that.editor.find( '.content-type-settings' ).empty();
-
 				that.loadControls( $( this ).val() );
 			});
 		},
 
 		loadControls: function( type ) {
-			$.ajax({
-				url: as_js_vars.ajaxurl,
-				type: 'post',
-				data: { action: 'accordion_slider_load_content_type_settings', type: type },
-				complete: function( data ) {
-					$( '.content-type-settings' ).append( data.responseText );
-				}
-			});
+			var that = this;
+
+			if ( type === 'static' ) {
+				this.editor.attr( 'class', 'settings-editor' );
+			} else if ( type === 'posts' ) {
+				this.editor.attr( 'class', 'settings-editor posts' );
+			} else if ( type === 'gallery' ) {
+				this.editor.attr( 'class', 'settings-editor gallery' );
+			} else if ( type === 'flickr' ) {
+				this.editor.attr( 'class', 'settings-editor flickr' );
+			}
+
+			this.editor.find( '.content-type-settings' ).empty();
+
+			if ( type === 'posts' ) {
+				AccordionSliderAdmin.getPostNames(function( data ) {
+					$.ajax({
+						url: as_js_vars.ajaxurl,
+						type: 'post',
+						data: { action: 'accordion_slider_load_content_type_settings', type: type, data: JSON.stringify( data ) },
+						complete: function( data ) {
+							$( '.content-type-settings' ).append( data.responseText );
+
+							var $taxonomiesContainer = $( '.content-type-settings' ).find( 'select[name="taxonomy"]' );
+
+							$( '.content-type-settings' ).find( 'select[name="post_type"]' ).on( 'change', function() {
+								var posts = $(this).val();
+
+								$taxonomiesContainer.empty();
+
+								AccordionSliderAdmin.getTaxonomies( posts, function( data ) {
+									$.each( posts, function( index, element ) {
+										var taxonomies = data[ element ][ 'taxonomies' ];
+										
+										if ( $.isEmptyObject( taxonomies ) === false ) {
+											$.each( taxonomies, function( index, element ) {
+												var	$taxonomy = $( '<optgroup label="' + element[ 'label' ] + '"></optgroup>' ).appendTo( $taxonomiesContainer );
+													
+												$.each( element['terms'], function( index, element ) {
+													$( '<option value="' + element[ 'slug' ] + '">' + element[ 'name' ] + '</option>' ).appendTo( $taxonomy );
+												});
+											});
+										}
+
+									});
+
+								});
+							});
+						}
+					});
+				});
+			} else {
+				$.ajax({
+					url: as_js_vars.ajaxurl,
+					type: 'post',
+					data: { action: 'accordion_slider_load_content_type_settings', type: type },
+					complete: function( data ) {
+						$( '.content-type-settings' ).append( data.responseText );
+					}
+				});
+			}
+
+			
 		},
 
 		save: function() {
