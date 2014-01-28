@@ -36,7 +36,6 @@ class Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_load_content_type_settings', array( $this, 'load_content_type_settings' ) );
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint', array( $this, 'add_breakpoint' ) );
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint_setting', array( $this, 'add_breakpoint_setting' ) );
-		add_action( 'wp_ajax_accordion_slider_get_post_names', array( $this, 'get_post_names' ) );
 		add_action( 'wp_ajax_accordion_slider_get_taxonomies', array( $this, 'get_taxonomies' ) );
 	}
 
@@ -417,7 +416,7 @@ class Accordion_Slider_Admin {
 		$type = $_POST['type'];
 
 		if ( $type === 'posts' ) {
-			$data = json_decode( stripslashes( $_POST['data'] ), true );
+			$data = $this->get_post_names();
 
 			include( 'views/posts-content-settings.php' );
 		} else if ( $type === 'gallery' ) {
@@ -442,9 +441,7 @@ class Accordion_Slider_Admin {
 			$result[ $post_type->name ] = array( 'name' => $post_type->name , 'label' => $post_type->label );
 		}
 
-		echo json_encode( $result );
-
-		die();
+		return $result;
 	}
 
 	public function get_taxonomies() {

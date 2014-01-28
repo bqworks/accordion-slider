@@ -480,31 +480,13 @@
 			});
 		},
 
-		getPostNames: function( callback ) {
-			var that = this;
-			
-			if ( $.isEmptyObject( this.postsData ) ) {
-				$.ajax({
-					url: as_js_vars.ajaxurl,
-					type: 'get',
-					data: { action: 'accordion_slider_get_post_names' },
-					complete: function( data ) {
-						that.postsData = JSON.parse( data.responseText );
-						callback( that.postsData );
-					}
-				});
-			} else {
-				callback( this.postsData );
-			}
-		},
-
 		getTaxonomies: function( posts, callback ) {
 			var that = this;
 			
 			var postsToLoad = [];
 
 			$.each( posts, function( index, element ) {
-				if ( typeof that.postsData[ element ][ 'taxonomies' ] === 'undefined' ) {
+				if ( typeof that.postsData[ element ] === 'undefined' ) {
 					postsToLoad.push( element );
 				}
 			});
@@ -518,7 +500,7 @@
 						var response = JSON.parse( data.responseText );
 
 						$.each( response, function( name, taxonomy ) {
-							that.postsData[ name ][ 'taxonomies' ] = taxonomy;
+							that.postsData[ name ] = taxonomy;
 						});
 
 						callback( that.postsData );
@@ -1468,56 +1450,44 @@
 			}
 
 			this.editor.find( '.content-type-settings' ).empty();
+			
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_load_content_type_settings', type: type },
+				complete: function( data ) {
+					$( '.content-type-settings' ).append( data.responseText );
 
-			if ( type === 'posts' ) {
-				AccordionSliderAdmin.getPostNames(function( data ) {
-					$.ajax({
-						url: as_js_vars.ajaxurl,
-						type: 'post',
-						data: { action: 'accordion_slider_load_content_type_settings', type: type, data: JSON.stringify( data ) },
-						complete: function( data ) {
-							$( '.content-type-settings' ).append( data.responseText );
+					if ( type === 'posts' ) {
 
-							var $taxonomiesContainer = $( '.content-type-settings' ).find( 'select[name="taxonomy"]' );
+						var $taxonomiesContainer = $( '.content-type-settings' ).find( 'select[name="taxonomy"]' );
 
-							$( '.content-type-settings' ).find( 'select[name="post_type"]' ).on( 'change', function() {
-								var posts = $(this).val();
+						$( '.content-type-settings' ).find( 'select[name="post_type"]' ).on( 'change', function() {
+							var postNames = $(this).val();
 
-								$taxonomiesContainer.empty();
+							$taxonomiesContainer.empty();
 
-								AccordionSliderAdmin.getTaxonomies( posts, function( data ) {
-									$.each( posts, function( index, element ) {
-										var taxonomies = data[ element ][ 'taxonomies' ];
-										
-										if ( $.isEmptyObject( taxonomies ) === false ) {
-											$.each( taxonomies, function( index, element ) {
-												var	$taxonomy = $( '<optgroup label="' + element[ 'label' ] + '"></optgroup>' ).appendTo( $taxonomiesContainer );
-													
-												$.each( element['terms'], function( index, element ) {
-													$( '<option value="' + element[ 'slug' ] + '">' + element[ 'name' ] + '</option>' ).appendTo( $taxonomy );
-												});
+							AccordionSliderAdmin.getTaxonomies( postNames, function( data ) {
+								$.each( postNames, function( index, postName ) {
+									var taxonomies = data[ postName ];
+									
+									if ( $.isEmptyObject( taxonomies ) === false ) {
+										$.each( taxonomies, function( index, taxonomy ) {
+											var	$taxonomy = $( '<optgroup label="' + taxonomy[ 'label' ] + '"></optgroup>' ).appendTo( $taxonomiesContainer );
+												
+											$.each( taxonomy['terms'], function( index, term ) {
+												$( '<option value="' + term[ 'slug' ] + '">' + term[ 'name' ] + '</option>' ).appendTo( $taxonomy );
 											});
-										}
-
-									});
+										});
+									}
 
 								});
-							});
-						}
-					});
-				});
-			} else {
-				$.ajax({
-					url: as_js_vars.ajaxurl,
-					type: 'post',
-					data: { action: 'accordion_slider_load_content_type_settings', type: type },
-					complete: function( data ) {
-						$( '.content-type-settings' ).append( data.responseText );
-					}
-				});
-			}
 
-			
+							});
+						});
+					}
+				}
+			});
 		},
 
 		save: function() {
