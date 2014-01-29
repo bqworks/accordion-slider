@@ -431,16 +431,24 @@ class Accordion_Slider_Admin {
 	public function get_post_names() {
 		$result = [];
 
-		$post_types = get_post_types( '', 'objects' );
+		$post_names_transient = get_transient( 'accordion_slider_post_names' );
 
-		unset( $post_types['attachment'] );
-		unset( $post_types['revision'] );
-		unset( $post_types['nav_menu_item'] );
+		if ( $post_names_transient === false ) {
+			$post_types = get_post_types( '', 'objects' );
 
-		foreach ( $post_types as $post_type ) {
-			$result[ $post_type->name ] = array( 'name' => $post_type->name , 'label' => $post_type->label );
+			unset( $post_types['attachment'] );
+			unset( $post_types['revision'] );
+			unset( $post_types['nav_menu_item'] );
+
+			foreach ( $post_types as $post_type ) {
+				$result[ $post_type->name ] = array( 'name' => $post_type->name , 'label' => $post_type->label );
+			}
+
+			set_transient( 'accordion_slider_post_names', $result, 5 * 60 );
+		} else {
+			$result = $post_names_transient;
 		}
-
+		
 		return $result;
 	}
 
