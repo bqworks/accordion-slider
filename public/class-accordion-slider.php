@@ -158,7 +158,8 @@ class Accordion_Slider {
 				opened_background_height mediumint(9) NOT NULL,
 				background_link text NOT NULL,
 				background_link_title text NOT NULL,
-				html_content text NOT NULL,
+				html text NOT NULL,
+				settings text NOT NULL,
 				PRIMARY KEY (id)
 				) DEFAULT CHARSET=utf8;";
 			
@@ -268,6 +269,7 @@ class Accordion_Slider {
 
 			foreach ( $panels_raw as $panel_raw ) {
 				$panel = $panel_raw;
+				$panel['settings'] = json_decode( stripslashes( $panel_raw['settings'] ), true );
 				$layers_raw = $this->load_layers( $panel_raw['id'] );
 
 				if ( $layers_raw !== false ) {

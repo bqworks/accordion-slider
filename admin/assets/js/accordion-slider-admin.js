@@ -113,7 +113,7 @@
 					var accordionData = JSON.parse( data.responseText );
 
 					$.each( accordionData.panels, function( index, panel ) {
-						var panelData = { background: {}, layers: panel.layers, html: panel.html_content };
+						var panelData = { background: {}, layers: panel.layers, html: panel.html, settings: panel.settings };
 
 						$.each( panel, function( settingName, settingValue ) {
 							if ( settingName.indexOf( 'background' ) !== -1 ) {
@@ -443,7 +443,7 @@
 						panels.find( '.panel' + indexes ).each(function( index ) {
 							var panel = $( this );
 
-							that.initPanel( panel, { background: images[ index ], layers: {}, html: {} } );
+							that.initPanel( panel, { background: images[ index ], layers: {}, html: '', settings: {} } );
 						});
 					}
 				});
@@ -516,7 +516,7 @@
 		this.$element = element;
 		this.id = id;
 		this.data = data;
-		this.panelData = { background: {}, layers: {}, html: {} };
+		this.panelData = { background: {}, layers: {}, html: '', settings: {} };
 		this.events = $( {} );
 
 		this.init();
@@ -579,6 +579,7 @@
 
 				allData[ 'layers' ] = this.panelData.layers;
 				allData[ 'html' ] = this.panelData.html;
+				allData[ 'settings' ] = this.panelData.settings;
 
 				return allData;
 			} else if ( target === 'background' ) {
@@ -587,6 +588,8 @@
 				return this.panelData.layers;
 			} else if ( target === 'html' ) {
 				return this.panelData.html;
+			} else if ( target === 'settings' ) {
+				return this.panelData.settings;
 			}
 		},
 
@@ -599,6 +602,8 @@
 				this.panelData.layers = data;
 			} else if ( target === 'html' ) {
 				this.panelData.html = data;
+			} else if ( target === 'settings' ) {
+				this.panelData.settings = data;
 			}
 		},
 
@@ -1403,19 +1408,21 @@
 
 		currentPanel: null,
 
-		panelSettings: null,
+		settingsData: null,
 
 		open: function( id ) {
 			var that = this;
 
 			this.currentPanel = AccordionSliderAdmin.getPanel( id );
-			this.panelSettings = this.currentPanel.getData( 'settings' );
+			this.settingsData = this.currentPanel.getData( 'settings' );
+
+			console.log(this.settingsData);
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				dataType: 'html',
-				data: { action: 'accordion_slider_load_settings_editor', data: JSON.stringify( this.panelSettings ) },
+				data: { action: 'accordion_slider_load_settings_editor', data: JSON.stringify( this.settingsData ) },
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
@@ -1491,6 +1498,13 @@
 
 		save: function() {
 			event.preventDefault();
+
+			this.editor.find( '.setting' ).each(function() {
+				var $setting = $( this );
+				that.settingsData[ $setting.attr( 'name' ) ] = $setting.attr( 'type' ) === 'checkbox' ? $setting.is( ':checked' ) : $setting.val();
+			});
+
+			this.currentPanel.setData( 'settings', this.settingsData );
 
 			this.close();
 		},

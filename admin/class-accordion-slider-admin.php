@@ -229,9 +229,10 @@ class Accordion_Slider_Admin {
 							'opened_background_height' => isset( $panel_data['opened_background_height'] ) ? $panel_data['opened_background_height'] : '',
 							'background_link' => isset( $panel_data['background_link'] ) ? $panel_data['background_link'] : '',
 							'background_link_title' => isset( $panel_data['background_link_title'] ) ? $panel_data['background_link_title'] : '',
-							'html_content' => isset( $panel_data['html_content'] ) ? $panel_data['html_content'] : '');
+							'html' => isset( $panel_data['html'] ) ? $panel_data['html'] : '',
+							'settings' => isset( $panel_data['settings'] ) ? json_encode( $panel_data['settings'] ) : '');
 
-			$wpdb->insert( $wpdb->prefix . 'accordionslider_panels', $panel, array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s' ) );
+			$wpdb->insert( $wpdb->prefix . 'accordionslider_panels', $panel, array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s' ) );
 
 			if ( ! empty( $panel_data[ 'layers' ] ) ) {
 				$panel_id = $wpdb->insert_id;
@@ -296,10 +297,11 @@ class Accordion_Slider_Admin {
 				foreach ( $panels as $panel ) {
 					$new_panel = $panel;
 					$new_panel['accordion_id'] = $accordion_id;
+					$new_panel['settings'] = json_encode( $panel['settings'] );
 					unset( $new_panel['id'] );
 					unset( $new_panel['layers'] );
 
-					$wpdb->insert( $wpdb->prefix . 'accordionslider_panels', $new_panel, array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s' ) );
+					$wpdb->insert( $wpdb->prefix . 'accordionslider_panels', $new_panel, array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s' ) );
 
 					$new_panel_id = $wpdb->insert_id;
 
@@ -448,7 +450,7 @@ class Accordion_Slider_Admin {
 		} else {
 			$result = $post_names_transient;
 		}
-		
+
 		return $result;
 	}
 
