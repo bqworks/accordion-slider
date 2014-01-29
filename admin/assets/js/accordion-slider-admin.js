@@ -352,10 +352,12 @@
 		},
 
 		duplicatePanel: function( panelData ) {
-			var that = this;
+			var that = this,
+				newPanelData = $.extend( true, {}, panelData );
+
 
 			var images = [ {
-				background_source: panelData.background.background_source
+				background_source: newPanelData.background.background_source
 			} ];
 
 			$.ajax({
@@ -365,7 +367,7 @@
 				complete: function( data ) {
 					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) );
 
-					that.initPanel( panel, panelData );
+					that.initPanel( panel, newPanelData );
 				}
 			});
 		},
