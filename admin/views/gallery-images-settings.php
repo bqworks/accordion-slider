@@ -3,7 +3,7 @@
 		<label><?php _e( 'Post ID', 'accordion-slider' ); ?>:</label>
 	</td>
 	<td class="setting-cell">
-		<input class="setting" type="text" name="post_id" value="" />
+		<input class="panel-setting" type="text" name="gallery_post_id" value="<?php echo isset( $panel_settings['gallery_post_id'] ) ? esc_attr( $panel_settings['gallery_post_id'] ) : $panel_default_settings['gallery_post_id']['default_value']; ?>" />
 	</td>
 </tr>
 <tr>
@@ -11,7 +11,7 @@
 		<label><?php _e( 'Limit', 'accordion-slider' ); ?>:</label>
 	</td>
 	<td class="setting-cell">
-		<input class="setting" type="text" name="maximum" value="" />
+		<input class="panel-setting" type="text" name="gallery_maximum" value="<?php echo isset( $panel_settings['gallery_maximum'] ) ? esc_attr( $panel_settings['gallery_maximum'] ) : $panel_default_settings['gallery_maximum']['default_value']; ?>" />
 	</td>
 </tr>
 <tr>
@@ -19,7 +19,7 @@
 		<label><?php _e( 'Start At', 'accordion-slider' ); ?>:</label>
 	</td>
 	<td class="setting-cell">
-		<input class="setting" type="text" name="offset" value="" />
+		<input class="panel-setting" type="text" name="gallery_offset" value="<?php echo isset( $panel_settings['gallery_offset'] ) ? esc_attr( $panel_settings['gallery_offset'] ) : $panel_default_settings['gallery_offset']['default_value']; ?>" />
 	</td>
 </tr>
 <tr>
@@ -27,6 +27,6 @@
 		<label><?php _e( 'Hide Gallery', 'accordion-slider' ); ?>:</label>
 	</td>
 	<td class="setting-cell">
-		<input class="setting" type="checkbox" name="hide_gallery" checked="checked" />
+		<input class="panel-setting" type="checkbox" name="gallery_hide_gallery" <?php echo ( isset( $panel_settings['gallery_hide_gallery'] ) && $panel_settings['gallery_hide_gallery'] === true ) || ( ! isset( $panel_settings['gallery_hide_gallery'] ) &&  $panel_default_settings['gallery_hide_gallery']['default_value'] === true ) ? 'checked="checked"' : ''; ?>/>
 	</td>
 </tr>

@@ -409,21 +409,26 @@ class Accordion_Slider_Admin {
 	}
 
 	public function load_settings_editor() {
+		$panel_settings = json_decode( stripslashes( $_POST['data'] ), true );
+
+		$panel_default_settings = Accordion_Slider_Settings::getPanelSettings();
+
 		include( 'views/settings-editor.php' );
 
 		die();
 	}
 
 	public function load_content_type_settings() {
-		$type = $_POST['type'];
+		$content_type = $_POST['type'];
+		$panel_default_settings = Accordion_Slider_Settings::getPanelSettings();
 
-		if ( $type === 'posts' ) {
-			$data = $this->get_post_names();
+		if ( $content_type === 'posts' ) {
+			$post_names = $this->get_post_names();
 
 			include( 'views/posts-content-settings.php' );
-		} else if ( $type === 'gallery' ) {
+		} else if ( $content_type === 'gallery' ) {
 			include( 'views/gallery-images-settings.php' );
-		} else if ( $type === 'flickr' ) {
+		} else if ( $content_type === 'flickr' ) {
 			include( 'views/flickr-settings.php' );
 		}
 
@@ -456,6 +461,13 @@ class Accordion_Slider_Admin {
 
 	public function get_taxonomies() {
 		$post_names = json_decode( stripslashes( $_GET['post_names'] ), true );
+
+		echo json_encode( $this->get_taxonomies_for_posts( $post_names ) );
+
+		die();
+	}
+
+	public function get_taxonomies_for_posts( $post_names ) {
 		$result = [];
 
 		foreach ( $post_names as $post_name ) {
@@ -481,9 +493,7 @@ class Accordion_Slider_Admin {
 			}
 		}
 
-		echo json_encode( $result );
-
-		die();
+		return $result;
 	}
 
 	public function add_breakpoint() {

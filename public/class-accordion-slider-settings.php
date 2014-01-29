@@ -8,6 +8,8 @@ class Accordion_Slider_Settings {
 
 	protected static $layer_settings = array();
 
+	protected static $panel_settings = array();
+
 	protected static $breakpoint_settings = array(
 		'width',
 		'height',
@@ -462,7 +464,7 @@ class Accordion_Slider_Settings {
 	}
 
 	/*
-		Return the settings
+		Return the layer settings
 	*/
 	public static function getLayerSettings() {
 		if ( empty( self::$layer_settings ) ) {
@@ -608,5 +610,145 @@ class Accordion_Slider_Settings {
 		}
 
 		return self::$layer_settings;
+	}
+
+	/*
+		Return the panel settings
+	*/
+	public static function getPanelSettings() {
+		if ( empty( self::$panel_settings ) ) {
+			self::$panel_settings = array(
+				'content_type' => array(
+					'label' => __( 'Content Type', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => 'static',
+					'available_values' => array(
+						'static' => __( 'Static Content', 'accordion-slider' ),
+						'posts' => __( 'Content from posts', 'accordion-slider' ),
+						'gallery' => __( 'Images from post\'s gallery', 'accordion-slider' ),
+						'flickr' => __( 'Flickr images', 'accordion-slider' )
+					),
+					'description' => ''
+				),
+				'posts_post_type' => array(
+					'label' => __( 'Posts', 'accordion-slider' ),
+					'type' => 'select',
+					'description' => ''
+				),
+				'posts_taxonomy' => array(
+					'label' => __( 'Taxonomy', 'accordion-slider' ),
+					'type' => 'multiselect',
+					'description' => ''
+				),
+				'posts_relation' => array(
+					'label' => __( 'Match', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => 'or',
+					'available_values' => array(
+						'or' => __( 'At least one', 'accordion-slider' ),
+						'and' => __( 'All', 'accordion-slider' )
+					),
+					'description' => ''
+				),
+				'posts_operator' => array(
+					'label' => __( 'With selected', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => 'include',
+					'available_values' => array(
+						'in' => __( 'Include', 'accordion-slider' ),
+						'not_in' => __( 'Exclude', 'accordion-slider' )
+					),
+					'description' => ''
+				),
+				'posts_order_by' => array(
+					'label' => __( 'Order By', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => 'date',
+					'available_values' => array(
+						'date' => __( 'Date', 'accordion-slider' ),
+						'comments' => __( 'Comments', 'accordion-slider' ),
+						'title' => __( 'Title', 'accordion-slider' ),
+						'random' => __( 'Random', 'accordion-slider' )
+					),
+					'description' => ''
+				),
+				'posts_order' => array(
+					'label' => __( 'Order', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => 'desc',
+					'available_values' => array(
+						'desc' => __( 'Descending', 'accordion-slider' ),
+						'asc' => __( 'Ascending', 'accordion-slider' )
+					),
+					'description' => ''
+				),
+				'posts_maximum' => array(
+					'label' => __( 'Limit', 'accordion-slider' ),
+					'type' => 'number',
+					'default_value' => 10,
+					'description' => ''
+				),
+				'posts_offset' => array(
+					'label' => __( 'Start At', 'accordion-slider' ),
+					'type' => 'number',
+					'default_value' => 0,
+					'description' => ''
+				),
+				'gallery_post_id' => array(
+					'label' => __( 'Post ID', 'accordion-slider' ),
+					'type' => 'text',
+					'default_value' => '',
+					'description' => ''
+				),
+				'gallery_maximum' => array(
+					'label' => __( 'Limit', 'accordion-slider' ),
+					'type' => 'number',
+					'default_value' => 10,
+					'description' => ''
+				),
+				'gallery_offset' => array(
+					'label' => __( 'Start At', 'accordion-slider' ),
+					'type' => 'number',
+					'default_value' => 0,
+					'description' => ''
+				),
+				'gallery_hide_gallery' => array(
+					'label' => __( 'Hide Gallery', 'accordion-slider' ),
+					'type' => 'checkbox',
+					'default_value' => true,
+					'description' => ''
+				),
+				'flickr_api_key' => array(
+					'label' => __( 'API Key', 'accordion-slider' ),
+					'type' => 'text',
+					'default_value' => '',
+					'description' => ''
+				),
+				'flickr_load_by' => array(
+					'label' => __( 'Load By', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => 'set',
+					'available_values' => array(
+						'set' => __( 'Set', 'accordion-slider' ),
+						'username' => __( 'Username', 'accordion-slider' )
+					),
+					'description' => ''
+				),
+				'flickr_id' => array(
+					'label' => __( 'ID', 'accordion-slider' ),
+					'type' => 'text',
+					'default_value' => '',
+					'description' => ''
+				),
+				'flickr_maximum' => array(
+					'label' => __( 'Limit', 'accordion-slider' ),
+					'type' => 'number',
+					'default_value' => 10,
+					'description' => ''
+				)
+			);
+		}
+
+		return self::$panel_settings;
 	}
 }

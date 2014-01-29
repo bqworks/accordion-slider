@@ -113,7 +113,12 @@
 					var accordionData = JSON.parse( data.responseText );
 
 					$.each( accordionData.panels, function( index, panel ) {
-						var panelData = { background: {}, layers: panel.layers, html: panel.html, settings: panel.settings };
+						var panelData = {
+							background: {},
+							layers: panel.layers,
+							html: panel.html,
+							settings: $.isArray( panel.settings ) ? {} : panel.settings
+						};
 
 						$.each( panel, function( settingName, settingValue ) {
 							if ( settingName.indexOf( 'background' ) !== -1 ) {
@@ -1371,7 +1376,7 @@
 			this.editor.find( '.close, .close-x' ).on( 'click', $.proxy( this.close, this ) );
 			this.editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
 
-			this.editor.find( '.setting[name="content_type"]' ).on( 'change', function() {
+			this.editor.find( '.panel-setting[name="content_type"]' ).on( 'change', function() {
 				that.loadControls( $( this ).val() );
 			});
 		},
@@ -1406,14 +1411,15 @@
 		},
 
 		handlePostsSelects: function() {
-			var $taxonomies = this.editor.find( 'select[name="taxonomy"]' );
+			var $taxonomies = this.editor.find( 'select[name="posts_taxonomy"]' );
 
-			this.editor.find( 'select[name="post_type"]' ).on( 'change', function() {
+			this.editor.find( 'select[name="posts_post_type"]' ).on( 'change', function() {
 				var postNames = $(this).val();
 
 				$taxonomies.empty();
 
 				AccordionSliderAdmin.getTaxonomies( postNames, function( data ) {
+					console.log(data);
 					$.each( postNames, function( index, postName ) {
 						var taxonomies = data[ postName ];
 							
@@ -1432,7 +1438,9 @@
 		save: function() {
 			event.preventDefault();
 
-			this.editor.find( '.setting' ).each(function() {
+			var that = this;
+
+			this.editor.find( '.panel-setting' ).each(function() {
 				var $setting = $( this );
 				that.settingsData[ $setting.attr( 'name' ) ] = $setting.attr( 'type' ) === 'checkbox' ? $setting.is( ':checked' ) : $setting.val();
 			});
