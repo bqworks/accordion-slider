@@ -516,8 +516,11 @@
 		this.$element = element;
 		this.id = id;
 		this.data = data;
-		this.panelData = { background: {}, layers: {}, html: '', settings: {} };
 		this.events = $( {} );
+
+		if ( typeof this.data === 'undefined' ) {
+			this.data = { background: {}, layers: {}, html: '', settings: {} };
+		}
 
 		this.init();
 	};
@@ -561,49 +564,45 @@
 
 			this.$element.find( '.duplicate-panel' ).on( 'click', function( event ) {
 				event.preventDefault();
-				that.trigger( { type: 'duplicatePanel', panelData: that.panelData } );
+				that.trigger( { type: 'duplicatePanel', panelData: that.data } );
 			});
-
-			if ( typeof this.data !== 'undefined' ) {
-				this.setData( 'all', this.data );
-			}
 		},
 
 		getData: function( target ) {
 			if ( target === 'all' ) {
 				var allData = {};
 
-				$.each( this.panelData.background, function( settingName, settingValue ) {
+				$.each( this.data.background, function( settingName, settingValue ) {
 					allData[ settingName ] = settingValue;
 				});
 
-				allData[ 'layers' ] = this.panelData.layers;
-				allData[ 'html' ] = this.panelData.html;
-				allData[ 'settings' ] = this.panelData.settings;
+				allData[ 'layers' ] = this.data.layers;
+				allData[ 'html' ] = this.data.html;
+				allData[ 'settings' ] = this.data.settings;
 
 				return allData;
 			} else if ( target === 'background' ) {
-				return this.panelData.background;
+				return this.data.background;
 			} else if ( target === 'layers' ) {
-				return this.panelData.layers;
+				return this.data.layers;
 			} else if ( target === 'html' ) {
-				return this.panelData.html;
+				return this.data.html;
 			} else if ( target === 'settings' ) {
-				return this.panelData.settings;
+				return this.data.settings;
 			}
 		},
 
 		setData: function( target, data ) {
 			if ( target === 'all' ) {
-				this.panelData = data;
+				this.data = data;
 			} else if ( target === 'background' ) {
-				this.panelData.background = data;
+				this.data.background = data;
 			} else if ( target === 'layers' ) {
-				this.panelData.layers = data;
+				this.data.layers = data;
 			} else if ( target === 'html' ) {
-				this.panelData.html = data;
+				this.data.html = data;
 			} else if ( target === 'settings' ) {
-				this.panelData.settings = data;
+				this.data.settings = data;
 			}
 		},
 
@@ -621,12 +620,12 @@
 		updateBackgroundImage: function() {
 			var panelImage = this.$element.find( '.panel-image' );
 
-			if ( this.panelData.background[ 'background_source' ] !== '' ) {
+			if ( this.data.background[ 'background_source' ] !== '' ) {
 				if ( panelImage.find( 'img' ).length ) {
-					panelImage.find( 'img' ).attr( 'src', this.panelData.background[ 'background_source' ] );
+					panelImage.find( 'img' ).attr( 'src', this.data.background[ 'background_source' ] );
 				} else {
 					panelImage.find( '.no-image' ).remove();
-					$( '<img src="' + this.panelData.background[ 'background_source' ] + '" />' ).appendTo( panelImage );
+					$( '<img src="' + this.data.background[ 'background_source' ] + '" />' ).appendTo( panelImage );
 				}
 			} else if ( panelImage.find( 'img' ).length ) {
 				panelImage.find( 'img' ).remove();
@@ -967,7 +966,7 @@
 				data: { action: 'accordion_slider_add_layer_settings', id: this.counter },
 				complete: function( data ) {
 					$( data.responseText ).appendTo( $( '.layers-settings' ) );
-					$( '<li class="layers-list-item" data-id="' + that.counter + '" data-position="' + that.layers.length + '">Layer ' + that.counter + '</li>' ).appendTo( editor.find( '.layers-list' ) );
+					$( '<li class="layers-list-item" data-id="' + that.counter + '" data-position="' + that.layers.length + '">Layer ' + that.counter + '</li>' ).appendTo( that.editor.find( '.layers-list' ) );
 
 					that.createLayer( that.counter, false );
 				}
@@ -1018,7 +1017,7 @@
 				data: { action: 'accordion_slider_add_layer_settings', id: this.counter, content: layerData.content, settings: JSON.stringify( layerData.settings ) },
 				complete: function( data ) {
 					$( data.responseText ).appendTo( $( '.layers-settings' ) );
-					$( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).appendTo( editor.find( '.layers-list' ) );
+					$( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).appendTo( that.editor.find( '.layers-list' ) );
 
 					that.createLayer( that.counter, layerData );
 				}
@@ -1415,8 +1414,6 @@
 
 			this.currentPanel = AccordionSliderAdmin.getPanel( id );
 			this.settingsData = this.currentPanel.getData( 'settings' );
-
-			console.log(this.settingsData);
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
