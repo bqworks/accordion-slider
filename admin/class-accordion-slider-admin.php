@@ -461,7 +461,7 @@ class Accordion_Slider_Admin {
 		die();
 	}
 
-	public function load_content_type_settings( $type ) {
+	public function load_content_type_settings( $type, $panel_settings = NULL ) {
 		$panel_default_settings = Accordion_Slider_Settings::getPanelSettings();
 
 		if ( $type === 'posts' ) {

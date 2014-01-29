@@ -23,7 +23,7 @@
 		</thead>
 		<tbody class="content-type-settings">
 			<?php
-				$this->load_content_type_settings( $content_type );
+				$this->load_content_type_settings( $content_type, $panel_settings );
 			?>
 		</tbody>
 	</table>

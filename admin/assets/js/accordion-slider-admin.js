@@ -1379,6 +1379,10 @@
 			this.editor.find( '.panel-setting[name="content_type"]' ).on( 'change', function() {
 				that.loadControls( $( this ).val() );
 			});
+
+			if ( this.editor.find( '.panel-setting[name="content_type"]' ).val() === 'posts' ) {
+				this.handlePostsSelects();
+			}
 		},
 
 		loadControls: function( type ) {
