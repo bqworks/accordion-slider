@@ -23,20 +23,20 @@ class Accordion_Slider_Admin {
 
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 
-		add_action( 'wp_ajax_accordion_slider_get_accordion_data', array( $this, 'get_accordion_data' ) );
-		add_action( 'wp_ajax_accordion_slider_update_accordion', array( $this, 'update_accordion' ) );
-		add_action( 'wp_ajax_accordion_slider_preview_accordion', array( $this, 'preview_accordion' ) );
-		add_action( 'wp_ajax_accordion_slider_delete_accordion', array( $this, 'delete_accordion' ) );
-		add_action( 'wp_ajax_accordion_slider_duplicate_accordion', array( $this, 'duplicate_accordion' ) );
-		add_action( 'wp_ajax_accordion_slider_add_panels', array( $this, 'add_panels' ) );
-		add_action( 'wp_ajax_accordion_slider_load_background_image_editor', array( $this, 'load_background_image_editor' ) );
-		add_action( 'wp_ajax_accordion_slider_load_layers_editor', array( $this, 'load_layers_editor' ) );
-		add_action( 'wp_ajax_accordion_slider_add_layer_settings', array( $this, 'add_layer_settings' ) );
-		add_action( 'wp_ajax_accordion_slider_load_settings_editor', array( $this, 'load_settings_editor' ) );
-		add_action( 'wp_ajax_accordion_slider_load_content_type_settings', array( $this, 'load_content_type_settings' ) );
-		add_action( 'wp_ajax_accordion_slider_add_breakpoint', array( $this, 'add_breakpoint' ) );
-		add_action( 'wp_ajax_accordion_slider_add_breakpoint_setting', array( $this, 'add_breakpoint_setting' ) );
-		add_action( 'wp_ajax_accordion_slider_get_taxonomies', array( $this, 'get_taxonomies' ) );
+		add_action( 'wp_ajax_accordion_slider_get_accordion_data', array( $this, 'ajax_get_accordion_data' ) );
+		add_action( 'wp_ajax_accordion_slider_update_accordion', array( $this, 'ajax_update_accordion' ) );
+		add_action( 'wp_ajax_accordion_slider_preview_accordion', array( $this, 'ajax_preview_accordion' ) );
+		add_action( 'wp_ajax_accordion_slider_delete_accordion', array( $this, 'ajax_delete_accordion' ) );
+		add_action( 'wp_ajax_accordion_slider_duplicate_accordion', array( $this, 'ajax_duplicate_accordion' ) );
+		add_action( 'wp_ajax_accordion_slider_add_panels', array( $this, 'ajax_add_panels' ) );
+		add_action( 'wp_ajax_accordion_slider_load_background_image_editor', array( $this, 'ajax_load_background_image_editor' ) );
+		add_action( 'wp_ajax_accordion_slider_load_layers_editor', array( $this, 'ajax_load_layers_editor' ) );
+		add_action( 'wp_ajax_accordion_slider_add_layer_settings', array( $this, 'ajax_add_layer_settings' ) );
+		add_action( 'wp_ajax_accordion_slider_load_settings_editor', array( $this, 'ajax_load_settings_editor' ) );
+		add_action( 'wp_ajax_accordion_slider_load_content_type_settings', array( $this, 'ajax_load_content_type_settings' ) );
+		add_action( 'wp_ajax_accordion_slider_add_breakpoint', array( $this, 'ajax_add_breakpoint' ) );
+		add_action( 'wp_ajax_accordion_slider_add_breakpoint_setting', array( $this, 'ajax_add_breakpoint_setting' ) );
+		add_action( 'wp_ajax_accordion_slider_get_taxonomies', array( $this, 'ajax_get_taxonomies' ) );
 	}
 
 	/*
@@ -159,7 +159,7 @@ class Accordion_Slider_Admin {
 		include_once( 'views/accordion.php' );
 	}
 
-	public function get_accordion_data() {
+	public function ajax_get_accordion_data() {
 		$nonce = $_GET['nonce'];
 		$id = $_GET['id'];
 
@@ -167,27 +167,38 @@ class Accordion_Slider_Admin {
 			die( 'This action was stopped for security purposes.' );
 		}
 
-		$accordion = $this->plugin->get_accordion( $_GET['id'] );
+		$accordion = $this->get_accordion_data( $_GET['id'] );
 
 		echo json_encode( $accordion );
 
 		die();
 	}
 
-	public function update_accordion() {
-		global $wpdb;
+	public function get_accordion_data( $id ) {
+		return $this->plugin->get_accordion( $id );
+	}
 
+	public function ajax_update_accordion() {
 		$accordion_data = json_decode( stripslashes( $_POST['data'] ), true );
-
 		$nonce = $accordion_data['nonce'];
 		$id = intval( $accordion_data['id'] );
-		$name = $accordion_data['name'];
-		$settings = $accordion_data['settings'];
-		$panels_data = $accordion_data['panels'];
 
 		if ( ! wp_verify_nonce( $nonce, 'update-accordion' . $id ) ) {
 			die( 'This action was stopped for security purposes.' );
 		}
+
+		echo $this->update_accordion( $accordion_data );
+
+		die();
+	}
+
+	public function update_accordion( $accordion_data ) {
+		global $wpdb;
+
+		$id = intval( $accordion_data['id'] );
+		$name = $accordion_data['name'];
+		$settings = $accordion_data['settings'];
+		$panels_data = $accordion_data['panels'];
 
 		if ( $id === -1 ) {
 			$wpdb->insert($wpdb->prefix . 'accordionslider_accordions', array( 'name' => $name, 
@@ -252,12 +263,10 @@ class Accordion_Slider_Admin {
 			}
 		}
 
-		echo $id;
-
-		die();
+		return $id;
 	}
 
-	public function preview_accordion() {
+	public function ajax_preview_accordion() {
 		$accordion = json_decode( stripslashes( $_POST['data'] ), true );
 		$accordion_output = $this->plugin->output_accordion( $accordion );
 
@@ -266,9 +275,7 @@ class Accordion_Slider_Admin {
 		die();	
 	}
 
-	public function duplicate_accordion() {
-		global $wpdb;
-
+	public function ajax_duplicate_accordion() {
 		$nonce = $_POST['nonce'];
 		$original_accordion_id = $_POST['id'];
 
@@ -276,27 +283,44 @@ class Accordion_Slider_Admin {
 			die( 'This action was stopped for security purposes.' );
 		}
 
-		$accordion = $this->plugin->get_accordion( $original_accordion_id );
+		if ( ( $accordion = $this->duplicate_accordion( $original_accordion_id ) ) !== false ) {
+			$accordion_id = $accordion['id'];
+			$accordion_name = $accordion['name'];
+			$accordion_created = $accordion['created'];
+			$accordion_modified = $accordion['modified'];
+
+			include( 'views/accordions_row.php' );
+		}
+
+		die();
+	}
+
+	public function duplicate_accordion( $accordion_id ) {
+		global $wpdb;
+
+		$accordion = $this->plugin->get_accordion( $accordion_id );
 
 		if ( $accordion !== false ) {
-			$accordion_name = $accordion['name'];
-			$accordion_created = date( 'm-d-Y' );
-			$accordion_modified = $accordion_created;
+			$new_accordion = array();
 
-			$wpdb->insert( $wpdb->prefix . 'accordionslider_accordions', array( 'name' => $accordion_name, 
-																				'settings' => json_encode( $accordion['settings'] ),
-																				'created' => $accordion_created, 
-																				'modified' => $accordion_modified ), 
-																		array( '%s', '%s', '%s', '%s' ) );
+			$new_accordion['name'] = $accordion['name'];
+			$new_accordion['settings'] = json_encode( $accordion['settings'] );
+			$new_accordion['created'] = date( 'm-d-Y' );
+			$new_accordion['modified'] = $new_accordion['created'];
+
+			$wpdb->insert( $wpdb->prefix . 'accordionslider_accordions', $new_accordion, array( '%s', '%s', '%s', '%s' ) );
 			
-			$accordion_id = $wpdb->insert_id;
+			$new_accordion_id = $wpdb->insert_id;
+
+			$new_accordion['id'] = $new_accordion_id;
 
 			if ( isset( $accordion['panels'] ) ) {
 				$panels = $accordion['panels'];
+				$new_accordion['panels'] = array();
 
 				foreach ( $panels as $panel ) {
 					$new_panel = $panel;
-					$new_panel['accordion_id'] = $accordion_id;
+					$new_panel['accordion_id'] = $new_accordion_id;
 					$new_panel['settings'] = json_encode( $panel['settings'] );
 					unset( $new_panel['id'] );
 					unset( $new_panel['layers'] );
@@ -307,29 +331,32 @@ class Accordion_Slider_Admin {
 
 					if ( isset( $panel['layers'] ) ) {
 						$layers = $panel['layers'];
+						$new_panel['layers'] = array();
 
 						foreach ( $layers as $layer ) {
 							$new_layer = $layer;
-							$new_layer['accordion_id'] = $accordion_id;
+							$new_layer['accordion_id'] = $new_accordion_id;
 							$new_layer['panel_id'] = $new_panel_id;
 							$new_layer['settings'] = json_encode( $layer['settings'] );
 							unset( $new_layer['id'] );
 
 							$wpdb->insert( $wpdb->prefix . 'accordionslider_layers', $new_layer, array( '%d', '%d', '%d', '%s', '%s', '%s' ) );
+
+							array_push( $new_panel['layers'], $new_layer );
 						}
 					}
+
+					array_push( $new_accordion['panels'], $new_panel );
 				}
 			}
 
-			echo include( 'views/accordions_row.php' );
+			return $new_accordion;
 		}
 
-		die();
+		return false;
 	}
 
-	public function delete_accordion() {
-		global $wpdb;
-
+	public function ajax_delete_accordion() {
 		$nonce = $_POST['nonce'];
 		$id = intval( $_POST['id'] );
 
@@ -337,13 +364,19 @@ class Accordion_Slider_Admin {
 			die( 'This action was stopped for security purposes.' );
 		}
 
+		echo $this->delete_accordion( $id ); 
+
+		die();
+	}
+
+	public function delete_accordion( $id ) {
+		global $wpdb;
+
 		$wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "accordionslider_panels WHERE accordion_id = %d", $id ) );
 
 		$wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "accordionslider_accordions WHERE id = %d", $id ) );
 
-		echo $id; 
-
-		die();
+		return $id;
 	}
 
 	public function create_panel( $data ) {
@@ -356,7 +389,7 @@ class Accordion_Slider_Admin {
 		include( 'views/panel.php' );
 	}
 	
-	public function add_panels() {
+	public function ajax_add_panels() {
 		if ( isset( $_POST['data'] ) ) {
 			$data = json_decode( stripslashes( $_POST['data'] ), true );
 
@@ -370,7 +403,7 @@ class Accordion_Slider_Admin {
 		die();
 	}
 
-	public function load_background_image_editor() {
+	public function ajax_load_background_image_editor() {
 		$data = json_decode( stripslashes( $_POST['data'] ), true );
 
 		include( 'views/background-image-editor.php' );
@@ -378,7 +411,7 @@ class Accordion_Slider_Admin {
 		die();
 	}
 
-	public function load_layers_editor() {
+	public function ajax_load_layers_editor() {
 		$layers = json_decode( stripslashes( $_POST['data'] ), true );
 
 		$layer_default_settings = Accordion_Slider_Settings::getLayerSettings();
@@ -388,7 +421,7 @@ class Accordion_Slider_Admin {
 		die();
 	}
 
-	public function add_layer_settings() {
+	public function ajax_add_layer_settings() {
 		$layer_id = $_POST['id'];
 		$layer_settings;
 		$layer_content;
@@ -408,31 +441,38 @@ class Accordion_Slider_Admin {
 		die();
 	}
 
-	public function load_settings_editor() {
+	public function ajax_load_settings_editor() {
 		$panel_settings = json_decode( stripslashes( $_POST['data'] ), true );
 
 		$panel_default_settings = Accordion_Slider_Settings::getPanelSettings();
+
+		$content_type = isset( $panel_settings['content_type'] ) ? $panel_settings['content_type'] : $panel_default_settings['content_type']['default_value'];
 
 		include( 'views/settings-editor.php' );
 
 		die();
 	}
 
-	public function load_content_type_settings() {
-		$content_type = $_POST['type'];
+	public function ajax_load_content_type_settings() {
+		$type = $_POST['type'];
+
+		echo $this->load_content_type_settings( $type );
+
+		die();
+	}
+
+	public function load_content_type_settings( $type ) {
 		$panel_default_settings = Accordion_Slider_Settings::getPanelSettings();
 
-		if ( $content_type === 'posts' ) {
+		if ( $type === 'posts' ) {
 			$post_names = $this->get_post_names();
 
 			include( 'views/posts-content-settings.php' );
-		} else if ( $content_type === 'gallery' ) {
+		} else if ( $type === 'gallery' ) {
 			include( 'views/gallery-images-settings.php' );
-		} else if ( $content_type === 'flickr' ) {
+		} else if ( $type === 'flickr' ) {
 			include( 'views/flickr-settings.php' );
 		}
-
-		die();
 	}
 
 	public function get_post_names() {
@@ -459,7 +499,7 @@ class Accordion_Slider_Admin {
 		return $result;
 	}
 
-	public function get_taxonomies() {
+	public function ajax_get_taxonomies() {
 		$post_names = json_decode( stripslashes( $_GET['post_names'] ), true );
 
 		echo json_encode( $this->get_taxonomies_for_posts( $post_names ) );
@@ -496,13 +536,13 @@ class Accordion_Slider_Admin {
 		return $result;
 	}
 
-	public function add_breakpoint() {
+	public function ajax_add_breakpoint() {
 		include( 'views/breakpoint.php' );
 
 		die();
 	}
 
-	public function add_breakpoint_setting() {
+	public function ajax_add_breakpoint_setting() {
 		$setting_name = $_GET['data'];
 
 		echo $this->create_breakpoint_setting( $setting_name, false );

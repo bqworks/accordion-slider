@@ -1,5 +1,5 @@
 <div class="modal-overlay"></div>
-<div class="settings-editor<?php echo isset( $panel_settings['content_type'] ) ? ' ' . $panel_settings['content_type'] : ''; ?>">
+<div class="settings-editor <?php echo $content_type; ?>">
 	<span class="close-x"></span>
 	<h3 class="heading"><?php _e( 'Panel Settings', 'accordion-slider' ); ?></h3>
 	
@@ -13,7 +13,7 @@
 					<select class="panel-setting" name="content_type">
 						<?php
 							foreach ( $panel_default_settings['content_type']['available_values'] as $value_name => $value_label ) {
-								$selected = ( isset( $panel_settings['content_type'] ) && $value_name === $panel_settings['content_type'] ) || ( ! isset( $panel_settings['content_type'] ) && $value_name === $panel_default_settings['content_type']['default_value'] ) ? ' selected="selected"' : '';
+								$selected = ( $content_type === $value_name ) ? ' selected="selected"' : '';
 								echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
 	                        }
 						?>
@@ -23,17 +23,7 @@
 		</thead>
 		<tbody class="content-type-settings">
 			<?php
-				$content_type = isset( $panel_settings['content_type'] ) ? $panel_settings['content_type'] : '';
-
-				if ( $content_type === 'posts' ) {
-					$post_names = $this->get_post_names();
-
-					include( 'posts-content-settings.php' );
-				} else if ( $content_type === 'gallery' ) {
-					include( 'gallery-images-settings.php' );
-				} else if ( $content_type === 'flickr' ) {
-					include( 'flickr-settings.php' );
-				}
+				$this->load_content_type_settings( $content_type );
 			?>
 		</tbody>
 	</table>
