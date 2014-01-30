@@ -539,7 +539,6 @@
 
 			this.$element.find( '.edit-background-image' ).on( 'click', function( event ) {
 				event.preventDefault();
-
 				BackgroundImageEditor.open( that.id );
 			});
 
@@ -554,13 +553,11 @@
 
 			this.$element.find( '.edit-layers' ).on( 'click', function( event ) {
 				event.preventDefault();
-
 				LayersEditor.open( that.id );
 			});
 
 			this.$element.find( '.edit-settings' ).on( 'click', function( event ) {
 				event.preventDefault();
-
 				SettingsEditor.open( that.id );
 			});
 
@@ -680,15 +677,34 @@
 		},
 
 		init: function() {
+			var that = this;
+
 			this.editor = $( '.background-image-editor' );
 
-			this.editor.find( '.close, .close-x' ).on( 'click', $.proxy( this.close, this ) );
-			this.editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
-			this.editor.find( '.image-loader' ).on( 'click', $.proxy( this.openMediaLibrary, this ) );
-			this.editor.find( '.clear-fieldset' ).on( 'click', $.proxy( this.clearFieldset, this ) );
+			this.editor.find( '.close, .close-x' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.close();
+			});
+
+			this.editor.find( '.save' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.save();
+			});
+
+			this.editor.find( '.image-loader' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.openMediaLibrary( event );
+			});
+
+			this.editor.find( '.clear-fieldset' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.clearFieldset( event );
+			});
 		},
 
 		openMediaLibrary: function( event ) {
+			event.preventDefault();
+
 			var that = this,
 				target = $( event.target ).parents( '.fieldset' ).hasClass( 'opened-background-image' ) === true ? 'opened-background' : 'background',
 				imageLoader = this.editor.find( '.' + target + '-image .image-loader' );
@@ -720,6 +736,8 @@
 		},
 
 		clearFieldset: function( event ) {
+			event.preventDefault();
+
 			var target = $( event.target ).parents( '.fieldset' ),
 				imageLoader = target.find( '.image-loader' );
 
@@ -732,8 +750,6 @@
 		},
 
 		save: function() {
-			event.preventDefault();
-
 			var that = this;
 
 			this.editor.find( '.field' ).each(function() {
@@ -748,8 +764,6 @@
 		},
 
 		close: function() {
-			event.preventDefault();
-
 			this.editor.find( '.close, .close-x' ).off( 'click' );
 			this.editor.find( '.save' ).off( 'click' );
 			this.editor.find( '.image-loader' ).off( 'click' );
@@ -796,12 +810,30 @@
 
 			this.editor = $( '.layers-editor' );
 
-			this.editor.find( '.add-new-layer' ).on( 'click', $.proxy( this.addNewLayer, this ) );
-			this.editor.find( '.delete-layer' ).on( 'click', $.proxy( this.deleteLayer, this ) );
-			this.editor.find( '.duplicate-layer' ).on( 'click', $.proxy( this.duplicateLayer, this ) );
+			this.editor.find( '.add-new-layer' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.addNewLayer();
+			});
 
-			this.editor.find( '.close' ).on( 'click', $.proxy( this.close, this ) );
-			this.editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
+			this.editor.find( '.delete-layer' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.deleteLayer();
+			});
+
+			this.editor.find( '.duplicate-layer' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.duplicateLayer();
+			});
+
+			this.editor.find( '.close' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.close();
+			});
+
+			this.editor.find( '.save' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.save();
+			});
 
 			this.initViewport();
 
@@ -894,8 +926,6 @@
 		},
 
 		addNewLayer: function() {
-			event.preventDefault();
-
 			var that = this;
 
 			this.counter++;
@@ -915,8 +945,6 @@
 		},
 
 		deleteLayer: function() {
-			event.preventDefault();
-
 			var that = this,
 				removedIndex;
 
@@ -938,8 +966,6 @@
 		},
 
 		duplicateLayer: function() {
-			event.preventDefault();
-
 			var that = this,
 				layerData;
 
@@ -966,8 +992,6 @@
 		},
 
 		save: function() {
-			event.preventDefault();
-
 			var data = [];
 
 			$.each( this.layers, function( index, element ) {
@@ -980,8 +1004,6 @@
 		},
 
 		close: function() {
-			event.preventDefault();
-
 			this.layers.length = 0;
 
 			this.editor.find( '.close' ).off( 'click' );
@@ -1373,8 +1395,15 @@
 
 			this.editor = $( '.settings-editor' );
 			
-			this.editor.find( '.close, .close-x' ).on( 'click', $.proxy( this.close, this ) );
-			this.editor.find( '.save' ).on( 'click', $.proxy( this.save, this ) );
+			this.editor.find( '.close, .close-x' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.close();
+			});
+
+			this.editor.find( '.save' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.save();
+			});
 
 			this.editor.find( '.panel-setting[name="content_type"]' ).on( 'change', function() {
 				that.loadControls( $( this ).val() );
@@ -1438,9 +1467,7 @@
 			});
 		},
 
-		save: function() {
-			event.preventDefault();
-
+		save: function( ) {
 			var that = this;
 
 			this.editor.find( '.panel-setting' ).each(function() {
@@ -1454,8 +1481,6 @@
 		},
 
 		close: function() {
-			event.preventDefault();
-
 			this.editor.find( '.close, .close-x' ).off( 'click' );
 			this.editor.find( '.save' ).off( 'click' );
 
@@ -1518,7 +1543,9 @@
 			this.previewWindow = $( '.preview-window' );
 			this.accordion = this.previewWindow.find( '.accordion-slider' );
 
-			this.previewWindow.find( '.close-x' ).on( 'click', $.proxy( this.close, this ) );
+			this.previewWindow.find( '.close-x' ).on( 'click', function( event ) {
+				that.close();
+			});
 
 			var accordionWidth = this.accordionData[ 'settings' ][ 'width' ],
 				accordionHeight = this.accordionData[ 'settings' ][ 'height' ],
@@ -1548,8 +1575,6 @@
 		},
 
 		close: function() {
-			event.preventDefault();
-
 			this.previewWindow.find( '.close-x' ).off( 'click' );
 
 			this.accordion.accordionSlider( 'destroy' );
