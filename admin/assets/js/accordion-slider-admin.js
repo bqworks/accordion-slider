@@ -1444,7 +1444,8 @@
 		},
 
 		handlePostsSelects: function() {
-			var $taxonomies = this.editor.find( 'select[name="posts_taxonomy"]' );
+			var that = this,
+				$taxonomies = this.editor.find( 'select[name="posts_taxonomy"]' );
 
 			this.editor.find( 'select[name="posts_post_type"]' ).on( 'change', function() {
 				var postNames = $(this).val();
@@ -1457,9 +1458,10 @@
 							
 						$.each( taxonomies, function( index, taxonomy ) {
 							var	$taxonomy = $( '<optgroup label="' + taxonomy[ 'label' ] + '"></optgroup>' ).appendTo( $taxonomies );
-								
+							
 							$.each( taxonomy['terms'], function( index, term ) {
-								$( '<option value="' + term[ 'slug' ] + '">' + term[ 'name' ] + '</option>' ).appendTo( $taxonomy );
+								var selected = $.inArray( term[ 'slug' ], that.settingsData[ 'posts_taxonomy' ] ) !== -1 ? ' selected="selected"' : '';
+								$( '<option value="' + term[ 'slug' ] + '"' + selected + '>' + term[ 'name' ] + '</option>' ).appendTo( $taxonomy );
 							});
 						});
 					});
