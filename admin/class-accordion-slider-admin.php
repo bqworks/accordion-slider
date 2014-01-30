@@ -476,7 +476,7 @@ class Accordion_Slider_Admin {
 	}
 
 	public function get_post_names() {
-		$result = [];
+		$result = array();
 
 		$post_names_transient = get_transient( 'accordion_slider_post_names' );
 
@@ -508,9 +508,25 @@ class Accordion_Slider_Admin {
 	}
 
 	public function get_taxonomies_for_posts( $post_names ) {
-		$result = [];
+		$result = array();
+		$posts_to_load = array();
 
-		foreach ( $post_names as $post_name ) {
+		$posts_data_transient = get_transient( 'accordion_slider_posts_data' );
+
+		if ( $posts_data_transient === false || empty( $posts_data_transient ) === true ) {
+			$posts_to_load = $post_names;
+			$posts_data_transient = array();
+		} else {
+			foreach ( $post_names as $post_name ) {
+				if ( array_key_exists( $post_name, $posts_data_transient ) === true ) {
+					$result[ $post_name ] = $posts_data_transient[ $post_name ];
+				} else {
+					array_push( $posts_to_load, $post_name );
+				}
+			}
+		}
+
+		foreach ( $posts_to_load as $post_name ) {
 			$result[ $post_name ] = array();
 
 			$taxonomies = get_object_taxonomies( $post_name, 'objects' );
@@ -531,8 +547,12 @@ class Accordion_Slider_Admin {
 					);
 				}
 			}
+
+			$posts_data_transient[ $post_name ] = $result[ $post_name ];
 		}
 
+		set_transient( 'accordion_slider_posts_data', $posts_data_transient, 5 * 60 );
+		
 		return $result;
 	}
 

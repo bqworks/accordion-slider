@@ -9,6 +9,10 @@
 	Author URI: http://bqworks.com
 */
 
+require_once('/Users/david/webdev/FirePHPCore/FirePHP.class.php');
+require_once('/Users/david/webdev/FirePHPCore/fb.php');
+ob_start();
+
 // if the file is called directly, abort
 if ( ! defined( 'WPINC' ) ) {
 	die();

@@ -1423,7 +1423,6 @@
 				$taxonomies.empty();
 
 				AccordionSliderAdmin.getTaxonomies( postNames, function( data ) {
-					console.log(data);
 					$.each( postNames, function( index, postName ) {
 						var taxonomies = data[ postName ];
 							
