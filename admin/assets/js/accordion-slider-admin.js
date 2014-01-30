@@ -1445,9 +1445,11 @@
 
 		handlePostsSelects: function() {
 			var that = this,
+				$postTypes = this.editor.find( 'select[name="posts_post_type"]' ),
 				$taxonomies = this.editor.find( 'select[name="posts_taxonomy"]' );
 
-			this.editor.find( 'select[name="posts_post_type"]' ).on( 'change', function() {
+
+			$postTypes.on( 'change', function() {
 				var postNames = $(this).val();
 
 				$taxonomies.empty();
@@ -1458,7 +1460,7 @@
 							
 						$.each( taxonomies, function( index, taxonomy ) {
 							var	$taxonomy = $( '<optgroup label="' + taxonomy[ 'label' ] + '"></optgroup>' ).appendTo( $taxonomies );
-							
+
 							$.each( taxonomy['terms'], function( index, term ) {
 								var selected = $.inArray( term[ 'slug' ], that.settingsData[ 'posts_taxonomy' ] ) !== -1 ? ' selected="selected"' : '';
 								$( '<option value="' + term[ 'slug' ] + '"' + selected + '>' + term[ 'name' ] + '</option>' ).appendTo( $taxonomy );
@@ -1467,6 +1469,9 @@
 					});
 				});
 			});
+
+			$postTypes.multiCheck();
+			$taxonomies.multiCheck();
 		},
 
 		save: function( ) {
@@ -1589,6 +1594,125 @@
 	});
 
 })( jQuery );
+
+;(function( $, window, document ) {
+
+	var MultiCheck = function( instance, options ) {
+
+		this.options = options;
+		this.$select = $( instance );
+		this.$multiCheck = null;
+		this.$multiCheckHeader = null;
+		this.$multiCheckContent = null;
+
+		this.uid = new Date().valueOf();
+
+		this.events = $( {} );
+
+		this.init();
+	};
+
+	MultiCheck.prototype = {
+
+		init: function() {
+			var that = this;
+
+			this.settings = $.extend( {}, this.defaults, this.options );
+
+			this.$multiCheck = $( '<div class="multi-check"></div>' );
+			this.$multiCheckHeader = $( '<div class="multi-check-header"></div>' ).appendTo( this.$multiCheck );
+			this.$multiCheckContent = $( '<div class="multi-check-content"></div>' ).appendTo( this.$multiCheck );
+
+			this.$select.children().each(function() {
+				if ( $( this ).is( 'optgroup' ) ) {
+					$( '<div class="group-label">' + $( this ).attr( 'label' ) + '</div>' ).appendTo( that.$multiCheckContent );
+
+					$( this ).children().each(function() {
+						that.optionToCheckbox( $( this ) );
+					});
+				} else {
+					that.optionToCheckbox( $( this ) );
+				}
+			});
+
+			this.updateHeader();
+
+			this.$select.after( this.$multiCheck );
+			this.$select.hide();
+			this.$multiCheckContent.hide();
+
+			this.$multiCheckHeader.on( 'click', function() {
+				that.$multiCheckContent.toggle();
+			});
+		},
+
+		optionToCheckbox: function( target ) {
+			$( '<div class="single-check-container"><input class="single-check" type="checkbox" value="' + target.attr( 'value' ) + '"' + ( target.is( ':selected' ) ? ' checked="checked"' : '' ) + ' /><label>' + target.text() + '</label></div>' ).appendTo( this.$multiCheckContent );
+		},
+
+		updateHeader: function() {
+			var headerText = '';
+
+			this.$multiCheckContent.find( '.single-check' ).each( function() {
+				if ( $( this ).is( ':checked' ) ) {
+					if ( headerText !== '' ) {
+						headerText += ', ';
+					}
+
+					headerText += $( this ).siblings( 'label' ).text();
+				}
+			});
+
+			if ( headerText === '' ) {
+				headerText = 'Click to select';
+			}
+
+			this.$multiCheckHeader.text( headerText );
+		},
+
+		destroy: function() {
+			
+		},
+
+		on: function( type, callback ) {
+			return this.events.on( type, callback );
+		},
+		
+		off: function( type ) {
+			return this.events.off( type );
+		},
+
+		trigger: function( data ) {
+			return this.events.triggerHandler( data );
+		},
+
+		defaults: {
+
+		}
+
+	};
+
+	$.fn.multiCheck = function( options ) {
+		var args = Array.prototype.slice.call( arguments, 1 );
+
+		return this.each(function() {
+			if ( typeof $( this ).data( 'multiCheck' ) === 'undefined' ) {
+				var newInstance = new MultiCheck( this, options );
+
+				$( this ).data( 'multiCheck', newInstance );
+			} else if ( typeof options !== 'undefined' ) {
+				var	currentInstance = $( this ).data( 'multiCheck' );
+
+				if ( typeof currentInstance[ options ] === 'function' ) {
+					currentInstance[ options ].apply( currentInstance, args );
+				} else {
+					$.error( options + ' does not exist in multiCheck.' );
+				}
+			}
+		});
+	};
+
+})(jQuery, window, document);
 
 ;(function( $, window, document ) {
 
