@@ -1810,12 +1810,12 @@
 		init: function() {
 			this.settings = $.extend( {}, this.defaults, this.options );
 
-			this.$container.on( 'mousedown.lightSortable' + this.uid, $.proxy( this.onDragStart, this ) );
-			$( 'body' ).on( 'mousemove.lightSortable.' + this.uid, $.proxy( this.onDragging, this ) );
-			$( 'body' ).on( 'mouseup.lightSortable.' + this.uid, $.proxy( this.onDragEnd, this ) );
+			this.$container.on( 'mousedown.lightSortable' + this.uid, $.proxy( this._onDragStart, this ) );
+			$( 'body' ).on( 'mousemove.lightSortable.' + this.uid, $.proxy( this._onDragging, this ) );
+			$( 'body' ).on( 'mouseup.lightSortable.' + this.uid, $.proxy( this._onDragEnd, this ) );
 		},
 
-		onDragStart: function( event ) {
+		_onDragStart: function( event ) {
 			if ( event.which !== 1 || $( event.target ).is( 'select' ) || $( event.target ).is( 'input' ) ) {
 				return;
 			}
@@ -1832,7 +1832,7 @@
 			}
 		},
 
-		onDragging: function( event ) {
+		_onDragging: function( event ) {
 			if ( this.$selectedChild === null )
 				return;
 
@@ -1898,7 +1898,7 @@
 			this.$selectedChild.css( { 'left': this.currentMouseX - this.initialMouseX + this.panelInitialX, 'top': this.currentMouseY - this.initialMouseY + this.panelInitialY } );
 		},
 
-		onDragEnd: function() {
+		_onDragEnd: function() {
 			if ( this.isDragging ) {
 				this.isDragging = false;
 
@@ -1924,8 +1924,10 @@
 		},
 
 		destroy: function() {
+			this.$container.removeData( 'lightSortable' );
+			
 			if ( this.isDragging ) {
-				this.onDragEnd();
+				this._onDragEnd();
 			}
 
 			this.$container.off( 'mousedown.lightSortable.' + this.uid );
