@@ -1633,7 +1633,8 @@
 		this.$multiCheckHeader = null;
 		this.$multiCheckContent = null;
 
-		this.uid = new Date().valueOf();
+		this.uid = new Date().valueOf() * Math.random();
+		this.counter = 0;
 
 		this.init();
 	};
@@ -1673,6 +1674,8 @@
 		refresh: function() {
 			var that = this;
 
+			this.counter = 0;
+
 			this.$multiCheckContent.find( '.single-check' ).off( 'change.multiCheck' );
 			this.$multiCheckContent.empty();
 
@@ -1705,10 +1708,12 @@
 
 		_optionToCheckbox: function( target ) {
 			var $singleCheckContainer = $( '<li class="single-check-container"></li>' ).appendTo( this.$multiCheckContent ),
-				$singleCheck = $( '<input class="single-check" type="checkbox" value="' + target.attr( 'value' ) + '"' + ( target.is( ':selected' ) ? ' checked="checked"' : '' ) + ' />' ).appendTo( $singleCheckContainer ),
-				$singleCheckLabel = $( '<label>' + target.text() + '</label>' ).appendTo( $singleCheckContainer );
+				$singleCheck = $( '<input id="single-check-' + this.uid + '-' + this.counter + '" class="single-check" type="checkbox" value="' + target.attr( 'value' ) + '"' + ( target.is( ':selected' ) ? ' checked="checked"' : '' ) + ' />' ).appendTo( $singleCheckContainer ),
+				$singleCheckLabel = $( '<label for="single-check-' + this.uid + '-' + this.counter + '">' + target.text() + '</label>' ).appendTo( $singleCheckContainer );
 			
 			$singleCheck.data( 'option', target );
+
+			this.counter++;
 		},
 
 		_updateHeader: function() {
