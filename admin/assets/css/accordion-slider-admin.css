@@ -38,6 +38,13 @@
 	float: left;
 	width: 32%;
 	margin: 1% 2% 1% 0;
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	border: 1px solid #e5e5e5;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .panel:nth-child(3n) {
@@ -82,7 +89,7 @@
 
 .panel-buttons {
 	height: 44px;
-	background: #F5F5F5;
+	background: #FFF;
 	text-align: center;
 	cursor: move;
 }
@@ -546,7 +553,7 @@
 }
 
 .settings-editor.posts {
-	height: 425px;
+	height: 435px;
 }
 
 .settings-editor.gallery {
