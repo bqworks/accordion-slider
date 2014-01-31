@@ -750,14 +750,15 @@
 		},
 
 		save: function() {
-			var that = this;
+			var that = this,
+				data = {};
 
 			this.editor.find( '.field' ).each(function() {
 				var field = $( this );
-				that.backgroundData[ field.attr('name') ] = field.val();
+				data[ field.attr('name') ] = field.val();
 			});
 
-			this.currentPanel.setData( 'background', this.backgroundData );
+			this.currentPanel.setData( 'background', data );
 			this.currentPanel.updateBackgroundImage();
 
 			this.close();
@@ -1496,14 +1497,15 @@
 		},
 
 		save: function( ) {
-			var that = this;
+			var that = this,
+				data = {};
 
 			this.editor.find( '.panel-setting' ).each(function() {
 				var $setting = $( this );
-				that.settingsData[ $setting.attr( 'name' ) ] = $setting.attr( 'type' ) === 'checkbox' ? $setting.is( ':checked' ) : $setting.val();
+				data[ $setting.attr( 'name' ) ] = $setting.attr( 'type' ) === 'checkbox' ? $setting.is( ':checked' ) : $setting.val();
 			});
 
-			this.currentPanel.setData( 'settings', this.settingsData );
+			this.currentPanel.setData( 'settings', data );
 
 			this.close();
 		},
@@ -1511,6 +1513,9 @@
 		close: function() {
 			this.editor.find( '.close, .close-x' ).off( 'click' );
 			this.editor.find( '.save' ).off( 'click' );
+
+			this.editor.find( 'select[name="posts_post_type"]' ).multiCheck( 'destroy' );
+			this.editor.find( 'select[name="posts_taxonomy"]' ).multiCheck( 'destroy' );
 
 			$( 'body' ).find( '.modal-overlay, .settings-editor' ).remove();
 		}
