@@ -1833,7 +1833,7 @@
 		},
 
 		_onDragging: function( event ) {
-			if ( this.$selectedChild === null )
+			if ( this.$selectedChild === null || this.$selectedChild.length === 0 )
 				return;
 
 			this.currentMouseX = event.pageX;
@@ -1925,7 +1925,7 @@
 
 		destroy: function() {
 			this.$container.removeData( 'lightSortable' );
-			
+
 			if ( this.isDragging ) {
 				this._onDragEnd();
 			}
