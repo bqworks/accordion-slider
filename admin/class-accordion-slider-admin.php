@@ -529,30 +529,29 @@ class Accordion_Slider_Admin {
 		foreach ( $posts_to_load as $post_name ) {
 			$taxonomies = get_object_taxonomies( $post_name, 'objects' );
 
-			if ( ! empty( $taxonomies ) ) {
-				$result[ $post_name ] = array();
+			$result[ $post_name ] = array();
 
-				foreach ( $taxonomies as $taxonomy ) {
-					$terms = get_terms( $taxonomy->name, 'objects' );
+			foreach ( $taxonomies as $taxonomy ) {
+				$terms = get_terms( $taxonomy->name, 'objects' );
 
-					if ( ! empty( $terms ) ) {
-						$result[ $post_name ][ $taxonomy->name ] = array(
-							'name' => $taxonomy->name,
-							'label' => $taxonomy->label,
-							'terms' => array()
+				if ( ! empty( $terms ) ) {
+					$result[ $post_name ][ $taxonomy->name ] = array(
+						'name' => $taxonomy->name,
+						'label' => $taxonomy->label,
+						'terms' => array()
+					);
+
+					foreach ( $terms as $term ) {
+						$result[ $post_name ][ $taxonomy->name ]['terms'][ $term->name ] = array(
+							'name' => $term->name,
+							'slug' => $term->slug,
+							'full' => $taxonomy->name . '|' . $term->name
 						);
-
-						foreach ( $terms as $term ) {
-							$result[ $post_name ][ $taxonomy->name ]['terms'][ $term->name ] = array(
-								'name' => $term->name,
-								'slug' => $term->slug
-							);
-						}
 					}
 				}
-
-				$posts_data_transient[ $post_name ] = $result[ $post_name ];
 			}
+
+			$posts_data_transient[ $post_name ] = $result[ $post_name ];
 		}
 
 		set_transient( 'accordion_slider_posts_data', $posts_data_transient, 5 * 60 );

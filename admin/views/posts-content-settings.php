@@ -31,8 +31,8 @@
 							echo '<optgroup label="' . $taxonomy['label'] . '">';
 
 							foreach ( $taxonomy['terms'] as $term ) {
-								$selected = isset( $panel_settings['posts_taxonomy'] ) && in_array( $term[ 'slug' ], $panel_settings['posts_taxonomy'] ) ? ' selected="selected"' : '';
-								echo '<option value="' . $term[ 'slug' ] . '"' . $selected . '>' . $term[ 'name' ] . '</option>';
+								$selected = isset( $panel_settings['posts_taxonomy'] ) && in_array( $term[ 'full' ], $panel_settings['posts_taxonomy'] ) ? ' selected="selected"' : '';
+								echo '<option value="' . $term[ 'full' ] . '"' . $selected . '>' . $term[ 'name' ] . '</option>';
 							}
 
 							echo '</optgroup>';

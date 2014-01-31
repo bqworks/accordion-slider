@@ -1465,8 +1465,8 @@
 								var	$taxonomy = $( '<optgroup label="' + taxonomy[ 'label' ] + '"></optgroup>' ).appendTo( $taxonomies );
 
 								$.each( taxonomy[ 'terms' ], function( index, term ) {
-									var selected = $.inArray( term[ 'slug' ], selectedTaxonomies ) !== -1 ? ' selected="selected"' : '';
-									$( '<option value="' + term[ 'slug' ] + '"' + selected + '>' + term[ 'name' ] + '</option>' ).appendTo( $taxonomy );
+									var selected = $.inArray( term[ 'full' ], selectedTaxonomies ) !== -1 ? ' selected="selected"' : '';
+									$( '<option value="' + term[ 'full' ] + '"' + selected + '>' + term[ 'name' ] + '</option>' ).appendTo( $taxonomy );
 								});
 							});
 						});
