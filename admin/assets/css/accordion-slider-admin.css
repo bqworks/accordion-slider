@@ -604,7 +604,7 @@
 }
 
 .settings-editor .multi-check {
-    margin-left: 14px;
+    display: inline-block;
 }
 
 .breakpoints-box .inside {
@@ -713,10 +713,12 @@
 }
 
 .multi-check-header-arrow {
-	float: right;
+	position: absolute;
+	top: 50%;
+	right: 5px;
 	color: #333;
 	font-size: 11px;
-	margin-top: 2px;
+	margin-top: -7px;
 }
 
 .multi-check-content {
