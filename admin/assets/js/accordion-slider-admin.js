@@ -1717,23 +1717,33 @@
 		},
 
 		_updateHeader: function() {
-			var headerText = '';
+			var $headerText = this.$multiCheckHeader.find( '.multi-check-header-text' ),
+				text = '',
+				count = 0,
+				that = this;
 
 			this.$multiCheckContent.find( '.single-check' ).each( function() {
 				if ( $( this ).is( ':checked' ) ) {
-					if ( headerText !== '' ) {
-						headerText += ', ';
+					if ( text !== '' ) {
+						text += ', ';
 					}
 
-					headerText += $( this ).siblings( 'label' ).text();
+					text += $( this ).siblings( 'label' ).text();
+					count++;
 				}
 			});
 
-			if ( headerText === '' ) {
-				headerText = 'Click to select';
+			if ( text === '' ) {
+				text = 'Click to select';
 			}
 
-			this.$multiCheckHeader.find( '.multi-check-header-text' ).text( headerText );
+			$headerText.text( text );
+
+			setTimeout(function() {
+				if ( $headerText.width() > that.$multiCheckHeader.width() - 10 ) {
+					$headerText.text( count + ' selected' );
+				}
+			}, 1);
 		},
 
 		open: function() {
