@@ -603,6 +603,10 @@
 	margin-top: 10px;
 }
 
+.settings-editor .multi-check {
+    margin-left: 14px;
+}
+
 .breakpoints-box .inside {
 	margin: 0;
 	padding: 0;
@@ -696,25 +700,39 @@
 }
 
 .multi-check {
-	text-align: left;
-    width: 215px;
-    margin-left: 14px;
-    border: 1px solid #CCC;
-    padding: 0 5px;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+	position: relative;
+    text-align: left;
 }
 
 .multi-check-header {
+	width: 100%;
 	padding: 5px;
+	text-align: left;
 	cursor: pointer;
+	white-space: nowrap;
+}
+
+.multi-check-header-arrow {
+	float: right;
+	color: #333;
+	font-size: 11px;
+	margin-top: 2px;
 }
 
 .multi-check-content {
 	overflow: auto;
-	height: 100px;
-	border-top: 1px solid #CCC;
+	position: absolute;
+	width: 100%;
+	min-height: 50px;
+	max-height: 150px;
+	margin: 0;
+	padding: 0 5px;
+	border: 1px solid #999;
+	background-color: #FFF;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	z-index: 1000;
 }
 
 .multi-check input {

@@ -1446,7 +1446,8 @@
 		handlePostsSelects: function() {
 			var that = this,
 				$postTypes = this.editor.find( 'select[name="posts_post_type"]' ),
-				$taxonomies = this.editor.find( 'select[name="posts_taxonomy"]' );
+				$taxonomies = this.editor.find( 'select[name="posts_taxonomy"]' ),
+				selectedTaxonomies = $taxonomies.val() || [];
 
 
 			$postTypes.on( 'change', function() {
@@ -1454,24 +1455,44 @@
 
 				$taxonomies.empty();
 
-				AccordionSliderAdmin.getTaxonomies( postNames, function( data ) {
-					$.each( postNames, function( index, postName ) {
-						var taxonomies = data[ postName ];
-							
-						$.each( taxonomies, function( index, taxonomy ) {
-							var	$taxonomy = $( '<optgroup label="' + taxonomy[ 'label' ] + '"></optgroup>' ).appendTo( $taxonomies );
+				if ( postNames !== null ) {
+					AccordionSliderAdmin.getTaxonomies( postNames, function( data ) {
+						$.each( postNames, function( index, postName ) {
+							var taxonomies = data[ postName ];
+								
+							$.each( taxonomies, function( index, taxonomy ) {
+								var	$taxonomy = $( '<optgroup label="' + taxonomy[ 'label' ] + '"></optgroup>' ).appendTo( $taxonomies );
 
-							$.each( taxonomy['terms'], function( index, term ) {
-								var selected = $.inArray( term[ 'slug' ], that.settingsData[ 'posts_taxonomy' ] ) !== -1 ? ' selected="selected"' : '';
-								$( '<option value="' + term[ 'slug' ] + '"' + selected + '>' + term[ 'name' ] + '</option>' ).appendTo( $taxonomy );
+								$.each( taxonomy[ 'terms' ], function( index, term ) {
+									var selected = $.inArray( term[ 'slug' ], selectedTaxonomies ) !== -1 ? ' selected="selected"' : '';
+									$( '<option value="' + term[ 'slug' ] + '"' + selected + '>' + term[ 'name' ] + '</option>' ).appendTo( $taxonomy );
+								});
 							});
 						});
+
+						$taxonomies.multiCheck( 'refresh' );
 					});
+				} else {
+					$taxonomies.multiCheck( 'refresh' );
+				}
+			});
+
+			$taxonomies.on( 'change', function( event ) {
+				$taxonomies.find( 'option' ).each( function() {
+					var option = $( this ),
+						term =  option.attr( 'value' ),
+						index = $.inArray( term, selectedTaxonomies );
+
+					if ( option.is( ':selected' ) === true && index === -1 ) {
+						selectedTaxonomies.push( term );
+					} else if ( option.is( ':selected' ) === false && index !== -1 ) {
+						selectedTaxonomies.splice( index, 1 );
+					}
 				});
 			});
 
-			$postTypes.multiCheck();
-			$taxonomies.multiCheck();
+			$postTypes.multiCheck( { width: 215} );
+			$taxonomies.multiCheck( { width: 215} );
 		},
 
 		save: function( ) {
@@ -1600,14 +1621,14 @@
 	var MultiCheck = function( instance, options ) {
 
 		this.options = options;
+		this.isOpened = false;
+
 		this.$select = $( instance );
 		this.$multiCheck = null;
 		this.$multiCheckHeader = null;
 		this.$multiCheckContent = null;
 
 		this.uid = new Date().valueOf();
-
-		this.events = $( {} );
 
 		this.init();
 	};
@@ -1619,38 +1640,73 @@
 
 			this.settings = $.extend( {}, this.defaults, this.options );
 
-			this.$multiCheck = $( '<div class="multi-check"></div>' );
-			this.$multiCheckHeader = $( '<div class="multi-check-header"></div>' ).appendTo( this.$multiCheck );
-			this.$multiCheckContent = $( '<div class="multi-check-content"></div>' ).appendTo( this.$multiCheck );
+			this.$multiCheck = $( '<div class="multi-check"></div>' ).css( 'width', this.settings.width );
+			this.$multiCheckHeader = $( '<button type="button" class="multi-check-header"><span class="multi-check-header-text"></span><span class="multi-check-header-arrow">▼</span></button>' ).appendTo( this.$multiCheck );
+			this.$multiCheckContent = $( '<ul class="multi-check-content"></ul>' ).appendTo( this.$multiCheck );
 
-			this.$select.children().each(function() {
-				if ( $( this ).is( 'optgroup' ) ) {
-					$( '<div class="group-label">' + $( this ).attr( 'label' ) + '</div>' ).appendTo( that.$multiCheckContent );
-
-					$( this ).children().each(function() {
-						that.optionToCheckbox( $( this ) );
-					});
-				} else {
-					that.optionToCheckbox( $( this ) );
+			this.$multiCheckHeader.on( 'mousedown.multiCheck', function( event ) {
+				if ( that.isOpened === false ) {
+					that.open();
+				} else if ( that.isOpened === true ) {
+					that.close();
+				}
+			});
+			
+			$( document ).on( 'mousedown.multiCheck.' + this.uid , function( event ) {
+				if ( $.contains( that.$multiCheck[0], event.target ) === false ) {
+					that.close();
 				}
 			});
 
-			this.updateHeader();
+			this.refresh();
 
 			this.$select.after( this.$multiCheck );
 			this.$select.hide();
 			this.$multiCheckContent.hide();
+		},
 
-			this.$multiCheckHeader.on( 'click', function() {
-				that.$multiCheckContent.toggle();
+		refresh: function() {
+			var that = this;
+
+			this.$multiCheckContent.find( '.single-check' ).off( 'change.multiCheck' );
+			this.$multiCheckContent.empty();
+
+			this.$select.children().each(function() {
+				if ( $( this ).is( 'optgroup' ) ) {
+					$( '<li class="group-label">' + $( this ).attr( 'label' ) + '</li>' ).appendTo( that.$multiCheckContent );
+
+					$( this ).children().each(function() {
+						that._optionToCheckbox( $( this ) );
+					});
+				} else {
+					that._optionToCheckbox( $( this ) );
+				}
 			});
+
+			this.$multiCheckContent.find( '.single-check' ).on( 'change.multiCheck', function() {
+				if ( $( this ).is( ':checked' ) ) {
+					$( this ).data( 'option' ).attr( 'selected', 'selected' );
+				} else {
+					$( this ).data( 'option' ).removeAttr( 'selected' );
+				}
+
+				that.$select.trigger( 'change' );
+
+				that._updateHeader();
+			});
+
+			this._updateHeader();
 		},
 
-		optionToCheckbox: function( target ) {
-			$( '<div class="single-check-container"><input class="single-check" type="checkbox" value="' + target.attr( 'value' ) + '"' + ( target.is( ':selected' ) ? ' checked="checked"' : '' ) + ' /><label>' + target.text() + '</label></div>' ).appendTo( this.$multiCheckContent );
+		_optionToCheckbox: function( target ) {
+			var $singleCheckContainer = $( '<li class="single-check-container"></li>' ).appendTo( this.$multiCheckContent ),
+				$singleCheck = $( '<input class="single-check" type="checkbox" value="' + target.attr( 'value' ) + '"' + ( target.is( ':selected' ) ? ' checked="checked"' : '' ) + ' />' ).appendTo( $singleCheckContainer ),
+				$singleCheckLabel = $( '<label>' + target.text() + '</label>' ).appendTo( $singleCheckContainer );
+			
+			$singleCheck.data( 'option', target );
 		},
 
-		updateHeader: function() {
+		_updateHeader: function() {
 			var headerText = '';
 
 			this.$multiCheckContent.find( '.single-check' ).each( function() {
@@ -1667,27 +1723,34 @@
 				headerText = 'Click to select';
 			}
 
-			this.$multiCheckHeader.text( headerText );
+			this.$multiCheckHeader.find( '.multi-check-header-text' ).text( headerText );
+		},
+
+		open: function() {
+			var that = this;
+
+			this.isOpened = true;
+
+			this.$multiCheckContent.show();
+		},
+
+		close: function() {
+			this.isOpened = false;
+
+			this.$multiCheckContent.hide();
 		},
 
 		destroy: function() {
-			
-		},
-
-		on: function( type, callback ) {
-			return this.events.on( type, callback );
-		},
-		
-		off: function( type ) {
-			return this.events.off( type );
-		},
-
-		trigger: function( data ) {
-			return this.events.triggerHandler( data );
+			this.$select.removeData( 'multiCheck' );
+			this.$multiCheckHeader.off( 'mousedown.multiCheck' );
+			$( document ).off( 'mousedown.multiCheck.' + this.uid );
+			this.$multiCheckContent.find( '.single-check' ).off( 'change.multiCheck' );
+			this.$multiCheck.remove();
+			this.$select.show();
 		},
 
 		defaults: {
-
+			width: 200
 		}
 
 	};
