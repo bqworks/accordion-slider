@@ -632,12 +632,14 @@ class Accordion_Slider_Settings {
 				),
 				'posts_post_type' => array(
 					'label' => __( 'Posts', 'accordion-slider' ),
-					'type' => 'select',
+					'type' => 'multiselect',
+					'default_value' => array( 'post' ),
 					'description' => ''
 				),
 				'posts_taxonomy' => array(
 					'label' => __( 'Taxonomy', 'accordion-slider' ),
 					'type' => 'multiselect',
+					'default_value' => '',
 					'description' => ''
 				),
 				'posts_relation' => array(

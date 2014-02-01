@@ -6,7 +6,7 @@
 		<select multiple class="panel-setting" name="posts_post_type">
 			<?php
 				foreach ( $post_names as $value ) {
-					$selected = isset( $panel_settings['posts_post_type'] ) && in_array( $value['name'], $panel_settings['posts_post_type'] ) ? ' selected="selected"' : '';
+					$selected = ( isset( $panel_settings['posts_post_type'] ) && in_array( $value['name'], $panel_settings['posts_post_type'] ) ) || ( ! isset( $panel_settings['posts_post_type'] ) && in_array( $value['name'], $panel_default_settings['posts_post_type']['default_value'] ) ) ? ' selected="selected"' : '';
 					echo '<option value="' . $value['name'] . '"' . $selected . '>' . $value['label'] . '</option>';
 				}
 			?>
