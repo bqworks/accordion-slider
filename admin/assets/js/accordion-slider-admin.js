@@ -656,19 +656,18 @@
 
 		currentPanel: null,
 
-		backgroundData: null,
-
 		open: function( id ) {
 			var that = this;
 
 			this.currentPanel = AccordionSliderAdmin.getPanel( id );
-			this.backgroundData = this.currentPanel.getData( 'background' );
+			
+			var data = this.currentPanel.getData( 'background' );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				dataType: 'html',
-				data: { action: 'accordion_slider_load_background_image_editor', data: JSON.stringify( this.backgroundData ) },
+				data: { action: 'accordion_slider_load_background_image_editor', data: JSON.stringify( data ) },
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
@@ -1371,19 +1370,18 @@
 
 		currentPanel: null,
 
-		settingsData: null,
-
 		open: function( id ) {
 			var that = this;
 
 			this.currentPanel = AccordionSliderAdmin.getPanel( id );
-			this.settingsData = this.currentPanel.getData( 'settings' );
+			
+			var data = this.currentPanel.getData( 'settings' );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				dataType: 'html',
-				data: { action: 'accordion_slider_load_settings_editor', data: JSON.stringify( this.settingsData ) },
+				data: { action: 'accordion_slider_load_settings_editor', data: JSON.stringify( data ) },
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
