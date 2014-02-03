@@ -1829,8 +1829,8 @@
 			this.settings = $.extend( {}, this.defaults, this.options );
 
 			this.$container.on( 'mousedown.lightSortable' + this.uid, $.proxy( this._onDragStart, this ) );
-			$( 'body' ).on( 'mousemove.lightSortable.' + this.uid, $.proxy( this._onDragging, this ) );
-			$( 'body' ).on( 'mouseup.lightSortable.' + this.uid, $.proxy( this._onDragEnd, this ) );
+			$( document ).on( 'mousemove.lightSortable.' + this.uid, $.proxy( this._onDragging, this ) );
+			$( document ).on( 'mouseup.lightSortable.' + this.uid, $.proxy( this._onDragEnd, this ) );
 		},
 
 		_onDragStart: function( event ) {
@@ -1949,8 +1949,8 @@
 			}
 
 			this.$container.off( 'mousedown.lightSortable.' + this.uid );
-			$( 'body' ).off( 'mousemove.lightSortable.' + this.uid );
-			$( 'body' ).off( 'mouseup.lightSortable.' + this.uid );
+			$( document ).off( 'mousemove.lightSortable.' + this.uid );
+			$( document ).off( 'mouseup.lightSortable.' + this.uid );
 		},
 
 		on: function( type, callback ) {
