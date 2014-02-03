@@ -111,11 +111,3 @@
 		<input class="panel-setting" type="text" name="posts_maximum" value="<?php echo isset( $panel_settings['posts_maximum'] ) ? esc_attr( $panel_settings['posts_maximum'] ) : $panel_default_settings['posts_maximum']['default_value']; ?>" />
 	</td>
 </tr>
-<tr>
-	<td class="label-cell">
-		<label><?php _e( 'Start At', 'accordion-slider' ); ?>:</label>
-	</td>
-	<td class="setting-cell">
-		<input class="panel-setting" type="text" name="posts_offset" value="<?php echo isset( $panel_settings['posts_offset'] ) ? esc_attr( $panel_settings['posts_offset'] ) : $panel_default_settings['posts_offset']['default_value']; ?>" />
-	</td>
-</tr>

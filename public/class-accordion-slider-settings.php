@@ -645,20 +645,20 @@ class Accordion_Slider_Settings {
 				'posts_relation' => array(
 					'label' => __( 'Match', 'accordion-slider' ),
 					'type' => 'select',
-					'default_value' => 'or',
+					'default_value' => 'OR',
 					'available_values' => array(
-						'or' => __( 'At least one', 'accordion-slider' ),
-						'and' => __( 'All', 'accordion-slider' )
+						'OR' => __( 'At least one', 'accordion-slider' ),
+						'AND' => __( 'All', 'accordion-slider' )
 					),
 					'description' => ''
 				),
 				'posts_operator' => array(
 					'label' => __( 'With selected', 'accordion-slider' ),
 					'type' => 'select',
-					'default_value' => 'include',
+					'default_value' => 'IN',
 					'available_values' => array(
-						'in' => __( 'Include', 'accordion-slider' ),
-						'not_in' => __( 'Exclude', 'accordion-slider' )
+						'IN' => __( 'Include', 'accordion-slider' ),
+						'NOT IN' => __( 'Exclude', 'accordion-slider' )
 					),
 					'description' => ''
 				),
@@ -668,19 +668,19 @@ class Accordion_Slider_Settings {
 					'default_value' => 'date',
 					'available_values' => array(
 						'date' => __( 'Date', 'accordion-slider' ),
-						'comments' => __( 'Comments', 'accordion-slider' ),
+						'comment_count' => __( 'Comments', 'accordion-slider' ),
 						'title' => __( 'Title', 'accordion-slider' ),
-						'random' => __( 'Random', 'accordion-slider' )
+						'rand' => __( 'Random', 'accordion-slider' )
 					),
 					'description' => ''
 				),
 				'posts_order' => array(
 					'label' => __( 'Order', 'accordion-slider' ),
 					'type' => 'select',
-					'default_value' => 'desc',
+					'default_value' => 'DESC',
 					'available_values' => array(
-						'desc' => __( 'Descending', 'accordion-slider' ),
-						'asc' => __( 'Ascending', 'accordion-slider' )
+						'DESC' => __( 'Descending', 'accordion-slider' ),
+						'ASC' => __( 'Ascending', 'accordion-slider' )
 					),
 					'description' => ''
 				),
@@ -688,36 +688,6 @@ class Accordion_Slider_Settings {
 					'label' => __( 'Limit', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 10,
-					'description' => ''
-				),
-				'posts_offset' => array(
-					'label' => __( 'Start At', 'accordion-slider' ),
-					'type' => 'number',
-					'default_value' => 0,
-					'description' => ''
-				),
-				'gallery_post_id' => array(
-					'label' => __( 'Post ID', 'accordion-slider' ),
-					'type' => 'text',
-					'default_value' => '',
-					'description' => ''
-				),
-				'gallery_maximum' => array(
-					'label' => __( 'Limit', 'accordion-slider' ),
-					'type' => 'number',
-					'default_value' => 10,
-					'description' => ''
-				),
-				'gallery_offset' => array(
-					'label' => __( 'Start At', 'accordion-slider' ),
-					'type' => 'number',
-					'default_value' => 0,
-					'description' => ''
-				),
-				'gallery_hide_gallery' => array(
-					'label' => __( 'Hide Gallery', 'accordion-slider' ),
-					'type' => 'checkbox',
-					'default_value' => true,
 					'description' => ''
 				),
 				'flickr_api_key' => array(

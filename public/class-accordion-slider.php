@@ -313,6 +313,7 @@ class Accordion_Slider {
 		
 		$default_settings = Accordion_Slider_Settings::getSettings();
  		$default_layer_settings = Accordion_Slider_Settings::getLayerSettings();
+ 		$default_panel_settings = Accordion_Slider_Settings::getPanelSettings();
 
 		$content_html = "";
 		$settings_js = "";
@@ -324,7 +325,7 @@ class Accordion_Slider {
 			$panels = $accordion['panels'];
 
 			foreach ( $panels as $panel ) {
-				$content_html .= "\r\n" . '		<div class="as-panel">';
+				$panel_html = "\r\n" . '		<div class="as-panel">';
 
 				$is_background_image = isset( $panel['background_source'] ) && $panel['background_source'] !== '' ? true : false;
 				$is_opened_background_image = isset( $panel['opened_background_source'] ) && $panel['opened_background_source'] !== '' ? true : false;
@@ -333,14 +334,14 @@ class Accordion_Slider {
 				$background_link = '';
 
 				if ( $is_background_link ) {
-					$background_link_href = ' href="' . esc_url( $panel['background_link'] ) . '"';
+					$background_link_href = ' href="' . esc_attr( $panel['background_link'] ) . '"';
 					$background_link_title = isset( $panel['background_link_title'] ) && $panel['background_link_title'] !== '' ? ' title="' . esc_attr( $panel['background_link_title'] ) . '"' : '';
 
 					$background_link = '<a' . $background_link_href . $background_link_title . '>';
 				}
 
 				if ( $is_background_image ) {
-					$background_source = ' src="' . esc_url( $panel['background_source'] ) . '"';
+					$background_source = ' src="' . esc_attr( $panel['background_source'] ) . '"';
 					$background_alt = isset( $panel['background_alt'] ) && $panel['background_alt'] !== '' ? ' alt="' . esc_attr( $panel['background_alt'] ) . '"' : '';
 					$background_title = isset( $panel['background_title'] ) && $panel['background_title'] !== '' ? ' title="' . esc_attr( $panel['background_title'] ) . '"' : '';
 					$background_width = isset( $panel['background_width'] ) && $panel['background_width'] !== '' ? ' width="' . esc_attr( $panel['background_width'] ) . '"' : '';
@@ -349,14 +350,14 @@ class Accordion_Slider {
 					$background_image = '<img class="as-background"' . $background_source . $background_alt . $background_title . $background_width . $background_height . ' />';
 				
 					if ( $is_background_link === true &&  $is_opened_background_image === false ) {
-						$content_html .= "\r\n" . '			' . $background_link . "\r\n" . '				' . $background_image . "\r\n" . '			' . '</a>';
+						$panel_html .= "\r\n" . '			' . $background_link . "\r\n" . '				' . $background_image . "\r\n" . '			' . '</a>';
 					} else {
-						$content_html .= "\r\n" . '			' . $background_image;
+						$panel_html .= "\r\n" . '			' . $background_image;
 					}
 				}
 
 				if ( $is_opened_background_image ) {
-					$opened_background_source = ' src="' . esc_url( $panel['opened_background_source'] ) . '"';
+					$opened_background_source = ' src="' . esc_attr( $panel['opened_background_source'] ) . '"';
 					$opened_background_alt = isset( $panel['opened_background_alt'] ) && $panel['opened_background_alt'] !== '' ? ' alt="' . esc_attr( $panel['opened_background_alt'] ) . '"' : '';
 					$opened_background_title = isset( $panel['opened_background_title'] ) && $panel['opened_background_title'] !== '' ? ' title="' . esc_attr( $panel['opened_background_title'] ) . '"' : '';
 					$opened_background_width = isset( $panel['opened_background_width'] ) && $panel['opened_background_width'] !== '' ? ' width="' . esc_attr( $panel['opened_background_width'] ) . '"' : '';
@@ -365,9 +366,9 @@ class Accordion_Slider {
 					$opened_background_image = '<img class="as-background-opened"' . $opened_background_source . $opened_background_alt . $opened_background_title . $opened_background_width . $opened_background_height . ' />';
 
 					if ( $is_background_link === true ) {
-						$content_html .= "\r\n" . '			' . $background_link . "\r\n" . '				' . $opened_background_image . "\r\n" . '			' . '</a>';
+						$panel_html .= "\r\n" . '			' . $background_link . "\r\n" . '				' . $opened_background_image . "\r\n" . '			' . '</a>';
 					} else {
-						$content_html .= "\r\n" . '			' . $opened_background_image;
+						$panel_html .= "\r\n" . '			' . $opened_background_image;
 					}
 				}
 
@@ -419,12 +420,21 @@ class Accordion_Slider {
 							}
 						}
 
-						$content_html .= "\r\n" . '			' . '<div class="' .  $layer_classes . '"' . $layer_attributes . '>' . esc_html( $layer_content ) . '</div>';
+						$panel_html .= "\r\n" . '			' . '<div class="' .  $layer_classes . '"' . $layer_attributes . '>' . esc_html( $layer_content ) . '</div>';
 					}
 				}
 
+				$panel_html .= "\r\n" . '		</div>';
 
-				$content_html .= "\r\n" . '		</div>';
+				$content_type = isset( $panel['settings']['content_type'] ) ? $panel['settings']['content_type'] : $default_panel_settings['content_type'];
+
+				if ( $content_type === 'static' ) {
+					$content_html .= $panel_html;
+				} else if ( $content_type === 'posts' ) {
+					$content_html .= $this->output_posts_panels( $panel_html, $panel['settings'] );
+				} else if ( $content_type === 'gallery' ) {
+					$content_html .= $this->output_gallery_panels( $panel_html, $panel['settings'] );
+				}
 			}
 		}
 
@@ -508,4 +518,277 @@ class Accordion_Slider {
 
 		return $content_html . "\r\n" . $accordion_js;
 	}
+
+	public function output_posts_panels( $panel_html, $settings ) {
+		$default_panel_settings = Accordion_Slider_Settings::getPanelSettings();
+
+		$query_args = array();
+			
+		if ( isset( $settings['posts_post_type'] ) && ! empty( $settings['posts_post_type'] ) ) {
+			$query_args['post_type'] = $settings['posts_post_type'];
+		}
+		
+		if ( isset( $settings['posts_taxonomy'] ) && ! empty( $settings['posts_taxonomy'] ) ) {
+			$taxonomy_terms = $settings['posts_taxonomy'];
+
+			$tax_query = array();
+
+			foreach ( $taxonomy_terms as $taxonomy_term_raw ) {
+				$taxonomy_term = explode( '|', $taxonomy_term_raw );
+				
+				$tax_item['taxonomy'] = $taxonomy_term[0];
+				$tax_item['terms'] = $taxonomy_term[1];
+				$tax_item['field'] = 'slug';
+				
+				$tax_item['operator'] = isset( $settings['posts_operator'] ) ? $settings['posts_operator'] : $default_panel_settings['posts_operator'];
+				
+				array_push( $tax_query, $tax_item );
+			}
+			
+			if ( count( $taxonomy_terms ) > 1 ) {
+				$tax_query['relation'] = isset( $settings['posts_relation'] ) ? $settings['posts_relation'] : $default_panel_settings['posts_relation'];
+			}
+
+			$query_args['tax_query'] = $tax_query;
+		}
+		
+		$query_args['posts_per_page'] = isset( $settings['posts_maximum'] ) ? $settings['posts_maximum'] : $default_panel_settings['posts_maximum'];
+		$query_args['offset'] = isset( $settings['posts_offset'] ) ? $settings['posts_offset'] : $default_panel_settings['posts_offset'];
+		$query_args['orderby'] = isset( $settings['posts_order_by'] ) ? $settings['posts_order_by'] : $default_panel_settings['posts_order_by'];
+		$query_args['order'] = isset( $settings['posts_order'] ) ? $settings['posts_order'] : $default_panel_settings['posts_order'];
+		
+		$query = new WP_Query( $query_args );
+
+		$is_image = false;
+
+		if ( strpos( $panel_html, '[as_image' ) ) {
+			$is_image = true;
+		}
+
+		preg_match_all( '/\[as_(.*?)\]/', $panel_html, $matches, PREG_SET_ORDER );
+
+		$panels_html = '';
+
+		while ( $query->have_posts() ) {
+			$query->the_post();
+
+			$panel_html_copy = $panel_html;
+			$featured_image_data = null;
+
+			if ( $is_image && has_post_thumbnail() ) {
+				$featured_image_id = get_post_thumbnail_id();
+				$featured_image_data = get_post( $featured_image_id, ARRAY_A );
+				
+				$featured_image_alt = get_post_meta( $featured_image_id, '_wp_attachment_image_alt' );
+				$featured_image_data['alt'] = ! empty( $featured_image_alt ) ? $featured_image_alt[0] : '';
+			}
+
+			foreach ( $matches as $match ) {
+				$shortcode = $match[0];
+
+				$delimiter_position = strpos( $match[1], '.' );
+				$shortcode_arg = $delimiter_position !== false ? substr( $match[1], $delimiter_position + 1 ) : false;
+				$shortcode_name = $shortcode_arg !== false ? substr( $match[1], 0, $delimiter_position ) : $match[1];
+
+				switch( $shortcode_name ) {
+					case 'image':
+						if ( is_null( $featured_image_data ) ) {
+							return;
+						}
+
+						$image_size = $shortcode_arg !== false ? $shortcode_arg : 'full';
+						$image_full = get_the_post_thumbnail( get_the_ID(), $image_size, array( 'class' => '' ) );
+
+						$panel_html_copy = str_replace( $shortcode, $image_full, $panel_html_copy );
+						break;
+
+					case 'image_src':
+						if ( is_null( $featured_image_data ) ) {
+							return;
+						}
+
+						$image_size = $shortcode_arg !== false ? $shortcode_arg : 'full';
+						$image_src = wp_get_attachment_image_src( $featured_image_id, $image_size );
+
+						$panel_html_copy = str_replace( $shortcode, $image_src[0], $panel_html_copy );
+						break;
+
+					case 'image_alt':
+						if ( is_null( $featured_image_data ) ) {
+							return;
+						}
+
+						$panel_html_copy = str_replace( $shortcode, $featured_image_data['alt'], $panel_html_copy );
+						break;
+
+					case 'image_title':
+						if ( is_null( $featured_image_data ) ) {
+							return;
+						}
+
+						$panel_html_copy = str_replace( $shortcode, $featured_image_data['post_title'], $panel_html_copy );
+						break;
+
+					case 'image_description':
+						if ( is_null( $featured_image_data ) ) {
+							return;
+						}
+
+						$panel_html_copy = str_replace( $shortcode, $featured_image_data['post_content'], $panel_html_copy );
+						break;
+
+					case 'image_caption':
+						if ( is_null( $featured_image_data ) ) {
+							return;
+						}
+
+						$panel_html_copy = str_replace( $shortcode, $featured_image_data['post_excerpt'], $panel_html_copy );
+						break;
+
+					case 'title':
+
+						$panel_html_copy = str_replace( $shortcode, get_the_title(), $panel_html_copy );
+						break;
+
+					case 'link':
+						$link = '<a href="' . get_permalink( get_the_ID() ) . '">' . get_the_title() . '</a>';
+
+						$panel_html_copy = str_replace( $shortcode, $link, $panel_html_copy );
+						break;
+
+					case 'link_url':
+
+						$panel_html_copy = str_replace( $shortcode, get_permalink( get_the_ID() ), $panel_html_copy );
+						break;
+
+					case 'date':
+
+						$date_format = $shortcode_arg !== false ? $shortcode_arg : get_option( 'date_format' );
+						$panel_html_copy = str_replace( $shortcode, get_the_date( $date_format ), $panel_html_copy );
+						break;
+
+					case 'excerpt':
+
+						$panel_html_copy = str_replace( $shortcode, get_the_excerpt(), $panel_html_copy );
+						break;
+
+					case 'content':
+
+						$panel_html_copy = str_replace( $shortcode, get_the_content(), $panel_html_copy );
+						break;
+
+					case 'category':
+
+						$categories = get_the_category( get_the_ID() );
+						$category = ! empty( $categories ) ? $categories[0] : '';
+
+						$panel_html_copy = str_replace( $shortcode, $category, $panel_html_copy );
+						break;
+
+					case 'custom':
+
+						$value = '';
+
+						if ( $shortcode_arg !== false ) {
+							$values = get_post_meta( get_the_ID(), $shortcode_arg );										
+							$value = $values[0];
+						}
+
+						$panel_html_copy = str_replace( $shortcode, $value, $panel_html_copy );
+						break;
+				}
+			}
+
+			$panels_html .= $panel_html_copy;
+		}
+
+		wp_reset_postdata();
+
+		return $panels_html;
+	}
+
+	public function output_gallery_panels( $panel_html, $settings ) {
+		global $post;
+
+		$post_content = $post->post_content;
+		$pattern = get_shortcode_regex();
+
+		preg_match_all( '/' . $pattern . '/s', $post_content, $gallery_matches, PREG_SET_ORDER );
+		preg_match_all( '/\[as_(.*?)\]/', $panel_html, $matches, PREG_SET_ORDER );
+
+		$panels_html = '';
+
+		foreach ( $gallery_matches as $gallery_match ) {
+			if ( $gallery_match[2] !== 'gallery' ) {
+				continue;
+			}
+
+			$gallery_atts = shortcode_parse_atts( $gallery_match[3] );
+
+			if ( ! isset( $gallery_atts[ 'ids' ] ) ) {
+				continue;
+			}
+
+			$gallery_ids = explode( ',', $gallery_atts[ 'ids' ] );
+
+			$gallery_images = array();
+
+			foreach ( $gallery_ids as $gallery_id ) {
+				$gallery_image = get_post( $gallery_id, ARRAY_A );
+				$gallery_image_alt = get_post_meta( $gallery_id, '_wp_attachment_image_alt' );
+				$gallery_image['alt'] = ! empty( $gallery_image_alt ) ? $gallery_image_alt[0] : '';
+
+				array_push( $gallery_images, $gallery_image );
+			}
+
+			foreach ( $gallery_images as $gallery_image ) {
+				$panel_html_copy = $panel_html;
+
+				foreach ( $matches as $match ) {
+					$shortcode = $match[0];
+
+					$delimiter_position = strpos( $match[1], '.' );
+					$shortcode_arg = $delimiter_position !== false ? substr( $match[1], $delimiter_position + 1 ) : false;
+					$shortcode_name = $shortcode_arg !== false ? substr( $match[1], 0, $delimiter_position ) : $match[1];
+
+					switch( $shortcode_name ) {
+						case 'image':
+							$image_size = $shortcode_arg !== false ? $shortcode_arg : 'full';
+							$image_full = wp_get_attachment_image( $gallery_image['ID'], $image_size );
+
+							$panel_html_copy = str_replace( $shortcode, $image_full, $panel_html_copy );
+							break;
+
+						case 'image_src':
+
+							$image_size = $shortcode_arg !== false ? $shortcode_arg : 'full';
+							$image_src = wp_get_attachment_image_src( $gallery_image['ID'], $image_size );
+
+							$panel_html_copy = str_replace( $shortcode, $image_src[0], $panel_html_copy );
+							break;
+
+						case 'image_alt':
+
+							$panel_html_copy = str_replace( $shortcode, $gallery_image['alt'], $panel_html_copy );
+							break;
+
+						case 'image_title':
+
+							$panel_html_copy = str_replace( $shortcode, $gallery_image['post_title'], $panel_html_copy );
+							break;
+
+						case 'image_description':
+
+							$panel_html_copy = str_replace( $shortcode, $gallery_image['post_content'], $panel_html_copy );
+							break;
+					}
+				}
+
+				$panels_html .= $panel_html_copy;
+			}
+		}
+
+		return $panels_html;
+	}
+
 }
