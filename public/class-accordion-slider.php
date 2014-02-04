@@ -135,6 +135,7 @@ class Accordion_Slider {
 				settings text NOT NULL,
 				created varchar(11) NOT NULL,
 				modified varchar(11) NOT NULL,
+				panels_state text NOT NULL,
 				PRIMARY KEY (id)
 				) DEFAULT CHARSET=utf8;";
 			
@@ -261,6 +262,7 @@ class Accordion_Slider {
 		$accordion['id'] = $accordion_raw['id'];
 		$accordion['name'] = $accordion_raw['name'];
 		$accordion['settings'] = json_decode( stripslashes( $accordion_raw['settings'] ), true );
+		$accordion['panels_state'] = json_decode( stripslashes( $accordion_raw['panels_state'] ), true );
 		
 		$panels_raw = $this->load_panels( $id );
 

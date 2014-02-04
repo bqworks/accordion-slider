@@ -21,6 +21,18 @@ class Accordion_Slider_Settings {
 		'visiblePanels'
 	);
 
+	protected static $panels_state = array(
+		'appearance' => '',
+		'animations' => 'closed',
+		'autoplay' => 'closed',
+		'mouse_wheel' => 'closed',
+		'keyboard' => 'closed',
+		'swap_background' => 'closed',
+		'touch_swipe' => 'closed',
+		'video' => 'closed',
+		'breakpoints'  => 'closed'
+	);
+
 	/*
 		Return the settings
 	*/
@@ -432,7 +444,7 @@ class Accordion_Slider_Settings {
 					)
 				),
 
-				'touchSwipe' => array(
+				'touch_swipe' => array(
 					'label' => __( 'Touch Swipe', 'accordion-slider' ),
 					'list' => array(
 						'touchSwipe',
@@ -461,6 +473,13 @@ class Accordion_Slider_Settings {
 	*/
 	public static function getBreakpointSettings() {
 		return self::$breakpoint_settings;
+	}
+
+	/*
+		Return the default panels state
+	*/
+	public static function getPanelsState() {
+		return self::$panels_state;
 	}
 
 	/*

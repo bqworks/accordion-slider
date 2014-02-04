@@ -82,6 +82,10 @@
 			});
 
 			that.resizePanelImages();
+
+			$( '.postbox .hndle' ).on( 'click', function() {
+				$( this ).parent( '.postbox' ).toggleClass( 'closed' );
+			});
 		},
 
 		initAllAccordionsPage: function() {
@@ -161,6 +165,7 @@
 				'name': $( 'input#title' ).val(),
 				'settings': {},
 				'panels': [],
+				'panels_state': {},
 				'nonce': as_js_vars.ua_nonce
 			};
 
@@ -194,6 +199,11 @@
 			if ( breakpoints.length > 0 ) {
 				accordionData.settings.breakpoints = breakpoints;
 			}
+
+			$( '.sidebar-settings' ).find( '.postbox' ).each(function() {
+				var panel = $( this );
+				accordionData.panels_state[ panel.attr( 'data-name' ) ] = panel.hasClass( 'closed' ) ? 'closed' : '';
+			});
 
 			return accordionData;
 		},

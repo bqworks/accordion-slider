@@ -141,6 +141,7 @@ class Accordion_Slider_Admin {
 				$accordion_id = $accordion['id'];
 				$accordion_name = $accordion['name'];
 				$accordion_settings = $accordion['settings'];
+				$accordion_panels_state = $accordion['panels_state'];
 
 				$panels = isset( $accordion['panels'] ) ? $accordion['panels'] : false;
 
@@ -196,22 +197,22 @@ class Accordion_Slider_Admin {
 		global $wpdb;
 
 		$id = intval( $accordion_data['id'] );
-		$name = $accordion_data['name'];
-		$settings = $accordion_data['settings'];
 		$panels_data = $accordion_data['panels'];
 
 		if ( $id === -1 ) {
-			$wpdb->insert($wpdb->prefix . 'accordionslider_accordions', array( 'name' => $name, 
-																				'settings' => json_encode( $settings ),
-																				'created' => date( 'm-d-Y' ), 
-																				'modified' => date( 'm-d-Y' ) ), 
-																		array( '%s', '%s', '%s', '%s' ) );
+			$wpdb->insert($wpdb->prefix . 'accordionslider_accordions', array( 'name' => $accordion_data['name'],
+																				'settings' => json_encode( $accordion_data['settings'] ),
+																				'created' => date( 'm-d-Y' ),
+																				'modified' => date( 'm-d-Y' ),
+																				'panels_state' => json_encode( $accordion_data['panels_state'] ) ), 
+																		array( '%s', '%s', '%s', '%s', '%s' ) );
 			
 			$id = $wpdb->insert_id;
 		} else {
-			$wpdb->update( $wpdb->prefix . 'accordionslider_accordions', array( 'name' => $name, 
-																			 	'settings' => json_encode( $settings ),
-																			 	'modified' => date( 'm-d-Y' ) ),
+			$wpdb->update( $wpdb->prefix . 'accordionslider_accordions', array( 'name' => $accordion_data['name'], 
+																			 	'settings' => json_encode( $accordion_data['settings'] ),
+																			 	'modified' => date( 'm-d-Y' ),
+																				'panels_state' => json_encode( $accordion_data['panels_state'] ) ), 
 																	   	array( 'id' => $id ), 
 																	   	array( '%s', '%s', '%s' ), 
 																	   	array( '%d' ) );
@@ -308,7 +309,7 @@ class Accordion_Slider_Admin {
 			$new_accordion['created'] = date( 'm-d-Y' );
 			$new_accordion['modified'] = $new_accordion['created'];
 
-			$wpdb->insert( $wpdb->prefix . 'accordionslider_accordions', $new_accordion, array( '%s', '%s', '%s', '%s' ) );
+			$wpdb->insert( $wpdb->prefix . 'accordionslider_accordions', $new_accordion, array( '%s', '%s', '%s', '%s', '%s' ) );
 			
 			$new_accordion_id = $wpdb->insert_id;
 

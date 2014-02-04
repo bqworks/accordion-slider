@@ -45,10 +45,12 @@
                 <div class="sidebar-settings">
                     <?php 
                         $setting_groups = Accordion_Slider_Settings::getSettingGroups();
+                        $panels_state = Accordion_Slider_Settings::getPanelsState();
 
-                        foreach ( $setting_groups as $group ) {
+                        foreach ( $setting_groups as $group_name => $group ) {
+                            $panel_class = isset( $accordion_panels_state ) ? $accordion_panels_state[ $group_name ] : $panels_state[ $group_name ];
                             ?>
-                            <div class="postbox">
+                            <div class="postbox <?php echo $panel_class; ?>" data-name="<?php echo $group_name; ?>">
                                 <div class="handlediv"></div>
                                 <h3 class="hndle"><?php echo $group['label']; ?></h3>
                                 <div class="inside">
@@ -92,7 +94,8 @@
                             <?php
                         }
                     ?>
-                    <div class="postbox breakpoints-box">
+                    <?php $panel_class = isset( $accordion_panels_state ) ? $accordion_panels_state['breakpoints'] : $panels_state[ $group_name ]; ?>
+                    <div class="postbox breakpoints-box <?php echo $panel_class; ?>" data-name="breakpoints">
                         <div class="handlediv"></div>
                         <h3 class="hndle"><?php _e( 'Breakpoints', 'accordion-slider' ); ?></h3>
                         <div class="inside">
