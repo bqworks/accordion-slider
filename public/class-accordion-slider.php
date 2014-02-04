@@ -350,8 +350,9 @@ class Accordion_Slider {
 					$background_title = isset( $panel['background_title'] ) && $panel['background_title'] !== '' ? ' title="' . esc_attr( $panel['background_title'] ) . '"' : '';
 					$background_width = isset( $panel['background_width'] ) && $panel['background_width'] !== '' ? ' width="' . esc_attr( $panel['background_width'] ) . '"' : '';
 					$background_height = isset( $panel['background_height'] ) && $panel['background_height'] !== '' ? ' height="' . esc_attr( $panel['background_height'] ) . '"' : '';
+					$background_retina_source = isset( $panel['background_retina_source'] ) && $panel['background_retina_source'] !== '' ? ' data-retina="' . esc_attr( $panel['background_retina_source'] ) . '"' : '';
 
-					$background_image = '<img class="as-background"' . $background_source . $background_alt . $background_title . $background_width . $background_height . ' />';
+					$background_image = '<img class="as-background"' . $background_source . $background_retina_source . $background_alt . $background_title . $background_width . $background_height . ' />';
 				
 					if ( $is_background_link === true &&  $is_opened_background_image === false ) {
 						$panel_html .= "\r\n" . '			' . $background_link . "\r\n" . '				' . $background_image . "\r\n" . '			' . '</a>';
@@ -366,8 +367,9 @@ class Accordion_Slider {
 					$opened_background_title = isset( $panel['opened_background_title'] ) && $panel['opened_background_title'] !== '' ? ' title="' . esc_attr( $panel['opened_background_title'] ) . '"' : '';
 					$opened_background_width = isset( $panel['opened_background_width'] ) && $panel['opened_background_width'] !== '' ? ' width="' . esc_attr( $panel['opened_background_width'] ) . '"' : '';
 					$opened_background_height = isset( $panel['opened_background_height'] ) && $panel['opened_background_height'] !== '' ? ' height="' . esc_attr( $panel['opened_background_height'] ) . '"' : '';
+					$opened_background_retina_source = isset( $panel['opened_background_retina_source'] ) && $panel['opened_background_retina_source'] !== '' ? ' data-retina="' . esc_attr( $panel['opened_background_retina_source'] ) . '"' : '';
 
-					$opened_background_image = '<img class="as-background-opened"' . $opened_background_source . $opened_background_alt . $opened_background_title . $opened_background_width . $opened_background_height . ' />';
+					$opened_background_image = '<img class="as-background-opened"' . $opened_background_source . $opened_background_retina_source . $opened_background_alt . $opened_background_title . $opened_background_width . $opened_background_height . ' />';
 
 					if ( $is_background_link === true ) {
 						$panel_html .= "\r\n" . '			' . $background_link . "\r\n" . '				' . $opened_background_image . "\r\n" . '			' . '</a>';
