@@ -83,7 +83,7 @@
 
 			that.resizePanelImages();
 
-			$( '.postbox .hndle' ).on( 'click', function() {
+			$( '.postbox .hndle, .postbox .handlediv' ).on( 'click', function() {
 				$( this ).parent( '.postbox' ).toggleClass( 'closed' );
 			});
 		},
