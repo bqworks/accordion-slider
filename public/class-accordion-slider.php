@@ -323,6 +323,8 @@ class Accordion_Slider {
 		$content_html .= "\r\n" . '<div id="accordion-slider-' . $accordion_id . '" class="accordion-slider">';
 		$content_html .= "\r\n" . '	<div class="as-panels">';
 
+		$is_lazy_loading = isset( $accordion_settings['lazy_loading'] ) ? $accordion_settings['lazy_loading'] : $default_settings['lazy_loading'];
+
 		if ( isset( $accordion['panels'] ) ) {
 			$panels = $accordion['panels'];
 
@@ -343,7 +345,7 @@ class Accordion_Slider {
 				}
 
 				if ( $is_background_image ) {
-					$background_source = ' src="' . esc_attr( $panel['background_source'] ) . '"';
+					$background_source = $is_lazy_loading === true ? ' src="' . plugins_url( 'assets/css/images/blank.gif', __FILE__ ) . '" data-src="' . esc_attr( $panel['background_source'] ) . '"' : ' src="' . esc_attr( $panel['background_source'] ) . '"';
 					$background_alt = isset( $panel['background_alt'] ) && $panel['background_alt'] !== '' ? ' alt="' . esc_attr( $panel['background_alt'] ) . '"' : '';
 					$background_title = isset( $panel['background_title'] ) && $panel['background_title'] !== '' ? ' title="' . esc_attr( $panel['background_title'] ) . '"' : '';
 					$background_width = isset( $panel['background_width'] ) && $panel['background_width'] !== '' ? ' width="' . esc_attr( $panel['background_width'] ) . '"' : '';
@@ -359,7 +361,7 @@ class Accordion_Slider {
 				}
 
 				if ( $is_opened_background_image ) {
-					$opened_background_source = ' src="' . esc_attr( $panel['opened_background_source'] ) . '"';
+					$opened_background_source = $is_lazy_loading === true ? ' src="' . plugins_url( 'assets/css/images/blank.gif', __FILE__ ) . '" data-src="' . esc_attr( $panel['opened_background_source'] ) . '"' : ' src="' . esc_attr( $panel['opened_background_source'] ) . '"';
 					$opened_background_alt = isset( $panel['opened_background_alt'] ) && $panel['opened_background_alt'] !== '' ? ' alt="' . esc_attr( $panel['opened_background_alt'] ) . '"' : '';
 					$opened_background_title = isset( $panel['opened_background_title'] ) && $panel['opened_background_title'] !== '' ? ' title="' . esc_attr( $panel['opened_background_title'] ) . '"' : '';
 					$opened_background_width = isset( $panel['opened_background_width'] ) && $panel['opened_background_width'] !== '' ? ' width="' . esc_attr( $panel['opened_background_width'] ) . '"' : '';
@@ -445,7 +447,7 @@ class Accordion_Slider {
 
 		foreach ( $default_settings as $setting_name => $setting ) {
 			$setting_default_value = $setting['default_value'];
-			$setting_value = $accordion_settings[ $setting_name ];
+			$setting_value = isset( $accordion_settings[ $setting_name ] ) ? $accordion_settings[ $setting_name ] : $setting_default_value;
 
 			if ( $setting_value != $setting_default_value ) {
 				if ( $settings_js !== '' ) {

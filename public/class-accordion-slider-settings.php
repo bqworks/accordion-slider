@@ -119,6 +119,12 @@ class Accordion_Slider_Settings {
 					'default_value' => 0,
 					'description' => ''
 				),
+				'lazy_loading' => array(
+					'label' => __( 'Lazy Loading', 'accordion-slider' ),
+					'type' => 'boolean',
+					'default_value' => false,
+					'description' => ''
+				),
 
 				'openedPanelSize' => array(
 					'label' => __( 'Opened Panel Size', 'accordion-slider' ),
@@ -390,7 +396,8 @@ class Accordion_Slider_Settings {
 						'panelOverlap',
 						'visiblePanels',
 						'startPanel',
-						'startPage'
+						'startPage',
+						'lazy_loading'
 					)
 				),
 
