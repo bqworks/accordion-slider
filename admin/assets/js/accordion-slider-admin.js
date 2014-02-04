@@ -1615,7 +1615,7 @@
 
 			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
 
-			this.previewWindow = $( '.preview-window' );
+			this.previewWindow = $( '.preview-window .modal-window' );
 			this.accordion = this.previewWindow.find( '.accordion-slider' );
 
 			this.previewWindow.find( '.close-x' ).on( 'click', function( event ) {
@@ -1623,25 +1623,19 @@
 			});
 
 			var accordionWidth = this.accordionData[ 'settings' ][ 'width' ],
-				accordionHeight = this.accordionData[ 'settings' ][ 'height' ],
-				isPercetageWidth = accordionWidth.indexOf( '%' ) !== -1,
-				isPercetageHeight =  accordionHeight.indexOf( '%' ) !== -1;
+				isPercetageWidth = accordionWidth.indexOf( '%' ) !== -1;
 
 			if ( isPercetageWidth === false ) {
 				accordionWidth = parseInt( accordionWidth, 10 );
 			}
 
-			if ( isPercetageHeight === false ) {
-				accordionHeight = parseInt( accordionHeight, 10 );
-			}
-
 			$( window ).on( 'resize', function() {
-				if ( isPercetageWidth === true || isPercetageHeight === true ) {
-					that.previewWindow.css( { width: $( window ).width() - 100, height: that.accordion.height() } );
+				if ( isPercetageWidth === true ) {
+					that.previewWindow.css( 'width', $( window ).width() - 100 );
 				} else if ( accordionWidth + 100 >= $( window ).width() ) {
-					that.previewWindow.css( { width: $( window ).width() - 100, height: that.accordion.height() } );
+					that.previewWindow.css( 'width', $( window ).width() - 100 );
 				} else {
-					that.previewWindow.css( { width: accordionWidth, height: accordionHeight } );
+					that.previewWindow.css( 'width', accordionWidth );
 				}
 			});
 
