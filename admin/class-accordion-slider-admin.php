@@ -578,13 +578,14 @@ class Accordion_Slider_Admin {
 		$setting = Accordion_Slider_Settings::getSettings( $name );
 		$setting_value = $value !== false ? $value : $setting['default_value'];
 		$setting_html = '';
+		$uid = mt_rand();
 
 		if ( $setting['type'] === 'number' || $setting['type'] === 'mixed' ) {
-            $setting_html = '<tr><td><label>' . $setting['label'] . '</label></td><td class="setting-cell"><input class="breakpoint-setting" type="text" name="' . $name . '" value="' . esc_attr( $setting_value ) . '" /><span class="remove-breakpoint-setting"></span></td></tr>';
+            $setting_html = '<tr><td><label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label></td><td class="setting-cell"><input id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" type="text" name="' . $name . '" value="' . esc_attr( $setting_value ) . '" /><span class="remove-breakpoint-setting"></span></td></tr>';
         } else if ( $setting['type'] === 'boolean' ) {
-            $setting_html = '<tr><td><label>' . $setting['label'] . '</label></td><td class="setting-cell"><input class="breakpoint-setting" type="checkbox" name="' . $name . '"' . ( $setting_value === true ? ' checked="checked"' : '' ) . ' /><span class="remove-breakpoint-setting"></span></td></tr>';
+            $setting_html = '<tr><td><label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label></td><td class="setting-cell"><input id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" type="checkbox" name="' . $name . '"' . ( $setting_value === true ? ' checked="checked"' : '' ) . ' /><span class="remove-breakpoint-setting"></span></td></tr>';
         } else if ( $setting['type'] === 'select' ) {
-            $setting_html ='<tr><td><label>' . $setting['label'] . '</label></td><td class="setting-cell"><select class="breakpoint-setting" name="' . $name . '">';
+            $setting_html ='<tr><td><label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label></td><td class="setting-cell"><select id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" name="' . $name . '">';
             
             foreach ( $setting['available_values'] as $value_name => $value_label ) {
                 $setting_html .= '<option value="' . $value_name . '"' . ( $setting_value == $value_name ? ' selected="selected"' : '' ) . '>' . $value_label . '</option>';

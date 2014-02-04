@@ -16,20 +16,20 @@
 			<table class="data-fields">
 				<tbody>
 					<tr>
-						<td><label><?php _e( 'Source:', 'accordion-slider' ); ?></label></td>
-						<td><input class="field" type="text" name="background_source" value="<?php echo isset( $data['background_source'] ) ? esc_attr( $data['background_source'] ) : ''; ?>" /></td>
+						<td><label for="background-source"><?php _e( 'Source:', 'accordion-slider' ); ?></label></td>
+						<td><input id="background-source" class="field" type="text" name="background_source" value="<?php echo isset( $data['background_source'] ) ? esc_attr( $data['background_source'] ) : ''; ?>" /></td>
 					</tr>
 					<tr>
-						<td><label><?php _e( 'Alt:', 'accordion-slider' ); ?></label></td>
-						<td><input class="field" type="text" name="background_alt" value="<?php echo isset( $data['background_alt'] ) ? esc_attr( $data['background_alt'] ) : ''; ?>" /></td>
+						<td><label for="background-alt"><?php _e( 'Alt:', 'accordion-slider' ); ?></label></td>
+						<td><input id="background-alt" class="field" type="text" name="background_alt" value="<?php echo isset( $data['background_alt'] ) ? esc_attr( $data['background_alt'] ) : ''; ?>" /></td>
 					</tr>
 					<tr>
-						<td><label><?php _e( 'Title:', 'accordion-slider' ); ?></label></td>
-						<td><input class="field" type="text" name="background_title" value="<?php echo isset( $data['background_title'] ) ? esc_attr( $data['background_title'] ) : ''; ?>" /></td>
+						<td><label for="background-title"><?php _e( 'Title:', 'accordion-slider' ); ?></label></td>
+						<td><input id="background-title" class="field" type="text" name="background_title" value="<?php echo isset( $data['background_title'] ) ? esc_attr( $data['background_title'] ) : ''; ?>" /></td>
 					</tr>
 					<tr>
-						<td><label><?php _e( 'Retina Source:', 'accordion-slider' ); ?></label></td>
-						<td><input class="field" type="text" name="background_retina_source" value="<?php echo isset( $data['background_retina_source'] ) ? esc_attr( $data['background_retina_source'] ) : ''; ?>" /></td>
+						<td><label for="background-retina-source"><?php _e( 'Retina Source:', 'accordion-slider' ); ?></label></td>
+						<td><input id="background-retina-source" class="field" type="text" name="background_retina_source" value="<?php echo isset( $data['background_retina_source'] ) ? esc_attr( $data['background_retina_source'] ) : ''; ?>" /></td>
 					</tr>
 				</tbody>
 			</table>
@@ -51,20 +51,20 @@
 			<table class="data-fields">
 				<tbody>
 					<tr>
-						<td><label><?php _e( 'Source:', 'accordion-slider' ); ?></label></td>
-						<td><input class="field" type="text" name="opened_background_source" value="<?php echo isset( $data['opened_background_source'] ) ? esc_attr( $data['opened_background_source'] ) : ''; ?>" /></td>
+						<td><label for="opened-background-source"><?php _e( 'Source:', 'accordion-slider' ); ?></label></td>
+						<td><input id="opened-background-source" class="field" type="text" name="opened_background_source" value="<?php echo isset( $data['opened_background_source'] ) ? esc_attr( $data['opened_background_source'] ) : ''; ?>" /></td>
 					</tr>
 					<tr>
-						<td><label><?php _e( 'Alt:', 'accordion-slider' ); ?></label></td>
-						<td><input class="field" type="text" name="opened_background_alt" value="<?php echo isset( $data['opened_background_alt'] ) ? esc_attr( $data['opened_background_alt'] ) : ''; ?>" /></td>
+						<td><label for="opened-background-alt"><?php _e( 'Alt:', 'accordion-slider' ); ?></label></td>
+						<td><input id="opened-background-alt" class="field" type="text" name="opened_background_alt" value="<?php echo isset( $data['opened_background_alt'] ) ? esc_attr( $data['opened_background_alt'] ) : ''; ?>" /></td>
 					</tr>
 					<tr>
-						<td><label><?php _e( 'Title:', 'accordion-slider' ); ?></label></td>
-						<td><input class="field" type="text" name="opened_background_title" value="<?php echo isset( $data['opened_background_title'] ) ? esc_attr( $data['opened_background_title'] ) : ''; ?>" /></td>
+						<td><label for="opened-background-title"><?php _e( 'Title:', 'accordion-slider' ); ?></label></td>
+						<td><input id="opened-background-title" class="field" type="text" name="opened_background_title" value="<?php echo isset( $data['opened_background_title'] ) ? esc_attr( $data['opened_background_title'] ) : ''; ?>" /></td>
 					</tr>
 					<tr>
-						<td><label><?php _e( 'Retina Source:', 'accordion-slider' ); ?></label></td>
-						<td><input class="field" type="text" name="opened_background_retina_source" value="<?php echo isset( $data['opened_background_retina_source'] ) ? esc_attr( $data['opened_background_retina_source'] ) : ''; ?>" /></td>
+						<td><label for="opened-background-retina-source"><?php _e( 'Retina Source:', 'accordion-slider' ); ?></label></td>
+						<td><input id="opened-background-retina-source" class="field" type="text" name="opened_background_retina_source" value="<?php echo isset( $data['opened_background_retina_source'] ) ? esc_attr( $data['opened_background_retina_source'] ) : ''; ?>" /></td>
 					</tr>
 				</tbody>
 			</table>
@@ -77,12 +77,12 @@
 			<table class="data-fields">
 				<tbody>
 					<tr>
-						<td><label><?php _e( 'URL:', 'accordion-slider' ); ?></label></td>
-						<td><input class="field" type="text" name="background_link" value="<?php echo isset( $data['background_link'] ) ?  esc_attr( $data['background_link'] ) : ''; ?>" /></td>
+						<td><label for="background-link"><?php _e( 'URL:', 'accordion-slider' ); ?></label></td>
+						<td><input id="background-link" class="field" type="text" name="background_link" value="<?php echo isset( $data['background_link'] ) ?  esc_attr( $data['background_link'] ) : ''; ?>" /></td>
 					</tr>
 					<tr>
-						<td><label><?php _e( 'Title:', 'accordion-slider' ); ?></label></td>
-						<td><input class="field" type="text" name="background_link_title" value="<?php echo isset( $data['background_link_title'] ) ? esc_attr( $data['background_link_title'] ) : ''; ?>" /></td>
+						<td><label for="background-link-title"><?php _e( 'Title:', 'accordion-slider' ); ?></label></td>
+						<td><input id="background-link-title" class="field" type="text" name="background_link_title" value="<?php echo isset( $data['background_link_title'] ) ? esc_attr( $data['background_link_title'] ) : ''; ?>" /></td>
 					</tr>
 				</tbody>
 			</table>

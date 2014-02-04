@@ -8,10 +8,10 @@
 			<thead>
 				<tr>
 					<th class="label-cell">
-						<label>Content Type:</label>
+						<label for="content-type">Content Type:</label>
 					</th>
 					<th class="setting-cell">
-						<select class="panel-setting" name="content_type">
+						<select id="content-type" class="panel-setting" name="content_type">
 							<?php
 								foreach ( $panel_default_settings['content_type']['available_values'] as $value_name => $value_label ) {
 									$selected = ( $content_type === $value_name ) ? ' selected="selected"' : '';

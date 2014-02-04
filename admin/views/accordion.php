@@ -62,18 +62,18 @@
                                             ?>
                                                     <tr>
                                                         <td>
-                                                            <label><?php echo $setting['label']; ?></label>
+                                                            <label for="<?php echo $setting_name; ?>"><?php echo $setting['label']; ?></label>
                                                         </td>
                                                         <td>
                                                             <?php
                                                                 $value = isset( $accordion_settings ) && isset( $accordion_settings[ $setting_name ] ) ? $accordion_settings[ $setting_name ] : $setting['default_value'];
 
                                                                 if ( $setting['type'] === 'number' || $setting['type'] === 'mixed' ) {
-                                                                    echo '<input class="setting" type="text" name="' . $setting_name . '" value="' . esc_attr( $value ) . '" />';
+                                                                    echo '<input id="' . $setting_name . '" class="setting" type="text" name="' . $setting_name . '" value="' . esc_attr( $value ) . '" />';
                                                                 } else if ( $setting['type'] === 'boolean' ) {
-                                                                    echo '<input class="setting" type="checkbox" name="' . $setting_name . '"' . ( $value === true ? ' checked="checked"' : '' ) . ' />';
+                                                                    echo '<input id="' . $setting_name . '" class="setting" type="checkbox" name="' . $setting_name . '"' . ( $value === true ? ' checked="checked"' : '' ) . ' />';
                                                                 } else if ( $setting['type'] === 'select' ) {
-                                                                    echo'<select class="setting" name="' . $setting_name . '">';
+                                                                    echo'<select id="' . $setting_name . '" class="setting" name="' . $setting_name . '">';
                                                                     
                                                                     foreach ( $setting['available_values'] as $value_name => $value_label ) {
                                                                         echo '<option value="' . $value_name . '"' . ( $value === $value_name ? ' selected="selected"' : '' ) . '>' . $value_label . '</option>';
