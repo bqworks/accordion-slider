@@ -259,14 +259,18 @@
 
 			var dialog = $(
 				'<div class="modal-overlay"></div>' +
-				'<div class="delete-accordion-dialog">' +
-				'	<p class="dialog-question">' + as_js_vars.accordion_delete + '</p>' +
-				'	<div class="dialog-buttons">' +
-				'		<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
-				'		<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
+				'<div class="modal-window-container">' +
+				'	<div class="modal-window delete-accordion-dialog">' +
+				'		<p class="dialog-question">' + as_js_vars.accordion_delete + '</p>' +
+				'		<div class="dialog-buttons">' +
+				'			<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
+				'			<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
+				'		</div>' +
 				'	</div>' +
 				'</div>'
 			).appendTo( 'body' );
+
+			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
 
 			dialog.find( '.dialog-ok' ).one( 'click', function( event ) {
 				event.preventDefault();
@@ -401,14 +405,18 @@
 			var panel = that.getPanel( id ),
 				dialog = $(
 				'<div class="modal-overlay"></div>' +
-				'<div class="delete-panel-dialog">' +
-				'	<p class="dialog-question">' + as_js_vars.panel_delete + '</p>' +
-				'	<div class="dialog-buttons">' +
-				'		<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
-				'		<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
+				'<div class="modal-window-container">' +
+				'	<div class="modal-window delete-panel-dialog">' +
+				'		<p class="dialog-question">' + as_js_vars.panel_delete + '</p>' +
+				'		<div class="dialog-buttons">' +
+				'			<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
+				'			<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
+				'		</div>' +
 				'	</div>' +
 				'</div>'
 			).appendTo( 'body' );
+
+			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
 
 			dialog.find( '.dialog-ok' ).one( 'click', function( event ) {
 				event.preventDefault();
@@ -718,6 +726,8 @@
 		init: function() {
 			var that = this;
 
+			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
+
 			this.editor = $( '.background-image-editor' );
 
 			this.editor.find( '.close, .close-x' ).on( 'click', function( event ) {
@@ -809,7 +819,7 @@
 			this.editor.find( '.image-loader' ).off( 'click' );
 			this.editor.find( '.clear-fieldset' ).off( 'click' );
 
-			$( 'body' ).find( '.modal-overlay, .background-image-editor' ).remove();
+			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
 	};
 
@@ -845,6 +855,8 @@
 
 		init: function() {
 			var that = this;
+
+			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
 
 			this.counter = 0;
 
@@ -928,8 +940,6 @@
 			
 			viewportImage.appendTo( viewport );
 			viewportLayers.appendTo( viewport );
-
-			this.editor.css( { 'width': Math.max( imageWidth, 960 ), 'height': imageHeight + 180 } );
 			viewport.css( 'height', imageHeight );
 
 			if ( imageWidth < 960 ) {
@@ -1051,7 +1061,7 @@
 
 			$( '.layers-list' ).lightSortable( 'destroy' );
 
-			$( 'body' ).find( '.modal-overlay, .layers-editor' ).remove();
+			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
 	};
 
@@ -1432,6 +1442,8 @@
 		init: function() {
 			var that = this;
 
+			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
+
 			this.editor = $( '.settings-editor' );
 			
 			this.editor.find( '.close, .close-x' ).on( 'click', function( event ) {
@@ -1455,16 +1467,6 @@
 
 		loadControls: function( type ) {
 			var that = this;
-
-			if ( type === 'static' ) {
-				this.editor.attr( 'class', 'settings-editor' );
-			} else if ( type === 'posts' ) {
-				this.editor.attr( 'class', 'settings-editor posts' );
-			} else if ( type === 'gallery' ) {
-				this.editor.attr( 'class', 'settings-editor gallery' );
-			} else if ( type === 'flickr' ) {
-				this.editor.attr( 'class', 'settings-editor flickr' );
-			}
 
 			this.editor.find( '.content-type-settings' ).empty();
 			
@@ -1555,7 +1557,7 @@
 			this.editor.find( 'select[name="posts_post_type"]' ).multiCheck( 'destroy' );
 			this.editor.find( 'select[name="posts_taxonomy"]' ).multiCheck( 'destroy' );
 
-			$( 'body' ).find( '.modal-overlay, .settings-editor' ).remove();
+			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
 
 	};
@@ -1611,6 +1613,8 @@
 		init: function() {
 			var that = this;
 
+			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
+
 			this.previewWindow = $( '.preview-window' );
 			this.accordion = this.previewWindow.find( '.accordion-slider' );
 
@@ -1649,7 +1653,7 @@
 			this.previewWindow.find( '.close-x' ).off( 'click' );
 
 			this.accordion.accordionSlider( 'destroy' );
-			$( 'body' ).find( '.modal-overlay, .preview-window' ).remove();
+			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
 	};
 

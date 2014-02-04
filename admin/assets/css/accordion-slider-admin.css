@@ -211,13 +211,42 @@
 
 .modal-overlay {
 	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgb(0, 0, 0);
+	background: rgba(0, 0, 0, 0.7);
+	z-index: 1000;
+	text-align: center;
+}
+
+.modal-window-container {
+	position: absolute;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
-	background-color: #000;
-	opacity: 0.7;
-	z-index: 1000;
+	margin-top: 32px;
+	z-index: 1001;
+	text-align: center;
+}
+
+.modal-window-container:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	margin-right: -0.25em;
+}
+
+.modal-window {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	padding: 30px;
+	background-color: #FFF;
+	text-align: left;
 }
 
 .close-x {
@@ -233,17 +262,9 @@
 }
 
 .preview-window {
-	position: fixed;
 	width: 800px;
 	height: 400px;
 	padding: 20px 50px 100px;
-	margin: auto;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: #FFF;
-	z-index: 1001;
 }
 
 .preview-title {
@@ -253,18 +274,14 @@
 	margin-bottom: 20px;
 }
 
-.background-image-editor {
-	width: 660px;
-	height: 560px;
-	position: fixed;
-	padding: 30px;
-	margin: auto;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: #FFF;
-	z-index: 1001;
+.background-image-editor .modal-window {
+	min-width: 660px;
+}
+
+@media (max-width: 720px) {
+	.background-image-editor:before {
+		display: none;
+	}
 }
 
 .background-image-editor .fieldset {
@@ -357,18 +374,15 @@
 	margin-left: 10px;
 }
 
-.layers-editor {
-	width: 960px;
-	height: 580px;
-	position: fixed;
+.layers-editor .modal-window {
+	min-width: 960px;
 	padding: 0;
-	margin: auto;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: #FFF;
-	z-index: 1001;
+}
+
+@media (max-width: 960px) {
+	.layers-editor:before {
+		display: none;
+	}
 }
 
 .layers-editor .viewport {
@@ -546,30 +560,14 @@
 	cursor: move;
 }
 
-.settings-editor {
-	width: 330px;
-	height: 120px;
-	position: fixed;
-	padding: 30px;
-	margin: auto;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: #FFF;
-	z-index: 1001;
+.settings-editor .modal-window {
+	min-width: 316px;
 }
 
-.settings-editor.posts {
-	height: 400px;
-}
-
-.settings-editor.gallery {
-	height: 120px;
-}
-
-.settings-editor.flickr {
-	height: 268px;
+@media (max-width: 376px) {
+	.settings-editor:before {
+		display: none;
+	}
 }
 
 .settings-editor .heading {
@@ -685,24 +683,7 @@
 
 .delete-accordion-dialog,
 .delete-panel-dialog {
-	position: fixed;
-	height: 90px;
-	background-color: #FFF;
-	padding: 10px 20px;
-	z-index: 1001;
-	margin: auto;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-}
-
-.delete-accordion-dialog {
-	width: 330px;
-}
-
-.delete-panel-dialog {
-	width: 300px;
+	
 }
 
 .dialog-question {
