@@ -269,6 +269,7 @@ class Accordion_Slider_Admin {
 
 	public function ajax_preview_accordion() {
 		$accordion = json_decode( stripslashes( $_POST['data'] ), true );
+		$accordion_name = $accordion['name'];
 		$accordion_output = $this->plugin->output_accordion( $accordion );
 
 		include( 'views/preview-window.php' );
