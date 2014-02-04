@@ -1,5 +1,5 @@
 <div class="wrap accordion-slider-admin">
-	<h2><?php echo isset( $_GET['action'] ) && $_GET['action'] === 'edit' ? 'Edit Accordion' : 'Add New Accordion'; ?></h2>
+	<h2><?php echo isset( $_GET['action'] ) && $_GET['action'] === 'edit' ? __( 'Edit Accordion', 'accordion-slider' ) : __( 'Add New Accordion', 'accordion-slider' ); ?></h2>
 
 	<form action="" method="post">
     	<div class="metabox-holder has-right-sidebar">

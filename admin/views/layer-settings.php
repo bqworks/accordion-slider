@@ -4,7 +4,7 @@
 			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="tab" id="content-tab-<?php echo esc_attr( $layer_id ); ?>" checked="checked">
 			<label for="content-tab-<?php echo esc_attr( $layer_id ); ?>" class="tab-label"><?php _e( 'Content', 'accordion-slider' ); ?></label>
 			<div class="setting-fields">
-				<textarea class="content"><?php echo isset( $layer_content ) ? esc_textarea( $layer_content ) : 'New layer'; ?></textarea>
+				<textarea class="content"><?php echo isset( $layer_content ) ? esc_textarea( $layer_content ) : __( 'New layer', 'accordion-slider' ); ?></textarea>
 			</div>
 		</li>
 		<li>

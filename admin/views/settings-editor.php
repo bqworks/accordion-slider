@@ -8,7 +8,7 @@
 			<thead>
 				<tr>
 					<th class="label-cell">
-						<label for="content-type">Content Type:</label>
+						<label for="content-type"><?php _e( 'Content Type', 'accordion-slider' ); ?>:</label>
 					</th>
 					<th class="setting-cell">
 						<select id="content-type" class="panel-setting" name="content_type">
