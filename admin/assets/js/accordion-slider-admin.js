@@ -81,8 +81,6 @@
 				that.resizePanelImages();
 			});
 
-			that.resizePanelImages();
-
 			$( '.postbox .hndle, .postbox .handlediv' ).on( 'click', function() {
 				$( this ).parent( '.postbox' ).toggleClass( 'closed' );
 			});
@@ -393,8 +391,6 @@
 					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) );
 
 					that.initPanel( panel, newPanelData );
-
-					that.resizePanelImages();
 				}
 			});
 		},
@@ -610,6 +606,8 @@
 				event.preventDefault();
 				that.trigger( { type: 'duplicatePanel', panelData: that.data } );
 			});
+
+			this.resizeImage();
 		},
 
 		getData: function( target ) {
@@ -672,16 +670,29 @@
 					$( '<img src="' + this.data.background[ 'background_source' ] + '" />' ).appendTo( panelPreview );
 				}
 
-				var image = panelPreview.find( 'img' );
-
-				if ( image.width() / image.height() > panelPreview.width() / panelPreview.height() ) {
-					image.css( { width: 'auto', height: '100%' } );
-				} else {
-					image.css( { width: '100%', height: 'auto' } );
-				}
+				this.resizeImage();
 			} else if ( panelPreview.find( 'img' ).length ) {
 				panelPreview.find( 'img' ).remove();
 				$( '<p class="no-image">' + as_js_vars.no_image + '</p>' ).appendTo( panelPreview );
+			}
+		},
+
+		resizeImage: function() {
+			var panelPreview = this.$element.find( '.panel-preview' ),
+				panelImage = this.$element.find( '.panel-preview > img' );
+
+			if ( panelImage.length ) {
+				var checkImage = setInterval(function() {
+					if ( panelImage[0].complete === true ) {
+						clearInterval( checkImage );
+
+						if ( panelImage.width() / panelImage.height() > panelPreview.width() / panelPreview.height() ) {
+							panelImage.css( { width: 'auto', height: '100%' } );
+						} else {
+							panelImage.css( { width: '100%', height: 'auto' } );
+						}
+					}
+				}, 100 );
 			}
 		},
 
