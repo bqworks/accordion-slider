@@ -1001,36 +1001,23 @@
 			var orientation = $( '.sidebar-settings' ).find( '.setting[name="orientation"]' ).val(),
 				accordionWidth = parseInt( $( '.sidebar-settings' ).find( '.setting[name="width"]' ).val(), 10),
 				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10),
-				backgroundData = this.currentPanel.getData( 'background' ),
-				imageWidth = backgroundData.background_width,
-				imageHeight = backgroundData.background_height;
+				backgroundData = this.currentPanel.getData( 'background' );
 
-			if ( orientation === 'horizontal' ) {
-				imageWidth = imageWidth * ( accordionHeight / imageHeight );
-				imageHeight = accordionHeight;
-			} else if ( orientation === 'vertical' ) {
-				imageHeight = imageHeight * ( accordionWidth / imageWidth );
-				imageWidth = accordionWidth;
-			}
-
-			var viewport = this.editor.find( '.viewport' ),
-				viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" width="' + imageWidth + '" height="' + imageHeight + '" />' ),
+			var viewport = this.editor.find( '.viewport' ).css( { 'width': Math.max( accordionWidth, 960 ), 'height': accordionHeight } ),
 				viewportLayers = $( '<div class="viewport-layers"></div>' );
-			
-			viewportImage.appendTo( viewport );
-			viewportLayers.appendTo( viewport );
-			viewport.css( 'height', imageHeight );
 
-			if ( imageWidth < 960 ) {
-				viewportImage.css( 'left', ( 960 - imageWidth ) / 2 );
+			if ( typeof backgroundData.background_source !== 'undefined' && backgroundData.background_source !== '') {
+				var viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" />' ).appendTo( viewport );
+
+				viewportLayers.css( {
+					'width': viewportImage.width(),
+					'height': viewportImage.height(),
+					'left': viewportImage.position().left,
+					'top': viewportImage.position().top
+				});
 			}
 
-			viewportLayers.css( {
-				'width': imageWidth,
-				'height': imageHeight,
-				'left': viewportImage.position().left,
-				'top': viewportImage.position().top
-			});
+			viewportLayers.appendTo( viewport );
 		},
 
 		createLayer: function( id, data ) {
