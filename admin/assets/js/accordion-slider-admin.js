@@ -587,6 +587,11 @@
 				});
 			});
 
+			this.$element.find( '.edit-html' ).on( 'click', function( event ) {
+				event.preventDefault();
+				HTMLEditor.open( that.id );
+			});
+
 			this.$element.find( '.edit-layers' ).on( 'click', function( event ) {
 				event.preventDefault();
 				LayersEditor.open( that.id );
@@ -820,6 +825,65 @@
 
 			this.currentPanel.setData( 'background', data );
 			this.currentPanel.updateBackgroundImage();
+
+			this.close();
+		},
+
+		close: function() {
+			this.editor.find( '.close, .close-x' ).off( 'click' );
+			this.editor.find( '.save' ).off( 'click' );
+			this.editor.find( '.image-loader' ).off( 'click' );
+			this.editor.find( '.clear-fieldset' ).off( 'click' );
+
+			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
+		}
+	};
+
+	var HTMLEditor = {
+
+		editor: null,
+
+		currentPanel: null,
+
+		open: function( id ) {
+			var that = this;
+
+			this.currentPanel = AccordionSliderAdmin.getPanel( id );
+			
+			var data = this.currentPanel.getData( 'html' );
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				dataType: 'html',
+				data: { action: 'accordion_slider_load_html_editor', data: data },
+				complete: function( data ) {
+					$( 'body' ).append( data.responseText );
+					that.init();
+				}
+			});
+		},
+
+		init: function() {
+			var that = this;
+
+			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
+
+			this.editor = $( '.html-editor' );
+
+			this.editor.find( '.close, .close-x' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.close();
+			});
+
+			this.editor.find( '.save' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.save();
+			});
+		},
+
+		save: function() {
+			this.currentPanel.setData( 'html', this.editor.find( 'textarea' ).val() );
 
 			this.close();
 		},

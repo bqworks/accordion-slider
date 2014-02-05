@@ -17,7 +17,7 @@
 
 	<div class="panel-buttons"> 
 		<a class="button-secondary edit-background-image" href="#"><?php _e( 'Im', 'accordion-slider' ); ?></a>
-		<a class="button-secondary edit-html-content" href="#"><?php _e( 'HT', 'accordion-slider' ); ?></a>
+		<a class="button-secondary edit-html" href="#"><?php _e( 'HT', 'accordion-slider' ); ?></a>
 		<a class="button-secondary edit-layers" href="#"><?php _e( 'Ly', 'accordion-slider' ); ?></a>
 		<a class="button-secondary edit-settings" href="#"><?php _e( 'St', 'accordion-slider' ); ?></a>
 	</div>

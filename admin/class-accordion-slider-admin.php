@@ -30,6 +30,7 @@ class Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_duplicate_accordion', array( $this, 'ajax_duplicate_accordion' ) );
 		add_action( 'wp_ajax_accordion_slider_add_panels', array( $this, 'ajax_add_panels' ) );
 		add_action( 'wp_ajax_accordion_slider_load_background_image_editor', array( $this, 'ajax_load_background_image_editor' ) );
+		add_action( 'wp_ajax_accordion_slider_load_html_editor', array( $this, 'ajax_load_html_editor' ) );
 		add_action( 'wp_ajax_accordion_slider_load_layers_editor', array( $this, 'ajax_load_layers_editor' ) );
 		add_action( 'wp_ajax_accordion_slider_add_layer_settings', array( $this, 'ajax_add_layer_settings' ) );
 		add_action( 'wp_ajax_accordion_slider_load_settings_editor', array( $this, 'ajax_load_settings_editor' ) );
@@ -409,6 +410,14 @@ class Accordion_Slider_Admin {
 		$data = json_decode( stripslashes( $_POST['data'] ), true );
 
 		include( 'views/background-image-editor.php' );
+
+		die();
+	}
+
+	public function ajax_load_html_editor() {
+		$html_content = $_POST['data'];
+
+		include( 'views/html-editor.php' );
 
 		die();
 	}
