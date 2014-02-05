@@ -1,12 +1,12 @@
 <tr>
 	<td class="label-cell">
-		<label for="posts-post-type"><?php _e( 'Post Type', 'accordion-slider' ); ?>:</label>
+		<label for="posts-post-types"><?php _e( 'Post Types', 'accordion-slider' ); ?>:</label>
 	</td>
 	<td class="setting-cell">
-		<select id="posts-post-type" multiple class="panel-setting" name="posts_post_type">
+		<select id="posts-post-types" multiple class="panel-setting" name="posts_post_types">
 			<?php
 				foreach ( $post_names as $value ) {
-					$selected = ( isset( $panel_settings['posts_post_type'] ) && in_array( $value['name'], $panel_settings['posts_post_type'] ) ) || ( ! isset( $panel_settings['posts_post_type'] ) && in_array( $value['name'], $panel_default_settings['posts_post_type']['default_value'] ) ) ? ' selected="selected"' : '';
+					$selected = ( isset( $panel_settings['posts_post_types'] ) && in_array( $value['name'], $panel_settings['posts_post_types'] ) ) || ( ! isset( $panel_settings['posts_post_types'] ) && in_array( $value['name'], $panel_default_settings['posts_post_types']['default_value'] ) ) ? ' selected="selected"' : '';
 					echo '<option value="' . $value['name'] . '"' . $selected . '>' . $value['label'] . '</option>';
 				}
 			?>
@@ -15,14 +15,14 @@
 </tr>
 <tr>
 	<td class="label-cell">
-		<label for="posts-taxonomy"><?php _e( 'Taxonomy', 'accordion-slider' ); ?>:</label>
+		<label for="posts-taxonomies"><?php _e( 'Taxonomies', 'accordion-slider' ); ?>:</label>
 	</td>
 	<td class="setting-cell">
-		<select id="posts-taxonomy" multiple class="panel-setting" name="posts_taxonomy">
+		<select id="posts-taxonomies" multiple class="panel-setting" name="posts_taxonomies">
 			<?php
-				if ( isset( $panel_settings['posts_post_type'] ) && ! empty( $panel_settings['posts_post_type'] ) ) {
-					$post_types = $panel_settings['posts_post_type'];
-					$all_taxonomies = $this->get_taxonomies_for_posts( $panel_settings['posts_post_type'] );
+				if ( isset( $panel_settings['posts_post_types'] ) && ! empty( $panel_settings['posts_post_types'] ) ) {
+					$post_types = $panel_settings['posts_post_types'];
+					$all_taxonomies = $this->get_taxonomies_for_posts( $panel_settings['posts_post_types'] );
 
 					foreach ( $post_types as $post_type ) {
 						$taxonomies = $all_taxonomies[ $post_type ];
@@ -31,7 +31,7 @@
 							echo '<optgroup label="' . $taxonomy['label'] . '">';
 
 							foreach ( $taxonomy['terms'] as $term ) {
-								$selected = isset( $panel_settings['posts_taxonomy'] ) && in_array( $term[ 'full' ], $panel_settings['posts_taxonomy'] ) ? ' selected="selected"' : '';
+								$selected = isset( $panel_settings['posts_taxonomies'] ) && in_array( $term[ 'full' ], $panel_settings['posts_taxonomies'] ) ? ' selected="selected"' : '';
 								echo '<option value="' . $term[ 'full' ] . '"' . $selected . '>' . $term[ 'name' ] . '</option>';
 							}
 

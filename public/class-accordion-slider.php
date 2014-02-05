@@ -530,12 +530,12 @@ class Accordion_Slider {
 
 		$query_args = array();
 			
-		if ( isset( $settings['posts_post_type'] ) && ! empty( $settings['posts_post_type'] ) ) {
-			$query_args['post_type'] = $settings['posts_post_type'];
+		if ( isset( $settings['posts_post_types'] ) && ! empty( $settings['posts_post_types'] ) ) {
+			$query_args['post_types'] = $settings['posts_post_types'];
 		}
 		
-		if ( isset( $settings['posts_taxonomy'] ) && ! empty( $settings['posts_taxonomy'] ) ) {
-			$taxonomy_terms = $settings['posts_taxonomy'];
+		if ( isset( $settings['posts_taxonomies'] ) && ! empty( $settings['posts_taxonomies'] ) ) {
+			$taxonomy_terms = $settings['posts_taxonomies'];
 
 			$tax_query = array();
 

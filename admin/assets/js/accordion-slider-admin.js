@@ -1497,8 +1497,8 @@
 
 		handlePostsSelects: function() {
 			var that = this,
-				$postTypes = this.editor.find( 'select[name="posts_post_type"]' ),
-				$taxonomies = this.editor.find( 'select[name="posts_taxonomy"]' ),
+				$postTypes = this.editor.find( 'select[name="posts_post_types"]' ),
+				$taxonomies = this.editor.find( 'select[name="posts_taxonomies"]' ),
 				selectedTaxonomies = $taxonomies.val() || [];
 
 
@@ -1565,8 +1565,8 @@
 			this.editor.find( '.close, .close-x' ).off( 'click' );
 			this.editor.find( '.save' ).off( 'click' );
 
-			this.editor.find( 'select[name="posts_post_type"]' ).multiCheck( 'destroy' );
-			this.editor.find( 'select[name="posts_taxonomy"]' ).multiCheck( 'destroy' );
+			this.editor.find( 'select[name="posts_post_types"]' ).multiCheck( 'destroy' );
+			this.editor.find( 'select[name="posts_taxonomies"]' ).multiCheck( 'destroy' );
 
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
