@@ -20,9 +20,10 @@
 	<td class="setting-cell">
 		<select id="posts-taxonomies" multiple class="panel-setting" name="posts_taxonomies">
 			<?php
-				if ( isset( $panel_settings['posts_post_types'] ) && ! empty( $panel_settings['posts_post_types'] ) ) {
-					$post_types = $panel_settings['posts_post_types'];
-					$all_taxonomies = $this->get_taxonomies_for_posts( $panel_settings['posts_post_types'] );
+				$post_types = isset( $panel_settings['posts_post_types'] ) ? $panel_settings['posts_post_types'] : $panel_default_settings['posts_post_types']['default_value'];
+				
+				if ( ! empty( $post_types ) ) {
+					$all_taxonomies = $this->get_taxonomies_for_posts( $post_types );
 
 					foreach ( $post_types as $post_type ) {
 						$taxonomies = $all_taxonomies[ $post_type ];

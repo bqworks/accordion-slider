@@ -1553,7 +1553,14 @@
 
 			this.editor.find( '.panel-setting' ).each(function() {
 				var $setting = $( this );
-				data[ $setting.attr( 'name' ) ] = $setting.attr( 'type' ) === 'checkbox' ? $setting.is( ':checked' ) : $setting.val();
+
+				if ( typeof $setting.attr( 'multiple' ) !== 'undefined' ) {
+					data[ $setting.attr( 'name' ) ] =  $setting.val() !== null ? $setting.val() : [];
+				} else if ( $setting.attr( 'type' ) === 'checkbox' ) {
+					data[ $setting.attr( 'name' ) ] =  $setting.is( ':checked' );
+				} else {
+					data[ $setting.attr( 'name' ) ] =  $setting.val();
+				}
 			});
 
 			this.currentPanel.setData( 'settings', data );
