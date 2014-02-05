@@ -640,10 +640,14 @@
 		},
 
 		setData: function( target, data ) {
+			var that = this;
+
 			if ( target === 'all' ) {
 				this.data = data;
 			} else if ( target === 'background' ) {
-				this.data.background = data;
+				$.each( data, function( name, value ) {
+					that.data.background[ name ] = value;
+				});
 			} else if ( target === 'layers' ) {
 				this.data.layers = data;
 			} else if ( target === 'html' ) {
