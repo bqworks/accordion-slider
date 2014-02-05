@@ -760,7 +760,7 @@
 				that.save();
 			});
 
-			this.editor.find( '.image-loader' ).on( 'click', function( event ) {
+			this.editor.find( '.image-loader, .retina-loader' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.openMediaLibrary( event );
 			});
@@ -776,30 +776,39 @@
 
 			var that = this,
 				target = $( event.target ).parents( '.fieldset' ).hasClass( 'opened-background-image' ) === true ? 'opened-background' : 'background',
-				imageLoader = this.editor.find( '.' + target + '-image .image-loader' );
+				imageLoader = this.editor.find( '.' + target + '-image .image-loader' ),
+				isRetina = $( event.target ).hasClass( 'retina-loader' );
 
 			MediaLoader.open(function( selection ) {
 				var image = selection[ 0 ];
 
-				if ( imageLoader.find( 'img' ).length !== 0 ) {
-					imageLoader.find( 'img' ).attr( 'src', image.url );
+				if ( isRetina === true ) {
+					if ( target === 'background' ) {
+						that.editor.find( 'input[name="background_retina_source"]' ).val( image.url );
+					} else if ( target === 'opened-background' ) {
+						that.editor.find( 'input[name="opened_background_retina_source"]' ).val( image.url );
+					}
 				} else {
-					imageLoader.find( '.no-image' ).remove();
-					$( '<img src="' + image.url + '" />' ).appendTo( imageLoader );
-				}
+					if ( imageLoader.find( 'img' ).length !== 0 ) {
+						imageLoader.find( 'img' ).attr( 'src', image.url );
+					} else {
+						imageLoader.find( '.no-image' ).remove();
+						$( '<img src="' + image.url + '" />' ).appendTo( imageLoader );
+					}
 
-				if ( target === 'background' ) {
-					that.editor.find( 'input[name="background_source"]' ).val( image.url );
-					that.editor.find( 'input[name="background_alt"]' ).val( image.alt );
-					that.editor.find( 'input[name="background_title"]' ).val( image.title );
-					that.editor.find( 'input[name="background_width"]' ).val( image.width );
-					that.editor.find( 'input[name="background_height"]' ).val( image.height );
-				} else if ( target === 'opened-background' ) {
-					that.editor.find( 'input[name="opened_background_source"]' ).val( image.url );
-					that.editor.find( 'input[name="opened_background_alt"]' ).val( image.alt );
-					that.editor.find( 'input[name="opened_background_title"]' ).val( image.title );
-					that.editor.find( 'input[name="opened_background_width"]' ).val( image.width );
-					that.editor.find( 'input[name="opened_background_height"]' ).val( image.height );
+					if ( target === 'background' ) {
+						that.editor.find( 'input[name="background_source"]' ).val( image.url );
+						that.editor.find( 'input[name="background_alt"]' ).val( image.alt );
+						that.editor.find( 'input[name="background_title"]' ).val( image.title );
+						that.editor.find( 'input[name="background_width"]' ).val( image.width );
+						that.editor.find( 'input[name="background_height"]' ).val( image.height );
+					} else if ( target === 'opened-background' ) {
+						that.editor.find( 'input[name="opened_background_source"]' ).val( image.url );
+						that.editor.find( 'input[name="opened_background_alt"]' ).val( image.alt );
+						that.editor.find( 'input[name="opened_background_title"]' ).val( image.title );
+						that.editor.find( 'input[name="opened_background_width"]' ).val( image.width );
+						that.editor.find( 'input[name="opened_background_height"]' ).val( image.height );
+					}
 				}
 			});
 		},

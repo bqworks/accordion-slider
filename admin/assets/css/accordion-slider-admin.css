@@ -330,25 +330,40 @@
 	margin: 0;
 }
 
-.background-image-editor .data-fields {
+.retina-loader {
+	width: 17px;
+	height: 17px;
+	position: absolute;
+	background-color: #CCC;
+	margin-top: 5px;
+	margin-left: -22px;
+	cursor: pointer;
+}
+
+#background-retina-source,
+#opened-background-retina-source {
+	padding-right: 25px;
+}
+
+.background-image-editor table {
 	margin-left: 190px;
 }
 
-.background-image-editor .data-fields label {
+.background-image-editor label {
 	
 }
 
-.background-image-editor .data-fields .field {
+.background-image-editor .field {
 	margin-left: 10px;
 	width: 363px;
 	font-size: 12px;
 }
 
-.background-image-editor .link .data-fields {
+.background-image-editor .link table {
 	margin-left: 0;
 }
 
-.background-image-editor .link .data-fields .field {
+.background-image-editor .link .field {
 	width: 612px;
 }
 

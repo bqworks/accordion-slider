@@ -13,7 +13,7 @@
 					}
 				?>
 			</div>
-			<table class="data-fields">
+			<table>
 				<tbody>
 					<tr>
 						<td><label for="background-source"><?php _e( 'Source:', 'accordion-slider' ); ?></label></td>
@@ -29,7 +29,7 @@
 					</tr>
 					<tr>
 						<td><label for="background-retina-source"><?php _e( 'Retina Source:', 'accordion-slider' ); ?></label></td>
-						<td><input id="background-retina-source" class="field" type="text" name="background_retina_source" value="<?php echo isset( $data['background_retina_source'] ) ? esc_attr( $data['background_retina_source'] ) : ''; ?>" /></td>
+						<td><input id="background-retina-source" class="field" type="text" name="background_retina_source" value="<?php echo isset( $data['background_retina_source'] ) ? esc_attr( $data['background_retina_source'] ) : ''; ?>" /><span class="retina-loader"></span></td>
 					</tr>
 				</tbody>
 			</table>
@@ -48,7 +48,7 @@
 					}
 				?>
 			</div>
-			<table class="data-fields">
+			<table>
 				<tbody>
 					<tr>
 						<td><label for="opened-background-source"><?php _e( 'Source:', 'accordion-slider' ); ?></label></td>
@@ -64,7 +64,7 @@
 					</tr>
 					<tr>
 						<td><label for="opened-background-retina-source"><?php _e( 'Retina Source:', 'accordion-slider' ); ?></label></td>
-						<td><input id="opened-background-retina-source" class="field" type="text" name="opened_background_retina_source" value="<?php echo isset( $data['opened_background_retina_source'] ) ? esc_attr( $data['opened_background_retina_source'] ) : ''; ?>" /></td>
+						<td><input id="opened-background-retina-source" class="field" type="text" name="opened_background_retina_source" value="<?php echo isset( $data['opened_background_retina_source'] ) ? esc_attr( $data['opened_background_retina_source'] ) : ''; ?>" /><span class="retina-loader"></span></td>
 					</tr>
 				</tbody>
 			</table>
@@ -74,7 +74,7 @@
 
 		<div class="fieldset link">
 			<h3 class="heading"><?php _e( 'Link', 'accordion-slider' ); ?><span class="clear-fieldset"><?php _e( 'Clear', 'accordion-slider' ); ?></span></h3>
-			<table class="data-fields">
+			<table>
 				<tbody>
 					<tr>
 						<td><label for="background-link"><?php _e( 'URL:', 'accordion-slider' ); ?></label></td>
