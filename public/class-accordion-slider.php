@@ -378,6 +378,10 @@ class Accordion_Slider {
 					}
 				}
 
+				if ( isset( $panel['html'] ) && $panel['html'] !== '' ) {
+					$panel_html .= "\r\n" . '			' . $panel['html'];
+				}
+
 				if ( isset( $panel['layers'] ) ) {
 					$layers = $panel['layers'];
 
