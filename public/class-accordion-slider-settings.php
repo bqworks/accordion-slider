@@ -40,24 +40,28 @@ class Accordion_Slider_Settings {
 		if ( empty( self::$settings ) ) {
 			self::$settings = array(
 				'width' => array(
+					'js_name' => 'width',
 					'label' => __( 'Width', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 800,
 					'description' => ''
 				),
 				'height' => array(
+					'js_name' => 'height',
 					'label' => __( 'Height', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 400,
 					'description' => ''
 				),
 				'responsive' => array(
+					'js_name' => 'responsive',
 					'label' => __( 'Responsive', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => true,
 					'description' => ''
 				),
-				'responsiveMode' => array(
+				'responsive_mode' => array(
+					'js_name' => 'responsiveMode',
 					'label' => __( 'Responsive Mode', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'auto',
@@ -67,13 +71,15 @@ class Accordion_Slider_Settings {
 					),
 					'description' => ''
 				),
-				'aspectRatio' => array(
+				'aspect_ratio' => array(
+					'js_name' => 'aspectRatio',
 					'label' => __( 'Aspect Ratio', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => -1,
 					'description' => ''
 				),
 				'orientation' => array(
+					'js_name' => 'orientation',
 					'label' => __( 'Orientation', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'horizontal',
@@ -84,61 +90,71 @@ class Accordion_Slider_Settings {
 					'description' => ''
 				),
 				'shadow' => array(
+					'js_name' => 'shadow',
 					'label' => __( 'Shadow', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => true,
 					'description' => ''
 				),
-				'panelDistance' => array(
+				'panel_distance' => array(
+					'js_name' => 'panelDistance',
 					'label' => __( 'Panel Distance', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 0,
 					'description' => ''
 				),
-				'panelOverlap' => array(
+				'panel_overlap' => array(
+					'js_name' => 'panelOverlap',
 					'label' => __( 'Panel Overlap', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => true,
 					'description' => ''
 				),
-				'visiblePanels' => array(
+				'visible_panels' => array(
+					'js_name' => 'visiblePanels',
 					'label' => __( 'Visible Panels', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => -1,
 					'description' => ''
 				),
-				'startPanel' => array(
+				'start_panel' => array(
+					'js_name' => 'startPanel',
 					'label' => __( 'Start Panel', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 0,
 					'description' => ''
 				),
-				'startPage' => array(
+				'start_page' => array(
+					'js_name' => 'startPage',
 					'label' => __( 'Start Page', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 0,
 					'description' => ''
 				),
 				'lazy_loading' => array(
+					'js_name' => 'lazyLoading',
 					'label' => __( 'Lazy Loading', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => false,
 					'description' => ''
 				),
 
-				'openedPanelSize' => array(
+				'opened_panel_size' => array(
+					'js_name' => 'openedPanelSize',
 					'label' => __( 'Opened Panel Size', 'accordion-slider' ),
 					'type' => 'mixed',
 					'default_value' => 'max',
 					'description' => ''
 				),
-				'maxOpenedPanelSize' => array(
+				'max_opened_panel_size' => array(
+					'js_name' => 'maxOpenedPanelSize',
 					'label' => __( 'Max Opened Panel Size', 'accordion-slider' ),
 					'type' => 'mixed',
 					'default_value' => '80%',
 					'description' => ''
 				),
-				'openPanelOn' => array(
+				'open_panel_on' => array(
+					'js_name' => 'openPanelOn',
 					'label' => __( 'Open Panel On', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'hover',
@@ -148,37 +164,43 @@ class Accordion_Slider_Settings {
 					),
 					'description' => ''
 				),
-				'closePanelsOnMouseOut' => array(
+				'close_panels_on_mouse_out' => array(
+					'js_name' => 'closePanelsOnMouseOut',
 					'label' => __( 'Close Panels On Mouse Out', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => true,
 					'description' => ''
 				),
-				'mouseDelay' => array(
+				'mouse_delay' => array(
+					'js_name' => 'mouseDelay',
 					'label' => __( 'Mouse Delay', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 200,
 					'description' => ''
 				),
-				'openPanelDuration' => array(
+				'open_panel_duration' => array(
+					'js_name' => 'openPanelDuration',
 					'label' => __( 'Open Panel Duration', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 700,
 					'description' => ''
 				),
-				'closePanelDuration' => array(
+				'close_panel_duration' => array(
+					'js_name' => 'closePanelDuration',
 					'label' => __( 'Close Panel Duration', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 700,
 					'description' => ''
 				),
-				'pageScrollDuration' => array(
+				'page_scroll_duration' => array(
+					'js_name' => 'pageScrollDuration',
 					'label' => __( 'Page Scroll Duration', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 500,
 					'description' => ''
 				),
-				'pageScrollEasing' => array(
+				'page_scroll_easing' => array(
+					'js_name' => 'pageScrollEasing',
 					'label' => __( 'Page Scroll Easing', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'swing',
@@ -219,18 +241,21 @@ class Accordion_Slider_Settings {
 				),
 
 				'autoplay' => array(
+					'js_name' => 'autoplay',
 					'label' => __( 'Autoplay', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => true,
 					'description' => ''
 				),
-				'autoplayDelay' => array(
+				'autoplay_delay' => array(
+					'js_name' => 'autoplayDelay',
 					'label' => __( 'Autoplay Delay', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 5000,
 					'description' => ''
 				),
-				'autoplayDirection' => array(
+				'autoplay_direction' => array(
+					'js_name' => 'autoplayDirection',
 					'label' => __( 'Autoplay Direction', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'normal',
@@ -240,7 +265,8 @@ class Accordion_Slider_Settings {
 					),
 					'description' => ''
 				),
-				'autoplayOnHover' => array(
+				'autoplay_on_hover' => array(
+					'js_name' => 'autoplayOnHover',
 					'label' => __( 'Autoplay On Hover', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'pause',
@@ -252,19 +278,22 @@ class Accordion_Slider_Settings {
 					'description' => ''
 				),
 
-				'mouseWheel' => array(
+				'mouse_wheel' => array(
+					'js_name' => 'mouseWheel',
 					'label' => __( 'Mouse Wheel', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => true,
 					'description' => ''
 				),
-				'mouseWheelSensitivity' => array(
+				'mouse_wheel_sensitivity' => array(
+					'js_name' => 'mouseWheelSensitivity',
 					'label' => __( 'Mouse Wheel Sensitivity', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 50,
 					'description' => ''
 				),
-				'mouseWheelTarget' => array(
+				'mouse_wheel_target' => array(
+					'js_name' => 'mouseWheelTarget',
 					'label' => __( 'Mouse Wheel Target', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'panel',
@@ -276,45 +305,52 @@ class Accordion_Slider_Settings {
 				),
 
 				'keyboard' => array(
+					'js_name' => 'keyboard',
 					'label' => __( 'Keyboard', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => true,
 					'description' => ''
 				),
-				'keyboardOnlyOnFocus' => array(
+				'keyboard_only_on_focus' => array(
+					'js_name' => 'keyboardOnlyOnFocus',
 					'label' => __( 'Keyboard Only On Focus', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => false,
 					'description' => ''
 				),
 
-				'swapBackgroundDuration' => array(
+				'swap_background_duration' => array(
+					'js_name' => 'swapBackgroundDuration',
 					'label' => __( 'Swap Background Duration', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 700,
 					'description' => ''
 				),
-				'fadeOutBackground' => array(
+				'fade_out_background' => array(
+					'js_name' => 'fadeOutBackground',
 					'label' => __( 'Fade Out Background', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => false,
 					'description' => ''
 				),
 
-				'touchSwipe' => array(
+				'touch_swipe' => array(
+					'js_name' => 'touchSwipe',
 					'label' => __( 'Touch Swipe', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => true,
 					'description' => ''
 				),
-				'touchSwipeThreshold' => array(
+				'touch_swipe_threshold' => array(
+					'js_name' => 'touchSwipeThreshold',
 					'label' => __( 'Touch Swipe Threshold', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 50,
 					'description' => ''
 				),
 
-				'openPanelVideoAction' => array(
+				'open_panel_video_action' => array(
+					'js_name' => 'openPanelVideoAction',
 					'label' => __( 'Open Panel Video Action', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'playVideo',
@@ -324,7 +360,8 @@ class Accordion_Slider_Settings {
 					),
 					'description' => ''
 				),
-				'closePanelVideoAction' => array(
+				'close_panel_video_action' => array(
+					'js_name' => 'closePanelVideoAction',
 					'label' => __( 'Close Panel Video Action', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'pauseVideo',
@@ -334,7 +371,8 @@ class Accordion_Slider_Settings {
 					),
 					'description' => ''
 				),
-				'playVideoAction' => array(
+				'play_video_action' => array(
+					'js_name' => 'playVideoAction',
 					'label' => __( 'Play Video Action', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'stopAutoplay',
@@ -344,7 +382,8 @@ class Accordion_Slider_Settings {
 					),
 					'description' => ''
 				),
-				'pauseVideoAction' => array(
+				'pause_video_action' => array(
+					'js_name' => 'pauseVideoAction',
 					'label' => __( 'Pause Video Action', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'none',
@@ -354,7 +393,8 @@ class Accordion_Slider_Settings {
 					),
 					'description' => ''
 				),
-				'endVideoAction' => array(
+				'end_video_action' => array(
+					'js_name' => 'endVideoAction',
 					'label' => __( 'End Video Action', 'accordion-slider' ),
 					'type' => 'select',
 					'default_value' => 'none',
@@ -388,15 +428,15 @@ class Accordion_Slider_Settings {
 						'width',
 						'height',
 						'responsive',
-						'responsiveMode',
-						'aspectRatio',
+						'responsive_mode',
+						'aspect_ratio',
 						'orientation',
 						'shadow',
-						'panelDistance',
-						'panelOverlap',
-						'visiblePanels',
-						'startPanel',
-						'startPage',
+						'panel_distance',
+						'panel_overlap',
+						'visible_panels',
+						'start_panel',
+						'start_page',
 						'lazy_loading'
 					)
 				),
@@ -404,15 +444,15 @@ class Accordion_Slider_Settings {
 				'animations' => array(
 					'label' => __( 'Animations', 'accordion-slider' ),
 					'list' => array(
-						'openedPanelSize',
-						'maxOpenedPanelSize',
-						'openPanelOn',
-						'closePanelsOnMouseOut',
-						'mouseDelay',
-						'openPanelDuration',
-						'closePanelDuration',
-						'pageScrollDuration',
-						'pageScrollEasing'
+						'opened_panel_size',
+						'max_opened_panel_size',
+						'open_panel_on',
+						'close_panels_on_mouse_out',
+						'mouse_delay',
+						'open_panel_duration',
+						'close_panel_duration',
+						'page_scroll_duration',
+						'page_scroll_easing'
 					)
 				),
 
@@ -420,18 +460,18 @@ class Accordion_Slider_Settings {
 					'label' => __( 'Autoplay', 'accordion-slider' ),
 					'list' => array(
 						'autoplay',
-						'autoplayDelay',
-						'autoplayDirection',
-						'autoplayOnHover'
+						'autoplay_delay',
+						'autoplay_direction',
+						'autoplay_on_hover'
 					)
 				),
 
 				'mouse_wheel' => array(
 					'label' => __( 'Mouse Wheel', 'accordion-slider' ),
 					'list' => array(
-						'mouseWheel',
-						'mouseWheelSensitivity',
-						'mouseWheelTarget'
+						'mouse_wheel',
+						'mouse_wheel_sensitivity',
+						'mouse_wheel_target'
 					)
 				),
 
@@ -439,34 +479,34 @@ class Accordion_Slider_Settings {
 					'label' => __( 'Keyboard', 'accordion-slider' ),
 					'list' => array(
 						'keyboard',
-						'keyboardOnlyOnFocus'
+						'keyboard_only_on_focus'
 					)
 				),
 
 				'swap_background' => array(
 					'label' => __( 'Swap Background', 'accordion-slider' ),
 					'list' => array(
-						'swapBackgroundDuration',
-						'fadeOutBackground'
+						'swap_background_duration',
+						'fade_out_background'
 					)
 				),
 
 				'touch_swipe' => array(
 					'label' => __( 'Touch Swipe', 'accordion-slider' ),
 					'list' => array(
-						'touchSwipe',
-						'touchSwipeThreshold'
+						'touch_swipe',
+						'touch_swipe_threshold'
 					)
 				),
 
 				'video' => array(
 					'label' => __( 'Video', 'accordion-slider' ),
 					'list' => array(
-						'openPanelVideoAction',
-						'closePanelVideoAction',
-						'playVideoAction',
-						'pauseVideoAction',
-						'endVideoAction'
+						'open_panel_video_action',
+						'close_panel_video_action',
+						'play_video_action',
+						'pause_video_action',
+						'end_video_action'
 					)
 				)
 			);
