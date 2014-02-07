@@ -226,7 +226,7 @@
 		previewAccordionAll: function( target ) {
 			var url = $.lightURLParse( target.attr( 'href' ) ),
 				nonce = url.lad_nonce,
-				id = url.id;
+				id = parseInt( url.id, 10 );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -243,7 +243,7 @@
 		deleteAccordion: function( target ) {
 			var url = $.lightURLParse( target.attr( 'href' ) ),
 				nonce = url.da_nonce,
-				id = url.id,
+				id = parseInt( url.id, 10 ),
 				row = target.parents( 'tr' );
 
 			var dialog = $(
@@ -293,7 +293,7 @@
 		duplicateAccordion: function( target ) {
 			var url = $.lightURLParse( target.attr( 'href' ) ),
 				nonce = url.dua_nonce,
-				id = url.id;
+				id = parseInt( url.id, 10 );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -310,7 +310,7 @@
 		exportAccordion: function( target ) {
 			var url = $.lightURLParse( target.attr( 'href' ) ),
 				nonce = url.ea_nonce,
-				id = url.id;
+				id = parseInt( url.id, 10 );
 
 			ExportWindow.open( id, nonce );
 		},
