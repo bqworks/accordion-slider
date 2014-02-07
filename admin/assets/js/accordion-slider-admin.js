@@ -224,20 +224,9 @@
 		},
 
 		previewAccordionAll: function( target ) {
-			var url = target.attr( 'href' ),
-				urlArray = url.split( '&' ).splice( 1 ),
-				nonce,
-				id;
-
-			$.each( urlArray, function( index, element ) {
-				var elementArray = element.split( '=' );
-
-				if ( elementArray[ 0 ] === 'id' ) {
-					id = parseInt( elementArray[ 1 ], 10 );
-				} else if ( elementArray[ 0 ] === 'lad_nonce' ) {
-					nonce = elementArray[ 1 ];
-				}
-			});
+			var url = $.lightURLParse( target.attr( 'href' ) ),
+				nonce = url.lad_nonce,
+				id = url.id;
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -252,21 +241,10 @@
 		},
 
 		deleteAccordion: function( target ) {
-			var url = target.attr( 'href' ),
-				urlArray = url.split( '&' ).splice( 1 ),
-				id,
-				nonce,
+			var url = $.lightURLParse( target.attr( 'href' ) ),
+				nonce = url.da_nonce,
+				id = url.id,
 				row = target.parents( 'tr' );
-
-			$.each( urlArray, function( index, element ) {
-				var elementArray = element.split( '=' );
-
-				if ( elementArray[ 0 ] === 'id' ) {
-					id = parseInt( elementArray[ 1 ], 10 );
-				} else if ( elementArray[ 0 ] === 'da_nonce' ) {
-					nonce = elementArray[ 1 ];
-				}
-			});
 
 			var dialog = $(
 				'<div class="modal-overlay"></div>' +
@@ -313,20 +291,9 @@
 		},
 
 		duplicateAccordion: function( target ) {
-			var url = target.attr( 'href' ),
-				urlArray = url.split( '&' ).splice( 1 ),
-				id,
-				nonce;
-
-			$.each( urlArray, function( index, element ) {
-				var elementArray = element.split( '=' );
-
-				if ( elementArray[ 0 ] === 'id' ) {
-					id = parseInt( elementArray[ 1 ], 10 );
-				} else if ( elementArray[ 0 ] === 'dua_nonce' ) {
-					nonce = elementArray[ 1 ];
-				}
-			});
+			var url = $.lightURLParse( target.attr( 'href' ) ),
+				nonce = url.dua_nonce,
+				id = url.id;
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -341,20 +308,9 @@
 		},
 
 		exportAccordion: function( target ) {
-			var url = target.attr( 'href' ),
-				urlArray = url.split( '&' ).splice( 1 ),
-				id,
-				nonce;
-
-			$.each( urlArray, function( index, element ) {
-				var elementArray = element.split( '=' );
-
-				if ( elementArray[ 0 ] === 'id' ) {
-					id = parseInt( elementArray[ 1 ], 10 );
-				} else if ( elementArray[ 0 ] === 'ea_nonce' ) {
-					nonce = elementArray[ 1 ];
-				}
-			});
+			var url = $.lightURLParse( target.attr( 'href' ) ),
+				nonce = url.ea_nonce,
+				id = url.id;
 
 			ExportWindow.open( id, nonce );
 		},
@@ -2254,6 +2210,22 @@
 				}
 			}
 		});
+	};
+
+})(jQuery, window, document);
+
+;(function( $, window, document ) {
+
+	$.lightURLParse = function( url ) {
+		var urlArray = url.split( '?' )[1].split( '&' ),
+			result = [];
+
+		$.each( urlArray, function( index, element ) {
+			var elementArray = element.split( '=' );
+			result[ elementArray[ 0 ] ] = elementArray[ 1 ];
+		});
+
+		return result;
 	};
 
 })(jQuery, window, document);
