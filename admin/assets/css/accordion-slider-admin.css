@@ -276,6 +276,19 @@
 	margin-left: 10px;
 }
 
+@media (max-width: 560px) {
+	.export-window:before,
+	.import-window:before {
+		display: none;
+	}
+}
+
+.export-window textarea,
+.import-window textarea {
+	min-width: 500px;
+	min-height: 300px;
+}
+
 .background-image-editor .modal-window {
 	min-width: 660px;
 }

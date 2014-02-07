@@ -24,10 +24,12 @@ class Accordion_Slider_Admin {
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 
 		add_action( 'wp_ajax_accordion_slider_get_accordion_data', array( $this, 'ajax_get_accordion_data' ) );
-		add_action( 'wp_ajax_accordion_slider_update_accordion', array( $this, 'ajax_update_accordion' ) );
+		add_action( 'wp_ajax_accordion_slider_save_accordion', array( $this, 'ajax_save_accordion' ) );
 		add_action( 'wp_ajax_accordion_slider_preview_accordion', array( $this, 'ajax_preview_accordion' ) );
 		add_action( 'wp_ajax_accordion_slider_delete_accordion', array( $this, 'ajax_delete_accordion' ) );
 		add_action( 'wp_ajax_accordion_slider_duplicate_accordion', array( $this, 'ajax_duplicate_accordion' ) );
+		add_action( 'wp_ajax_accordion_slider_export_accordion', array( $this, 'ajax_export_accordion' ) );
+		add_action( 'wp_ajax_accordion_slider_import_accordion', array( $this, 'ajax_import_accordion' ) );
 		add_action( 'wp_ajax_accordion_slider_add_panels', array( $this, 'ajax_add_panels' ) );
 		add_action( 'wp_ajax_accordion_slider_load_background_image_editor', array( $this, 'ajax_load_background_image_editor' ) );
 		add_action( 'wp_ajax_accordion_slider_load_html_editor', array( $this, 'ajax_load_html_editor' ) );
@@ -93,7 +95,7 @@ class Accordion_Slider_Admin {
 				'page' => isset( $_GET['page'] ) && ( $_GET['page'] === 'accordion-slider-new' || ( isset( $_GET['id'] ) && isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) ) ? 'single' : 'all',
 				'id' => $id,
 				'lad_nonce' => wp_create_nonce( 'load-accordion-data' . $id ),
-				'ua_nonce' => wp_create_nonce( 'update-accordion' . $id ),
+				'sa_nonce' => wp_create_nonce( 'save-accordion' . $id ),
 				'no_image' => __( 'Click to add image', 'accordion-slider' ),
 				'accordion_delete' => __( 'Are you sure you want to delete this accordion?', 'accordion-slider' ),
 				'panel_delete' => __( 'Are you sure you want to delete this panel?', 'accordion-slider' ),
@@ -180,21 +182,32 @@ class Accordion_Slider_Admin {
 		return $this->plugin->get_accordion( $id );
 	}
 
-	public function ajax_update_accordion() {
+	public function ajax_save_accordion() {
 		$accordion_data = json_decode( stripslashes( $_POST['data'] ), true );
 		$nonce = $accordion_data['nonce'];
 		$id = intval( $accordion_data['id'] );
+		$action = $accordion_data['action'];
 
-		if ( ! wp_verify_nonce( $nonce, 'update-accordion' . $id ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'save-accordion' . $id ) ) {
 			die( 'This action was stopped for security purposes.' );
 		}
 
-		echo $this->update_accordion( $accordion_data );
+		$accordion_id = $this->save_accordion( $accordion_data );
+
+		if ( $action === 'save' ) {
+			echo $accordion_id;
+		} else if ( $action === 'import' || $action === 'duplicate' ) {
+			$accordion_name = $accordion_data['name'];
+			$accordion_created = date( 'm-d-Y' );
+			$accordion_modified = date( 'm-d-Y' );
+
+			include( 'views/accordions_row.php' );
+		}
 
 		die();
 	}
 
-	public function update_accordion( $accordion_data ) {
+	public function save_accordion( $accordion_data ) {
 		global $wpdb;
 
 		$id = intval( $accordion_data['id'] );
@@ -380,6 +393,32 @@ class Accordion_Slider_Admin {
 		$wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "accordionslider_accordions WHERE id = %d", $id ) );
 
 		return $id;
+	}
+
+	public function ajax_export_accordion() {
+		$nonce = $_POST['nonce'];
+		$id = intval( $_POST['id'] );
+
+		if ( ! wp_verify_nonce( $nonce, 'export-accordion' . $id ) ) {
+			die( 'This action was stopped for security purposes.' );
+		}
+
+		$accordion = $this->plugin->get_accordion( $id );
+
+		if ( $accordion !== false ) {
+			unset( $accordion['id'] );
+			$export_string = json_encode( $accordion );
+
+			include( 'views/export-window.php' );
+		}
+
+		die();
+	}
+
+	public function ajax_import_accordion() {
+		include( 'views/import-window.php' );
+
+		die();
 	}
 
 	public function create_panel( $data ) {
@@ -572,7 +611,7 @@ class Accordion_Slider_Admin {
 
 	public function ajax_add_breakpoint() {
 		$width = $_GET['data'];
-		
+
 		include( 'views/breakpoint.php' );
 
 		die();

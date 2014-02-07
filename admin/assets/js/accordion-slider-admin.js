@@ -27,7 +27,7 @@
 
 			$( 'form' ).on( 'submit', function( event ) {
 				event.preventDefault();
-				that.updateAccordion();
+				that.saveAccordion();
 			});
 
 			$( '.preview-accordion' ).on( 'click', function( event ) {
@@ -104,6 +104,16 @@
 				that.duplicateAccordion( $( this ) );
 			});
 
+			$( '.accordions-list' ).on( 'click', '.export-accordion', function( event ) {
+				event.preventDefault();
+				that.exportAccordion( $( this ) );
+			});
+
+			$( '.import-accordion' ).on( 'click', function( event ) {
+				event.preventDefault();
+				ImportWindow.open();
+			});
+
 			$( '.accordions-list tbody' ).lightSortable( {
 				children: '.accordion-row',
 				placeholder: ''
@@ -140,13 +150,18 @@
 			});
 		},
 
-		updateAccordion: function() {
-			var accordionDataString = JSON.stringify( this.getAccordionData() );
+		saveAccordion: function() {
+			var accordionData = this.getAccordionData();
+			accordionData[ 'id' ] = as_js_vars.id;
+			accordionData[ 'nonce' ] = as_js_vars.sa_nonce;
+			accordionData[ 'action' ] = 'save';
+
+			var accordionDataString = JSON.stringify( accordionData );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
-				data: { action: 'accordion_slider_update_accordion', data: accordionDataString },
+				data: { action: 'accordion_slider_save_accordion', data: accordionDataString },
 				complete: function( data ) {
 					if ( parseInt( as_js_vars.id, 10 ) === -1 && isNaN( data.responseText ) === false ) {
 						window.location = as_js_vars.admin + '?page=accordion-slider&id=' + data.responseText + '&action=edit';
@@ -159,12 +174,10 @@
 			var that = this;
 
 			var accordionData = {
-				'id': as_js_vars.id,
 				'name': $( 'input#title' ).val(),
 				'settings': {},
 				'panels': [],
-				'panels_state': {},
-				'nonce': as_js_vars.ua_nonce
+				'panels_state': {}
 			};
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index, element ) {
@@ -325,6 +338,25 @@
 					row.hide().fadeIn();
 				}
 			});
+		},
+
+		exportAccordion: function( target ) {
+			var url = target.attr( 'href' ),
+				urlArray = url.split( '&' ).splice( 1 ),
+				id,
+				nonce;
+
+			$.each( urlArray, function( index, element ) {
+				var elementArray = element.split( '=' );
+
+				if ( elementArray[ 0 ] === 'id' ) {
+					id = parseInt( elementArray[ 1 ], 10 );
+				} else if ( elementArray[ 0 ] === 'ea_nonce' ) {
+					nonce = elementArray[ 1 ];
+				}
+			});
+
+			ExportWindow.open( id, nonce );
 		},
 
 		initPanels: function() {
@@ -561,6 +593,108 @@
 					image.css( { width: '100%', height: 'auto' } );
 				}
 			});
+		}
+	};
+
+	var ExportWindow = {
+
+		exportWindow: null,
+
+		open: function( id, nonce ) {
+			var that = this;
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_export_accordion', id: id, nonce: nonce },
+				complete: function( data ) {
+					that.exportWindow = $( data.responseText ).appendTo( $( 'body' ) );
+					that.init();
+				}
+			});
+		},
+
+		init: function() {
+			var that = this;
+
+			this.exportWindow.find( '.close-x' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.close();
+			});
+
+			this.exportWindow.find( 'textarea' ).on( 'click', function( event ) {
+				event.preventDefault();
+
+				$( this ).focus();
+				$( this ).select();
+			});
+		},
+
+		close: function() {
+			this.exportWindow.remove();
+		}
+	};
+
+	var ImportWindow = {
+
+		importWindow: null,
+
+		open: function() {
+			var that = this;
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_import_accordion' },
+				complete: function( data ) {
+					that.importWindow = $( data.responseText ).appendTo( $( 'body' ) );
+					that.init();
+				}
+			});
+		},
+
+		init: function() {
+			var that = this;
+
+			this.importWindow.find( '.close-x' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.close();
+			});
+
+			this.importWindow.find( '.save' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.save();
+			});
+		},
+
+		save: function() {
+			var accordionDataString = this.importWindow.find( 'textarea' ).val();
+				
+			if ( accordionDataString === '' ) {
+				return;
+			}
+
+			var accordionData = JSON.parse( accordionDataString );
+			accordionData[ 'id' ] = -1;
+			accordionData[ 'nonce' ] = as_js_vars.sa_nonce;
+			accordionData[ 'action' ] = 'import';
+			accordionDataString = JSON.stringify( accordionData );
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_save_accordion', data: accordionDataString },
+				complete: function( data ) {
+					var row = $( data.responseText ).appendTo( $( '.accordions-list tbody' ) );
+					
+					row.hide().fadeIn();
+					that.close();
+				}
+			});
+		},
+
+		close: function() {
+			this.importWindow.remove();
 		}
 	};
 
