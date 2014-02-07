@@ -228,7 +228,7 @@ class Accordion_Slider_Admin {
 																			 	'modified' => date( 'm-d-Y' ),
 																				'panels_state' => json_encode( $accordion_data['panels_state'] ) ), 
 																	   	array( 'id' => $id ), 
-																	   	array( '%s', '%s', '%s' ), 
+																	   	array( '%s', '%s', '%s', '%s' ), 
 																	   	array( '%d' ) );
 				
 			$wpdb->query( $wpdb->prepare( "DELETE FROM " . $wpdb->prefix . "accordionslider_panels WHERE accordion_id = %d", $id ) );
