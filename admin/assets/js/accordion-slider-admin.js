@@ -484,12 +484,21 @@
 		},
 
 		addBreakpoint: function() {
-			var that = this;
+			var that = this,
+				size = '';
+
+			var previousWidth = $( 'input[name="breakpoint_width"]' ).last().val();
+			
+			if ( typeof previousWidth === 'undefined' ) {
+				size = '960';
+			} else if ( previousWidth !== '' ) {
+				size = previousWidth - 190;
+			}
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'get',
-				data: { action: 'accordion_slider_add_breakpoint' },
+				data: { action: 'accordion_slider_add_breakpoint', data: size },
 				complete: function( data ) {
 					$( data.responseText ).appendTo( $( '.breakpoints' ) );
 				}

@@ -571,6 +571,8 @@ class Accordion_Slider_Admin {
 	}
 
 	public function ajax_add_breakpoint() {
+		$width = $_GET['data'];
+		
 		include( 'views/breakpoint.php' );
 
 		die();

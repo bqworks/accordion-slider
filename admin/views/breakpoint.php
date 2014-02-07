@@ -1,6 +1,6 @@
 <div class="breakpoint">
 	<div class="breakpoint-header">
-		<?php _e( 'Window maximum width:', 'accordion-slider' ); ?><input type="text" name="breakpoint_width" value="<?php echo isset( $breakpoint_settings['breakpoint_width'] ) ? esc_attr( $breakpoint_settings['breakpoint_width'] ) : ''; ?>" />
+		<?php _e( 'Window maximum width:', 'accordion-slider' ); ?><input type="text" name="breakpoint_width" value="<?php echo isset( $breakpoint_settings['breakpoint_width'] ) ? esc_attr( $breakpoint_settings['breakpoint_width'] ) : ( isset( $width ) ? $width : '' ); ?>" />
 		<span class="remove-breakpoint"></span>
 	</div>
 	<table>
