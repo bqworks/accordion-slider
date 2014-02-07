@@ -196,7 +196,7 @@ class Accordion_Slider_Admin {
 
 		if ( $action === 'save' ) {
 			echo $accordion_id;
-		} else if ( $action === 'import' || $action === 'duplicate' ) {
+		} else if ( $action === 'import' ) {
 			$accordion_name = $accordion_data['name'];
 			$accordion_created = date( 'm-d-Y' );
 			$accordion_modified = date( 'm-d-Y' );
@@ -299,77 +299,17 @@ class Accordion_Slider_Admin {
 			die( 'This action was stopped for security purposes.' );
 		}
 
-		if ( ( $accordion = $this->duplicate_accordion( $original_accordion_id ) ) !== false ) {
-			$accordion_id = $accordion['id'];
-			$accordion_name = $accordion['name'];
-			$accordion_created = $accordion['created'];
-			$accordion_modified = $accordion['modified'];
+		if ( ( $original_accordion = $this->plugin->get_accordion( $original_accordion_id ) ) !== false ) {
+			$original_accordion['id'] = -1;
+			$accordion_id = $this->save_accordion( $original_accordion );
+			$accordion_name = $original_accordion['name'];
+			$accordion_created = date( 'm-d-Y' );
+			$accordion_modified = date( 'm-d-Y' );
 
 			include( 'views/accordions_row.php' );
 		}
 
 		die();
-	}
-
-	public function duplicate_accordion( $accordion_id ) {
-		global $wpdb;
-
-		$accordion = $this->plugin->get_accordion( $accordion_id );
-
-		if ( $accordion !== false ) {
-			$new_accordion = array();
-
-			$new_accordion['name'] = $accordion['name'];
-			$new_accordion['settings'] = json_encode( $accordion['settings'] );
-			$new_accordion['created'] = date( 'm-d-Y' );
-			$new_accordion['modified'] = $new_accordion['created'];
-
-			$wpdb->insert( $wpdb->prefix . 'accordionslider_accordions', $new_accordion, array( '%s', '%s', '%s', '%s', '%s' ) );
-			
-			$new_accordion_id = $wpdb->insert_id;
-
-			$new_accordion['id'] = $new_accordion_id;
-
-			if ( isset( $accordion['panels'] ) ) {
-				$panels = $accordion['panels'];
-				$new_accordion['panels'] = array();
-
-				foreach ( $panels as $panel ) {
-					$new_panel = $panel;
-					$new_panel['accordion_id'] = $new_accordion_id;
-					$new_panel['settings'] = json_encode( $panel['settings'] );
-					unset( $new_panel['id'] );
-					unset( $new_panel['layers'] );
-
-					$wpdb->insert( $wpdb->prefix . 'accordionslider_panels', $new_panel, array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', '%s', '%s' ) );
-
-					$new_panel_id = $wpdb->insert_id;
-
-					if ( isset( $panel['layers'] ) ) {
-						$layers = $panel['layers'];
-						$new_panel['layers'] = array();
-
-						foreach ( $layers as $layer ) {
-							$new_layer = $layer;
-							$new_layer['accordion_id'] = $new_accordion_id;
-							$new_layer['panel_id'] = $new_panel_id;
-							$new_layer['settings'] = json_encode( $layer['settings'] );
-							unset( $new_layer['id'] );
-
-							$wpdb->insert( $wpdb->prefix . 'accordionslider_layers', $new_layer, array( '%d', '%d', '%d', '%s', '%s', '%s' ) );
-
-							array_push( $new_panel['layers'], $new_layer );
-						}
-					}
-
-					array_push( $new_accordion['panels'], $new_panel );
-				}
-			}
-
-			return $new_accordion;
-		}
-
-		return false;
 	}
 
 	public function ajax_delete_accordion() {
