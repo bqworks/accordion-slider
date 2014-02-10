@@ -29,6 +29,7 @@ class Accordion_Slider_Settings {
 		'keyboard' => 'closed',
 		'swap_background' => 'closed',
 		'touch_swipe' => 'closed',
+		'lightbox' => 'closed',
 		'video' => 'closed',
 		'breakpoints'  => 'closed'
 	);
@@ -362,6 +363,14 @@ class Accordion_Slider_Settings {
 					'description' => __( 'Sets how many pixels the distance of the swipe gesture needs to be in order to trigger a page change.', 'accordion-slider' )
 				),
 
+				'lightbox' => array(
+					'js_name' => 'lightbox',
+					'label' => __( 'Lightbox', 'accordion-slider' ),
+					'type' => 'boolean',
+					'default_value' => false,
+					'description' => __( 'Indicates if the links specified to the background images will be opened in a lightbox.', 'accordion-slider' )
+				),
+
 				'open_panel_video_action' => array(
 					'js_name' => 'openPanelVideoAction',
 					'label' => __( 'Open Panel Video Action', 'accordion-slider' ),
@@ -509,6 +518,13 @@ class Accordion_Slider_Settings {
 					'list' => array(
 						'touch_swipe',
 						'touch_swipe_threshold'
+					)
+				),
+
+				'lightbox' => array(
+					'label' => __( 'Lightbox', 'accordion-slider' ),
+					'list' => array(
+						'lightbox'
 					)
 				),
 

@@ -64,8 +64,11 @@ class Accordion_Slider_Admin {
 		$screen = get_current_screen();
 
 		if ( in_array( $screen->id, $this->plugin_screen_hook_suffixes ) ) {
-			wp_enqueue_style( $this->plugin_slug . '-plugin-style', plugins_url( 'accordion-slider/public/assets/css/accordion-slider.min.css' ), array(), Accordion_Slider::VERSION );
 			wp_enqueue_style( $this->plugin_slug . '-admin-style', plugins_url( 'assets/css/accordion-slider-admin.css', __FILE__ ), array(), Accordion_Slider::VERSION );
+
+			wp_enqueue_style( $this->plugin_slug . '-plugin-style', plugins_url( 'accordion-slider/public/assets/css/accordion-slider.min.css' ), array(), Accordion_Slider::VERSION );
+			wp_enqueue_style( $this->plugin_slug . '-lightbox-style', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.css' ), array(), Accordion_Slider::VERSION );
+			wp_enqueue_style( $this->plugin_slug . '-video-js-style', plugins_url( 'accordion-slider/public/assets/libs/video-js/video-js.min.css' ), array(), Accordion_Slider::VERSION );
 		}
 	}
 
@@ -83,10 +86,14 @@ class Accordion_Slider_Admin {
 			if ( function_exists( 'wp_enqueue_media' ) ) {
 		    	wp_enqueue_media();
 			}
-
-			wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'accordion-slider/public/assets/js/jquery.accordionSlider.min.js' ), array( 'jquery' ), Accordion_Slider::VERSION );
+			
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/accordion-slider-admin.js', __FILE__ ), array( 'jquery' ), Accordion_Slider::VERSION );
 
+			wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'accordion-slider/public/assets/js/jquery.accordionSlider.min.js' ), array( 'jquery' ), Accordion_Slider::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-easing-script', plugins_url( 'accordion-slider/public/assets/libs/easing/jquery.easing.1.3.min.js' ), false, Accordion_Slider::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-lightbox-script', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.pack.js' ), false, Accordion_Slider::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-video-js-script', plugins_url( 'accordion-slider/public/assets/libs/video-js/video.js' ), false, Accordion_Slider::VERSION );
+			
 			$id = isset( $_GET['id'] ) ? $_GET['id'] : -1;
 
 			wp_localize_script( $this->plugin_slug . '-admin-script', 'as_js_vars', array(

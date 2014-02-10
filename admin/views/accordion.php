@@ -48,7 +48,7 @@
                         $panels_state = Accordion_Slider_Settings::getPanelsState();
 
                         foreach ( $setting_groups as $group_name => $group ) {
-                            $panel_class = isset( $accordion_panels_state ) ? $accordion_panels_state[ $group_name ] : $panels_state[ $group_name ];
+                            $panel_class = isset( $accordion_panels_state ) && isset( $accordion_panels_state[ $group_name ] ) ? $accordion_panels_state[ $group_name ] : $panels_state[ $group_name ];
                             ?>
                             <div class="postbox <?php echo $panel_class; ?>" data-name="<?php echo $group_name; ?>">
                                 <div class="handlediv"></div>
