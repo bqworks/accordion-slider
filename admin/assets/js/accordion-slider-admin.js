@@ -132,7 +132,7 @@
 				type: 'get',
 				data: { action: 'accordion_slider_get_accordion_data', id: as_js_vars.id, nonce: as_js_vars.lad_nonce },
 				complete: function( data ) {
-					var accordionData = JSON.parse( data.responseText );
+					var accordionData = $.parseJSON( data.responseText );
 
 					$.each( accordionData.panels, function( index, panel ) {
 						var panelData = {
@@ -237,7 +237,7 @@
 				type: 'get',
 				data: { action: 'accordion_slider_get_accordion_data', id: id, nonce: nonce },
 				complete: function( data ) {
-					var accordionData = JSON.parse( data.responseText );
+					var accordionData = $.parseJSON( data.responseText );
 
 					PreviewWindow.open( accordionData );
 				}
@@ -527,7 +527,7 @@
 					type: 'get',
 					data: { action: 'accordion_slider_get_taxonomies', post_names: JSON.stringify( postsToLoad ) },
 					complete: function( data ) {
-						var response = JSON.parse( data.responseText );
+						var response = $.parseJSON( data.responseText );
 
 						$.each( response, function( name, taxonomy ) {
 							that.postsData[ name ] = taxonomy;
@@ -651,7 +651,7 @@
 				return;
 			}
 
-			var accordionData = JSON.parse( accordionDataString );
+			var accordionData = $.parseJSON( accordionDataString );
 			accordionData[ 'id' ] = -1;
 			accordionData[ 'nonce' ] = as_js_vars.sa_nonce;
 			accordionData[ 'action' ] = 'import';
