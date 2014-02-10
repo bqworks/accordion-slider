@@ -84,6 +84,10 @@
 			$( '.postbox .hndle, .postbox .handlediv' ).on( 'click', function() {
 				$( this ).parent( '.postbox' ).toggleClass( 'closed' );
 			});
+
+			$( '.sidebar-settings label' ).on( 'mouseover', function() {
+				that.showInfo( $( this ) );
+			});
 		},
 
 		initAllAccordionsPage: function() {
@@ -535,6 +539,23 @@
 			} else {
 				callback( this.postsData );
 			}
+		},
+
+		showInfo: function( target ) {
+			var label = target,
+				info = label.attr( 'data-info' ),
+				infoTooltip = null;
+
+			if ( typeof info !== 'undefined' ) {
+				infoTooltip = $( '<div class="info-tooltip">' + info + '</div>' ).appendTo( label.parent() );
+				infoTooltip.css( { 'left': - infoTooltip.outerWidth( true ) ,'marginTop': - infoTooltip.outerHeight( true ) * 0.5 - 9 } );
+			}
+
+			label.on( 'mouseout', function() {
+				if ( infoTooltip !== null ) {
+					infoTooltip.remove();
+				}
+			});
 		},
 
 		resizePanelImages: function() {

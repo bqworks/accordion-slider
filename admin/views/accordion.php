@@ -62,7 +62,7 @@
                                             ?>
                                                     <tr>
                                                         <td>
-                                                            <label for="<?php echo $setting_name; ?>"><?php echo $setting['label']; ?></label>
+                                                            <label data-info="<?php echo $setting['description']; ?>" for="<?php echo $setting_name; ?>"><?php echo $setting['label']; ?></label>
                                                         </td>
                                                         <td>
                                                             <?php

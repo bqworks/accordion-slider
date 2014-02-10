@@ -716,6 +716,30 @@
 	text-align: right;
 }
 
+.info-tooltip {
+	position: absolute;
+	padding: 10px;
+	background-color: #d9edf7;
+	color: #333;
+	border: 1px solid #5bc0de;
+	border-right-width: 4px;
+	left: -100%;
+	max-width: 100%;
+	z-index: 100;
+}
+
+.info-tooltip:after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 5px solid transparent;
+	border-left-color: #5bc0de;
+	top: 50%;
+	right: -14px;
+	margin-top: -5px;
+}
+
 .multi-check {
 	position: relative;
     text-align: left;
