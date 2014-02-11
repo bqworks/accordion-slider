@@ -839,3 +839,14 @@
 		float: none;
 	}
 }
+
+.button-primary.custom-css-js-update {
+	display: block;
+	margin-left: 3px;
+	margin-bottom: 40px;
+}
+
+.custom-css,
+.custom-js {
+	margin-bottom: 20px;
+}

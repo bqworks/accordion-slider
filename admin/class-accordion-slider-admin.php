@@ -141,6 +141,15 @@ class Accordion_Slider_Admin {
 			$this->plugin_slug . '-new',
 			array( $this, 'display_new_accordion_page' )
 		);
+
+		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
+			$this->plugin_slug,
+			__( 'Custom CSS and JavaScript', $this->plugin_slug ),
+			__( 'Custom CSS & JS', $this->plugin_slug ),
+			'manage_options',
+			$this->plugin_slug . '-custom',
+			array( $this, 'display_custom_css_js_page' )
+		);
 	}
 
 	public function display_accordion_page() {
@@ -168,6 +177,27 @@ class Accordion_Slider_Admin {
 		$accordion_name = 'My Accordion';
 
 		include_once( 'views/accordion.php' );
+	}
+
+	public function display_custom_css_js_page() {
+		if ( isset( $_POST['custom_css_update'] ) || isset( $_POST['custom_js_update'] ) ) {
+			check_admin_referer( 'custom-css-js-update', 'custom-css-js-nonce' );
+
+			if ( isset( $_POST['custom_css'] ) ) {
+				$custom_css = $_POST['custom_css'];
+				update_option( 'accordion_slider_custom_css', $custom_css );
+			}
+
+			if ( isset( $_POST['custom_js'] ) ) {
+				$custom_js = $_POST['custom_js'];
+				update_option( 'accordion_slider_custom_js', $custom_js );
+			}
+		} else {
+			$custom_css = get_option( 'accordion_slider_custom_css', '' );
+			$custom_js = get_option( 'accordion_slider_custom_js', '' );
+		}
+
+		include_once( 'views/custom-css-js.php' );
 	}
 
 	public function ajax_get_accordion_data() {
@@ -291,7 +321,7 @@ class Accordion_Slider_Admin {
 	public function ajax_preview_accordion() {
 		$accordion = json_decode( stripslashes( $_POST['data'] ), true );
 		$accordion_name = $accordion['name'];
-		$accordion_output = $this->plugin->output_accordion( $accordion );
+		$accordion_output = $this->plugin->output_accordion( $accordion ) . $this->plugin->get_inline_scripts();
 
 		include( 'views/preview-window.php' );
 
