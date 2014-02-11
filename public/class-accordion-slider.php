@@ -402,6 +402,10 @@ class Accordion_Slider {
 			}
 		}
 
+		if ( ! wp_style_is( $this->plugin_slug . '-plugin-style' ) ) {
+			echo '<div style="width: 450px; background-color: #FFF; color: #F00; border: 1px solid #F00; padding: 10px; font-size: 14px;"><span style="font-weight: bold;">Warning: Stylesheets not loaded!</span> You are loading the accordion outside of a post or page, so you need to manually specify where to load the stylesheets (e.g., homepage, all pages). You can set that <a style="text-decoration: underline; color: #F00;" href="' . admin_url( 'admin.php?page=accordion-slider-plugin-settings' ) . '">here</a>.</div>';
+		}
+
 		return $this->output_accordion( $accordion );
 	}
 
@@ -1018,7 +1022,7 @@ class Accordion_Slider {
 			}
 		}
 
-		if ( $load_styles ) {
+		if ( isset( $load_styles ) && $load_styles === true ) {
 			wp_enqueue_style( $this->plugin_slug . '-plugin-style' );
 
 			if ( ( $custom_css = get_option( 'accordion_slider_custom_css') ) !== false && $custom_css !== '' ) {
