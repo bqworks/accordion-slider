@@ -1005,24 +1005,34 @@ class Accordion_Slider {
 		}
 
 		global $posts;
+		$load_styles = false;
 		
-		if ( isset( $posts ) && ! empty( $posts ) ) {
+		if ( ( $load_stylesheets = get_option( 'accordion_slider_load_stylesheets' ) ) !== false ) {
+			if ( ( $load_stylesheets === 'all' ) || ( $load_stylesheets === 'homepage' && ( is_home() || is_front_page() ) ) ) {
+				$load_styles = true;
+			}
+		}
+		
+		if ( $load_styles === false && isset( $posts ) && ! empty( $posts ) ) {
 			foreach ( $posts as $post ) {
 				if ( strpos( $post->post_content, '[accordion_slider' ) !== false ) {
+					fb($post);
 					$load_styles = true;
 				}
 			}
 		}
 
-		$widget_accordions = get_option('widget_accordion-slider-widget');
+		if ( $load_styles === false ) {
+			$widget_accordions = get_option('widget_accordion-slider-widget');
 
-		foreach ( ( array )$widget_accordions as $key => $value ) {
-			if ( is_array( $value ) && isset( $value['accordion_id'] ) ) {
-				$load_styles = true;
+			foreach ( ( array )$widget_accordions as $key => $value ) {
+				if ( is_array( $value ) && isset( $value['accordion_id'] ) ) {
+					$load_styles = true;
+				}
 			}
 		}
 
-		if ( isset( $load_styles ) && $load_styles === true ) {
+		if ( $load_styles === true ) {
 			wp_enqueue_style( $this->plugin_slug . '-plugin-style' );
 
 			if ( ( $custom_css = get_option( 'accordion_slider_custom_css') ) !== false && $custom_css !== '' ) {
