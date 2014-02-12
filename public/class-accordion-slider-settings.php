@@ -835,7 +835,7 @@ class Accordion_Slider_Settings {
 						'homepage' => __( 'On homepage', 'accordion-slider' ),
 						'all' => __( 'On all pages', 'accordion-slider' )
 					),
-					'description' => __( 'The plugin can detect the presence of the accordion in a post, page or widget, and will automatically load the necessary stylesheets. However, when the accordion is loaded in PHP code, like in the theme\'s header or another template file, you need to manually specify where the stylesheets should load. If you only load the accordion on the homepage, select \'On homepage\', or if you load it in the header or another section that is visible on multiple pages, select \'On all pages\'.' , 'accordion-slider' )
+					'description' => __( 'The plugin can detect the presence of the accordion in a post, page or widget, and will automatically load the necessary stylesheets. However, when the accordion is loaded in PHP code, like in the theme\'s header or another template file, you need to manually specify where the stylesheets should load. If you only load the accordion on the homepage, select <i>On homepage</i>, or if you load it in the header or another section that is visible on multiple pages, select <i>On all pages</i>.' , 'accordion-slider' )
 				),
 				'load_custom_css_js' => array(
 					'label' => __( 'Load custom CSS and JavaScript', 'accordion-slider' ),
@@ -844,12 +844,12 @@ class Accordion_Slider_Settings {
 						'inline' => __( 'Inline', 'accordion-slider' ),
 						'in_files' => __( 'In files', 'accordion-slider' )
 					),
-					'description' => __( 'By default, custom CSS and JavaScript code added to the accordion will be loaded inline. However, if you want to add large amounts of custom CSS or JavaScript, it\'s better to have the code loaded in files, rather than inline.', 'accordion-slider' )
+					'description' => __( 'By default, custom CSS and JavaScript code added to the accordion will be loaded inline. However, if you want to add large amounts of custom CSS or JavaScript, it\'s better to have the code loaded in files, rather than inline. If you chose to load the custom code in files, after selecting this option, you need to re-save the custom CSS and/or JavaScript and the plugin will automatically create the <i>accordion-slider-custom</i> folder inside <i>wp-plugins</i> and then <i>custom.css</i> and <i>custom.js</i> inside <i>accordion-slider-custom</i>. You might also be prompted to provide credentials if the files can\'t be created due to folder permission issues.' , 'accordion-slider' )
 				),
 				'load_unminified_scripts' => array(
 					'label' => __( 'Load unminified scripts', 'accordion-slider' ),
 					'default_value' => false,
-					'description' => __( 'Check this option if you want to debug the CSS or JavaScript code of the accordion slider.', 'accordion-slider' )
+					'description' => __( 'Check this option if you want to load the unminified/uncompressed CSS and JavaScript files for the accordion. This is useful for debugging purposes.', 'accordion-slider' )
 				)
 			);
 		}
