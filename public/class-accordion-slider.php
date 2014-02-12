@@ -1026,7 +1026,6 @@ class Accordion_Slider {
 		if ( $load_styles === false && isset( $posts ) && ! empty( $posts ) ) {
 			foreach ( $posts as $post ) {
 				if ( strpos( $post->post_content, '[accordion_slider' ) !== false ) {
-					fb($post);
 					$load_styles = true;
 				}
 			}
@@ -1045,8 +1044,17 @@ class Accordion_Slider {
 		if ( $load_styles === true ) {
 			wp_enqueue_style( $this->plugin_slug . '-plugin-style' );
 
-			if ( ( $custom_css = get_option( 'accordion_slider_custom_css') ) !== false && $custom_css !== '' ) {
-				wp_add_inline_style( $this->plugin_slug . '-plugin-style', $custom_css );
+			if ( get_option( 'accordion_slider_is_custom_css') == true ) {
+				if ( get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
+					$custom_css_path = plugins_url( 'accordion-slider-custom/custom.css' );
+					$custom_css_dir_path = WP_PLUGIN_DIR . '/accordion-slider-custom/custom.css';
+
+					if ( file_exists( $custom_css_dir_path ) ) {
+						wp_enqueue_style( $this->plugin_slug . '-plugin-custom-style', $custom_css_path, array(), self::VERSION );
+					}
+				} else {
+					wp_add_inline_style( $this->plugin_slug . '-plugin-style', stripslashes( get_option( 'accordion_slider_custom_css' ) ) );
+				}
 			}
 		}
 	}
@@ -1060,6 +1068,15 @@ class Accordion_Slider {
 			wp_enqueue_script( $script_handle );
 		}
 
+		if ( get_option( 'accordion_slider_is_custom_js' ) == true && get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
+			$custom_js_path = plugins_url( 'accordion-slider-custom/custom.js' );
+			$custom_js_dir_path = WP_PLUGIN_DIR . '/accordion-slider-custom/custom.js';
+
+			if ( file_exists( $custom_js_dir_path ) ) {
+				wp_enqueue_script( $this->plugin_slug . '-plugin-custom-script', $custom_js_path, array(), self::VERSION );
+			}
+		}
+
 		echo $this->get_inline_scripts();
 	}
 
@@ -1068,9 +1085,9 @@ class Accordion_Slider {
 
 		$inline_js .= $this->js_output;
 
-		if ( ( $custom_js = get_option( 'accordion_slider_custom_js') ) !== false && $custom_js !== '' ) {
+		if ( get_option( 'accordion_slider_is_custom_js' ) == true && get_option( 'accordion_slider_load_custom_css_js' ) !== 'in_files' ) {
 			$custom_js = "\r\n" . '<script type="text/javascript">' .
-						"\r\n" . '	' . stripslashes( $custom_js ) .
+						"\r\n" . '	' . stripslashes( get_option( 'accordion_slider_custom_js' ) ) .
 						"\r\n" . '</script>' . "\r\n";
 
 			$inline_js .= $custom_js;
