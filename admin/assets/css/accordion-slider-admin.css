@@ -850,3 +850,25 @@
 .custom-js {
 	margin-bottom: 20px;
 }
+
+.plugin-settings table {
+	max-width: 960px;
+}
+
+.plugin-settings table td {
+	vertical-align: top;
+	padding: 10px 30px 10px 0;
+}
+
+.plugin-settings table tr td:first-child {
+	white-space: nowrap;
+}
+
+.plugin-settings label {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.plugin-settings .button-primary {
+	margin-top: 30px;
+}

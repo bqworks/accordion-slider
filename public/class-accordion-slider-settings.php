@@ -34,6 +34,8 @@ class Accordion_Slider_Settings {
 		'breakpoints'  => 'closed'
 	);
 
+	protected static $plugin_settings = array();
+
 	/*
 		Return the settings
 	*/
@@ -817,5 +819,41 @@ class Accordion_Slider_Settings {
 		}
 
 		return self::$panel_settings;
+	}
+
+	/*
+		Return the plugin settings
+	*/
+	public static function getPluginSettings() {
+		if ( empty( self::$plugin_settings ) ) {
+			self::$plugin_settings = array(
+				'load_stylesheets' => array(
+					'label' => __( 'Load stylesheets', 'accordion-slider' ),
+					'default_value' => 'automatically',
+					'available_values' => array(
+						'automatically' => __( 'Automatically', 'accordion-slider' ),
+						'homepage' => __( 'On homepage', 'accordion-slider' ),
+						'all' => __( 'On all pages', 'accordion-slider' )
+					),
+					'description' => __( 'The plugin can detect the presence of the accordion in a post, page or widget, and will automatically load the necessary stylesheets. However, when the accordion is loaded in PHP code, like in the theme\'s header or another template file, you need to manually specify where the stylesheets should load. If you only load the accordion on the homepage, select \'On homepage\', or if you load it in the header or another section that is visible on multiple pages, select \'On all pages\'.' , 'accordion-slider' )
+				),
+				'load_custom_css_js' => array(
+					'label' => __( 'Load custom CSS and JavaScript', 'accordion-slider' ),
+					'default_value' => 'inline',
+					'available_values' => array(
+						'inline' => __( 'Inline', 'accordion-slider' ),
+						'in_files' => __( 'In files', 'accordion-slider' )
+					),
+					'description' => __( 'By default, custom CSS and JavaScript code added to the accordion will be loaded inline. However, if you want to add large amounts of custom CSS or JavaScript, it\'s better to have the code loaded in files, rather than inline.', 'accordion-slider' )
+				),
+				'load_unminified_scripts' => array(
+					'label' => __( 'Load unminified scripts', 'accordion-slider' ),
+					'default_value' => false,
+					'description' => __( 'Check this option if you want to debug the CSS or JavaScript code of the accordion slider.', 'accordion-slider' )
+				)
+			);
+		}
+
+		return self::$plugin_settings;
 	}
 }

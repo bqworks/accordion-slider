@@ -150,6 +150,15 @@ class Accordion_Slider_Admin {
 			$this->plugin_slug . '-custom',
 			array( $this, 'display_custom_css_js_page' )
 		);
+
+		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
+			$this->plugin_slug,
+			__( 'Plugin Settings', $this->plugin_slug ),
+			__( 'Plugin Settings', $this->plugin_slug ),
+			'manage_options',
+			$this->plugin_slug . '-settings',
+			array( $this, 'display_plugin_settings_page' )
+		);
 	}
 
 	public function display_accordion_page() {
@@ -180,6 +189,9 @@ class Accordion_Slider_Admin {
 	}
 
 	public function display_custom_css_js_page() {
+		$custom_css = get_option( 'accordion_slider_custom_css', '' );
+		$custom_js = get_option( 'accordion_slider_custom_js', '' );
+
 		if ( isset( $_POST['custom_css_update'] ) || isset( $_POST['custom_js_update'] ) ) {
 			check_admin_referer( 'custom-css-js-update', 'custom-css-js-nonce' );
 
@@ -192,12 +204,40 @@ class Accordion_Slider_Admin {
 				$custom_js = $_POST['custom_js'];
 				update_option( 'accordion_slider_custom_js', $custom_js );
 			}
-		} else {
-			$custom_css = get_option( 'accordion_slider_custom_css', '' );
-			$custom_js = get_option( 'accordion_slider_custom_js', '' );
 		}
 
 		include_once( 'views/custom-css-js.php' );
+	}
+
+	public function display_plugin_settings_page() {
+		$plugin_settings = Accordion_Slider_Settings::getPluginSettings();
+		$load_stylesheets = get_option( 'accordion_slider_load_stylesheets', $plugin_settings['load_stylesheets']['default_value'] );
+		$load_custom_css_js = get_option( 'accordion_slider_load_custom_css_js', $plugin_settings['load_custom_css_js']['default_value'] );
+		$load_unminified_scripts = get_option( 'accordion_slider_load_unminified_scripts', $plugin_settings['load_unminified_scripts']['default_value'] );
+
+		if ( isset( $_POST['plugin_settings_update'] ) ) {
+			check_admin_referer( 'plugin-settings-update', 'plugin-settings-nonce' );
+
+			if ( isset( $_POST['load_stylesheets'] ) ) {
+				$load_stylesheets = $_POST['load_stylesheets'];
+				update_option( 'accordion_slider_load_stylesheets', $load_stylesheets );
+			}
+
+			if ( isset( $_POST['load_custom_css_js'] ) ) {
+				$load_custom_css_js = $_POST['load_custom_css_js'];
+				update_option( 'accordion_slider_load_custom_css_js', $load_custom_css_js );
+			}
+
+			if ( isset( $_POST['load_unminified_scripts'] ) ) {
+				$load_unminified_scripts = true;
+				update_option( 'accordion_slider_load_unminified_scripts', true );
+			} else {
+				$load_unminified_scripts = false;
+				update_option( 'accordion_slider_load_unminified_scripts', false );
+			}
+		}
+		
+		include_once( 'views/plugin-settings.php' );
 	}
 
 	public function ajax_get_accordion_data() {
