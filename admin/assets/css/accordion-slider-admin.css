@@ -397,11 +397,10 @@
 }
 
 .layers-editor .modal-window {
-	min-width: 960px;
-	padding: 0;
+	min-width: 625px;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 625px) {
 	.layers-editor:before {
 		display: none;
 	}
@@ -437,7 +436,7 @@
 }
 
 .layers-editor .controls {
-	padding: 10px;
+	margin-top: 10px;
 	overflow: hidden;
 }
 
@@ -450,27 +449,25 @@
 	position: relative;
 }
 
-.layers-editor .buttons {
-	padding: 0 10px 10px;
-}
-
 .layers-editor .layers-list {
 	width: 130px;
-	height: 121px;
+	max-height: 138px;
 	overflow: auto;
-	margin: 0;
+	margin: 6px 0 0;
 }
 
 .layers-editor .layers-list-item {
 	position: relative;
-	background-color: #EEE;
-	padding: 4px 5px;
-	margin: 5px 0;
+	border: 1px solid #CCC;
+	background-color: #F4F4F4;
+	padding: 7px;
+	margin: 0 0 7px 0;
 	cursor: move;
+	line-height: 1;
 }
 
 .layers-editor .selected-layers-list-item {
-	border: 1px solid #999;
+	border-color: #000;
 }
 
 .layers-editor .layers-list-item:first-child {
@@ -508,6 +505,8 @@
 
 .layers-editor .layer-settings {
     display: none;
+    margin-bottom: 0;
+    height: 168px;
 }
 
 .layers-editor .selected-layer-settings {
@@ -523,21 +522,49 @@
 }
 
 .layers-editor .tab-label {
+	padding: 10px;
     font-size: 14px;
-    margin-right: 20px;
     color: #0074a2;
 }
 
 .layers-editor .tab:checked ~ .tab-label,
 .layers-editor .tab-label:hover {
-    text-decoration: underline;
+    background-color: #F4F4F4;
 }
 
 .layers-editor .setting-fields {
     display: none;
     position: absolute;
-    top: 33px;
+    top: 30px;
     left: 0;
+    width: 100%;
+	height: 138px;
+    background-color: #F4F4F4;
+    padding: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.layers-editor .setting-fields label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.layers-editor .setting-fields table {
+    border-spacing: 0;
+}
+
+.layers-editor .setting-fields td {
+    padding: 0 20px 10px 0;
+}
+
+.layers-editor .setting-fields td:last-child {
+    padding-right: 0;
+}
+
+.layers-editor .setting-fields tr:last-child td {
+    padding-bottom: 0;
 }
 
 .layers-editor .tab:checked ~ .setting-fields {
@@ -548,16 +575,16 @@
     display: block;
 }
 
-.layers-editor .content {
-	width: 790px;
-	height: 80px;
+.layers-editor .setting-fields textarea {
 	margin: 0;
+	width: 100%;
+	height: 100%
 }
 
 .layers-editor .viewport {
 	position: relative;
+	width: 100%;
 	text-align: center;
-	border-bottom: 1px solid #DDD;
 	background-image:
 	    -moz-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%),
 	    -moz-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%);

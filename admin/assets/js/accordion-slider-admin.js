@@ -1114,7 +1114,7 @@
 				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10),
 				backgroundData = this.currentPanel.getData( 'background' );
 
-			var viewport = this.editor.find( '.viewport' ).css( { 'width': Math.max( accordionWidth, 960 ), 'height': accordionHeight } ),
+			var viewport = this.editor.find( '.viewport' ).css( { 'height': accordionHeight } ),
 				viewportLayers = $( '<div class="viewport-layers"></div>' );
 
 			if ( typeof backgroundData.background_source !== 'undefined' && backgroundData.background_source !== '') {
@@ -1330,6 +1330,8 @@
 			this.editor.off( 'mousemove.layer' + this.id );
 			this.editor.off( 'click.layer' + this.id );
 
+			this.$layerSettings.find( 'select[name="preset_styles"]' ).multiCheck( 'destroy' );
+
 			this.$viewportLayer.remove();
 			this.$layerListItem.remove();
 			this.$layerSettings.remove();
@@ -1507,6 +1509,8 @@
 				horizontalPosition = position.indexOf( 'right' ) !== -1 ? 'right' : 'left',
 				verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top',
 				customClass = this.$layerSettings.find( '.setting[name="custom_class"]' ).val();
+
+			this.$layerSettings.find( 'select[name="preset_styles"]' ).multiCheck( { width: 120} );
 
 			this.$layerSettings.find( '.setting[name="width"]' ).on( 'change', function() {
 				that.$viewportLayer.css( 'width', $( this ).val() );

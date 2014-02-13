@@ -4,17 +4,25 @@
 		<span class="close-x"></span>
 
 		<div class="viewport"></div>
-		
+
 		<div class="controls">
-			<ul class="left layers-list">
-				<?php
-					foreach ( $layers as $layer ) {
-						$layer_id = $layer[ 'id' ];
-						$layer_name = $layer[ 'name' ];
-						echo '<li class="layers-list-item" data-id="' . $layer_id . '">' . $layer_name . '</li>';
-					}
-				?>
-			</ul>
+			<div class="left">
+				<div class="buttons">
+					<a class="button-secondary add-new-layer" href="#">+</a>
+					<a class="button-secondary delete-layer" href="#">-</a>
+					<a class="button-secondary duplicate-layer" href="#">=</a>
+				</div>
+
+				<ul class="layers-list">
+					<?php
+						foreach ( $layers as $layer ) {
+							$layer_id = $layer[ 'id' ];
+							$layer_name = $layer[ 'name' ];
+							echo '<li class="layers-list-item" data-id="' . $layer_id . '">' . $layer_name . '</li>';
+						}
+					?>
+				</ul>
+			</div>
 
 			<ul class="right layers-settings">
 				<?php
@@ -29,10 +37,5 @@
 			</ul>
 		</div>
 		
-		<div class="buttons">
-			<a class="button-secondary add-new-layer" href="#"><?php _e( 'Add New Layer', 'accordion-slider' ); ?></a>
-			<a class="button-secondary delete-layer" href="#"><?php _e( 'Delete Layer', 'accordion-slider' ); ?></a>
-			<a class="button-secondary duplicate-layer" href="#"><?php _e( 'Duplicate Layer', 'accordion-slider' ); ?></a>
-		</div>
 	</div>
 </div>

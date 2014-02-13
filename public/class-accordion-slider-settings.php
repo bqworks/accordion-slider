@@ -566,16 +566,15 @@ class Accordion_Slider_Settings {
 	public static function getLayerSettings() {
 		if ( empty( self::$layer_settings ) ) {
 			self::$layer_settings = array(
-				'width' => array(
-					'label' => __( 'Width', 'accordion-slider' ),
-					'type' => 'mixed',
-					'default_value' => 'auto',
-					'description' => ''
-				),
-				'height' => array(
-					'label' => __( 'Height', 'accordion-slider' ),
-					'type' => 'mixed',
-					'default_value' => 'auto',
+				'display' => array(
+					'label' => __( 'Display', 'accordion-slider' ),
+					'type' => 'radio',
+					'default_value' => 'always',
+					'available_values' => array(
+						'always' => __( 'Always', 'accordion-slider' ),
+						'opened' => __( 'When opened', 'accordion-slider' ),
+						'closed' => __( 'When closed', 'accordion-slider' )
+					),
 					'description' => ''
 				),
 				'position' => array(
@@ -590,6 +589,18 @@ class Accordion_Slider_Settings {
 					),
 					'description' => ''
 				),
+				'width' => array(
+					'label' => __( 'Width', 'accordion-slider' ),
+					'type' => 'mixed',
+					'default_value' => 'auto',
+					'description' => ''
+				),
+				'height' => array(
+					'label' => __( 'Height', 'accordion-slider' ),
+					'type' => 'mixed',
+					'default_value' => 'auto',
+					'description' => ''
+				),
 				'horizontal' => array(
 					'label' => __( 'Horizontal', 'accordion-slider' ),
 					'type' => 'mixed',
@@ -602,45 +613,22 @@ class Accordion_Slider_Settings {
 					'default_value' => '0',
 					'description' => ''
 				),
-				'black_background' => array(
-					'label' => __( 'Black Background', 'accordion-slider' ),
-					'type' => 'boolean',
-					'default_value' => true,
-					'description' => ''
-				),
-				'white_background' => array(
-					'label' => __( 'White Background', 'accordion-slider' ),
-					'type' => 'boolean',
-					'default_value' => false,
-					'description' => ''
-				),
-				'padding' => array(
-					'label' => __( 'Padding', 'accordion-slider' ),
-					'type' => 'boolean',
-					'default_value' => true,
-					'description' => ''
-				),
-				'round_corners' => array(
-					'label' => __( 'Round Corners', 'accordion-slider' ),
-					'type' => 'boolean',
-					'default_value' => false,
+				'preset_styles' => array(
+					'label' => __( 'Preset Styles', 'accordion-slider' ),
+					'type' => 'multiselect',
+					'default_value' => array( 'black', 'padding' ),
+					'available_values' => array(
+						'black' => __( 'Black', 'accordion-slider' ),
+						'white' => __( 'White', 'accordion-slider' ),
+						'padding' => __( 'Padding', 'accordion-slider' ),
+						'round' => __( 'Round Corners', 'accordion-slider' )
+					),
 					'description' => ''
 				),
 				'custom_class' => array(
 					'label' => __( 'Custom Class', 'accordion-slider' ),
 					'type' => 'text',
 					'default_value' => '',
-					'description' => ''
-				),
-				'display' => array(
-					'label' => __( 'Display', 'accordion-slider' ),
-					'type' => 'radio',
-					'default_value' => 'always',
-					'available_values' => array(
-						'always' => __( 'Always', 'accordion-slider' ),
-						'opened' => __( 'When panel is opened', 'accordion-slider' ),
-						'closed' => __( 'When panel is closed', 'accordion-slider' )
-					),
 					'description' => ''
 				),
 				'show_transition' => array(
