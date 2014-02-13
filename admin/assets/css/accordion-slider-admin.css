@@ -304,6 +304,10 @@
 	margin-bottom: 30px;
 }
 
+.background-image-editor .fieldset:last-child {
+	margin-bottom: 0;
+}
+
 .clear-fieldset {
 	float: right;
 	font-size: 12px;

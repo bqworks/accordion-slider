@@ -870,14 +870,10 @@
 
 			this.editor = $( '.background-image-editor' );
 
-			this.editor.find( '.close, .close-x' ).on( 'click', function( event ) {
-				event.preventDefault();
-				that.close();
-			});
-
-			this.editor.find( '.save' ).on( 'click', function( event ) {
+			this.editor.find( '.close-x' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.save();
+				that.close();
 			});
 
 			this.editor.find( '.image-loader, .retina-loader' ).on( 'click', function( event ) {
@@ -958,13 +954,10 @@
 
 			this.currentPanel.setData( 'background', data );
 			this.currentPanel.updateBackgroundImage();
-
-			this.close();
 		},
 
 		close: function() {
-			this.editor.find( '.close, .close-x' ).off( 'click' );
-			this.editor.find( '.save' ).off( 'click' );
+			this.editor.find( '.close-x' ).off( 'click' );
 			this.editor.find( '.image-loader' ).off( 'click' );
 			this.editor.find( '.clear-fieldset' ).off( 'click' );
 
@@ -1004,26 +997,19 @@
 
 			this.editor = $( '.html-editor' );
 
-			this.editor.find( '.close, .close-x' ).on( 'click', function( event ) {
-				event.preventDefault();
-				that.close();
-			});
-
-			this.editor.find( '.save' ).on( 'click', function( event ) {
+			this.editor.find( '.close-x' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.save();
+				that.close();
 			});
 		},
 
 		save: function() {
 			this.currentPanel.setData( 'html', this.editor.find( 'textarea' ).val() );
-
-			this.close();
 		},
 
 		close: function() {
-			this.editor.find( '.close, .close-x' ).off( 'click' );
-			this.editor.find( '.save' ).off( 'click' );
+			this.editor.find( '.close-x' ).off( 'click' );
 			this.editor.find( '.image-loader' ).off( 'click' );
 			this.editor.find( '.clear-fieldset' ).off( 'click' );
 
@@ -1070,6 +1056,12 @@
 
 			this.editor = $( '.layers-editor' );
 
+			this.editor.find( '.close-x' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.save();
+				that.close();
+			});
+
 			this.editor.find( '.add-new-layer' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.addNewLayer();
@@ -1083,16 +1075,6 @@
 			this.editor.find( '.duplicate-layer' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.duplicateLayer();
-			});
-
-			this.editor.find( '.close' ).on( 'click', function( event ) {
-				event.preventDefault();
-				that.close();
-			});
-
-			this.editor.find( '.save' ).on( 'click', function( event ) {
-				event.preventDefault();
-				that.save();
 			});
 
 			this.initViewport();
@@ -1244,15 +1226,12 @@
 			});
 
 			this.currentPanel.setData( 'layers', data );
-
-			this.close();
 		},
 
 		close: function() {
 			this.layers.length = 0;
 
-			this.editor.find( '.close' ).off( 'click' );
-			this.editor.find( '.save' ).off( 'click' );
+			this.editor.find( '.close-x' ).off( 'click' );
 
 			$( '.layers-list' ).lightSortable( 'destroy' );
 
@@ -1643,12 +1622,8 @@
 			
 			this.editor.find( '.close, .close-x' ).on( 'click', function( event ) {
 				event.preventDefault();
-				that.close();
-			});
-
-			this.editor.find( '.save' ).on( 'click', function( event ) {
-				event.preventDefault();
 				that.save();
+				that.close();
 			});
 
 			this.editor.find( '.panel-setting[name="content_type"]' ).on( 'change', function() {
@@ -1748,13 +1723,10 @@
 			});
 
 			this.currentPanel.setData( 'settings', data );
-
-			this.close();
 		},
 
 		close: function() {
-			this.editor.find( '.close, .close-x' ).off( 'click' );
-			this.editor.find( '.save' ).off( 'click' );
+			this.editor.find( '.close-x' ).off( 'click' );
 
 			this.editor.find( 'select[name="posts_post_types"]' ).multiCheck( 'destroy' );
 			this.editor.find( 'select[name="posts_taxonomies"]' ).multiCheck( 'destroy' );

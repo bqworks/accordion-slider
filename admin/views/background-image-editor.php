@@ -87,10 +87,5 @@
 				</tbody>
 			</table>
 		</div>
-
-		<div class="buttons">
-			<a class="button-secondary save" href="#"><?php _e( 'Save', 'accordion-slider' ); ?></a>
-			<a class="button-secondary close" href="#"><?php _e( 'Close', 'accordion-slider' ); ?></a>
-		</div>
 	</div>
 </div>
