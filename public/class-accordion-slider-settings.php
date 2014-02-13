@@ -718,9 +718,9 @@ class Accordion_Slider_Settings {
 				'content_type' => array(
 					'label' => __( 'Content Type', 'accordion-slider' ),
 					'type' => 'select',
-					'default_value' => 'static',
+					'default_value' => 'custom',
 					'available_values' => array(
-						'static' => __( 'Static Content', 'accordion-slider' ),
+						'custom' => __( 'Custom Content', 'accordion-slider' ),
 						'posts' => __( 'Content from posts', 'accordion-slider' ),
 						'gallery' => __( 'Images from post\'s gallery', 'accordion-slider' ),
 						'flickr' => __( 'Flickr images', 'accordion-slider' )

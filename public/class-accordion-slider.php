@@ -622,7 +622,7 @@ class Accordion_Slider {
 
 				$content_type = isset( $panel['settings']['content_type'] ) ? $panel['settings']['content_type'] : $default_panel_settings['content_type']['default_value'];
 
-				if ( $content_type === 'static' ) {
+				if ( $content_type === 'custom' ) {
 					$html_output .= $panel_html;
 				} else if ( $content_type === 'posts' ) {
 					$html_output .= $this->output_posts_panels( $panel_html, $panel['settings'] );
