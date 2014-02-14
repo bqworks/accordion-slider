@@ -8,7 +8,17 @@
 		<div class="controls">
 			<div class="left">
 				<div class="buttons">
-					<a class="button-secondary add-new-layer" href="#">+</a>
+					<div class="add-layer-group">
+                        <a class="button-secondary add-new-layer" href="#">+</a>
+                        <ul class="layer-type">
+                            <li><a href="#" data-type="paragraph"><?php _e( 'Paragraph', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="heading"><?php _e( 'Heading', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="image"><?php _e( 'Image', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="video"><?php _e( 'Video', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="div"><?php _e( 'DIV', 'accordion-slider' ); ?></a></li>
+                        </ul>
+                    </div>
+					
 					<a class="button-secondary delete-layer" href="#">-</a>
 					<a class="button-secondary duplicate-layer" href="#">=</a>
 				</div>
@@ -28,7 +38,7 @@
 				<?php
 					foreach ( $layers as $layer ) {
 						$layer_id = $layer[ 'id' ];
-						$layer_content = $layer[ 'content' ];
+						$layer_type = $layer[ 'type' ];
 						$layer_settings = $layer[ 'settings' ];
 
 						include( 'layer-settings.php' );

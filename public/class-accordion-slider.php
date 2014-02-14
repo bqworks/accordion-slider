@@ -178,9 +178,19 @@ class Accordion_Slider {
 			
 			$create_layers_table = "CREATE TABLE ". $prefix . "accordionslider_layers (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				accordion_id mediumint(9) NOT NULL,
 				panel_id mediumint(9) NOT NULL,
 				position mediumint(9) NOT NULL,
-				content text NOT NULL,
+				name text NOT NULL,
+				type text NOT NULL,
+				text text NOT NULL,
+				heading_type varchar(100) NOT NULL,
+				image_source text NOT NULL,
+				image_alt text NOT NULL,
+				image_link text NOT NULL,
+				image_retina text NOT NULL,
+				video_image text NOT NULL,
+				video_code text NOT NULL,
 				settings text NOT NULL,
 				PRIMARY KEY (id)
 				) DEFAULT CHARSET=utf8;";

@@ -566,6 +566,33 @@ class Accordion_Slider_Settings {
 	public static function getLayerSettings() {
 		if ( empty( self::$layer_settings ) ) {
 			self::$layer_settings = array(
+				'type' => array(
+					'label' => __( 'Type', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => 'div',
+					'available_values' => array(
+						'paragraph' => __( 'Paragraph', 'accordion-slider' ),
+						'heading' => __( 'Heading', 'accordion-slider' ),
+						'image' => __( 'Image', 'accordion-slider' ),
+						'video' => __( 'Video', 'accordion-slider' ),
+						'div' => __( 'DIV', 'accordion-slider' )
+					),
+					'description' => ''
+				),
+				'heading_type' => array(
+					'label' => __( 'Heading Type', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => 'h3',
+					'available_values' => array(
+						'h1' => __( 'H1', 'accordion-slider' ),
+						'h2' => __( 'H2', 'accordion-slider' ),
+						'h3' => __( 'H3', 'accordion-slider' ),
+						'h4' => __( 'H4', 'accordion-slider' ),
+						'h5' => __( 'H5', 'accordion-slider' ),
+						'h6' => __( 'H6', 'accordion-slider' )
+					),
+					'description' => ''
+				),
 				'display' => array(
 					'label' => __( 'Display', 'accordion-slider' ),
 					'type' => 'radio',

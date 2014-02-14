@@ -435,9 +435,45 @@
 	padding: 10px;
 }
 
+.add-layer-group {
+	display: inline;
+	position: relative;
+}
+
+.add-layer-group:hover .layer-type {
+	display: block;
+}
+
+.layer-type {
+	position: absolute;
+	bottom: 18px;
+	padding: 0 10px;
+	background-color: #FCFCFC;
+	margin: 0;
+	background-image: linear-gradient(to bottom, #FEFEFE, #F4F4F4);
+	border: 1px solid #BBB;
+	display: none;
+	z-index: 10;
+}
+
+.layer-type li {
+	margin: 0;
+	border-bottom: 1px solid #BBB;
+	cursor: pointer;
+}
+
+.layer-type li:last-child {
+	border-bottom: none;
+}
+
+.layer-type a {
+	display: block;
+	padding: 8px;
+	text-decoration: none;
+}
+
 .layers-editor .controls {
 	margin-top: 10px;
-	overflow: hidden;
 }
 
 .layers-editor .controls .left {
@@ -606,6 +642,7 @@
 	position: absolute;
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
 }
 
 .layers-editor .viewport-layer {

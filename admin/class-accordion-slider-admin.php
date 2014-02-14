@@ -412,11 +412,19 @@ class Accordion_Slider_Admin {
 									'panel_id' => $panel_id,
 									'position' => isset( $layer_data['position'] ) ? $layer_data['position'] : 0,
 									'name' => isset( $layer_data['name'] ) ? $layer_data['name'] : '',
-									'content' => isset( $layer_data['content'] ) ? $layer_data['content'] : '',
+									'type' => isset( $layer_data['type'] ) ? $layer_data['type'] : '',
+									'text' => isset( $layer_data['text'] ) ? $layer_data['text'] : '',
+									'heading_type' => isset( $layer_data['heading_type'] ) ? $layer_data['heading_type'] : '',
+									'image_source' => isset( $layer_data['image_source'] ) ? $layer_data['image_source'] : '',
+									'image_alt' => isset( $layer_data['image_alt'] ) ? $layer_data['image_alt'] : '',
+									'image_link' => isset( $layer_data['image_link'] ) ? $layer_data['image_link'] : '',
+									'image_retina' => isset( $layer_data['image_retina'] ) ? $layer_data['image_retina'] : '',
+									'video_image' => isset( $layer_data['video_image'] ) ? $layer_data['video_image'] : '',
+									'video_code' => isset( $layer_data['video_code'] ) ? $layer_data['video_code'] : '',
 									'settings' =>  isset( $layer_data['settings'] ) ? json_encode( $layer_data['settings'] ) : ''
 									);
 
-					$wpdb->insert( $wpdb->prefix . 'accordionslider_layers', $layer, array( '%d', '%d', '%d', '%s', '%s', '%s' ) );
+					$wpdb->insert( $wpdb->prefix . 'accordionslider_layers', $layer, array( '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ) );
 				}
 			}
 		}
@@ -556,8 +564,8 @@ class Accordion_Slider_Admin {
 
 	public function ajax_add_layer_settings() {
 		$layer_id = $_POST['id'];
+		$layer_type = $_POST['type'];
 		$layer_settings;
-		$layer_content;
 
 		if ( isset( $_POST['settings'] ) ) {
 			$layer_settings = json_decode( stripslashes( $_POST['settings'] ), true );
