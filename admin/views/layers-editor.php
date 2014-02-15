@@ -11,11 +11,11 @@
 					<div class="add-layer-group">
                         <a class="button-secondary add-new-layer" href="#">+</a>
                         <ul class="layer-type">
-                            <li><a href="#" data-type="paragraph"><?php _e( 'Paragraph', 'accordion-slider' ); ?></a></li>
-                            <li><a href="#" data-type="heading"><?php _e( 'Heading', 'accordion-slider' ); ?></a></li>
-                            <li><a href="#" data-type="image"><?php _e( 'Image', 'accordion-slider' ); ?></a></li>
-                            <li><a href="#" data-type="video"><?php _e( 'Video', 'accordion-slider' ); ?></a></li>
-                            <li><a href="#" data-type="div"><?php _e( 'DIV', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="video"><?php _e( 'Video Layer', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="div"><?php _e( 'DIV Layer', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="image"><?php _e( 'Image Layer', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="heading"><?php _e( 'Heading Layer', 'accordion-slider' ); ?></a></li>
+                            <li><a href="#" data-type="paragraph"><?php _e( 'Paragraph Layer', 'accordion-slider' ); ?></a></li>
                         </ul>
                     </div>
 					

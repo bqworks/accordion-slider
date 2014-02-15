@@ -419,12 +419,10 @@ class Accordion_Slider_Admin {
 									'image_alt' => isset( $layer_data['image_alt'] ) ? $layer_data['image_alt'] : '',
 									'image_link' => isset( $layer_data['image_link'] ) ? $layer_data['image_link'] : '',
 									'image_retina' => isset( $layer_data['image_retina'] ) ? $layer_data['image_retina'] : '',
-									'video_image' => isset( $layer_data['video_image'] ) ? $layer_data['video_image'] : '',
-									'video_code' => isset( $layer_data['video_code'] ) ? $layer_data['video_code'] : '',
 									'settings' =>  isset( $layer_data['settings'] ) ? json_encode( $layer_data['settings'] ) : ''
 									);
 
-					$wpdb->insert( $wpdb->prefix . 'accordionslider_layers', $layer, array( '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ) );
+					$wpdb->insert( $wpdb->prefix . 'accordionslider_layers', $layer, array( '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ) );
 				}
 			}
 		}

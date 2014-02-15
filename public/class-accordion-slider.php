@@ -189,8 +189,6 @@ class Accordion_Slider {
 				image_alt text NOT NULL,
 				image_link text NOT NULL,
 				image_retina text NOT NULL,
-				video_image text NOT NULL,
-				video_code text NOT NULL,
 				settings text NOT NULL,
 				PRIMARY KEY (id)
 				) DEFAULT CHARSET=utf8;";

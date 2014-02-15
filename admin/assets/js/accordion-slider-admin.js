@@ -1121,8 +1121,8 @@
 				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10),
 				backgroundData = this.currentPanel.getData( 'background' );
 
-			var viewport = this.editor.find( '.viewport' ).css( { 'height': accordionHeight } ),
-				viewportLayers = $( '<div class="viewport-layers"></div>' );
+			var viewport = this.editor.find( '.viewport' ).css( { 'width': accordionWidth, 'height': accordionHeight } ),
+				viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' );
 
 			if ( typeof backgroundData.background_source !== 'undefined' && backgroundData.background_source !== '') {
 				var viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" />' ).appendTo( viewport );
@@ -1142,16 +1142,16 @@
 			var that = this,
 				layer;
 
-			if ( type === 'paragraph' ) {
-				layer =	new ParagraphLayer( id, data, this.editor );
-			} else if ( type === 'heading' ) {
+			if ( type === 'heading' ) {
 				layer =	new HeadingLayer( id, data, this.editor );
 			} else if ( type === 'image' ) {
 				layer =	new ImageLayer( id, data, this.editor );
+			} else if ( type === 'div' ) {
+				layer =	new DivLayer( id, data, this.editor );
 			} else if ( type === 'video' ) {
 				layer =	new VideoLayer( id, data, this.editor );
 			} else {
-				layer =	new DivLayer( id, data, this.editor );
+				layer =	new ParagraphLayer( id, data, this.editor );
 			}
 
 			this.layers.push( layer );
@@ -1183,7 +1183,7 @@
 				data: { action: 'accordion_slider_add_layer_settings', id: this.counter, type: type },
 				complete: function( data ) {
 					$( data.responseText ).appendTo( $( '.layers-settings' ) );
-					$( '<li class="layers-list-item" data-id="' + that.counter + '" data-position="' + that.layers.length + '">Layer ' + that.counter + '</li>' ).appendTo( that.editor.find( '.layers-list' ) );
+					$( '<li class="layers-list-item" data-id="' + that.counter + '" data-position="' + that.layers.length + '">Layer ' + that.counter + '</li>' ).prependTo( that.editor.find( '.layers-list' ) );
 
 					that.createLayer( that.counter, type, false );
 				}
@@ -1266,23 +1266,23 @@
 		this.selected = false;
 		this.events = $( {} );
 
+		this.$viewportLayers = this.editor.find( '.viewport-layers' );
+
+		this.$viewportLayer = null;
+		this.$layerListItem = this.editor.find( '.layers-list-item[data-id="' + this.id + '"]' );
+		this.$layerSettings = this.editor.find( '.layer-settings[data-id="' + this.id + '"]' );
+
 		this.init();
 	};
 
 	Layer.prototype = {
 
 		init: function() {
-			this.$viewportLayers = this.editor.find( '.viewport-layers' );
-
-			this.$viewportLayer = null;
-			this.$layerListItem = this.editor.find( '.layers-list-item[data-id="' + this.id + '"]' );
-			this.$layerSettings = this.editor.find( '.layer-settings[data-id="' + this.id + '"]' );
-
+			this.initLayerContent();
+			this.initLayerSettings();
 			this.initViewportLayer();
 			this.initLayerDragging();
 			this.initLayerListItem();
-			this.initLayerContent();
-			this.initLayerSettings();
 		},
 
 		getData: function() {
@@ -1375,32 +1375,23 @@
 			this.$viewportLayer.attr( 'data-id', this.id );
 
 			if ( this.data === false ) {
-				this.$viewportLayer.addClass( 'as-black as-padding' )
-									.css( { 'width': 'auto', 'height': 'auto', 'left': 0, 'top': 0 } );
+				this.$viewportLayer.css( { 'width': 'auto', 'height': 'auto', 'left': 0, 'top': 0 } );
+
+				if ( this.$viewportLayer.hasClass( 'as-layer' ) ) {
+					this.$viewportLayer.addClass( 'as-black as-padding' );
+				} else {
+					this.$viewportLayer.find( '.as-layer' ).addClass( 'as-black as-padding' );
+				}
 			} else {
 				var classes = '';
+				classes += ' ' + this.data.settings.preset_styles !== null ? this.data.settings.preset_styles.join( ' ' ) : '';
+				classes += ' ' + this.data.settings.custom_class;
 
-				if ( this.data.settings.black_background === true ) {
-					classes += ' as-black';
+				if ( this.$viewportLayer.hasClass( 'as-layer' ) ) {
+					this.$viewportLayer.addClass( classes );
+				} else {
+					this.$viewportLayer.find( '.as-layer' ).addClass( classes );
 				}
-
-				if ( this.data.settings.white_background === true ) {
-					classes += ' as-white';
-				}
-
-				if ( this.data.settings.padding === true ) {
-					classes += ' as-padding';
-				}
-
-				if ( this.data.settings.round_corners === true ) {
-					classes += ' as-rounded';
-				}
-
-				if ( this.data.settings.custom_class !== '' ) {
-					classes += ' ' + this.data.settings.custom_class;
-				}
-
-				this.$viewportLayer.addClass( classes );
 
 				this.$viewportLayer.css( { 'width': this.data.settings.width, 'height': this.data.settings.height } );
 
@@ -1423,7 +1414,7 @@
 				}
 			}
 
-			this.$viewportLayer.on( 'click', function() {
+			this.$viewportLayer.on( 'mousedown', function() {
 				that.triggerSelect();
 			});
 		},
@@ -1529,8 +1520,7 @@
 			var that = this,
 				position = this.$layerSettings.find( '.setting[name="position"]' ).val().toLowerCase(),
 				horizontalPosition = position.indexOf( 'right' ) !== -1 ? 'right' : 'left',
-				verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top',
-				customClass = this.$layerSettings.find( '.setting[name="custom_class"]' ).val();
+				verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top';
 
 			this.$layerSettings.find( 'select[name="preset_styles"]' ).multiCheck( { width: 120} );
 
@@ -1567,56 +1557,45 @@
 				}
 			});
 
-			this.$layerSettings.find( '.setting[name="black_background"]' ).on( 'change', function() {
-				if ( $( this ).is( ':checked' ) ) {
-					that.$viewportLayer.addClass( 'as-black' );
+			this.$layerSettings.find( '.setting[name="preset_styles"], .setting[name="custom_class"]' ).on( 'change', function() {
+				var classes = '',
+					selectedStyles = that.$layerSettings.find( '.setting[name="preset_styles"]' ).val(),
+					customClass = that.$layerSettings.find( '.setting[name="custom_class"]' ).val();
+
+				classes += selectedStyles !== null ? ' ' + selectedStyles.join( ' ' ) : '';
+				classes += customClass !== '' ? ' ' + customClass : '';
+
+				if ( that.$viewportLayer.hasClass( 'as-layer' ) ) {
+					that.$viewportLayer.attr( 'class', 'viewport-layer as-layer' + classes );
 				} else {
-					that.$viewportLayer.removeClass( 'as-black' );
+					that.$viewportLayer.find( '.as-layer' ).attr( 'class', 'as-layer' + classes );
 				}
-			});
-
-			this.$layerSettings.find( '.setting[name="white_background"]' ).on( 'change', function() {
-				if ( $( this ).is( ':checked' ) ) {
-					that.$viewportLayer.addClass( 'as-white' );
-				} else {
-					that.$viewportLayer.removeClass( 'as-white' );
-				}
-			});
-
-			this.$layerSettings.find( '.setting[name="padding"]' ).on( 'change', function() {
-				if ( $( this ).is( ':checked' ) ) {
-					that.$viewportLayer.addClass( 'as-padding' );
-				} else {
-					that.$viewportLayer.removeClass( 'as-padding' );
-				}
-			});
-
-			this.$layerSettings.find( '.setting[name="round_corners"]' ).on( 'change', function() {
-				if ( $( this ).is( ':checked' ) ) {
-					that.$viewportLayer.addClass( 'as-rounded' );
-				} else {
-					that.$viewportLayer.removeClass( 'as-rounded' );
-				}
-			});
-
-			this.$layerSettings.find( '.setting[name="custom_class"]' ).on( 'change', function(event) {
-				that.$viewportLayer.removeClass( customClass );
-
-				customClass = $( this ).val();
-
-				that.$viewportLayer.addClass( customClass );
 			});
 		}
 	};
 
 	var ParagraphLayer = function( id, data, editor ) {
-		this.text = data === false ? 'New Layer' : data.text;
-
 		Layer.call( this, id, data, editor );
 	};
 
 	ParagraphLayer.prototype = Object.create( Layer.prototype );
 	ParagraphLayer.prototype.constructor = ParagraphLayer;
+
+	ParagraphLayer.prototype.initLayerContent = function() {
+		var that = this;
+
+		this.text = this.data === false ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
+
+		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
+			that.text = $( this ).val();
+			this.$viewportLayer.text( this.text );
+		});
+	};
+
+	ParagraphLayer.prototype.initViewportLayer = function() {
+		this.$viewportLayer = $( '<p class="viewport-layer as-layer">' + this.text + '</p>' ).appendTo( this.$viewportLayers );
+		Layer.prototype.initViewportLayer.call( this );
+	};
 
 	ParagraphLayer.prototype.getData = function() {
 		var data = Layer.prototype.getData.call( this );
@@ -1626,34 +1605,37 @@
 		return data;
 	};
 
-	ParagraphLayer.prototype.initViewportLayer = function() {
-		this.$viewportLayer = $( '<p class="viewport-layer as-layer"></p>' ).appendTo( this.$viewportLayers );
-		this.renderViewportLayer();
-		Layer.prototype.initViewportLayer.call( this );
-	};
-
-	ParagraphLayer.prototype.initLayerContent = function() {
-		var that = this;
-
-		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
-			that.text = $( this ).val();
-			that.renderViewportLayer();
-		});
-	};
-
-	ParagraphLayer.prototype.renderViewportLayer = function() {
-		this.$viewportLayer.text( this.text );
-	};
-
 	var HeadingLayer = function( id, data, editor ) {
-		this.headingType = 'h3';
-		this.headingText = 'New layer';
-
 		Layer.call( this, id, data, editor );
 	};
 
 	HeadingLayer.prototype = Object.create( Layer.prototype );
 	HeadingLayer.prototype.constructor = HeadingLayer;
+
+	HeadingLayer.prototype.initLayerContent = function() {
+		var that = this;
+
+		this.headingType = this.data === false ? 'h3' : this.data.heading_type;
+		this.headingText = this.data === false ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
+
+		this.$layerSettings.find( 'select[name="heading_type"]' ).on( 'change', function() {
+			that.headingType = $( this ).val();
+			
+			var classes = that.$viewportLayer.find( '.as-layer' ).attr( 'class' );
+			that.$viewportLayer.html( '<' + that.headingType + ' class="' + classes + '">' + that.headingText + '</' + that.headingType + '>' );
+		});
+
+		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
+			that.headingText = $( this ).val();
+			
+			that.$viewportLayer.find( '.as-layer' ).html( this.headingText );
+		});
+	};
+
+	HeadingLayer.prototype.initViewportLayer = function() {
+		this.$viewportLayer = $( '<div class="viewport-layer"><' + this.headingType + ' class="as-layer">' + this.headingText + '</' + this.headingType + '></div>' ).appendTo( this.$viewportLayers );
+		Layer.prototype.initViewportLayer.call( this );
+	};
 
 	HeadingLayer.prototype.getData = function() {
 		var data = Layer.prototype.getData.call( this );
@@ -1664,106 +1646,43 @@
 		return data;
 	};
 
-	HeadingLayer.prototype.initViewportLayer = function() {
-		this.$viewportLayer = $( '<' + this.headingType + ' class="viewport-layer as-layer"></' + this.headingType + '>' ).appendTo( this.$viewportLayers );
-		this.renderViewportLayer();
-		Layer.prototype.initViewportLayer.call( this );
-	};
-
-	HeadingLayer.prototype.initLayerContent = function() {
-		var that = this;
-
-		this.$layerSettings.find( 'select[name="heading_type"]' ).on( 'change', function() {
-			that.headingType = $( this ).val();
-			that.renderViewportLayer();
-		});
-
-		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
-			that.headingText = $( this ).val();
-			that.renderViewportLayer();
-		});
-	};
-
-	HeadingLayer.prototype.renderViewportLayer = function() {
-		var classes = this.$viewportLayer.attr( 'class' ),
-			style = this.$viewportLayer.attr( 'style' );
-
-		this.$viewportLayer.html( '<' + this.headingType + '>' + this.headingText + '</' + this.headingType + '>' );
-
-		if ( typeof classes !== 'undefined' ) {
-			this.$viewportLayer.attr( 'class', classes );
-		}
-
-		if ( typeof style !== 'undefined' ) {
-			this.$viewportLayer.attr( 'style', style );
-		}
-	};
-
 	var ImageLayer = function( id, data, editor ) {
-		this.imageSource = '';
-
 		Layer.call( this, id, data, editor );
 	};
 
 	ImageLayer.prototype = Object.create( Layer.prototype );
 	ImageLayer.prototype.constructor = ImageLayer;
 
+	ImageLayer.prototype.initLayerContent = function() {
+		var that = this;
+
+		this.imageSource = this.data === false ? this.$layerSettings.find( 'input[name="image_source"]' ).val() : this.data.image_source;
+
+		this.$layerSettings.find( 'input[name="image_source"]' ).on( 'change', function() {
+			that.imageSource = $( this ).val();
+
+			if ( that.imageSource !== '' ) {
+				that.$viewportLayer.attr( 'src', that.imageSource );
+			} else {
+				that.$viewportLayer.attr( 'src', 'placeholder.png' );
+			}
+		});
+	};
+
+	ImageLayer.prototype.initViewportLayer = function() {
+		this.$viewportLayer = $( '<img class="viewport-layer as-layer" src="placeholder.png" draggable="false" />' ).appendTo( this.$viewportLayers );
+		Layer.prototype.initViewportLayer.call( this );
+	};
+
 	ImageLayer.prototype.getData = function() {
 		var data = Layer.prototype.getData.call( this );
 		data.type = 'image';
 		data.image_source = this.imageSource;
-		data.image_alt = this.$layerSettings.find( 'input[name="image_alt"]' );
-		data.image_link = this.$layerSettings.find( 'input[name="image_link"]' );
-		data.image_retina = this.$layerSettings.find( 'input[name="image_retina"]' );
+		data.image_alt = this.$layerSettings.find( 'input[name="image_alt"]' ).val();
+		data.image_link = this.$layerSettings.find( 'input[name="image_link"]' ).val();
+		data.image_retina = this.$layerSettings.find( 'input[name="image_retina"]' ).val();
 
 		return data;
-	};
-	
-	ImageLayer.prototype.initViewportLayer = function() {
-		this.$viewportLayer = $( '<img class="viewport-layer as-layer" src="placeholder.png" />' ).appendTo( this.$viewportLayers );
-		this.renderViewportLayer();
-		Layer.prototype.initViewportLayer.call( this );
-	};
-
-	ImageLayer.prototype.initLayerContent = function() {
-		this.$layerSettings.find( 'input[name="image_source"]' ).on( 'change', function() {
-			that.imageSource = $( this ).val();
-			that.renderViewportLayer();
-			console.log(that.imageSource);
-		});
-
-		var that = this;
-	};
-
-	ImageLayer.prototype.renderViewportLayer = function() {
-		if ( this.imageSource !== '' ) {
-			this.$viewportLayer.attr( 'src', this.imageSource );
-		} else {
-			this.$viewportLayer.attr( 'src', 'placeholder.png' );
-		}
-	};
-
-	var VideoLayer = function( id, data, editor ) {
-		this.videoImage = '';
-		this.videoCode = '';
-
-		Layer.call( this, id, data, editor );
-	};
-
-	VideoLayer.prototype = Object.create( Layer.prototype );
-	VideoLayer.prototype.constructor = VideoLayer;
-
-	VideoLayer.prototype.getData = function() {
-		var data = Layer.prototype.getData.call( this );
-		data.type = 'video';
-		data.video_image = this.videoImage;
-		data.video_code = this.videoCode;
-
-		return data;
-	};
-
-	VideoLayer.prototype.initLayerContent = function() {
-		var that = this;
 	};
 
 	var DivLayer = function( id, data, editor ) {
@@ -1773,20 +1692,84 @@
 	DivLayer.prototype = Object.create( Layer.prototype );
 	DivLayer.prototype.constructor = DivLayer;
 
+	DivLayer.prototype.initLayerContent = function() {
+		var that = this;
+
+		this.text = this.data === false ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
+
+		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
+			that.text = $( this ).val();
+			that.$viewportLayer.html( that.text );
+		});
+	};
+
+	DivLayer.prototype.initViewportLayer = function() {
+		this.$viewportLayer = $( '<div class="viewport-layer as-layer">' + this.text + '</div>' ).appendTo( this.$viewportLayers );
+		Layer.prototype.initViewportLayer.call( this );
+	};
+
 	DivLayer.prototype.getData = function() {
 		var data = Layer.prototype.getData.call( this );
 		data.type = 'div';
-		data.text = this.$layerSettings.find( 'textarea[name="text"]' ).val();
+		data.text = this.text;
 
 		return data;
 	};
 
-	DivLayer.prototype.initLayerContent = function() {
+	var VideoLayer = function( id, data, editor ) {
+		Layer.call( this, id, data, editor );
+	};
+
+	VideoLayer.prototype = Object.create( Layer.prototype );
+	VideoLayer.prototype.constructor = VideoLayer;
+
+	VideoLayer.prototype.initLayerContent = function() {
 		var that = this;
 
+		this.text = this.data === false ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
+
 		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
-			that.$viewportLayer.html( $( this ).val() );
+			that.text = $( this ).val();
 		});
+	};
+
+	VideoLayer.prototype.initViewportLayer = function() {
+		this.$viewportLayer = $( '<div class="viewport-layer as-layer"></div>' ).appendTo( this.$viewportLayers );
+		Layer.prototype.initViewportLayer.call( this );
+	};
+
+	VideoLayer.prototype.getData = function() {
+		var data = Layer.prototype.getData.call( this );
+		data.type = 'video';
+
+		var video = $( this.text );
+
+		if ( ! video.hasClass( 'as-video' ) ) {
+			video.addClass( 'as-video' );
+		}
+
+		if ( video.is( 'iframe' ) ) {
+			var src = video.attr( 'src' );
+
+			if ( ( src.indexOf( 'youtube.com' ) !== -1 || src.indexOf( 'youtu.be' ) !== -1 ) && src.indexOf( 'enablejsapi' ) === -1 ) {
+				src += ( src.indexOf( '?' ) === -1 ? '?' : '&' ) + 'enablejsapi=1&wmode=opaque';
+			}
+
+			if ( src.indexOf( 'vimeo.com' ) !== -1 && src.indexOf( 'api' ) === -1 ) {
+				src += ( src.indexOf( '?' ) === -1 ? '?' : '&' ) + 'api=1';
+			}
+
+			video.attr( 'src', src );
+		} else if ( video.hasClass( 'video-js' ) && typeof video.attr( 'data-videojs-id' ) === 'undefined' ) {
+			video.removeClass( 'as-video' );
+
+			var wrapper = $( '<div class="as-video" data-videojs-id="' + video.attr( 'id' ) + '"></div>' ).append( video );
+			video = wrapper.clone();
+		}
+
+		data.text = video[0].outerHTML;
+
+		return data;
 	};
 
 	var SettingsEditor = {

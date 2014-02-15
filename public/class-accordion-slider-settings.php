@@ -643,12 +643,12 @@ class Accordion_Slider_Settings {
 				'preset_styles' => array(
 					'label' => __( 'Preset Styles', 'accordion-slider' ),
 					'type' => 'multiselect',
-					'default_value' => array( 'black', 'padding' ),
+					'default_value' => array( 'as-black', 'as-padding' ),
 					'available_values' => array(
-						'black' => __( 'Black', 'accordion-slider' ),
-						'white' => __( 'White', 'accordion-slider' ),
-						'padding' => __( 'Padding', 'accordion-slider' ),
-						'round' => __( 'Round Corners', 'accordion-slider' )
+						'as-black' => __( 'Black', 'accordion-slider' ),
+						'as-white' => __( 'White', 'accordion-slider' ),
+						'as-padding' => __( 'Padding', 'accordion-slider' ),
+						'as-rounded' => __( 'Round Corners', 'accordion-slider' )
 					),
 					'description' => ''
 				),

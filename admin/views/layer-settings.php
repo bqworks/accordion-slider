@@ -8,13 +8,13 @@
 				<?php 
 					$layer_type = isset( $layer_type ) ? $layer_type : $layer_default_settings['type']['default_value'];
 
-					if ( $layer_type === 'paragraph' || $layer_type === 'div' ) {
+					if ( $layer_type === 'paragraph' ) {
 				?>
-						<textarea name="text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : __( 'New layer', 'accordion-slider' ); ?></textarea>
+						<textarea name="text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : 'New layer'; ?></textarea>
 				<?php
 					} else if ( $layer_type === 'heading' ) {
 				?>
-						<label for="layer-<?php echo esc_attr( $layer_id ); ?>-heading-type"><?php _e( 'Heading Yype', 'accordion-slider' ); ?></label>
+						<label for="layer-<?php echo esc_attr( $layer_id ); ?>-heading-type"><?php _e( 'Heading Type', 'accordion-slider' ); ?></label>
 						<select id="layer-<?php echo esc_attr( $layer_id ); ?>-heading-type" name="heading_type">
 							<?php
 								foreach ( $layer_default_settings['heading_type']['available_values'] as $value_name => $value_label ) {
@@ -24,7 +24,7 @@
 							?>
 						</select>
 
-						<textarea name="text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : __( 'New layer', 'accordion-slider' ); ?></textarea>
+						<textarea name="text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : 'New layer'; ?></textarea>
 				<?php
 					} else if ( $layer_type === 'image' ) {
 				?>
@@ -49,20 +49,14 @@
 							</tbody>
 						</table>
 				<?php
+					} else if ( $layer_type === 'div' ) {
+				?>
+						<textarea name="text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : '<h3>New layer title</h3><p>New layer description</p>'; ?></textarea>
+				<?php
 					} else if ( $layer_type === 'video' ) {
 				?>
-						<table>
-							<tbody>
-								<tr>
-									<td><label for="layer-<?php echo esc_attr( $layer_id ); ?>-video-image"><?php _e( 'Video Image:', 'accordion-slider' ); ?></label></td>
-									<td><input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-video-image" name="video_image" value="<?php echo isset( $layer['video_image'] ) ? esc_attr( $layer['video_image'] ) : ''; ?>" /></td>
-								</tr>
-								<tr>
-									<td><label for="layer-<?php echo esc_attr( $layer_id ); ?>-video-code"><?php _e( 'Video Code:', 'accordion-slider' ); ?></label></td>
-									<td><input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-video-code" name="video_code" value="<?php echo isset( $layer['video_code'] ) ? esc_attr( $layer['video_code'] ) : ''; ?>" /></td>
-								</tr>
-							</tbody>
-						</table>
+						<label><?php _e( 'Video Embed/Code', 'accordion-slider' ); ?></label>
+						<textarea name="text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : ''; ?></textarea>
 				<?php
 					}
 				?>
@@ -99,7 +93,7 @@
 								<select multiple id="layer-<?php echo esc_attr( $layer_id ); ?>-preset-styles" class="setting" name="preset_styles">
 									<?php
 										foreach ( $layer_default_settings['preset_styles']['available_values'] as $value_name => $value_label ) {
-											$selected = ( isset( $layer_settings['preset_styles'] ) && in_array( $value_name, $layer_settings['preset_styles'] ) ) || ( ! isset( $layer_settings['preset_styles'] ) && in_array( $value_name === $layer_default_settings['preset_styles']['default_value'] ) ) ? ' selected="selected"' : '';
+											$selected = ( isset( $layer_settings['preset_styles'] ) && in_array( $value_name, $layer_settings['preset_styles'] ) ) || ( ! isset( $layer_settings['preset_styles'] ) && in_array( $value_name, $layer_default_settings['preset_styles']['default_value'] ) ) ? ' selected="selected"' : '';
 											echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
 				                        }
 									?>
