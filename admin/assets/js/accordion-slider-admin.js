@@ -1065,7 +1065,7 @@
 			this.editor.find( '.add-layer-group' ).on( 'click', function( event ) {
 				event.preventDefault();
 
-				var type = 'div';
+				var type = 'paragraph';
 
 				if ( typeof $( event.target ).attr( 'data-type' ) !== 'undefined' ) {
 					type = $( event.target ).attr( 'data-type' );
@@ -1100,9 +1100,15 @@
 					that.layers.splice( event.startPosition, 1 );
 					that.layers.splice( event.endPosition, 0, layer );
 
+					var $viewportLayers = that.editor.find( '.viewport-layers' ),
+						total = $viewportLayers.children().length - 1;
+
 					$( '.layers-list' ).find( '.layers-list-item' ).each(function( index, element ) {
 						$( element ).attr( 'data-position', index );
 					});
+
+					var swapLayer = $viewportLayers.find( '.viewport-layer' ).eq( total - event.startPosition ).detach();
+					swapLayer.insertBefore( $viewportLayers.find( '.viewport-layer' ).eq( total - event.endPosition ) );
 				}
 			} );
 
@@ -1121,40 +1127,44 @@
 				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10),
 				backgroundData = this.currentPanel.getData( 'background' );
 
-			var viewport = this.editor.find( '.viewport' ).css( { 'width': accordionWidth, 'height': accordionHeight } ),
-				viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' );
+			var $viewport = this.editor.find( '.viewport' ).css( { 'width': accordionWidth, 'height': accordionHeight } ),
+				$viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' );
 
 			if ( typeof backgroundData.background_source !== 'undefined' && backgroundData.background_source !== '') {
-				var viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" />' ).appendTo( viewport );
+				var $viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" />' ).appendTo( $viewport );
 
-				viewportLayers.css( {
-					'width': viewportImage.width(),
-					'height': viewportImage.height(),
-					'left': viewportImage.position().left,
-					'top': viewportImage.position().top
+				$viewportLayers.css( {
+					'width': $viewportImage.width(),
+					'height': $viewportImage.height(),
+					'left': $viewportImage.position().left,
+					'top': $viewportImage.position().top
 				});
 			}
 
-			viewportLayers.appendTo( viewport );
+			$viewportLayers.appendTo( $viewport );
 		},
 
 		createLayer: function( id, type, data ) {
 			var that = this,
 				layer;
 
-			if ( type === 'heading' ) {
-				layer =	new HeadingLayer( id, data, this.editor );
+			if ( type === 'paragraph' ) {
+				layer =	new ParagraphLayer( id, data );
+			} else if ( type === 'heading' ) {
+				layer =	new HeadingLayer( id, data );
 			} else if ( type === 'image' ) {
-				layer =	new ImageLayer( id, data, this.editor );
+				layer =	new ImageLayer( id, data );
 			} else if ( type === 'div' ) {
-				layer =	new DivLayer( id, data, this.editor );
+				layer =	new DivLayer( id, data );
 			} else if ( type === 'video' ) {
-				layer =	new VideoLayer( id, data, this.editor );
-			} else {
-				layer =	new ParagraphLayer( id, data, this.editor );
+				layer =	new VideoLayer( id, data );
 			}
 
-			this.layers.push( layer );
+			if ( data === false ) {
+				this.layers.unshift( layer );
+			} else {
+				this.layers.push( layer );
+			}
 
 			layer.on( 'select', function( event ) {
 				$.each( that.layers, function( index, layer ) {
@@ -1258,14 +1268,14 @@
 		}
 	};
 
-	var Layer = function( id, data, editor ) {
+	var Layer = function( id, data ) {
 		this.id = id;
 		this.data = data;
-		this.editor = editor;
 
 		this.selected = false;
 		this.events = $( {} );
 
+		this.editor = $( '.layers-editor' );
 		this.$viewportLayers = this.editor.find( '.viewport-layers' );
 
 		this.$viewportLayer = null;
@@ -1375,6 +1385,7 @@
 			this.$viewportLayer.attr( 'data-id', this.id );
 
 			if ( this.data === false ) {
+				this.$viewportLayer.appendTo( this.$viewportLayers );
 				this.$viewportLayer.css( { 'width': 'auto', 'height': 'auto', 'left': 0, 'top': 0 } );
 
 				if ( this.$viewportLayer.hasClass( 'as-layer' ) ) {
@@ -1383,6 +1394,8 @@
 					this.$viewportLayer.find( '.as-layer' ).addClass( 'as-black as-padding' );
 				}
 			} else {
+				this.$viewportLayer.prependTo( this.$viewportLayers );
+
 				var classes = '';
 				classes += ' ' + this.data.settings.preset_styles !== null ? this.data.settings.preset_styles.join( ' ' ) : '';
 				classes += ' ' + this.data.settings.custom_class;
@@ -1593,7 +1606,7 @@
 	};
 
 	ParagraphLayer.prototype.initViewportLayer = function() {
-		this.$viewportLayer = $( '<p class="viewport-layer as-layer">' + this.text + '</p>' ).appendTo( this.$viewportLayers );
+		this.$viewportLayer = $( '<p class="viewport-layer as-layer">' + this.text + '</p>' );
 		Layer.prototype.initViewportLayer.call( this );
 	};
 
@@ -1633,7 +1646,7 @@
 	};
 
 	HeadingLayer.prototype.initViewportLayer = function() {
-		this.$viewportLayer = $( '<div class="viewport-layer"><' + this.headingType + ' class="as-layer">' + this.headingText + '</' + this.headingType + '></div>' ).appendTo( this.$viewportLayers );
+		this.$viewportLayer = $( '<div class="viewport-layer"><' + this.headingType + ' class="as-layer">' + this.headingText + '</' + this.headingType + '></div>' );
 		Layer.prototype.initViewportLayer.call( this );
 	};
 
@@ -1670,7 +1683,7 @@
 	};
 
 	ImageLayer.prototype.initViewportLayer = function() {
-		this.$viewportLayer = $( '<img class="viewport-layer as-layer" src="placeholder.png" draggable="false" />' ).appendTo( this.$viewportLayers );
+		this.$viewportLayer = $( '<img class="viewport-layer as-layer" src="placeholder.png" draggable="false" />' );
 		Layer.prototype.initViewportLayer.call( this );
 	};
 
@@ -1704,7 +1717,7 @@
 	};
 
 	DivLayer.prototype.initViewportLayer = function() {
-		this.$viewportLayer = $( '<div class="viewport-layer as-layer">' + this.text + '</div>' ).appendTo( this.$viewportLayers );
+		this.$viewportLayer = $( '<div class="viewport-layer as-layer">' + this.text + '</div>' );
 		Layer.prototype.initViewportLayer.call( this );
 	};
 
@@ -1734,7 +1747,7 @@
 	};
 
 	VideoLayer.prototype.initViewportLayer = function() {
-		this.$viewportLayer = $( '<div class="viewport-layer as-layer"></div>' ).appendTo( this.$viewportLayers );
+		this.$viewportLayer = $( '<div class="viewport-layer as-layer"></div>' );
 		Layer.prototype.initViewportLayer.call( this );
 	};
 
