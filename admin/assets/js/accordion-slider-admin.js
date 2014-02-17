@@ -1087,9 +1087,11 @@
 			this.initViewport();
 
 			$.each( this.layersData, function( index, layerData ) {
-				that.createLayer( layerData.id, layerData.type, layerData );
+				var data = layerData;
+				data.createMode = 'init';
+				that.createLayer( data );
 
-				that.counter = Math.max( that.counter, layerData.id );
+				that.counter = Math.max( that.counter, data.id );
 			});
 
 			$( '.layers-list' ).lightSortable( {
@@ -1106,9 +1108,6 @@
 					$( '.layers-list' ).find( '.layers-list-item' ).each(function( index, element ) {
 						$( element ).attr( 'data-position', index );
 					});
-
-					console.log(total - event.startPosition);
-					console.log(total - event.endPosition);
 
 					var swapLayer = $viewportLayers.find( '.viewport-layer' ).eq( total - event.startPosition ).detach();
 
@@ -1152,23 +1151,23 @@
 			$viewportLayers.appendTo( $viewport );
 		},
 
-		createLayer: function( id, type, data ) {
+		createLayer: function( data ) {
 			var that = this,
 				layer;
 
-			if ( type === 'paragraph' ) {
-				layer =	new ParagraphLayer( id, data );
-			} else if ( type === 'heading' ) {
-				layer =	new HeadingLayer( id, data );
-			} else if ( type === 'image' ) {
-				layer =	new ImageLayer( id, data );
-			} else if ( type === 'div' ) {
-				layer =	new DivLayer( id, data );
-			} else if ( type === 'video' ) {
-				layer =	new VideoLayer( id, data );
+			if ( data.type === 'paragraph' ) {
+				layer =	new ParagraphLayer( data );
+			} else if ( data.type === 'heading' ) {
+				layer =	new HeadingLayer( data );
+			} else if ( data.type === 'image' ) {
+				layer =	new ImageLayer(data );
+			} else if ( data.type === 'div' ) {
+				layer =	new DivLayer( data );
+			} else if ( data.type === 'video' ) {
+				layer =	new VideoLayer( data );
 			}
 
-			if ( data === false ) {
+			if ( data.createMode === 'new' || data.createMode === 'duplicate' ) {
 				this.layers.unshift( layer );
 			} else {
 				this.layers.push( layer );
@@ -1203,7 +1202,7 @@
 					$( data.responseText ).appendTo( $( '.layers-settings' ) );
 					$( '<li class="layers-list-item" data-id="' + that.counter + '" data-position="' + that.layers.length + '">Layer ' + that.counter + '</li>' ).prependTo( that.editor.find( '.layers-list' ) );
 
-					that.createLayer( that.counter, type, false );
+					that.createLayer( { id: that.counter, type: type, createMode: 'new' } );
 				}
 			});
 		},
@@ -1245,12 +1244,25 @@
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				dataType: 'html',
-				data: { action: 'accordion_slider_add_layer_settings', id: this.counter, type: layerData.type, content: layerData.content, settings: JSON.stringify( layerData.settings ) },
+				data: {
+					action: 'accordion_slider_add_layer_settings',
+					id: this.counter,
+					type: layerData.type,
+					text: layerData.text,
+					heading_type: layerData.heading_type,
+					image_source: layerData.image_source,
+					image_alt: layerData.image_alt,
+					image_link: layerData.image_link,
+					image_retina: layerData.image_retina,
+					settings: JSON.stringify( layerData.settings )
+				},
 				complete: function( data ) {
 					$( data.responseText ).appendTo( $( '.layers-settings' ) );
-					$( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).appendTo( that.editor.find( '.layers-list' ) );
+					$( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).prependTo( that.editor.find( '.layers-list' ) );
 
-					that.createLayer( that.counter, layerData );
+					layerData.id = that.counter;
+					layerData.createMode = 'duplicate';
+					that.createLayer( layerData );
 				}
 			});
 		},
@@ -1276,9 +1288,9 @@
 		}
 	};
 
-	var Layer = function( id, data ) {
-		this.id = id;
+	var Layer = function( data ) {
 		this.data = data;
+		this.id = this.data.id;
 
 		this.selected = false;
 		this.events = $( {} );
@@ -1392,8 +1404,13 @@
 
 			this.$viewportLayer.attr( 'data-id', this.id );
 
-			if ( this.data === false ) {
+			if ( this.data.createMode === 'new' || this.data.createMode === 'duplicate' ) {
 				this.$viewportLayer.appendTo( this.$viewportLayers );
+			} else if ( this.data.createMode === 'init' ) {
+				this.$viewportLayer.prependTo( this.$viewportLayers );
+			}
+
+			if ( this.data.createMode === 'new' ) {
 				this.$viewportLayer.css( { 'width': 'auto', 'height': 'auto', 'left': 0, 'top': 0 } );
 
 				if ( this.$viewportLayer.hasClass( 'as-layer' ) ) {
@@ -1401,9 +1418,7 @@
 				} else {
 					this.$viewportLayer.find( '.as-layer' ).addClass( 'as-black as-padding' );
 				}
-			} else {
-				this.$viewportLayer.prependTo( this.$viewportLayers );
-
+			} else if ( this.data.createMode === 'init' || this.data.createMode === 'duplicate' ) {
 				var classes = '';
 				classes += ' ' + this.data.settings.preset_styles !== null ? this.data.settings.preset_styles.join( ' ' ) : '';
 				classes += ' ' + this.data.settings.custom_class;
@@ -1595,8 +1610,8 @@
 		}
 	};
 
-	var ParagraphLayer = function( id, data, editor ) {
-		Layer.call( this, id, data, editor );
+	var ParagraphLayer = function( data ) {
+		Layer.call( this, data );
 	};
 
 	ParagraphLayer.prototype = Object.create( Layer.prototype );
@@ -1605,11 +1620,11 @@
 	ParagraphLayer.prototype.initLayerContent = function() {
 		var that = this;
 
-		this.text = this.data === false ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
+		this.text = this.data.createMode === 'new' ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
 
 		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
 			that.text = $( this ).val();
-			this.$viewportLayer.text( this.text );
+			this.$viewportLayer.text( that.text );
 		});
 	};
 
@@ -1626,8 +1641,8 @@
 		return data;
 	};
 
-	var HeadingLayer = function( id, data, editor ) {
-		Layer.call( this, id, data, editor );
+	var HeadingLayer = function( data ) {
+		Layer.call( this, data );
 	};
 
 	HeadingLayer.prototype = Object.create( Layer.prototype );
@@ -1636,8 +1651,8 @@
 	HeadingLayer.prototype.initLayerContent = function() {
 		var that = this;
 
-		this.headingType = this.data === false ? 'h3' : this.data.heading_type;
-		this.headingText = this.data === false ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
+		this.headingType = this.data.createMode === 'new' ? 'h3' : this.data.heading_type;
+		this.headingText = this.data.createMode === 'new' ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
 
 		this.$layerSettings.find( 'select[name="heading_type"]' ).on( 'change', function() {
 			that.headingType = $( this ).val();
@@ -1649,7 +1664,7 @@
 		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
 			that.headingText = $( this ).val();
 			
-			that.$viewportLayer.find( '.as-layer' ).html( this.headingText );
+			that.$viewportLayer.find( '.as-layer' ).html( that.headingText );
 		});
 	};
 
@@ -1667,8 +1682,8 @@
 		return data;
 	};
 
-	var ImageLayer = function( id, data, editor ) {
-		Layer.call( this, id, data, editor );
+	var ImageLayer = function( data ) {
+		Layer.call( this, data );
 	};
 
 	ImageLayer.prototype = Object.create( Layer.prototype );
@@ -1677,7 +1692,7 @@
 	ImageLayer.prototype.initLayerContent = function() {
 		var that = this;
 
-		this.imageSource = this.data === false ? 'placeholder.png' : this.data.image_source;
+		this.imageSource = this.data.createMode === 'new' ? 'placeholder.png' : this.data.image_source;
 
 		this.$layerSettings.find( 'input[name="image_source"]' ).on( 'change', function() {
 			that.imageSource = $( this ).val();
@@ -1721,8 +1736,8 @@
 		return data;
 	};
 
-	var DivLayer = function( id, data, editor ) {
-		Layer.call( this, id, data, editor );
+	var DivLayer = function( data ) {
+		Layer.call( this, data );
 	};
 
 	DivLayer.prototype = Object.create( Layer.prototype );
@@ -1731,7 +1746,7 @@
 	DivLayer.prototype.initLayerContent = function() {
 		var that = this;
 
-		this.text = this.data === false ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
+		this.text = this.data.createMode === 'new' ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
 
 		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
 			that.text = $( this ).val();
@@ -1752,8 +1767,8 @@
 		return data;
 	};
 
-	var VideoLayer = function( id, data, editor ) {
-		Layer.call( this, id, data, editor );
+	var VideoLayer = function( data ) {
+		Layer.call( this, data );
 	};
 
 	VideoLayer.prototype = Object.create( Layer.prototype );
@@ -1762,7 +1777,7 @@
 	VideoLayer.prototype.initLayerContent = function() {
 		var that = this;
 
-		this.text = this.data === false ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
+		this.text = this.data.createMode === 'new' ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
 
 		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
 			that.text = $( this ).val();

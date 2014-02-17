@@ -561,6 +561,7 @@ class Accordion_Slider_Admin {
 	}
 
 	public function ajax_add_layer_settings() {
+		$layer = array();
 		$layer_id = $_POST['id'];
 		$layer_type = $_POST['type'];
 		$layer_settings;
@@ -569,8 +570,28 @@ class Accordion_Slider_Admin {
 			$layer_settings = json_decode( stripslashes( $_POST['settings'] ), true );
 		}
 
-		if ( isset( $_POST['content'] ) ) {
-			$layer_content = $_POST['content'];
+		if ( isset( $_POST['text'] ) ) {
+			$layer['text'] = $_POST['text'];
+		}
+
+		if ( isset( $_POST['heading_type'] ) ) {
+			$layer['heading_type'] = $_POST['heading_type'];
+		}
+
+		if ( isset( $_POST['image_source'] ) ) {
+			$layer['image_source'] = $_POST['image_source'];
+		}
+
+		if ( isset( $_POST['image_alt'] ) ) {
+			$layer['image_alt'] = $_POST['image_alt'];
+		}
+
+		if ( isset( $_POST['image_link'] ) ) {
+			$layer['image_link'] = $_POST['image_link'];
+		}
+
+		if ( isset( $_POST['image_retina'] ) ) {
+			$layer['image_retina'] = $_POST['image_retina'];
 		}
 
 		$layer_default_settings = Accordion_Slider_Settings::getLayerSettings();
