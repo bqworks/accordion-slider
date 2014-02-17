@@ -3,7 +3,7 @@
 		<li>
 			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="tab" id="content-tab-<?php echo esc_attr( $layer_id ); ?>" checked="checked">
 			<label for="content-tab-<?php echo esc_attr( $layer_id ); ?>" class="tab-label"><?php _e( 'Content', 'accordion-slider' ); ?></label>
-			<div class="setting-fields">
+			<div class="setting-fields content-fields">
 
 				<?php 
 					$layer_type = isset( $layer_type ) ? $layer_type : $layer_default_settings['type']['default_value'];
@@ -31,20 +31,24 @@
 						<table>
 							<tbody>
 								<tr>
-									<td><label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-source"><?php _e( 'Source:', 'accordion-slider' ); ?></label></td>
-									<td><input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-source" name="image_source" value="<?php echo isset( $layer['image_source'] ) ? esc_attr( $layer['image_source'] ) : ''; ?>" /></td>
+									<td>
+										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-source"><?php _e( 'Source:', 'accordion-slider' ); ?></label>
+										<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-source" name="image_source" value="<?php echo isset( $layer['image_source'] ) ? esc_attr( $layer['image_source'] ) : ''; ?>" />
+									</td>
+									<td>
+										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-alt"><?php _e( 'Alt:', 'accordion-slider' ); ?></label>
+										<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-alt" name="image_alt" value="<?php echo isset( $layer['image_alt'] ) ? esc_attr( $layer['image_alt'] ) : ''; ?>" />
+									</td>
 								</tr>
 								<tr>
-									<td><label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-alt"><?php _e( 'Alt:', 'accordion-slider' ); ?></label></td>
-									<td><input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-alt" name="image_alt" value="<?php echo isset( $layer['image_alt'] ) ? esc_attr( $layer['image_alt'] ) : ''; ?>" /></td>
-								</tr>
-								<tr>
-									<td><label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-link"><?php _e( 'Link:', 'accordion-slider' ); ?></label></td>
-									<td><input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-link" name="image_link" value="<?php echo isset( $layer['image_link'] ) ? esc_attr( $layer['image_link'] ) : ''; ?>" /></td>
-								</tr>
-								<tr>
-									<td><label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-retina"><?php _e( 'Retina:', 'accordion-slider' ); ?></label></td>
-									<td><input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-retina" name="image_retina" value="<?php echo isset( $layer['image_retina'] ) ? esc_attr( $layer['image_retina'] ) : ''; ?>" /></td>
+									<td>
+										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-link"><?php _e( 'Link:', 'accordion-slider' ); ?></label>
+										<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-link" name="image_link" value="<?php echo isset( $layer['image_link'] ) ? esc_attr( $layer['image_link'] ) : ''; ?>" />
+									</td>
+									<td>
+										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-retina"><?php _e( 'Retina:', 'accordion-slider' ); ?></label>
+										<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-retina" name="image_retina" value="<?php echo isset( $layer['image_retina'] ) ? esc_attr( $layer['image_retina'] ) : ''; ?>" />
+									</td>
 								</tr>
 							</tbody>
 						</table>

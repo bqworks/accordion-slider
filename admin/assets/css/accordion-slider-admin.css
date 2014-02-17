@@ -503,10 +503,6 @@
 	box-sizing: border-box;
 }
 
-.layers-editor .field {
-	margin: 0 18px 0 8px;
-}
-
 .layers-editor input[type="text"] {
 	width: 70px;
 }
@@ -561,6 +557,14 @@
 
 .layers-editor .setting-fields table {
     border-spacing: 0;
+}
+
+.layers-editor .content-fields table {
+    width: 100%;
+}
+
+.layers-editor .content-fields input {
+    width: 100%
 }
 
 .layers-editor .setting-fields td {
@@ -922,4 +926,21 @@
 
 .plugin-settings .button-primary {
 	margin-top: 30px;
+}
+
+.as-clearfix {
+    display: inline-block;
+}
+
+.as-clearfix:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.as-clearfix {
+    display: block;
 }
