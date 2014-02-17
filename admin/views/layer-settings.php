@@ -44,7 +44,10 @@
 								<tr>
 									<td>
 										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-source"><?php _e( 'Source', 'accordion-slider' ); ?></label>
-										<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-source" name="image_source" value="<?php echo isset( $layer['image_source'] ) ? esc_attr( $layer['image_source'] ) : ''; ?>" />
+										<div class="layer-image-input">
+											<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-source" name="image_source" value="<?php echo isset( $layer['image_source'] ) ? esc_attr( $layer['image_source'] ) : ''; ?>" />
+											<span class="layer-image-loader"></span>
+										</div>
 									</td>
 									<td>
 										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-alt"><?php _e( 'Alt', 'accordion-slider' ); ?></label>
@@ -58,7 +61,10 @@
 									</td>
 									<td>
 										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-retina"><?php _e( 'Retina', 'accordion-slider' ); ?></label>
-										<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-retina" name="image_retina" value="<?php echo isset( $layer['image_retina'] ) ? esc_attr( $layer['image_retina'] ) : ''; ?>" />
+										<div class="layer-image-input">
+											<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-retina" name="image_retina" value="<?php echo isset( $layer['image_retina'] ) ? esc_attr( $layer['image_retina'] ) : ''; ?>" />
+											<span class="layer-image-loader"></span>
+										</div>
 									</td>
 								</tr>
 							</tbody>

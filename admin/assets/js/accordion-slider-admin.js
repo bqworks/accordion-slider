@@ -1669,7 +1669,7 @@
 	ImageLayer.prototype.initLayerContent = function() {
 		var that = this;
 
-		this.imageSource = this.data === false ? this.$layerSettings.find( 'input[name="image_source"]' ).val() : this.data.image_source;
+		this.imageSource = this.data === false ? 'placeholder.png' : this.data.image_source;
 
 		this.$layerSettings.find( 'input[name="image_source"]' ).on( 'change', function() {
 			that.imageSource = $( this ).val();
@@ -1680,10 +1680,25 @@
 				that.$viewportLayer.attr( 'src', 'placeholder.png' );
 			}
 		});
+
+		this.$layerSettings.find( '.layer-image-loader' ).on( 'click', function( event ) {
+			var target = $( event.target ).siblings( 'input' ).attr( 'name' ) === 'image_source' ? 'default' : 'retina';
+
+			MediaLoader.open(function( selection ) {
+				var image = selection[ 0 ];
+console.log(image);
+				if ( target === 'default' ) {
+					that.$layerSettings.find( 'input[name="image_source"]' ).val( image.url ).trigger( 'change' );
+					that.$layerSettings.find( 'input[name="image_alt"]' ).val( image.alt );
+				} else if ( target === 'retina' ) {
+					that.$layerSettings.find( 'input[name="image_retina"]' ).val( image.url );
+				}
+			});
+		});
 	};
 
 	ImageLayer.prototype.initViewportLayer = function() {
-		this.$viewportLayer = $( '<img class="viewport-layer as-layer" src="placeholder.png" draggable="false" />' );
+		this.$viewportLayer = $( '<img class="viewport-layer as-layer" src="' + this.imageSource + '" draggable="false" />' );
 		Layer.prototype.initViewportLayer.call( this );
 	};
 
@@ -1754,6 +1769,11 @@
 	VideoLayer.prototype.getData = function() {
 		var data = Layer.prototype.getData.call( this );
 		data.type = 'video';
+
+		if ( this.text === '' ) {
+			data.text = this.text;
+			return data;
+		}
 
 		var video = $( this.text );
 
