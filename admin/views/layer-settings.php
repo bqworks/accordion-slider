@@ -14,17 +14,28 @@
 				<?php
 					} else if ( $layer_type === 'heading' ) {
 				?>
-						<label for="layer-<?php echo esc_attr( $layer_id ); ?>-heading-type"><?php _e( 'Heading Type', 'accordion-slider' ); ?></label>
-						<select id="layer-<?php echo esc_attr( $layer_id ); ?>-heading-type" name="heading_type">
-							<?php
-								foreach ( $layer_default_settings['heading_type']['available_values'] as $value_name => $value_label ) {
-									$selected = ( isset( $layer['heading_type'] ) && $value_name === $layer['heading_type'] ) || ( ! isset( $layer['heading_type'] ) && $value_name === $layer_default_settings['heading_type']['default_value'] ) ? ' selected="selected"' : '';
-									echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
-		                        }
-							?>
-						</select>
-
-						<textarea name="text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : 'New layer'; ?></textarea>
+						<table>
+							<tbody>
+								<tr>
+									<td>
+										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-heading-type" class="heading-type-label"><?php _e( 'Heading Type', 'accordion-slider' ); ?></label>
+										<select id="layer-<?php echo esc_attr( $layer_id ); ?>-heading-type" name="heading_type">
+											<?php
+												foreach ( $layer_default_settings['heading_type']['available_values'] as $value_name => $value_label ) {
+													$selected = ( isset( $layer['heading_type'] ) && $value_name === $layer['heading_type'] ) || ( ! isset( $layer['heading_type'] ) && $value_name === $layer_default_settings['heading_type']['default_value'] ) ? ' selected="selected"' : '';
+													echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
+						                        }
+											?>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<textarea name="text" class="heading-text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : 'New layer'; ?></textarea>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 				<?php
 					} else if ( $layer_type === 'image' ) {
 				?>
@@ -32,21 +43,21 @@
 							<tbody>
 								<tr>
 									<td>
-										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-source"><?php _e( 'Source:', 'accordion-slider' ); ?></label>
+										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-source"><?php _e( 'Source', 'accordion-slider' ); ?></label>
 										<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-source" name="image_source" value="<?php echo isset( $layer['image_source'] ) ? esc_attr( $layer['image_source'] ) : ''; ?>" />
 									</td>
 									<td>
-										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-alt"><?php _e( 'Alt:', 'accordion-slider' ); ?></label>
+										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-alt"><?php _e( 'Alt', 'accordion-slider' ); ?></label>
 										<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-alt" name="image_alt" value="<?php echo isset( $layer['image_alt'] ) ? esc_attr( $layer['image_alt'] ) : ''; ?>" />
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-link"><?php _e( 'Link:', 'accordion-slider' ); ?></label>
+										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-link"><?php _e( 'Link', 'accordion-slider' ); ?></label>
 										<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-link" name="image_link" value="<?php echo isset( $layer['image_link'] ) ? esc_attr( $layer['image_link'] ) : ''; ?>" />
 									</td>
 									<td>
-										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-retina"><?php _e( 'Retina:', 'accordion-slider' ); ?></label>
+										<label for="layer-<?php echo esc_attr( $layer_id ); ?>-image-retina"><?php _e( 'Retina', 'accordion-slider' ); ?></label>
 										<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-image-retina" name="image_retina" value="<?php echo isset( $layer['image_retina'] ) ? esc_attr( $layer['image_retina'] ) : ''; ?>" />
 									</td>
 								</tr>
@@ -60,7 +71,7 @@
 					} else if ( $layer_type === 'video' ) {
 				?>
 						<label><?php _e( 'Video Embed/Code', 'accordion-slider' ); ?></label>
-						<textarea name="text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : ''; ?></textarea>
+						<textarea name="text" class="video-text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : ''; ?></textarea>
 				<?php
 					}
 				?>

@@ -526,7 +526,8 @@
 }
 
 .layers-editor .tab-label {
-	padding: 10px;
+	display: block;
+	padding: 8px 10px;
     font-size: 14px;
     color: #0074a2;
 }
@@ -539,7 +540,7 @@
 .layers-editor .setting-fields {
     display: none;
     position: absolute;
-    top: 30px;
+    top: 33px;
     left: 0;
     width: 100%;
 	height: 138px;
@@ -548,23 +549,6 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-}
-
-.layers-editor .setting-fields label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.layers-editor .setting-fields table {
-    border-spacing: 0;
-}
-
-.layers-editor .content-fields table {
-    width: 100%;
-}
-
-.layers-editor .content-fields input {
-    width: 100%
 }
 
 .layers-editor .setting-fields td {
@@ -587,10 +571,39 @@
     display: block;
 }
 
+.layers-editor .setting-fields label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.layers-editor .setting-fields table {
+    border-spacing: 0;
+}
+
 .layers-editor .setting-fields textarea {
 	margin: 0;
 	width: 100%;
 	height: 100%
+}
+
+.layers-editor .content-fields table {
+    width: 100%;
+}
+
+.layers-editor .content-fields input {
+    width: 100%
+}
+
+.layers-editor .content-fields .heading-type-label {
+    display: inline;
+}
+
+.layers-editor .content-fields .heading-text {
+    height: 78px;
+}
+
+.layers-editor .content-fields .video-text {
+    height: 95px;
 }
 
 .layers-editor .viewport {
