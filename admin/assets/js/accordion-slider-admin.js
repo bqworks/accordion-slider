@@ -1107,8 +1107,16 @@
 						$( element ).attr( 'data-position', index );
 					});
 
+					console.log(total - event.startPosition);
+					console.log(total - event.endPosition);
+
 					var swapLayer = $viewportLayers.find( '.viewport-layer' ).eq( total - event.startPosition ).detach();
-					swapLayer.insertBefore( $viewportLayers.find( '.viewport-layer' ).eq( total - event.endPosition ) );
+
+					if ( total - event.startPosition < total - event.endPosition ) {
+						swapLayer.insertAfter( $viewportLayers.find( '.viewport-layer' ).eq( total - 1 - event.endPosition ) );
+					} else {
+						swapLayer.insertBefore( $viewportLayers.find( '.viewport-layer' ).eq( total - event.endPosition ) );
+					}
 				}
 			} );
 
