@@ -576,6 +576,10 @@
     margin-bottom: 5px;
 }
 
+.layers-editor .setting-fields .multi-check label {
+	display: inline;
+}
+
 .layers-editor .setting-fields table {
     border-spacing: 0;
 }
@@ -606,15 +610,15 @@
     height: 95px;
 }
 
-.layer-image-input {
+.layers-editor .layer-image-input {
 	position: relative;
 }
 
-.layer-image-input input {
+.layers-editor .layer-image-input input {
 	padding-right: 25px;
 }
 
-.layer-image-loader {
+.layers-editor .layer-image-loader {
 	width: 17px;
 	height: 17px;
 	position: absolute;

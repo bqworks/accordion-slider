@@ -1686,7 +1686,7 @@
 
 			MediaLoader.open(function( selection ) {
 				var image = selection[ 0 ];
-console.log(image);
+
 				if ( target === 'default' ) {
 					that.$layerSettings.find( 'input[name="image_source"]' ).val( image.url ).trigger( 'change' );
 					that.$layerSettings.find( 'input[name="image_alt"]' ).val( image.alt );
