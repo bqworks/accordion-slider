@@ -575,13 +575,12 @@ class Accordion_Slider {
 				}
 
 				if ( isset( $panel['layers'] ) ) {
-					$layers = $panel['layers'];
+					$layers = array_reverse( $panel['layers'] );
 
 					foreach ( $layers as $layer ) {
-						$layer_html = '';
+						$layer_type = isset( $layer['type'] ) ? $layer['type'] :  $default_layer_settings['type']['default_value'];
 						$layer_classes = 'as-layer';
 						$layer_attributes = '';
-						$layer_content = $layer['content'];
 
 						$layer_settings = $layer['settings'];
 
@@ -590,25 +589,13 @@ class Accordion_Slider {
 							unset( $layer_settings['display'] );
 						}
 
-						if ( isset( $layer_settings['black_background'] ) && $layer_settings['black_background'] === true ) {
-							$layer_classes .= ' as-black';
-							unset( $layer_settings['black_background'] );
+						$layer_styles = isset( $layer_settings['preset_styles'] ) ? $layer_settings['preset_styles'] : $default_layer_settings['preset_styles']['default_value'];
+
+						foreach ( $layer_styles as $layer_style ) {
+							$layer_classes .= ' ' . $layer_style;
 						}
 
-						if ( isset( $layer_settings['white_background'] ) && $layer_settings['white_background'] === true ) {
-							$layer_classes .= ' as-white';
-							unset( $layer_settings['white_background'] );
-						}
-
-						if ( isset( $layer_settings['round_corners'] ) && $layer_settings['round_corners'] === true ) {
-							$layer_classes .= ' as-rounded';
-							unset( $layer_settings['round_corners'] );
-						}
-
-						if ( isset( $layer_settings['padding'] ) && $layer_settings['padding'] === true ) {
-							$layer_classes .= ' as-padding';
-							unset( $layer_settings['padding'] );
-						}
+						unset( $layer_settings['preset_styles'] );
 
 						if ( isset( $layer_settings['custom_class'] ) && $layer_settings['custom_class'] !== '' ) {
 							$layer_classes .= ' ' . sanitize_html_class( $layer_settings['custom_class'] );
@@ -622,7 +609,39 @@ class Accordion_Slider {
 							}
 						}
 
-						$panel_html .= "\r\n" . '			' . '<div class="' .  $layer_classes . '"' . $layer_attributes . '>' . esc_html( $layer_content ) . '</div>';
+						if ( $layer_type === 'paragraph' ) {
+							$paragraph_content = isset( $layer['text'] ) ? $layer['text'] : '';
+							$panel_html .= "\r\n" . '			' . '<p class="' .  $layer_classes . '"' . $layer_attributes . '>' . stripslashes( $paragraph_content ) . '</p>';
+						} else if ( $layer_type === 'heading' ) {
+							$heading_type = isset( $layer['heading_type'] ) ? $layer['heading_type'] : $default_layer_settings['heading_type']['default_value'];
+							$heading_content = isset( $layer['text'] ) ? $layer['text'] : '';
+							$panel_html .= "\r\n" . '			' . '<' . $heading_type . ' class="' .  $layer_classes . '"' . $layer_attributes . '>' . stripslashes( $heading_content ) . '</' . $heading_type . '>';
+						} else if ( $layer_type === 'image' ) {
+							$image_source = isset( $layer['image_source'] ) && $layer['image_source'] !== '' ? $layer['image_source'] : 'placeholder.png';
+							$image_alt = isset( $layer['image_alt'] ) && $layer['image_alt'] !== '' ? ' alt="' . esc_attr( $layer['image_alt'] ) . '"' : '';
+							$image_retina = isset( $layer['image_retina'] ) && $layer['image_retina'] !== '' ? ' data-retina="' . $layer['image_retina'] . '"' : '';
+
+							$image_content = '<img class="' .  $layer_classes . '"' . $layer_attributes . ' src="' . $image_source . '"' . $image_alt . $image_retina . ' />';
+
+							if ( isset( $layer['image_link'] ) && $layer['image_link'] !== '' ) {
+								$image_content = '<a href="' . esc_url( $layer['image_link'] ) . '">' . $image_content . '</a>';
+							}
+
+							$panel_html .= "\r\n" . '			' . $image_content;
+						} else if ( $layer_type === 'div' ) {
+							$div_content = isset( $layer['text'] ) ? $layer['text'] : '';
+							$panel_html .= "\r\n" . '			' . '<div class="' .  $layer_classes . '"' . $layer_attributes . '>' . stripslashes( $div_content ) . '</div>';
+						} else if ( $layer_type === 'video' ) {
+							$video_content = isset( $layer['text'] ) && $layer['text'] !== '' ? $layer['text'] : '';
+							$video_content = str_replace( 'as-video' , 'as-video ' . $layer_classes , $video_content );
+							$insert_pos = strpos( $video_content, ' ' );
+
+							if ( $insert_pos !== false ) {
+								$video_content = substr_replace( $video_content, $layer_attributes, $insert_pos, 1 );
+							}
+
+							$panel_html .= "\r\n" . '			' . stripslashes( $video_content );
+						}
 					}
 				}
 
