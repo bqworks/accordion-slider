@@ -18,7 +18,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die();
 }
 
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-settings.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-accordion-slider-settings.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-bqworks-flickr.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-widget.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider.php' );
 

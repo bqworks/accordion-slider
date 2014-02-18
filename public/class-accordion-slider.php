@@ -611,11 +611,11 @@ class Accordion_Slider {
 
 						if ( $layer_type === 'paragraph' ) {
 							$paragraph_content = isset( $layer['text'] ) ? $layer['text'] : '';
-							$panel_html .= "\r\n" . '			' . '<p class="' .  $layer_classes . '"' . $layer_attributes . '>' . stripslashes( $paragraph_content ) . '</p>';
+							$panel_html .= "\r\n" . '			' . '<p class="' .  $layer_classes . '"' . $layer_attributes . '>' . $paragraph_content . '</p>';
 						} else if ( $layer_type === 'heading' ) {
 							$heading_type = isset( $layer['heading_type'] ) ? $layer['heading_type'] : $default_layer_settings['heading_type']['default_value'];
 							$heading_content = isset( $layer['text'] ) ? $layer['text'] : '';
-							$panel_html .= "\r\n" . '			' . '<' . $heading_type . ' class="' .  $layer_classes . '"' . $layer_attributes . '>' . stripslashes( $heading_content ) . '</' . $heading_type . '>';
+							$panel_html .= "\r\n" . '			' . '<' . $heading_type . ' class="' .  $layer_classes . '"' . $layer_attributes . '>' . $heading_content . '</' . $heading_type . '>';
 						} else if ( $layer_type === 'image' ) {
 							$image_source = isset( $layer['image_source'] ) && $layer['image_source'] !== '' ? $layer['image_source'] : 'placeholder.png';
 							$image_alt = isset( $layer['image_alt'] ) && $layer['image_alt'] !== '' ? ' alt="' . esc_attr( $layer['image_alt'] ) . '"' : '';
@@ -630,7 +630,7 @@ class Accordion_Slider {
 							$panel_html .= "\r\n" . '			' . $image_content;
 						} else if ( $layer_type === 'div' ) {
 							$div_content = isset( $layer['text'] ) ? $layer['text'] : '';
-							$panel_html .= "\r\n" . '			' . '<div class="' .  $layer_classes . '"' . $layer_attributes . '>' . stripslashes( $div_content ) . '</div>';
+							$panel_html .= "\r\n" . '			' . '<div class="' .  $layer_classes . '"' . $layer_attributes . '>' . $div_content . '</div>';
 						} else if ( $layer_type === 'video' ) {
 							$video_content = isset( $layer['text'] ) && $layer['text'] !== '' ? $layer['text'] : '';
 							$video_content = str_replace( 'as-video' , 'as-video ' . $layer_classes , $video_content );
@@ -640,7 +640,7 @@ class Accordion_Slider {
 								$video_content = substr_replace( $video_content, $layer_attributes, $insert_pos, 1 );
 							}
 
-							$panel_html .= "\r\n" . '			' . stripslashes( $video_content );
+							$panel_html .= "\r\n" . '			' . $video_content;
 						}
 					}
 				}
@@ -766,11 +766,11 @@ class Accordion_Slider {
 		$default_panel_settings = Accordion_Slider_Settings::getPanelSettings();
 
 		$query_args = array();
-			
+
 		if ( isset( $settings['posts_post_types'] ) && ! empty( $settings['posts_post_types'] ) ) {
 			$query_args['post_type'] = $settings['posts_post_types'];
 		}
-		
+
 		if ( isset( $settings['posts_taxonomies'] ) && ! empty( $settings['posts_taxonomies'] ) ) {
 			$taxonomy_terms = $settings['posts_taxonomies'];
 
