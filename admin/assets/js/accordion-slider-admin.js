@@ -1129,26 +1129,16 @@
 		},
 
 		initViewport: function() {
-			var orientation = $( '.sidebar-settings' ).find( '.setting[name="orientation"]' ).val(),
-				accordionWidth = parseInt( $( '.sidebar-settings' ).find( '.setting[name="width"]' ).val(), 10),
+			var accordionWidth = parseInt( $( '.sidebar-settings' ).find( '.setting[name="width"]' ).val(), 10),
 				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10),
 				backgroundData = this.currentPanel.getData( 'background' );
 
 			var $viewport = this.editor.find( '.viewport' ).css( { 'width': accordionWidth, 'height': accordionHeight } ),
-				$viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' );
+				$viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' ).appendTo( $viewport );
 
 			if ( typeof backgroundData.background_source !== 'undefined' && backgroundData.background_source !== '') {
-				var $viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" />' ).appendTo( $viewport );
-
-				$viewportLayers.css( {
-					'width': $viewportImage.width(),
-					'height': $viewportImage.height(),
-					'left': $viewportImage.position().left,
-					'top': $viewportImage.position().top
-				});
+				var $viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" />' ).prependTo( $viewport );
 			}
-
-			$viewportLayers.appendTo( $viewport );
 		},
 
 		createLayer: function( data ) {
