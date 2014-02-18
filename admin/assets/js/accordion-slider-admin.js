@@ -1624,7 +1624,7 @@
 
 		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
 			that.text = $( this ).val();
-			this.$viewportLayer.text( that.text );
+			that.$viewportLayer.text( that.text );
 		});
 	};
 
