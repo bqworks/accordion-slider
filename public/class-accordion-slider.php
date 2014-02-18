@@ -17,6 +17,8 @@ class Accordion_Slider {
 
 	protected $js_output = '';
 
+	protected $flickr_instance = null;
+
 	/*
 		Initialize the plugin
 	*/
@@ -655,6 +657,8 @@ class Accordion_Slider {
 					$html_output .= $this->output_posts_panels( $panel_html, $panel['settings'] );
 				} else if ( $content_type === 'gallery' ) {
 					$html_output .= $this->output_gallery_panels( $panel_html, $panel['settings'] );
+				} else if ( $content_type === 'flickr' ) {
+					$html_output .= $this->output_flickr_panels( $panel_html, $panel['settings'] );
 				}
 			}
 		}
@@ -1031,6 +1035,104 @@ class Accordion_Slider {
 
 				$panels_html .= $panel_html_copy;
 			}
+		}
+
+		return $panels_html;
+	}
+
+	public function output_flickr_panels( $panel_html, $settings ) {
+		if ( $this->flickr_instance === null ) {
+			if ( isset( $settings['flickr_api_key'] ) ) {
+				$this->flickr_instance = new bqworks_Flickr( '38ec62872a2e5012b867bf1a96ffb735' );
+			} else {
+				return;
+			}
+		}
+
+		$default_panel_settings = Accordion_Slider_Settings::getPanelSettings();
+		$loaded_photos = null;
+		$collection_name = null;
+		$data_type = isset( $settings['flickr_load_by'] ) ? $settings['flickr_load_by'] : $default_panel_settings['flickr_load_by']['default_value'];
+		$data_id = isset( $settings['flickr_id'] ) ? $settings['flickr_id'] : $default_panel_settings['flickr_id']['default_value'];
+		$limit = isset( $settings['flickr_per_page'] ) ? $settings['flickr_per_page'] : $default_panel_settings['flickr_per_page']['default_value'];
+
+		if ( $data_type === 'set_id' ) {
+			$loaded_photos = $this->flickr_instance->get_photos_by_set_id( $data_id, 'description,date_upload,owner_name', $limit );
+			$collection_name = 'photoset';
+		} else if ( $data_type === 'user_id' ) {
+			$loaded_photos = $this->flickr_instance->get_photos_by_user_id( $data_id, 'description,date_upload,owner_name', $limit );
+			$collection_name = 'photos';
+		}
+			
+		preg_match_all( '/\[as_(.*?)\]/', $panel_html, $matches, PREG_SET_ORDER );
+
+		$panels_html = '';
+
+		$photos = $loaded_photos[ $collection_name ]['photo'];
+
+		foreach ( $photos as $photo ) {
+			$panel_html_copy = $panel_html;
+			$photo_owner = $collection_name === 'photoset' ? $loaded_photos['photoset']['owner'] : $photo['owner'];
+
+			foreach ( $matches as $match ) {
+				$shortcode = $match[0];
+
+				$delimiter_position = strpos( $match[1], '.' );
+				$shortcode_arg = $delimiter_position !== false ? substr( $match[1], $delimiter_position + 1 ) : false;
+				$shortcode_name = $shortcode_arg !== false ? substr( $match[1], 0, $delimiter_position ) : $match[1];
+
+				switch( $shortcode_name ) {
+					case 'image':
+						$image_size = $shortcode_arg !== false ? $shortcode_arg : 'medium';
+						$image_src = $this->flickr_instance->get_photo_url( $photo, $image_size );
+						$image_full = '<img src="' . $image_src . '" />';
+						$panel_html_copy = str_replace( $shortcode, $image_full, $panel_html_copy );
+						break;
+
+					case 'image_src':
+						$image_size = $shortcode_arg !== false ? $shortcode_arg : 'medium';
+						$image_src = $this->flickr_instance->get_photo_url( $photo, $image_size );
+						$panel_html_copy = str_replace( $shortcode, $image_src, $panel_html_copy );
+						break;
+
+					case 'image_description':
+						$panel_html_copy = str_replace( $shortcode, $photo['description']['_content'], $panel_html_copy );
+						break;
+
+					case 'image_link':
+						$panel_html_copy = str_replace( $shortcode, 'http://www.flickr.com/photos/' . $photo_owner . '/' . $photo['id'] . '/', $panel_html_copy );
+						break;
+
+					case 'date':
+						$panel_html_copy = str_replace( $shortcode, date( 'F j Y', $photo['dateupload'] ), $panel_html_copy );
+						break;
+
+					case 'image_set':
+						$panel_html_copy = str_replace( $shortcode, 'http://www.flickr.com/photos/' . $photo_owner . '/sets/' . $loaded_photos['photoset']['id'], $panel_html_copy );
+						break;
+
+					case 'username':
+						$panel_html_copy = str_replace( $shortcode, $photo['ownername'], $panel_html_copy );
+						break;
+
+					case 'user_link':
+						$panel_html_copy = str_replace( $shortcode, 'http://www.flickr.com/people/' . $photo_owner . '/', $panel_html_copy );
+						break;
+
+					case 'user_photos':
+						$panel_html_copy = str_replace( $shortcode, 'http://www.flickr.com/photos/' . $photo_owner . '/', $panel_html_copy );
+						break;
+
+					case 'user_sets':
+						$panel_html_copy = str_replace( $shortcode, 'http://www.flickr.com/photos/' . $photo_owner . '/sets/', $panel_html_copy );
+						break;
+
+					default:
+						break;
+				}
+			}
+
+			$panels_html .= $panel_html_copy;
 		}
 
 		return $panels_html;

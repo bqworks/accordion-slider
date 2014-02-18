@@ -811,10 +811,10 @@ class Accordion_Slider_Settings {
 				'flickr_load_by' => array(
 					'label' => __( 'Load By', 'accordion-slider' ),
 					'type' => 'select',
-					'default_value' => 'set',
+					'default_value' => 'set_id',
 					'available_values' => array(
-						'set' => __( 'Set', 'accordion-slider' ),
-						'username' => __( 'Username', 'accordion-slider' )
+						'set_id' => __( 'Set ID', 'accordion-slider' ),
+						'user_id' => __( 'User ID', 'accordion-slider' )
 					),
 					'description' => ''
 				),
@@ -824,7 +824,7 @@ class Accordion_Slider_Settings {
 					'default_value' => '',
 					'description' => ''
 				),
-				'flickr_maximum' => array(
+				'flickr_per_page' => array(
 					'label' => __( 'Limit', 'accordion-slider' ),
 					'type' => 'number',
 					'default_value' => 10,
