@@ -9,6 +9,8 @@ class BQW_Accordion_Slider_Admin {
 
 	protected $plugin = null;
 
+	protected $plugin_slug = null;
+
 	/*
 		Initialize the plugin
 	*/

@@ -18,8 +18,9 @@ if ( ! defined( 'WPINC' ) ) {
 	die();
 }
 
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-accordion-slider-settings.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flickr.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-base.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-shortcode.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-widget.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-public-accordion.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-public-panel.php' );
@@ -35,12 +36,15 @@ require_once( plugin_dir_path( __FILE__ ) . 'public/class-public-heading-layer.p
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-public-image-layer.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-public-div-layer.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-public-video-layer.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-accordion-slider-settings.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flickr.php' );
 
-register_activation_hook( __FILE__, array( 'BQW_Accordion_Slider', 'activate' ) );
-register_deactivation_hook( __FILE__, array( 'BQW_Accordion_Slider', 'deactivate' ) );
+register_activation_hook( __FILE__, array( 'BQW_Accordion_Slider_Base', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'BQW_Accordion_Slider_Base', 'deactivate' ) );
 
 add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider', 'get_instance' ) );
+add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Base', 'get_instance' ) );
+add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Shortcode', 'get_instance' ) );
 
 if ( is_admin() ) {
 	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-accordion-slider-admin.php' );
