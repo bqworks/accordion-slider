@@ -1,7 +1,6 @@
 <?php
 
-if ( class_exists( 'bqworks_Flickr' ) === false ) {
-	class bqworks_Flickr {
+class bqworks_Flickr {
 
 	protected $rest = 'http://api.flickr.com/services/rest/';
 
@@ -53,7 +52,6 @@ if ( class_exists( 'bqworks_Flickr' ) === false ) {
 		curl_close( $curl ); 
 
 		return $response;
-	}
 	}
 }
 

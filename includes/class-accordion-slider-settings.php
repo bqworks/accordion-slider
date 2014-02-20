@@ -751,7 +751,7 @@ class Accordion_Slider_Settings {
 				'posts_taxonomies' => array(
 					'label' => __( 'Taxonomies', 'accordion-slider' ),
 					'type' => 'multiselect',
-					'default_value' => '',
+					'default_value' => array(),
 					'description' => ''
 				),
 				'posts_relation' => array(
