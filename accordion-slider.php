@@ -19,7 +19,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-base.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-activation.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-shortcode.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-widget.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-public-accordion.php' );
@@ -43,7 +43,7 @@ register_activation_hook( __FILE__, array( 'BQW_Accordion_Slider_Base', 'activat
 register_deactivation_hook( __FILE__, array( 'BQW_Accordion_Slider_Base', 'deactivate' ) );
 
 add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider', 'get_instance' ) );
-add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Base', 'get_instance' ) );
+add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Activation', 'get_instance' ) );
 add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Shortcode', 'get_instance' ) );
 
 // register the widget

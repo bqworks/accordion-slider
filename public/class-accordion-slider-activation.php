@@ -1,6 +1,6 @@
 <?php
 
-class BQW_Accordion_Slider_Base {
+class BQW_Accordion_Slider_Activation {
 
 	protected static $instance = null;
 
