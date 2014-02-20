@@ -138,7 +138,7 @@ class Accordion_Slider_Settings {
 					'js_name' => 'lazyLoading',
 					'label' => __( 'Lazy Loading', 'accordion-slider' ),
 					'type' => 'boolean',
-					'default_value' => true,
+					'default_value' => false,
 					'description' => __( 'Indicates if the background images will be loaded only when they are visible. Images from accordion pages that are not visible, will not be loaded.', 'accordion-slider' )
 				),
 
