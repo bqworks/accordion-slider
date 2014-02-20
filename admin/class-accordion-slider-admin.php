@@ -627,11 +627,11 @@ class BQW_Accordion_Slider_Admin {
 		if ( $type === 'posts' ) {
 			$post_names = $this->get_post_names();
 
-			include( 'views/posts-content-settings.php' );
+			include( 'views/posts-panel-settings.php' );
 		} else if ( $type === 'gallery' ) {
-			include( 'views/gallery-images-settings.php' );
+			include( 'views/gallery-panel-settings.php' );
 		} else if ( $type === 'flickr' ) {
-			include( 'views/flickr-settings.php' );
+			include( 'views/flickr-panel-settings.php' );
 		}
 	}
 
