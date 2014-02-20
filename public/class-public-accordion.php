@@ -27,7 +27,9 @@
 		}
 
 		public function render() {
-			$this->html_output .= "\r\n" . '<div id="accordion-slider-' . $this->id . '" class="accordion-slider">';
+			$custom_class = isset( $this->settings['custom_class'] ) && $this->settings['custom_class'] !== '' ? ' ' . $this->settings['custom_class'] : '';
+
+			$this->html_output .= "\r\n" . '<div id="accordion-slider-' . $this->id . '" class="accordion-slider' . $custom_class . '">';
 
 			if ( $this->has_panels() ) {
 				$this->html_output .= "\r\n" . '	<div class="as-panels">';
@@ -69,6 +71,10 @@
 			$settings_js = '';
 
 			foreach ( $this->default_settings as $name => $setting ) {
+				if ( ! isset( $setting['js_name'] ) ) {
+					continue;
+				}
+
 				$setting_default_value = $setting['default_value'];
 				$setting_value = isset( $this->settings[ $name ] ) ? $this->settings[ $name ] : $setting_default_value;
 

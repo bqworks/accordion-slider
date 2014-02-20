@@ -135,11 +135,16 @@ class Accordion_Slider_Settings {
 					'description' => __( 'Indicates which page will be opened when the accordion loads, if the panels are displayed on more than one page.', 'accordion-slider' )
 				),
 				'lazy_loading' => array(
-					'js_name' => 'lazyLoading',
 					'label' => __( 'Lazy Loading', 'accordion-slider' ),
 					'type' => 'boolean',
 					'default_value' => false,
 					'description' => __( 'Indicates if the background images will be loaded only when they are visible. Images from accordion pages that are not visible, will not be loaded.', 'accordion-slider' )
+				),
+				'custom_class' => array(
+					'label' => __( 'Custom Class', 'accordion-slider' ),
+					'type' => 'text',
+					'default_value' => '',
+					'description' => __( 'Adds a custom class to the accordion, for use in custom css.', 'accordion-slider' )
 				),
 
 				'opened_panel_size' => array(
@@ -461,7 +466,8 @@ class Accordion_Slider_Settings {
 						'visible_panels',
 						'start_panel',
 						'start_page',
-						'lazy_loading'
+						'lazy_loading',
+						'custom_class'
 					)
 				),
 
