@@ -214,14 +214,8 @@ class BQW_Accordion_Slider {
 			}
 		}
 
-		if ( $load_styles === false ) {
-			$widget_accordions = get_option('widget_accordion-slider-widget');
-
-			foreach ( ( array )$widget_accordions as $key => $value ) {
-				if ( is_array( $value ) && isset( $value['accordion_id'] ) ) {
-					$load_styles = true;
-				}
-			}
+		if ( $load_styles === false && is_active_widget( false, false, 'bqw-accordion-slider-widget' ) ) {
+			$load_styles = true;
 		}
 
 		if ( $load_styles === true ) {
