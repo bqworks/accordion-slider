@@ -19,9 +19,9 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-activation.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-accordion-slider-activation.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-shortcode.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-accordion-slider-widget.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-accordion-slider-widget.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-public-accordion.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-public-panel.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-public-panel-factory.php' );
