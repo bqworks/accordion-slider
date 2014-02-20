@@ -615,8 +615,9 @@ class BQW_Accordion_Slider_Admin {
 
 	public function ajax_load_content_type_settings() {
 		$type = $_POST['type'];
+		$panel_settings = json_decode( stripslashes( $_POST['data'] ), true );
 
-		echo $this->load_content_type_settings( $type );
+		echo $this->load_content_type_settings( $type, $panel_settings );
 
 		die();
 	}

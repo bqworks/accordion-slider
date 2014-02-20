@@ -1866,14 +1866,15 @@
 		},
 
 		loadControls: function( type ) {
-			var that = this;
+			var that = this,
+				data = this.currentPanel.getData( 'settings' );
 
 			this.editor.find( '.content-type-settings' ).empty();
 			
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
-				data: { action: 'accordion_slider_load_content_type_settings', type: type },
+				data: { action: 'accordion_slider_load_content_type_settings', type: type, data: JSON.stringify( data ) },
 				complete: function( data ) {
 					$( '.content-type-settings' ).append( data.responseText );
 
