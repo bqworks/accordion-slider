@@ -36,7 +36,7 @@
 			$api_key = $this->get_setting_value('flickr_api_key');
 
 			if ( $api_key !== '' ) {
-				$this->flickr_instance = new bqworks_Flickr( $api_key );
+				$this->flickr_instance = new BQW_Flickr( $api_key );
 			} else {
 				return false;
 			}
