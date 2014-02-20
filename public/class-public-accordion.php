@@ -21,7 +21,7 @@
 			$this->data = $data;
 			$this->id = isset( $this->data['id'] ) ? $this->data['id'] : '100';
 			$this->settings = $this->data['settings'];
-			$this->default_settings = Accordion_Slider_Settings::getSettings();
+			$this->default_settings = BQW_Accordion_Slider_Settings::getSettings();
 
 			$this->lazy_loading = isset( $this->settings['lazy_loading'] ) ? $this->settings['lazy_loading'] : $this->default_settings['lazy_loading'];
 		}

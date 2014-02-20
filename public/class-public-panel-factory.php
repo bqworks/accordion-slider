@@ -12,7 +12,7 @@
 
 		public static function create_panel( $data, $lazy_loaded ) {
 			if ( is_null( self::$default_type ) ) {
-				$default_settings = Accordion_Slider_Settings::getPanelSettings();
+				$default_settings = BQW_Accordion_Slider_Settings::getPanelSettings();
 				self::$default_type = $default_settings['content_type']['default_value'];
 			}
 

@@ -1,6 +1,6 @@
 <?php
 
-class Accordion_Slider_Settings {
+class BQW_Accordion_Slider_Settings {
 
 	protected static $settings = array();
 

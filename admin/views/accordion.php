@@ -44,8 +44,8 @@
                 
                 <div class="sidebar-settings">
                     <?php 
-                        $setting_groups = Accordion_Slider_Settings::getSettingGroups();
-                        $panels_state = Accordion_Slider_Settings::getPanelsState();
+                        $setting_groups = BQW_Accordion_Slider_Settings::getSettingGroups();
+                        $panels_state = BQW_Accordion_Slider_Settings::getPanelsState();
 
                         foreach ( $setting_groups as $group_name => $group ) {
                             $panel_class = isset( $accordion_panels_state ) && isset( $accordion_panels_state[ $group_name ] ) ? $accordion_panels_state[ $group_name ] : $panels_state[ $group_name ];
@@ -58,7 +58,7 @@
                                         <tbody>
                                             <?php
                                                 foreach ( $group['list'] as $setting_name ) {
-                                                    $setting = Accordion_Slider_Settings::getSettings( $setting_name );
+                                                    $setting = BQW_Accordion_Slider_Settings::getSettings( $setting_name );
                                             ?>
                                                     <tr>
                                                         <td>

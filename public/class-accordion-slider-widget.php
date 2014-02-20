@@ -1,15 +1,15 @@
 <?php
 
-class Accordion_Slider_Widget extends WP_Widget {
+class BQW_Accordion_Slider_Widget extends WP_Widget {
 	
-	function Accordion_Slider_Widget() {
+	function BQW_Accordion_Slider_Widget() {
 		
 		$widget_opts = array(
-			'classname' => 'accordion-slider-widget',
+			'classname' => 'bqw-accordion-slider-widget',
 			'description' => 'Display an Accordion Slider instance in the widgets area.'
 		);
 		
-		$this->WP_Widget( 'accordion-slider-widget', 'Accordion Slider', $widget_opts );
+		$this->WP_Widget( 'bqw-accordion-slider-widget', 'Accordion Slider', $widget_opts );
 	}
 	
 	

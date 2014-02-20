@@ -20,11 +20,11 @@
 	<div class="add-setting-group">
 		<select class="setting-selector">
 			<?php
-				$breakpoint_settings = Accordion_Slider_Settings::getBreakpointSettings();
+				$breakpoint_settings = BQW_Accordion_Slider_Settings::getBreakpointSettings();
 
 				foreach ( $breakpoint_settings as $setting_name ) {
 					if ( $setting_name !== 'breakpoint_width' ) {
-						$setting = Accordion_Slider_Settings::getSettings( $setting_name );
+						$setting = BQW_Accordion_Slider_Settings::getSettings( $setting_name );
 						echo '<option value="' . $setting_name . '">' . $setting['label'] . '</option>';
 					}
 				}

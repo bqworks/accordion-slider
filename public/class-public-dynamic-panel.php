@@ -11,7 +11,7 @@
 			parent::__construct( $data, $lazy_loading );
 
 			$this->settings = $data['settings'];
-			$this->default_settings = Accordion_Slider_Settings::getPanelSettings();
+			$this->default_settings = BQW_Accordion_Slider_Settings::getPanelSettings();
 		}
 
 		public function render() {

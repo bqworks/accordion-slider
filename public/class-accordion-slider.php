@@ -1,6 +1,6 @@
 <?php
 
-class Accordion_Slider {
+class BQW_Accordion_Slider {
 
 	// the current version of the plugin
 	const VERSION = '1.0.0';
@@ -219,7 +219,7 @@ class Accordion_Slider {
 	}
 
 	public function register_widget() {
-		register_widget( 'Accordion_Slider_Widget' );
+		register_widget( 'BQW_Accordion_Slider_Widget' );
 	}
 
 	/*

@@ -13,7 +13,7 @@
 
 		public static function create_layer( $data ) {
 			if ( is_null( self::$default_type ) ) {
-				$default_settings = Accordion_Slider_Settings::getLayerSettings();
+				$default_settings = BQW_Accordion_Slider_Settings::getLayerSettings();
 				self::$default_type = $default_settings['type']['default_value'];
 			}
 

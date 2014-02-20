@@ -11,7 +11,7 @@
 		public function __construct( $data ) {
 			$this->data = $data;
 			$this->settings = $this->data['settings'];
-			$this->default_settings = Accordion_Slider_Settings::getLayerSettings();
+			$this->default_settings = BQW_Accordion_Slider_Settings::getLayerSettings();
 		}
 
 		public function render() {
