@@ -65,4 +65,8 @@ class BQW_Accordion_Slider_Widget extends WP_Widget {
 	}
 }
 
+function bqw_as_register_widget() {
+	register_widget( 'BQW_Accordion_Slider_Widget' );
+}
+
 ?>

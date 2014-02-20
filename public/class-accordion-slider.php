@@ -26,9 +26,6 @@ class BQW_Accordion_Slider {
 		// load the plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
-		// register the widget
-		add_action( 'widgets_init', array( $this, 'register_widget' ) );
-
 		// register public CSS and JavaScript
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ) );
@@ -64,10 +61,6 @@ class BQW_Accordion_Slider {
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
 		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-	}
-
-	public function register_widget() {
-		register_widget( 'BQW_Accordion_Slider_Widget' );
 	}
 
 	/*

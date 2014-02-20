@@ -46,6 +46,9 @@ add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider', 'get_instance' ) );
 add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Base', 'get_instance' ) );
 add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Shortcode', 'get_instance' ) );
 
+// register the widget
+add_action( 'widgets_init', 'bqw_as_register_widget' );
+
 if ( is_admin() ) {
 	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-accordion-slider-admin.php' );
 	add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Admin', 'get_instance' ) );
