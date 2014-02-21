@@ -5,8 +5,8 @@
 
 		protected $flickr_instance = null;
 
-		public function __construct( $data, $accordion_id, $panel_index, $lazy_loading ) {
-			parent::__construct( $data, $accordion_id, $panel_index, $lazy_loading );
+		public function __construct() {
+			parent::__construct();
 
 			$this->registered_tags = array(
 				'image' => array( $this, 'render_image' ),

@@ -10,7 +10,7 @@
 
 		protected static $default_type = null;
 
-		public static function create_panel( $data, $accordion_id, $panel_index, $lazy_loaded ) {
+		public static function create_panel( $data ) {
 			if ( is_null( self::$default_type ) ) {
 				$default_settings = BQW_Accordion_Slider_Settings::getPanelSettings();
 				self::$default_type = $default_settings['content_type']['default_value'];
@@ -20,7 +20,8 @@
 
 			foreach( self::$registered_types as $registered_type_name => $registered_type_class ) {
 				if ( $type === $registered_type_name ) {
-					return new $registered_type_class( $data, $accordion_id, $panel_index, $lazy_loaded );
+					return new $registered_type_class();
+
 				}
 			}
 		}

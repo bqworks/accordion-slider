@@ -7,11 +7,16 @@
 
 		protected $registered_tags = null;
 
-		public function __construct( $data, $accordion_id, $panel_index, $lazy_loading ) {
-			parent::__construct( $data, $accordion_id, $panel_index, $lazy_loading );
+		public function __construct() {
+			parent::__construct();
 
-			$this->settings = $data['settings'];
 			$this->default_settings = BQW_Accordion_Slider_Settings::getPanelSettings();
+		}
+
+		public function set_data( $data, $accordion_id, $panel_index, $lazy_loading ) {
+			parent::set_data( $data, $accordion_id, $panel_index, $lazy_loading );
+
+			$this->settings = $this->data['settings'];
 		}
 
 		public function render() {

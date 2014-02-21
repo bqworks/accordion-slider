@@ -11,7 +11,11 @@
 
 		protected $html_output = '';
 
-		public function __construct( $data, $accordion_id, $panel_index, $lazy_loading ) {
+		public function __construct() {
+			
+		}
+
+		public function set_data( $data, $accordion_id, $panel_index, $lazy_loading ) {
 			$this->data = $data;
 			$this->accordion_id = $accordion_id;
 			$this->panel_index = $panel_index;
