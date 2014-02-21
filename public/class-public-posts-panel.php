@@ -22,6 +22,8 @@
 				'category' => array( $this, 'render_category' ),
 				'custom' => array( $this, 'render_custom' )
 			);
+
+			$this->registered_tags = apply_filters( 'accordion_slider_posts_tags', $this->registered_tags );
 		}
 
 		public function render() {
