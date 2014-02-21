@@ -67,7 +67,8 @@
 				$content = $this->input_html;
 
 				foreach ( $tags as $tag ) {
-					$content = $this->render_tag( $content, $tag['full'], $tag['name'], $tag['arg'], $image );
+					$result = $this->render_tag( $tag['name'], $tag['arg'], $image );
+					$content = str_replace( $tag['full'], $result, $content );
 				}
 
 				$output_html .= $content;
@@ -76,30 +77,30 @@
 			return $output_html;
 		}
 
-		protected function render_image( $content, $tag_full, $tag_arg, $image ) {
+		protected function render_image( $tag_arg, $image ) {
 			$image_size = $tag_arg !== false ? $tag_arg : 'full';
 			$image_full = wp_get_attachment_image( $image['ID'], $image_size );
 
-			return str_replace( $tag_full, $image_full, $content );
+			return $image_full;
 		}
 
-		protected function render_image_src( $content, $tag_full, $tag_arg, $image ) {
+		protected function render_image_src( $tag_arg, $image ) {
 			$image_size = $tag_arg !== false ? $tag_arg : 'full';
 			$image_src = wp_get_attachment_image_src( $image['ID'], $image_size );
 
-			return str_replace( $tag_full, $image_src[0], $content );
+			return $image_src[0];
 		}
 
-		protected function render_image_alt( $content, $tag_full, $tag_arg, $image ) {
-			return str_replace( $tag_full, $image['alt'], $content );
+		protected function render_image_alt( $tag_arg, $image ) {
+			return $image['alt'];
 		}
 
-		protected function render_image_title( $content, $tag_full, $tag_arg, $image ) {
-			return str_replace( $tag_full, $image['post_title'], $content );
+		protected function render_image_title( $tag_arg, $image ) {
+			return $image['post_title'];
 		}
 
-		protected function render_image_description( $content, $tag_full, $tag_arg, $image ) {
-			return str_replace( $tag_full, $image['post_content'], $content );
+		protected function render_image_description( $tag_arg, $image ) {
+			return $image['post_content'];
 		}
 	}
 ?>
