@@ -156,7 +156,6 @@
 
 		saveAccordion: function() {
 			var accordionData = this.getAccordionData();
-			accordionData[ 'id' ] = as_js_vars.id;
 			accordionData[ 'nonce' ] = as_js_vars.sa_nonce;
 			accordionData[ 'action' ] = 'save';
 
@@ -178,6 +177,7 @@
 			var that = this;
 
 			var accordionData = {
+				'id': as_js_vars.id,
 				'name': $( 'input#title' ).val(),
 				'settings': {},
 				'panels': [],

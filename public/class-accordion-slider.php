@@ -174,6 +174,8 @@ class BQW_Accordion_Slider {
 	}
 
 	public function output_accordion( $accordion_data ) {
+		$accordion_data = apply_filters( 'accordion_slider_data', $accordion_data, $accordion_data['id'] );
+
 		$accordion = new BQW_AS_Public_Accordion( $accordion_data );
 		$html_output = $accordion->render();
 		$this->js_output .= $accordion->render_js();

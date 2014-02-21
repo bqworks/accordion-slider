@@ -44,6 +44,10 @@ class BQW_Accordion_Slider_Shortcode {
 			$accordion = array( 'settings' => array() );
 		}
 
+		if ( ! isset( $accordion['id'] ) ) {
+			$accordion['id'] = $id;
+		}
+
 		foreach ( $atts as $key => $value ) {
 			if ( $key === 'breakpoints' ) {
 				$value = json_decode( stripslashes( $value ), true );
