@@ -3,8 +3,8 @@
 
 		protected $input_html = null;
 
-		public function __construct( $data, $lazy_loading ) {
-			parent::__construct( $data, $lazy_loading );
+		public function __construct( $data, $accordion_id, $panel_index, $lazy_loading ) {
+			parent::__construct( $data, $accordion_id, $panel_index, $lazy_loading );
 
 			$this->registered_tags = array(
 				'image' => array( $this, 'render_image' ),
@@ -70,6 +70,8 @@
 			$query_args['posts_per_page'] = $this->get_setting_value( 'posts_maximum' );
 			$query_args['orderby'] = $this->get_setting_value( 'posts_order_by' );
 			$query_args['order'] = $this->get_setting_value( 'posts_order' );
+
+			$query_args = apply_filters( 'accordion_slider_posts_query_args' , $query_args, $this->accordion_id, $this->panel_index );
 			
 			$query = new WP_Query( $query_args );
 

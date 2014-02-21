@@ -3,12 +3,18 @@
 
 		protected $data = null;
 
-		protected $html_output = '';
+		protected $accordion_id = null;
+
+		protected $panel_index = null;
 
 		protected $lazy_loading = null;
 
-		public function __construct( $data, $lazy_loading ) {
+		protected $html_output = '';
+
+		public function __construct( $data, $accordion_id, $panel_index, $lazy_loading ) {
 			$this->data = $data;
+			$this->accordion_id = $accordion_id;
+			$this->panel_index = $panel_index;
 			$this->lazy_loading = $lazy_loading;
 		}
 

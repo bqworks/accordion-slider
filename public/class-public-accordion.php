@@ -53,16 +53,18 @@
 		private function create_panels() {
 			$panels_output = '';
 			$panels = $this->data['panels'];
+			$panel_counter = 0;
 
 			foreach ( $panels as $panel ) {
-				$panels_output .= $this->create_panel( $panel );
+				$panels_output .= $this->create_panel( $panel, $panel_counter );
+				$panel_counter++;
 			}
 
 			return $panels_output;
 		}
 
-		private function create_panel( $data ) {
-			$panel = BQW_AS_Public_Panel_Factory::create_panel( $data, $this->lazy_loading );
+		private function create_panel( $data, $panel_counter ) {
+			$panel = BQW_AS_Public_Panel_Factory::create_panel( $data, $this->id, $panel_counter, $this->lazy_loading );
 			return $panel->render();
 		}
 
