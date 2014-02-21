@@ -19,7 +19,7 @@
 
 		public function __construct( $data ) {
 			$this->data = $data;
-			$this->id = isset( $this->data['id'] ) ? $this->data['id'] : '100';
+			$this->id = $this->data['id'];
 			$this->settings = $this->data['settings'];
 			$this->default_settings = BQW_Accordion_Slider_Settings::getSettings();
 
@@ -40,6 +40,8 @@
 			}
 
 			$this->html_output .= "\r\n" . '</div>';
+
+			$this->html_output = apply_filters( 'accordion_slider_markup', $this->html_output, $this->id );
 
 			return $this->html_output;
 		}
