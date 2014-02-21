@@ -436,6 +436,8 @@ class BQW_Accordion_Slider_Settings {
 					'description' => __( 'Sets what the accordion will do when a video ends. Can be set to \'Start Autoplay\', \'Next Panel\', \'Replay Video\' or \'None\'.', 'accordion-slider' )
 				)
 			);
+
+			self::$settings = apply_filters( 'accordion_slider_default_settings', self::$settings );
 		}
 
 		if ( ! is_null( $name ) ) {
@@ -725,6 +727,8 @@ class BQW_Accordion_Slider_Settings {
 					'description' => ''
 				)
 			);
+
+			self::$layer_settings = apply_filters( 'accordion_slider_default_layer_settings', self::$layer_settings );
 		}
 
 		return self::$layer_settings;
@@ -837,6 +841,8 @@ class BQW_Accordion_Slider_Settings {
 					'description' => ''
 				)
 			);
+
+			self::$panel_settings = apply_filters( 'accordion_slider_default_panel_settings', self::$panel_settings );
 		}
 
 		return self::$panel_settings;
