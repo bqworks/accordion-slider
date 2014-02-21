@@ -90,7 +90,8 @@
 				$content = $this->input_html;
 
 				foreach ( $tags as $tag ) {
-					$content = $this->render_tag( $content, $tag['full'], $tag['name'], $tag['arg'], $post );
+					$result = $this->render_tag( $tag['name'], $tag['arg'], $post );
+					$content = str_replace( $tag['full'], $result, $content );
 				}
 
 				$output_html .= $content;
@@ -101,8 +102,7 @@
 			return $output_html;
 		}
 
-		protected function render_image( $content, $tag_full, $tag_arg, $post ) {
-			fb('test');
+		protected function render_image( $tag_arg, $post ) {
 			if ( ! has_post_thumbnail( $post->ID ) ) {
 				return;
 			}
@@ -110,10 +110,10 @@
 			$image_size = $tag_arg !== false ? $tag_arg : 'full';
 			$image_full = get_the_post_thumbnail( $post->ID, $image_size, array( 'class' => '' ) );
 
-			return str_replace( $tag_full, $image_full, $content );
+			return $image_full;
 		}
 
-		protected function render_image_src( $content, $tag_full, $tag_arg, $post ) {
+		protected function render_image_src( $tag_arg, $post ) {
 			if ( ! has_post_thumbnail( $post->ID ) ) {
 				return;
 			}
@@ -121,10 +121,10 @@
 			$image_size = $tag_arg !== false ? $tag_arg : 'full';
 			$image_src = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $image_size );
 
-			return str_replace( $tag_full, $image_src[0], $content );
+			return $image_src[0];
 		}
 
-		protected function render_image_alt( $content, $tag_full, $tag_arg, $post ) {
+		protected function render_image_alt( $tag_arg, $post ) {
 			if ( ! has_post_thumbnail( $post->ID ) ) {
 				return;
 			}
@@ -132,75 +132,75 @@
 			$image_alt = get_post_meta( get_post_thumbnail_id( $post->ID ), '_wp_attachment_image_alt' );
 			$image_alt_value = ! empty ( $image_alt ) ? $image_alt[0] : '';
 
-			return str_replace( $tag_full, $image_alt_value, $content );
+			return $image_alt_value;
 		}
 
-		protected function render_image_title( $content, $tag_full, $tag_arg, $post ) {
+		protected function render_image_title( $tag_arg, $post ) {
 			if ( ! has_post_thumbnail( $post->ID ) ) {
 				return;
 			}
 
 			$image_data = get_post( get_post_thumbnail_id(), ARRAY_A );
 
-			return str_replace( $tag_full, $image_data['post_title'], $content );
+			return $image_data['post_title'];
 		}
 
-		protected function render_image_description( $content, $tag_full, $tag_arg, $post ) {
+		protected function render_image_description( $tag_arg, $post ) {
 			if ( ! has_post_thumbnail( $post->ID ) ) {
 				return;
 			}
 
 			$image_data = get_post( get_post_thumbnail_id(), ARRAY_A );
 
-			return str_replace( $tag_full, $image_data['post_content'], $content );
+			return $image_data['post_content'];
 		}
 
-		protected function render_image_caption( $content, $tag_full, $tag_arg, $post ) {
+		protected function render_image_caption( $tag_arg, $post ) {
 			if ( ! has_post_thumbnail( $post->ID ) ) {
 				return;
 			}
 
 			$image_data = get_post( get_post_thumbnail_id(), ARRAY_A );
 
-			return str_replace( $tag_full, $image_data['post_excerpt'], $content );
+			return $image_data['post_excerpt'];
 		}
 
-		protected function render_title( $content, $tag_full, $tag_arg, $post ) {
-			return str_replace( $tag_full, get_the_title(), $content );
+		protected function render_title( $tag_arg, $post ) {
+			return get_the_title();
 		}
 
-		protected function render_link( $content, $tag_full, $tag_arg, $post ) {
+		protected function render_link( $tag_arg, $post ) {
 			$link = '<a href="' . get_permalink( $post->ID ) . '">' . $post->post_title . '</a>';
 
-			return str_replace( $tag_full, $link, $content );
+			return $link;
 		}
 
-		protected function render_link_url( $content, $tag_full, $tag_arg, $post ) {
-			return str_replace( $tag_full, get_permalink( $post->ID ), $content );
+		protected function render_link_url( $tag_arg, $post ) {
+			return get_permalink( $post->ID );
 		}
 
-		protected function render_date( $content, $tag_full, $tag_arg, $post ) {
+		protected function render_date( $tag_arg, $post ) {
 			$date_format = $tag_arg !== false ? $tag_arg : get_option( 'date_format' );
 			
-			return str_replace( $tag_full, get_post_time( $date_format, false, $post->ID ), $content );
+			return get_post_time( $date_format, false, $post->ID );
 		}
 
-		protected function render_excerpt( $content, $tag_full, $tag_arg, $post ) {
-			return str_replace( $tag_full, $post->post_excerpt, $content );
+		protected function render_excerpt( $tag_arg, $post ) {
+			return $post->post_excerpt;
 		}
 
-		protected function render_content( $content, $tag_full, $tag_arg, $post ) {
-			return str_replace( $tag_full, $post->post_content, $content );
+		protected function render_content( $tag_arg, $post ) {
+			return $post->post_content;
 		}
 
-		protected function render_category( $content, $tag_full, $tag_arg, $post ) {
+		protected function render_category( $tag_arg, $post ) {
 			$categories = get_the_category( $post->ID );
 			$category = ! empty( $categories ) ? $categories[0]->name : '';
 
-			return str_replace( $tag_full, $category, $content );
+			return $category;
 		}
 
-		protected function render_custom( $content, $tag_full, $tag_arg, $post ) {
+		protected function render_custom( $tag_arg, $post ) {
 			$value = '';
 
 			if ( $tag_arg !== false ) {
@@ -208,7 +208,7 @@
 				$value = ! empty( $values ) ? $values[0] : '';
 			}
 
-			return str_replace( $tag_full, $value, $content );
+			return $value;
 		}
 	}
 ?>

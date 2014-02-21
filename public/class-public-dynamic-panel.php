@@ -45,10 +45,10 @@
 			return $tags;
 		}
 
-		protected function render_tag( $content, $tag_full, $tag_name, $tag_arg, $query_entry ) {
+		protected function render_tag( $tag_name, $tag_arg, $query_entry ) {
 			foreach ( $this->registered_tags as $name => $method ) {
 				if ( $name === $tag_name ) {
-					return call_user_func( $method, $content, $tag_full, $tag_arg, $query_entry );
+					return call_user_func( $method, $tag_arg, $query_entry );
 				}
 			}
 		}
