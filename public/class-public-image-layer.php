@@ -2,8 +2,8 @@
 
 	class BQW_AS_Public_Image_Layer extends BQW_AS_Public_Layer {
 
-		public function __construct( $data ) {
-			parent::__construct( $data );
+		public function __construct() {
+			parent::__construct();
 		}
 
 		public function render() {

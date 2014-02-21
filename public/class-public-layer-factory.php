@@ -21,7 +21,7 @@
 
 			foreach( self::$registered_types as $registered_type_name => $registered_type_class ) {
 				if ( $type === $registered_type_name ) {
-					return new $registered_type_class( $data );
+					return new $registered_type_class();
 				}
 			}
 		}
