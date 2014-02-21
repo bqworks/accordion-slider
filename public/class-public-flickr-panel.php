@@ -70,7 +70,8 @@
 				$content = $this->input_html;
 
 				foreach ( $tags as $tag ) {
-					$content = $this->render_tag( $content, $tag['full'], $tag['name'], $tag['arg'], $photo );
+					$result = $this->render_tag( $tag['name'], $tag['arg'], $photo );
+					$content = str_replace( $tag['full'], $result, $content );
 				}
 
 				$output_html .= $content;
@@ -79,39 +80,39 @@
 			return $output_html;
 		}
 
-		protected function render_image( $content, $tag_full, $tag_arg, $photo ) {
+		protected function render_image( $tag_arg, $photo ) {
 			$image_size = $tag_arg !== false ? $tag_arg : 'medium';
 			$image_src = $this->flickr_instance->get_photo_url( $photo, $image_size );
 			$image_full = '<img src="' . $image_src . '" />';
 
-			return str_replace( $tag_full, $image_full, $content );
+			return $image_full;
 		}
 
-		protected function render_image_src( $content, $tag_full, $tag_arg, $photo ) {
+		protected function render_image_src( $tag_arg, $photo ) {
 			$image_size = $tag_arg !== false ? $tag_arg : 'medium';
 			$image_src = $this->flickr_instance->get_photo_url( $photo, $image_size );
 
-			return str_replace( $tag_full, $image_src, $content );
+			return $image_src;
 		}
 
-		protected function render_image_description( $content, $tag_full, $tag_arg, $photo ) {
-			return str_replace( $tag_full, $photo['description']['_content'], $content );
+		protected function render_image_description( $tag_arg, $photo ) {
+			return $photo['description']['_content'];
 		}
 
-		protected function render_image_link( $content, $tag_full, $tag_arg, $photo ) {
-			return str_replace( $tag_full, 'http://www.flickr.com/photos/' . $photo['owner'] . '/' . $photo['id'] . '/', $content );
+		protected function render_image_link( $tag_arg, $photo ) {
+			return 'http://www.flickr.com/photos/' . $photo['owner'] . '/' . $photo['id'] . '/';
 		}
 
-		protected function render_date( $content, $tag_full, $tag_arg, $photo ) {
-			return str_replace( $tag_full, date( 'F j Y', $photo['dateupload'] ), $content );
+		protected function render_date( $tag_arg, $photo ) {
+			return date( 'F j Y', $photo['dateupload'] );
 		}
 
-		protected function render_username( $content, $tag_full, $tag_arg, $photo ) {
-			return str_replace( $tag_full, $photo['ownername'], $content );
+		protected function render_username( $tag_arg, $photo ) {
+			return $photo['ownername'];
 		}
 
-		protected function render_user_link( $content, $tag_full, $tag_arg, $photo ) {
-			return str_replace( $tag_full, 'http://www.flickr.com/people/' . $photo['owner'] . '/', $content );
+		protected function render_user_link( $tag_arg, $photo ) {
+			return 'http://www.flickr.com/people/' . $photo['owner'] . '/';
 		}
 	}
 ?>
