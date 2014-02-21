@@ -15,6 +15,10 @@
 				$content = substr_replace( $content, $this->get_attributes(), $insert_pos, 1 );
 			}
 
-			return "\r\n" . '			' . $content;
+			$html_output = "\r\n" . '			' . $content;
+
+			$html_output = apply_filters( 'accordion_slider_layer_markup', $html_output, $this->accordion_id, $this->panel_index );
+
+			return $html_output;
 		}
 	}

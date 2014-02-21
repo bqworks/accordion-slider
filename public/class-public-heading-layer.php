@@ -10,6 +10,10 @@
 			$content = isset( $this->data['text'] ) ? $this->data['text'] : '';
 			$type = isset( $this->data['heading_type'] ) ? $this->data['heading_type'] : '';
 			
-			return "\r\n" . '			' . '<' . $type . ' class="' .  $this->get_classes() . '"' . $this->get_attributes() . '>' . $content . '</' . $type . '>';
+			$html_output = "\r\n" . '			' . '<' . $type . ' class="' .  $this->get_classes() . '"' . $this->get_attributes() . '>' . $content . '</' . $type . '>';
+
+			$html_output = apply_filters( 'accordion_slider_layer_markup', $html_output, $this->accordion_id, $this->panel_index );
+
+			return $html_output;
 		}
 	}

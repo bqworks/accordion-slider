@@ -16,7 +16,11 @@
 			if ( isset( $this->data['image_link'] ) && $this->data['image_link'] !== '' ) {
 				$image_content = '<a href="' . esc_url( $this->data['image_link'] ) . '">' . $image_content . '</a>';
 			}
+			
+			$html_output = "\r\n" . '			' . $image_content;
+			
+			$html_output = apply_filters( 'accordion_slider_layer_markup', $html_output, $this->accordion_id, $this->panel_index );
 
-			return "\r\n" . '			' . $image_content;
+			return $html_output;
 		}
 	}
