@@ -141,11 +141,9 @@
 
 			$this->add_js_dependency( 'plugin' );
 
-			$js_output .= "\r\n" . '<script type="text/javascript">' .
-							"\r\n" . '	jQuery( document ).ready(function( $ ) {' .
-							"\r\n" . '		$( "#accordion-slider-' . $this->id . '" ).accordionSlider({' .
+			$js_output .= "\r\n" . '		$( "#accordion-slider-' . $this->id . '" ).accordionSlider({' .
 												$settings_js .
-							"\r\n" . '		});';
+							"\r\n" . '		});' . "\r\n";
 
 			if ( isset ( $this->settings['lightbox'] ) && $this->settings['lightbox'] === true ) {
 				$this->add_js_dependency( 'lightbox' );
@@ -156,11 +154,8 @@
 								"\r\n" . '			if ( $( this ).hasClass( \'as-swiping\' ) === false ) {' .
 								"\r\n" . '				$.fancybox.open( $( \'#accordion-slider-' .$this->id . ' .as-panel > a\' ), { index: $( this ).parent().index() } );' .
 								"\r\n" . '			}' .
-								"\r\n" . '		});';
+								"\r\n" . '		});' . "\r\n";
 			}
-
-			$js_output .= "\r\n" . '	});' .
-							"\r\n" . '</script>';
 
 			if ( isset ( $this->settings['page_scroll_easing'] ) && $this->settings['page_scroll_easing'] !== 'swing' ) {
 				$this->add_js_dependency( 'easing' );

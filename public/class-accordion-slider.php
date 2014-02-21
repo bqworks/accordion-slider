@@ -266,17 +266,20 @@ class BQW_Accordion_Slider {
 	}
 
 	public function get_inline_scripts() {
-		$inline_js = '';
-
-		$inline_js .= $this->js_output;
+		$inline_js = "\r\n" . '<script type="text/javascript">' .
+					"\r\n" . '	jQuery( document ).ready(function( $ ) {' .
+					$this->js_output;
 
 		if ( get_option( 'accordion_slider_is_custom_js' ) == true && get_option( 'accordion_slider_load_custom_css_js' ) !== 'in_files' ) {
-			$custom_js = "\r\n" . '<script type="text/javascript">' .
-						"\r\n" . '	' . stripslashes( get_option( 'accordion_slider_custom_js' ) ) .
-						"\r\n" . '</script>' . "\r\n";
+			$custom_js = "\r\n" . '	' . stripslashes( get_option( 'accordion_slider_custom_js' ) );
 
 			$inline_js .= $custom_js;
 		}
+
+		$inline_js .= "\r\n" . '	});' .
+					"\r\n" . '</script>';
+
+		$inline_js = apply_filters( 'accordion_slider_javascript', $inline_js );
 
 		return $inline_js;
 	}
