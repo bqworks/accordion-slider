@@ -138,7 +138,7 @@
 
 		private function create_layer( $data ) {
 			$layer = BQW_AS_Public_Layer_Factory::create_layer( $data );
-			$layer->set_data( $data, $accordion_id, $panel_index );
+			$layer->set_data( $data, $this->accordion_id, $this->panel_index );
 			return $layer->render();
 		}
 	}

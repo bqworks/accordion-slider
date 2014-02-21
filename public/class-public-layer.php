@@ -47,6 +47,8 @@
 				$classes .= ' ' . $this->settings['custom_class'];
 			}
 
+			$classes = apply_filters( 'accordion_slider_layer_classes', $classes, $this->accordion_id, $this->panel_index );
+
 			return $classes;
 		}
 
