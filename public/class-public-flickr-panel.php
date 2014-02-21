@@ -17,6 +17,8 @@
 				'username' => array( $this, 'render_username' ),
 				'user_link' => array( $this, 'render_user_link' )
 			);
+
+			$this->registered_tags = apply_filters( 'accordion_slider_flickr_tags', $this->registered_tags );
 		}
 
 		public function render() {
