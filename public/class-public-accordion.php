@@ -27,9 +27,11 @@
 		}
 
 		public function render() {
-			$custom_class = isset( $this->settings['custom_class'] ) && $this->settings['custom_class'] !== '' ? ' ' . $this->settings['custom_class'] : '';
+			$classes = 'accordion-slider';
+			$classes .= isset( $this->settings['custom_class'] ) && $this->settings['custom_class'] !== '' ? ' ' . $this->settings['custom_class'] : '';
+			$classes = apply_filters( 'accordion_slider_classes' , $classes, $this->id );
 
-			$this->html_output .= "\r\n" . '<div id="accordion-slider-' . $this->id . '" class="accordion-slider' . $custom_class . '">';
+			$this->html_output .= "\r\n" . '<div id="accordion-slider-' . $this->id . '" class="' . $classes . '">';
 
 			if ( $this->has_panels() ) {
 				$this->html_output .= "\r\n" . '	<div class="as-panels">';

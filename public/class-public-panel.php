@@ -23,7 +23,10 @@
 		}
 
 		public function render() {
-			$this->html_output = "\r\n" . '		<div class="as-panel">';
+			$classes = 'as-panel';
+			$classes = apply_filters( 'accordion_slider_panel_classes' , $classes, $this->accordion_id, $this->panel_index );
+
+			$this->html_output = "\r\n" . '		<div class="' . $classes . '">';
 
 			if ( $this->has_background_image() ) {
 				$this->html_output .= "\r\n" . '			' . ( $this->has_background_link() && ! $this->has_opened_background_image() ? $this->add_link_to_background_image( $this->create_background_image() ) : $this->create_background_image() );
