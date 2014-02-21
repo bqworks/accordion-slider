@@ -13,6 +13,8 @@
 				'image_title' => array( $this, 'render_image_title' ),
 				'image_description' => array( $this, 'render_image_description' )
 			);
+
+			$this->registered_tags = apply_filters( 'accordion_slider_gallery_tags', $this->registered_tags );
 		}
 
 		public function render() {
@@ -48,9 +50,9 @@
 				$ids = explode( ',', $atts[ 'ids' ] );
 
 				foreach ( $ids as $id ) {
-					$image = get_post( $id, ARRAY_A );
+					$image = get_post( $id );
 					$image_alt = get_post_meta( $id, '_wp_attachment_image_alt' );
-					$image['alt'] = ! empty( $image_alt ) ? $image_alt[0] : '';
+					$image->alt = ! empty( $image_alt ) ? $image_alt[0] : '';
 
 					array_push( $images, $image );
 				}
@@ -79,28 +81,28 @@
 
 		protected function render_image( $tag_arg, $image ) {
 			$image_size = $tag_arg !== false ? $tag_arg : 'full';
-			$image_full = wp_get_attachment_image( $image['ID'], $image_size );
+			$image_full = wp_get_attachment_image( $image->ID, $image_size );
 
 			return $image_full;
 		}
 
 		protected function render_image_src( $tag_arg, $image ) {
 			$image_size = $tag_arg !== false ? $tag_arg : 'full';
-			$image_src = wp_get_attachment_image_src( $image['ID'], $image_size );
+			$image_src = wp_get_attachment_image_src( $image->ID, $image_size );
 
 			return $image_src[0];
 		}
 
 		protected function render_image_alt( $tag_arg, $image ) {
-			return $image['alt'];
+			return $image->alt;
 		}
 
 		protected function render_image_title( $tag_arg, $image ) {
-			return $image['post_title'];
+			return $image->post_title;
 		}
 
 		protected function render_image_description( $tag_arg, $image ) {
-			return $image['post_content'];
+			return $image->post_content;
 		}
 	}
 ?>
