@@ -46,6 +46,8 @@
 
 			$this->html_output .= "\r\n" . '		</div>';
 
+			$this->html_output = apply_filters( 'accordion_slider_panel_markup', $this->html_output, $this->accordion_id, $this->panel_index );
+
 			return $this->html_output;
 		}
 
