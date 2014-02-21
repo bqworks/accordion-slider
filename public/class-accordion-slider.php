@@ -233,6 +233,8 @@ class BQW_Accordion_Slider {
 					wp_add_inline_style( $this->plugin_slug . '-plugin-style', stripslashes( get_option( 'accordion_slider_custom_css' ) ) );
 				}
 			}
+
+			do_action( 'accordion_slider_enqueue_styles' );
 		}
 	}
 
@@ -241,18 +243,24 @@ class BQW_Accordion_Slider {
 			return;
 		}
 
-		foreach ( $this->scripts_to_load as $script_handle ) {
-			wp_enqueue_script( $script_handle );
-		}
-
 		if ( get_option( 'accordion_slider_is_custom_js' ) == true && get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
 			$custom_js_path = plugins_url( 'accordion-slider-custom/custom.js' );
 			$custom_js_dir_path = WP_PLUGIN_DIR . '/accordion-slider-custom/custom.js';
 
 			if ( file_exists( $custom_js_dir_path ) ) {
-				wp_enqueue_script( $this->plugin_slug . '-plugin-custom-script', $custom_js_path, array(), self::VERSION );
+				$this->add_script_to_load( $this->plugin_slug . '-plugin-custom-script', $custom_js_path );
 			}
 		}
+
+		foreach ( $this->scripts_to_load as $key => $value ) {
+			if ( is_numeric( $key ) ) {
+				wp_enqueue_script( $value );
+			} else if ( is_string( $key ) ) {
+				wp_enqueue_script( $key, $value );
+			}
+		}
+
+		do_action( 'accordion_slider_enqueue_scripts' );
 
 		echo $this->get_inline_scripts();
 	}
