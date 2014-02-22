@@ -428,6 +428,8 @@ class BQW_Accordion_Slider_Admin {
 				}
 			}
 		}
+		
+		delete_transient( 'accordion_slider_' . $id . '_cache' );
 
 		return $id;
 	}
@@ -435,7 +437,7 @@ class BQW_Accordion_Slider_Admin {
 	public function ajax_preview_accordion() {
 		$accordion = json_decode( stripslashes( $_POST['data'] ), true );
 		$accordion_name = $accordion['name'];
-		$accordion_output = $this->plugin->output_accordion( $accordion ) . $this->plugin->get_inline_scripts();
+		$accordion_output = $this->plugin->output_accordion( $accordion, false ) . $this->plugin->get_inline_scripts();
 
 		include( 'views/preview-window.php' );
 
@@ -640,7 +642,6 @@ class BQW_Accordion_Slider_Admin {
 
 	public function get_post_names() {
 		$result = array();
-
 		$post_names_transient = get_transient( 'accordion_slider_post_names' );
 
 		if ( $post_names_transient === false ) {
