@@ -307,7 +307,6 @@ class BQW_Accordion_Slider {
 			'id' => '-1'
 		), $atts ) );
 
-		$start = microtime(true);
 		$cache_transient_name = 'accordion_slider_' . $id . '_cache';
 
 		if ( ( $accordion_cache = get_transient( $cache_transient_name ) ) !== false ) {
