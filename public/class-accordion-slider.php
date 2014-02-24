@@ -489,6 +489,8 @@ class BQW_Accordion_Slider {
 					$value = true;
 				} else if ( $value === 'false' ) {
 					$value = false;
+				} else if ( $key === 'preset_styles' ) {
+					$value = explode( ',', $value );
 				}
 
 				$attributes['layer_settings'][ $key ] = $value;
