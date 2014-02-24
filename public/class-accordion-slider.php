@@ -303,13 +303,12 @@ class BQW_Accordion_Slider {
 	}
 
 	public function accordion_slider_shortcode( $atts, $content = null ) {
-		extract( shortcode_atts( array(
-			'id' => '-1'
-		), $atts ) );
+		$id = isset( $atts['id'] ) ? $atts['id'] : -1;
+		$cache = ( isset( $atts['cache'] ) && $atts['cache'] === 'false' ) ? false : true;
 
 		$cache_transient_name = 'accordion_slider_' . $id . '_cache';
 
-		if ( ( $accordion_cache = get_transient( $cache_transient_name ) ) !== false ) {
+		if ( ( $accordion_cache = get_transient( $cache_transient_name ) ) !== false && $cache !== false ) {
 			$css_dependencies = $accordion_cache['css_dependencies'];
 			$js_dependencies = $accordion_cache['js_dependencies'];
 
@@ -447,7 +446,7 @@ class BQW_Accordion_Slider {
 				foreach ( $element as $key => $value ) {
 					// check if the element is a layer or a different type
 					if ( $key === 'layer' ) {
-						$layer = array( 'content' => $value );
+						$layer = array( 'text' => $value );
 
 						if ( isset( $element['layer_settings'] ) ) {
 							$layer['settings'] = $element['layer_settings'];
@@ -477,8 +476,8 @@ class BQW_Accordion_Slider {
 
 		foreach ( $atts as $key => $value ) {
 			if ( $key === 'name' ) {
-				$attributes[ $name ] = $content;
-			} else if ( $name === 'layer' ) {
+				$attributes[ $atts['name'] ] = $content;
+			} else if ( isset( $atts['name'] ) && $atts['name'] === 'layer' ) {
 				if ( ! isset( $attributes['layer_settings'] ) ) {
 					$attributes['layer_settings'] = array();
 				}
