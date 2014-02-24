@@ -877,6 +877,11 @@ class BQW_Accordion_Slider_Settings {
 					'label' => __( 'Load unminified scripts', 'accordion-slider' ),
 					'default_value' => false,
 					'description' => __( 'Check this option if you want to load the unminified/uncompressed CSS and JavaScript files for the accordion. This is useful for debugging purposes.', 'accordion-slider' )
+				),
+				'cache_expiry_interval' => array(
+					'label' => __( 'Cache Expiry Interval', 'accordion-slider' ),
+					'default_value' => 24,
+					'description' => __( 'Indicates the time interval after which a slider\'s cache will expire. If the cache of a slider has expired, the slider will be rendered again and cached the next time it is viewed.', 'accordion-slider' )
 				)
 			);
 		}

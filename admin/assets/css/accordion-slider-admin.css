@@ -965,6 +965,12 @@
 	margin-top: 30px;
 }
 
+#cache-expiry-interval {
+	width: 50px;
+	margin-right: 10px;
+	text-align: center;
+}
+
 .as-clearfix {
     display: inline-block;
 }

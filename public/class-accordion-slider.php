@@ -204,7 +204,10 @@ class BQW_Accordion_Slider {
 				'js_dependencies' => $js_dependencies
 			);
 
-			set_transient( 'accordion_slider_' . $accordion_data['id'] . '_cache', $accordion_cache, 60 * 60 * 24 );
+			$plugin_settings = BQW_Accordion_Slider_Settings::getPluginSettings();
+			$cache_time = 60 * 60 * floatval( get_option( 'accordion_slider_cache_expiry_interval', $plugin_settings['cache_expiry_interval']['default_value'] ) );
+			
+			set_transient( 'accordion_slider_cache_' . $accordion_data['id'], $accordion_cache, $cache_time );
 		}
 
 		return $html_output;
@@ -306,7 +309,7 @@ class BQW_Accordion_Slider {
 		$id = isset( $atts['id'] ) ? $atts['id'] : -1;
 		$cache = ( isset( $atts['cache'] ) && $atts['cache'] === 'false' ) ? false : true;
 
-		$cache_transient_name = 'accordion_slider_' . $id . '_cache';
+		$cache_transient_name = 'accordion_slider_cache_' . $id;
 
 		if ( ( $accordion_cache = get_transient( $cache_transient_name ) ) !== false && $cache !== false ) {
 			$css_dependencies = $accordion_cache['css_dependencies'];

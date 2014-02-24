@@ -52,9 +52,21 @@
                     <?php echo $plugin_settings['load_unminified_scripts']['description']; ?>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <label for="cache-expiry-interval"><?php echo $plugin_settings['cache_expiry_interval']['label']; ?></label>
+                </td>
+                <td>
+                    <input type="text" id="cache-expiry-interval" name="cache_expiry_interval" value="<?php echo $cache_expiry_interval; ?>"><span>hours</span>
+                </td>
+                <td>
+                    <?php echo $plugin_settings['cache_expiry_interval']['description']; ?>
+                    <a class="button-secondary clear-all-cache"><?php _e( 'Clear all cache now', 'accordion-slider' ); ?></a>
+                </td>
+            </tr>
         </table>
 
     	<input type="submit" name="plugin_settings_update" class="button-primary" value="Update Settings" />
 	</form>
-    
+
 </div>
