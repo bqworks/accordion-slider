@@ -134,7 +134,7 @@
 .add-panel-group {
 	float: left;
 	overflow: hidden;
-	margin: 10px 0 120px;
+	margin: 10px 0 180px;
 }
 
 .add-panel-group:hover .panel-type {

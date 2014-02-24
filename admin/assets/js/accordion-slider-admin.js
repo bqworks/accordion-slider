@@ -40,14 +40,24 @@
 				that.addEmptyPanel();
 			});
 
-			$( '.panel-type a[data-type="images"]' ).on( 'click', function( event ) {
+			$( '.panel-type a[data-type="image"]' ).on( 'click', function( event ) {
 				event.preventDefault();
-				that.addImagesPanel();
+				that.addImagePanels();
 			});
 
-			$( '.panel-type a[data-type="dynamic"]' ).on( 'click', function( event ) {
+			$( '.panel-type a[data-type="posts"]' ).on( 'click', function( event ) {
 				event.preventDefault();
-				that.addDynamicPanel();
+				that.addPostsPanels();
+			});
+
+			$( '.panel-type a[data-type="gallery"]' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.addGalleryPanels();
+			});
+
+			$( '.panel-type a[data-type="flickr"]' ).on( 'click', function( event ) {
+				event.preventDefault();
+				that.addFlickrPanels();
 			});
 
 			$( '.add-breakpoint' ).on( 'click', function( event ) {
@@ -455,14 +465,20 @@
 			});
 		},
 
-		addImagesPanel: function() {
+		addImagePanels: function() {
 			var that = this;
 			
 			MediaLoader.open(function( selection ) {
 				var images = [];
 
 				$.each( selection, function( index, element ) {
-					images.push( { background_source: element.url, background_alt: element.alt, background_title: element.title,  background_width: element.width,  background_height: element.height } );
+					images.push({
+						background_source: element.url,
+						background_alt: element.alt,
+						background_title: element.title,
+						background_width: element.width,
+						background_height: element.height
+					});
 				});
 
 				$.ajax({
@@ -481,6 +497,123 @@
 						});
 					}
 				});
+			});
+		},
+
+		addPostsPanels: function() {
+			var that = this;
+
+			var data =  [ { background_source: '[as_image_src]', background_alt: '[as_image_alt]' } ];
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_add_panels', data: JSON.stringify( data ) },
+				complete: function( data ) {
+					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) ),
+						panelId = that.panelCounter;
+
+					that.initPanel( panel, {
+						background: {
+							background_source: '[as_image_src]',
+							background_alt: '[as_image_alt]',
+							background_link: '[as_link]'
+						},
+						layers: [
+							{
+								id: 1,
+								name: 'Layer 1',
+								type: 'paragraph',
+								text: '[as_title]',
+								settings: {
+									position: 'bottomLeft',
+									horizontal: '0',
+									vertical: '0',
+									preset_styles: ['as-black', 'as-padding']
+								}
+							}
+						],
+						html: '',
+						settings: {
+							content_type: 'posts'
+						}
+					});
+
+					SettingsEditor.open( panelId );
+				}
+			});
+		},
+
+		addGalleryPanels: function() {
+			var that = this;
+
+			var data =  [ { background_source: '[as_image_src]', background_alt: '[as_image_alt]' } ];
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_add_panels', data: JSON.stringify( data ) },
+				complete: function( data ) {
+					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) ),
+						panelId = that.panelCounter;
+
+					that.initPanel( panel, {
+						background: {
+							background_source: '[as_image_src]',
+							background_alt: '[as_image_alt]'
+						},
+						layers: {},
+						html: '',
+						settings: {
+							content_type: 'gallery'
+						}
+					});
+
+					SettingsEditor.open( panelId );
+				}
+			});
+		},
+
+		addFlickrPanels: function() {
+			var that = this;
+
+			var data =  [ { background_source: '[as_image_src]', background_alt: '[as_image_alt]' } ];
+
+			$.ajax({
+				url: as_js_vars.ajaxurl,
+				type: 'post',
+				data: { action: 'accordion_slider_add_panels', data: JSON.stringify( data ) },
+				complete: function( data ) {
+					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) ),
+						panelId = that.panelCounter;
+
+					that.initPanel( panel, {
+						background: {
+							background_source: '[as_image_src]',
+							background_link: '[as_image_link]'
+						},
+						layers: [
+							{
+								id: 1,
+								name: 'Layer 1',
+								type: 'paragraph',
+								text: '[as_image_description]',
+								settings: {
+									position: 'bottomLeft',
+									horizontal: '0',
+									vertical: '0',
+									preset_styles: ['as-black', 'as-padding']
+								}
+							}
+						],
+						html: '',
+						settings: {
+							content_type: 'flickr'
+						}
+					});
+
+					SettingsEditor.open( panelId );
+				}
 			});
 		},
 
