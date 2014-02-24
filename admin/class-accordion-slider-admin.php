@@ -42,6 +42,7 @@ class BQW_Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint', array( $this, 'ajax_add_breakpoint' ) );
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint_setting', array( $this, 'ajax_add_breakpoint_setting' ) );
 		add_action( 'wp_ajax_accordion_slider_get_taxonomies', array( $this, 'ajax_get_taxonomies' ) );
+		add_action( 'wp_ajax_accordion_slider_clear_all_cache', array( $this, 'ajax_clear_all_cache' ) );
 	}
 
 	/*
@@ -137,6 +138,7 @@ class BQW_Accordion_Slider_Admin {
 				'id' => $id,
 				'lad_nonce' => wp_create_nonce( 'load-accordion-data' . $id ),
 				'sa_nonce' => wp_create_nonce( 'save-accordion' . $id ),
+				'cac_nonce' => wp_create_nonce( 'clear-all-cache' ),
 				'no_image' => __( 'Click to add image', 'accordion-slider' ),
 				'accordion_delete' => __( 'Are you sure you want to delete this accordion?', 'accordion-slider' ),
 				'panel_delete' => __( 'Are you sure you want to delete this panel?', 'accordion-slider' ),
@@ -766,5 +768,19 @@ class BQW_Accordion_Slider_Admin {
         }
 
         return $setting_html;
+	}
+
+	public function ajax_clear_all_cache() {
+		$nonce = $_POST['nonce'];
+
+		if ( ! wp_verify_nonce( $nonce, 'clear-all-cache' ) ) {
+			die( 'This action was stopped for security purposes.' );
+		}
+
+		global $wpdb;
+
+		$wpdb->query( "DELETE FROM " . $wpdb->prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
+
+		die();
 	}
 }
