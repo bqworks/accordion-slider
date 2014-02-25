@@ -151,7 +151,6 @@
 	padding: 0 10px;
 	background-color: #FCFCFC;
 	margin: 0;
-	background-image: linear-gradient(to bottom, #FEFEFE, #F4F4F4);
 	border: 1px solid #BBB;
 	display: none;
 }
@@ -421,7 +420,6 @@
 	padding: 0 10px;
 	background-color: #FCFCFC;
 	margin: 0;
-	background-image: linear-gradient(to bottom, #FEFEFE, #F4F4F4);
 	border: 1px solid #BBB;
 	display: none;
 	z-index: 10;
