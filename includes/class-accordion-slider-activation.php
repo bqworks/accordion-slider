@@ -156,6 +156,8 @@ class BQW_Accordion_Slider_Activation {
 			dbDelta( $create_panels_table );
 			dbDelta( $create_layers_table );
 		}
+
+		$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
 	}
 
 	/*
