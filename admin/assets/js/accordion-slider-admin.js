@@ -145,6 +145,31 @@
 					}
 				});
 			});
+
+			$( '.purchase-code' ).on( 'submit', function( event ) {
+				event.preventDefault();
+
+				var form = $( this ),
+					purchaseCode = form.find( '.purchase-code-field' ).val(),
+					nonce = form.find( '#purchase-code-nonce' ).val();
+
+				if ( purchaseCode !== '' ) {
+					$.ajax({
+						url: as_js_vars.ajaxurl,
+						type: 'post',
+						data: { action: 'accordion_slider_verify_purchase_code', purchase_code: purchaseCode, nonce: nonce },
+						complete: function( data ) {
+							if ( data.responseText === 'true' ) {
+								form.find( '.purchase-code-message' ).text( 'The purchase code is valid.' );
+							} else {
+								form.find( '.purchase-code-message' ).text( 'The purchase code is not valid.' );
+							}
+						}
+					});
+				} else {
+					form.find( '.purchase-code-message' ).text( 'Please enter your purchase code.' );
+				}
+			} );
 		},
 
 		loadAccordionData: function() {

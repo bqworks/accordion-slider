@@ -43,6 +43,7 @@ class BQW_Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint_setting', array( $this, 'ajax_add_breakpoint_setting' ) );
 		add_action( 'wp_ajax_accordion_slider_get_taxonomies', array( $this, 'ajax_get_taxonomies' ) );
 		add_action( 'wp_ajax_accordion_slider_clear_all_cache', array( $this, 'ajax_clear_all_cache' ) );
+		add_action( 'wp_ajax_accordion_slider_verify_purchase_code', array( $this, 'ajax_verify_purchase_code' ) );
 	}
 
 	/*
@@ -780,6 +781,25 @@ class BQW_Accordion_Slider_Admin {
 		global $wpdb;
 
 		$wpdb->query( "DELETE FROM " . $wpdb->prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
+
+		die();
+	}
+
+	public function ajax_verify_purchase_code() {
+		$purchase_code = $_POST['purchase_code'];
+		$nonce = $_POST['nonce'];
+
+		if ( ! wp_verify_nonce( $nonce, 'purchase-code-update' ) ) {
+			die( 'This action was stopped for security purposes.' );
+		}
+
+		$api = BQW_Accordion_Slider_API::get_instance();
+
+		if ( $api->verify_purchase_code( $purchase_code ) === true ) {
+			echo 'true';
+		} else {
+			echo 'false';
+		}
 
 		die();
 	}

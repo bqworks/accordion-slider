@@ -69,4 +69,13 @@
     	<input type="submit" name="plugin_settings_update" class="button-primary" value="Update Settings" />
 	</form>
 
+    <form action="" method="post" class="purchase-code">
+        <?php wp_nonce_field( 'purchase-code-update', 'purchase-code-nonce' ); ?>
+        
+        <label for="purchase-code-field"><?php _e( 'Purchase Code:', 'accordion-slider' ); ?></label>
+        <input type="text" id="purchase-code-field" name="purchase_code" class="purchase-code-field" value="<?php echo ''; ?>">
+        <p class="purchase-code-message"></p>
+        <input type="submit" name="purchase_code_update" class="button-primary" value="Verify Purchase Code" />
+    </form>
+
 </div>
