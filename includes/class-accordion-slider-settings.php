@@ -14,11 +14,11 @@ class BQW_Accordion_Slider_Settings {
 		'width',
 		'height',
 		'responsive',
-		'responsiveMode',
-		'aspectRatio',
+		'responsive_mode',
+		'aspect_ratio',
 		'orientation',
-		'panelDistance',
-		'visiblePanels'
+		'panel_distance',
+		'visible_panels'
 	);
 
 	protected static $panels_state = array(
