@@ -1196,6 +1196,8 @@
 
 		counter: 0,
 
+		isWorking: false,
+
 		open: function( id ) {
 			var that = this;
 
@@ -1236,6 +1238,12 @@
 			this.editor.find( '.add-layer-group' ).on( 'click', function( event ) {
 				event.preventDefault();
 
+				if ( that.isWorking === true ) {
+					return;
+				}
+
+				that.isWorking = true;
+
 				var type = 'paragraph';
 
 				if ( typeof $( event.target ).attr( 'data-type' ) !== 'undefined' ) {
@@ -1252,6 +1260,13 @@
 
 			this.editor.find( '.duplicate-layer' ).on( 'click', function( event ) {
 				event.preventDefault();
+
+				if ( that.isWorking === true ) {
+					return;
+				}
+
+				that.isWorking = true;
+
 				that.duplicateLayer();
 			});
 
@@ -1347,6 +1362,8 @@
 			});
 
 			layer.triggerSelect();
+
+			this.isWorking = false;
 		},
 
 		addNewLayer: function( type ) {
