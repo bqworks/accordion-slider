@@ -40,7 +40,9 @@
 				<div class="postbox action">
 					<div class="inside">
 						<input type="submit" name="submit" class="button-primary" value="Update" />
+                        <span class="spinner update-spinner"></span>
 						<a class="button preview-accordion" href="#"><?php _e( 'Preview', 'accordion-slider' ); ?></a>
+                        <span class="spinner preview-spinner"></span>
 					</div>
 				</div>
                 

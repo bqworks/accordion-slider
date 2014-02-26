@@ -60,6 +60,7 @@
 }
 
 .panel-preview {
+	position: relative;
 	height: 170px;
 	background: #E0E0E0;
 	overflow: hidden;
@@ -75,6 +76,22 @@
     -webkit-background-size: 21px 21px;
     background-size: 20px 20px;
     background-position: 0 0, 10px 10px;
+}
+
+.panel .panel-spinner {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	left: 0;
+	right: 0;
+	background-color: #FFF;
+	background-size: auto;
+	float: none;
+	width: auto;
+	height: auto;
+	background-position: center;
+	z-index: 10;
 }
 
 .panel-preview .no-image {
@@ -181,6 +198,11 @@
 
 .action .preview-accordion {
 	margin-left: 6px;
+}
+
+.action .spinner {
+	margin-top: 0;
+	float: none;
 }
 
 .postbox.closed .hndle {

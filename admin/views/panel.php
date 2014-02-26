@@ -1,5 +1,7 @@
 <div class="panel">
-	<div class="panel-preview"> 
+	<span class="spinner panel-spinner"></span>
+	
+	<div class="panel-preview">
 		<?php 
 			if ( isset ( $panel_image ) && $panel_image !== '' ) {
 				echo '<img src="' . esc_url( $panel_image ) . '" />';

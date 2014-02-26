@@ -184,11 +184,19 @@
 
 			var accordionDataString = JSON.stringify( accordionData );
 
+			var spinner = $( '.update-spinner' ).css( 'display', 'inline-block' );
+
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				data: { action: 'accordion_slider_save_accordion', data: accordionDataString },
 				complete: function( data ) {
+					spinner.css( 'display', '' );
+
+					if ( $( '.updated' ).length === 0 ) {
+						$( 'h2' ).after( '<div class="updated"><p>' + as_js_vars.accordion_update + '</p></div>' );
+					}
+
 					if ( parseInt( as_js_vars.id, 10 ) === -1 && isNaN( data.responseText ) === false ) {
 						window.location = as_js_vars.admin + '?page=accordion-slider&id=' + data.responseText + '&action=edit';
 					}
@@ -997,6 +1005,8 @@
 			
 			var data = this.currentPanel.getData( 'background' );
 
+			var spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
+
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
@@ -1005,6 +1015,8 @@
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
+
+					spinner.css( 'display', '' );
 				}
 			});
 		},
@@ -1124,6 +1136,8 @@
 			
 			var data = this.currentPanel.getData( 'html' );
 
+			var spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
+
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
@@ -1132,6 +1146,8 @@
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
+
+					spinner.css( 'display', '' );
 				}
 			});
 		},
@@ -1181,6 +1197,8 @@
 			this.currentPanel = AccordionSliderAdmin.getPanel( id );
 			this.layersData = this.currentPanel.getData( 'layers' );
 
+			var spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
+
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
@@ -1189,6 +1207,8 @@
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
+
+					spinner.css( 'display', '' );
 				}
 			});
 		},
@@ -1977,6 +1997,8 @@
 			
 			var data = this.currentPanel.getData( 'settings' );
 
+			var spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
+
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
@@ -1985,6 +2007,8 @@
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
+
+					spinner.css( 'display', '' );
 				}
 			});
 		},
@@ -2150,6 +2174,8 @@
 			var that = this;
 			this.accordionData = data;
 
+			var spinner = $( '.preview-spinner' ).css( 'display', 'inline-block' );
+
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
@@ -2157,6 +2183,8 @@
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
+
+					spinner.css( 'display', '' );
 				}
 			});
 		},

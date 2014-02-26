@@ -143,7 +143,8 @@ class BQW_Accordion_Slider_Admin {
 				'accordion_delete' => __( 'Are you sure you want to delete this accordion?', 'accordion-slider' ),
 				'panel_delete' => __( 'Are you sure you want to delete this panel?', 'accordion-slider' ),
 				'yes' => __( 'Yes', 'accordion-slider' ),
-				'cancel' => __( 'Cancel', 'accordion-slider' )
+				'cancel' => __( 'Cancel', 'accordion-slider' ),
+				'accordion_update' => __( 'Accordion slider updated.', 'accordion-slider' )
 			) );
 		}
 	}
