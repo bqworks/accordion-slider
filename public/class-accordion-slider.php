@@ -3,7 +3,7 @@
 class BQW_Accordion_Slider {
 
 	// the current version of the plugin
-	const VERSION = '1.0.0';
+	const VERSION = '1.0';
 
 	// unique identifier for the plugin
 	protected $plugin_slug = 'accordion-slider';
