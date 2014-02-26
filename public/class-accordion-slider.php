@@ -13,7 +13,7 @@ class BQW_Accordion_Slider {
 
 	protected $accordion_id_counter = 1000;
 
-	protected $scripts_to_load = [];
+	protected $scripts_to_load = array();
 
 	protected $js_output = '';
 
