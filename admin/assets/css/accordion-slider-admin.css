@@ -230,6 +230,10 @@
 	width: 50px;
 }
 
+.sidebar-settings #custom_class {
+	width: 150px;
+}
+
 .modal-overlay {
 	position: fixed;
 	top: 0;
