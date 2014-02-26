@@ -55,7 +55,9 @@ class BQW_Accordion_Slider_API {
 		
 		$args = array(
 			'action' => 'update-check',
-			'slug' => $slug
+			'slug' => $slug,
+			'purchase_code' => get_option( 'accordion_slider_purchase_code', '' ),
+			'purchase_code_status' => get_option( 'accordion_slider_purchase_code_status', '0' )
 		);
 
 		$response = $this->api_request( $args );
@@ -78,7 +80,9 @@ class BQW_Accordion_Slider_API {
 
 		$args = array(
 			'action' => 'plugin-info',
-			'slug' => $slug
+			'slug' => $slug,
+			'purchase_code' => get_option( 'accordion_slider_purchase_code', '' ),
+			'purchase_code_status' => get_option( 'accordion_slider_purchase_code_status', '0' )
 		);
 
 		$response = $this->api_request( $args );
