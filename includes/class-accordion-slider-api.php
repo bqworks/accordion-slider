@@ -6,7 +6,16 @@ class BQW_Accordion_Slider_API {
 
 	protected static $instance = null;
 
+	protected $slug = 'accordion-slider/accordion-slider.php';
+
+	protected $purchase_code = null;
+
+	protected $purchase_code_status = null;
+
 	private function __construct() {
+		$this->purchase_code = get_option( 'accordion_slider_purchase_code', '' );
+		$this->purchase_code_status = get_option( 'accordion_slider_purchase_code_status', '0' );
+
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update_check' ) );
 		add_filter( 'plugins_api', array( $this, 'update_info' ), 10, 3 );
 		add_action( 'in_plugin_update_message-accordion-slider/accordion-slider.php', array( $this, 'update_notification_message' ) );
@@ -50,20 +59,19 @@ class BQW_Accordion_Slider_API {
 			return $transient;
 		}
 
-		$slug = 'accordion-slider/accordion-slider.php';
-		$current_version = $transient->checked[ $slug ];
+		$current_version = $transient->checked[ $this->slug ];
 		
 		$args = array(
 			'action' => 'update-check',
-			'slug' => $slug,
-			'purchase_code' => get_option( 'accordion_slider_purchase_code', '' ),
-			'purchase_code_status' => get_option( 'accordion_slider_purchase_code_status', '0' )
+			'slug' => $this->slug,
+			'purchase_code' => $this->purchase_code,
+			'purchase_code_status' => $this->purchase_code_status
 		);
 
 		$response = $this->api_request( $args );
 		
 		if ( $response !== false && version_compare( $current_version, $response->new_version, '<' ) )	{	
-			$transient->response[ $slug ] = $response;
+			$transient->response[ $this->slug ] = $response;
 		}
 
 		return $transient;
@@ -71,18 +79,18 @@ class BQW_Accordion_Slider_API {
 
 	
 	public function update_info( $false, $action, $args ) {
-		$slug = 'accordion-slider/accordion-slider.php';
-		
 		// return if the Accordion Slider plugin info is not requested
+		$slug = $this->slug;
+
 		if ( ! isset( $args->slug ) || $args->slug !== $slug ) {
 			return $false;
 		}
 
 		$args = array(
 			'action' => 'plugin-info',
-			'slug' => $slug,
-			'purchase_code' => get_option( 'accordion_slider_purchase_code', '' ),
-			'purchase_code_status' => get_option( 'accordion_slider_purchase_code_status', '0' )
+			'slug' => $this->slug,
+			'purchase_code' => $this->purchase_code,
+			'purchase_code_status' => $this->purchase_code_status
 		);
 
 		$response = $this->api_request( $args );
@@ -105,7 +113,7 @@ class BQW_Accordion_Slider_API {
 		if ( $message === false ) {
 			$args = array(
 				'action' => 'notification-message',
-				'slug' => 'accordion-slider/accordion-slider.php'
+				'slug' => $this->slug
 			);
 			
 			$response = $this->api_request( $args );
@@ -117,6 +125,10 @@ class BQW_Accordion_Slider_API {
 				set_transient( 'accordion_slider_update_notification_message', $message, 60 * 60 * 12 );
 			}
 		}
+
+		if ( $this->purchase_code_status !== '1' ) {
+			$message = __( ' To activate automatic updates, you need to enter your purchase code ', 'accordion-slider' ) . '<a href="' . admin_url( 'admin.php?page=accordion-slider-settings' ) . '">' . __( 'here', 'accordion-slider' ) . '</a>.<br/> ' . $message;
+		}
 		
 		echo $message;
 	}
@@ -124,12 +136,15 @@ class BQW_Accordion_Slider_API {
 	public function verify_purchase_code( $purchase_code ) {
 		$args = array(
 			'action' => 'verify-purchase',
-			'slug' => 'accordion-slider/accordion-slider.php',
+			'slug' => $this->slug,
 			'purchase_code' => $purchase_code
 		);
 
 		$response = $this->api_request( $args );
-		
+
+		delete_site_transient( 'update_plugins' );
+		delete_transient( 'accordion_slider_update_notification_message' );
+
 		if ( $response !== false && isset( $response->is_valid ) && $response->is_valid === 'yes' ) {
 			return true;
 		} else {
