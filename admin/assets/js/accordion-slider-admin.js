@@ -1399,6 +1399,10 @@
 				}
 			});
 
+			if ( this.layers.length === 0 ) {
+				return;
+			}
+
 			if ( removedIndex === 0 ) {
 				this.layers[ 0 ].triggerSelect();
 			} else {
