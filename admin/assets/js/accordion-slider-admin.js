@@ -150,6 +150,8 @@
 		loadAccordionData: function() {
 			var that = this;
 
+			$( '.panel-spinner' ).css( 'display', 'inline-block' );
+
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'get',
@@ -173,6 +175,8 @@
 
 						that.getPanel( index ).setData( 'all', panelData );
 					});
+
+					$( '.panel-spinner' ).css( 'display', '' );
 				}
 			});
 		},
