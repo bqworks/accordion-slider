@@ -2,7 +2,7 @@
 
 class BQW_Accordion_Slider_API {
 
-	const ACCORDION_SLIDER_API = 'http://bqworks.com/api/accordion-slider/';
+	const ACCORDION_SLIDER_API = 'http://api.bqworks.com/accordion-slider/';
 
 	protected static $instance = null;
 
