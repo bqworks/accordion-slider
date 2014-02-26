@@ -803,7 +803,8 @@
 		},
 
 		save: function() {
-			var accordionDataString = this.importWindow.find( 'textarea' ).val();
+			var that = this,
+				accordionDataString = this.importWindow.find( 'textarea' ).val();
 				
 			if ( accordionDataString === '' ) {
 				return;
