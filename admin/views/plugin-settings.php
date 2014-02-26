@@ -72,10 +72,24 @@
     <form action="" method="post" class="purchase-code">
         <?php wp_nonce_field( 'purchase-code-update', 'purchase-code-nonce' ); ?>
         
+        <?php
+            if ( $purchase_code_status === '1' ) {
+                $purchase_code_message_class = 'valid-code';
+                $purchase_code_message = __( 'The purchase code is valid.', 'accordion-slider' );
+            } else if ( $purchase_code_status === '2' ) {
+                $purchase_code_message_class = 'not-valid-code';
+                $purchase_code_message = __( 'The purchase code is not valid.', 'accordion-slider' );
+            } else {
+                $purchase_code_message_class = 'empty-code';
+                $purchase_code_message = __( 'Please enter your purchase code in order to have access to automatic updates.', 'accordion-slider' );
+            }
+        ?>
+
+        <p class="purchase-code-message <?php echo $purchase_code_message_class; ?>"><?php echo $purchase_code_message; ?></p>
+
         <label for="purchase-code-field"><?php _e( 'Purchase Code:', 'accordion-slider' ); ?></label>
-        <input type="text" id="purchase-code-field" name="purchase_code" class="purchase-code-field" value="<?php echo ''; ?>">
-        <p class="purchase-code-message"></p>
-        <input type="submit" name="purchase_code_update" class="button-primary" value="Verify Purchase Code" />
+        <input type="text" id="purchase-code-field" name="purchase_code" class="purchase-code-field" value="<?php echo esc_attr( $purchase_code ); ?>">
+        <input type="submit" name="purchase_code_update" class="button-secondary" value="Verify Purchase Code" />
     </form>
 
 </div>

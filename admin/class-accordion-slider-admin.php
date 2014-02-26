@@ -43,7 +43,6 @@ class BQW_Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint_setting', array( $this, 'ajax_add_breakpoint_setting' ) );
 		add_action( 'wp_ajax_accordion_slider_get_taxonomies', array( $this, 'ajax_get_taxonomies' ) );
 		add_action( 'wp_ajax_accordion_slider_clear_all_cache', array( $this, 'ajax_clear_all_cache' ) );
-		add_action( 'wp_ajax_accordion_slider_verify_purchase_code', array( $this, 'ajax_verify_purchase_code' ) );
 	}
 
 	/*
@@ -311,6 +310,32 @@ class BQW_Accordion_Slider_Admin {
 			if ( isset( $_POST['cache_expiry_interval'] ) ) {
 				$cache_expiry_interval = $_POST['cache_expiry_interval'];
 				update_option( 'accordion_slider_cache_expiry_interval', $cache_expiry_interval );
+			}
+		}
+
+		$purchase_code = get_option( 'accordion_slider_purchase_code', '' );
+		$purchase_code_status = get_option( 'accordion_slider_purchase_code_status', '0' );
+		
+		if ( isset( $_POST['purchase_code_update'] ) ) {
+			check_admin_referer( 'purchase-code-update', 'purchase-code-nonce' );
+
+			if ( isset( $_POST['purchase_code'] ) && $_POST['purchase_code'] !== $purchase_code ) {
+				$purchase_code = $_POST['purchase_code'];
+				update_option( 'accordion_slider_purchase_code', $purchase_code );
+
+				if ( $_POST['purchase_code'] === '' ) {
+					$purchase_code_status = '0';
+				} else {
+					$api = BQW_Accordion_Slider_API::get_instance();
+
+					if ( $api->verify_purchase_code( $purchase_code ) === true ) {
+						$purchase_code_status = '1';
+					} else {
+						$purchase_code_status = '2';
+					}
+				}
+
+				update_option( 'accordion_slider_purchase_code_status', $purchase_code_status );
 			}
 		}
 		
@@ -781,25 +806,6 @@ class BQW_Accordion_Slider_Admin {
 		global $wpdb;
 
 		$wpdb->query( "DELETE FROM " . $wpdb->prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
-
-		die();
-	}
-
-	public function ajax_verify_purchase_code() {
-		$purchase_code = $_POST['purchase_code'];
-		$nonce = $_POST['nonce'];
-
-		if ( ! wp_verify_nonce( $nonce, 'purchase-code-update' ) ) {
-			die( 'This action was stopped for security purposes.' );
-		}
-
-		$api = BQW_Accordion_Slider_API::get_instance();
-
-		if ( $api->verify_purchase_code( $purchase_code ) === true ) {
-			echo 'true';
-		} else {
-			echo 'false';
-		}
 
 		die();
 	}
