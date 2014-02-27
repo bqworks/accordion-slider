@@ -363,7 +363,12 @@
 
 			$( '.panels-container' ).lightSortable( {
 				children: '.panel',
-				placeholder: 'panel panel-placeholder'
+				placeholder: 'panel panel-placeholder',
+				sortEnd: function( event ) {
+					$( '.panel' ).each(function( index ) {
+						$( this ).attr( 'data-position', index );
+					});
+				}
 			} );
 		},
 
@@ -1409,7 +1414,7 @@
 				this.layers[ removedIndex - 1 ].triggerSelect();
 			}
 		},
-
+		
 		duplicateLayer: function() {
 			var that = this,
 				layerData;
