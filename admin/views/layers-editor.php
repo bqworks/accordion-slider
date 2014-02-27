@@ -19,8 +19,8 @@
                         </ul>
                     </div>
 					
-					<a class="delete-layer" href="#" title="Delete Layer">Delete</a>
-					<a class="duplicate-layer" href="#" title="Duplicate Layer">Duplicate</a>
+					<a class="delete-layer disabled" href="#" title="Delete Layer">Delete</a>
+					<a class="duplicate-layer disabled" href="#" title="Duplicate Layer">Duplicate</a>
 				</div>
 
 				<ul class="layers-list">

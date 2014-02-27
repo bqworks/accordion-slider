@@ -471,13 +471,18 @@
 	text-indent: -9999px;
 	background-image: url('images/all-buttons.png');
 	margin: 7px;
-	opacity: 0.5;
+	opacity: 0.6;
 }
 
 .layer-buttons .add-new-layer:hover,
 .layer-buttons .delete-layer:hover,
 .layer-buttons .duplicate-layer:hover {
 	opacity: 1;
+}
+
+.layer-buttons .disabled,
+.layer-buttons .disabled:hover {
+	opacity: 0.2;
 }
 
 .layer-buttons .add-new-layer {

@@ -1247,8 +1247,6 @@
 					return;
 				}
 
-				that.isWorking = true;
-
 				var type = 'paragraph';
 
 				if ( typeof $( event.target ).attr( 'data-type' ) !== 'undefined' ) {
@@ -1269,8 +1267,6 @@
 				if ( that.isWorking === true ) {
 					return;
 				}
-
-				that.isWorking = true;
 
 				that.duplicateLayer();
 			});
@@ -1369,10 +1365,14 @@
 			layer.triggerSelect();
 
 			this.isWorking = false;
+
+			this.editor.find( '.disabled' ).removeClass( 'disabled' );
 		},
 
 		addNewLayer: function( type ) {
 			var that = this;
+
+			this.isWorking = true;
 
 			this.counter++;
 
@@ -1405,6 +1405,7 @@
 			});
 
 			if ( this.layers.length === 0 ) {
+				this.editor.find( '.delete-layer, .duplicate-layer' ).addClass( 'disabled' );
 				return;
 			}
 
@@ -1419,13 +1420,19 @@
 			var that = this,
 				layerData;
 
-			this.counter++;
-
 			$.each( this.layers, function( index, layer ) {
 				if ( layer.isSelected() === true ) {
 					layerData = layer.getData();
 				}
 			});
+
+			if ( typeof layerData === 'undefined' ) {
+				return;
+			}
+
+			this.isWorking = true;
+			
+			this.counter++;
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
