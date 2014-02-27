@@ -2570,7 +2570,7 @@
 
 				$( 'body' ).css( 'user-select', '');
 
-				this.$selectedChild.css( { 'position': 'relative', left: '', top: '', width: '', height: '', 'pointer-events': 'auto' } )
+				this.$selectedChild.css( { 'position': '', left: '', top: '', width: '', height: '', 'pointer-events': '' } )
 									.removeClass( 'ls-ignore' )
 									.insertAfter( this.$placeholder );
 
