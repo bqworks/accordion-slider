@@ -520,7 +520,13 @@
 		addPostsPanels: function() {
 			var that = this;
 
-			var data =  [ { background_source: '[as_image_src]', background_alt: '[as_image_alt]' } ];
+			var data =  [{
+				background_source: '[as_image_src]',
+				background_alt: '[as_image_alt]',
+				settings: {
+					content_type: 'posts'
+				}
+			}];
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -564,7 +570,13 @@
 		addGalleryPanels: function() {
 			var that = this;
 
-			var data =  [ { background_source: '[as_image_src]', background_alt: '[as_image_alt]' } ];
+			var data =  [{
+				background_source: '[as_image_src]',
+				background_alt: '[as_image_alt]',
+				settings: {
+					content_type: 'gallery'
+				}
+			}];
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -594,7 +606,13 @@
 		addFlickrPanels: function() {
 			var that = this;
 
-			var data =  [ { background_source: '[as_image_src]', background_alt: '[as_image_alt]' } ];
+			var data =  [{
+				background_source: '[as_image_src]',
+				background_alt: '[as_image_alt]',
+				settings: {
+					content_type: 'flickr'
+				}
+			}];
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -863,12 +881,16 @@
 			});
 
 			this.$element.find( '.panel-preview' ).on( 'click', function( event ) {
-				MediaLoader.open(function( selection ) {
-					var image = selection[ 0 ];
+				var contentType = that.getData( 'settings' )[ 'content_type' ];
 
-					that.setData( 'background', { background_source: image.url, background_alt: image.alt, background_title: image.title, background_width: image.width, background_height: image.height } );
-					that.updateBackgroundImage();
-				});
+				if ( typeof contentType === 'undefined' || contentType === 'custom' ) {
+					MediaLoader.open(function( selection ) {
+						var image = selection[ 0 ];
+
+						that.setData( 'background', { background_source: image.url, background_alt: image.alt, background_title: image.title, background_width: image.width, background_height: image.height } );
+						that.updateBackgroundImage();
+					});
+				}
 			});
 
 			this.$element.find( '.edit-html' ).on( 'click', function( event ) {
@@ -953,21 +975,28 @@
 		},
 
 		updateBackgroundImage: function() {
-			var panelPreview = this.$element.find( '.panel-preview' );
+			var panelPreview = this.$element.find( '.panel-preview' ),
+				contentType = this.data.settings[ 'content_type' ];
+			
+			panelPreview.empty();
 
-			if ( this.data.background[ 'background_source' ] !== '' ) {
-				if ( panelPreview.find( 'img' ).length ) {
-					panelPreview.find( 'img' ).attr( 'src', this.data.background[ 'background_source' ] );
+			if ( typeof contentType === 'undefined' || contentType === 'custom' ) {
+				var backgroundSource = this.data.background[ 'background_source' ];
+				if ( typeof backgroundSource !== 'undefined' && backgroundSource !== '' ) {
+					$( '<img src="' + backgroundSource + '" />' ).appendTo( panelPreview );
+					this.resizeImage();
 				} else {
-					panelPreview.find( '.no-image' ).remove();
-					$( '<img src="' + this.data.background[ 'background_source' ] + '" />' ).appendTo( panelPreview );
+					$( '<p class="no-image">' + as_js_vars.no_image + '</p>' ).appendTo( panelPreview );
 				}
-
-				this.resizeImage();
-			} else if ( panelPreview.find( 'img' ).length ) {
-				panelPreview.find( 'img' ).remove();
-				$( '<p class="no-image">' + as_js_vars.no_image + '</p>' ).appendTo( panelPreview );
+			} else if ( contentType === 'posts' ) {
+				$( '<p class="dynamic-panel">[ ' + as_js_vars.posts_panels + ' ]</p>' ).appendTo( panelPreview );
+			} else if ( contentType === 'gallery' ) {
+				$( '<p class="dynamic-panel">[ ' + as_js_vars.gallery_panels + ' ]</p>' ).appendTo( panelPreview );
+			} else if ( contentType === 'flickr' ) {
+				$( '<p class="dynamic-panel">[ ' + as_js_vars.flickr_panels + ' ]</p>' ).appendTo( panelPreview );
 			}
+
+			
 		},
 
 		resizeImage: function() {
@@ -1013,7 +1042,12 @@
 
 			this.currentPanel = AccordionSliderAdmin.getPanel( id );
 			
-			var data = this.currentPanel.getData( 'background' );
+			var data = this.currentPanel.getData( 'background' ),
+				contentType = this.currentPanel.getData( 'settings' )[ 'content_type' ];
+
+			if ( typeof contentType === 'undefined' ) {
+				contentType = 'custom';
+			}
 
 			var spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
 
@@ -1021,7 +1055,7 @@
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				dataType: 'html',
-				data: { action: 'accordion_slider_load_background_image_editor', data: JSON.stringify( data ) },
+				data: { action: 'accordion_slider_load_background_image_editor', data: JSON.stringify( data ), content_type: contentType },
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
@@ -1323,7 +1357,9 @@
 			var $viewport = this.editor.find( '.viewport' ).css( { 'width': accordionWidth, 'height': accordionHeight } ),
 				$viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' ).appendTo( $viewport );
 
-			if ( typeof backgroundData.background_source !== 'undefined' && backgroundData.background_source !== '') {
+			if ( typeof backgroundData.background_source !== 'undefined' &&
+				backgroundData.background_source !== '' &&
+				backgroundData.background_source.indexOf( '[' ) === -1 ) {
 				var $viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" />' ).prependTo( $viewport );
 			}
 		},
@@ -1431,7 +1467,7 @@
 			}
 
 			this.isWorking = true;
-			
+
 			this.counter++;
 
 			$.ajax({
@@ -2162,6 +2198,7 @@
 			});
 
 			this.currentPanel.setData( 'settings', data );
+			this.currentPanel.updateBackgroundImage();
 		},
 
 		close: function() {

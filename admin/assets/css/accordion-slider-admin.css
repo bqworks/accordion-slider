@@ -104,6 +104,16 @@
 	width: 100%;
 }
 
+.panel-preview .dynamic-panel {
+    line-height: 169px;
+    margin: 0;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #FFF;
+	border-bottom: 1px solid #DDD;
+}
+
 .panel-buttons {
 	height: 44px;
 	background: #FFF;
@@ -343,8 +353,18 @@
 	min-width: 660px;
 }
 
+.background-image-editor.dynamic .modal-window {
+	min-width: 470px;
+}
+
 @media (max-width: 720px) {
-	.background-image-editor:before {
+	.background-image-editor.custom:before {
+		display: none;
+	}
+}
+
+@media (max-width: 530px) {
+	.background-image-editor.dynamic:before {
 		display: none;
 	}
 }
@@ -387,6 +407,10 @@
 	cursor: pointer;
 }
 
+.background-image-editor.dynamic .image-loader {
+	display: none;
+}
+
 .background-image-editor .image-loader img {
 	height: 100%;
 }
@@ -413,6 +437,10 @@
 	opacity: 1;
 }
 
+.background-image-editor.dynamic .retina-loader {
+	display: none;
+}
+
 #background-retina-source,
 #opened-background-retina-source {
 	padding-right: 25px;
@@ -420,6 +448,10 @@
 
 .background-image-editor table {
 	margin-left: 190px;
+}
+
+.background-image-editor.dynamic table {
+	margin-left: 0;
 }
 
 .background-image-editor label {
@@ -438,6 +470,10 @@
 
 .background-image-editor .link .field {
 	width: 612px;
+}
+
+.background-image-editor.dynamic .link .field {
+	width: 420px;
 }
 
 .html-editor .modal-window textarea {

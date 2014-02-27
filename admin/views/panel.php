@@ -3,10 +3,18 @@
 	
 	<div class="panel-preview">
 		<?php 
-			if ( isset ( $panel_image ) && $panel_image !== '' ) {
-				echo '<img src="' . esc_url( $panel_image ) . '" />';
-			} else {
-				echo '<p class="no-image">' . __( 'Click to add image', 'accordion-slider' ) . '</p>';
+			if ( $panel_type === 'custom' ) {
+				if ( $panel_image !== '' ) {
+					echo '<img src="' . esc_url( $panel_image ) . '" />';
+				} else {
+					echo '<p class="no-image">' . __( 'Click to add image', 'accordion-slider' ) . '</p>';
+				}
+			} else if ( $panel_type === 'posts' ) {
+				echo '<p class="dynamic-panel">[ ' . __( 'Posts Panels', 'accordion-slider' ) . ' ]</p>';
+			} else if ( $panel_type === 'gallery' ) {
+				echo '<p class="dynamic-panel">[ ' . __( 'Gallery Panels', 'accordion-slider' ) . ' ]</p>';
+			} else if ( $panel_type === 'flickr' ) {
+				echo '<p class="dynamic-panel">[ ' . __( 'Flickr Panels', 'accordion-slider' ) . ' ]</p>';
 			}
 		?>
 	</div>

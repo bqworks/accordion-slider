@@ -140,6 +140,9 @@ class BQW_Accordion_Slider_Admin {
 				'sa_nonce' => wp_create_nonce( 'save-accordion' . $id ),
 				'cac_nonce' => wp_create_nonce( 'clear-all-cache' ),
 				'no_image' => __( 'Click to add image', 'accordion-slider' ),
+				'posts_panels' => __( 'Posts panels', 'accordion-slider' ),
+				'gallery_panels' => __( 'Gallery panels', 'accordion-slider' ),
+				'flickr_panels' => __( 'Flickr panels', 'accordion-slider' ),
 				'accordion_delete' => __( 'Are you sure you want to delete this accordion?', 'accordion-slider' ),
 				'panel_delete' => __( 'Are you sure you want to delete this panel?', 'accordion-slider' ),
 				'yes' => __( 'Yes', 'accordion-slider' ),
@@ -550,9 +553,12 @@ class BQW_Accordion_Slider_Admin {
 	}
 
 	public function create_panel( $data ) {
+		$panel_type = 'custom';
 		$panel_image = '';
 
-		if ( $data !== false && $data['background_source'] !== '' ) {
+		if ( $data !== false ) {
+			$panel_type = isset( $data['settings'] ) && isset( $data['settings']['content_type'] ) ? $data['settings']['content_type'] : $panel_type;
+
 			$panel_image = $data['background_source'];
 		}
 
@@ -575,6 +581,7 @@ class BQW_Accordion_Slider_Admin {
 
 	public function ajax_load_background_image_editor() {
 		$data = json_decode( stripslashes( $_POST['data'] ), true );
+		$content_class = $_POST['content_type'] === 'custom' ? 'custom' : 'dynamic';
 
 		include( 'views/background-image-editor.php' );
 

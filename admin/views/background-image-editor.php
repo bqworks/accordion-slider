@@ -1,5 +1,5 @@
 <div class="modal-overlay"></div>
-<div class="modal-window-container background-image-editor">
+<div class="modal-window-container background-image-editor <?php echo $content_class;?>">
 	<div class="modal-window">
 		<span class="close-x"></span>
 		<div class="fieldset background-image">
