@@ -12,15 +12,14 @@
 	</div>
 
 	<div class="panel-controls">
-		<a class="delete-panel" href="#"><?php _e( 'Delete', 'accordion-slider' ); ?></a>
-		<a class="duplicate-panel" href="#"><?php _e( 'Duplicate', 'accordion-slider' ); ?></a>
-		<a class="toggle-visibility" href="#"><?php _e( 'Visibility', 'accordion-slider' ); ?></a>
+		<a class="delete-panel" href="#" title="Delete Panel">Delete</a>
+		<a class="duplicate-panel" href="#" title="Duplicate Panel">Duplicate</a>
 	</div>
 
 	<div class="panel-buttons"> 
-		<a class="button-secondary edit-background-image" href="#"><?php _e( 'Im', 'accordion-slider' ); ?></a>
-		<a class="button-secondary edit-html" href="#"><?php _e( 'HT', 'accordion-slider' ); ?></a>
-		<a class="button-secondary edit-layers" href="#"><?php _e( 'Ly', 'accordion-slider' ); ?></a>
-		<a class="button-secondary edit-settings" href="#"><?php _e( 'St', 'accordion-slider' ); ?></a>
+		<a class="edit-background-image" href="#" title="Edit Background Image">Image</a>
+		<a class="edit-layers" href="#" title="Edit Layers">Layers</a>
+		<a class="edit-html" href="#" title="Edit HTML">HTML</a>
+		<a class="edit-settings" href="#" title="Edit Settings">Settings</a>
 	</div>
 </div>

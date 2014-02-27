@@ -7,9 +7,9 @@
 
 		<div class="controls">
 			<div class="left">
-				<div class="buttons">
+				<div class="layer-buttons">
 					<div class="add-layer-group">
-                        <a class="button-secondary add-new-layer" href="#">+</a>
+                        <a class="add-new-layer" href="#" title="Add Layer">Add</a>
                         <ul class="layer-type">
                             <li><a href="#" data-type="video"><?php _e( 'Video Layer', 'accordion-slider' ); ?></a></li>
                             <li><a href="#" data-type="div"><?php _e( 'DIV Layer', 'accordion-slider' ); ?></a></li>
@@ -19,8 +19,8 @@
                         </ul>
                     </div>
 					
-					<a class="button-secondary delete-layer" href="#">-</a>
-					<a class="button-secondary duplicate-layer" href="#">=</a>
+					<a class="delete-layer" href="#" title="Delete Layer">Delete</a>
+					<a class="duplicate-layer" href="#" title="Duplicate Layer">Duplicate</a>
 				</div>
 
 				<ul class="layers-list">

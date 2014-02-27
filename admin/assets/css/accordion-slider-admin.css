@@ -111,9 +111,34 @@
 	cursor: move;
 }
 
-.panel-buttons .button-secondary {
-	margin: 10px 5px;
-	border-color: #DDD;
+.panel-buttons a {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-indent: -9999px;
+	background-image: url('images/all-buttons.png');
+	margin: 7px;
+	opacity: 0.5;
+}
+
+.panel-buttons a:hover {
+	opacity: 1;
+}
+
+.panel-buttons .edit-background-image {
+
+}
+
+.panel-buttons .edit-layers {
+	background-position: -30px 0;
+}
+
+.panel-buttons .edit-html {
+	background-position: -60px 0;
+}
+
+.panel-buttons .edit-settings {
+	background-position: -90px 0;
 }
 
 .panel-controls {
@@ -129,23 +154,23 @@
 
 .panel-controls a {
 	display: block;
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	background-color: #FFF;
 	margin: 10px;
 	text-indent: -9999px;
+	background-image: url('images/all-buttons.png');
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,.4);
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.4);
+	box-shadow: 0 1px 1px rgba(0,0,0,.4);
 }
 
 .delete-panel {
-
+	background-position: -153px -3px;
 }
 
 .duplicate-panel {
-
-}
-
-.toggle-visibility {
-
+	background-position: -183px -3px;
 }
 
 .add-panel-group {
@@ -376,10 +401,16 @@
 	width: 17px;
 	height: 17px;
 	position: absolute;
-	background-color: #CCC;
 	margin-top: 5px;
 	margin-left: -22px;
 	cursor: pointer;
+	background-image: url('images/all-buttons.png');
+	background-position: -217px -7px;
+	opacity: 0.5;
+}
+
+.retina-loader:hover {
+	opacity: 1;
 }
 
 #background-retina-source,
@@ -429,6 +460,36 @@
 	.layers-editor:before {
 		display: none;
 	}
+}
+
+.layer-buttons .add-new-layer,
+.layer-buttons .delete-layer,
+.layer-buttons .duplicate-layer {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	text-indent: -9999px;
+	background-image: url('images/all-buttons.png');
+	margin: 7px;
+	opacity: 0.5;
+}
+
+.layer-buttons .add-new-layer:hover,
+.layer-buttons .delete-layer:hover,
+.layer-buttons .duplicate-layer:hover {
+	opacity: 1;
+}
+
+.layer-buttons .add-new-layer {
+	background-position: -125px -5px;
+}
+
+.layer-buttons .delete-layer {
+	background-position: -155px -5px;
+}
+
+.layer-buttons .duplicate-layer {
+	background-position: -185px -5px;
 }
 
 .add-layer-group {
@@ -646,10 +707,16 @@
 	width: 17px;
 	height: 17px;
 	position: absolute;
-	background-color: #CCC;
 	bottom: 6px;
 	right: 4px;
 	cursor: pointer;
+	background-image: url('images/all-buttons.png');
+	background-position: -217px -7px;
+	opacity: 0.5;
+}
+
+.layers-editor .layer-image-loader:hover {
+	opacity: 1;
 }
 
 .layers-editor .viewport {
