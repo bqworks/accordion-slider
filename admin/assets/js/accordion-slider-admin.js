@@ -898,7 +898,7 @@
 						var image = selection[ 0 ];
 
 						that.setData( 'background', { background_source: image.url, background_alt: image.alt, background_title: image.title, background_width: image.width, background_height: image.height } );
-						that.updateBackgroundImage();
+						that.updatePanelPreview();
 					});
 				}
 			});
@@ -984,7 +984,7 @@
 			});
 		},
 
-		updateBackgroundImage: function() {
+		updatePanelPreview: function() {
 			var panelPreview = this.$element.find( '.panel-preview' ),
 				contentType = this.data.settings[ 'content_type' ];
 			
@@ -992,21 +992,25 @@
 
 			if ( typeof contentType === 'undefined' || contentType === 'custom' ) {
 				var backgroundSource = this.data.background[ 'background_source' ];
+
 				if ( typeof backgroundSource !== 'undefined' && backgroundSource !== '' ) {
 					$( '<img src="' + backgroundSource + '" />' ).appendTo( panelPreview );
 					this.resizeImage();
 				} else {
 					$( '<p class="no-image">' + as_js_vars.no_image + '</p>' ).appendTo( panelPreview );
 				}
-			} else if ( contentType === 'posts' ) {
-				$( '<p class="dynamic-panel">[ ' + as_js_vars.posts_panels + ' ]</p>' ).appendTo( panelPreview );
-			} else if ( contentType === 'gallery' ) {
-				$( '<p class="dynamic-panel">[ ' + as_js_vars.gallery_panels + ' ]</p>' ).appendTo( panelPreview );
-			} else if ( contentType === 'flickr' ) {
-				$( '<p class="dynamic-panel">[ ' + as_js_vars.flickr_panels + ' ]</p>' ).appendTo( panelPreview );
-			}
 
-			
+				this.$element.removeClass( 'dynamic-panel' );
+			} else if ( contentType === 'posts' ) {
+				$( '<p>[ ' + as_js_vars.posts_panels + ' ]</p>' ).appendTo( panelPreview );
+				this.$element.addClass( 'dynamic-panel' );
+			} else if ( contentType === 'gallery' ) {
+				$( '<p>[ ' + as_js_vars.gallery_panels + ' ]</p>' ).appendTo( panelPreview );
+				this.$element.addClass( 'dynamic-panel' );
+			} else if ( contentType === 'flickr' ) {
+				$( '<p>[ ' + as_js_vars.flickr_panels + ' ]</p>' ).appendTo( panelPreview );
+				this.$element.addClass( 'dynamic-panel' );
+			}
 		},
 
 		resizeImage: function() {
@@ -1046,6 +1050,8 @@
 		editor: null,
 
 		currentPanel: null,
+
+		needsPreviewUpdate: false,
 
 		open: function( id ) {
 			var that = this;
@@ -1097,6 +1103,10 @@
 				event.preventDefault();
 				that.clearFieldset( event );
 			});
+
+			this.editor.find( 'input[name="background_source"]' ).on( 'input', function( event ) {
+				that.needsPreviewUpdate = true;
+			});
 		},
 
 		openMediaLibrary: function( event ) {
@@ -1130,6 +1140,8 @@
 						that.editor.find( 'input[name="background_title"]' ).val( image.title );
 						that.editor.find( 'input[name="background_width"]' ).val( image.width );
 						that.editor.find( 'input[name="background_height"]' ).val( image.height );
+
+						that.needsPreviewUpdate = true;
 					} else if ( target === 'opened-background' ) {
 						that.editor.find( 'input[name="opened_background_source"]' ).val( image.url );
 						that.editor.find( 'input[name="opened_background_alt"]' ).val( image.alt );
@@ -1165,7 +1177,11 @@
 			});
 
 			this.currentPanel.setData( 'background', data );
-			this.currentPanel.updateBackgroundImage();
+
+			if ( this.needsPreviewUpdate === true ) {
+				this.currentPanel.updatePanelPreview();
+				this.needsPreviewUpdate = false;
+			}
 		},
 
 		close: function() {
@@ -2074,6 +2090,8 @@
 
 		currentPanel: null,
 
+		needsPreviewUpdate: false,
+
 		open: function( id ) {
 			var that = this;
 
@@ -2112,6 +2130,8 @@
 
 			this.editor.find( '.panel-setting[name="content_type"]' ).on( 'change', function() {
 				that.loadControls( $( this ).val() );
+
+				that.needsPreviewUpdate = true;
 			});
 
 			if ( this.editor.find( '.panel-setting[name="content_type"]' ).val() === 'posts' ) {
@@ -2208,7 +2228,11 @@
 			});
 
 			this.currentPanel.setData( 'settings', data );
-			this.currentPanel.updateBackgroundImage();
+
+			if ( this.needsPreviewUpdate === true ) {
+				this.currentPanel.updatePanelPreview();
+				this.needsPreviewUpdate = false;
+			}
 		},
 
 		close: function() {

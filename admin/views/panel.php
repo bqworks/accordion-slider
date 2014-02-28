@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel<?php echo ( $panel_type === 'posts' || $panel_type === 'gallery' || $panel_type === 'flickr' ) ? ' dynamic-panel' : '' ; ?>">
 	<span class="spinner panel-spinner"></span>
 	
 	<div class="panel-preview">
@@ -10,11 +10,11 @@
 					echo '<p class="no-image">' . __( 'Click to add image', 'accordion-slider' ) . '</p>';
 				}
 			} else if ( $panel_type === 'posts' ) {
-				echo '<p class="dynamic-panel">[ ' . __( 'Posts Panels', 'accordion-slider' ) . ' ]</p>';
+				echo '<p>[ ' . __( 'Posts Panels', 'accordion-slider' ) . ' ]</p>';
 			} else if ( $panel_type === 'gallery' ) {
-				echo '<p class="dynamic-panel">[ ' . __( 'Gallery Panels', 'accordion-slider' ) . ' ]</p>';
+				echo '<p>[ ' . __( 'Gallery Panels', 'accordion-slider' ) . ' ]</p>';
 			} else if ( $panel_type === 'flickr' ) {
-				echo '<p class="dynamic-panel">[ ' . __( 'Flickr Panels', 'accordion-slider' ) . ' ]</p>';
+				echo '<p>[ ' . __( 'Flickr Panels', 'accordion-slider' ) . ' ]</p>';
 			}
 		?>
 	</div>

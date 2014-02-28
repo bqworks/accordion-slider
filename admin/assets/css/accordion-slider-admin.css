@@ -78,6 +78,14 @@
     background-position: 0 0, 10px 10px;
 }
 
+.dynamic-panel .panel-preview {
+    background: #FFF;
+	border-bottom: 1px solid #DDD;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 .panel .panel-spinner {
 	position: absolute;
 	top: 0;
@@ -94,7 +102,7 @@
 	z-index: 10;
 }
 
-.panel-preview .no-image {
+.panel-preview p {
 	line-height: 170px;
 	margin: 0;
 	width: 100%;
@@ -104,14 +112,9 @@
 	width: 100%;
 }
 
-.panel-preview .dynamic-panel {
-    line-height: 169px;
-    margin: 0;
-    width: 100%;
+.dynamic-panel .panel-preview p {
     font-size: 18px;
     font-weight: bold;
-    background-color: #FFF;
-	border-bottom: 1px solid #DDD;
 }
 
 .panel-buttons {
