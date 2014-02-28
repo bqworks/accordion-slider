@@ -811,10 +811,10 @@
 }
 
 .settings-editor .modal-window {
-	min-width: 316px;
+	min-width: 326px;
 }
 
-@media (max-width: 376px) {
+@media (max-width: 386px) {
 	.settings-editor:before {
 		display: none;
 	}
@@ -846,6 +846,10 @@
 
 .settings-editor th.label-cell {
 	text-align: left;
+}
+
+.settings-editor .label-cell label {
+	padding-right: 10px;
 }
 
 .settings-editor .setting-cell {
