@@ -134,6 +134,7 @@ class BQW_Accordion_Slider_Admin {
 			wp_localize_script( $this->plugin_slug . '-admin-script', 'as_js_vars', array(
 				'admin' => admin_url( 'admin.php' ),
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+				'plugin' => plugins_url( 'accordion-slider' ),
 				'page' => isset( $_GET['page'] ) && ( $_GET['page'] === 'accordion-slider-new' || ( isset( $_GET['id'] ) && isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) ) ? 'single' : 'all',
 				'id' => $id,
 				'lad_nonce' => wp_create_nonce( 'load-accordion-data' . $id ),

@@ -1946,9 +1946,10 @@
 	ImageLayer.prototype.constructor = ImageLayer;
 
 	ImageLayer.prototype.initLayerContent = function() {
-		var that = this;
+		var that = this,
+			placehoderPath = as_js_vars.plugin + '/admin/assets/css/images/image-placeholder.png';
 
-		this.imageSource = this.data.createMode === 'new' ? 'placeholder.png' : this.data.image_source;
+		this.imageSource = this.data.createMode === 'new' ? placehoderPath : this.data.image_source;
 
 		this.$layerSettings.find( 'input[name="image_source"]' ).on( 'change', function() {
 			that.imageSource = $( this ).val();
@@ -1956,7 +1957,7 @@
 			if ( that.imageSource !== '' ) {
 				that.$viewportLayer.attr( 'src', that.imageSource );
 			} else {
-				that.$viewportLayer.attr( 'src', 'placeholder.png' );
+				that.$viewportLayer.attr( 'src', placehoderPath );
 			}
 		});
 
@@ -2041,8 +2042,25 @@
 	};
 
 	VideoLayer.prototype.initViewportLayer = function() {
-		this.$viewportLayer = $( '<div class="viewport-layer as-layer"></div>' );
+		var that = this;
+
+		this.$viewportLayer = $( '<div class="viewport-layer as-layer"><span class="video-placeholder"></span></div>' );
 		Layer.prototype.initViewportLayer.call( this );
+
+		this.$layerSettings.find( 'input[name="width"], input[name="height"]' ).on( 'change', function() {
+			var width = that.$layerSettings.find( 'input[name="width"]' ).val(),
+				height = that.$layerSettings.find( 'input[name="height"]' ).val();
+
+			if ( width === 'auto' ) {
+				that.$viewportLayer.css( 'width', 300 );
+			}
+
+			if ( height === 'auto' ) {
+				that.$viewportLayer.css( 'height', 150 );
+			}
+		});
+
+		this.$layerSettings.find( 'input[name="width"], input[name="height"]' ).trigger( 'change' );
 	};
 
 	VideoLayer.prototype.getData = function() {
