@@ -479,7 +479,6 @@
 .html-editor .modal-window textarea {
 	min-width: 600px;
 	min-height: 300px;
-	margin-bottom: 20px;
 }
 
 @media (max-width: 660px) {
