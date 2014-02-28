@@ -266,7 +266,27 @@
 }
 
 .sidebar-settings #custom_class {
-	width: 150px;
+	width: 100px;
+}
+
+.appearance-panel select {
+	min-width: 100px;
+}
+
+.animations-panel select {
+	min-width: 110px;
+}
+
+.autoplay-panel select {
+	min-width: 100px;
+}
+
+.mouse_wheel-panel select {
+	min-width: 100px;
+}
+
+.video-panel select {
+	min-width: 120px;
 }
 
 .modal-overlay {

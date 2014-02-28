@@ -52,9 +52,10 @@
                         $panels_state = BQW_Accordion_Slider_Settings::getPanelsState();
 
                         foreach ( $setting_groups as $group_name => $group ) {
-                            $panel_class = isset( $accordion_panels_state ) && isset( $accordion_panels_state[ $group_name ] ) ? $accordion_panels_state[ $group_name ] : $panels_state[ $group_name ];
+                            $panel_state_class = isset( $accordion_panels_state ) && isset( $accordion_panels_state[ $group_name ] ) ? $accordion_panels_state[ $group_name ] : $panels_state[ $group_name ];
+                            $panel_name_class = $group_name . '-panel';
                             ?>
-                            <div class="postbox <?php echo $panel_class; ?>" data-name="<?php echo $group_name; ?>">
+                            <div class="postbox <?php echo $panel_name_class . ' ' . $panel_state_class; ?>" data-name="<?php echo $group_name; ?>">
                                 <div class="handlediv"></div>
                                 <h3 class="hndle"><?php echo $group['label']; ?></h3>
                                 <div class="inside">
