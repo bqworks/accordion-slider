@@ -67,10 +67,10 @@
 				that.addBreakpoint();
 			});
 
-			$( '.breakpoints' ).on( 'click', '.add-setting', function( event ) {
+			$( '.breakpoints' ).on( 'click', '.setting-name a', function( event ) {
 				event.preventDefault();
 
-				var name = $( this ).siblings( '.setting-selector' ).val(),
+				var name = $( this ).attr( 'data-type' ),
 					context = $( this ).parents( '.breakpoint' ).find( '.breakpoint-settings' );
 
 				that.addBreakpointSetting( name, context );

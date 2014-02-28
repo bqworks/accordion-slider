@@ -1,9 +1,34 @@
 <div class="breakpoint">
-	<div class="breakpoint-header">
-		<?php _e( 'Window maximum width:', 'accordion-slider' ); ?><input type="text" name="breakpoint_width" value="<?php echo isset( $breakpoint_settings['breakpoint_width'] ) ? esc_attr( $breakpoint_settings['breakpoint_width'] ) : ( isset( $width ) ? $width : '' ); ?>" />
-		<span class="remove-breakpoint"></span>
-	</div>
 	<table>
+		<thead class="breakpoint-header">
+			<tr>
+				<th>
+					<label><?php _e( 'Window width:', 'accordion-slider' ); ?></label>
+				</th>
+				<th>
+					<input type="text" name="breakpoint_width" value="<?php echo isset( $breakpoint_settings['breakpoint_width'] ) ? esc_attr( $breakpoint_settings['breakpoint_width'] ) : ( isset( $width ) ? $width : '' ); ?>" />
+					
+					<div class="add-setting-group">
+				        <a class="button add-setting" href="#"><?php _e( 'Add Setting', 'accordion-slider' ); ?> <span class="add-setting-arrow">&#9660</span></a>
+				        <ul class="setting-name">
+				        	<?php
+								$default_breakpoint_settings = BQW_Accordion_Slider_Settings::getBreakpointSettings();
+
+								foreach ( $default_breakpoint_settings as $setting_name ) {
+									if ( $setting_name !== 'breakpoint_width' ) {
+										$setting = BQW_Accordion_Slider_Settings::getSettings( $setting_name );
+										echo '<li><a href="#" data-type="' . $setting_name . '">' . $setting['label'] . '</a></li>';
+									}
+								}
+							?>
+				        </ul>
+				    </div>
+
+					<span class="remove-breakpoint"></span>
+				</th>
+			</tr>
+		</thead>
+	
 		<tbody class="breakpoint-settings">
 			<?php
 				if ( isset( $breakpoint_settings ) && ! empty( $breakpoint_settings ) ) {
@@ -16,20 +41,4 @@
 			?>
 		</tbody>
 	</table>
-	
-	<div class="add-setting-group">
-		<select class="setting-selector">
-			<?php
-				$breakpoint_settings = BQW_Accordion_Slider_Settings::getBreakpointSettings();
-
-				foreach ( $breakpoint_settings as $setting_name ) {
-					if ( $setting_name !== 'breakpoint_width' ) {
-						$setting = BQW_Accordion_Slider_Settings::getSettings( $setting_name );
-						echo '<option value="' . $setting_name . '">' . $setting['label'] . '</option>';
-					}
-				}
-			?>
-		</select>
-		<a class="button add-setting" href="#"><?php _e( 'Add Option', 'accordion-slider' ); ?></a>
-	</div>
 </div>

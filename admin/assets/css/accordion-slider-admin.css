@@ -933,29 +933,86 @@
 	background-color: #FFF;
 }
 
+.breakpoints-box table {
+	width: 100%;
+	border-spacing: 0;
+	white-space: nowrap;
+}
+
+.breakpoints-box table th {
+	font-weight: normal;
+	padding: 10px 10px 10px 20px;
+}
+
+.breakpoints-box table td {
+	padding-left: 20px;
+}
+
 .breakpoint-header {
 	width: 100%;
-	padding: 5px 10px;
-	background-color: #F7F7F7;
+	background-color: #F9F9F9;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	cursor: move;
+	text-align: left;
+}
+
+.breakpoint-header input {
+	vertical-align: middle
 }
 
 .add-setting-group {
-	padding: 10px 10px 30px;
+	position: relative;
+	display: inline-block;
+	float: right;
+	margin-right: 25px;
 }
 
-.breakpoints-box table {
-	margin-left: 5px;
+.add-setting-group:hover .setting-name {
+	display: block;
+}
+
+.add-setting {
+	vertical-align: middle !important;
+}
+
+.add-setting-arrow {
+	font-size: 10px;
+	color: #999;
+}
+
+.setting-name {
+	position: absolute;
+	padding: 0 10px;
+	background-color: #FEFEFE;
+	margin: 0;
+	border: 1px solid #BBB;
+	display: none;
+	bottom: 28px;
+}
+
+.setting-name li {
+	margin: 0;
+	cursor: pointer;
+}
+
+.setting-name li:last-child {
+	border-bottom: none;
+}
+
+.setting-name a {
+	display: block;
+	padding: 3px;
+	text-decoration: none;
+	white-space: nowrap;
 }
 
 .remove-breakpoint,
 .remove-breakpoint-setting {
 	display: none;
 	position: absolute;
-	right: 10px;
+	right: 15px;
 	font-size: 15px;
 	margin-top: 3px;
 	cursor: pointer;
