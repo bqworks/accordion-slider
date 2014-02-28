@@ -8,6 +8,8 @@
 
 		postsData: {},
 
+		allowPanelImageResize: true,
+
 		init: function() {
 			if ( as_js_vars.page === 'single' ) {
 				this.initSingleAccordionPage();
@@ -88,7 +90,15 @@
 			} );
 
 			$( window ).resize(function() {
-				that.resizePanelImages();
+				if ( that.allowPanelImageResize === true ) {
+					that.resizePanelImages();
+					that.allowPanelImageResize = false;
+
+					setTimeout( function() {
+						that.resizePanelImages();
+						that.allowPanelImageResize = true;
+					}, 250 );
+				}
 			});
 
 			$( '.postbox .hndle, .postbox .handlediv' ).on( 'click', function() {
