@@ -530,7 +530,7 @@
 	height: 20px;
 	text-indent: -9999px;
 	background-image: url('images/all-buttons.png');
-	margin: 7px;
+	margin: 0 15px 0 0;
 	opacity: 0.6;
 }
 
@@ -610,9 +610,9 @@
 
 .layers-editor .layers-list {
 	width: 130px;
-	max-height: 138px;
+	max-height: 137px;
 	overflow: auto;
-	margin: 6px 0 0;
+	margin: 13px 0 0;
 }
 
 .layers-editor .layers-list-item {
@@ -661,7 +661,7 @@
 .layers-editor .layer-settings {
     display: none;
     margin-bottom: 0;
-    height: 168px;
+    height: 170px;
 }
 
 .layers-editor .selected-layer-settings {
