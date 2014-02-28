@@ -519,6 +519,7 @@
 .layer-buttons .disabled,
 .layer-buttons .disabled:hover {
 	opacity: 0.2;
+	cursor: default;
 }
 
 .layer-buttons .add-new-layer {
