@@ -129,6 +129,7 @@
 	background-image: url('images/all-buttons.png');
 	margin: 7px;
 	opacity: 0.5;
+	outline: none;
 }
 
 .panel-buttons a:hover {
@@ -173,6 +174,7 @@
 	-moz-box-shadow: 0 1px 1px rgba(0,0,0,.4);
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.4);
 	box-shadow: 0 1px 1px rgba(0,0,0,.4);
+	outline: none;
 }
 
 .delete-panel {
@@ -532,6 +534,7 @@
 	background-image: url('images/all-buttons.png');
 	margin: 0 15px 0 0;
 	opacity: 0.6;
+	outline: none;
 }
 
 .layer-buttons .add-new-layer:hover,
