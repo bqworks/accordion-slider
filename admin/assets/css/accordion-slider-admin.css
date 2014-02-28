@@ -462,6 +462,11 @@
 	margin-left: 10px;
 	width: 363px;
 	font-size: 12px;
+	border: none;
+	border-bottom: 1px solid #DDD;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 .background-image-editor .link table {
