@@ -8,21 +8,7 @@
 				<th>
 					<input type="text" name="breakpoint_width" value="<?php echo isset( $breakpoint_settings['breakpoint_width'] ) ? esc_attr( $breakpoint_settings['breakpoint_width'] ) : ( isset( $width ) ? $width : '' ); ?>" />
 					
-					<div class="add-setting-group">
-				        <a class="button add-setting" href="#"><?php _e( 'Add Setting', 'accordion-slider' ); ?> <span class="add-setting-arrow">&#9660</span></a>
-				        <ul class="setting-name">
-				        	<?php
-								$default_breakpoint_settings = BQW_Accordion_Slider_Settings::getBreakpointSettings();
-
-								foreach ( $default_breakpoint_settings as $setting_name ) {
-									if ( $setting_name !== 'breakpoint_width' ) {
-										$setting = BQW_Accordion_Slider_Settings::getSettings( $setting_name );
-										echo '<li><a href="#" data-type="' . $setting_name . '">' . $setting['label'] . '</a></li>';
-									}
-								}
-							?>
-				        </ul>
-				    </div>
+					
 
 					<span class="remove-breakpoint"></span>
 				</th>
@@ -41,4 +27,19 @@
 			?>
 		</tbody>
 	</table>
+	<div class="add-setting-group">
+				        <a class="button add-setting" href="#"><?php _e( 'Add Setting', 'accordion-slider' ); ?> <span class="add-setting-arrow">&#9660</span></a>
+				        <ul class="setting-name">
+				        	<?php
+								$default_breakpoint_settings = BQW_Accordion_Slider_Settings::getBreakpointSettings();
+
+								foreach ( $default_breakpoint_settings as $setting_name ) {
+									if ( $setting_name !== 'breakpoint_width' ) {
+										$setting = BQW_Accordion_Slider_Settings::getSettings( $setting_name );
+										echo '<li><a href="#" data-type="' . $setting_name . '">' . $setting['label'] . '</a></li>';
+									}
+								}
+							?>
+				        </ul>
+				    </div>
 </div>

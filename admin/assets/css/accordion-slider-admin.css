@@ -964,9 +964,7 @@
 
 .add-setting-group {
 	position: relative;
-	display: inline-block;
-	float: right;
-	margin-right: 25px;
+	margin: 15px;
 }
 
 .add-setting-group:hover .setting-name {
