@@ -177,7 +177,7 @@ class BQW_Accordion_Slider {
 		return $accordion;
 	}
 
-	public function output_accordion( $accordion_data, $cache = true ) {
+	public function output_accordion( $accordion_data, $allow_cache = true ) {
 		$accordion_data = apply_filters( 'accordion_slider_data', $accordion_data, $accordion_data['id'] );
 
 		$accordion = new BQW_AS_Public_Accordion( $accordion_data );
@@ -196,7 +196,7 @@ class BQW_Accordion_Slider {
 			$this->add_script_to_load( $this->plugin_slug . '-' . $js_dependency . '-script' );
 		}
 
-		if ( $cache === true ) {
+		if ( $allow_cache === true ) {
 			$accordion_cache = array(
 				'html_output' => $html_output,
 				'js_output' => $js_output,
@@ -307,11 +307,11 @@ class BQW_Accordion_Slider {
 
 	public function accordion_slider_shortcode( $atts, $content = null ) {
 		$id = isset( $atts['id'] ) ? $atts['id'] : -1;
-		$cache = ( isset( $atts['cache'] ) && $atts['cache'] === 'false' ) ? false : true;
+		$allow_cache = ( isset( $atts['allow_cache'] ) && $atts['allow_cache'] === 'false' ) ? false : true;
 
 		$cache_transient_name = 'accordion_slider_cache_' . $id;
 
-		if ( ( $accordion_cache = get_transient( $cache_transient_name ) ) !== false && $cache !== false ) {
+		if ( ( $accordion_cache = get_transient( $cache_transient_name ) ) !== false && $allow_cache !== false ) {
 			$css_dependencies = $accordion_cache['css_dependencies'];
 			$js_dependencies = $accordion_cache['js_dependencies'];
 
