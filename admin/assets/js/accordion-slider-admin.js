@@ -2600,6 +2600,8 @@
 				this.panelInitialY = this.$selectedChild.position().top;
 
 				this.startPosition = this.$selectedChild.index();
+
+				event.preventDefault();
 			}
 		},
 
@@ -2607,6 +2609,8 @@
 			if ( this.$selectedChild === null || this.$selectedChild.length === 0 )
 				return;
 
+			event.preventDefault();
+			
 			this.currentMouseX = event.pageX;
 			this.currentMouseY = event.pageY;
 
