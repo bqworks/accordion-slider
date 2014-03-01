@@ -2483,17 +2483,13 @@
 				}
 			});
 
-			if ( text === '' ) {
+			if ( count === 0 ) {
 				text = 'Click to select';
+			} else if ( count >= 2 ) {
+				text = count + ' selected';
 			}
 
 			$headerText.text( text );
-console.log(that.$multiCheckHeader.width());
-			setTimeout(function() {
-				if ( $headerText.width() > that.$multiCheckHeader.width() - 10 ) {
-					$headerText.text( count + ' selected' );
-				}
-			}, 1);
 		},
 
 		open: function() {
