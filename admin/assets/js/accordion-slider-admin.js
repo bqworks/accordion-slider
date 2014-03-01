@@ -229,9 +229,11 @@
 				'panels_state': {}
 			};
 
-			$( '.panels-container' ).find( '.panel' ).each(function( index, element ) {
-				var panelData = that.getPanel( parseInt( $( element ).attr('data-id'), 10) ).getData( 'all' );
-				panelData.position = parseInt( $( element ).attr( 'data-position' ), 10 );
+			$( '.panels-container' ).find( '.panel' ).each(function() {
+				var $panel = $( this ),
+					panelData = that.getPanel( parseInt( $panel.attr('data-id'), 10) ).getData( 'all' );
+				
+				panelData.position = parseInt( $panel.attr( 'data-position' ), 10 );
 
 				accordionData.panels[ index ] = panelData;
 			});
@@ -383,9 +385,10 @@
 		},
 
 		initPanel: function( element, data ) {
-			var that = this;
+			var that = this,
+				$panel = element;
 
-			var panel = new Panel( element, this.panelCounter, data );
+			var panel = new Panel( $panel, this.panelCounter, data );
 			this.panels.push( panel );
 
 			panel.on( 'duplicatePanel', function( event ) {
@@ -396,24 +399,24 @@
 				that.deletePanel( event.id );
 			});
 
-			element.attr( 'data-id', this.panelCounter );
-			element.attr( 'data-position', this.panelCounter );
+			$panel.attr( 'data-id', this.panelCounter );
+			$panel.attr( 'data-position', this.panelCounter );
 
 			this.panelCounter++;
 		},
 
 		getPanel: function( id ) {
 			var that = this,
-				panel;
+				selectedPanel;
 
-			$.each( that.panels, function( index, element ) {
-				if ( element.id === id ) {
-					panel = element;
+			$.each( that.panels, function( index, panel ) {
+				if ( panel.id === id ) {
+					selectedPanel = panel;
 					return false;
 				}
 			});
 
-			return panel;
+			return selectedPanel;
 		},
 
 		duplicatePanel: function( panelData ) {
@@ -498,13 +501,13 @@
 			MediaLoader.open(function( selection ) {
 				var images = [];
 
-				$.each( selection, function( index, element ) {
+				$.each( selection, function( index, image ) {
 					images.push({
-						background_source: element.url,
-						background_alt: element.alt,
-						background_title: element.title,
-						background_width: element.width,
-						background_height: element.height
+						background_source: image.url,
+						background_alt: image.alt,
+						background_title: image.title,
+						background_width: image.width,
+						background_height: image.height
 					});
 				});
 
@@ -706,9 +709,9 @@
 			
 			var postsToLoad = [];
 
-			$.each( posts, function( index, element ) {
-				if ( typeof that.postsData[ element ] === 'undefined' ) {
-					postsToLoad.push( element );
+			$.each( posts, function( index, postName ) {
+				if ( typeof that.postsData[ postName ] === 'undefined' ) {
+					postsToLoad.push( postName );
 				}
 			});
 
@@ -868,7 +871,7 @@
 	};
 
 	var Panel = function( element, id, data ) {
-		this.$element = element;
+		this.$panel = element;
 		this.id = id;
 		this.data = data;
 		this.events = $( {} );
@@ -885,12 +888,12 @@
 		init: function() {
 			var that = this;
 
-			this.$element.find( '.edit-background-image' ).on( 'click', function( event ) {
+			this.$panel.find( '.edit-background-image' ).on( 'click', function( event ) {
 				event.preventDefault();
 				BackgroundImageEditor.open( that.id );
 			});
 
-			this.$element.find( '.panel-preview' ).on( 'click', function( event ) {
+			this.$panel.find( '.panel-preview' ).on( 'click', function( event ) {
 				var contentType = that.getData( 'settings' )[ 'content_type' ];
 
 				if ( typeof contentType === 'undefined' || contentType === 'custom' ) {
@@ -903,27 +906,27 @@
 				}
 			});
 
-			this.$element.find( '.edit-html' ).on( 'click', function( event ) {
+			this.$panel.find( '.edit-html' ).on( 'click', function( event ) {
 				event.preventDefault();
 				HTMLEditor.open( that.id );
 			});
 
-			this.$element.find( '.edit-layers' ).on( 'click', function( event ) {
+			this.$panel.find( '.edit-layers' ).on( 'click', function( event ) {
 				event.preventDefault();
 				LayersEditor.open( that.id );
 			});
 
-			this.$element.find( '.edit-settings' ).on( 'click', function( event ) {
+			this.$panel.find( '.edit-settings' ).on( 'click', function( event ) {
 				event.preventDefault();
 				SettingsEditor.open( that.id );
 			});
 
-			this.$element.find( '.delete-panel' ).on( 'click', function( event ) {
+			this.$panel.find( '.delete-panel' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.trigger( { type: 'deletePanel', id: that.id } );
 			});
 
-			this.$element.find( '.duplicate-panel' ).on( 'click', function( event ) {
+			this.$panel.find( '.duplicate-panel' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.trigger( { type: 'duplicatePanel', panelData: that.data } );
 			});
@@ -974,18 +977,18 @@
 		},
 
 		remove: function() {
-			this.$element.find( '.edit-background-image' ).off( 'click' );
-			this.$element.find( '.panel-preview' ).off( 'click' );
-			this.$element.find( '.delete-panel' ).off( 'click' );
-			this.$element.find( '.duplicate-panel' ).off( 'click' );
+			this.$panel.find( '.edit-background-image' ).off( 'click' );
+			this.$panel.find( '.panel-preview' ).off( 'click' );
+			this.$panel.find( '.delete-panel' ).off( 'click' );
+			this.$panel.find( '.duplicate-panel' ).off( 'click' );
 
-			this.$element.fadeOut( 500, function() {
+			this.$panel.fadeOut( 500, function() {
 				$( this ).remove();
 			});
 		},
 
 		updatePanelPreview: function() {
-			var panelPreview = this.$element.find( '.panel-preview' ),
+			var panelPreview = this.$panel.find( '.panel-preview' ),
 				contentType = this.data.settings[ 'content_type' ];
 			
 			panelPreview.empty();
@@ -1000,22 +1003,22 @@
 					$( '<p class="no-image">' + as_js_vars.no_image + '</p>' ).appendTo( panelPreview );
 				}
 
-				this.$element.removeClass( 'dynamic-panel' );
+				this.$panel.removeClass( 'dynamic-panel' );
 			} else if ( contentType === 'posts' ) {
 				$( '<p>[ ' + as_js_vars.posts_panels + ' ]</p>' ).appendTo( panelPreview );
-				this.$element.addClass( 'dynamic-panel' );
+				this.$panel.addClass( 'dynamic-panel' );
 			} else if ( contentType === 'gallery' ) {
 				$( '<p>[ ' + as_js_vars.gallery_panels + ' ]</p>' ).appendTo( panelPreview );
-				this.$element.addClass( 'dynamic-panel' );
+				this.$panel.addClass( 'dynamic-panel' );
 			} else if ( contentType === 'flickr' ) {
 				$( '<p>[ ' + as_js_vars.flickr_panels + ' ]</p>' ).appendTo( panelPreview );
-				this.$element.addClass( 'dynamic-panel' );
+				this.$panel.addClass( 'dynamic-panel' );
 			}
 		},
 
 		resizeImage: function() {
-			var panelPreview = this.$element.find( '.panel-preview' ),
-				panelImage = this.$element.find( '.panel-preview > img' );
+			var panelPreview = this.$panel.find( '.panel-preview' ),
+				panelImage = this.$panel.find( '.panel-preview > img' );
 
 			if ( panelImage.length ) {
 				var checkImage = setInterval(function() {
@@ -1526,8 +1529,8 @@
 		save: function() {
 			var data = [];
 
-			$.each( this.layers, function( index, element ) {
-				data.push( element.getData() );
+			$.each( this.layers, function( index, layer ) {
+				data.push( layer.getData() );
 			});
 
 			this.currentPanel.setData( 'layers', data );
