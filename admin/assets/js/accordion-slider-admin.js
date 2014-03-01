@@ -1086,25 +1086,25 @@
 
 			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
 
-			this.editor = $( '.background-image-editor' );
+			this.$editor = $( '.background-image-editor' );
 
-			this.editor.find( '.close-x' ).on( 'click', function( event ) {
+			this.$editor.find( '.close-x' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.save();
 				that.close();
 			});
 
-			this.editor.find( '.image-loader, .retina-loader' ).on( 'click', function( event ) {
+			this.$editor.find( '.image-loader, .retina-loader' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.openMediaLibrary( event );
 			});
 
-			this.editor.find( '.clear-fieldset' ).on( 'click', function( event ) {
+			this.$editor.find( '.clear-fieldset' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.clearFieldset( event );
 			});
 
-			this.editor.find( 'input[name="background_source"]' ).on( 'input', function( event ) {
+			this.$editor.find( 'input[name="background_source"]' ).on( 'input', function( event ) {
 				that.needsPreviewUpdate = true;
 			});
 		},
@@ -1114,7 +1114,7 @@
 
 			var that = this,
 				target = $( event.target ).parents( '.fieldset' ).hasClass( 'opened-background-image' ) === true ? 'opened-background' : 'background',
-				imageLoader = this.editor.find( '.' + target + '-image .image-loader' ),
+				imageLoader = this.$editor.find( '.' + target + '-image .image-loader' ),
 				isRetina = $( event.target ).hasClass( 'retina-loader' );
 
 			MediaLoader.open(function( selection ) {
@@ -1122,9 +1122,9 @@
 
 				if ( isRetina === true ) {
 					if ( target === 'background' ) {
-						that.editor.find( 'input[name="background_retina_source"]' ).val( image.url );
+						that.$editor.find( 'input[name="background_retina_source"]' ).val( image.url );
 					} else if ( target === 'opened-background' ) {
-						that.editor.find( 'input[name="opened_background_retina_source"]' ).val( image.url );
+						that.$editor.find( 'input[name="opened_background_retina_source"]' ).val( image.url );
 					}
 				} else {
 					if ( imageLoader.find( 'img' ).length !== 0 ) {
@@ -1135,19 +1135,19 @@
 					}
 
 					if ( target === 'background' ) {
-						that.editor.find( 'input[name="background_source"]' ).val( image.url );
-						that.editor.find( 'input[name="background_alt"]' ).val( image.alt );
-						that.editor.find( 'input[name="background_title"]' ).val( image.title );
-						that.editor.find( 'input[name="background_width"]' ).val( image.width );
-						that.editor.find( 'input[name="background_height"]' ).val( image.height );
+						that.$editor.find( 'input[name="background_source"]' ).val( image.url );
+						that.$editor.find( 'input[name="background_alt"]' ).val( image.alt );
+						that.$editor.find( 'input[name="background_title"]' ).val( image.title );
+						that.$editor.find( 'input[name="background_width"]' ).val( image.width );
+						that.$editor.find( 'input[name="background_height"]' ).val( image.height );
 
 						that.needsPreviewUpdate = true;
 					} else if ( target === 'opened-background' ) {
-						that.editor.find( 'input[name="opened_background_source"]' ).val( image.url );
-						that.editor.find( 'input[name="opened_background_alt"]' ).val( image.alt );
-						that.editor.find( 'input[name="opened_background_title"]' ).val( image.title );
-						that.editor.find( 'input[name="opened_background_width"]' ).val( image.width );
-						that.editor.find( 'input[name="opened_background_height"]' ).val( image.height );
+						that.$editor.find( 'input[name="opened_background_source"]' ).val( image.url );
+						that.$editor.find( 'input[name="opened_background_alt"]' ).val( image.alt );
+						that.$editor.find( 'input[name="opened_background_title"]' ).val( image.title );
+						that.$editor.find( 'input[name="opened_background_width"]' ).val( image.width );
+						that.$editor.find( 'input[name="opened_background_height"]' ).val( image.height );
 					}
 				}
 			});
@@ -1171,7 +1171,7 @@
 			var that = this,
 				data = {};
 
-			this.editor.find( '.field' ).each(function() {
+			this.$editor.find( '.field' ).each(function() {
 				var field = $( this );
 				data[ field.attr('name') ] = field.val();
 			});
@@ -1185,9 +1185,9 @@
 		},
 
 		close: function() {
-			this.editor.find( '.close-x' ).off( 'click' );
-			this.editor.find( '.image-loader' ).off( 'click' );
-			this.editor.find( '.clear-fieldset' ).off( 'click' );
+			this.$editor.find( '.close-x' ).off( 'click' );
+			this.$editor.find( '.image-loader' ).off( 'click' );
+			this.$editor.find( '.clear-fieldset' ).off( 'click' );
 
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
@@ -1227,9 +1227,9 @@
 
 			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
 
-			this.editor = $( '.html-editor' );
+			this.$editor = $( '.html-editor' );
 
-			this.editor.find( '.close-x' ).on( 'click', function( event ) {
+			this.$editor.find( '.close-x' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.save();
 				that.close();
@@ -1237,13 +1237,13 @@
 		},
 
 		save: function() {
-			this.currentPanel.setData( 'html', this.editor.find( 'textarea' ).val() );
+			this.currentPanel.setData( 'html', this.$editor.find( 'textarea' ).val() );
 		},
 
 		close: function() {
-			this.editor.find( '.close-x' ).off( 'click' );
-			this.editor.find( '.image-loader' ).off( 'click' );
-			this.editor.find( '.clear-fieldset' ).off( 'click' );
+			this.$editor.find( '.close-x' ).off( 'click' );
+			this.$editor.find( '.image-loader' ).off( 'click' );
+			this.$editor.find( '.clear-fieldset' ).off( 'click' );
 
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
@@ -1292,15 +1292,15 @@
 
 			this.counter = 0;
 
-			this.editor = $( '.layers-editor' );
+			this.$editor = $( '.layers-editor' );
 
-			this.editor.find( '.close-x' ).on( 'click', function( event ) {
+			this.$editor.find( '.close-x' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.save();
 				that.close();
 			});
 
-			this.editor.find( '.add-layer-group' ).on( 'click', function( event ) {
+			this.$editor.find( '.add-layer-group' ).on( 'click', function( event ) {
 				event.preventDefault();
 
 				if ( that.isWorking === true ) {
@@ -1316,12 +1316,12 @@
 				that.addNewLayer( type );
 			});
 
-			this.editor.find( '.delete-layer' ).on( 'click', function( event ) {
+			this.$editor.find( '.delete-layer' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.deleteLayer();
 			});
 
-			this.editor.find( '.duplicate-layer' ).on( 'click', function( event ) {
+			this.$editor.find( '.duplicate-layer' ).on( 'click', function( event ) {
 				event.preventDefault();
 
 				if ( that.isWorking === true ) {
@@ -1349,7 +1349,7 @@
 					that.layers.splice( event.startPosition, 1 );
 					that.layers.splice( event.endPosition, 0, layer );
 
-					var $viewportLayers = that.editor.find( '.viewport-layers' ),
+					var $viewportLayers = that.$editor.find( '.viewport-layers' ),
 						total = $viewportLayers.children().length - 1;
 
 					$( '.layers-list' ).find( '.layers-list-item' ).each(function( index, element ) {
@@ -1380,7 +1380,7 @@
 				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10),
 				backgroundData = this.currentPanel.getData( 'background' );
 
-			var $viewport = this.editor.find( '.viewport' ).css( { 'width': accordionWidth, 'height': accordionHeight } ),
+			var $viewport = this.$editor.find( '.viewport' ).css( { 'width': accordionWidth, 'height': accordionHeight } ),
 				$viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' ).appendTo( $viewport );
 
 			if ( typeof backgroundData.background_source !== 'undefined' &&
@@ -1428,7 +1428,7 @@
 
 			this.isWorking = false;
 
-			this.editor.find( '.disabled' ).removeClass( 'disabled' );
+			this.$editor.find( '.disabled' ).removeClass( 'disabled' );
 		},
 
 		addNewLayer: function( type ) {
@@ -1445,7 +1445,7 @@
 				data: { action: 'accordion_slider_add_layer_settings', id: this.counter, type: type },
 				complete: function( data ) {
 					$( data.responseText ).appendTo( $( '.layers-settings' ) );
-					$( '<li class="layers-list-item" data-id="' + that.counter + '" data-position="' + that.layers.length + '">Layer ' + that.counter + '</li>' ).prependTo( that.editor.find( '.layers-list' ) );
+					$( '<li class="layers-list-item" data-id="' + that.counter + '" data-position="' + that.layers.length + '">Layer ' + that.counter + '</li>' ).prependTo( that.$editor.find( '.layers-list' ) );
 
 					that.createLayer( { id: that.counter, type: type, createMode: 'new' } );
 				}
@@ -1467,7 +1467,7 @@
 			});
 
 			if ( this.layers.length === 0 ) {
-				this.editor.find( '.delete-layer, .duplicate-layer' ).addClass( 'disabled' );
+				this.$editor.find( '.delete-layer, .duplicate-layer' ).addClass( 'disabled' );
 				return;
 			}
 
@@ -1514,7 +1514,7 @@
 				},
 				complete: function( data ) {
 					$( data.responseText ).appendTo( $( '.layers-settings' ) );
-					$( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).prependTo( that.editor.find( '.layers-list' ) );
+					$( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).prependTo( that.$editor.find( '.layers-list' ) );
 
 					layerData.id = that.counter;
 					layerData.createMode = 'duplicate';
@@ -1536,7 +1536,7 @@
 		close: function() {
 			this.layers.length = 0;
 
-			this.editor.find( '.close-x' ).off( 'click' );
+			this.$editor.find( '.close-x' ).off( 'click' );
 
 			$( '.layers-list' ).lightSortable( 'destroy' );
 
@@ -1551,12 +1551,12 @@
 		this.selected = false;
 		this.events = $( {} );
 
-		this.editor = $( '.layers-editor' );
-		this.$viewportLayers = this.editor.find( '.viewport-layers' );
+		this.$editor = $( '.layers-editor' );
+		this.$viewportLayers = this.$editor.find( '.viewport-layers' );
 
 		this.$viewportLayer = null;
-		this.$layerListItem = this.editor.find( '.layers-list-item[data-id="' + this.id + '"]' );
-		this.$layerSettings = this.editor.find( '.layer-settings[data-id="' + this.id + '"]' );
+		this.$layerListItem = this.$editor.find( '.layers-list-item[data-id="' + this.id + '"]' );
+		this.$layerSettings = this.$editor.find( '.layer-settings[data-id="' + this.id + '"]' );
 
 		this.init();
 	};
@@ -1633,8 +1633,8 @@
 			this.$layerListItem.off( 'dblclick' );
 			this.$layerListItem.off( 'selectstart' );
 
-			this.editor.off( 'mousemove.layer' + this.id );
-			this.editor.off( 'click.layer' + this.id );
+			this.$editor.off( 'mousemove.layer' + this.id );
+			this.$editor.off( 'click.layer' + this.id );
 
 			this.$layerSettings.find( 'select[name="preset_styles"]' ).multiCheck( 'destroy' );
 
@@ -1729,7 +1729,7 @@
 				hasFocus = true;
 			});
 
-			this.editor.on( 'mousemove.layer' + this.id, function( event ) {
+			this.$editor.on( 'mousemove.layer' + this.id, function( event ) {
 				if ( hasFocus === true ) {
 					that.$viewportLayer.css( { 'left': layerX + event.pageX - mouseX, 'top': layerY + event.pageY - mouseY } );
 
@@ -1751,7 +1751,7 @@
 				if ( horizontalPosition === 'left' ) {
 					that.$layerSettings.find( '.setting[name="horizontal"]' ).val( that.$viewportLayer.position().left );
 				} else if ( horizontalPosition === 'right' ) {
-					var right = that.editor.find( '.viewport-layers' ).width() - that.$viewportLayer.position().left - that.$viewportLayer.outerWidth( true );
+					var right = that.$editor.find( '.viewport-layers' ).width() - that.$viewportLayer.position().left - that.$viewportLayer.outerWidth( true );
 
 					that.$layerSettings.find( '.setting[name="horizontal"]' ).val( right );
 					that.$viewportLayer.css( { 'left': 'auto', 'right': right } );
@@ -1760,7 +1760,7 @@
 				if ( verticalPosition === 'top' ) {
 					that.$layerSettings.find( '.setting[name="vertical"]' ).val( that.$viewportLayer.position().top );
 				} else if ( verticalPosition === 'bottom' ) {
-					var bottom = that.editor.find( '.viewport-layers' ).height() - that.$viewportLayer.position().top - that.$viewportLayer.outerHeight( true );
+					var bottom = that.$editor.find( '.viewport-layers' ).height() - that.$viewportLayer.position().top - that.$viewportLayer.outerHeight( true );
 
 					that.$layerSettings.find( '.setting[name="vertical"]' ).val( bottom );
 					that.$viewportLayer.css( { 'top': 'auto', 'bottom': bottom } );
@@ -1792,7 +1792,7 @@
 				event.preventDefault();
 			});
 
-			this.editor.on( 'click.layer' + this.id, function( event ) {
+			this.$editor.on( 'click.layer' + this.id, function( event ) {
 				if ( ! $( event.target ).is( 'input' ) && isEditingLayerName === true ) {
 					isEditingLayerName = false;
 
@@ -2138,21 +2138,21 @@
 
 			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
 
-			this.editor = $( '.settings-editor' );
+			this.$editor = $( '.settings-editor' );
 			
-			this.editor.find( '.close, .close-x' ).on( 'click', function( event ) {
+			this.$editor.find( '.close, .close-x' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.save();
 				that.close();
 			});
 
-			this.editor.find( '.panel-setting[name="content_type"]' ).on( 'change', function() {
+			this.$editor.find( '.panel-setting[name="content_type"]' ).on( 'change', function() {
 				that.loadControls( $( this ).val() );
 
 				that.needsPreviewUpdate = true;
 			});
 
-			if ( this.editor.find( '.panel-setting[name="content_type"]' ).val() === 'posts' ) {
+			if ( this.$editor.find( '.panel-setting[name="content_type"]' ).val() === 'posts' ) {
 				this.handlePostsSelects();
 			}
 		},
@@ -2161,7 +2161,7 @@
 			var that = this,
 				data = this.currentPanel.getData( 'settings' );
 
-			this.editor.find( '.content-type-settings' ).empty();
+			this.$editor.find( '.content-type-settings' ).empty();
 			
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -2179,8 +2179,8 @@
 
 		handlePostsSelects: function() {
 			var that = this,
-				$postTypes = this.editor.find( 'select[name="posts_post_types"]' ),
-				$taxonomies = this.editor.find( 'select[name="posts_taxonomies"]' ),
+				$postTypes = this.$editor.find( 'select[name="posts_post_types"]' ),
+				$taxonomies = this.$editor.find( 'select[name="posts_taxonomies"]' ),
 				selectedTaxonomies = $taxonomies.val() || [];
 
 
@@ -2233,7 +2233,7 @@
 			var that = this,
 				data = {};
 
-			this.editor.find( '.panel-setting' ).each(function() {
+			this.$editor.find( '.panel-setting' ).each(function() {
 				var $setting = $( this );
 
 				if ( typeof $setting.attr( 'multiple' ) !== 'undefined' ) {
@@ -2254,10 +2254,10 @@
 		},
 
 		close: function() {
-			this.editor.find( '.close-x' ).off( 'click' );
+			this.$editor.find( '.close-x' ).off( 'click' );
 
-			this.editor.find( 'select[name="posts_post_types"]' ).multiCheck( 'destroy' );
-			this.editor.find( 'select[name="posts_taxonomies"]' ).multiCheck( 'destroy' );
+			this.$editor.find( 'select[name="posts_post_types"]' ).multiCheck( 'destroy' );
+			this.$editor.find( 'select[name="posts_taxonomies"]' ).multiCheck( 'destroy' );
 
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
