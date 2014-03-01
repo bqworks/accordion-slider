@@ -1678,8 +1678,7 @@
 					this.$viewportLayer.find( '.as-layer' ).addClass( 'as-black as-padding' );
 				}
 			} else if ( this.data.createMode === 'init' || this.data.createMode === 'duplicate' ) {
-				var classes = '';
-				classes += ' ' + this.data.settings.preset_styles !== null ? this.data.settings.preset_styles.join( ' ' ) : '';
+				var classes = this.data.settings.preset_styles !== null ? this.data.settings.preset_styles.join( ' ' ) : '';
 				classes += ' ' + this.data.settings.custom_class;
 
 				if ( this.$viewportLayer.hasClass( 'as-layer' ) ) {
@@ -1846,7 +1845,7 @@
 				if ( horizontal === 'center' ) {
 					that.$viewportLayer.css( { 'width': that.$viewportLayer.outerWidth( true ), 'marginLeft': 'auto', 'marginRight': 'auto', 'left': 0, 'right': 0 } );
 				} else {
-					suffix = horizontal.indexOf( 'px' ) === -1 && horizontal.indexOf( '%' ) === -1 ? 'px' : '';
+					suffix = ( horizontal.indexOf( 'px' ) === -1 && horizontal.indexOf( '%' ) === -1 ) ? 'px' : '';
 					that.$viewportLayer.css( horizontalPosition, horizontal + suffix );
 				}
 
@@ -2489,7 +2488,7 @@
 			}
 
 			$headerText.text( text );
-
+console.log(that.$multiCheckHeader.width());
 			setTimeout(function() {
 				if ( $headerText.width() > that.$multiCheckHeader.width() - 10 ) {
 					$headerText.text( count + ' selected' );
@@ -2610,7 +2609,7 @@
 				return;
 
 			event.preventDefault();
-			
+
 			this.currentMouseX = event.pageX;
 			this.currentMouseY = event.pageY;
 

@@ -114,7 +114,7 @@
 								<select multiple id="layer-<?php echo esc_attr( $layer_id ); ?>-preset-styles" class="setting" name="preset_styles">
 									<?php
 										foreach ( $layer_default_settings['preset_styles']['available_values'] as $value_name => $value_label ) {
-											$selected = ( isset( $layer_settings['preset_styles'] ) && in_array( $value_name, $layer_settings['preset_styles'] ) ) || ( ! isset( $layer_settings['preset_styles'] ) && in_array( $value_name, $layer_default_settings['preset_styles']['default_value'] ) ) ? ' selected="selected"' : '';
+											$selected = ( isset( $layer_settings['preset_styles'] ) && in_array( $value_name, $layer_settings['preset_styles'] ) ) || ( ! isset( $layer_settings ) && in_array( $value_name, $layer_default_settings['preset_styles']['default_value'] ) ) ? ' selected="selected"' : '';
 											echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
 				                        }
 									?>
