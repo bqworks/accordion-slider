@@ -101,6 +101,8 @@
 
 		private function add_link_to_background_image( $image ) {
 			$background_link_href = $this->data['background_link'];
+			$background_link_href = apply_filters( 'accordion_slider_slide_link_url', $background_link_href );
+
 			$background_link_title = isset( $this->data['background_link_title'] ) && $this->data['background_link_title'] !== '' ? ' title="' . esc_attr( $this->data['background_link_title'] ) . '"' : '';
 			$background_link = '<a href="' . $background_link_href . '"' . $background_link_title . '>' . $image . '</a>';
 			
@@ -116,7 +118,10 @@
 		}
 
 		private function create_html() {
-			return $this->data['html'];
+			$html = $this->data['html'];
+			$html = apply_filters( 'accordion_slider_slide_html', $html );
+
+			return $html;
 		}
 
 		private function has_layers() {

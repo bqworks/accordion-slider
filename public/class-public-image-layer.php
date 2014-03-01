@@ -13,8 +13,11 @@
 
 			$image_content = '<img class="' .  $this->get_classes() . '"' . $this->get_attributes() . ' src="' . $image_source . '"' . $image_alt . $image_retina . ' />';
 
-			if ( isset( $this->data['image_link'] ) && $this->data['image_link'] !== '' ) {
-				$image_content = '<a href="' . esc_url( $this->data['image_link'] ) . '">' . $image_content . '</a>';
+			$image_link = $this->data['image_link'];
+
+			if ( isset( $image_link ) && $$image_link !== '' ) {
+				$image_link = apply_filters( 'accordion_slider_layer_image_link_url', $image_link );
+				$image_content = '<a href="' . esc_url( $image_link ) . '">' . $image_content . '</a>';
 			}
 			
 			$html_output = "\r\n" . '			' . $image_content;

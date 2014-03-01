@@ -8,6 +8,7 @@
 
 		public function render() {
 			$content = isset( $this->data['text'] ) ? $this->data['text'] : '';
+			$content = apply_filters( 'accordion_slider_layer_content', $content );
 
 			$html_output = "\r\n" . '			' . '<div class="' .  $this->get_classes() . '"' . $this->get_attributes() . '>' . $content . '</div>';
 

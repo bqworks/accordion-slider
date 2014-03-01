@@ -72,6 +72,10 @@ if ( is_admin() ) {
 // add_filter( 'accordion_slider_posts_tags', 'posts_tags' );
 // add_filter( 'accordion_slider_gallery_tags', 'gallery_tags' );
 // add_filter( 'accordion_slider_flickr_tags', 'flickr_tags' );
+add_filter( 'accordion_slider_slide_html', 'slide_html' );
+add_filter( 'accordion_slider_slide_link_url', 'slide_link_url' );
+add_filter( 'accordion_slider_layer_content', 'layer_content', 11, 1 );
+add_filter( 'accordion_slider_layer_image_link_url', 'layer_image_link_url' );
 
 function add_my_scripts() {
 	wp_enqueue_script('test-script', 'my/test/script.js');
@@ -146,4 +150,24 @@ function flickr_tags( $tags ) {
 
 function render_my_custom( $tag_arg, $photo ) {
 	return $photo['id'];
+}
+
+function slide_html( $content ) {
+	fb( $content, 'slide_html' );
+	return $content;
+}
+
+function slide_link_url( $content ) {
+	fb( $content, 'slide_link_url' );
+	return $content;
+}
+
+function layer_content( $content ) {
+	fb( $content, 'layer_content' );
+	return $content;
+}
+
+function layer_image_link_url( $content ) {
+	fb( $content, 'layer_image_link_url' );
+	return $content;
 }
