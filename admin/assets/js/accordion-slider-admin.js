@@ -1724,6 +1724,8 @@
 				autoRightBottom = false;
 
 			this.$viewportLayer.on( 'mousedown', function( event ) {
+				event.preventDefault();
+
 				mouseX = event.pageX;
 				mouseY = event.pageY;
 				layerX = that.$viewportLayer[ 0 ].offsetLeft;
@@ -1733,6 +1735,8 @@
 			});
 
 			this.$editor.on( 'mousemove.layer' + this.id, function( event ) {
+				event.preventDefault();
+
 				if ( hasFocus === true ) {
 					that.$viewportLayer.css( { 'left': layerX + event.pageX - mouseX, 'top': layerY + event.pageY - mouseY } );
 
@@ -1744,6 +1748,8 @@
 			});
 
 			this.$viewportLayer.on( 'mouseup', function( event ) {
+				event.preventDefault();
+
 				var position = that.$layerSettings.find( '.setting[name="position"]' ).val().toLowerCase(),
 					horizontalPosition = position.indexOf( 'right' ) !== -1 ? 'right' : 'left',
 					verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top';
@@ -1981,7 +1987,7 @@
 	};
 
 	ImageLayer.prototype.initViewportLayer = function() {
-		this.$viewportLayer = $( '<img class="viewport-layer as-layer" src="' + this.imageSource + '" draggable="false" />' );
+		this.$viewportLayer = $( '<img class="viewport-layer as-layer" src="' + this.imageSource + '" />' );
 		Layer.prototype.initViewportLayer.call( this );
 	};
 
