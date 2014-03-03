@@ -7,7 +7,7 @@
 		}
 
 		public function render() {
-			$image_source = isset( $this->data['image_source'] ) && $this->data['image_source'] !== '' ? $this->data['image_source'] : 'placeholder.png';
+			$image_source = isset( $this->data['image_source'] ) && $this->data['image_source'] !== '' ? $this->data['image_source'] : '';
 			$image_alt = isset( $this->data['image_alt'] ) && $this->data['image_alt'] !== '' ? ' alt="' . esc_attr( $this->data['image_alt'] ) . '"' : '';
 			$image_retina = isset( $this->data['image_retina'] ) && $this->data['image_retina'] !== '' ? ' data-retina="' . $this->data['image_retina'] . '"' : '';
 
