@@ -231,7 +231,7 @@
 				'panels_state': {}
 			};
 
-			$( '.panels-container' ).find( '.panel' ).each(function() {
+			$( '.panels-container' ).find( '.panel' ).each(function( index ) {
 				var $panel = $( this ),
 					panelData = that.getPanel( parseInt( $panel.attr('data-id'), 10) ).getData( 'all' );
 				
