@@ -1,12 +1,12 @@
 <?php
-	class BQW_AS_Public_Layer_Factory {
+	class BQW_AS_Layer_Renderer_Factory {
 
 		protected static $registered_types = array(
-			'paragraph' => 'BQW_AS_Public_Paragraph_Layer',
-			'heading' => 'BQW_AS_Public_Heading_Layer',
-			'image' => 'BQW_AS_Public_Image_Layer',
-			'div' => 'BQW_AS_Public_Div_Layer',
-			'video' => 'BQW_AS_Public_Video_Layer'
+			'paragraph' => 'BQW_AS_Paragraph_Layer_Renderer',
+			'heading' => 'BQW_AS_Heading_Layer_Renderer',
+			'image' => 'BQW_AS_Image_Layer_Renderer',
+			'div' => 'BQW_AS_Div_Layer_Renderer',
+			'video' => 'BQW_AS_Video_Layer_Renderer'
 		);
 
 		protected static $default_type = null;

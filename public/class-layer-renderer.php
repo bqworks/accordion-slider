@@ -1,6 +1,6 @@
 <?php
 
-	class BQW_AS_Public_Layer {
+	class BQW_AS_Layer_Renderer {
 
 		protected $data = null;
 

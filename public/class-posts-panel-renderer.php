@@ -1,5 +1,5 @@
 <?php
-	class BQW_AS_Public_Posts_Panel extends BQW_AS_Public_Dynamic_Panel {
+	class BQW_AS_Posts_Panel_Renderer extends BQW_AS_Dynamic_Panel_Renderer {
 
 		protected $input_html = null;
 

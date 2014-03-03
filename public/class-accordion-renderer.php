@@ -1,5 +1,5 @@
 <?php
-	class BQW_AS_Public_Accordion {
+	class BQW_AS_Accordion_Renderer {
 
 		protected $data = null;
 
@@ -68,7 +68,7 @@
 		}
 
 		private function create_panel( $data, $panel_counter ) {
-			$panel = BQW_AS_Public_Panel_Factory::create_panel( $data );
+			$panel = BQW_AS_Panel_Renderer_Factory::create_panel( $data );
 			$panel->set_data( $data, $this->id, $panel_counter, $this->lazy_loading );
 			return $panel->render();
 		}

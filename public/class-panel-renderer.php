@@ -1,5 +1,5 @@
 <?php
-	class BQW_AS_Public_Panel {
+	class BQW_AS_Panel_Renderer {
 
 		protected $data = null;
 
@@ -144,7 +144,7 @@
 		}
 
 		private function create_layer( $data ) {
-			$layer = BQW_AS_Public_Layer_Factory::create_layer( $data );
+			$layer = BQW_AS_Layer_Renderer_Factory::create_layer( $data );
 			$layer->set_data( $data, $this->accordion_id, $this->panel_index );
 			return $layer->render();
 		}

@@ -180,7 +180,7 @@ class BQW_Accordion_Slider {
 	public function output_accordion( $accordion_data, $allow_cache = true ) {
 		$accordion_data = apply_filters( 'accordion_slider_data', $accordion_data, $accordion_data['id'] );
 
-		$accordion = new BQW_AS_Public_Accordion( $accordion_data );
+		$accordion = new BQW_AS_Accordion_Renderer( $accordion_data );
 		$html_output = $accordion->render();
 		$js_output = $accordion->render_js();
 		$this->js_output .= $js_output;

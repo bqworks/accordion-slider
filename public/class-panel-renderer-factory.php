@@ -1,11 +1,11 @@
 <?php
-	class BQW_AS_Public_Panel_Factory {
+	class BQW_AS_Panel_Renderer_Factory {
 
 		protected static $registered_types = array(
-			'custom' => 'BQW_AS_Public_Panel',
-			'posts' => 'BQW_AS_Public_Posts_Panel',
-			'gallery' => 'BQW_AS_Public_Gallery_Panel',
-			'flickr' => 'BQW_AS_Public_Flickr_Panel'
+			'custom' => 'BQW_AS_Panel_Renderer',
+			'posts' => 'BQW_AS_Posts_Panel_Renderer',
+			'gallery' => 'BQW_AS_Gallery_Panel_Renderer',
+			'flickr' => 'BQW_AS_Flickr_Panel_Renderer'
 		);
 
 		protected static $default_type = null;

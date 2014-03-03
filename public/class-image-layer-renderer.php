@@ -1,6 +1,6 @@
 <?php
 
-	class BQW_AS_Public_Image_Layer extends BQW_AS_Public_Layer {
+	class BQW_AS_Image_Layer_Renderer extends BQW_AS_Layer_Renderer {
 
 		public function __construct() {
 			parent::__construct();
