@@ -258,25 +258,7 @@ class BQW_Accordion_Slider_Admin {
 			}
 
 			if ( get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
-				$url = wp_nonce_url( 'admin.php?page=accordion-slider-custom', 'custom-css-js-update', 'custom-css-js-nonce' );
-
-				if ( ( $credentials = request_filesystem_credentials( $url, '', false, false, null ) ) === false ) {
-					return;
-				}
-
-				if ( ! WP_Filesystem( $credentials ) ) {
-					request_filesystem_credentials( $url, '', true, false, null );
-					return;
-				}
-
-				global $wp_filesystem;
-
-				if ( ! $wp_filesystem->exists( WP_PLUGIN_DIR . '/accordion-slider-custom' ) ) {
-					$wp_filesystem->mkdir( WP_PLUGIN_DIR . '/accordion-slider-custom' );
-				}
-				
-				$wp_filesystem->put_contents( WP_PLUGIN_DIR . '/accordion-slider-custom/custom.css', stripslashes( $custom_css ), FS_CHMOD_FILE );
-				$wp_filesystem->put_contents( WP_PLUGIN_DIR . '/accordion-slider-custom/custom.js', stripslashes( $custom_js ), FS_CHMOD_FILE );
+				$this->save_custom_css_js_in_files( $custom_css, $custom_js );
 			}
 		}
 
@@ -344,6 +326,28 @@ class BQW_Accordion_Slider_Admin {
 		}
 		
 		include_once( 'views/plugin-settings.php' );
+	}
+
+	private function save_custom_css_js_in_files ( $custom_css, $custom_js ) {
+		$url = wp_nonce_url( 'admin.php?page=accordion-slider-custom', 'custom-css-js-update', 'custom-css-js-nonce' );
+
+		if ( ( $credentials = request_filesystem_credentials( $url, '', false, false, null ) ) === false ) {
+			return;
+		}
+
+		if ( ! WP_Filesystem( $credentials ) ) {
+			request_filesystem_credentials( $url, '', true, false, null );
+			return;
+		}
+
+		global $wp_filesystem;
+
+		if ( ! $wp_filesystem->exists( WP_PLUGIN_DIR . '/accordion-slider-custom' ) ) {
+			$wp_filesystem->mkdir( WP_PLUGIN_DIR . '/accordion-slider-custom' );
+		}
+		
+		$wp_filesystem->put_contents( WP_PLUGIN_DIR . '/accordion-slider-custom/custom.css', stripslashes( $custom_css ), FS_CHMOD_FILE );
+		$wp_filesystem->put_contents( WP_PLUGIN_DIR . '/accordion-slider-custom/custom.js', stripslashes( $custom_js ), FS_CHMOD_FILE );
 	}
 
 	public function ajax_get_accordion_data() {
