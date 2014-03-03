@@ -146,12 +146,14 @@
 			$( '.clear-all-cache' ).on( 'click', function( event ) {
 				event.preventDefault();
 
+				$( '.clear-cache-spinner' ).css( 'display', 'inline-block' );
+
 				$.ajax({
 					url: as_js_vars.ajaxurl,
 					type: 'post',
 					data: { action: 'accordion_slider_clear_all_cache', nonce: as_js_vars.cac_nonce },
 					complete: function( data ) {
-						
+						$( '.clear-cache-spinner' ).css( 'display', '' );
 					}
 				});
 			});
