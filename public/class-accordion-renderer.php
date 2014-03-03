@@ -46,7 +46,7 @@
 			return $this->html_output;
 		}
 
-		private function has_panels() {
+		protected function has_panels() {
 			if ( isset( $this->data['panels'] ) && ! empty( $this->data['panels'] ) ) {
 				return true;
 			}
@@ -54,7 +54,7 @@
 			return false;
 		}
 
-		private function create_panels() {
+		protected function create_panels() {
 			$panels_output = '';
 			$panels = $this->data['panels'];
 			$panel_counter = 0;
@@ -67,7 +67,7 @@
 			return $panels_output;
 		}
 
-		private function create_panel( $data, $panel_counter ) {
+		protected function create_panel( $data, $panel_counter ) {
 			$panel = BQW_AS_Panel_Renderer_Factory::create_panel( $data );
 			$panel->set_data( $data, $this->id, $panel_counter, $this->lazy_loading );
 			return $panel->render();

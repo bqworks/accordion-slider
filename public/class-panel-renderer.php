@@ -51,7 +51,7 @@
 			return $this->html_output;
 		}
 
-		private function has_background_image() {
+		protected function has_background_image() {
 			if ( isset( $this->data['background_source'] ) && $this->data['background_source'] !== '' ) {
 				return true;
 			}
@@ -59,7 +59,7 @@
 			return false;
 		}
 
-		private function create_background_image() {
+		protected function create_background_image() {
 			$background_source = $this->lazy_loading === true ? ' src="' . plugins_url( 'accordion-slider/public/assets/css/images/blank.gif' ) . '" data-src="' . esc_attr( $this->data['background_source'] ) . '"' : ' src="' . esc_attr( $this->data['background_source'] ) . '"';
 			$background_alt = isset( $this->data['background_alt'] ) && $this->data['background_alt'] !== '' ? ' alt="' . esc_attr( $this->data['background_alt'] ) . '"' : '';
 			$background_title = isset( $this->data['background_title'] ) && $this->data['background_title'] !== '' ? ' title="' . esc_attr( $this->data['background_title'] ) . '"' : '';
@@ -71,7 +71,7 @@
 			return $background_image;
 		}
 
-		private function has_opened_background_image() {
+		protected function has_opened_background_image() {
 			if ( isset( $this->data['opened_background_source'] ) && $this->data['opened_background_source'] !== '' ) {
 				return true;
 			}
@@ -79,7 +79,7 @@
 			return false;
 		}
 
-		private function create_opened_background_image() {
+		protected function create_opened_background_image() {
 			$opened_background_source = $this->lazy_loading === true ? ' src="' . plugins_url( 'accordion-slider/public/assets/css/images/blank.gif' ) . '" data-src="' . esc_attr( $this->data['opened_background_source'] ) . '"' : ' src="' . esc_attr( $this->data['opened_background_source'] ) . '"';
 			$opened_background_alt = isset( $this->data['opened_background_alt'] ) && $this->data['opened_background_alt'] !== '' ? ' alt="' . esc_attr( $this->data['opened_background_alt'] ) . '"' : '';
 			$opened_background_title = isset( $this->data['opened_background_title'] ) && $this->data['opened_background_title'] !== '' ? ' title="' . esc_attr( $this->data['opened_background_title'] ) . '"' : '';
@@ -91,7 +91,7 @@
 			return $opened_background_image;
 		}
 
-		private function has_background_link() {
+		protected function has_background_link() {
 			if ( isset( $this->data['background_link'] ) && $this->data['background_link'] !== '' ) {
 				return true;
 			} 
@@ -99,7 +99,7 @@
 			return false;
 		}
 
-		private function add_link_to_background_image( $image ) {
+		protected function add_link_to_background_image( $image ) {
 			$background_link_href = $this->data['background_link'];
 			$background_link_href = apply_filters( 'accordion_slider_slide_link_url', $background_link_href );
 
@@ -109,7 +109,7 @@
 			return $background_link;
 		}
 
-		private function has_html() {
+		protected function has_html() {
 			if ( isset( $this->data['html'] ) && $this->data['html'] !== '' ) {
 				return true;
 			} 
@@ -117,14 +117,14 @@
 			return false;
 		}
 
-		private function create_html() {
+		protected function create_html() {
 			$html = $this->data['html'];
 			$html = apply_filters( 'accordion_slider_slide_html', $html );
 
 			return $html;
 		}
 
-		private function has_layers() {
+		protected function has_layers() {
 			if ( isset( $this->data['layers'] ) && ! empty( $this->data['layers'] ) ) {
 				return true;
 			}
@@ -132,7 +132,7 @@
 			return false;
 		}
 
-		private function create_layers() {
+		protected function create_layers() {
 			$layers_output = '';
 			$layers = array_reverse( $this->data['layers'] );
 
@@ -143,7 +143,7 @@
 			return $layers_output;
 		}
 
-		private function create_layer( $data ) {
+		protected function create_layer( $data ) {
 			$layer = BQW_AS_Layer_Renderer_Factory::create_layer( $data );
 			$layer->set_data( $data, $this->accordion_id, $this->panel_index );
 			return $layer->render();
