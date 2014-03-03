@@ -162,7 +162,7 @@ class BQW_Accordion_Slider_Admin {
 			'Accordion Slider',
 			'manage_options',
 			$this->plugin_slug,
-			array( $this, 'display_accordion_page' )
+			array( $this, 'render_accordion_page' )
 		);
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
@@ -171,7 +171,7 @@ class BQW_Accordion_Slider_Admin {
 			__( 'All Accordions', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
-			array( $this, 'display_accordion_page' )
+			array( $this, 'render_accordion_page' )
 		);
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
@@ -180,7 +180,7 @@ class BQW_Accordion_Slider_Admin {
 			__( 'Add New', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug . '-new',
-			array( $this, 'display_new_accordion_page' )
+			array( $this, 'render_new_accordion_page' )
 		);
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
@@ -189,7 +189,7 @@ class BQW_Accordion_Slider_Admin {
 			__( 'Custom CSS & JS', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug . '-custom',
-			array( $this, 'display_custom_css_js_page' )
+			array( $this, 'render_custom_css_js_page' )
 		);
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
@@ -198,11 +198,11 @@ class BQW_Accordion_Slider_Admin {
 			__( 'Plugin Settings', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug . '-settings',
-			array( $this, 'display_plugin_settings_page' )
+			array( $this, 'render_plugin_settings_page' )
 		);
 	}
 
-	public function display_accordion_page() {
+	public function render_accordion_page() {
 		if ( isset( $_GET['id'] ) && isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
 			$accordion = $this->plugin->get_accordion( $_GET['id'] );
 
@@ -223,13 +223,13 @@ class BQW_Accordion_Slider_Admin {
 		}
 	}
 
-	public function display_new_accordion_page() {
+	public function render_new_accordion_page() {
 		$accordion_name = 'My Accordion';
 
 		include_once( 'views/accordion.php' );
 	}
 
-	public function display_custom_css_js_page() {
+	public function render_custom_css_js_page() {
 		$custom_css = get_option( 'accordion_slider_custom_css', '' );
 		$custom_js = get_option( 'accordion_slider_custom_js', '' );
 
@@ -259,7 +259,7 @@ class BQW_Accordion_Slider_Admin {
 			}
 
 			if ( get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
-				$url = wp_nonce_url( 'admin.php?page=display_custom_css_js_page', 'custom-css-js-update', 'custom-css-js-nonce' );
+				$url = wp_nonce_url( 'admin.php?page=accordion-slider-custom', 'custom-css-js-update', 'custom-css-js-nonce' );
 
 				if ( ( $credentials = request_filesystem_credentials( $url, '', false, false, null ) ) === false ) {
 					return;
@@ -284,7 +284,7 @@ class BQW_Accordion_Slider_Admin {
 		include_once( 'views/custom-css-js.php' );
 	}
 
-	public function display_plugin_settings_page() {
+	public function render_plugin_settings_page() {
 		$plugin_settings = BQW_Accordion_Slider_Settings::getPluginSettings();
 		$load_stylesheets = get_option( 'accordion_slider_load_stylesheets', $plugin_settings['load_stylesheets']['default_value'] );
 		$load_custom_css_js = get_option( 'accordion_slider_load_custom_css_js', $plugin_settings['load_custom_css_js']['default_value'] );
