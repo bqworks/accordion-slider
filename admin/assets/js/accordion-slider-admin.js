@@ -148,10 +148,12 @@
 
 				$( '.clear-cache-spinner' ).css( 'display', 'inline-block' );
 
+				var nonce = $( this ).attr( 'data-nonce' );
+
 				$.ajax({
 					url: as_js_vars.ajaxurl,
 					type: 'post',
-					data: { action: 'accordion_slider_clear_all_cache', nonce: as_js_vars.cac_nonce },
+					data: { action: 'accordion_slider_clear_all_cache', nonce: nonce },
 					complete: function( data ) {
 						$( '.clear-cache-spinner' ).css( 'display', '' );
 					}

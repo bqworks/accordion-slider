@@ -61,7 +61,7 @@
                 </td>
                 <td>
                     <?php echo $plugin_settings['cache_expiry_interval']['description']; ?>
-                    <a class="button-secondary clear-all-cache"><?php _e( 'Clear all cache now', 'accordion-slider' ); ?></a>
+                    <a class="button-secondary clear-all-cache" data-nonce="<?php echo wp_create_nonce( 'clear-all-cache' ); ?>"><?php _e( 'Clear all cache now', 'accordion-slider' ); ?></a>
                     <span class="spinner clear-cache-spinner"></span>
                 </td>
             </tr>

@@ -139,7 +139,6 @@ class BQW_Accordion_Slider_Admin {
 				'id' => $id,
 				'lad_nonce' => wp_create_nonce( 'load-accordion-data' . $id ),
 				'sa_nonce' => wp_create_nonce( 'save-accordion' . $id ),
-				'cac_nonce' => wp_create_nonce( 'clear-all-cache' ),
 				'no_image' => __( 'Click to add image', 'accordion-slider' ),
 				'posts_panels' => __( 'Posts panels', 'accordion-slider' ),
 				'gallery_panels' => __( 'Gallery panels', 'accordion-slider' ),
