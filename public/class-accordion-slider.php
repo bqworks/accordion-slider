@@ -1,54 +1,112 @@
 <?php
-
+/**
+ * Accordion Slider public class.
+ * 
+ * @since 1.0.0
+ */
 class BQW_Accordion_Slider {
 
-	// the current version of the plugin
-	const VERSION = '1.0';
+	/**
+	 * Current version of the Accordion Slider plugin.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var string
+	 */
+	const VERSION = '1.0.0';
 
-	// unique identifier for the plugin
+	/**
+	 * Plugin slug.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var string
+	 */
 	protected $plugin_slug = 'accordion-slider';
 
-	// holds a reference to the instance of the class
+	/**
+	 * Current class instance.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var object
+	 */
 	protected static $instance = null;
 
-	protected $accordion_id_counter = 1000;
-
+	/**
+	 * Scripts to load.
+	 *
+	 * Script id's are added to this array when the accordion is rendered,
+	 * and then the list of scripts is enqueued when the wp_footer action is called.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var array
+	 */
 	protected $scripts_to_load = array();
 
+	/**
+	 * JavaScript output.
+	 *
+	 * The JavaScript output of all accordions loaded on the page is stored
+	 * in this variable, and when wp_footer is called, the result is printed.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var string
+	 */
 	protected $js_output = '';
 
+	/**
+	 * Flickr class instance.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var object
+	 */
 	protected $flickr_instance = null;
 
-	/*
-		Initialize the plugin
-	*/
+	/**
+	 * Initialize the Accordion Slider plugin.
+	 *
+	 * @since 1.0.0
+	 */
 	private function __construct() {
-		// load the plugin text domain
+		// load the translation
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
-		// register public CSS and JavaScript
+		// register the public CSS and JS files
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ) );
 
-		// load public CSS and JavaScript
+		// when the actions are called enqueue the necessary CSS and JS files
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_styles' ) );
 		add_action( 'wp_footer', array( $this, 'load_scripts' ) );
 
+		// register the shortcodes
 		add_shortcode( 'accordion_slider', array( $this, 'accordion_slider_shortcode' ) );
 		add_shortcode( 'accordion_panel', array( $this, 'accordion_panel_shortcode' ) );
 		add_shortcode( 'accordion_panel_element', array( $this, 'accordion_panel_element_shortcode' ) );
 	}
 
-	/*
-		Return the plugin's slug
-	*/
+	/**
+	 * Return the plugin slug.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return string The plugin slug.
+	 */
 	public function get_plugin_slug() {
 		return $this->plugin_slug;
 	}
 
-	/*
-		Return the instance of the class
-	*/
+	/**
+	 * Return the current class instance.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return object The instance of the current class.
+	 */
 	public static function get_instance() {
 		if ( self::$instance == null ) {
 			self::$instance = new self;
@@ -57,9 +115,11 @@ class BQW_Accordion_Slider {
 		return self::$instance;
 	}
 
-	/*
-		Load the plugin translation file
-	*/
+	/**
+	 * Return the current class instance.
+	 *
+	 * @since 1.0.0
+	 */
 	public function load_plugin_textdomain() {
 		$domain = $this->plugin_slug;
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
@@ -67,9 +127,11 @@ class BQW_Accordion_Slider {
 		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
 	}
 
-	/*
-		Load the public CSS and JavaScript
-	*/
+	/**
+	 * Register the public CSS files.
+	 *
+	 * @since 1.0.0
+	 */
 	public function register_styles() {
 		if ( get_option( 'accordion_slider_load_unminified_scripts' ) == true ) {
 			wp_register_style( $this->plugin_slug . '-plugin-style', plugins_url( 'accordion-slider/public/assets/css/accordion-slider.css' ), array(), self::VERSION );
@@ -81,6 +143,11 @@ class BQW_Accordion_Slider {
 		wp_register_style( $this->plugin_slug . '-video-js-style', plugins_url( 'accordion-slider/public/assets/libs/video-js/video-js.min.css' ), array(), self::VERSION );
 	}
 
+	/**
+	 * Register the public JS files.
+	 *
+	 * @since 1.0.0
+	 */
 	public function register_scripts() {
 		if ( get_option( 'accordion_slider_load_unminified_scripts' ) == true ) {
 			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'accordion-slider/public/assets/js/jquery.accordionSlider.js' ), array( 'jquery' ), self::VERSION );
@@ -93,12 +160,27 @@ class BQW_Accordion_Slider {
 		wp_register_script( $this->plugin_slug . '-video-js-script', plugins_url( 'accordion-slider/public/assets/libs/video-js/video.js' ), array(), self::VERSION );
 	}
 
+	/**
+	 * Add script id's to the list of scripts to be loaded when wp_footer is called.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param string $handle An id of the script to load.
+	 */
 	public function add_script_to_load( $handle ) {
 		if ( in_array( $handle, $this->scripts_to_load ) === false ) {
 			$this->scripts_to_load[] = $handle;
 		}
 	}
 
+	/**
+	 * Load the accordion data from the database.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  int        $id The id of the accordion.
+	 * @return array|bool     An array containing the accordion data, or false, if the specified id doesn't exist in the database.
+	 */
 	public function load_accordion( $id ) {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'accordionslider_accordions';
@@ -112,6 +194,14 @@ class BQW_Accordion_Slider {
 		}
 	}
 
+	/**
+	 * Load each panel's data from the database.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  int        $id The id of the accordion.
+	 * @return array|bool     An array containing each panel's data, or false, if the specified id doesn't exist in the database.
+	 */
 	public function load_panels( $id ) {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'accordionslider_panels';
@@ -124,6 +214,14 @@ class BQW_Accordion_Slider {
 		}
 	}
 
+	/**
+	 * Load each layer's data from the database.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  int        $id The id of the accordion.
+	 * @return array|bool     An array containing each layer's data, or false, if the specified id doesn't exist in the database.
+	 */
 	public function load_layers( $id ) {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'accordionslider_layers';
@@ -136,6 +234,17 @@ class BQW_Accordion_Slider {
 		}
 	}
 
+	/**
+	 * Return the data of the accordion.
+	 *
+	 * It loads the accordion, panels and layers data from the database and formats it into
+	 * and a single array.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  int   $id The id of the accordion.
+	 * @return array     An array containing all the accordion's database data.
+	 */
 	public function get_accordion( $id ) {
 		$accordion = array();
 		$accordion_raw = $this->load_accordion( $id );
@@ -177,6 +286,17 @@ class BQW_Accordion_Slider {
 		return $accordion;
 	}
 
+	/**
+	 * Return the HTML markup of the accordion.
+	 *
+	 * Also, retrieves the JavaScript output of the accordion and CSS and JavaScript files that need to be loaded.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  array   $accordion_data An array containing the accordion's data.
+	 * @param  boolean $allow_cache    Indicates whether or not the output will be cached.
+	 * @return string                  The HTML code that needs to be printed for the accordion.
+	 */
 	public function output_accordion( $accordion_data, $allow_cache = true ) {
 		$accordion_data = apply_filters( 'accordion_slider_data', $accordion_data, $accordion_data['id'] );
 
@@ -213,6 +333,19 @@ class BQW_Accordion_Slider {
 		return $html_output;
 	}
 
+	/**
+	 * Load the necessary CSS files or inline code.
+	 *
+	 * It checks to see if the plugin is set to load the CSS in all pages or only on the homepage,
+	 * then it checks to see if the accordion shortcode exists in the currently viewed post(s), then it checks
+	 * if the accordion is added in a widget.
+	 *
+	 * If either of these checks return a positive result, the accordion's CSS file will be loaded.
+	 *
+	 * Then, it also loads the custom CSS, either from a file or from the database and print it as inline CSS.
+	 * 
+	 * @since 1.0.0
+	 */
 	public function load_styles() {
 		if ( is_admin() ) {
 			return;
@@ -259,6 +392,12 @@ class BQW_Accordion_Slider {
 		}
 	}
 
+	/**
+	 * Load the scripts added to the list of scripts that need to be loaded, enqueues them,
+	 * and then it prints the inline JavaScrip code that instantiates all the accordions on the page.
+	 * 
+	 * @since 1.0.0
+	 */
 	public function load_scripts() {
 		if ( empty( $this->scripts_to_load ) ) {
 			return;
@@ -286,6 +425,13 @@ class BQW_Accordion_Slider {
 		echo $this->get_inline_scripts();
 	}
 
+	/**
+	 * Return the inline JavaScript code for all accordions on the page.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return string The inline JavaScript.
+	 */
 	public function get_inline_scripts() {
 		$inline_js = "\r\n" . '<script type="text/javascript">' .
 					"\r\n" . '	jQuery( document ).ready(function( $ ) {' .
@@ -305,12 +451,24 @@ class BQW_Accordion_Slider {
 		return $inline_js;
 	}
 
+	/**
+	 * Parse the accordion slider shortcode and print the accordion.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @param  array  $atts    The attributes specified in the shortcode.
+	 * @param  string $content The content added inside the shortcode.
+	 * @return string          The accordion's HTML.
+	 */
 	public function accordion_slider_shortcode( $atts, $content = null ) {
+		// get the id specified in the shortcode
 		$id = isset( $atts['id'] ) ? $atts['id'] : -1;
-		$allow_cache = ( isset( $atts['allow_cache'] ) && $atts['allow_cache'] === 'false' ) ? false : true;
 
+		// check whether cache is allowed
+		$allow_cache = ( isset( $atts['allow_cache'] ) && $atts['allow_cache'] === 'false' ) ? false : true;
 		$cache_transient_name = 'accordion_slider_cache_' . $id;
 
+		// load the accordion from the cache
 		if ( ( $accordion_cache = get_transient( $cache_transient_name ) ) !== false && $allow_cache !== false ) {
 			$css_dependencies = $accordion_cache['css_dependencies'];
 			$js_dependencies = $accordion_cache['js_dependencies'];
@@ -328,9 +486,14 @@ class BQW_Accordion_Slider {
 			return $accordion_cache['html_output'];
 		}
 
+		// parse the inner content of the shortcode
 		$content = do_shortcode( $content );
+
+		// get the accordion's database data
 		$accordion = $this->get_accordion( $id );
 
+		// if the specified id doesn't return a result, either the accordion doesn't exist, or, if
+		// there is inner content added to the shortcode, try to create the accordion from scratch
 		if ( $accordion === false ) {
 			if ( empty( $content ) ) {
 				return 'An accordion slider with the ID of ' . $id . ' doesn\'t exist.';
@@ -339,10 +502,12 @@ class BQW_Accordion_Slider {
 			$accordion = array( 'settings' => array() );
 		}
 
+		// add the if of the accordion to the array of accordion data
 		if ( ! isset( $accordion['id'] ) ) {
 			$accordion['id'] = $id;
 		}
 
+		// override the accordion's settings with those specified in the shortcode
 		foreach ( $atts as $key => $value ) {
 			if ( $key === 'breakpoints' ) {
 				$value = json_decode( stripslashes( $value ), true );
@@ -357,20 +522,20 @@ class BQW_Accordion_Slider {
 
 		// analyze the shortcode's content, if any
 		if ( ! empty( $content ) ) {
-			// create an array that will hold extra slides
+
+			// create an array that will hold additional extra
 			$panels_extra = array();
 			
-			// counter for the slides for which an index was not specified and will be added at the end of the other slides
+			// counter for the panels for which an index was not specified and will be added at the end of the other panels
 			$end_counter = 1;
 			
-			// get all the added slides
+			// get all the added panels
 			$panels_shortcode = do_shortcode( $content );
 			$panels_shortcode = str_replace( '<br />', '', $panels_shortcode );		
 			$panels_shortcode = explode( '%as_sep%', $panels_shortcode );
 			
-			
-			// loop through all the slides added within the shortcode 
-			// and add the slide to the panels_extra array
+			// loop through all the panels added within the shortcode 
+			// and add the panel to the panels_extra array
 			foreach ( $panels_shortcode as $panel_shortcode ) {
 				$panel_shortcode = json_decode( stripslashes( trim( $panel_shortcode ) ), true );
 
@@ -386,8 +551,8 @@ class BQW_Accordion_Slider {
 				}
 			}
 			
-			// loop through all the existing slides and override the settings and/or the content
-			// if it's the case
+			// loop through the panels added in the database and override the content with that
+			// specified through shortcodes
 			if ( isset( $accordion['panels'] ) ) {
 				foreach ( $accordion['panels'] as $index => &$panel ) {
 					if ( isset( $panels_extra[ $index ] ) ) {
@@ -406,6 +571,7 @@ class BQW_Accordion_Slider {
 				}
 			}
 
+			// add the remaining panels, added through shortcodes, to the end of the accordion
 			if ( ! empty( $panels_extra ) ) {
 				if ( ! isset( $accordion['panels'] ) ) {
 					$accordion['panels'] = array();
@@ -417,16 +583,32 @@ class BQW_Accordion_Slider {
 			}
 		}
 
+		// if the CSS file(s) were not enqueued, display a warning message
 		if ( ! wp_style_is( $this->plugin_slug . '-plugin-style' ) ) {
-			echo '<div style="width: 450px; background-color: #FFF; color: #F00; border: 1px solid #F00; padding: 10px; font-size: 14px;"><span style="font-weight: bold;">Warning: Stylesheets not loaded!</span> You are loading the accordion outside of a post or page, so you need to manually specify where to load the stylesheets (e.g., homepage, all pages). You can set that <a style="text-decoration: underline; color: #F00;" href="' . admin_url( 'admin.php?page=accordion-slider-plugin-settings' ) . '">here</a>.</div>';
+			echo '<div style="width: 450px; background-color: #FFF; color: #F00; border: 1px solid #F00; padding: 10px; font-size: 14px;">
+			<span style="font-weight: bold;">Warning: Stylesheets not loaded!</span> 
+			You are loading the accordion outside of a post or page, so you need to manually specify where to load the stylesheets (e.g., homepage, all pages). 
+			You can set that <a style="text-decoration: underline; color: #F00;" href="' . admin_url( 'admin.php?page=accordion-slider-plugin-settings' ) . '">here</a>.
+			</div>';
 		}
 		
 		return $this->output_accordion( $accordion );
 	}
 
+	/**
+	 * Parse the accordion panel shortcode and return the data.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @param  array  $atts    The attributes specified in the shortcode.
+	 * @param  string $content The content added inside the shortcode.
+	 * @return string          JSON-encoded data for the panel.
+	 */
 	public function accordion_panel_shortcode( $atts, $content = null ) {
+		// initialize the settings
 		$panel = array( 'settings' => array( 'index' => 'end' ) );
 
+		// parse the attributes passed
 		if ( ! empty( $atts ) ) {
 			foreach ( $atts as $key => $value ) {
 				if ( $key === 'posts_post_types' || $key === 'posts_taxonomies' ) {
@@ -470,9 +652,16 @@ class BQW_Accordion_Slider {
 		return json_encode( $panel ) . '%as_sep%';
 	}
 
+	/**
+	 * Parse the accordion panel element shortcode and return the data.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @param  array  $atts    The attributes specified in the shortcode.
+	 * @param  string $content The content added inside the shortcode.
+	 * @return string          JSON-encoded data for the panel element.
+	 */
 	public function accordion_panel_element_shortcode( $atts, $content = null ) {
-		extract( shortcode_atts( array( 'name' => 'none' ), $atts ) );
-	
 		$content = do_shortcode( $content );
 
 		$attributes = array();

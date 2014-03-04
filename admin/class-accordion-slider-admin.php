@@ -1,19 +1,52 @@
 <?php
-
+/**
+ * Accordion Slider admin class.
+ * 
+ * @since 1.0.0
+ */
 class BQW_Accordion_Slider_Admin {
 
-	// holds a reference to the instance of the class
+	/**
+	 * Current class instance.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var object
+	 */
 	protected static $instance = null;
 
+	/**
+	 * Stores the hook suffixes for the plugin's admin pages.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var array
+	 */
 	protected $plugin_screen_hook_suffixes = null;
 
+	/**
+	 * Current class instance of the public Accordion Slider class.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var object
+	 */
 	protected $plugin = null;
 
+	/**
+	 * Plugin class.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var object
+	 */
 	protected $plugin_slug = null;
 
-	/*
-		Initialize the plugin
-	*/
+	/**
+	 * Initialize the admin by registering the required actions.
+	 *
+	 * @since 1.0.0
+	 */
 	private function __construct() {
 
 		$this->plugin = BQW_Accordion_Slider::get_instance();
@@ -45,9 +78,13 @@ class BQW_Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_clear_all_cache', array( $this, 'ajax_clear_all_cache' ) );
 	}
 
-	/*
-		Return the instance of the class
-	*/
+	/**
+	 * Return the current class instance.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return object The instance of the current class.
+	 */
 	public static function get_instance() {
 		if ( self::$instance == null ) {
 			self::$instance = new self;
@@ -56,9 +93,13 @@ class BQW_Accordion_Slider_Admin {
 		return self::$instance;
 	}
 
-	/*
-		Load the admin CSS
-	*/
+	/**
+	 * Loads the admin CSS files.
+	 *
+	 * It loads the public and admin CSS, and also the public custom CSS.
+	 *
+	 * @since 1.0.0
+	 */
 	public function enqueue_admin_styles() {
 		if ( ! isset( $this->plugin_screen_hook_suffixes ) ) {
 			return;
@@ -93,9 +134,14 @@ class BQW_Accordion_Slider_Admin {
 		}
 	}
 
-	/*
-		Load the admin JavaScript
-	*/
+	/**
+	 * Loads the admin JS files.
+	 *
+	 * It loads the public and admin JS, and also the public custom JS.
+	 * Also, it passes the PHP variables to the admin JS file.
+	 *
+	 * @since 1.0.0
+	 */
 	public function enqueue_admin_scripts() {
 		if ( ! isset( $this->plugin_screen_hook_suffixes ) ) {
 			return;
@@ -152,9 +198,11 @@ class BQW_Accordion_Slider_Admin {
 		}
 	}
 
-	/*
-		Create the admin menu
-	*/
+	/**
+	 * Create the plugin menu.
+	 *
+	 * @since 1.0.0
+	 */
 	public function add_admin_menu() {
 		add_menu_page(
 			'Accordion Slider',
@@ -201,6 +249,15 @@ class BQW_Accordion_Slider_Admin {
 		);
 	}
 
+	/**
+	 * Renders the accordion page.
+	 *
+	 * Based on the 'action' parameter, it will render
+	 * either an individual accordion page or the list
+	 * of all the accordions.
+	 * 
+	 * @since 1.0.0
+	 */
 	public function render_accordion_page() {
 		if ( isset( $_GET['id'] ) && isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
 			$accordion = $this->plugin->get_accordion( $_GET['id'] );
@@ -222,12 +279,25 @@ class BQW_Accordion_Slider_Admin {
 		}
 	}
 
+	/**
+	 * Renders the page for a new accordion.
+	 * 
+	 * @since 1.0.0
+	 */
 	public function render_new_accordion_page() {
 		$accordion_name = 'My Accordion';
 
 		include_once( 'views/accordion.php' );
 	}
 
+	/**
+	 * Renders the custom CSS and JavaScript page.
+	 *
+	 * It also checks if new data was posted, and saves
+	 * it in the options table.
+	 * 
+	 * @since 1.0.0
+	 */
 	public function render_custom_css_js_page() {
 		$custom_css = get_option( 'accordion_slider_custom_css', '' );
 		$custom_js = get_option( 'accordion_slider_custom_js', '' );
@@ -265,6 +335,17 @@ class BQW_Accordion_Slider_Admin {
 		include_once( 'views/custom-css-js.php' );
 	}
 
+	/**
+	 * Renders the plugin settings page.
+	 *
+	 * It also checks if new data was posted, and saves
+	 * it in the options table.
+	 *
+	 * It verifies the purchase code supplied and displays
+	 * if it's valid.
+	 * 
+	 * @since 1.0.0
+	 */
 	public function render_plugin_settings_page() {
 		$plugin_settings = BQW_Accordion_Slider_Settings::getPluginSettings();
 		$load_stylesheets = get_option( 'accordion_slider_load_stylesheets', $plugin_settings['load_stylesheets']['default_value'] );
@@ -328,13 +409,25 @@ class BQW_Accordion_Slider_Admin {
 		include_once( 'views/plugin-settings.php' );
 	}
 
+	/**
+	 * Add the custom CSS and JS in files, using the WP Filesystem API.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  string $custom_css The custom CSS.
+	 * @param  string $custom_js  The custom JavaScript.
+	 */
 	private function save_custom_css_js_in_files ( $custom_css, $custom_js ) {
 		$url = wp_nonce_url( 'admin.php?page=accordion-slider-custom', 'custom-css-js-update', 'custom-css-js-nonce' );
 
+		// get the credentials and if there aren't any credentials stored,
+		// display a form for the user to provide the credentials
 		if ( ( $credentials = request_filesystem_credentials( $url, '', false, false, null ) ) === false ) {
 			return;
 		}
 
+		// check the credentials if they are valid
+		// if they aren't, display the form again
 		if ( ! WP_Filesystem( $credentials ) ) {
 			request_filesystem_credentials( $url, '', true, false, null );
 			return;
@@ -342,6 +435,7 @@ class BQW_Accordion_Slider_Admin {
 
 		global $wp_filesystem;
 
+		// create the 'accordion-slider-custom' folder if it doesn't exist
 		if ( ! $wp_filesystem->exists( WP_PLUGIN_DIR . '/accordion-slider-custom' ) ) {
 			$wp_filesystem->mkdir( WP_PLUGIN_DIR . '/accordion-slider-custom' );
 		}
@@ -350,6 +444,13 @@ class BQW_Accordion_Slider_Admin {
 		$wp_filesystem->put_contents( WP_PLUGIN_DIR . '/accordion-slider-custom/custom.js', stripslashes( $custom_js ), FS_CHMOD_FILE );
 	}
 
+	/**
+	 * AJAX call for getting the accordion's data.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return string The accordion data, as JSON-encoded array.
+	 */
 	public function ajax_get_accordion_data() {
 		$nonce = $_GET['nonce'];
 		$id = $_GET['id'];
@@ -365,10 +466,27 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * Return the accordion's data.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  int   $id The id of the accordion.
+	 * @return array     The accordion data.
+	 */
 	public function get_accordion_data( $id ) {
 		return $this->plugin->get_accordion( $id );
 	}
 
+	/**
+	 * AJAX call for saving the accordion.
+	 *
+	 * It can be called when the accordion is created, updated
+	 * or when an accordion is imported. If the accordion is 
+	 * imported, it returns a row in the list of accordions.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_save_accordion() {
 		$accordion_data = json_decode( stripslashes( $_POST['data'] ), true );
 		$nonce = $accordion_data['nonce'];
@@ -394,6 +512,21 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * Save the accordion.
+	 *
+	 * It either creates a new accordion or updates and existing one.
+	 *
+	 * For existing accordions, the panels and layers are deleted and 
+	 * re-inserted in the database.
+	 *
+	 * The cached accordion is deleted every time the accordion is saved.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  array $accordion_data The data of the accordion that's saved.
+	 * @return int                   The id of the saved accordion.
+	 */
 	public function save_accordion( $accordion_data ) {
 		global $wpdb;
 
@@ -476,6 +609,15 @@ class BQW_Accordion_Slider_Admin {
 		return $id;
 	}
 
+	/**
+	 * AJAX call for previewing the accordion.
+	 *
+	 * Receives the current data from the database (in the accordions page)
+	 * or from the current settings (in the accordion page) and prints the
+	 * HTML markup and the inline JavaScript for the accordion.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_preview_accordion() {
 		$accordion = json_decode( stripslashes( $_POST['data'] ), true );
 		$accordion_name = $accordion['name'];
@@ -486,6 +628,17 @@ class BQW_Accordion_Slider_Admin {
 		die();	
 	}
 
+	/**
+	 * AJAX call for duplicating an accordion.
+	 *
+	 * Loads an accordion from the database and re-saves it with an id of -1, 
+	 * which will determine the save function to add a new accordion in the 
+	 * database.
+	 *
+	 * It returns a new accordion row in the list of all accordions.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_duplicate_accordion() {
 		$nonce = $_POST['nonce'];
 		$original_accordion_id = $_POST['id'];
@@ -507,6 +660,17 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * AJAX call for deleting an accordion.
+	 *
+	 * It's called from the list of accordions, when the
+	 * 'Delete' link is clicked.
+	 *
+	 * It calls the 'delete_accordion()' method and passes
+	 * it the id of the accordion to be deleted.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_delete_accordion() {
 		$nonce = $_POST['nonce'];
 		$id = intval( $_POST['id'] );
@@ -520,6 +684,14 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * Delete the accordion indicated by the id.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  int $id The id of the accordion to be deleted.
+	 * @return int     The id of the accordion that was deleted.
+	 */
 	public function delete_accordion( $id ) {
 		global $wpdb;
 
@@ -530,6 +702,16 @@ class BQW_Accordion_Slider_Admin {
 		return $id;
 	}
 
+	/**
+	 * AJAX call for exporting an accordion.
+	 *
+	 * It loads an accordion from the database and encodes 
+	 * its data as JSON, after removing the id of the accordion.
+	 *
+	 * The JSON string created is presented in a modal window.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_export_accordion() {
 		$nonce = $_POST['nonce'];
 		$id = intval( $_POST['id'] );
@@ -550,12 +732,29 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * AJAX call for displaying the modal window
+	 * for importing an accordion.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_import_accordion() {
 		include( 'views/import-window.php' );
 
 		die();
 	}
 
+	/**
+	 * Create a panel from the passed data.
+	 *
+	 * Receives some data, like the background image, or
+	 * the panel's content type. A new panel is created by 
+	 * passing 'false' instead of any data.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  array|bool $data The data of the panel or false, if the panel is new.
+	 */
 	public function create_panel( $data ) {
 		$panel_type = 'custom';
 		$panel_image = '';
@@ -569,6 +768,16 @@ class BQW_Accordion_Slider_Admin {
 		include( 'views/panel.php' );
 	}
 	
+	/**
+	 * AJAX call for adding multiple or a single panel.
+	 *
+	 * If it receives any data, it tries to create multiple
+	 * panels by padding the data that was received, and if
+	 * it doesn't receive any data it tries to create a
+	 * single panel.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_add_panels() {
 		if ( isset( $_POST['data'] ) ) {
 			$panels_data = json_decode( stripslashes( $_POST['data'] ), true );
@@ -583,6 +792,15 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * AJAX call for displaying the background image editor.
+	 *
+	 * The aspect of the editor will depend on the panel's
+	 * content type. Dynamic panels will not have the possibility
+	 * to load images from the library.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_load_background_image_editor() {
 		$data = json_decode( stripslashes( $_POST['data'] ), true );
 		$content_class = $_POST['content_type'] === 'custom' ? 'custom' : 'dynamic';
@@ -592,6 +810,11 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * AJAX call for displaying the inline HTML editor.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_load_html_editor() {
 		$html_content = $_POST['data'];
 
@@ -600,6 +823,11 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * AJAX call for displaying the layers editor.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_load_layers_editor() {
 		$layers = json_decode( stripslashes( $_POST['data'] ), true );
 
@@ -610,6 +838,14 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * AJAX call for adding a new block of layer settings
+	 *
+	 * It receives the id and type of the layer, and creates 
+	 * the appropriate setting fields.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_add_layer_settings() {
 		$layer = array();
 		$layer_id = $_POST['id'];
@@ -651,6 +887,11 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * AJAX call for displaying the panel's settings editor.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_load_settings_editor() {
 		$panel_settings = json_decode( stripslashes( $_POST['data'] ), true );
 
@@ -663,6 +904,15 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * AJAX call for displaying the setting fields associated 
+	 * with the current content type of the panel.
+	 *
+	 * It's called when the content type is changed manually 
+	 * in the panel's settings window
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_load_content_type_settings() {
 		$type = $_POST['type'];
 		$panel_settings = json_decode( stripslashes( $_POST['data'] ), true );
@@ -672,6 +922,17 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * Return the setting fields associated with the content type.
+	 *
+	 * If the content type is set to 'posts', the names of the
+	 * registered post types will be loaded.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  string $type           The panel's content type.
+	 * @param  array  $panel_settings The panel's settings.
+	 */
 	public function load_content_type_settings( $type, $panel_settings = NULL ) {
 		$panel_default_settings = BQW_Accordion_Slider_Settings::getPanelSettings();
 
@@ -686,6 +947,23 @@ class BQW_Accordion_Slider_Admin {
 		}
 	}
 
+	/**
+	 * Return the names of all registered post types
+	 *
+	 * It arranges the data in an associative array that contains
+	 * the name of the post type as the key and and an array, containing 
+	 * both the post name and post value, as the value:
+	 *
+	 * name => ( name, label )
+	 *
+	 * After the data is fetched, it is stored in a transient for 5 minutes.
+	 * Before fetching the data, the function tries to get the data
+	 * from the transient.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return array The list of names for the registered post types.
+	 */
 	public function get_post_names() {
 		$result = array();
 		$post_names_transient = get_transient( 'accordion_slider_post_names' );
@@ -709,6 +987,14 @@ class BQW_Accordion_Slider_Admin {
 		return $result;
 	}
 
+	/**
+	 * AJAX call for getting the registered taxonomies.
+	 *
+	 * It's called when the post names are selected manually
+	 * in the panel's settings window.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_get_taxonomies() {
 		$post_names = json_decode( stripslashes( $_GET['post_names'] ), true );
 
@@ -717,6 +1003,22 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * Loads the taxonomies associated with the selected post names.
+	 *
+	 * It tries to find cached data for the post names and their taxonomies,
+	 * stored in the 'accordion_slider_posts_data' transient. If there is 
+	 * cached data, the cached post names and their taxonomy data are added
+	 * to the result. Post names that are not found in the transient are 
+	 * added to the list of posts to load.After these posts are loaded, the
+	 * transient is updated to contain both the existing post names and the
+	 * newly loaded post names, and their taxonomy data.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  array $post_names An array of selected post names.
+	 * @return array             An array of post names and their taxonomies.
+	 */
 	public function get_taxonomies_for_posts( $post_names ) {
 		$result = array();
 		$posts_to_load = array();
@@ -769,6 +1071,11 @@ class BQW_Accordion_Slider_Admin {
 		return $result;
 	}
 
+	/**
+	 * AJAX call for adding a new breakpoint section.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_add_breakpoint() {
 		$width = $_GET['data'];
 
@@ -777,6 +1084,11 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * AJAX call for adding a new breakpoint setting.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_add_breakpoint_setting() {
 		$setting_name = $_GET['data'];
 
@@ -785,6 +1097,18 @@ class BQW_Accordion_Slider_Admin {
 		die();
 	}
 
+	/**
+	 * Return the HTML markup for the breakpoint setting.
+	 *
+	 * Generates a unique number that will be attributed to
+	 * the label and to the input/select field.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  string $name  The name of the setting.
+	 * @param  mixed  $value The value of the setting. If false, the default setting value will be assigned.
+	 * @return string        The HTML markup for the setting.
+	 */
 	public function create_breakpoint_setting( $name, $value ) {
 		$setting = BQW_Accordion_Slider_Settings::getSettings( $name );
 		$setting_value = $value !== false ? $value : $setting['default_value'];
@@ -792,22 +1116,58 @@ class BQW_Accordion_Slider_Admin {
 		$uid = mt_rand();
 
 		if ( $setting['type'] === 'number' || $setting['type'] === 'mixed' ) {
-            $setting_html = '<tr><td><label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label></td><td class="setting-cell"><input id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" type="text" name="' . $name . '" value="' . esc_attr( $setting_value ) . '" /><span class="remove-breakpoint-setting"></span></td></tr>';
+            $setting_html = '
+            	<tr>
+            		<td>
+            			<label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
+            		</td>
+            		<td class="setting-cell">
+            			<input id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" type="text" name="' . $name . '" value="' . esc_attr( $setting_value ) . '" />
+            			<span class="remove-breakpoint-setting"></span>
+            		</td>
+            	</tr>';
         } else if ( $setting['type'] === 'boolean' ) {
-            $setting_html = '<tr><td><label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label></td><td class="setting-cell"><input id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" type="checkbox" name="' . $name . '"' . ( $setting_value === true ? ' checked="checked"' : '' ) . ' /><span class="remove-breakpoint-setting"></span></td></tr>';
+            $setting_html = '
+            	<tr>
+            		<td>
+            			<label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
+            		</td>
+            		<td class="setting-cell">
+            			<input id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" type="checkbox" name="' . $name . '"' . ( $setting_value === true ? ' checked="checked"' : '' ) . ' />
+            			<span class="remove-breakpoint-setting"></span>
+            		</td>
+            	</tr>';
         } else if ( $setting['type'] === 'select' ) {
-            $setting_html ='<tr><td><label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label></td><td class="setting-cell"><select id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" name="' . $name . '">';
+            $setting_html ='
+            	<tr>
+            		<td>
+            			<label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
+            		</td>
+            		<td class="setting-cell">
+            			<select id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" name="' . $name . '">';
             
             foreach ( $setting['available_values'] as $value_name => $value_label ) {
                 $setting_html .= '<option value="' . $value_name . '"' . ( $setting_value == $value_name ? ' selected="selected"' : '' ) . '>' . $value_label . '</option>';
             }
             
-            $setting_html .= '</select><span class="remove-breakpoint-setting"></span></td></tr>';
+            $setting_html .= '
+            			</select>
+            			<span class="remove-breakpoint-setting"></span>
+            		</td>
+            	</tr>';
         }
 
         return $setting_html;
 	}
 
+	/**
+	 * AJAX call for deleting the cached accordions
+	 * stored using transients.
+	 *
+	 * It's called from the Plugin Settings page.
+	 *
+	 * @since 1.0.0
+	 */
 	public function ajax_clear_all_cache() {
 		$nonce = $_POST['nonce'];
 

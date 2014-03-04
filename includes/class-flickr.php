@@ -56,4 +56,3 @@ if ( class_exists( 'BQW_Flickr' ) === false ) {
 		}
 	}
 }
-?>

@@ -1,17 +1,38 @@
 <?php
-
+/**
+ * Handles the activation and deactivation of the plugin.
+ * 
+ * @since 1.0.0
+ */
 class BQW_Accordion_Slider_Activation {
 
+	/**
+	 * Current class instance.
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @var object
+	 */
 	protected static $instance = null;
 
+	/**
+	 * Initialize the Accordion Slider plugin.
+	 *
+	 * Activate the plugin for a newly added blog.
+	 *
+	 * @since 1.0.0
+	 */
 	private function __construct() {
-		// activate the plugin when a new blog is added
 		add_action( 'wpmu_new_blog', array( $this, 'activate_new_blog' ) );
 	}
 
-	/*
-		Return the instance of the class
-	*/
+	/**
+	 * Return the current class instance.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return object The instance of the current class.
+	 */
 	public static function get_instance() {
 		if ( self::$instance == null ) {
 			self::$instance = new self;
@@ -20,9 +41,14 @@ class BQW_Accordion_Slider_Activation {
 		return self::$instance;
 	}
 
-	/*
-		Executed when the plugin is activated
-	*/
+	/**
+	 * Activate the plugin for the entire network or only
+	 * for a single site.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param bool $network_wide Whether the plugin will be activated network-wide.
+	 */
 	public static function activate( $network_wide ) {
 		if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 			if ( $network_wide ) {
@@ -42,9 +68,14 @@ class BQW_Accordion_Slider_Activation {
 		}
 	}
 
-	/*
-		Executed when the plugin is deactivated
-	*/
+	/**
+	 * Deactivate the plugin for the entire network or only
+	 * for a single site.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param bool $network_wide Whether the plugin will be deactivated network-wide.
+	 */
 	public static function deactivate( $network_wide ) {
 		if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 			if ( $network_wide ) {
@@ -64,9 +95,13 @@ class BQW_Accordion_Slider_Activation {
 		}
 	}
 
-	/*
-		Executed when a new blog is activated within a WPMU environment
-	*/
+	/**
+	 * Called when a new blog is created in the network.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param int $blog_id The id of the newly created blog.
+	 */
 	public function activate_new_blog( $blog_id ) {
 		if ( did_action( 'wpmu_new_blog' ) !== 1 ) {
 			return 1;
@@ -77,9 +112,13 @@ class BQW_Accordion_Slider_Activation {
 		restore_current_blog();
 	}
 
-	/*
-		Get all blog id's
-	*/
+	/**
+	 * Return a list of all blogs' id's.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return object The id's.
+	 */
 	private static function get_blog_ids() {
 		global $wpdb;
 
@@ -88,9 +127,13 @@ class BQW_Accordion_Slider_Activation {
 		return $wpdb->get_col($sql);
 	}
 
-	/*
-		Executed for a single blog when the plugin is activated
-	*/
+	/**
+	 * Called for a single blog when the plugin is activated.
+	 *
+	 * Creates the database tables for the plugin.
+	 *
+	 * @since 1.0.0
+	 */
 	private static function single_activate() {
 		global $wpdb;
 		$prefix = $wpdb->prefix;
@@ -156,14 +199,16 @@ class BQW_Accordion_Slider_Activation {
 			dbDelta( $create_panels_table );
 			dbDelta( $create_layers_table );
 		}
-
-		$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
 	}
-
-	/*
-		Executed for a single blog when the plugin is deactivated
-	*/
+	
+	/**
+	 * Called for a single blog when the plugin is deactivated.
+	 *
+	 * Removes the cached accordions stored as transients.
+	 *
+	 * @since 1.0.0
+	 */
 	private static function single_deactivate() {
-
+		$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
 	}
 }

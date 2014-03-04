@@ -1,15 +1,66 @@
 <?php
-
+/**
+ * Contains the default settings for the accordion, panels, layers etc.
+ * 
+ * @since 1.0.0
+ */
 class BQW_Accordion_Slider_Settings {
 
+	/**
+	 * The accordion's settings.
+	 * 
+	 * The array contains the name, label, type, default value, 
+	 * JavaScript name and description of the setting.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @var array
+	 */
 	protected static $settings = array();
 
+	/**
+	 * The groups of settings.
+	 *
+	 * The settings are grouped for the purpose of generating
+	 * the accordion's admin sidebar.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @var array
+	 */
 	protected static $setting_groups = array();
 
+	/**
+	 * Layer settings.
+	 *
+	 * The array contains the name, label, type, default value
+	 * and description of the setting.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @var array
+	 */
 	protected static $layer_settings = array();
 
+	/**
+	 * Panel settings.
+	 *
+	 * The array contains the name, label, type, default value
+	 * and description of the setting.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @var array
+	 */
 	protected static $panel_settings = array();
 
+	/**
+	 * List of settings that can be used for breakpoints.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @var array
+	 */
 	protected static $breakpoint_settings = array(
 		'width',
 		'height',
@@ -21,6 +72,13 @@ class BQW_Accordion_Slider_Settings {
 		'visible_panels'
 	);
 
+	/**
+	 * Hold the state (opened or closed) of the sidebar panels.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @var array
+	 */
 	protected static $panels_state = array(
 		'appearance' => '',
 		'animations' => 'closed',
@@ -34,11 +92,23 @@ class BQW_Accordion_Slider_Settings {
 		'breakpoints'  => 'closed'
 	);
 
+	/**
+	 * Holds the plugin settings.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @var array
+	 */
 	protected static $plugin_settings = array();
 
-	/*
-		Return the settings
-	*/
+	/**
+	 * Return the accordion settings.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  string      $name The name of the setting. Optional.
+	 * @return array|mixed       The array of settings or the value of the setting.
+	 */
 	public static function getSettings( $name = null ) {
 		if ( empty( self::$settings ) ) {
 			self::$settings = array(
@@ -447,9 +517,13 @@ class BQW_Accordion_Slider_Settings {
 		return self::$settings;
 	}
 
-	/*
-		Return the setting groups
-	*/
+	/**
+	 * Return the setting groups.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return array The array of setting groups.
+	 */
 	public static function getSettingGroups() {
 		if ( empty( self::$setting_groups ) ) {
 			self::$setting_groups = array(
@@ -553,24 +627,36 @@ class BQW_Accordion_Slider_Settings {
 
 		return self::$setting_groups;
 	}
-
-	/*
-		Return the breakpoint settings
-	*/
+	
+	/**
+	 * Return the breakpoint settings.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return array The array of breakpoint settings.
+	 */
 	public static function getBreakpointSettings() {
 		return self::$breakpoint_settings;
 	}
 
-	/*
-		Return the default panels state
-	*/
+	/**
+	 * Return the default panels state.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return array The array of panels state.
+	 */
 	public static function getPanelsState() {
 		return self::$panels_state;
 	}
 
-	/*
-		Return the layer settings
-	*/
+	/**
+	 * Return the layer settings.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return array The array of layer settings.
+	 */
 	public static function getLayerSettings() {
 		if ( empty( self::$layer_settings ) ) {
 			self::$layer_settings = array(
@@ -734,9 +820,13 @@ class BQW_Accordion_Slider_Settings {
 		return self::$layer_settings;
 	}
 
-	/*
-		Return the panel settings
-	*/
+	/**
+	 * Return the panel settings.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return array The array of panel settings.
+	 */
 	public static function getPanelSettings() {
 		if ( empty( self::$panel_settings ) ) {
 			self::$panel_settings = array(
@@ -848,9 +938,13 @@ class BQW_Accordion_Slider_Settings {
 		return self::$panel_settings;
 	}
 
-	/*
-		Return the plugin settings
-	*/
+	/**
+	 * Return the plugin settings.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @return array The array of plugin settings.
+	 */
 	public static function getPluginSettings() {
 		if ( empty( self::$plugin_settings ) ) {
 			self::$plugin_settings = array(
