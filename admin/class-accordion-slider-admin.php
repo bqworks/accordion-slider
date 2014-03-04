@@ -604,7 +604,7 @@ class BQW_Accordion_Slider_Admin {
 			}
 		}
 		
-		delete_transient( 'accordion_slider_' . $id . '_cache' );
+		delete_transient( 'accordion_slider_cache_' . $id );
 
 		return $id;
 	}
