@@ -1006,18 +1006,22 @@ class BQW_Accordion_Slider_Admin {
 	/**
 	 * Loads the taxonomies associated with the selected post names.
 	 *
-	 * It tries to find cached data for the post names and their taxonomies,
-	 * stored in the 'accordion_slider_posts_data' transient. If there is 
-	 * cached data, the cached post names and their taxonomy data are added
-	 * to the result. Post names that are not found in the transient are 
-	 * added to the list of posts to load.After these posts are loaded, the
-	 * transient is updated to contain both the existing post names and the
+	 * It tries to find cached data for post names and their taxonomies,
+	 * stored in the 'accordion_slider_posts_data' transient. If there is any
+	 * cached data and if selected post names are in the cached data, those
+	 * post names and their taxonomy data are added to the result. Post names 
+	 * that are not found in the transient are added to the list of posts to load.
+	 * After these posts are loaded, the transient is updated to include the
 	 * newly loaded post names, and their taxonomy data.
+	 *
+	 * While the transient will contain all the post names and taxonomies
+	 * loaded in the past and those requested now, the result will include
+	 * only post names and taxonomies requested now.
 	 *
 	 * @since 1.0.0
 	 * 
-	 * @param  array $post_names An array of selected post names.
-	 * @return array             An array of post names and their taxonomies.
+	 * @param  array $post_names The array of selected post names.
+	 * @return array             The array of selected post names and their taxonomies.
 	 */
 	public function get_taxonomies_for_posts( $post_names ) {
 		$result = array();
