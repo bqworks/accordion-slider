@@ -310,15 +310,15 @@
 		 * @return {Object} The accordion data.
 		 */
 		getAccordionData: function() {
-			var that = this;
-
-			var accordionData = {
-				'id': as_js_vars.id,
-				'name': $( 'input#title' ).val(),
-				'settings': {},
-				'panels': [],
-				'panels_state': {}
-			};
+			var that = this,
+				accordionData = {
+					'id': as_js_vars.id,
+					'name': $( 'input#title' ).val(),
+					'settings': {},
+					'panels': [],
+					'panels_state': {}
+				},
+				breakpoints = [];
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index ) {
 				var $panel = $( this ),
@@ -333,8 +333,6 @@
 				var setting = $( this );
 				accordionData.settings[ setting.attr( 'name' ) ] = setting.attr( 'type' ) === 'checkbox' ? setting.is( ':checked' ) : setting.val();
 			});
-
-			var breakpoints = [];
 
 			$( '.breakpoints' ).find( '.breakpoint' ).each(function() {
 				var breakpointGroup = $( this ),
@@ -548,9 +546,9 @@
 		 */
 		initPanel: function( element, data ) {
 			var that = this,
-				$panel = element;
+				$panel = element,
+				panel = new Panel( $panel, this.panelCounter, data );
 
-			var panel = new Panel( $panel, this.panelCounter, data );
 			this.panels.push( panel );
 
 			panel.on( 'duplicatePanel', function( event ) {
@@ -602,11 +600,10 @@
 		 */
 		duplicatePanel: function( panelData ) {
 			var that = this,
-				newPanelData = $.extend( true, {}, panelData );
-
-			var images = [{
-				background_source: newPanelData.background.background_source
-			}];
+				newPanelData = $.extend( true, {}, panelData ),
+				images = [{
+					background_source: newPanelData.background.background_source
+				}];
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -632,21 +629,19 @@
 		 * @param  {Int} id The id of the panel to be deleted.
 		 */
 		deletePanel: function( id ) {
-			var that = this;
-
-			var panel = that.getPanel( id ),
+			var that = this,
+				panel = that.getPanel( id ),
 				dialog = $(
-				'<div class="modal-overlay"></div>' +
-				'<div class="modal-window-container">' +
-				'	<div class="modal-window delete-panel-dialog">' +
-				'		<p class="dialog-question">' + as_js_vars.panel_delete + '</p>' +
-				'		<div class="dialog-buttons">' +
-				'			<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
-				'			<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
-				'		</div>' +
-				'	</div>' +
-				'</div>'
-			).appendTo( 'body' );
+					'<div class="modal-overlay"></div>' +
+					'<div class="modal-window-container">' +
+					'	<div class="modal-window delete-panel-dialog">' +
+					'		<p class="dialog-question">' + as_js_vars.panel_delete + '</p>' +
+					'		<div class="dialog-buttons">' +
+					'			<a class="button dialog-ok" href="#">' + as_js_vars.yes + '</a>' +
+					'			<a class="button dialog-cancel" href="#">' + as_js_vars.cancel + '</a>' +
+					'		</div>' +
+					'	</div>' +
+					'</div>').appendTo( 'body' );
 
 			$( '.modal-window-container' ).css( 'top', $( window ).scrollTop() );
 
@@ -744,13 +739,12 @@
 		 * @since 1.0.0
 		 */
 		addPostsPanels: function() {
-			var that = this;
-
-			var data =  [{
-				settings: {
-					content_type: 'posts'
-				}
-			}];
+			var that = this,
+				data =  [{
+					settings: {
+						content_type: 'posts'
+					}
+				}];
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -802,13 +796,12 @@
 		 * @since 1.0.0
 		 */
 		addGalleryPanels: function() {
-			var that = this;
-
-			var data =  [{
-				settings: {
-					content_type: 'gallery'
-				}
-			}];
+			var that = this,
+				data =  [{
+					settings: {
+						content_type: 'gallery'
+					}
+				}];
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -846,13 +839,12 @@
 		 * @since 1.0.0
 		 */
 		addFlickrPanels: function() {
-			var that = this;
-
-			var data =  [{
-				settings: {
-					content_type: 'flickr'
-				}
-			}];
+			var that = this,
+				data =  [{
+					settings: {
+						content_type: 'flickr'
+					}
+				}];
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -907,9 +899,8 @@
 		 */
 		addBreakpoint: function() {
 			var that = this,
-				size = '';
-
-			var previousWidth = $( 'input[name="breakpoint_width"]' ).last().val();
+				size = '',
+				previousWidth = $( 'input[name="breakpoint_width"]' ).last().val();
 			
 			if ( typeof previousWidth === 'undefined' ) {
 				size = '960';
@@ -959,9 +950,8 @@
 		 * @param  {Function} callback Function to call after the taxonomies are loaded.
 		 */
 		getTaxonomies: function( posts, callback ) {
-			var that = this;
-			
-			var postsToLoad = [];
+			var that = this,
+				postsToLoad = [];
 
 			$.each( posts, function( index, postName ) {
 				if ( typeof that.postsData[ postName ] === 'undefined' ) {
@@ -1516,18 +1506,16 @@
 		 * @param  {Int} id The id of the panel
 		 */
 		open: function( id ) {
-			var that = this;
-
 			this.currentPanel = AccordionSliderAdmin.getPanel( id );
-			
-			var data = this.currentPanel.getData( 'background' ),
-				contentType = this.currentPanel.getData( 'settings' )[ 'content_type' ];
+
+			var that = this,
+				data = this.currentPanel.getData( 'background' ),
+				contentType = this.currentPanel.getData( 'settings' )[ 'content_type' ],
+				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
 
 			if ( typeof contentType === 'undefined' ) {
 				contentType = 'custom';
 			}
-
-			var spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -1738,13 +1726,11 @@
 		 * @param  {Int} id The id of the panel.
 		 */
 		open: function( id ) {
-			var that = this;
-
 			this.currentPanel = AccordionSliderAdmin.getPanel( id );
 			
-			var data = this.currentPanel.getData( 'html' );
-
-			var spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
+			var that = this,
+				data = this.currentPanel.getData( 'html' ),
+				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -1879,12 +1865,11 @@
 		 * @param  {Int} id The id of the panel.
 		 */
 		open: function( id ) {
-			var that = this;
+			var that = this,
+				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
 
 			this.currentPanel = AccordionSliderAdmin.getPanel( id );
 			this.layersData = this.currentPanel.getData( 'layers' );
-
-			var spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -3040,13 +3025,11 @@
 		 * @param  {Int} id The id of the panel
 		 */
 		open: function( id ) {
-			var that = this;
-
 			this.currentPanel = AccordionSliderAdmin.getPanel( id );
-			
-			var data = this.currentPanel.getData( 'settings' );
 
-			var spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
+			var that = this,
+				data = this.currentPanel.getData( 'settings' ),
+				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -3337,10 +3320,10 @@
 		 * @param  {Object} data The data of the accordion
 		 */
 		open: function( data ) {
-			var that = this;
 			this.accordionData = data;
 
-			var spinner = $( '.preview-spinner' ).css( 'display', 'inline-block' );
+			var that = this,
+				spinner = $( '.preview-spinner' ).css( 'display', 'inline-block' );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
