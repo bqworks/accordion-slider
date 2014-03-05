@@ -23,12 +23,12 @@
 					<a class="duplicate-layer disabled" href="#" title="Duplicate Layer">Duplicate</a>
 				</div>
 
-				<ul class="layers-list">
+				<ul class="list-layers">
 					<?php
 						foreach ( $layers as $layer ) {
 							$layer_id = $layer[ 'id' ];
 							$layer_name = $layer[ 'name' ];
-							echo '<li class="layers-list-item" data-id="' . $layer_id . '">' . $layer_name . '</li>';
+							echo '<li class="list-layer" data-id="' . $layer_id . '">' . $layer_name . '</li>';
 						}
 					?>
 				</ul>

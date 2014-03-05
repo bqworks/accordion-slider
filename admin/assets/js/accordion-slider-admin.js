@@ -1962,9 +1962,9 @@
 				that.counter = Math.max( that.counter, data.id );
 			});
 
-			$( '.layers-list' ).lightSortable( {
-				children: '.layers-list-item',
-				placeholder: 'layers-list-item-placeholder',
+			$( '.list-layers' ).lightSortable( {
+				children: '.list-layer',
+				placeholder: 'list-layer-placeholder',
 				sortEnd: function( event ) {
 					var layer = that.layers[ event.startPosition ];
 					that.layers.splice( event.startPosition, 1 );
@@ -1973,7 +1973,7 @@
 					var $viewportLayers = that.$editor.find( '.viewport-layers' ),
 						total = $viewportLayers.children().length - 1;
 
-					$( '.layers-list' ).find( '.layers-list-item' ).each(function( index, element ) {
+					$( '.list-layers' ).find( '.list-layer' ).each(function( index, element ) {
 						$( element ).attr( 'data-position', index );
 					});
 
@@ -1987,7 +1987,7 @@
 				}
 			} );
 
-			$( '.layers-list' ).find( '.layers-list-item' ).each(function( index, element ) {
+			$( '.list-layers' ).find( '.list-layer' ).each(function( index, element ) {
 				$( element ).attr( 'data-position', index );
 			});
 
@@ -2104,7 +2104,7 @@
 				data: { action: 'accordion_slider_add_layer_settings', id: this.counter, type: type },
 				complete: function( data ) {
 					$( data.responseText ).appendTo( $( '.layers-settings' ) );
-					$( '<li class="layers-list-item" data-id="' + that.counter + '" data-position="' + that.layers.length + '">Layer ' + that.counter + '</li>' ).prependTo( that.$editor.find( '.layers-list' ) );
+					$( '<li class="list-layer" data-id="' + that.counter + '" data-position="' + that.layers.length + '">Layer ' + that.counter + '</li>' ).prependTo( that.$editor.find( '.list-layers' ) );
 
 					that.createLayer( { id: that.counter, type: type, createMode: 'new' } );
 				}
@@ -2190,7 +2190,7 @@
 				},
 				complete: function( data ) {
 					$( data.responseText ).appendTo( $( '.layers-settings' ) );
-					$( '<li class="layers-list-item" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).prependTo( that.$editor.find( '.layers-list' ) );
+					$( '<li class="list-layer" data-id="' + that.counter + '">Layer ' + that.counter + '</li>' ).prependTo( that.$editor.find( '.list-layers' ) );
 
 					layerData.id = that.counter;
 					layerData.createMode = 'duplicate';
@@ -2230,7 +2230,7 @@
 			this.$editor.find( '.delete-layer' ).off( 'click' );
 			this.$editor.find( '.duplicate-layer' ).off( 'click' );
 
-			$( '.layers-list' ).lightSortable( 'destroy' );
+			$( '.list-layers' ).lightSortable( 'destroy' );
 
 			$.each( this.layers, function( index, layer ) {
 				layer.destroy();
@@ -2271,7 +2271,7 @@
 		this.$viewportLayers = this.$editor.find( '.viewport-layers' );
 
 		this.$viewportLayer = null;
-		this.$layerListItem = this.$editor.find( '.layers-list-item[data-id="' + this.id + '"]' );
+		this.$listLayer = this.$editor.find( '.list-layer[data-id="' + this.id + '"]' );
 		this.$layerSettings = this.$editor.find( '.layer-settings[data-id="' + this.id + '"]' );
 
 		this.init();
@@ -2289,7 +2289,7 @@
 			this.initLayerSettings();
 			this.initViewportLayer();
 			this.initLayerDragging();
-			this.initLayerListItem();
+			this.initListLayer();
 		},
 
 		/**
@@ -2306,8 +2306,8 @@
 			var data = {};
 
 			data.id = this.id;
-			data.position = parseInt( this.$layerListItem.attr( 'data-position' ), 10);
-			data.name = this.$layerListItem.text();
+			data.position = parseInt( this.$listLayer.attr( 'data-position' ), 10);
+			data.name = this.$listLayer.text();
 			
 			data.settings = {};
 
@@ -2351,7 +2351,7 @@
 		select: function() {
 			this.selected = true;
 
-			this.$layerListItem.addClass( 'selected-layers-list-item' );
+			this.$listLayer.addClass( 'selected-list-layer' );
 			this.$layerSettings.addClass( 'selected-layer-settings' );
 		},
 
@@ -2363,7 +2363,7 @@
 		deselect: function() {
 			this.selected = false;
 
-			this.$layerListItem.removeClass( 'selected-layers-list-item' );
+			this.$listLayer.removeClass( 'selected-list-layer' );
 			this.$layerSettings.removeClass( 'selected-layer-settings' );
 		},
 
@@ -2401,9 +2401,9 @@
 			this.$viewportLayer.off( 'mouseup' );
 			this.$viewportLayer.off( 'click' );
 
-			this.$layerListItem.off( 'click' );
-			this.$layerListItem.off( 'dblclick' );
-			this.$layerListItem.off( 'selectstart' );
+			this.$listLayer.off( 'click' );
+			this.$listLayer.off( 'dblclick' );
+			this.$listLayer.off( 'selectstart' );
 
 			this.$editor.off( 'mousemove.layer' + this.id );
 			this.$editor.off( 'click.layer' + this.id );
@@ -2419,7 +2419,7 @@
 			this.$layerSettings.find( '.setting[name="custom_class"]' ).off( 'change' );
 
 			this.$viewportLayer.remove();
-			this.$layerListItem.remove();
+			this.$listLayer.remove();
 			this.$layerSettings.remove();
 		},
 
@@ -2622,27 +2622,27 @@
 		 * 
 		 * @since 1.0.0
 		 */
-		initLayerListItem: function() {
+		initListLayer: function() {
 			var that = this,
 				isEditingLayerName = false;
 
-			this.$layerListItem.on( 'click', function( event ) {
+			this.$listLayer.on( 'click', function( event ) {
 				that.trigger( { type: 'select', id: that.id } );
 			});
 
-			this.$layerListItem.on( 'dblclick', function( event ) {
+			this.$listLayer.on( 'dblclick', function( event ) {
 				if ( isEditingLayerName === true ) {
 					return;
 				}
 
 				isEditingLayerName = true;
 
-				var name = that.$layerListItem.text();
+				var name = that.$listLayer.text();
 
-				var input = $( '<input type="text" value="' + name + '" />' ).appendTo( that.$layerListItem );
+				var input = $( '<input type="text" value="' + name + '" />' ).appendTo( that.$listLayer );
 			});
 
-			this.$layerListItem.on( 'selectstart', function( event ) {
+			this.$listLayer.on( 'selectstart', function( event ) {
 				event.preventDefault();
 			});
 
@@ -2650,9 +2650,9 @@
 				if ( ! $( event.target ).is( 'input' ) && isEditingLayerName === true ) {
 					isEditingLayerName = false;
 
-					var input = that.$layerListItem.find( 'input' );
+					var input = that.$listLayer.find( 'input' );
 
-					that.$layerListItem.text( input.val() );
+					that.$listLayer.text( input.val() );
 					input.remove();
 				}
 			});

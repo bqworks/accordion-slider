@@ -614,14 +614,14 @@
 	position: relative;
 }
 
-.layers-editor .layers-list {
+.layers-editor .list-layers {
 	width: 130px;
 	max-height: 137px;
 	overflow: auto;
 	margin: 13px 0 0;
 }
 
-.layers-editor .layers-list-item {
+.layers-editor .list-layer {
 	position: relative;
 	border: 1px solid #CCC;
 	background-color: #F4F4F4;
@@ -631,19 +631,19 @@
 	line-height: 1;
 }
 
-.layers-editor .selected-layers-list-item {
+.layers-editor .selected-list-layer {
 	border-color: #000;
 }
 
-.layers-editor .layers-list-item:first-child {
+.layers-editor .list-layer:first-child {
 	margin-top: 0;
 }
 
-.layers-editor .layers-list-item:last-child {
+.layers-editor .list-layer:last-child {
 	margin-bottom: 0;
 }
 
-.layers-editor .layers-list-item input {
+.layers-editor .list-layer input {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -652,7 +652,7 @@
 	margin: 0;
 }
 
-.layers-list-item-placeholder {
+.list-layer-placeholder {
 	border: 1px dashed #999;
 	background-color: #FEFEFE;
 	-moz-box-sizing: border-box;
