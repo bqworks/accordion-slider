@@ -1,9 +1,9 @@
 <li id="layer-settings-<?php echo esc_attr( $layer_id ); ?>" class="layer-settings" data-id="<?php echo esc_attr( $layer_id ); ?>">
 	<ul>
 		<li>
-			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="tab" id="content-tab-<?php echo esc_attr( $layer_id ); ?>" checked="checked">
-			<label for="content-tab-<?php echo esc_attr( $layer_id ); ?>" class="tab-label"><?php _e( 'Content', 'accordion-slider' ); ?></label>
-			<div class="setting-fields content-fields">
+			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="layer-settings-tab" id="content-tab-<?php echo esc_attr( $layer_id ); ?>" checked="checked">
+			<label for="content-tab-<?php echo esc_attr( $layer_id ); ?>" class="layer-settings-tab-label"><?php _e( 'Content', 'accordion-slider' ); ?></label>
+			<div class="layer-setting-fields layer-content-fields">
 
 				<?php 
 					$layer_type = isset( $layer_type ) ? $layer_type : $layer_default_settings['type']['default_value'];
@@ -84,9 +84,9 @@
 			</div>
 		</li>
 		<li>
-			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="tab" id="appearance-tab-<?php echo $layer_id; ?>">
-			<label for="appearance-tab-<?php echo esc_attr( $layer_id ); ?>" class="tab-label"><?php _e( 'Appearance', 'accordion-slider' ); ?></label>
-			<div class="setting-fields">
+			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="layer-settings-tab" id="appearance-tab-<?php echo $layer_id; ?>">
+			<label for="appearance-tab-<?php echo esc_attr( $layer_id ); ?>" class="layer-settings-tab-label"><?php _e( 'Appearance', 'accordion-slider' ); ?></label>
+			<div class="layer-setting-fields">
 				<table>
 					<tbody>
 						<tr>
@@ -152,9 +152,9 @@
 		</li>
 
 		<li>
-			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="tab" id="animation-tab-<?php echo esc_attr( $layer_id ); ?>">
-			<label for="animation-tab-<?php echo esc_attr( $layer_id ); ?>" class="tab-label"><?php _e( 'Animation', 'accordion-slider' ); ?></label>
-			<div class="setting-fields">
+			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="layer-settings-tab" id="animation-tab-<?php echo esc_attr( $layer_id ); ?>">
+			<label for="animation-tab-<?php echo esc_attr( $layer_id ); ?>" class="layer-settings-tab-label"><?php _e( 'Animation', 'accordion-slider' ); ?></label>
+			<div class="layer-setting-fields">
 				<table>
 					<tbody>
 						<tr>
