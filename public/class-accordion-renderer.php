@@ -203,7 +203,7 @@ class BQW_AS_Accordion_Renderer {
 					$setting_value = "'" . $setting_value . "'";
 				}
 
-				$settings_js .= "\r\n" . '			' . $setting['js_name'] . ' : ' . $setting_value;
+				$settings_js .= "\r\n" . '			' . $setting['js_name'] . ': ' . $setting_value;
 			}
 		}
 
@@ -237,7 +237,7 @@ class BQW_AS_Accordion_Renderer {
 							$value = "'" . $value . "'";
 						}
 
-						$breakpoint_setting_js .= "\r\n" . '					' . $name . ' : ' . $value;
+						$breakpoint_setting_js .= "\r\n" . '					' . $this->default_settings[ $name ]['js_name'] . ': ' . $value;
 					}
 
 					$breakpoints_js .= $breakpoint_setting_js;
