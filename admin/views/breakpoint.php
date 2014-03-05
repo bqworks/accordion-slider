@@ -27,19 +27,19 @@
 			?>
 		</tbody>
 	</table>
-	<div class="add-setting-group">
-				        <a class="button add-setting" href="#"><?php _e( 'Add Setting', 'accordion-slider' ); ?> <span class="add-setting-arrow">&#9660</span></a>
-				        <ul class="setting-name">
-				        	<?php
-								$default_breakpoint_settings = BQW_Accordion_Slider_Settings::getBreakpointSettings();
+	<div class="add-breakpoint-setting-group">
+        <a class="button add-breakpoint-setting" href="#"><?php _e( 'Add Setting', 'accordion-slider' ); ?> <span class="add-breakpoint-setting-arrow">&#9660</span></a>
+        <ul class="breakpoint-setting-name">
+        	<?php
+				$default_breakpoint_settings = BQW_Accordion_Slider_Settings::getBreakpointSettings();
 
-								foreach ( $default_breakpoint_settings as $setting_name ) {
-									if ( $setting_name !== 'breakpoint_width' ) {
-										$setting = BQW_Accordion_Slider_Settings::getSettings( $setting_name );
-										echo '<li><a href="#" data-type="' . $setting_name . '">' . $setting['label'] . '</a></li>';
-									}
-								}
-							?>
-				        </ul>
-				    </div>
+				foreach ( $default_breakpoint_settings as $setting_name ) {
+					if ( $setting_name !== 'breakpoint_width' ) {
+						$setting = BQW_Accordion_Slider_Settings::getSettings( $setting_name );
+						echo '<li><a href="#" data-type="' . $setting_name . '">' . $setting['label'] . '</a></li>';
+					}
+				}
+			?>
+        </ul>
+    </div>
 </div>

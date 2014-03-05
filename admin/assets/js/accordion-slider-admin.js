@@ -120,7 +120,7 @@
 				that.addBreakpoint();
 			});
 
-			$( '.breakpoints' ).on( 'click', '.setting-name a', function( event ) {
+			$( '.breakpoints' ).on( 'click', '.breakpoint-setting-name a', function( event ) {
 				event.preventDefault();
 
 				var name = $( this ).attr( 'data-type' ),
