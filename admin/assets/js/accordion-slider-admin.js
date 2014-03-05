@@ -1,15 +1,56 @@
-(function($) {
+/*
+ * ======================================================================
+ * Accordion Slider Admin
+ * ======================================================================
+ */
+(function( $ ) {
 
 	var AccordionSliderAdmin = {
 
+		/**
+		 * Stores the data for all panels in the accordion.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Array}
+		 */
 		panels: [],
 
+		/**
+		 * Keeps a count for the panels in the accordion.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Int}
+		 */
 		panelCounter: 0,
 
+		/**
+		 * Stores all posts names and their taxonomies.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Object}
+		 */
 		postsData: {},
 
+		/**
+		 * Indicates if the preview images from the panels
+		 * can be resized.
+		 * This prevents resizing the images too often.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Boolean}
+		 */
 		allowPanelImageResize: true,
 
+		/**
+		 * Initializes the functionality for a single accordion page
+		 * or for the page that contains all the accordions.
+		 *
+		 * @since 1.0.0
+		 */
 		init: function() {
 			if ( as_js_vars.page === 'single' ) {
 				this.initSingleAccordionPage();
@@ -18,6 +59,18 @@
 			}
 		},
 
+		/*
+		 * ======================================================================
+		 * Accordion functions
+		 * ======================================================================
+		 */
+		
+		/**
+		 * Initializes the functionality for a single accordion page
+		 * by adding all the necessary event listeners.
+		 *
+		 * @since 1.0.0
+		 */
 		initSingleAccordionPage: function() {
 			var that = this;
 
@@ -89,6 +142,14 @@
 				placeholder: ''
 			} );
 
+			$( '.postbox .hndle, .postbox .handlediv' ).on( 'click', function() {
+				$( this ).parent( '.postbox' ).toggleClass( 'closed' );
+			});
+
+			$( '.sidebar-settings label' ).on( 'mouseover', function() {
+				that.showInfo( $( this ) );
+			});
+
 			$( window ).resize(function() {
 				if ( that.allowPanelImageResize === true ) {
 					that.resizePanelImages();
@@ -100,16 +161,14 @@
 					}, 250 );
 				}
 			});
-
-			$( '.postbox .hndle, .postbox .handlediv' ).on( 'click', function() {
-				$( this ).parent( '.postbox' ).toggleClass( 'closed' );
-			});
-
-			$( '.sidebar-settings label' ).on( 'mouseover', function() {
-				that.showInfo( $( this ) );
-			});
 		},
 
+		/**
+		 * Initializes the functionality for the page that contains
+		 * all the accordions by adding all the necessary event listeners.
+		 *
+		 * @since 1.0.0
+		 */
 		initAllAccordionsPage: function() {
 			var that = this;
 
@@ -161,6 +220,15 @@
 			});
 		},
 
+		/**
+		 * Load the accordion accordion data.
+		 * 
+		 * Send an AJAX request with the accordion id and the nonce, and
+		 * retrieve all the accordion's database data. Then, assign the
+		 * data to the panels.
+		 *
+		 * @since 1.0.0
+		 */
 		loadAccordionData: function() {
 			var that = this;
 
@@ -195,6 +263,14 @@
 			});
 		},
 
+		/**
+		 * Save the accordion's data.
+		 * 
+		 * Get the accordion's data and send it to the server with AJAX. If
+		 * a new accordion was created, redirect to the accordion's edit page.
+		 *
+		 * @since 1.0.0
+		 */
 		saveAccordion: function() {
 			var accordionData = this.getAccordionData();
 			accordionData[ 'nonce' ] = as_js_vars.sa_nonce;
@@ -222,6 +298,17 @@
 			});
 		},
 
+		/**
+		 * Get the accordion's data.
+		 * 
+		 * Read the value of the sidebar settings, including the breakpoints,
+		 * the panels state, the name of the accordion, the id, and get the
+		 * data for each panel.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @return {Object} The accordion data.
+		 */
 		getAccordionData: function() {
 			var that = this;
 
@@ -274,10 +361,20 @@
 			return accordionData;
 		},
 
+		/**
+		 * Preview the accordion in the accordion's edit page.
+		 *
+		 * @since 1.0.0
+		 */
 		previewAccordion: function() {
 			PreviewWindow.open( this.getAccordionData() );
 		},
 
+		/**
+		 * Preview the accordion in the accordions' list page.
+		 *
+		 * @since 1.0.0
+		 */
 		previewAccordionAll: function( target ) {
 			var url = $.lightURLParse( target.attr( 'href' ) ),
 				nonce = url.lad_nonce,
@@ -295,6 +392,22 @@
 			});
 		},
 
+		/**
+		 * Delete an accordion.
+		 *
+		 * This is called in the accordions' list page upon clicking
+		 * the 'Delete' link.
+		 *
+		 * It displays a confirmation dialog before sending the request
+		 * for deletion to the server.
+		 *
+		 * The accordion's row is removed after the accordion is deleted
+		 * server-side.
+		 * 
+		 * @since 1.0.0
+		 *
+		 * @param  {jQuery Object} target The clicked 'Delete' link.
+		 */
 		deleteAccordion: function( target ) {
 			var url = $.lightURLParse( target.attr( 'href' ) ),
 				nonce = url.da_nonce,
@@ -345,6 +458,19 @@
 			});
 		},
 
+		/**
+		 * Duplicate an accordion.
+		 *
+		 * This is called in the accordions' list page upon clicking
+		 * the 'Duplicate' link.
+		 *
+		 * A new row is added in the list for the newly created
+		 * accordion.
+		 * 
+		 * @since 1.0.0
+		 *
+		 * @param  {jQuery Object} target The clicked 'Duplicate' link.
+		 */
 		duplicateAccordion: function( target ) {
 			var url = $.lightURLParse( target.attr( 'href' ) ),
 				nonce = url.dua_nonce,
@@ -362,6 +488,16 @@
 			});
 		},
 
+		/**
+		 * Open the accordion export window.
+		 *
+		 * This is called in the accordions' list page upon clicking
+		 * the 'Export' link.
+		 * 
+		 * @since 1.0.0
+		 *
+		 * @param  {jQuery Object} target The clicked 'Export' link.
+		 */
 		exportAccordion: function( target ) {
 			var url = $.lightURLParse( target.attr( 'href' ) ),
 				nonce = url.ea_nonce,
@@ -370,6 +506,17 @@
 			ExportWindow.open( id, nonce );
 		},
 
+		/*
+		 * ======================================================================
+		 * Panel functions executed by the accordion
+		 * ======================================================================
+		 */
+		
+		/**
+		 * Initialize all the existing panels when the page loads.
+		 * 
+		 * @since 1.0.0
+		 */
 		initPanels: function() {
 			var that = this;
 
@@ -388,6 +535,17 @@
 			} );
 		},
 
+		/**
+		 * Initialize an individual panel.
+		 *
+		 * Creates a new instance of the Panel object and adds it 
+		 * to the array of panels.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {jQuery Object} element The panel element.
+		 * @param  {Object}        data    The panel's data.
+		 */
 		initPanel: function( element, data ) {
 			var that = this,
 				$panel = element;
@@ -409,6 +567,14 @@
 			this.panelCounter++;
 		},
 
+		/**
+		 * Return the panel data.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {Int}    id The id of the panel to retrieve.
+		 * @return {Object}    The data of the retrieved panel.
+		 */
 		getPanel: function( id ) {
 			var that = this,
 				selectedPanel;
@@ -423,14 +589,24 @@
 			return selectedPanel;
 		},
 
+		/**
+		 * Duplicate an individual panel.
+		 *
+		 * The background image is sent to the server for the purpose
+		 * of adding it to the panel preview, while the rest of the data
+		 * is passed with JS.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {Object} panelData The data of the object to be duplicated.
+		 */
 		duplicatePanel: function( panelData ) {
 			var that = this,
 				newPanelData = $.extend( true, {}, panelData );
 
-
-			var images = [ {
+			var images = [{
 				background_source: newPanelData.background.background_source
-			} ];
+			}];
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -444,6 +620,17 @@
 			});
 		},
 
+		/**
+		 * Delete an individual panel.
+		 *
+		 * The background image is sent to the server for the purpose
+		 * of adding it to the panel preview, while the rest of the data
+		 * is passed with JS.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {Int} id The id of the panel to be deleted.
+		 */
 		deletePanel: function( id ) {
 			var that = this;
 
@@ -484,6 +671,11 @@
 			});
 		},
 
+		/**
+		 * Add an empty panel.
+		 *
+		 * @since 1.0.0
+		 */
 		addEmptyPanel: function() {
 			var that = this;
 
@@ -499,6 +691,13 @@
 			});
 		},
 
+		/**
+		 * Add image panel(s).
+		 *
+		 * Add one or multiple panels pre-populated with image data.
+		 *
+		 * @since 1.0.0
+		 */
 		addImagePanels: function() {
 			var that = this;
 			
@@ -534,12 +733,20 @@
 			});
 		},
 
+		/**
+		 * Add posts panel.
+		 *
+		 * Add a posts panel and pre-populate it with dynamic tags.
+		 *
+		 * Also, automatically open the Setting editor to allow the
+		 * user to configurate the WordPress query.
+		 *
+		 * @since 1.0.0
+		 */
 		addPostsPanels: function() {
 			var that = this;
 
 			var data =  [{
-				background_source: '[as_image_src]',
-				background_alt: '[as_image_alt]',
 				settings: {
 					content_type: 'posts'
 				}
@@ -584,12 +791,20 @@
 			});
 		},
 
+		/**
+		 * Add gallery panel.
+		 *
+		 * Add a gallery panel and pre-populate it with dynamic tags.
+		 *
+		 * Also, automatically open the Setting editor inform the user
+		 * on how to use this panel type.
+		 *
+		 * @since 1.0.0
+		 */
 		addGalleryPanels: function() {
 			var that = this;
 
 			var data =  [{
-				background_source: '[as_image_src]',
-				background_alt: '[as_image_alt]',
 				settings: {
 					content_type: 'gallery'
 				}
@@ -620,12 +835,20 @@
 			});
 		},
 
+		/**
+		 * Add Flickr panel.
+		 *
+		 * Add a Flickr panel and pre-populate it with dynamic tags.
+		 *
+		 * Also, automatically open the Setting editor to allow the
+		 * user to configurate the Flickr query.
+		 *
+		 * @since 1.0.0
+		 */
 		addFlickrPanels: function() {
 			var that = this;
 
 			var data =  [{
-				background_source: '[as_image_src]',
-				background_alt: '[as_image_alt]',
 				settings: {
 					content_type: 'flickr'
 				}
@@ -669,10 +892,19 @@
 			});
 		},
 
-		addDynamicPanel: function() {
-			var that = this;
-		},
-
+		/*
+		 * ======================================================================
+		 * More accordion functions
+		 * ======================================================================
+		 */
+		
+		/**
+		 * Add a breakpoint fieldset.
+		 *
+		 * Also, try to automatically assigns the width of the breakpoint.
+		 * 
+		 * @since 1.0.0
+		 */
 		addBreakpoint: function() {
 			var that = this,
 				size = '';
@@ -695,6 +927,11 @@
 			});
 		},
 
+		/**
+		 * Add a breakpoint setting.
+		 * 
+		 * @since 1.0.0
+		 */
 		addBreakpointSetting: function( name, context) {
 			var that = this;
 
@@ -708,6 +945,19 @@
 			});
 		},
 
+		/**
+		 * Load the taxonomies for the selected post names and 
+		 * pass all the returned data to the callback function.
+		 *
+		 * Only load the taxonomies for a particular post name if
+		 * it's not already available in the 'postsData' property,
+		 * which stores all the posts data loaded in a session.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {Array}    posts    Array of post names.
+		 * @param  {Function} callback Function to call after the taxonomies are loaded.
+		 */
 		getTaxonomies: function( posts, callback ) {
 			var that = this;
 			
@@ -739,6 +989,13 @@
 			}
 		},
 
+		/**
+		 * Display the informative tooltip.
+		 * 
+		 * @since 1.0.0
+		 * 
+		 * @param  {jQuery Object} target The setting label which is hovered.
+		 */
 		showInfo: function( target ) {
 			var label = target,
 				info = label.attr( 'data-info' ),
@@ -756,6 +1013,13 @@
 			});
 		},
 
+		/**
+		 * Iterate through all panels and resizes the preview
+		 * images based on their aspect ratio and the panel's
+		 * current aspect ratio.
+		 *
+		 * @since 1.0.0
+		 */
 		resizePanelImages: function() {
 			var panelRatio = $( '.panel-preview' ).width() / $( '.panel-preview' ).height();
 
@@ -771,10 +1035,31 @@
 		}
 	};
 
+	/*
+	 * ======================================================================
+	 * Export and import functions
+	 * ======================================================================
+	 */
+		
 	var ExportWindow = {
 
+		/**
+		 * Reference to the modal window.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {jQuery Object}
+		 */
 		exportWindow: null,
 
+		/**
+		 * Open the modal window.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {Int}    id    The id of the accordion.
+		 * @param  {string} nonce A security nonce.
+		 */
 		open: function( id, nonce ) {
 			var that = this;
 
@@ -789,6 +1074,11 @@
 			});
 		},
 
+		/**
+		 * Add event listeners to the buttons.
+		 * 
+		 * @since 1.0.0
+		 */
 		init: function() {
 			var that = this;
 
@@ -805,6 +1095,11 @@
 			});
 		},
 
+		/**
+		 * Handle window closing.
+		 * 
+		 * @since 1.0.0
+		 */
 		close: function() {
 			this.exportWindow.remove();
 		}
@@ -812,8 +1107,20 @@
 
 	var ImportWindow = {
 
+		/**
+		 * Reference to the modal window.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {jQuery Object}
+		 */
 		importWindow: null,
 
+		/**
+		 * Open the modal window.
+		 *
+		 * @since 1.0.0
+		 */
 		open: function() {
 			var that = this;
 
@@ -828,6 +1135,11 @@
 			});
 		},
 
+		/**
+		 * Add event listeners to the buttons.
+		 * 
+		 * @since 1.0.0
+		 */
 		init: function() {
 			var that = this;
 
@@ -842,6 +1154,16 @@
 			});
 		},
 
+		/**
+		 * Save the entered data.
+		 *
+		 * The entered JSON string is parsed, and it's sent to the server-side
+		 * saving method.
+		 *
+		 * After the accordion is created, a new row is added to the list.
+		 * 
+		 * @since 1.0.0
+		 */
 		save: function() {
 			var that = this,
 				accordionDataString = this.importWindow.find( 'textarea' ).val();
@@ -869,11 +1191,31 @@
 			});
 		},
 
+		/**
+		 * Handle window closing.
+		 * 
+		 * @since 1.0.0
+		 */
 		close: function() {
 			this.importWindow.remove();
 		}
 	};
 
+	/*
+	 * ======================================================================
+	 * Panel functions
+	 * ======================================================================
+	 */
+	
+	/**
+	 * Panel object.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param {jQuery Object} element The jQuery element.
+	 * @param {Int}           id      The id of the panel.
+	 * @param {Object}        data    The data of the panel.
+	 */
 	var Panel = function( element, id, data ) {
 		this.$panel = element;
 		this.id = id;
@@ -889,13 +1231,15 @@
 
 	Panel.prototype = {
 
+		/**
+		 * Initialize the panel.
+		 * 
+		 * Add the necessary event listeners.
+		 *
+		 * @since 1.0.0
+		 */
 		init: function() {
 			var that = this;
-
-			this.$panel.find( '.edit-background-image' ).on( 'click', function( event ) {
-				event.preventDefault();
-				BackgroundImageEditor.open( that.id );
-			});
 
 			this.$panel.find( '.panel-preview' ).on( 'click', function( event ) {
 				var contentType = that.getData( 'settings' )[ 'content_type' ];
@@ -910,14 +1254,19 @@
 				}
 			});
 
-			this.$panel.find( '.edit-html' ).on( 'click', function( event ) {
+			this.$panel.find( '.edit-background-image' ).on( 'click', function( event ) {
 				event.preventDefault();
-				HTMLEditor.open( that.id );
+				BackgroundImageEditor.open( that.id );
 			});
 
 			this.$panel.find( '.edit-layers' ).on( 'click', function( event ) {
 				event.preventDefault();
 				LayersEditor.open( that.id );
+			});
+
+			this.$panel.find( '.edit-html' ).on( 'click', function( event ) {
+				event.preventDefault();
+				HTMLEditor.open( that.id );
 			});
 
 			this.$panel.find( '.edit-settings' ).on( 'click', function( event ) {
@@ -938,6 +1287,18 @@
 			this.resizeImage();
 		},
 
+		/**
+		 * Return the panel's data.
+		 *
+		 * It can return the background data, or the layers
+		 * data, or the HTML data, or the settings data, or
+		 * all the data.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {String} target The type of data to return.
+		 * @return {Object}        The requested data.
+		 */
 		getData: function( target ) {
 			if ( target === 'all' ) {
 				var allData = {};
@@ -962,6 +1323,17 @@
 			}
 		},
 
+		/**
+		 * Set the panel's data.
+		 *
+		 * It can set a specific data type, like the background, 
+		 * layers, html, settings, or it can set all the data.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {String} target The type of data to set.
+		 * @param  {Object} data   The data to attribute to the panel.
+		 */
 		setData: function( target, data ) {
 			var that = this;
 
@@ -980,6 +1352,11 @@
 			}
 		},
 
+		/**
+		 * Remove the panel.
+		 * 
+		 * @since 1.0.0
+		 */
 		remove: function() {
 			this.$panel.find( '.edit-background-image' ).off( 'click' );
 			this.$panel.find( '.panel-preview' ).off( 'click' );
@@ -991,6 +1368,18 @@
 			});
 		},
 
+		/**
+		 * Update the panel's preview.
+		 *
+		 * If the content type is custom, the preview will consist
+		 * of an image. If the content is dynamic, a text will be 
+		 * displayed that indicates the type of content (i.e., posts).
+		 *
+		 * This is called when the background image is changed or
+		 * when the content type is changed.
+		 * 
+		 * @since 1.0.0
+		 */
 		updatePanelPreview: function() {
 			var panelPreview = this.$panel.find( '.panel-preview' ),
 				contentType = this.data.settings[ 'content_type' ];
@@ -1020,6 +1409,11 @@
 			}
 		},
 
+		/**
+		 * Resize the preview image, after it has loaded.
+		 *
+		 * @since 1.0.0
+		 */
 		resizeImage: function() {
 			var panelPreview = this.$panel.find( '.panel-preview' ),
 				panelImage = this.$panel.find( '.panel-preview > img' );
@@ -1039,27 +1433,88 @@
 			}
 		},
 
+		/**
+		 * Add an event listener to the panel.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {String}   type    The event name.
+		 * @param  {Function} handler The callback function.
+		 */
 		on: function( type, handler ) {
 			this.events.on( type, handler );
 		},
 
+		/**
+		 * Remove an event listener from the panel.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {String} type The event name.
+		 */
 		off: function( type ) {
 			this.events.off( type );
 		},
 
+		/**
+		 * Triggers an event.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {String} type The event name.
+		 */
 		trigger: function( type ) {
 			this.events.triggerHandler( type );
 		}
 	};
 
+	/*
+	 * ======================================================================
+	 * Background Image Editor
+	 * ======================================================================
+	 */
+	
 	var BackgroundImageEditor = {
 
+		/**
+		 * Reference to the modal window.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {jQuery Object}
+		 */
 		editor: null,
 
+		/**
+		 * Reference to panel for which the editor was opened.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Panel}
+		 */
 		currentPanel: null,
 
+		/**
+		 * Indicates whether the panel's preview needs to be updated.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Boolean}
+		 */
 		needsPreviewUpdate: false,
 
+		/**
+		 * Open the modal window.
+		 *
+		 * It checks the content type set for the panel and passes
+		 * that information because the aspect of the editor will
+		 * depend on what type the content is. Dynamic panels will
+		 * not have the possibility to load images from the library.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {Int} id The id of the panel
+		 */
 		open: function( id ) {
 			var that = this;
 
@@ -1088,6 +1543,13 @@
 			});
 		},
 
+		/**
+		 * Initialize the editor.
+		 *
+		 * Add the necessary event listeners.
+		 * 
+		 * @since 1.0.0
+		 */
 		init: function() {
 			var that = this;
 
@@ -1116,6 +1578,22 @@
 			});
 		},
 
+		/**
+		 * Open the Media library.
+		 *
+		 * Allows the user to select an image from the library for
+		 * the current panel. It checks if the image needs to be added
+		 * for the background or for the opened background, and also
+		 * if it needs to be added for the main image or for the retina
+		 * image.
+		 *
+		 * It updates the editor's fields with information associated
+		 * with the image, like the image's alt, title, width and height.
+		 * 
+		 * @since 1.0.0
+		 * 
+		 * @param  {Event Object} event The mouse click event.
+		 */
 		openMediaLibrary: function( event ) {
 			event.preventDefault();
 
@@ -1160,6 +1638,13 @@
 			});
 		},
 
+		/**
+		 * Clear the input fields for the image.
+		 * 
+		 * @since 1.0.0
+		 * 
+		 * @param  {Event Object} event The mouse click event.
+		 */
 		clearFieldset: function( event ) {
 			event.preventDefault();
 
@@ -1174,6 +1659,18 @@
 			}
 		},
 
+		/**
+		 * Save the data entered in the editor.
+		 *
+		 * Iterates through all input fields and copies the
+		 * data entered in an object, which is then passed
+		 * to the panel.
+		 *
+		 * It also calls the function that updates the panel's
+		 * preview, if the main background image was changed.
+		 * 
+		 * @since 1.0.0
+		 */
 		save: function() {
 			var that = this,
 				data = {};
@@ -1191,6 +1688,13 @@
 			}
 		},
 
+		/**
+		 * Close the editor.
+		 *
+		 * Remove all event listeners.
+		 * 
+		 * @since 1.0.0
+		 */
 		close: function() {
 			this.$editor.find( '.close-x' ).off( 'click' );
 			this.$editor.find( '.image-loader' ).off( 'click' );
@@ -1200,12 +1704,39 @@
 		}
 	};
 
+	/*
+	 * ======================================================================
+	 * HTML editor
+	 * ======================================================================
+	 */
+	
 	var HTMLEditor = {
 
+		/**
+		 * Reference to the modal window.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {jQuery Object}
+		 */
 		editor: null,
 
+		/**
+		 * Reference to panel for which the editor was opened.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Panel}
+		 */
 		currentPanel: null,
 
+		/**
+		 * Open the modal window.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {Int} id The id of the panel.
+		 */
 		open: function( id ) {
 			var that = this;
 
@@ -1229,6 +1760,13 @@
 			});
 		},
 
+		/**
+		 * Initialize the editor.
+		 *
+		 * Add the necessary event listeners.
+		 * 
+		 * @since 1.0.0
+		 */
 		init: function() {
 			var that = this;
 
@@ -1243,10 +1781,22 @@
 			});
 		},
 
+		/**
+		 * Save the content entered in the editor's textfield.
+		 * 
+		 * @since 1.0.0
+		 */
 		save: function() {
 			this.currentPanel.setData( 'html', this.$editor.find( 'textarea' ).val() );
 		},
 
+		/**
+		 * Close the editor.
+		 *
+		 * Remove all event listeners.
+		 * 
+		 * @since 1.0.0
+		 */
 		close: function() {
 			this.$editor.find( '.close-x' ).off( 'click' );
 			this.$editor.find( '.image-loader' ).off( 'click' );
@@ -1256,20 +1806,78 @@
 		}
 	};
 
+	/*
+	 * ======================================================================
+	 * Layers editor
+	 * ======================================================================
+	 */
+	
 	var LayersEditor = {
 
+		/**
+		 * Reference to the modal window.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {jQuery Object}
+		 */
 		editor: null,
 
+		/**
+		 * Reference to panel for which the editor was opened.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Panel}
+		 */
 		currentPanel: null,
 
+		/**
+		 * Array of JavaScript objects, that contain the layer's data.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Array}
+		 */
 		layersData: null,
 
+		/**
+		 * Array of Layer objects.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Array}
+		 */
 		layers: [],
 
+		/**
+		 * Counter for layers.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Int}
+		 */
 		counter: 0,
 
+		/**
+		 * Indicates if a layer is currently being added.
+		 *
+		 * Stops the addition of new layers if another addition
+		 * is being processed.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Boolean}
+		 */
 		isWorking: false,
 
+		/**
+		 * Open the modal window.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {Int} id The id of the panel.
+		 */
 		open: function( id ) {
 			var that = this;
 
@@ -1292,6 +1900,17 @@
 			});
 		},
 
+		/**
+		 * Initialize the editor.
+		 *
+		 * Adds the necessary event listeners for adding a new layer,
+		 * deleting a layer or duplicating a layer.
+		 *
+		 * It also creates the layers existing in the panel's data,
+		 * and initializes the sorting functionality.
+		 * 
+		 * @since 1.0.0
+		 */
 		init: function() {
 			var that = this;
 
@@ -1382,6 +2001,18 @@
 			}
 		},
 
+		/**
+		 * Initialize the viewport.
+		 *
+		 * The viewport will have the same size as the accordion, not
+		 * as the current image, because layers can be added outside
+		 * the image.
+		 *
+		 * The viewport will contain the image and on top of the image,
+		 * a container that will hold the layers.
+		 *
+		 * @since 1.0.0
+		 */
 		initViewport: function() {
 			var accordionWidth = parseInt( $( '.sidebar-settings' ).find( '.setting[name="width"]' ).val(), 10),
 				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10),
@@ -1397,6 +2028,22 @@
 			}
 		},
 
+		/**
+		 * Create a layer.
+		 *
+		 * Based on the type of the layer, information which is
+		 * available in the passed data, a certain subclass of the
+		 * Layer object will be instantiated.
+		 *
+		 * It also checks if the created layer is a new/duplicate layer or
+		 * an existing layer, and adds it either at the beginning or the 
+		 * end of the list. New layers always need to be added before the 
+		 * existing layers.
+		 * 
+		 * @since 1.0.0
+		 * 
+		 * @param  {Object} data The layer's data.
+		 */
 		createLayer: function( data ) {
 			var that = this,
 				layer;
@@ -1438,6 +2085,16 @@
 			this.$editor.find( '.disabled' ).removeClass( 'disabled' );
 		},
 
+		/**
+		 * Add a new layer on runtime.
+		 * 
+		 * Sends an AJAX request to load the layer's settings editor and
+		 * also adds the layer panel in the list of layers.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param {String} type The type of layer.
+		 */
 		addNewLayer: function( type ) {
 			var that = this;
 
@@ -1459,6 +2116,14 @@
 			});
 		},
 
+		/**
+		 * Delete the selected layer.
+		 *
+		 * Iterates through the layers and detects the selected
+		 * one, then calls its 'destroy' method.
+		 *
+		 * @since 1.0.0
+		 */
 		deleteLayer: function() {
 			var that = this,
 				removedIndex;
@@ -1485,6 +2150,15 @@
 			}
 		},
 		
+		/**
+		 * Duplicate the selected layer.
+		 *
+		 * Iterates through the layers and detects the selected
+		 * one, then copies its data and sends an AJAX request 
+		 * with the copied data.
+		 *
+		 * @since 1.0.0
+		 */
 		duplicateLayer: function() {
 			var that = this,
 				layerData;
@@ -1530,6 +2204,14 @@
 			});
 		},
 
+		/**
+		 * Save the data from the editor.
+		 *
+		 * Iterate through the array of Layer objects, get their 
+		 * data and send all the data to the panel.
+		 * 
+		 * @since 1.0.0
+		 */
 		save: function() {
 			var data = [];
 
@@ -1540,6 +2222,13 @@
 			this.currentPanel.setData( 'layers', data );
 		},
 
+		/**
+		 * Close the editor.
+		 *
+		 * Remove all event listeners and and destroy objects.
+		 * 
+		 * @since 1.0.0
+		 */
 		close: function() {
 			this.layers.length = 0;
 
@@ -1551,6 +2240,24 @@
 		}
 	};
 
+	/*
+	 * ======================================================================
+	 * Layer functions
+	 * ======================================================================
+	 */
+	
+	/**
+	 * Layer object.
+	 *
+	 * Parent/Base object for all layer types.
+	 *
+	 * Each layer has a representation in the viewport, in the list of layers
+	 * and in the settings.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param {Object} data The layer's data.
+	 */
 	var Layer = function( data ) {
 		this.data = data;
 		this.id = this.data.id;
@@ -1570,6 +2277,11 @@
 
 	Layer.prototype = {
 
+		/**
+		 * Initialize the layer.
+		 * 
+		 * @since 1.0.0
+		 */
 		init: function() {
 			this.initLayerContent();
 			this.initLayerSettings();
@@ -1578,6 +2290,16 @@
 			this.initLayerListItem();
 		},
 
+		/**
+		 * Return the layer's data: id, name, position and settings.
+		 *
+		 * Iterates through the layer's associated setting fields 
+		 * and copies the settings (name and value).
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @return {Object} The layer's data.
+		 */
 		getData: function() {
 			var data = {};
 
@@ -1605,10 +2327,25 @@
 			return data;
 		},
 
+		/**
+		 * Return the id of the layer.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @return {Int} The id.
+		 */
 		getID: function() {
 			return this.id;
 		},
 
+		/**
+		 * Select the layer.
+		 *
+		 * Adds classes to the layer item from the list and to the 
+		 * settings in order to highlight/show them.
+		 * 
+		 * @since 1.0.0
+		 */
 		select: function() {
 			this.selected = true;
 
@@ -1616,6 +2353,11 @@
 			this.$layerSettings.addClass( 'selected-layer-settings' );
 		},
 
+		/**
+		 * Deselect the layer by removing the added classes.
+		 * 
+		 * @since 1.0.0
+		 */
 		deselect: function() {
 			this.selected = false;
 
@@ -1623,14 +2365,35 @@
 			this.$layerSettings.removeClass( 'selected-layer-settings' );
 		},
 
+		/**
+		 * Trigger the selection event.
+		 *
+		 * Used for programatically selecting the layer.
+		 * 
+		 * @since 1.0.0
+		 */
 		triggerSelect: function() {
 			this.trigger( { type: 'select', id: this.id } );
 		},
 
+		/**
+		 * Check if the layer is selected.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @return {Boolean} Whether the layer is selected.
+		 */
 		isSelected: function() {
 			return this.selected;
 		},
 
+		/**
+		 * Destroy the layer
+		 *
+		 * Removes all event listeners and elements associated with the layer.
+		 * 
+		 * @since 1.0.0
+		 */
 		destroy: function() {
 			this.$viewportLayer.off( 'mousedown' );
 			this.$viewportLayer.off( 'mouseup' );
@@ -1650,23 +2413,60 @@
 			this.$layerSettings.remove();
 		},
 
+		/**
+		 * Add an event listener to the layer.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {String}   type    The event name.
+		 * @param  {Function} handler The callback function.
+		 */
 		on: function( type, handler ) {
 			this.events.on( type, handler );
 		},
 
+		/**
+		 * Remove an event listener from the layer.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {String} type The event name.
+		 */
 		off: function( type ) {
 			this.events.off( type );
 		},
 
+		/**
+		 * Triggers an event.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {String} type The event name.
+		 */
 		trigger: function( type ) {
 			this.events.triggerHandler( type );
 		},
 
+		/**
+		 * Initialize the viewport layer.
+		 *
+		 * This is the layer's representation in the viewport and its
+		 * role is to give a preview of how the layer will look like
+		 * in the front-end. 
+		 *
+		 * If the layer is a newly created one, add some default styling
+		 * to it (black background and padding), and if it's an existing
+		 * layer or a duplicated one, set its style according to the
+		 * layer's data.
+		 * 
+		 * @since 1.0.0
+		 */
 		initViewportLayer: function() {
 			var that = this;
 
 			this.$viewportLayer.attr( 'data-id', this.id );
 
+			// append the layer before or after the other layers
 			if ( this.data.createMode === 'new' || this.data.createMode === 'duplicate' ) {
 				this.$viewportLayer.appendTo( this.$viewportLayers );
 			} else if ( this.data.createMode === 'init' ) {
@@ -1674,25 +2474,32 @@
 			}
 
 			if ( this.data.createMode === 'new' ) {
+
+				// set the position of the layer
 				this.$viewportLayer.css( { 'width': 'auto', 'height': 'auto', 'left': 0, 'top': 0 } );
 
+				// set the style of the layer
 				if ( this.$viewportLayer.hasClass( 'as-layer' ) ) {
 					this.$viewportLayer.addClass( 'as-black as-padding' );
 				} else {
 					this.$viewportLayer.find( '.as-layer' ).addClass( 'as-black as-padding' );
 				}
 			} else if ( this.data.createMode === 'init' || this.data.createMode === 'duplicate' ) {
+				
+				// set the style of the layer
 				var classes = this.data.settings.preset_styles !== null ? this.data.settings.preset_styles.join( ' ' ) : '';
 				classes += ' ' + this.data.settings.custom_class;
-
+				
 				if ( this.$viewportLayer.hasClass( 'as-layer' ) ) {
 					this.$viewportLayer.addClass( classes );
 				} else {
 					this.$viewportLayer.find( '.as-layer' ).addClass( classes );
 				}
 
+				// set the size of the layer
 				this.$viewportLayer.css( { 'width': this.data.settings.width, 'height': this.data.settings.height } );
 
+				// set the position of the layer
 				var position = this.data.settings.position.toLowerCase(),
 					horizontalPosition = position.indexOf( 'right' ) !== -1 ? 'right' : 'left',
 					verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top';
@@ -1712,11 +2519,19 @@
 				}
 			}
 
+			// select the layer after it was added
 			this.$viewportLayer.on( 'mousedown', function() {
 				that.triggerSelect();
 			});
 		},
 
+		/**
+		 * Initialize the layer's dragging functionality.
+		 *
+		 * This is for the viewport representation of the layer.
+		 * 
+		 * @since 1.0.0
+		 */
 		initLayerDragging: function() {
 			var that = this,
 				mouseX = 0,
@@ -1729,6 +2544,8 @@
 			this.$viewportLayer.on( 'mousedown', function( event ) {
 				event.preventDefault();
 
+				// Store the position of the mouse pointer
+				// and the position of the layer
 				mouseX = event.pageX;
 				mouseY = event.pageY;
 				layerX = that.$viewportLayer[ 0 ].offsetLeft;
@@ -1743,6 +2560,9 @@
 				if ( hasFocus === true ) {
 					that.$viewportLayer.css( { 'left': layerX + event.pageX - mouseX, 'top': layerY + event.pageY - mouseY } );
 
+					// While moving the layer, disable the right and bottom properties
+					// so that the layer will be positioned using the left and top
+					// properties.
 					if ( autoRightBottom === false ) {
 						autoRightBottom = true;
 						that.$viewportLayer.css( { 'right': 'auto', 'bottom': 'auto' } );
@@ -1750,6 +2570,8 @@
 				}
 			});
 
+			// Set the layer's position settings based on Position setting and the
+			// position to which the layer was dragged.
 			this.$viewportLayer.on( 'mouseup', function( event ) {
 				event.preventDefault();
 
@@ -1780,6 +2602,16 @@
 			});
 		},
 
+		/**
+		 * Initialize the layer's list item.
+		 *
+		 * This is the layer's representation in the list of layers.
+		 *
+		 * Implements functionality for selecting the layer and
+		 * changing its name.
+		 * 
+		 * @since 1.0.0
+		 */
 		initLayerListItem: function() {
 			var that = this,
 				isEditingLayerName = false;
@@ -1816,10 +2648,26 @@
 			});
 		},
 
+		/**
+		 * Initialize the viewport layer's content.
+		 *
+		 * This is overridden by child objects, based on the
+		 * specific of the content type.
+		 * 
+		 * @since 1.0.0
+		 */
 		initLayerContent: function() {
 
 		},
 
+		/**
+		 * Initialize the layer's settings.
+		 *
+		 * It listens for changes in the setting fields and applies the
+		 * changes to the viewport representation of the layer.
+		 * 
+		 * @since 1.0.0
+		 */
 		initLayerSettings: function() {
 			var that = this,
 				position = this.$layerSettings.find( '.setting[name="position"]' ).val().toLowerCase(),
@@ -1828,6 +2676,7 @@
 
 			this.$layerSettings.find( 'select[name="preset_styles"]' ).multiCheck( { width: 120} );
 
+			// listen for size changes
 			this.$layerSettings.find( '.setting[name="width"]' ).on( 'change', function() {
 				that.$viewportLayer.css( 'width', $( this ).val() );
 			});
@@ -1836,6 +2685,7 @@
 				that.$viewportLayer.css( 'height', $( this ).val() );
 			});
 
+			// listen for position changes
 			this.$layerSettings.find( '.setting[name="position"], .setting[name="horizontal"], .setting[name="vertical"]' ).on( 'change', function() {
 				var horizontal = that.$layerSettings.find( '.setting[name="horizontal"]' ).val(),
 					vertical = that.$layerSettings.find( '.setting[name="vertical"]' ).val();
@@ -1860,7 +2710,8 @@
 					that.$viewportLayer.css( verticalPosition, vertical + suffix );
 				}
 			});
-
+			
+			// listen for style changes
 			this.$layerSettings.find( '.setting[name="preset_styles"], .setting[name="custom_class"]' ).on( 'change', function() {
 				var classes = '',
 					selectedStyles = that.$layerSettings.find( '.setting[name="preset_styles"]' ).val(),
@@ -1878,6 +2729,12 @@
 		}
 	};
 
+	/*
+	 * ======================================================================
+	 * Paragraph layer
+	 * ======================================================================
+	 */
+	
 	var ParagraphLayer = function( data ) {
 		Layer.call( this, data );
 	};
@@ -1909,6 +2766,12 @@
 		return data;
 	};
 
+	/*
+	 * ======================================================================
+	 * Heading layer
+	 * ======================================================================
+	 */
+	
 	var HeadingLayer = function( data ) {
 		Layer.call( this, data );
 	};
@@ -1950,6 +2813,12 @@
 		return data;
 	};
 
+	/*
+	 * ======================================================================
+	 * Image layer
+	 * ======================================================================
+	 */
+	
 	var ImageLayer = function( data ) {
 		Layer.call( this, data );
 	};
@@ -2005,6 +2874,12 @@
 		return data;
 	};
 
+	/*
+	 * ======================================================================
+	 * DIV layer
+	 * ======================================================================
+	 */
+	
 	var DivLayer = function( data ) {
 		Layer.call( this, data );
 	};
@@ -2036,6 +2911,12 @@
 		return data;
 	};
 
+	/*
+	 * ======================================================================
+	 * Video layer
+	 * ======================================================================
+	 */
+	
 	var VideoLayer = function( data ) {
 		Layer.call( this, data );
 	};
@@ -2114,14 +2995,50 @@
 		return data;
 	};
 
+	/*
+	 * ======================================================================
+	 * Settings editor
+	 * ======================================================================
+	 */
+	
 	var SettingsEditor = {
 
+		/**
+		 * Reference to the modal window.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {jQuery Object}
+		 */
 		editor: null,
 
+		/**
+		 * Reference to panel for which the editor was opened.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Panel}
+		 */
 		currentPanel: null,
 
+		/**
+		 * Indicates whether the panel's preview needs to be updated.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Boolean}
+		 */
 		needsPreviewUpdate: false,
 
+		/**
+		 * Open the modal window.
+		 *
+		 * Send an AJAX request providing the panel's settings data.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {Int} id The id of the panel
+		 */
 		open: function( id ) {
 			var that = this;
 
@@ -2145,6 +3062,13 @@
 			});
 		},
 
+		/**
+		 * Initialize the editor.
+		 *
+		 * Add the necessary event listeners.
+		 * 
+		 * @since 1.0.0
+		 */
 		init: function() {
 			var that = this;
 
@@ -2158,17 +3082,31 @@
 				that.close();
 			});
 
+			// Listen when the content type changes in order to load a new 
+			// set of input fields, associated with the new content type.
 			this.$editor.find( '.panel-setting[name="content_type"]' ).on( 'change', function() {
-				that.loadControls( $( this ).val() );
+				var type = $( this ).val();
 
+				that.loadControls( type );
 				that.needsPreviewUpdate = true;
 			});
 
+			// Check if the content type is set to 'Posts' in order
+			// to load the associates taxonomies for the selected posts.
 			if ( this.$editor.find( '.panel-setting[name="content_type"]' ).val() === 'posts' ) {
 				this.handlePostsSelects();
 			}
 		},
 
+		/**
+		 * Load the input fields associated with the content type.
+		 *
+		 * Sends an AJAX request providing the panel's settings.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {String} type The content type.
+		 */
 		loadControls: function( type ) {
 			var that = this,
 				data = this.currentPanel.getData( 'settings' );
@@ -2189,6 +3127,20 @@
 			});
 		},
 
+		/**
+		 * Handle changes in the post names and taxonomies select.
+		 *
+		 * When the selected post names change, load the new associates
+		 * taxonomies and construct the options for the taxonomy terms.
+		 *
+		 * Also, listen when the selected taxonomy terms change in order
+		 * to keep a list of all selected terms. The list is useful in
+		 * case the content type changes, because the selected taxonomy
+		 * terms will be automatically populated next time when the
+		 * 'Posts' content type is selected.
+		 * 
+		 * @since 1.0.0
+		 */
 		handlePostsSelects: function() {
 			var that = this,
 				$postTypes = this.$editor.find( 'select[name="posts_post_types"]' ),
@@ -2196,6 +3148,7 @@
 				selectedTaxonomies = $taxonomies.val() || [];
 
 
+			// detect when post names change
 			$postTypes.on( 'change', function() {
 				var postNames = $(this).val();
 
@@ -2223,6 +3176,7 @@
 				}
 			});
 
+			// detect when taxonomies change
 			$taxonomies.on( 'change', function( event ) {
 				$taxonomies.find( 'option' ).each( function() {
 					var option = $( this ),
@@ -2237,11 +3191,22 @@
 				});
 			});
 
-			$postTypes.multiCheck( { width: 215} );
-			$taxonomies.multiCheck( { width: 215} );
+			$postTypes.multiCheck( { width: 215 } );
+			$taxonomies.multiCheck( { width: 215 } );
 		},
 
-		save: function( ) {
+		/**
+		 * Save the settings.
+		 *
+		 * Create a new object in which the current settings are
+		 * saved and pass the data to the panel.
+		 *
+		 * If the content type is changed, update the panel's
+		 * preview.
+		 * 
+		 * @since 1.0.0
+		 */
+		save: function() {
 			var that = this,
 				data = {};
 
@@ -2265,6 +3230,13 @@
 			}
 		},
 
+		/**
+		 * Close the editor.
+		 *
+		 * Remove all event listeners.
+		 * 
+		 * @since 1.0.0
+		 */
 		close: function() {
 			this.$editor.find( '.close-x' ).off( 'click' );
 
@@ -2273,11 +3245,26 @@
 
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
-
 	};
+
+	/*
+	 * ======================================================================
+	 * Media loader
+	 * ======================================================================
+	 */
 
 	var MediaLoader = {
 
+		/**
+		 * Open the WordPress media loader and pass the
+		 * information of the selected images to the 
+		 * callback function.
+		 *
+		 * The passed that is the image's url, alt, title,
+		 * width and height.
+		 * 
+		 * @since 1.0.0
+		 */
 		open: function( callback ) {
 			var selection = [],
 				insertReference = wp.media.editor.insert;
@@ -2300,15 +3287,55 @@
 
 			wp.media.editor.open( 'media-loader' );
 		}
-
 	};
 
+	/*
+	 * ======================================================================
+	 * Preview window
+	 * ======================================================================
+	 */
+	
 	var PreviewWindow = {
 
+		/**
+		 * Reference to the modal window.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {jQuery Object}
+		 */
 		previewWindow: null,
 
+		/**
+		 * Reference to the accordion slider instance.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {jQuery Object}
+		 */
 		accordion: null,
 
+		/**
+		 * The accordion's data.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @type {Object}
+		 */
+		accordionData: null,
+
+		/**
+		 * Open the preview window and pass the accordion's data,
+		 * which consists of accordion settings and each panel's
+		 * settings and content.
+		 *
+		 * Send an AJAX request with the data and receive the 
+		 * accordion's HTML markup and inline JavaScript.
+		 *
+		 * @since 1.0.0
+		 * 
+		 * @param  {Object} data The data of the accordion
+		 */
 		open: function( data ) {
 			var that = this;
 			this.accordionData = data;
@@ -2328,6 +3355,15 @@
 			});
 		},
 
+		/**
+		 * Initialize the preview.
+		 *
+		 * Detect when the window is resized and resize the preview
+		 * window accordingly, and also based on the accordion's set
+		 * width.
+		 *
+		 * @since 1.0.0
+		 */
 		init: function() {
 			var that = this;
 
@@ -2348,9 +3384,7 @@
 			}
 
 			$( window ).on( 'resize', function() {
-				if ( isPercetageWidth === true ) {
-					that.previewWindow.css( 'width', $( window ).width() - 100 );
-				} else if ( accordionWidth + 100 >= $( window ).width() ) {
+				if ( isPercetageWidth === true || $( window ).width() <= accordionWidth + 100 ) {
 					that.previewWindow.css( 'width', $( window ).width() - 100 );
 				} else {
 					that.previewWindow.css( 'width', accordionWidth );
@@ -2361,6 +3395,13 @@
 			$( window ).trigger( 'resize' );
 		},
 
+		/**
+		 * Close the preview window.
+		 *
+		 * Remove event listeners and elements.
+		 *
+		 * @since 1.0.0
+		 */
 		close: function() {
 			this.previewWindow.find( '.close-x' ).off( 'click' );
 
@@ -2375,7 +3416,13 @@
 
 })( jQuery );
 
-;(function( $, window, document ) {
+/*
+ * ======================================================================
+ * MultiCheck
+ * ======================================================================
+ */
+	
+;(function( $ ) {
 
 	var MultiCheck = function( instance, options ) {
 
@@ -2545,9 +3592,15 @@
 		});
 	};
 
-})(jQuery, window, document);
+})( jQuery );
 
-;(function( $, window, document ) {
+/*
+ * ======================================================================
+ * LightSortable
+ * ======================================================================
+ */
+
+;(function( $ ) {
 
 	var LightSortable = function( instance, options ) {
 
@@ -2749,9 +3802,15 @@
 		});
 	};
 
-})(jQuery, window, document);
+})( jQuery );
 
-;(function( $, window, document ) {
+/*
+ * ======================================================================
+ * lightURLParse
+ * ======================================================================
+ */
+
+;(function( $ ) {
 
 	$.lightURLParse = function( url ) {
 		var urlArray = url.split( '?' )[1].split( '&' ),
@@ -2765,4 +3824,4 @@
 		return result;
 	};
 
-})(jQuery, window, document);
+})( jQuery );
