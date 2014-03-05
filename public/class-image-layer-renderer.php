@@ -34,7 +34,7 @@ class BQW_AS_Image_Layer_Renderer extends BQW_AS_Layer_Renderer {
 
 		$image_link = $this->data['image_link'];
 
-		if ( isset( $image_link ) && $$image_link !== '' ) {
+		if ( isset( $image_link ) && $image_link !== '' ) {
 			$image_link = apply_filters( 'accordion_slider_layer_image_link_url', $image_link );
 			$image_content = '<a href="' . esc_url( $image_link ) . '">' . $image_content . '</a>';
 		}
