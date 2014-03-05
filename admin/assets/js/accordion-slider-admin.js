@@ -601,14 +601,17 @@
 		duplicatePanel: function( panelData ) {
 			var that = this,
 				newPanelData = $.extend( true, {}, panelData ),
-				images = [{
+				data = [{
+					settings: {
+						content_type: newPanelData.settings.content_type,
+					},
 					background_source: newPanelData.background.background_source
 				}];
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
-				data: { action: 'accordion_slider_add_panels', data: JSON.stringify( images ) },
+				data: { action: 'accordion_slider_add_panels', data: JSON.stringify( data ) },
 				complete: function( data ) {
 					var panel = $( data.responseText ).appendTo( $( '.panels-container' ) );
 
