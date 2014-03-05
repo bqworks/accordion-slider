@@ -2013,7 +2013,7 @@
 				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10),
 				backgroundData = this.currentPanel.getData( 'background' );
 
-			var $viewport = this.$editor.find( '.viewport' ).css( { 'width': accordionWidth, 'height': accordionHeight } ),
+			var $viewport = this.$editor.find( '.layer-viewport' ).css( { 'width': accordionWidth, 'height': accordionHeight } ),
 				$viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' ).appendTo( $viewport );
 
 			if ( typeof backgroundData.background_source !== 'undefined' &&

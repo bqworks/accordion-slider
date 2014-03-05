@@ -601,15 +601,15 @@
 	text-decoration: none;
 }
 
-.layers-editor .controls {
+.layers-editor .layer-controls {
 	margin-top: 10px;
 }
 
-.layers-editor .controls .left {
+.layers-editor .layer-controls .layer-controls-left {
 	float: left;
 }
 
-.layers-editor .controls .right {
+.layers-editor .layer-controls .layer-controls-right {
 	margin: 4px 0 0 150px;
 	position: relative;
 }
@@ -799,7 +799,7 @@
 	opacity: 1;
 }
 
-.layers-editor .viewport {
+.layers-editor .layer-viewport {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
