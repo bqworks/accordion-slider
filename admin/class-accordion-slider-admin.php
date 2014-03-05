@@ -762,7 +762,7 @@ class BQW_Accordion_Slider_Admin {
 		if ( $data !== false ) {
 			$panel_type = isset( $data['settings'] ) && isset( $data['settings']['content_type'] ) ? $data['settings']['content_type'] : $panel_type;
 
-			$panel_image = $data['background_source'];
+			$panel_image = isset( $data['background_source'] ) ? $data['background_source'] : '';
 		}
 
 		include( 'views/panel.php' );
