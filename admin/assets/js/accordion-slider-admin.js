@@ -1094,6 +1094,8 @@
 		 * @since 1.0.0
 		 */
 		close: function() {
+			this.exportWindow.find( '.close-x' ).off( 'click' );
+			this.exportWindow.find( 'textarea' ).off( 'click' );
 			this.exportWindow.remove();
 		}
 	};
@@ -1190,6 +1192,8 @@
 		 * @since 1.0.0
 		 */
 		close: function() {
+			this.importWindow.find( '.close-x' ).off( 'click' );
+			this.importWindow.find( '.save' ).off( 'click' );
 			this.importWindow.remove();
 		}
 	};
@@ -1351,8 +1355,11 @@
 		 * @since 1.0.0
 		 */
 		remove: function() {
-			this.$panel.find( '.edit-background-image' ).off( 'click' );
 			this.$panel.find( '.panel-preview' ).off( 'click' );
+			this.$panel.find( '.edit-background-image' ).off( 'click' );
+			this.$panel.find( '.edit-layers' ).off( 'click' );
+			this.$panel.find( '.edit-html' ).off( 'click' );
+			this.$panel.find( '.edit-settings' ).off( 'click' );
 			this.$panel.find( '.delete-panel' ).off( 'click' );
 			this.$panel.find( '.duplicate-panel' ).off( 'click' );
 
@@ -1689,7 +1696,9 @@
 		close: function() {
 			this.$editor.find( '.close-x' ).off( 'click' );
 			this.$editor.find( '.image-loader' ).off( 'click' );
+			this.$editor.find( '.retina-loader' ).off( 'click' );
 			this.$editor.find( '.clear-fieldset' ).off( 'click' );
+			this.$editor.find( 'input[name="background_source"]' ).off( 'input' );
 
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
@@ -1788,8 +1797,6 @@
 		 */
 		close: function() {
 			this.$editor.find( '.close-x' ).off( 'click' );
-			this.$editor.find( '.image-loader' ).off( 'click' );
-			this.$editor.find( '.clear-fieldset' ).off( 'click' );
 
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
@@ -2218,11 +2225,18 @@
 		 * @since 1.0.0
 		 */
 		close: function() {
-			this.layers.length = 0;
-
 			this.$editor.find( '.close-x' ).off( 'click' );
+			this.$editor.find( '.add-layer-group' ).off( 'click' );
+			this.$editor.find( '.delete-layer' ).off( 'click' );
+			this.$editor.find( '.duplicate-layer' ).off( 'click' );
 
 			$( '.layers-list' ).lightSortable( 'destroy' );
+
+			$.each( this.layers, function( index, layer ) {
+				layer.destroy();
+			});
+
+			this.layers.length = 0;
 
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
@@ -2395,6 +2409,14 @@
 			this.$editor.off( 'click.layer' + this.id );
 
 			this.$layerSettings.find( 'select[name="preset_styles"]' ).multiCheck( 'destroy' );
+
+			this.$layerSettings.find( '.setting[name="width"]' ).off( 'change' );
+			this.$layerSettings.find( '.setting[name="height"]' ).off( 'change' );
+			this.$layerSettings.find( '.setting[name="position"]' ).off( 'change' );
+			this.$layerSettings.find( '.setting[name="horizontal"]' ).off( 'change' );
+			this.$layerSettings.find( '.setting[name="vertical"]' ).off( 'change' );
+			this.$layerSettings.find( '.setting[name="preset_styles"]' ).off( 'change' );
+			this.$layerSettings.find( '.setting[name="custom_class"]' ).off( 'change' );
 
 			this.$viewportLayer.remove();
 			this.$layerListItem.remove();
@@ -2754,6 +2776,12 @@
 		return data;
 	};
 
+	ParagraphLayer.prototype.destroy = function() {
+		this.$layerSettings.find( 'textarea[name="text"]' ).off( 'input' );
+
+		Layer.prototype.destroy.call( this );
+	};
+
 	/*
 	 * ======================================================================
 	 * Heading layer
@@ -2799,6 +2827,13 @@
 		data.text = this.headingText;
 
 		return data;
+	};
+
+	HeadingLayer.prototype.destroy = function() {
+		this.$layerSettings.find( 'select[name="heading_type"]' ).off( 'change' );
+		this.$layerSettings.find( 'textarea[name="text"]' ).off( 'input' );
+
+		Layer.prototype.destroy.call( this );
 	};
 
 	/*
@@ -2862,6 +2897,13 @@
 		return data;
 	};
 
+	ImageLayer.prototype.destroy = function() {
+		this.$layerSettings.find( 'input[name="image_source"]' ).off( 'change' );
+		this.$layerSettings.find( '.layer-image-loader' ).off( 'click' );
+
+		Layer.prototype.destroy.call( this );
+	};
+
 	/*
 	 * ======================================================================
 	 * DIV layer
@@ -2897,6 +2939,12 @@
 		data.text = this.text;
 
 		return data;
+	};
+
+	ImageLayer.prototype.destroy = function() {
+		this.$layerSettings.find( 'textarea[name="text"]' ).off( 'input' );
+
+		Layer.prototype.destroy.call( this );
 	};
 
 	/*
@@ -2981,6 +3029,13 @@
 		data.text = video[0].outerHTML;
 
 		return data;
+	};
+
+	ImageLayer.prototype.destroy = function() {
+		this.$layerSettings.find( 'input[name="width"]' ).off( 'change' );
+		this.$layerSettings.find( 'input[name="height"]' ).off( 'change' );
+
+		Layer.prototype.destroy.call( this );
 	};
 
 	/*
@@ -3229,6 +3284,10 @@
 			this.$editor.find( 'select[name="posts_post_types"]' ).multiCheck( 'destroy' );
 			this.$editor.find( 'select[name="posts_taxonomies"]' ).multiCheck( 'destroy' );
 
+			this.$editor.find( 'select[name="content_type"]' ).off( 'change' );
+			this.$editor.find( 'select[name="posts_post_types"]' ).off( 'change' );
+			this.$editor.find( 'select[name="posts_taxonomies"]' ).off( 'change' );
+
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
 	};
@@ -3369,7 +3428,7 @@
 				accordionWidth = parseInt( accordionWidth, 10 );
 			}
 
-			$( window ).on( 'resize', function() {
+			$( window ).on( 'resize.accordionSlider', function() {
 				if ( isPercetageWidth === true || $( window ).width() <= accordionWidth + 100 ) {
 					that.previewWindow.css( 'width', $( window ).width() - 100 );
 				} else {
@@ -3390,6 +3449,7 @@
 		 */
 		close: function() {
 			this.previewWindow.find( '.close-x' ).off( 'click' );
+			$( window ).off( 'resize.accordionSlider' );
 
 			this.accordion.accordionSlider( 'destroy' );
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
