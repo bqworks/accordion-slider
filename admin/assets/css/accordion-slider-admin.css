@@ -1,3 +1,6 @@
+/*----------------------------------------------------------------------
+All accordions page
+----------------------------------------------------------------------*/
 .new-accordion-buttons {
 	margin-top: 20px;
 }
@@ -6,6 +9,9 @@
 	background-color: #F9F9F9;
 }
 
+/*----------------------------------------------------------------------
+Single accordion page
+----------------------------------------------------------------------*/
 .accordion-slider-admin #titlediv {
 	margin-right: 2%;
 }
@@ -33,10 +39,34 @@
 	width: 360px;
 }
 
+@media (max-width: 650px) {
+	.accordion-slider-admin .editor-wrapper {
+		float: none;
+		margin-right: 0;
+	}
+
+	.accordion-slider-admin .editor-body {
+		margin-right: 0;
+	}
+
+	.accordion-slider-admin .inner-sidebar {
+		float: none;
+		width: 100%;
+	}
+
+	.add-panel-group {
+		float: none;
+	}
+}
+
+/* Panels container
+--------------------------------------------------*/
 .panels-container {
 	overflow: hidden;
 }
 
+/* Panel
+--------------------------------------------------*/
 .panel {
 	position: relative;
 	float: left;
@@ -49,6 +79,30 @@
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+}
+
+@media (max-width: 1700px) {
+	.panel {
+		width: 23%;
+	}
+}
+
+@media (max-width: 1500px) {
+	.panel {
+		width: 31%;
+	}
+}
+
+@media (max-width: 1250px) {
+	.panel {
+		width: 48%;
+	}
+}
+
+@media (max-width: 1020px) {
+	.panel {
+		width: 98%;
+	}
 }
 
 .panel-placeholder {
@@ -188,6 +242,8 @@
 	background-position: -183px -3px;
 }
 
+/* Add panel button
+--------------------------------------------------*/
 .add-panel-group {
 	float: left;
 	overflow: hidden;
@@ -228,6 +284,8 @@
 	text-decoration: none;
 }
 
+/* Accordion sidebar settings
+--------------------------------------------------*/
 .action {
 	background-color: #F5F5F5;
 }
@@ -294,6 +352,8 @@
 	min-width: 120px;
 }
 
+/* Modal windows
+--------------------------------------------------*/
 .modal-overlay {
 	position: fixed;
 	top: 0;
@@ -361,6 +421,8 @@
 	margin-left: 10px;
 }
 
+/* Import/Export window
+--------------------------------------------------*/
 @media (max-width: 560px) {
 	.export-window:before,
 	.import-window:before {
@@ -374,6 +436,8 @@
 	min-height: 300px;
 }
 
+/* Background editor
+--------------------------------------------------*/
 .background-image-editor .modal-window {
 	min-width: 660px;
 }
@@ -479,10 +543,6 @@
 	margin-left: 0;
 }
 
-.background-image-editor label {
-	
-}
-
 .background-image-editor .field {
 	margin-left: 10px;
 	width: 363px;
@@ -506,6 +566,8 @@
 	width: 420px;
 }
 
+/* HTML editor
+--------------------------------------------------*/
 .html-editor .modal-window textarea {
 	min-width: 600px;
 	min-height: 300px;
@@ -517,6 +579,8 @@
 	}
 }
 
+/* Layers editor
+--------------------------------------------------*/
 .layers-editor .modal-window {
 	min-width: 625px;
 }
@@ -527,9 +591,11 @@
 	}
 }
 
-.layer-buttons .add-new-layer,
-.layer-buttons .delete-layer,
-.layer-buttons .duplicate-layer {
+/* layer buttons
+----------------*/
+.add-new-layer,
+.delete-layer,
+.duplicate-layer {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
@@ -540,9 +606,9 @@
 	outline: none;
 }
 
-.layer-buttons .add-new-layer:hover,
-.layer-buttons .delete-layer:hover,
-.layer-buttons .duplicate-layer:hover {
+.add-new-layer:hover,
+.delete-layer:hover,
+.duplicate-layer:hover {
 	opacity: 1;
 }
 
@@ -552,15 +618,15 @@
 	cursor: default;
 }
 
-.layer-buttons .add-new-layer {
+.add-new-layer {
 	background-position: -125px -5px;
 }
 
-.layer-buttons .delete-layer {
+.delete-layer {
 	background-position: -155px -5px;
 }
 
-.layer-buttons .duplicate-layer {
+.duplicate-layer {
 	background-position: -185px -5px;
 }
 
@@ -601,27 +667,31 @@
 	text-decoration: none;
 }
 
-.layers-editor .layer-controls {
+/* layer controls
+-----------------*/
+.layer-controls {
 	margin-top: 10px;
 }
 
-.layers-editor .layer-controls .layer-controls-left {
+.layer-controls-left {
 	float: left;
 }
 
-.layers-editor .layer-controls .layer-controls-right {
+.layer-controls-right {
 	margin: 4px 0 0 150px;
 	position: relative;
 }
 
-.layers-editor .list-layers {
+/* layer list
+-------------*/
+.list-layers {
 	width: 130px;
 	max-height: 137px;
 	overflow: auto;
 	margin: 13px 0 0;
 }
 
-.layers-editor .list-layer {
+.list-layer {
 	position: relative;
 	border: 1px solid #CCC;
 	background-color: #F4F4F4;
@@ -631,19 +701,19 @@
 	line-height: 1;
 }
 
-.layers-editor .selected-list-layer {
+.selected-list-layer {
 	border-color: #000;
 }
 
-.layers-editor .list-layer:first-child {
+.list-layer:first-child {
 	margin-top: 0;
 }
 
-.layers-editor .list-layer:last-child {
+.list-layer:last-child {
 	margin-bottom: 0;
 }
 
-.layers-editor .list-layer input {
+.list-layer input {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -660,41 +730,43 @@
 	box-sizing: border-box;
 }
 
+/* layer settings
+-----------------*/
 .layers-editor input[type="text"] {
 	width: 70px;
 }
 
-.layers-editor .layer-settings {
+.layer-settings {
     display: none;
     margin-bottom: 0;
     height: 170px;
 }
 
-.layers-editor .selected-layer-settings {
+.selected-layer-settings {
     display: block;
 }
 
-.layers-editor .layer-settings > ul > li {
+.layer-settings > ul > li {
     float: left;
 }
 
-.layers-editor .tab {
-    display: none;
+.layer-settings-tab {
+    display: none !important;
 }
 
-.layers-editor .tab-label {
+.layer-settings-tab-label {
 	display: block;
 	padding: 8px 10px;
     font-size: 14px;
     color: #0074a2;
 }
 
-.layers-editor .tab:checked ~ .tab-label,
-.layers-editor .tab-label:hover {
+.layer-settings-tab:checked ~ .layer-settings-tab-label,
+.layer-settings-tab-label:hover {
     background-color: #F4F4F4;
 }
 
-.layers-editor .setting-fields {
+.layer-setting-fields {
     display: none;
     position: absolute;
     top: 33px;
@@ -708,82 +780,82 @@
     box-sizing: border-box;
 }
 
-.layers-editor .setting-fields td {
+.layer-setting-fields td {
     padding: 0 20px 10px 0;
 }
 
-.layers-editor .setting-fields td:last-child {
+.layer-setting-fields td:last-child {
     padding-right: 0;
 }
 
-.layers-editor .setting-fields tr:last-child td {
+.layer-setting-fields tr:last-child td {
     padding-bottom: 0;
 }
 
-.layers-editor .tab:checked ~ .setting-fields {
+.layer-settings-tab:checked ~ .layer-setting-fields {
     display: block;
 }
 
-.layers-editor .tab:checked ~ .setting-fields {
+.layer-settings-tab:checked ~ .layer-setting-fields {
     display: block;
 }
 
-.layers-editor .setting-fields label {
+.layer-setting-fields label {
     display: block;
     margin-bottom: 5px;
 }
 
-.layers-editor .setting-fields .multi-check label {
+.layer-setting-fields .multi-check label {
 	display: inline;
 }
 
-.layers-editor .setting-fields table {
+.layer-setting-fields table {
     border-spacing: 0;
 }
 
-.layers-editor .setting-fields textarea {
+.layer-setting-fields input[name="custom_class"] {
+    width: 120px;
+}
+
+.layer-setting-fields select[name="position"] {
+    width: 127px;
+}
+
+.layer-content-fields table {
+    width: 100%;
+}
+
+.layer-content-fields textarea {
 	margin: 0;
 	width: 100%;
 	height: 100%
 }
 
-.layers-editor .setting-fields input[name="custom_class"] {
-    width: 120px;
-}
-
-.layers-editor .setting-fields select[name="position"] {
-    width: 127px;
-}
-
-.layers-editor .content-fields table {
-    width: 100%;
-}
-
-.layers-editor .content-fields input {
+.layer-content-fields input[type="text"] {
     width: 100%
 }
 
-.layers-editor .content-fields .heading-type-label {
+.layer-content-fields .heading-type-label {
     display: inline;
 }
 
-.layers-editor .content-fields .heading-text {
+.layer-content-fields .heading-text {
     height: 78px;
 }
 
-.layers-editor .content-fields .video-text {
+.layer-content-fields .video-text {
     height: 95px;
 }
 
-.layers-editor .layer-image-input {
+.layer-image-input {
 	position: relative;
 }
 
-.layers-editor .layer-image-input input {
+.layer-image-input input[type="text"] {
 	padding-right: 25px;
 }
 
-.layers-editor .layer-image-loader {
+.layer-image-loader {
 	width: 17px;
 	height: 17px;
 	position: absolute;
@@ -795,11 +867,13 @@
 	opacity: 0.5;
 }
 
-.layers-editor .layer-image-loader:hover {
+.layer-image-loader:hover {
 	opacity: 1;
 }
 
-.layers-editor .layer-viewport {
+/* layer viewport
+-----------------*/
+.layer-viewport {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
@@ -815,7 +889,7 @@
     background-position: 0 0, 10px 10px;
 }
 
-.layers-editor .viewport-image {
+.viewport-image {
 	position: relative;
 	height: 100%;
 }
@@ -832,7 +906,7 @@
 	background: transparent;
 }
 
-.layers-editor .viewport-layer {
+.viewport-layer {
 	position: absolute;
 	cursor: move;
 	-moz-user-select: none;
@@ -840,8 +914,8 @@
 	user-select: none;
 }
 
-.layers-editor .viewport-layer .as-layer {
-	position: relative;
+.viewport-layer .as-layer {
+	position: relative !important;
 }
 
 .viewport-layers .video-placeholder {
@@ -854,6 +928,8 @@
 	background-color: #FFF;
 }
 
+/* Settings editor
+--------------------------------------------------*/
 .settings-editor .modal-window {
 	min-width: 326px;
 }
@@ -918,6 +994,8 @@
     display: inline-block;
 }
 
+/* Breakpoint settings
+--------------------------------------------------*/
 .breakpoints-box .inside {
 	margin: 0;
 	padding: 0;
@@ -962,25 +1040,25 @@
 	vertical-align: middle
 }
 
-.add-setting-group {
+.add-breakpoint-setting-group {
 	position: relative;
 	margin: 15px;
 }
 
-.add-setting-group:hover .setting-name {
+.add-breakpoint-setting-group:hover .breakpoint-setting-name {
 	display: block;
 }
 
-.add-setting {
+.add-breakpoint-setting {
 	vertical-align: middle !important;
 }
 
-.add-setting-arrow {
+.add-breakpoint-setting-arrow {
 	font-size: 10px;
 	color: #999;
 }
 
-.setting-name {
+.breakpoint-setting-name {
 	position: absolute;
 	padding: 0 10px;
 	background-color: #FEFEFE;
@@ -990,16 +1068,16 @@
 	bottom: 28px;
 }
 
-.setting-name li {
+.breakpoint-setting-name li {
 	margin: 0;
 	cursor: pointer;
 }
 
-.setting-name li:last-child {
+.breakpoint-setting-name li:last-child {
 	border-bottom: none;
 }
 
-.setting-name a {
+.breakpoint-setting-name a {
 	display: block;
 	padding: 3px;
 	text-decoration: none;
@@ -1034,11 +1112,8 @@
 	width: 99%
 }
 
-.delete-accordion-dialog,
-.delete-panel-dialog {
-	
-}
-
+/* Delete dialogs
+--------------------------------------------------*/
 .dialog-question {
 	font-weight: bold;
 	font-size: 14px;
@@ -1048,6 +1123,8 @@
 	text-align: right;
 }
 
+/* Info tooltip
+--------------------------------------------------*/
 .info-tooltip {
 	position: absolute;
 	padding: 10px;
@@ -1072,6 +1149,8 @@
 	margin-top: -5px;
 }
 
+/* Multicheck plugin
+--------------------------------------------------*/
 .multi-check {
 	position: relative;
     text-align: left;
@@ -1128,50 +1207,9 @@
 	padding: 5px;
 }
 
-@media (max-width: 1700px) {
-	.panel {
-		width: 23%;
-	}
-}
-
-@media (max-width: 1500px) {
-	.panel {
-		width: 31%;
-	}
-}
-
-@media (max-width: 1250px) {
-	.panel {
-		width: 48%;
-	}
-}
-
-@media (max-width: 1020px) {
-	.panel {
-		width: 98%;
-	}
-}
-
-@media (max-width: 650px) {
-	.accordion-slider-admin .editor-wrapper {
-		float: none;
-		margin-right: 0;
-	}
-
-	.accordion-slider-admin .editor-body {
-		margin-right: 0;
-	}
-
-	.accordion-slider-admin .inner-sidebar {
-		float: none;
-		width: 100%;
-	}
-
-	.add-panel-group {
-		float: none;
-	}
-}
-
+/*----------------------------------------------------------------------
+Custom CSS and JavaScript page
+----------------------------------------------------------------------*/
 .button-primary.custom-css-js-update {
 	display: block;
 	margin-left: 3px;
@@ -1182,6 +1220,10 @@
 .custom-js {
 	margin-bottom: 20px;
 }
+
+/*----------------------------------------------------------------------
+Plugin settings page
+----------------------------------------------------------------------*/
 
 .plugin-settings table {
 	max-width: 960px;
@@ -1246,6 +1288,10 @@
 .not-valid-code {
 	border-color: #D9534F;
 }
+
+/*----------------------------------------------------------------------
+Utils
+----------------------------------------------------------------------*/
 
 .as-clearfix {
     display: inline-block;
