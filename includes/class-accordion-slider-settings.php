@@ -142,7 +142,7 @@ class BQW_Accordion_Slider_Settings {
 						'auto' => __( 'Auto', 'accordion-slider' ),
 						'custom' => __( 'Custom', 'accordion-slider' )
 					),
-					'description' => __( '\'Auto\' resizes the accordion and all of its elements (e.g., layers, videos) automatically, while \'Custom\' only resizes the accordion container and panels, and you are given flexibility over the way inner elements (e.g., layers, videos) will respond to smaller sizes. For example, you could use CSS media queries to define different text sizes or to hide certain elements when the accordion becomes smaller, ensuring that all content remains readable without having to zoom in. It\'s important to note that, if \'Auto\' responsiveness is used, the \'Width\' and \'Height\' need to be set to fixed values, so that the accordion can calculate correctly how much it needs to scale.', 'accordion-slider' )
+					'description' => __( '\'Auto\' resizes the accordion and all of its elements (e.g., layers, videos) automatically, while \'Custom\' resizes only the accordion container and panels, and you are given flexibility over the way inner elements (e.g., layers, videos) will respond to smaller sizes. For example, you could use CSS media queries to define different text sizes or to hide certain elements when the accordion becomes smaller, ensuring that all content remains readable without having to zoom in. It\'s important to note that, if \'Auto\' responsiveness is used, the \'Width\' and \'Height\' need to be set to fixed values, so that the accordion can calculate correctly how much it needs to scale.', 'accordion-slider' )
 				),
 				'aspect_ratio' => array(
 					'js_name' => 'aspectRatio',
@@ -238,9 +238,10 @@ class BQW_Accordion_Slider_Settings {
 					'default_value' => 'hover',
 					'available_values' => array(
 						'hover' => __( 'Hover', 'accordion-slider' ),
-						'click' => __( 'Click', 'accordion-slider' )
+						'click' => __( 'Click', 'accordion-slider' ),
+						'never' => __( 'Never', 'accordion-slider' )
 					),
-					'description' => __( 'If set to \'Hover\', the panels will be opened by moving the mouse pointer over them; if set to \'Click\', the panels will only open when clicked.', 'accordion-slider' )
+					'description' => __( 'If set to \'Hover\', the panels will be opened by moving the mouse pointer over them; if set to \'Click\', the panels will open when clicked. Can also be set to \'never\' to disable the opening of the panels.', 'accordion-slider' )
 				),
 				'close_panels_on_mouse_out' => array(
 					'js_name' => 'closePanelsOnMouseOut',
@@ -956,7 +957,7 @@ class BQW_Accordion_Slider_Settings {
 						'homepage' => __( 'On homepage', 'accordion-slider' ),
 						'all' => __( 'On all pages', 'accordion-slider' )
 					),
-					'description' => __( 'The plugin can detect the presence of the accordion in a post, page or widget, and will automatically load the necessary stylesheets. However, when the accordion is loaded in PHP code, like in the theme\'s header or another template file, you need to manually specify where the stylesheets should load. If you only load the accordion on the homepage, select <i>On homepage</i>, or if you load it in the header or another section that is visible on multiple pages, select <i>On all pages</i>.' , 'accordion-slider' )
+					'description' => __( 'The plugin can detect the presence of the accordion in a post, page or widget, and will automatically load the necessary stylesheets. However, when the accordion is loaded in PHP code, like in the theme\'s header or another template file, you need to manually specify where the stylesheets should load. If you load the accordion only on the homepage, select <i>On homepage</i>, or if you load it in the header or another section that is visible on multiple pages, select <i>On all pages</i>.' , 'accordion-slider' )
 				),
 				'load_custom_css_js' => array(
 					'label' => __( 'Load custom CSS and JavaScript', 'accordion-slider' ),
