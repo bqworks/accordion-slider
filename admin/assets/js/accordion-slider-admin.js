@@ -761,7 +761,7 @@
 						background: {
 							background_source: '[as_image_src]',
 							background_alt: '[as_image_alt]',
-							background_link: '[as_link]'
+							background_link: '[as_link_url]'
 						},
 						layers: [
 							{
