@@ -146,7 +146,7 @@
 				$( this ).parent( '.postbox' ).toggleClass( 'closed' );
 			});
 
-			$( '.sidebar-settings label' ).on( 'mouseover', function() {
+			$( '.sidebar-settings' ).on( 'mouseover', 'label', function() {
 				that.showInfo( $( this ) );
 			});
 

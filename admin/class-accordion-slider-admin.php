@@ -1122,7 +1122,7 @@ class BQW_Accordion_Slider_Admin {
             $setting_html = '
             	<tr>
             		<td>
-            			<label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
+            			<label data-info="' . $setting['description'] . '" for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
             		</td>
             		<td class="setting-cell">
             			<input id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" type="text" name="' . $name . '" value="' . esc_attr( $setting_value ) . '" />
@@ -1133,7 +1133,7 @@ class BQW_Accordion_Slider_Admin {
             $setting_html = '
             	<tr>
             		<td>
-            			<label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
+            			<label data-info="' . $setting['description'] . '" for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
             		</td>
             		<td class="setting-cell">
             			<input id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" type="checkbox" name="' . $name . '"' . ( $setting_value === true ? ' checked="checked"' : '' ) . ' />
@@ -1144,7 +1144,7 @@ class BQW_Accordion_Slider_Admin {
             $setting_html ='
             	<tr>
             		<td>
-            			<label for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
+            			<label data-info="' . $setting['description'] . '" for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
             		</td>
             		<td class="setting-cell">
             			<select id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" name="' . $name . '">';

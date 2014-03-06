@@ -1134,6 +1134,7 @@ Single accordion page
 	border-right-width: 4px;
 	left: -100%;
 	max-width: 100%;
+	white-space: normal;
 	z-index: 100;
 }
 
