@@ -193,7 +193,7 @@ class BQW_AS_Accordion_Renderer {
 			$setting_value = isset( $this->settings[ $name ] ) ? $this->settings[ $name ] : $setting_default_value;
 
 			if ( $setting_value != $setting_default_value ) {
-				if ( $js_output !== '' ) {
+				if ( $settings_js !== '' ) {
 					$settings_js .= ',';
 				}
 
