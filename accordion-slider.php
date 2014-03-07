@@ -3,7 +3,7 @@
 /*
 	Plugin Name: Accordion Slider
 	Plugin URI:  http://bqworks.net/accordion-slider/
-	Description: Responsive and Touch-enabled WordPress accordion
+	Description: Fully responsive and mobile-friendly accordion slider.
 	Version:     1.0
 	Author:      bqworks
 	Author URI:  http://bqworks.com
