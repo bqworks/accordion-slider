@@ -99,7 +99,7 @@ class BQW_Accordion_Slider_API {
 		}
 
 		$response = unserialize( wp_remote_retrieve_body( $request ) );
-		
+
 		if ( is_object( $response ) ) {
 			return $response;
 		} else {
@@ -265,10 +265,14 @@ class BQW_Accordion_Slider_API {
 		delete_site_transient( 'update_plugins' );
 		delete_transient( 'accordion_slider_update_notification_message' );
 
-		if ( $response !== false && isset( $response->is_valid ) && $response->is_valid === 'yes' ) {
-			return true;
+		if ( $response !== false && isset( $response->is_valid ) ) {
+			if ( $response->is_valid === 'yes' ) {
+				return 'yes';
+			} else {
+				return 'no';
+			}
 		} else {
-			return false;
+			return 'error';
 		}
 	}
 }

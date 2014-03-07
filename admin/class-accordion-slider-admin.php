@@ -386,7 +386,7 @@ class BQW_Accordion_Slider_Admin {
 		if ( isset( $_POST['purchase_code_update'] ) ) {
 			check_admin_referer( 'purchase-code-update', 'purchase-code-nonce' );
 
-			if ( isset( $_POST['purchase_code'] ) && $_POST['purchase_code'] !== $purchase_code ) {
+			if ( isset( $_POST['purchase_code'] ) ) {
 				$purchase_code = $_POST['purchase_code'];
 				update_option( 'accordion_slider_purchase_code', $purchase_code );
 
@@ -395,10 +395,14 @@ class BQW_Accordion_Slider_Admin {
 				} else {
 					$api = BQW_Accordion_Slider_API::get_instance();
 
-					if ( $api->verify_purchase_code( $purchase_code ) === true ) {
+					$verification_result = $api->verify_purchase_code( $purchase_code );
+
+					if ( $verification_result === 'yes' ) {
 						$purchase_code_status = '1';
-					} else {
+					} else if ( $verification_result === 'no' ) {
 						$purchase_code_status = '2';
+					} else if ( $verification_result === 'error' ) {
+						$purchase_code_status = '3';
 					}
 				}
 
