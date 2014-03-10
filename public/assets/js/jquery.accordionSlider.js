@@ -1,3 +1,10 @@
+/*!
+* Accordion Slider - v2.3.0
+* Homepage: http://bqworks.com/accordion-slider/
+* Author: bqworks
+* Author URL: http://bqworks.com/
+* Date: 2014-03-10
+*/
 ;(function(window, $) {
 
 	"use strict";
@@ -271,10 +278,10 @@
 			// if there is distance between the panels, the panels can't overlap
 			if (this.settings.panelDistance > 0 || this.settings.panelOverlap === false) {
 				this.isOverlapping = false;
-				this.$accordion.removeClass('overlap');
+				this.$accordion.removeClass('as-overlap');
 			} else if (this.settings.panelOverlap === true) {
 				this.isOverlapping = true;
-				this.$accordion.addClass('overlap');
+				this.$accordion.addClass('as-overlap');
 			}
 
 			// clear inline size of the background images because the orientation might have changes
@@ -381,19 +388,32 @@
 
 			// listen for 'panelClick' events
 			panel.on('panelClick.' + NS, function(event) {
+				if (that.$accordion.hasClass('as-swiping'))
+					return;
+				
 				if (that.settings.openPanelOn === 'click') {
 					// open the panel if it's not already opened
 					// and close the panels if the clicked panel is opened
-					if (index !== this.currentIndex)
+					if (index !== that.currentIndex) {
 						that.openPanel(event.index);
-					else
+					} else {
 						that.closePanels();
+					}
 				}
 
 				var eventObject = {type: 'panelClick', index: index};
 				that.trigger(eventObject);
 				if ($.isFunction(that.settings.panelClick))
 					that.settings.panelClick.call(that, eventObject);
+			});
+
+			// disable links if the panel should open on click and it wasn't opened yet
+			panel.on('panelMouseDown.' + NS, function(event) {
+				if (index !== that.currentIndex && that.settings.openPanelOn === 'click') {
+					$(this).find('a').one('click', function(event) {
+						event.preventDefault();
+					});
+				}
 			});
 
 			// listen for 'imagesComplete' events and if the images were loaded in
@@ -437,13 +457,7 @@
 			if (this.settings.aspectRatio !== -1)
 				this.$accordion.css('height', this.$accordion.innerWidth() / this.settings.aspectRatio);
 
-			// get the total size, in pixels, of the accordion
-			if (this.settings.responsiveMode === 'custom' && this.settings.responsive === true) {
-				// clear previous styling
-				this.$maskContainer.attr('style', '');
-
-				this.totalSize = this.settings.orientation === "horizontal" ? this.$accordion.innerWidth() : this.$accordion.innerHeight();
-			} else if (this.settings.responsiveMode === 'auto' && this.settings.responsive === true) {
+			if (this.settings.responsive === true && this.settings.responsiveMode === 'auto') {
 				// get the accordion's size ratio based on the set size and the actual size
 				this.autoResponsiveRatio = this.$accordion.innerWidth() / this.settings.width;
 
@@ -456,6 +470,11 @@
 				});
 				
 				this.totalSize = this.settings.orientation === "horizontal" ? this.$maskContainer.innerWidth() : this.$maskContainer.innerHeight();
+			} else {
+				// clear previous styling
+				this.$maskContainer.attr('style', '');
+
+				this.totalSize = this.settings.orientation === "horizontal" ? this.$accordion.innerWidth() : this.$accordion.innerHeight();
 			}
 
 			// set the size of the background images explicitly because of a bug?
@@ -481,6 +500,7 @@
 
 			// set the size, in pixels, of the closed panels
 			this.closedPanelSize = (this.totalSize - (this.getVisiblePanels() - 1) * this.computedPanelDistance) / this.getVisiblePanels();
+
 			// round the value
 			this.closedPanelSize = Math.floor(this.closedPanelSize);
 
@@ -1161,7 +1181,8 @@
 				paginationButtons.remove();
 				paginationButtons.off('click.' + NS, '.as-pagination-button');
 				this.off('pageScroll.' + NS);
-			
+				
+				this.$accordion.removeClass('as-has-buttons');
 			// if there are pages and the buttons were not created yet, create them now
 			} else if (totalPages > 1 && paginationButtons.length === 0) {
 				// create the buttons' container
@@ -1185,6 +1206,8 @@
 					paginationButtons.find('.as-selected').removeClass('as-selected');
 					paginationButtons.find('.as-pagination-button').eq(event.index).addClass('as-selected');
 				});
+
+				this.$accordion.addClass('as-has-buttons');
 
 			// update the buttons if they already exist but their number differs from
 			// the number of existing pages
@@ -1294,6 +1317,11 @@
 				that.trigger({type: 'panelClick.' + NS, index: that.index});
 			});
 
+			// listen for 'mousedown' events
+			this.on('mousedown.' + this.panelNS, function() {
+				that.trigger({type: 'panelMouseDown.' + NS, index: that.index});
+			});
+
 			// set position and size properties
 			this.update();
 
@@ -1327,6 +1355,7 @@
 			this.off('mouseenter.' + this.panelNS);
 			this.off('mouseleave.' + this.panelNS);
 			this.off('click.' + this.panelNS);
+			this.off('mousedown.' + this.panelNS);
 
 			// clean the element from attached styles and data
 			this.$panel.attr('style', '');
@@ -1390,36 +1419,13 @@
 			Get the real size of the panel's content
 		*/
 		getContentSize: function() {
-			var size,
-				that = this;
-
 			// check if there are loading images
 			if (this.isLoaded === false)
 				if (this.checkImagesComplete() === 'loading')
 					return 'loading';
 
-			if (this.settings.panelOverlap === false || parseInt(this.settings.panelDistance, 10) > 0) {
-				// get the current size of the inner content and then temporarily set the panel to a small size
-				// in order to accurately calculate the size of the inner content
-				var currentSize = this.$panel.css(this.sizeProperty);
-				this.$panel.css(this.sizeProperty, 10);
-				size = this.sizeProperty === 'width' ? this.$panel[0].scrollWidth : this.$panel[0].scrollHeight;
-				this.$panel.css(this.sizeProperty, currentSize);
-			} else {
-				// workaround for when scrollWidth and scrollHeight return incorrect values
-				// this happens in some browsers (Firefox and Opera a.t.m.) unless there is a set width and height for the element
-				if (this.sizeProperty === 'width') {
-					this.$panel.css({'width': '100px', 'overflow': 'hidden'});
-					size = this.$panel[0].scrollWidth;
-					this.$panel.css({'width': '', 'overflow': ''});
-				} else {
-					this.$panel.css({'height': '100px', 'overflow': 'hidden'});
-					size = this.$panel[0].scrollHeight;
-					this.$panel.css({'height': '', 'overflow': ''});
-				}
-			}
-
-			return size;
+			
+			return this.sizeProperty === 'width' ? this.$panel[0].scrollWidth : this.$panel[0].scrollHeight;
 		},
 
 		/*
@@ -2439,99 +2445,6 @@
 	};
 
 	$.AccordionSlider.addModule('LazyLoading', LazyLoading, 'accordion');
-	
-})(window, jQuery);
-
-/*
-	Mouse Scroll module for Accordion Slider
-
-	Adds mouse scrolling functionality to the accordion
-*/
-;(function(window, $) {
-
-	"use strict";
-	
-	var NS = $.AccordionSlider.namespace;
-
-	var MouseScroll = {
-
-		isMouseOver: false,
-
-		mousePosition: {x: 0, y:0},
-
-		initMouseScroll: function() {
-			var that = this;
-
-			if ('ontouchstart' in window)
-				return;
-
-			$.extend(this.settings, this.mouseScrollDefaults, this.options);
-
-			this.$maskContainer.on('mouseenter.' + NS, function(event) {
-				that.isMouseOver = true;
-			});
-
-			this.$maskContainer.on('mouseleave.' + NS, function(event) {
-				that.isMouseOver = false;
-			});
-
-			this.$maskContainer.on('mousemove.' + NS, function(event) {
-				var eventObject = event.originalEvent,
-					containerOffset = that.$maskContainer.offset();
-
-				that.mousePosition.x = eventObject.clientX - containerOffset.left;
-				that.mousePosition.y = eventObject.clientY - containerOffset.top;
-			});
-
-			requestAnimationFrame(anim);
-
-			function anim() {
-				requestAnimationFrame(anim);
-
-				if (that.isMouseOver === false)
-					return;
-
-				if (that.mousePosition.x < 300 && that.$panelsContainer.position().left < 0) {
-					that.$panelsContainer.css('left', that.$panelsContainer.position().left + (30 - that.mousePosition.x / 10));
-
-					if (that.$panelsContainer.position().left > 0) {
-						that.$panelsContainer.css('left', 0);
-					}
-				} else if (that.mousePosition.x > that.totalSize - 300 && that.$panelsContainer.position().left > - that.$panelsContainer.width() + that.totalSize) {
-					that.$panelsContainer.css('left', that.$panelsContainer.position().left - (30 - (that.totalSize - that.mousePosition.x) / 10));
-
-					if (that.$panelsContainer.position().left < - that.$panelsContainer.width() + that.totalSize) {
-						that.$panelsContainer.css('left', - that.$panelsContainer.width() + that.totalSize);
-					}
-				}
-
-				var page = Math.ceil(Math.abs(that.$panelsContainer.position().left) / that.totalSize);
-
-				if (that.currentPage !== page) {
-					//if (that.currentIndex !== -1)
-					//	that.closePanels();
-
-					that.currentPage = page;
-
-					// fire 'pageScroll' event
-					var eventObject = {type: 'pageScroll', index: that.currentPage};
-					that.trigger(eventObject);
-					if ($.isFunction(that.settings.pageScroll))
-						that.settings.pageScroll.call(that, eventObject);
-				}
-			}
-		},
-
-		destroyMouseScroll: function() {
-
-		},
-
-		mouseScrollDefaults: {
-			
-		}
-	};
-
-	//$.AccordionSlider.addModule('MouseScroll', MouseScroll, 'accordion');
 	
 })(window, jQuery);
 
@@ -3817,6 +3730,7 @@ JWPlayerVideo.prototype.replay = function() {
 						panel.off('panelMouseOver.' + NS);
 						panel.off('panelMouseOut.' + NS);
 						panel.off('panelClick.' + NS);
+						panel.off('panelMouseDown.' + NS);
 					});
 
 				// add or remove grabbing icon
@@ -3829,7 +3743,7 @@ JWPlayerVideo.prototype.replay = function() {
 
 		_onTouchStart: function(event) {
 			// disable dragging if the element is set to allow selections
-			if ($(event.target).closest('.selectable').length >= 1 || (this.isTouchSupport === false && this.getTotalPages() === 1))
+			if ($(event.target).closest('.as-selectable').length >= 1 || (this.isTouchSupport === false && this.getTotalPages() === 1))
 				return;
 
 			// prevent default behavior only for mouse events
@@ -3857,9 +3771,11 @@ JWPlayerVideo.prototype.replay = function() {
 			this.$panelsContainer.removeClass('as-grab').addClass('as-grabbing');
 
 			// disable click events on links
-			$(event.target).parents('.as-panel').find('a').addClass('as-swiping').one('click.TouchSwipe', function(event) {
+			$(event.target).parents('.as-panel').find('a').one('click.TouchSwipe', function(event) {
 				event.preventDefault();
 			});
+
+			this.$accordion.addClass('as-swiping');
 		},
 
 		_onTouchMove: function(event) {
@@ -3897,7 +3813,8 @@ JWPlayerVideo.prototype.replay = function() {
 
 		_onTouchEnd: function(event) {
 			// remove the move and end listeners
-			var moveEvent = this.isTouchSupport ? 'touchmove' : 'mousemove',
+			var that = this,
+				moveEvent = this.isTouchSupport ? 'touchmove' : 'mousemove',
 				endEvent = this.isTouchSupport ? 'touchend' : 'mouseup';
 
 			this.$panelsContainer.off(moveEvent + '.' + NS);
@@ -3914,7 +3831,8 @@ JWPlayerVideo.prototype.replay = function() {
 					this.openPanel(index);
 				} else {
 					// re-enable click events on links
-					$(event.target).parents('.as-panel').find('a').removeClass('as-swiping').off('click.TouchSwipe');
+					$(event.target).parents('.as-panel').find('a').off('click.TouchSwipe');
+					this.$accordion.removeClass('as-swiping');
 				}
 
 				return;
@@ -3922,18 +3840,23 @@ JWPlayerVideo.prototype.replay = function() {
 
 			// return if there was no movement and re-enable click events on links
 			if (this.isTouchMoving === false) {
-				$(event.target).parents('.as-panel').find('a').removeClass('as-swiping').off('click.TouchSwipe');
+				$(event.target).parents('.as-panel').find('a').off('click.TouchSwipe');
+				this.$accordion.removeClass('as-swiping');
 				return;
 			}
 
 			this.isTouchMoving = false;
+
+			$(event.target).parents('.as-panel').one('click', function(event) {
+				event.preventDefault();
+			});
 
 			// remove the 'as-swiping' class but with a delay
 			// because there might be other event listeners that check
 			// the existence of this class, and this class should still be 
 			// applied for those listeners, since there was a swipe event
 			setTimeout(function() {
-				$(event.target).parents('.as-panel').find('a').removeClass('as-swiping');
+				that.$accordion.removeClass('as-swiping');
 			}, 1);
 
 			var noScrollAnimObj = {};
