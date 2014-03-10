@@ -966,6 +966,10 @@ Single accordion page
 	padding-bottom: 10px;
 }
 
+.settings-editor tr:last-child td {
+	padding-bottom: 0;
+}
+
 .settings-editor th {
 	font-size: 14px;
 }
