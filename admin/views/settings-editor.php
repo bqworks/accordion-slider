@@ -2,7 +2,6 @@
 <div class="modal-window-container settings-editor">
 	<div class="modal-window">
 		<span class="close-x"></span>
-		<h3 class="heading"><?php _e( 'Panel Settings', 'accordion-slider' ); ?></h3>
 		
 		<table>
 			<thead>
