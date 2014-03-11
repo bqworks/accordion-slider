@@ -11,10 +11,21 @@
 			<p><?php _e( 'If you want to reproduce one of the examples showcased online, you can easily import those examples into your own Accordion Slider installation.', 'accordion-slider' ); ?></p>
 			<p><?php _e( 'The examples can be found in the <i>examples</i> folder (which is inside the main downloaded package), and can be imported using the <i>Import Accordion</i> button below.', 'accordion-slider' ); ?></p>
 			<p><?php _e( 'You can use these examples as a starting point for your own accordions or simply to learn how certain features are achieved.', 'accordion-slider' ); ?></p>
-			<p><?php _e( 'For other instructions please see the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-help'); ?>"><?php _e( 'Help', 'accordion-slider' ); ?></a> <?php _e( 'page.', 'accordion-slider' ); ?></p>
+			<p><?php _e( 'For other instructions please see the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-help'); ?>"><?php _e( 'Help', 'accordion-slider' ); ?></a> <?php _e( 'page', 'accordion-slider' ); ?>.</p>
 
 			<h3><?php _e( '2. Support', 'accordion-slider' ); ?></h3>
-			<p><?php _e( 'When you need support, please contact us at our support center:', 'accordion-slider' ); ?> <a href="http://support.bqworks.com">support.bqworks.com</a></p>
+			<p><?php _e( 'When you need support, please contact us at our support center:', 'accordion-slider' ); ?> <a href="http://support.bqworks.com">support.bqworks.com</a>.</p>
+			
+			<?php
+				$purchase_code_status = get_option( 'accordion_slider_purchase_code_status', '0' );
+
+				if ( $purchase_code_status !== '1' ) {
+			?>
+					<h3><?php _e( '3. Updates', 'accordion-slider' ); ?></h3>
+					<p><?php _e( 'In order to have access to automatic updates, please enter your purchase code', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-settings'); ?>"><?php _e( 'here', 'accordion-slider' ); ?></a>.</p>
+			<?php
+				}
+			?>
 		</div>
 	<?php
 		}
