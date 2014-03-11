@@ -11,9 +11,7 @@
                 <label for="show-hide-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
                 
                 <div class="info-content">
-                    <p><?php _e( 'Multiple panels will be dynamically generated, one panel for each image from the <i>[gallery]</i> shortcode.', 'accordion-slider' ); ?></p>
-                    <p><?php _e( 'You just need to drop the accordion slider shortcode in a post that contains a <i>[gallery]</i> shortcode, and the images from the <i>[gallery]</i> will automatically be loaded in the accordion.', 'accordion-slider' ); ?></p>
-                    <p><?php _e( 'The images and their data can be fetched through <i>dynamic tags</i>, which are enumerated in the Background, Layers and HTML editors.', 'accordion-slider' ); ?></p>
+                    <p><?php _e( '<i>Custom Content</i> panels allow you to manually specify the image(s), link and all the other data for the panel.', 'accordion-slider' ); ?></p>
                 </div>
             </div>
         <?php

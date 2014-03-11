@@ -37,3 +37,26 @@
 		<input id="flickr-limit" class="panel-setting" type="text" name="flickr_maximum" value="<?php echo isset( $panel_settings['flickr_per_page'] ) ? esc_attr( $panel_settings['flickr_per_page'] ) : $panel_default_settings['flickr_per_page']['default_value']; ?>" />
 	</td>
 </tr>
+<tr>
+	<td colspan="2">
+		<?php
+            $show_info = get_option( 'accordion_slider_show_inline_info', true );
+
+            if ( $show_info === true ) {
+        ?>
+            <div class="inline-info panel-settings-info">
+            	<input type="checkbox" id="show-hide-info" class="show-hide-info">
+				<label for="show-hide-info" class="show-info"><?php _e( 'Show info', 'accordion-slider' ); ?></label>
+				<label for="show-hide-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
+				
+				<div class="info-content">
+            		<p><?php _e( 'Multiple panels will be dynamically generated (one panel for each Flickr image loaded), based on the set parameters.', 'accordion-slider' ); ?></p>
+                	<p><?php _e( 'First, you need to request an API key', 'accordion-slider' ); ?> <a href="https://www.flickr.com/services/apps/create/apply/"><?php _e( 'here', 'accordion-slider' ); ?></a> <?php _e( 'and then specify it in the <i>API Key</i> field above.', 'accordion-slider' ); ?></p>
+                	<p><?php _e( 'The images and their data can be fetched through <i>dynamic tags</i>, which are enumerated in the Background, Layers and HTML editors.', 'accordion-slider' ); ?></p>
+            	</div>
+            </div>
+        <?php
+            }
+        ?>
+	</td>
+</tr>

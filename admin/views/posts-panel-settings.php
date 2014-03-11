@@ -112,3 +112,27 @@
 		<input id="posts-maximum" class="panel-setting" type="text" name="posts_maximum" value="<?php echo isset( $panel_settings['posts_maximum'] ) ? esc_attr( $panel_settings['posts_maximum'] ) : $panel_default_settings['posts_maximum']['default_value']; ?>" />
 	</td>
 </tr>
+<tr>
+	<td colspan="2">
+		<?php
+            $show_info = get_option( 'accordion_slider_show_inline_info', true );
+
+            if ( $show_info === true ) {
+        ?>
+            <div class="inline-info panel-settings-info">
+            	<input type="checkbox" id="show-hide-info" class="show-hide-info">
+				<label for="show-hide-info" class="show-info"><?php _e( 'Show info', 'accordion-slider' ); ?></label>
+				<label for="show-hide-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
+				
+				<div class="info-content">
+                	<p><?php _e( 'Multiple panels will be dynamically generated (one panel for each loaded post), based on the set parameters.', 'accordion-slider' ); ?></p>
+                	<p><?php _e( 'The list of taxonomies will be refreshed every time the list of post types is updated.', 'accordion-slider' ); ?></p>
+                	<p><?php _e( 'The <i>Match</i> parameter indicates whether, in order to be fetched, a post needs to have all the selected taxonomy terms, or at least one will be sufficient. The <i>With selected</i> parameter indicates whether posts that include the selected taxonomy terms will be loaded, or if posts that don\'t include them will be loaded.', 'accordion-slider' ); ?></p>
+                	<p><?php _e( 'The images and their data can be fetched through <i>dynamic tags</i>, which are enumerated in the Background, Layers and HTML editors.', 'accordion-slider' ); ?></p>
+            	</div>
+            </div>
+        <?php
+            }
+        ?>
+	</td>
+</tr>

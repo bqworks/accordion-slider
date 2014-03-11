@@ -1742,13 +1742,14 @@
 			
 			var that = this,
 				data = this.currentPanel.getData( 'html' ),
-				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
+				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' ),
+				contentType = this.currentPanel.getData( 'settings' )[ 'content_type' ];
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				dataType: 'html',
-				data: { action: 'accordion_slider_load_html_editor', data: data },
+				data: { action: 'accordion_slider_load_html_editor', data: data, content_type: contentType },
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
@@ -1875,17 +1876,18 @@
 		 * @param  {Int} id The id of the panel.
 		 */
 		open: function( id ) {
-			var that = this,
-				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
-
 			this.currentPanel = AccordionSliderAdmin.getPanel( id );
 			this.layersData = this.currentPanel.getData( 'layers' );
+
+			var that = this,
+				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' ),
+				contentType = this.currentPanel.getData( 'settings' )[ 'content_type' ];
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				dataType: 'html',
-				data: { action: 'accordion_slider_load_layers_editor', data: JSON.stringify( this.layersData ) },
+				data: { action: 'accordion_slider_load_layers_editor', data: JSON.stringify( this.layersData ), content_type: contentType },
 				complete: function( data ) {
 					$( 'body' ).append( data.responseText );
 					that.init();
@@ -2021,6 +2023,8 @@
 				backgroundData.background_source.indexOf( '[' ) === -1 ) {
 				var $viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" />' ).prependTo( $viewport );
 			}
+
+			$( '.layers-editor-info' ).css( 'maxWidth', accordionWidth );
 		},
 
 		/**
@@ -2077,7 +2081,7 @@
 
 			this.isWorking = false;
 
-			this.$editor.find( '.disabled' ).removeClass( 'disabled' );
+			this.$editor.removeClass( 'no-layers' );
 		},
 
 		/**
@@ -2134,7 +2138,7 @@
 			});
 
 			if ( this.layers.length === 0 ) {
-				this.$editor.find( '.delete-layer, .duplicate-layer' ).addClass( 'disabled' );
+				this.$editor.addClass( 'no-layers' );
 				return;
 			}
 

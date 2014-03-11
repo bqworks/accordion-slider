@@ -760,7 +760,9 @@ class BQW_Accordion_Slider_Admin {
 	 * @param  array|bool $data The data of the panel or false, if the panel is new.
 	 */
 	public function create_panel( $data ) {
-		$panel_type = 'custom';
+		$panel_default_settings = BQW_Accordion_Slider_Settings::getPanelSettings();
+
+		$panel_type = $panel_default_settings['content_type']['default_value'];
 		$panel_image = '';
 
 		if ( $data !== false ) {
@@ -805,8 +807,11 @@ class BQW_Accordion_Slider_Admin {
 	 * @since 1.0.0
 	 */
 	public function ajax_load_background_image_editor() {
+		$panel_default_settings = BQW_Accordion_Slider_Settings::getPanelSettings();
+
 		$data = json_decode( stripslashes( $_POST['data'] ), true );
-		$content_class = $_POST['content_type'] === 'custom' ? 'custom' : 'dynamic';
+		$content_type = isset( $_POST['content_type'] ) ? $_POST['content_type'] : $panel_default_settings['content_type']['default_value'];
+		$content_class = $content_type === 'custom' ? 'custom' : 'dynamic';
 
 		include( 'views/background-image-editor.php' );
 
@@ -819,7 +824,10 @@ class BQW_Accordion_Slider_Admin {
 	 * @since 1.0.0
 	 */
 	public function ajax_load_html_editor() {
+		$panel_default_settings = BQW_Accordion_Slider_Settings::getPanelSettings();
+
 		$html_content = $_POST['data'];
+		$content_type = isset( $_POST['content_type'] ) ? $_POST['content_type'] : $panel_default_settings['content_type']['default_value'];
 
 		include( 'views/html-editor.php' );
 
@@ -832,10 +840,12 @@ class BQW_Accordion_Slider_Admin {
 	 * @since 1.0.0
 	 */
 	public function ajax_load_layers_editor() {
-		$layers = json_decode( stripslashes( $_POST['data'] ), true );
-
+		$panel_default_settings = BQW_Accordion_Slider_Settings::getPanelSettings();
 		$layer_default_settings = BQW_Accordion_Slider_Settings::getLayerSettings();
 
+		$layers = json_decode( stripslashes( $_POST['data'] ), true );
+		$content_type = isset( $_POST['content_type'] ) ? $_POST['content_type'] : $panel_default_settings['content_type']['default_value'];
+		
 		include( 'views/layers-editor.php' );
 
 		die();

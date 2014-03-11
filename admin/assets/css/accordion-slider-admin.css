@@ -615,8 +615,10 @@ Single accordion page
 	opacity: 1;
 }
 
-.layer-buttons .disabled,
-.layer-buttons .disabled:hover {
+.no-layers .delete-layer,
+.no-layers .duplicate-layer,
+.no-layers .delete-layer:hover,
+.no-layers .duplicate-layer:hover {
 	opacity: 0.2;
 	cursor: default;
 }
@@ -1133,15 +1135,18 @@ Single accordion page
 	text-align: right;
 }
 
-/* Info tooltip
+/* Inline info and info tooltip
 --------------------------------------------------*/
 .info-tooltip {
 	position: absolute;
 	padding: 10px;
-	background-color: #d9edf7;
+	background-color: #FFF;
 	color: #333;
-	border: 1px solid #5bc0de;
+	border: 1px solid #5BC0DE;
 	border-right-width: 4px;
+	-moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
 	left: -100%;
 	max-width: 100%;
 	white-space: normal;
@@ -1154,10 +1159,139 @@ Single accordion page
 	width: 0;
 	height: 0;
 	border: 5px solid transparent;
-	border-left-color: #5bc0de;
+	border-left-color: #5BC0DE;
 	top: 50%;
 	right: -14px;
 	margin-top: -5px;
+}
+
+.inline-info {
+	padding: 1px 10px;
+	background-color: #F4FAFF;
+	color: #333;
+	border-left: 4px solid #5BC0DE;
+	-moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.getting-started-info {
+	margin: 10px 0 20px 0;
+	background-color: #FFF;
+}
+
+.breakpoints-info {
+	margin: 10px;
+}
+
+.panel-settings-info {
+	max-width: 324px;
+}
+
+.background-editor-info {
+	max-width: 660px;
+}
+
+.dynamic .background-editor-info {
+	max-width: 470px;
+}
+
+.layers-editor-info {
+	margin-top: 30px;
+}
+
+.no-layers-info {
+	display: none;
+}
+
+.has-layers-info {
+	display: block;
+}
+
+.no-layers .no-layers-info {
+	display: block;
+}
+
+.no-layers .has-layers-info {
+	display: none;
+}
+
+.html-editor-info {
+	max-width: 600px;
+	margin-top: 30px;
+}
+
+.export-info,
+.import-info {
+	max-width: 500px;
+	margin-top: 30px;
+}
+
+.info-content,
+.dynamic-tags {
+	display: none;
+}
+
+.show-hide-info,
+.show-hide-dynamic-tags {
+	display: none !important;
+}
+
+.show-info,
+.hide-info,
+.show-dynamic-tags,
+.hide-dynamic-tags {
+	text-decoration: underline;
+	margin-bottom: 1em;
+	color: #0074A2;
+}
+
+.show-info,
+.hide-info {
+	margin-top: 1em;
+}
+
+.show-info:hover,
+.hide-info:hover,
+.show-dynamic-tags:hover,
+.hide-dynamic-tags:hover {
+	color: #2EA2CC;
+}
+
+.show-info,
+.show-dynamic-tags {
+	display: inline-block;
+}
+
+.hide-info,
+.hide-dynamic-tags {
+	display: none;
+}
+
+.show-hide-info:checked ~ .info-content,
+.show-hide-dynamic-tags:checked ~ .dynamic-tags {
+	display: block;
+}
+
+.show-hide-info:checked ~ .show-info,
+.show-hide-dynamic-tags:checked ~ .show-dynamic-tags {
+	display: none;
+}
+
+.show-hide-info:checked ~ .hide-info,
+.show-hide-dynamic-tags:checked ~ .hide-dynamic-tags {
+	display: inline-block;
+}
+
+.dynamic-tags td {
+	vertical-align: top;
+}
+
+.dynamic-tags td p {
+	margin-top: 0;
 }
 
 /* Multicheck plugin

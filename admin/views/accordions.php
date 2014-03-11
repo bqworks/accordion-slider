@@ -1,6 +1,25 @@
 <div class="wrap accordion-slider-admin">
 	<h2><?php _e( 'All Accordions' ); ?></h2>
-       
+	
+	<?php
+		$show_info = get_option( 'accordion_slider_show_inline_info', true );
+
+		if ( $show_info === true ) {
+	?>
+	    <div class="inline-info getting-started-info">
+			<h3><?php _e( '1. Getting started', 'accordion-slider' ); ?></h3>
+			<p><?php _e( 'If you want to reproduce one of the examples showcased online, you can easily import those examples into your own Accordion Slider installation.', 'accordion-slider' ); ?></p>
+			<p><?php _e( 'The examples can be found in the <i>examples</i> folder (which is inside the main downloaded package), and can be imported using the <i>Import Accordion</i> button below.', 'accordion-slider' ); ?></p>
+			<p><?php _e( 'You can use these examples as a starting point for your own accordions or simply to learn how certain features are achieved.', 'accordion-slider' ); ?></p>
+			<p><?php _e( 'For other instructions please see the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-help'); ?>"><?php _e( 'Help', 'accordion-slider' ); ?></a> <?php _e( 'page.', 'accordion-slider' ); ?></p>
+
+			<h3><?php _e( '2. Support', 'accordion-slider' ); ?></h3>
+			<p><?php _e( 'When you need support, please contact us at our support center:', 'accordion-slider' ); ?> <a href="http://support.bqworks.com">support.bqworks.com</a></p>
+		</div>
+	<?php
+		}
+	?>
+
 	<table class="widefat accordions-list">
 	<thead>
 	<tr>
@@ -31,7 +50,7 @@
 				$accordion_created = $accordion->created;
 				$accordion_modified = $accordion->modified;
 
-				include( 'accordions_row.php' );
+				include( 'accordions-row.php' );
 			}
 		}
 	?>

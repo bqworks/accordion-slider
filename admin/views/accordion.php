@@ -116,11 +116,28 @@
                                 ?>
                             </div>
                             <a class="button add-breakpoint" href="#"><?php _e( 'Add Breakpoint', 'accordion-slider' ); ?></a>
+                            <?php
+                                $show_info = get_option( 'accordion_slider_show_inline_info', true );
+
+                                if ( $show_info === true ) {
+                            ?>
+                                <div class="inline-info breakpoints-info">
+                                    <input type="checkbox" id="show-hide-breakpoint-info" class="show-hide-info">
+                                    <label for="show-hide-breakpoint-info" class="show-info"><?php _e( 'Show info', 'accordion-slider' ); ?></label>
+                                    <label for="show-hide-breakpoint-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
+                                    
+                                    <div class="info-content">
+                                        <p><?php _e( 'Breakpoints allow you to modify the look of the accordion for different window sizes.', 'accordion-slider' ); ?></p>
+                                        <p><?php _e( 'Each breakpoint allows you to set the width of the window for which the breakpoint will apply, and then add several settings which will override the global settings.', 'accordion-slider' ); ?></p>
+                                    </div>
+                                </div>
+                            <?php
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 	</form>
-    
 </div>
