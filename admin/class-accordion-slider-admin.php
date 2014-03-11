@@ -510,7 +510,7 @@ class BQW_Accordion_Slider_Admin {
 			$accordion_created = date( 'm-d-Y' );
 			$accordion_modified = date( 'm-d-Y' );
 
-			include( 'views/accordions_row.php' );
+			include( 'views/accordions-row.php' );
 		}
 
 		die();
@@ -658,7 +658,7 @@ class BQW_Accordion_Slider_Admin {
 			$accordion_created = date( 'm-d-Y' );
 			$accordion_modified = date( 'm-d-Y' );
 
-			include( 'views/accordions_row.php' );
+			include( 'views/accordions-row.php' );
 		}
 
 		die();
@@ -947,6 +947,8 @@ class BQW_Accordion_Slider_Admin {
 			include( 'views/gallery-panel-settings.php' );
 		} else if ( $type === 'flickr' ) {
 			include( 'views/flickr-panel-settings.php' );
+		} else {
+			include( 'views/custom-panel-settings.php' );
 		}
 	}
 
