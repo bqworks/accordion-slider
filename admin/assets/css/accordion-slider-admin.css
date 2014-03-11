@@ -493,10 +493,22 @@ Single accordion page
 	float: left;
 	width: 170px;
 	height: 120px;
-	background-color: #EEE;
 	overflow: hidden;
 	text-align: center;
 	cursor: pointer;
+	background-image:
+	    -moz-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%),
+	    -moz-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%);
+    background-image:
+	    -webkit-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%),
+	    -webkit-linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%);
+	background-image:
+	    linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%),
+	    linear-gradient(45deg, #EEE 25%, transparent 25%,transparent 75%, #EEE 75%, #EEE 100%);
+    -moz-background-size: 20px 20px;
+    -webkit-background-size: 21px 21px;
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
 }
 
 .background-image-editor.dynamic .image-loader {
@@ -509,8 +521,12 @@ Single accordion page
 
 .background-image-editor .image-loader .no-image {
 	width: 100%;
-	line-height: 120px;
+	line-height: 118px;
 	margin: 0;
+	border: 1px solid #EEE;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .retina-loader {
