@@ -320,7 +320,7 @@ class BQW_Accordion_Slider_Admin {
 				$custom_js = $_POST['custom_js'];
 				update_option( 'accordion_slider_custom_js', $custom_js );
 
-				if ( $custom_css !== '' ) {
+				if ( $custom_js !== '' ) {
 					update_option( 'accordion_slider_is_custom_js', true );
 				} else {
 					update_option( 'accordion_slider_is_custom_js', false );
