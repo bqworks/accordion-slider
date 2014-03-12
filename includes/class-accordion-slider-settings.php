@@ -756,12 +756,13 @@ class BQW_Accordion_Slider_Settings {
 				'show_transition' => array(
 					'label' => __( 'Show Transition', 'accordion-slider' ),
 					'type' => 'select',
-					'default_value' => 'left',
+					'default_value' => 'fade',
 					'available_values' => array(
+						'fade' => __( 'Fade', 'accordion-slider' ),
 						'left' => __( 'Left', 'accordion-slider' ),
 						'right' => __( 'Right', 'accordion-slider' ),
-						'top' => __( 'Top', 'accordion-slider' ),
-						'bottom' => __( 'Bottom', 'accordion-slider' )
+						'up' => __( 'Up', 'accordion-slider' ),
+						'down' => __( 'Down', 'accordion-slider' )
 					),
 					'description' => ''
 				),
@@ -786,12 +787,13 @@ class BQW_Accordion_Slider_Settings {
 				'hide_transition' => array(
 					'label' => __( 'Hide Transition', 'accordion-slider' ),
 					'type' => 'select',
-					'default_value' => 'left',
+					'default_value' => 'fade',
 					'available_values' => array(
+						'fade' => __( 'Fade', 'accordion-slider' ),
 						'left' => __( 'Left', 'accordion-slider' ),
 						'right' => __( 'Right', 'accordion-slider' ),
-						'top' => __( 'Top', 'accordion-slider' ),
-						'bottom' => __( 'Bottom', 'accordion-slider' )
+						'up' => __( 'Up', 'accordion-slider' ),
+						'bottom' => __( 'Down', 'accordion-slider' )
 					),
 					'description' => ''
 				),
