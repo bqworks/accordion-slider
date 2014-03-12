@@ -16,7 +16,7 @@
 				<label for="show-hide-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
 				
 				<div class="info-content">
-	                <p><?php _e( 'In the text area above you can add raw HTML content.', 'accordion-slider' ); ?></p>
+	                <p><?php _e( 'In the field above you can add raw HTML content.', 'accordion-slider' ); ?></p>
 
 					<?php
 						if ( $content_type === 'posts' || $content_type === 'gallery' || $content_type === 'flickr' ) {

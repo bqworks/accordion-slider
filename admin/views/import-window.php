@@ -20,7 +20,7 @@
 		            <label for="show-hide-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
 		            
 		            <div class="info-content">
-		                <p><?php _e( 'In the text area above you need to copy the new accordion\'s data, as it was exported. Then, click in the <i>Import</i> button.', 'accordion-slider' ); ?></p>
+		                <p><?php _e( 'In the field above you need to copy the new accordion\'s data, as it was exported. Then, click in the <i>Import</i> button.', 'accordion-slider' ); ?></p>
 		            </div>
 		        </div>
 		<?php
