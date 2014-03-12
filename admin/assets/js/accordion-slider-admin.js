@@ -2563,7 +2563,7 @@
 				hasFocus = true;
 			});
 
-			this.$editor.on( 'mousemove.layer' + this.id, function( event ) {
+			this.$editor.find( '.viewport-layers' ).on( 'mousemove.layer' + this.id, function( event ) {
 				event.preventDefault();
 
 				if ( hasFocus === true ) {
