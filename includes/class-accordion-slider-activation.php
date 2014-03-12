@@ -209,6 +209,9 @@ class BQW_Accordion_Slider_Activation {
 	 * @since 1.0.0
 	 */
 	private static function single_deactivate() {
+		global $wpdb;
+		$prefix = $wpdb->prefix;
+		
 		$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
 	}
 }
