@@ -102,12 +102,12 @@
 								</select>
 							</td>
 							<td>
-								<label for="layer-<?php echo esc_attr( $layer_id ); ?>-width"><?php _e( 'Width', 'accordion-slider' ); ?></label>
-								<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-width" class="setting" name="width" value="<?php echo isset( $layer_settings['width'] ) ? esc_attr( $layer_settings['width'] ) : $layer_default_settings['width']['default_value']; ?>" />
-							</td>
-							<td>
 								<label for="layer-<?php echo esc_attr( $layer_id ); ?>-horizontal"><?php _e( 'Horizontal', 'accordion-slider' ); ?></label>
 								<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-horizontal" class="setting" name="horizontal" value="<?php echo isset( $layer_settings['horizontal'] ) ? esc_attr( $layer_settings['horizontal'] ) : $layer_default_settings['horizontal']['default_value']; ?>" />
+							</td>
+							<td>
+								<label for="layer-<?php echo esc_attr( $layer_id ); ?>-width"><?php _e( 'Width', 'accordion-slider' ); ?></label>
+								<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-width" class="setting" name="width" value="<?php echo isset( $layer_settings['width'] ) ? esc_attr( $layer_settings['width'] ) : $layer_default_settings['width']['default_value']; ?>" />
 							</td>
 							<td>
 								<label for="layer-<?php echo esc_attr( $layer_id ); ?>-preset-styles"><?php _e( 'Preset styles', 'accordion-slider' ); ?></label>
@@ -134,12 +134,12 @@
 								</select>
 							</td>
 							<td>
-								<label for="layer-<?php echo esc_attr( $layer_id ); ?>-height"><?php _e( 'Height', 'accordion-slider' ); ?></label>
-								<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-height" class="setting" name="height" value="<?php echo isset( $layer_settings['height'] ) ? esc_attr( $layer_settings['height'] ) : $layer_default_settings['height']['default_value']; ?>" />
-							</td>
-							<td>
 								<label for="layer-<?php echo esc_attr( $layer_id ); ?>-vertical"><?php _e( 'Vertical', 'accordion-slider' ); ?></label>
 								<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-vertical" class="setting" name="vertical" value="<?php echo isset( $layer_settings['vertical'] ) ? esc_attr( $layer_settings['vertical'] ) : $layer_default_settings['vertical']['default_value']; ?>" />
+							</td>
+							<td>
+								<label for="layer-<?php echo esc_attr( $layer_id ); ?>-height"><?php _e( 'Height', 'accordion-slider' ); ?></label>
+								<input type="text" id="layer-<?php echo esc_attr( $layer_id ); ?>-height" class="setting" name="height" value="<?php echo isset( $layer_settings['height'] ) ? esc_attr( $layer_settings['height'] ) : $layer_default_settings['height']['default_value']; ?>" />
 							</td>
 							<td>
 								<label for="layer-<?php echo esc_attr( $layer_id ); ?>-custom-class"><?php _e( 'Custom Class', 'accordion-slider' ); ?></label>
