@@ -3319,7 +3319,8 @@
 				insertReference = wp.media.editor.insert;
 			
 			wp.media.editor.send.attachment = function( props, attachment ) {
-				var url = attachment.sizes[ props.size ].url,
+				var image = typeof attachment.sizes[ props.size ] !== 'undefined' ? attachment.sizes[ props.size ] : attachment.sizes[ 'full' ],
+					url = image.url,
 					alt = attachment.alt,
 					title = attachment.title,
 					width = attachment.width,
