@@ -13,6 +13,7 @@
 <tr class="accordion-row">
 	<td><?php echo $accordion_id; ?></td>
 	<td><?php echo esc_html( $accordion_name ); ?></td>
+	<td><?php echo '[accordion_slider id="' . $accordion_id . '"]'; ?></td>
 	<td><?php echo $accordion_created; ?></td>
 	<td><?php echo $accordion_modified; ?></td>
 	<td>

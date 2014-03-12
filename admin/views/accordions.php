@@ -34,11 +34,12 @@
 	<table class="widefat accordions-list">
 	<thead>
 	<tr>
-		<th width="5%"><?php _e( 'ID', 'accordion-slider' ); ?></th>
-		<th width="39%"><?php _e( 'Name', 'accordion-slider' ); ?></th>
-		<th width="13%"><?php _e( 'Created', 'accordion-slider' ); ?></th>
-		<th width="13%"><?php _e( 'Modified', 'accordion-slider' ); ?></th>
-		<th width="35%"><?php _e( 'Actions', 'accordion-slider' ); ?></th>
+		<th><?php _e( 'ID', 'accordion-slider' ); ?></th>
+		<th><?php _e( 'Name', 'accordion-slider' ); ?></th>
+		<th><?php _e( 'Shortcode', 'accordion-slider' ); ?></th>
+		<th><?php _e( 'Created', 'accordion-slider' ); ?></th>
+		<th><?php _e( 'Modified', 'accordion-slider' ); ?></th>
+		<th><?php _e( 'Actions', 'accordion-slider' ); ?></th>
 	</tr>
 	</thead>
 	
@@ -72,6 +73,7 @@
 	<tr>
 		<th><?php _e( 'ID', 'accordion-slider' ); ?></th>
 		<th><?php _e( 'Name', 'accordion-slider' ); ?></th>
+		<th><?php _e( 'Shortcode', 'accordion-slider' ); ?></th>
 		<th><?php _e( 'Created', 'accordion-slider' ); ?></th>
 		<th><?php _e( 'Modified', 'accordion-slider' ); ?></th>
 		<th><?php _e( 'Actions', 'accordion-slider' ); ?></th>
