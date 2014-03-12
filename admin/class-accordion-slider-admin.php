@@ -121,8 +121,15 @@ class BQW_Accordion_Slider_Admin {
 
 			if ( get_option( 'accordion_slider_is_custom_css') == true ) {
 				if ( get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
-					$custom_css_path = plugins_url( 'accordion-slider-custom/custom.css' );
-					$custom_css_dir_path = WP_PLUGIN_DIR . '/accordion-slider-custom/custom.css';
+					global $blog_id;
+					$file_suffix = '';
+
+					if ( ! is_main_site( $blog_id ) ) {
+						$file_suffix = '-' . $blog_id;
+					}
+
+					$custom_css_path = plugins_url( 'accordion-slider-custom/custom' . $file_suffix . '.css' );
+					$custom_css_dir_path = WP_PLUGIN_DIR . '/accordion-slider-custom/custom' . $file_suffix . '.css';
 
 					if ( file_exists( $custom_css_dir_path ) ) {
 						wp_enqueue_style( $this->plugin_slug . '-plugin-custom-style', $custom_css_path, array(), BQW_Accordion_Slider::VERSION );
@@ -167,8 +174,15 @@ class BQW_Accordion_Slider_Admin {
 			wp_enqueue_script( $this->plugin_slug . '-video-js-script', plugins_url( 'accordion-slider/public/assets/libs/video-js/video.js' ), array(), BQW_Accordion_Slider::VERSION );
 
 			if ( get_option( 'accordion_slider_is_custom_js' ) == true && get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
-				$custom_js_path = plugins_url( 'accordion-slider-custom/custom.js' );
-				$custom_js_dir_path = WP_PLUGIN_DIR . '/accordion-slider-custom/custom.js';
+				global $blog_id;
+				$file_suffix = '';
+
+				if ( ! is_main_site( $blog_id ) ) {
+					$file_suffix = '-' . $blog_id;
+				}
+
+				$custom_js_path = plugins_url( 'accordion-slider-custom/custom' . $file_suffix . '.js' );
+				$custom_js_dir_path = WP_PLUGIN_DIR . '/accordion-slider-custom/custom' . $file_suffix . '.js';
 
 				if ( file_exists( $custom_js_dir_path ) ) {
 					wp_enqueue_script( $this->plugin_slug . '-plugin-custom-script', $custom_js_path, array(), BQW_Accordion_Slider::VERSION );
@@ -461,9 +475,16 @@ class BQW_Accordion_Slider_Admin {
 		if ( ! $wp_filesystem->exists( WP_PLUGIN_DIR . '/accordion-slider-custom' ) ) {
 			$wp_filesystem->mkdir( WP_PLUGIN_DIR . '/accordion-slider-custom' );
 		}
-		
-		$wp_filesystem->put_contents( WP_PLUGIN_DIR . '/accordion-slider-custom/custom.css', stripslashes( $custom_css ), FS_CHMOD_FILE );
-		$wp_filesystem->put_contents( WP_PLUGIN_DIR . '/accordion-slider-custom/custom.js', stripslashes( $custom_js ), FS_CHMOD_FILE );
+
+		global $blog_id;
+		$file_suffix = '';
+
+		if ( ! is_main_site( $blog_id ) ) {
+			$file_suffix = '-' . $blog_id;
+		}
+
+		$wp_filesystem->put_contents( WP_PLUGIN_DIR . '/accordion-slider-custom/custom' . $file_suffix . '.css', stripslashes( $custom_css ), FS_CHMOD_FILE );
+		$wp_filesystem->put_contents( WP_PLUGIN_DIR . '/accordion-slider-custom/custom' . $file_suffix . '.js', stripslashes( $custom_js ), FS_CHMOD_FILE );
 	}
 
 	/**
