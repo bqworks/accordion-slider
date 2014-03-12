@@ -197,11 +197,6 @@
 				ImportWindow.open();
 			});
 
-			$( '.accordions-list tbody' ).lightSortable( {
-				children: '.accordion-row',
-				placeholder: ''
-			} );
-
 			$( '.clear-all-cache' ).on( 'click', function( event ) {
 				event.preventDefault();
 
