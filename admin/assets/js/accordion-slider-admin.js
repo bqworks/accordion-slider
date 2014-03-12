@@ -2554,7 +2554,8 @@
 				layerX = 0,
 				layerY = 0,
 				hasFocus = false,
-				autoRightBottom = false;
+				autoRightBottom = false,
+				hasMoved = false;
 
 			this.$viewportLayer.on( 'mousedown', function( event ) {
 				event.preventDefault();
@@ -2567,10 +2568,13 @@
 				layerY = that.$viewportLayer[ 0 ].offsetTop;
 
 				hasFocus = true;
+				hasMoved = false;
 			});
 
 			this.$editor.find( '.viewport-layers' ).on( 'mousemove.layer' + this.id, function( event ) {
 				event.preventDefault();
+
+				hasMoved = true;
 
 				if ( hasFocus === true ) {
 					that.$viewportLayer.css( { 'left': layerX + event.pageX - mouseX, 'top': layerY + event.pageY - mouseY } );
@@ -2590,12 +2594,16 @@
 			this.$viewportLayer.on( 'mouseup', function( event ) {
 				event.preventDefault();
 
+				hasFocus = false;
+				autoRightBottom = false;
+
+				if ( hasMoved === false ) {
+					return;
+				}
+
 				var position = that.$layerSettings.find( '.setting[name="position"]' ).val().toLowerCase(),
 					horizontalPosition = position.indexOf( 'right' ) !== -1 ? 'right' : 'left',
 					verticalPosition = position.indexOf( 'bottom' ) !== -1 ? 'bottom' : 'top';
-
-				hasFocus = false;
-				autoRightBottom = false;
 
 				if ( horizontalPosition === 'left' ) {
 					that.$layerSettings.find( '.setting[name="horizontal"]' ).val( that.$viewportLayer.position().left );
