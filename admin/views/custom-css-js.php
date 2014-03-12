@@ -1,5 +1,25 @@
 <div class="wrap accordion-slider-admin">
 	<h2><?php _e( 'Custom CSS and JavaScript', 'accordion-slider' ); ?></h2>
+    
+    <?php
+        $show_info = get_option( 'accordion_slider_show_inline_info', true );
+
+        if ( $show_info == true ) {
+    ?>
+        <div class="inline-info custom-css-js-info">
+            <input type="checkbox" id="show-hide-info" class="show-hide-info">
+            <label for="show-hide-info" class="show-info"><?php _e( 'Show info', 'accordion-slider' ); ?></label>
+            <label for="show-hide-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
+            
+            <div class="info-content">
+                <p><?php _e( 'The fields below can be used for all your custom CSS or JavaScript.', 'accordion-slider' ); ?></p>
+                <p><?php _e( 'If you want to target a specific accordion, you need to assign a <i>Custom Class</i> to the accordion, in the accordion\'s settings, and then use that custom class in the <i>Custom CSS</i> field below.', 'accordion-slider' ); ?></p>
+                <p><?php _e( 'By default, the custom CSS and JavaScript code will be loaded inline, but in the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-settings') ?>"><?php _e( 'Plugin Settings', 'accordion-slider' ); ?></a> <?php _e( 'page you can set to be load the code in files.', 'accordion-slider' ); ?></p>
+            </div>
+        </div>
+    <?php
+        }
+    ?>
 
 	<form action="" method="post">
         <?php wp_nonce_field( 'custom-css-js-update', 'custom-css-js-nonce' ); ?>
@@ -14,5 +34,4 @@
 
     	<input type="submit" name="custom_js_update" class="button-primary custom-css-js-update" value="Update JavaScript" />
 	</form>
-    
 </div>

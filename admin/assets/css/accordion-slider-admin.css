@@ -1246,6 +1246,10 @@ Single accordion page
 	margin-top: 30px;
 }
 
+.custom-css-js-info {
+	margin: 15px 0 30px 0;
+}
+
 .info-content,
 .dynamic-tags {
 	display: none;
