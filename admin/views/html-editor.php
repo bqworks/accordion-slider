@@ -8,7 +8,7 @@
 		<?php
             $show_info = get_option( 'accordion_slider_show_inline_info', true );
 
-            if ( $show_info === true ) {
+            if ( $show_info == true ) {
         ?>
             <div class="inline-info html-editor-info">
             	<input type="checkbox" id="show-hide-info" class="show-hide-info">

@@ -974,9 +974,19 @@ class BQW_Accordion_Slider_Settings {
 					'description' => __( 'Check this option if you want to load the unminified/uncompressed CSS and JavaScript files for the accordion. This is useful for debugging purposes.', 'accordion-slider' )
 				),
 				'cache_expiry_interval' => array(
-					'label' => __( 'Cache Expiry Interval', 'accordion-slider' ),
+					'label' => __( 'Cache expiry interval', 'accordion-slider' ),
 					'default_value' => 24,
 					'description' => __( 'Indicates the time interval after which a slider\'s cache will expire. If the cache of a slider has expired, the slider will be rendered again and cached the next time it is viewed.', 'accordion-slider' )
+				),
+				'show_inline_info' => array(
+					'label' => __( 'Show inline info', 'accordion-slider' ),
+					'default_value' => true,
+					'description' => __( 'Indicates whether the inline information will be displayed in admin panels and wherever it\'s available.', 'accordion-slider' )
+				),
+				'show_getting_started_info' => array(
+					'label' => __( 'Show <i>Getting Started</i> info', 'accordion-slider' ),
+					'default_value' => true,
+					'description' => __( 'Indicates whether the <i>Getting Started</i> information will be displayed in the <i>All Accordions</i> page, above the list of accordions. This setting will be disabled if the <i>Close</i> button is clicked in the information box.', 'accordion-slider' )
 				)
 			);
 		}

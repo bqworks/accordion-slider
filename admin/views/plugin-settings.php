@@ -65,6 +65,28 @@
                     <span class="spinner clear-cache-spinner"></span>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <label for="show-inline-info"><?php echo $plugin_settings['show_inline_info']['label']; ?></label>
+                </td>
+                <td>
+                    <input type="checkbox" id="show-inline-info" name="show_inline_info" <?php echo $show_inline_info == true ? 'checked="checked"' : ''; ?>>
+                </td>
+                <td>
+                    <?php echo $plugin_settings['show_inline_info']['description']; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="show-getting-started-info"><?php echo $plugin_settings['show_getting_started_info']['label']; ?></label>
+                </td>
+                <td>
+                    <input type="checkbox" id="show-getting-started-info" name="show_getting_started_info" <?php echo $show_getting_started_info == true ? 'checked="checked"' : ''; ?>>
+                </td>
+                <td>
+                    <?php echo $plugin_settings['show_getting_started_info']['description']; ?>
+                </td>
+            </tr>
         </table>
 
     	<input type="submit" name="plugin_settings_update" class="button-primary" value="Update Settings" />

@@ -119,7 +119,7 @@
                             <?php
                                 $show_info = get_option( 'accordion_slider_show_inline_info', true );
 
-                                if ( $show_info === true ) {
+                                if ( $show_info == true ) {
                             ?>
                                 <div class="inline-info breakpoints-info">
                                     <input type="checkbox" id="show-hide-breakpoint-info" class="show-hide-info">

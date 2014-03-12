@@ -352,6 +352,8 @@ class BQW_Accordion_Slider_Admin {
 		$load_custom_css_js = get_option( 'accordion_slider_load_custom_css_js', $plugin_settings['load_custom_css_js']['default_value'] );
 		$load_unminified_scripts = get_option( 'accordion_slider_load_unminified_scripts', $plugin_settings['load_unminified_scripts']['default_value'] );
 		$cache_expiry_interval = get_option( 'accordion_slider_cache_expiry_interval', $plugin_settings['cache_expiry_interval']['default_value'] );
+		$show_inline_info = get_option( 'accordion_slider_show_inline_info', $plugin_settings['show_inline_info']['default_value'] );
+		$show_getting_started_info = get_option( 'accordion_slider_show_getting_started_info', $plugin_settings['show_getting_started_info']['default_value'] );
 
 		if ( isset( $_POST['plugin_settings_update'] ) ) {
 			check_admin_referer( 'plugin-settings-update', 'plugin-settings-nonce' );
@@ -377,6 +379,22 @@ class BQW_Accordion_Slider_Admin {
 			if ( isset( $_POST['cache_expiry_interval'] ) ) {
 				$cache_expiry_interval = $_POST['cache_expiry_interval'];
 				update_option( 'accordion_slider_cache_expiry_interval', $cache_expiry_interval );
+			}
+
+			if ( isset( $_POST['show_inline_info'] ) ) {
+				$show_inline_info = true;
+				update_option( 'accordion_slider_show_inline_info', true );
+			} else {
+				$show_inline_info = false;
+				update_option( 'accordion_slider_show_inline_info', false );
+			}
+
+			if ( isset( $_POST['show_getting_started_info'] ) ) {
+				$show_getting_started_info = true;
+				update_option( 'accordion_slider_show_getting_started_info', true );
+			} else {
+				$show_getting_started_info = false;
+				update_option( 'accordion_slider_show_getting_started_info', false );
 			}
 		}
 
