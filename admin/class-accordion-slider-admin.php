@@ -455,25 +455,26 @@ class BQW_Accordion_Slider_Admin {
 	 */
 	private function save_custom_css_js_in_files ( $custom_css, $custom_js ) {
 		$url = wp_nonce_url( 'admin.php?page=accordion-slider-custom', 'custom-css-js-update', 'custom-css-js-nonce' );
+		$context = WP_PLUGIN_DIR;
 
 		// get the credentials and if there aren't any credentials stored,
 		// display a form for the user to provide the credentials
-		if ( ( $credentials = request_filesystem_credentials( $url, '', false, false, null ) ) === false ) {
+		if ( ( $credentials = request_filesystem_credentials( $url, '', false, $context, null ) ) === false  ) {			
 			return;
 		}
 
 		// check the credentials if they are valid
 		// if they aren't, display the form again
-		if ( ! WP_Filesystem( $credentials ) ) {
-			request_filesystem_credentials( $url, '', true, false, null );
+		if ( ! WP_Filesystem( $credentials, $context ) ) {
+			request_filesystem_credentials( $url, '', true, $context, null );
 			return;
 		}
 
 		global $wp_filesystem;
 
 		// create the 'accordion-slider-custom' folder if it doesn't exist
-		if ( ! $wp_filesystem->exists( WP_PLUGIN_DIR . '/accordion-slider-custom' ) ) {
-			$wp_filesystem->mkdir( WP_PLUGIN_DIR . '/accordion-slider-custom' );
+		if ( ! $wp_filesystem->exists( $context . '/accordion-slider-custom' ) ) {
+			$wp_filesystem->mkdir( $context . '/accordion-slider-custom' );
 		}
 
 		global $blog_id;
@@ -483,8 +484,8 @@ class BQW_Accordion_Slider_Admin {
 			$file_suffix = '-' . $blog_id;
 		}
 
-		$wp_filesystem->put_contents( WP_PLUGIN_DIR . '/accordion-slider-custom/custom' . $file_suffix . '.css', stripslashes( $custom_css ), FS_CHMOD_FILE );
-		$wp_filesystem->put_contents( WP_PLUGIN_DIR . '/accordion-slider-custom/custom' . $file_suffix . '.js', stripslashes( $custom_js ), FS_CHMOD_FILE );
+		$wp_filesystem->put_contents( $context . '/accordion-slider-custom/custom' . $file_suffix . '.css', stripslashes( $custom_css ), FS_CHMOD_FILE );
+		$wp_filesystem->put_contents( $context . '/accordion-slider-custom/custom' . $file_suffix . '.js', stripslashes( $custom_js ), FS_CHMOD_FILE );
 	}
 
 	/**
