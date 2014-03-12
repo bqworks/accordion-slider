@@ -317,7 +317,7 @@
 
 			$( '.panels-container' ).find( '.panel' ).each(function( index ) {
 				var $panel = $( this ),
-					panelData = that.getPanel( parseInt( $panel.attr('data-id'), 10) ).getData( 'all' );
+					panelData = that.getPanel( parseInt( $panel.attr('data-id'), 10 ) ).getData( 'all' );
 				
 				panelData.position = parseInt( $panel.attr( 'data-position' ), 10 );
 
@@ -2006,12 +2006,18 @@
 		 * @since 1.0.0
 		 */
 		initViewport: function() {
-			var accordionWidth = parseInt( $( '.sidebar-settings' ).find( '.setting[name="width"]' ).val(), 10),
-				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10),
+			var accordionWidth = parseInt( $( '.sidebar-settings' ).find( '.setting[name="width"]' ).val(), 10 ),
+				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10 ),
 				backgroundData = this.currentPanel.getData( 'background' );
 
 			var $viewport = this.$editor.find( '.layer-viewport' ).css( { 'width': accordionWidth, 'height': accordionHeight } ),
 				$viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' ).appendTo( $viewport );
+
+			var customClass = $( '.sidebar-settings' ).find( '.setting[name="custom_class"]' ).val();
+
+			if ( customClass !== '' ) {
+				$viewportLayers.addClass( customClass );
+			}
 
 			if ( typeof backgroundData.background_source !== 'undefined' &&
 				backgroundData.background_source !== '' &&
@@ -2305,7 +2311,7 @@
 			var data = {};
 
 			data.id = this.id;
-			data.position = parseInt( this.$listLayer.attr( 'data-position' ), 10);
+			data.position = parseInt( this.$listLayer.attr( 'data-position' ), 10 );
 			data.name = this.$listLayer.text();
 			
 			data.settings = {};
