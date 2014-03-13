@@ -2328,8 +2328,10 @@
 					if ( settingField.is( ':checked' ) ) {
 						data.settings[ settingField.attr( 'name' ).split( '-' )[ 0 ] ] = settingField.val();
 					}
-				} else if (type === 'checkbox' ) {
+				} else if ( type === 'checkbox' ) {
 					data.settings[ settingField.attr( 'name' ) ] = settingField.is( ':checked' );
+				} else if ( settingField.is( 'select' ) && typeof settingField.attr( 'multiple' ) !== 'undefined' ) {
+					data.settings[ settingField.attr( 'name' ) ] = settingField.val() === null ? [] : settingField.val();
 				} else {
 					data.settings[ settingField.attr( 'name' ) ] = settingField.val();
 				}

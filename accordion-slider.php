@@ -153,21 +153,17 @@ function render_my_custom( $tag_arg, $photo ) {
 }
 
 function slide_html( $content ) {
-	fb( $content, 'slide_html' );
 	return $content;
 }
 
 function slide_link_url( $content ) {
-	fb( $content, 'slide_link_url' );
 	return $content;
 }
 
 function layer_content( $content ) {
-	fb( $content, 'layer_content' );
 	return $content;
 }
 
 function layer_image_link_url( $content ) {
-	fb( $content, 'layer_image_link_url' );
 	return $content;
 }
