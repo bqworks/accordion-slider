@@ -2012,10 +2012,17 @@
 		initViewport: function() {
 			var accordionWidth = parseInt( $( '.sidebar-settings' ).find( '.setting[name="width"]' ).val(), 10 ),
 				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10 ),
+				orientation = $( '.sidebar-settings' ).find( '.setting[name="orientation"]' ).val(),
 				backgroundData = this.currentPanel.getData( 'background' );
 
-			var $viewport = this.$editor.find( '.layer-viewport' ).css( { 'width': accordionWidth, 'height': accordionHeight } ),
+			var $viewport = this.$editor.find( '.layer-viewport' ),
 				$viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' ).appendTo( $viewport );
+
+			if ( orientation === 'horizontal' ) {
+				$viewport.css( 'height', accordionHeight );
+			} else {
+				$viewport.css( 'width', accordionWidth );
+			}
 
 			var customClass = $( '.sidebar-settings' ).find( '.setting[name="custom_class"]' ).val();
 
@@ -2026,10 +2033,28 @@
 			if ( typeof backgroundData.background_source !== 'undefined' &&
 				backgroundData.background_source !== '' &&
 				backgroundData.background_source.indexOf( '[' ) === -1 ) {
+				
 				var $viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" />' ).prependTo( $viewport );
+
+				if ( orientation === 'horizontal' ) {
+					$viewportImage.css( 'height', '100%' );
+				} else {
+					$viewportImage.css( 'width', '100%' );
+				}
+
+				setInterval( function() {
+					if ( $viewportImage[0].complete === true ) {
+						$viewportLayers.css( {
+							'width': $viewportImage.width(),
+							'height': $viewportImage.height(),
+							'left': $viewportImage.position().left,
+							'top': $viewportImage.position().top
+						});
+					}
+				}, 10 );
 			}
 
-			$( '.layers-editor-info' ).css( 'maxWidth', accordionWidth );
+			$( '.layers-editor-info' ).css( 'maxWidth', $viewport.width() );
 		},
 
 		/**

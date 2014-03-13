@@ -915,7 +915,7 @@ Single accordion page
 
 .viewport-image {
 	position: relative;
-	height: 100%;
+	display: block;
 }
 
 .layers-editor .viewport-layers {
