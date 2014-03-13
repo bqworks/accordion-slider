@@ -2657,6 +2657,12 @@
 				var name = that.$listLayer.text();
 
 				var input = $( '<input type="text" value="' + name + '" />' ).appendTo( that.$listLayer );
+
+				input.on( 'change', function() {
+					isEditingLayerName = false;
+					that.$listLayer.text( input.val() );
+					input.remove();
+				});
 			});
 
 			this.$listLayer.on( 'selectstart', function( event ) {
