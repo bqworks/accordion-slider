@@ -1963,6 +1963,10 @@
 				children: '.list-layer',
 				placeholder: 'list-layer-placeholder',
 				sortEnd: function( event ) {
+					if ( event.startPosition === event.endPosition ) {
+						return;
+					}
+
 					var layer = that.layers[ event.startPosition ];
 					that.layers.splice( event.startPosition, 1 );
 					that.layers.splice( event.endPosition, 0, layer );
@@ -2772,7 +2776,7 @@
 
 		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
 			that.text = $( this ).val();
-			that.$viewportLayer.text( that.text );
+			that.$viewportLayer.html( that.text );
 		});
 	};
 
