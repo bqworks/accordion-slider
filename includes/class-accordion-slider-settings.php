@@ -793,7 +793,7 @@ class BQW_Accordion_Slider_Settings {
 						'left' => __( 'Left', 'accordion-slider' ),
 						'right' => __( 'Right', 'accordion-slider' ),
 						'up' => __( 'Up', 'accordion-slider' ),
-						'bottom' => __( 'Down', 'accordion-slider' )
+						'down' => __( 'Down', 'accordion-slider' )
 					),
 					'description' => ''
 				),
