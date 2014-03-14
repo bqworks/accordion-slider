@@ -2000,9 +2000,9 @@
 		/**
 		 * Initialize the viewport.
 		 *
-		 * The viewport will have the same size as the accordion, not
-		 * as the current image, because layers can be added outside
-		 * the image.
+		 * The viewport will have the same size as the current image, 
+		 * or, if the panel doesn't have a background image, it will
+		 * have the same size as the maximum panel size.
 		 *
 		 * The viewport will contain the image and on top of the image,
 		 * a container that will hold the layers.
@@ -2042,6 +2042,8 @@
 					$viewportImage.css( 'width', '100%' );
 				}
 
+				// set the size of the layer's container after the image has
+				// loaded and its size can be retrieved
 				setInterval( function() {
 					if ( $viewportImage[0].complete === true ) {
 						$viewportLayers.css( {
@@ -2052,6 +2054,24 @@
 						});
 					}
 				}, 10 );
+			} else {
+				var panelSize = $( '.sidebar-settings' ).find( '.setting[name="opened_panel_size"]' ).val(),
+					maxPanelSize = $( '.sidebar-settings' ).find( '.setting[name="max_opened_panel_size"]' ).val(),
+					accordionSize = orientation === 'horizontal' ? accordionWidth : accordionHeight,
+					viewportSize;
+
+				// calculate the maximum allowed size for the panels
+				if ( panelSize === 'max' ) {
+					viewportSize = maxPanelSize.indexOf('%') !== -1 ? ( parseInt( maxPanelSize, 10 ) / 100 ) * accordionSize : parseInt( maxPanelSize, 10 );
+				} else {
+					viewportSize = panelSize.indexOf('%') !== -1 ? ( parseInt( panelSize, 10 ) / 100 ) * accordionSize : parseInt( panelSize, 10 );
+				}
+
+				if ( orientation === 'horizontal' ) {
+					$viewport.css( 'width', viewportSize );
+				} else {
+					$viewport.css( 'height', viewportSize );
+				}
 			}
 
 			$( '.layers-editor-info' ).css( 'maxWidth', $viewport.width() );
