@@ -282,12 +282,12 @@
 				complete: function( data ) {
 					spinner.css( 'display', '' );
 
-					if ( $( '.updated' ).length === 0 ) {
-						$( 'h2' ).after( '<div class="updated"><p>' + as_js_vars.accordion_update + '</p></div>' );
-					}
-
 					if ( parseInt( as_js_vars.id, 10 ) === -1 && isNaN( data.responseText ) === false ) {
+						$( 'h2' ).after( '<div class="updated"><p>' + as_js_vars.accordion_create + '</p></div>' );
+
 						window.location = as_js_vars.admin + '?page=accordion-slider&id=' + data.responseText + '&action=edit';
+					} else if ( $( '.updated' ).length === 0 ) {
+						$( 'h2' ).after( '<div class="updated"><p>' + as_js_vars.accordion_update + '</p></div>' );
 					}
 				}
 			});
