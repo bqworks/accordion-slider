@@ -39,7 +39,7 @@
             <div class="inner-sidebar meta-box-sortables ui-sortable">
 				<div class="postbox action">
 					<div class="inside">
-						<input type="submit" name="submit" class="button-primary" value="Update" />
+						<input type="submit" name="submit" class="button-primary" value="<?php echo isset( $_GET['action'] ) && $_GET['action'] === 'edit' ? __( 'Update', 'accordion-slider' ) : __( 'Create', 'accordion-slider' ); ?>" />
                         <span class="spinner update-spinner"></span>
 						<a class="button preview-accordion" href="#"><?php _e( 'Preview', 'accordion-slider' ); ?></a>
                         <span class="spinner preview-spinner"></span>
