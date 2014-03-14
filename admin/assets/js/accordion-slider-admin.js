@@ -2904,14 +2904,21 @@
 			placehoderPath = as_js_vars.plugin + '/admin/assets/css/images/image-placeholder.png';
 
 		this.imageSource = this.data.createMode === 'new' ? placehoderPath : this.data.image_source;
+		this.hasPlaceholder = this.data.createMode === 'new' ? true : false;
 
 		this.$layerSettings.find( 'input[name="image_source"]' ).on( 'change', function() {
 			that.imageSource = $( this ).val();
 
 			if ( that.imageSource !== '' ) {
-				that.$viewportLayer.attr( 'src', that.imageSource );
+				that.$viewportLayer.attr( 'src', that.imageSource )
+									.removeClass( 'has-placeholder' );
+
+				that.hasPlaceholder = false;
 			} else {
-				that.$viewportLayer.attr( 'src', placehoderPath );
+				that.$viewportLayer.attr( 'src', placehoderPath )
+									.addClass( 'has-placeholder' );
+
+				that.hasPlaceholder = true;
 			}
 		});
 
@@ -2931,8 +2938,29 @@
 		});
 	};
 
+	ImageLayer.prototype.initLayerSettings = function() {
+		Layer.prototype.initLayerSettings.call( this );
+
+		var that = this;
+
+		this.$layerSettings.find( '.setting[name="preset_styles"], .setting[name="custom_class"]' ).on( 'change', function() {
+			if ( that.hasPlaceholder === true ) {
+				that.$viewportLayer.addClass( 'has-placeholder' );
+			} else {
+				that.$viewportLayer.removeClass( 'has-placeholder' );
+			}
+		});
+	};
+
 	ImageLayer.prototype.initViewportLayer = function() {
 		this.$viewportLayer = $( '<img class="viewport-layer as-layer" src="' + this.imageSource + '" />' );
+
+		if ( this.hasPlaceholder === true ) {
+			this.$viewportLayer.addClass( 'has-placeholder' );
+		} else {
+			this.$viewportLayer.removeClass( 'has-placeholder' );
+		}
+
 		Layer.prototype.initViewportLayer.call( this );
 	};
 
@@ -2991,7 +3019,7 @@
 		return data;
 	};
 
-	ImageLayer.prototype.destroy = function() {
+	DivLayer.prototype.destroy = function() {
 		this.$layerSettings.find( 'textarea[name="text"]' ).off( 'input' );
 
 		Layer.prototype.destroy.call( this );
@@ -3023,7 +3051,7 @@
 	VideoLayer.prototype.initViewportLayer = function() {
 		var that = this;
 
-		this.$viewportLayer = $( '<div class="viewport-layer as-layer"><span class="video-placeholder"></span></div>' );
+		this.$viewportLayer = $( '<div class="viewport-layer as-layer has-placeholder"><span class="video-placeholder"></span></div>' );
 		Layer.prototype.initViewportLayer.call( this );
 
 		this.$layerSettings.find( 'input[name="width"], input[name="height"]' ).on( 'change', function() {
@@ -3040,6 +3068,16 @@
 		});
 
 		this.$layerSettings.find( 'input[name="width"], input[name="height"]' ).trigger( 'change' );
+	};
+
+	VideoLayer.prototype.initLayerSettings = function() {
+		Layer.prototype.initLayerSettings.call( this );
+
+		var that = this;
+
+		this.$layerSettings.find( '.setting[name="preset_styles"], .setting[name="custom_class"]' ).on( 'change', function() {
+			that.$viewportLayer.addClass( 'has-placeholder' );
+		});
 	};
 
 	VideoLayer.prototype.getData = function() {
@@ -3081,7 +3119,7 @@
 		return data;
 	};
 
-	ImageLayer.prototype.destroy = function() {
+	VideoLayer.prototype.destroy = function() {
 		this.$layerSettings.find( 'input[name="width"]' ).off( 'change' );
 		this.$layerSettings.find( 'input[name="height"]' ).off( 'change' );
 

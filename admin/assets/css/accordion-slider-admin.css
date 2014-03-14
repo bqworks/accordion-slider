@@ -942,6 +942,13 @@ Single accordion page
 	position: relative !important;
 }
 
+.viewport-layers .has-placeholder {
+	border: 1px dashed #999;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 .viewport-layers .video-placeholder {
 	display: block;
 	width: 100%;
