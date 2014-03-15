@@ -989,6 +989,17 @@ class BQW_Accordion_Slider_Settings {
 					'label' => __( 'Show <i>Getting Started</i> info', 'accordion-slider' ),
 					'default_value' => true,
 					'description' => __( 'Indicates whether the <i>Getting Started</i> information will be displayed in the <i>All Accordions</i> page, above the list of accordions. This setting will be disabled if the <i>Close</i> button is clicked in the information box.', 'accordion-slider' )
+				),
+				'access' => array(
+					'label' => __( 'Access', 'accordion-slider' ),
+					'default_value' => 'manage_options',
+					'available_values' => array(
+						'manage_options' => __( 'Administrator', 'accordion-slider' ),
+						'publish_pages' => __( 'Editor', 'accordion-slider '),
+						'publish_posts' => __( 'Author', 'accordion-slider' ),
+						'edit_posts' => __( 'Contributor', 'accordion-slider' )
+					),
+					'description' => __( 'Sets what category of users will have access to the plugin\'s admin area.', 'accordion-slider' )
 				)
 			);
 		}

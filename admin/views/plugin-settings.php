@@ -87,6 +87,24 @@
                     <?php echo $plugin_settings['show_getting_started_info']['description']; ?>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <label for="access"><?php echo $plugin_settings['access']['label']; ?></label>
+                </td>
+                <td>
+                    <select id="access" name="access">
+                        <?php
+                            foreach ( $plugin_settings['access']['available_values'] as $value_name => $value_label ) {
+                                $selected = $value_name === $access ? ' selected="selected"' : '';
+                                echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
+                            }
+                        ?>
+                    </select>
+                 </td>
+                <td>
+                    <?php echo $plugin_settings['access']['description']; ?>
+                </td>
+            </tr>
         </table>
 
     	<input type="submit" name="plugin_settings_update" class="button-primary" value="Update Settings" />

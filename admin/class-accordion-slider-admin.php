@@ -218,10 +218,13 @@ class BQW_Accordion_Slider_Admin {
 	 * @since 1.0.0
 	 */
 	public function add_admin_menu() {
+		$plugin_settings = BQW_Accordion_Slider_Settings::getPluginSettings();
+		$access = get_option( 'accordion_slider_access', $plugin_settings['access']['default_value'] );
+
 		add_menu_page(
 			'Accordion Slider',
 			'Accordion Slider',
-			'manage_options',
+			$access,
 			$this->plugin_slug,
 			array( $this, 'render_accordion_page' ),
 			plugins_url( '/accordion-slider/admin/assets/css/images/as-icon.png' )
@@ -231,7 +234,7 @@ class BQW_Accordion_Slider_Admin {
 			$this->plugin_slug,
 			__( 'All Accordions', $this->plugin_slug ),
 			__( 'All Accordions', $this->plugin_slug ),
-			'manage_options',
+			$access,
 			$this->plugin_slug,
 			array( $this, 'render_accordion_page' )
 		);
@@ -240,7 +243,7 @@ class BQW_Accordion_Slider_Admin {
 			$this->plugin_slug,
 			__( 'Add New Accordion', $this->plugin_slug ),
 			__( 'Add New', $this->plugin_slug ),
-			'manage_options',
+			$access,
 			$this->plugin_slug . '-new',
 			array( $this, 'render_new_accordion_page' )
 		);
@@ -249,7 +252,7 @@ class BQW_Accordion_Slider_Admin {
 			$this->plugin_slug,
 			__( 'Custom CSS and JavaScript', $this->plugin_slug ),
 			__( 'Custom CSS & JS', $this->plugin_slug ),
-			'manage_options',
+			$access,
 			$this->plugin_slug . '-custom',
 			array( $this, 'render_custom_css_js_page' )
 		);
@@ -258,7 +261,7 @@ class BQW_Accordion_Slider_Admin {
 			$this->plugin_slug,
 			__( 'Plugin Settings', $this->plugin_slug ),
 			__( 'Plugin Settings', $this->plugin_slug ),
-			'manage_options',
+			$access,
 			$this->plugin_slug . '-settings',
 			array( $this, 'render_plugin_settings_page' )
 		);
@@ -369,6 +372,7 @@ class BQW_Accordion_Slider_Admin {
 		$cache_expiry_interval = get_option( 'accordion_slider_cache_expiry_interval', $plugin_settings['cache_expiry_interval']['default_value'] );
 		$show_inline_info = get_option( 'accordion_slider_show_inline_info', $plugin_settings['show_inline_info']['default_value'] );
 		$show_getting_started_info = get_option( 'accordion_slider_show_getting_started_info', $plugin_settings['show_getting_started_info']['default_value'] );
+		$access = get_option( 'accordion_slider_access', $plugin_settings['access']['default_value'] );
 
 		if ( isset( $_POST['plugin_settings_update'] ) ) {
 			check_admin_referer( 'plugin-settings-update', 'plugin-settings-nonce' );
@@ -410,6 +414,11 @@ class BQW_Accordion_Slider_Admin {
 			} else {
 				$show_getting_started_info = false;
 				update_option( 'accordion_slider_show_getting_started_info', false );
+			}
+
+			if ( isset( $_POST['access'] ) ) {
+				$access = $_POST['access'];
+				update_option( 'accordion_slider_access', $access );
 			}
 		}
 
