@@ -223,7 +223,8 @@ class BQW_Accordion_Slider_Admin {
 			'Accordion Slider',
 			'manage_options',
 			$this->plugin_slug,
-			array( $this, 'render_accordion_page' )
+			array( $this, 'render_accordion_page' ),
+			plugins_url( '/accordion-slider/admin/assets/css/images/as-icon.png' )
 		);
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
