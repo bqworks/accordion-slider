@@ -48,7 +48,6 @@ class BQW_Accordion_Slider_Admin {
 	 * @since 1.0.0
 	 */
 	private function __construct() {
-
 		$this->plugin = BQW_Accordion_Slider::get_instance();
 		$this->plugin_slug = $this->plugin->get_plugin_slug();
 
