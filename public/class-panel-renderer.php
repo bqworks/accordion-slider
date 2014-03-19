@@ -206,7 +206,7 @@ class BQW_AS_Panel_Renderer {
 	 */
 	protected function add_link_to_background_image( $image ) {
 		$background_link_href = $this->data['background_link'];
-		$background_link_href = apply_filters( 'accordion_slider_panel_link_url', $background_link_href );
+		$background_link_href = apply_filters( 'accordion_slider_panel_link_url', $background_link_href, $this->accordion_id, $this->panel_index );
 
 		$background_link_title = isset( $this->data['background_link_title'] ) && $this->data['background_link_title'] !== '' ? ' title="' . esc_attr( $this->data['background_link_title'] ) . '"' : '';
 		$background_link = '<a href="' . $background_link_href . '"' . $background_link_title . '>' . $image . '</a>';
@@ -238,7 +238,7 @@ class BQW_AS_Panel_Renderer {
 	 */
 	protected function create_html() {
 		$html = $this->data['html'];
-		$html = apply_filters( 'accordion_slider_panel_html', $html );
+		$html = apply_filters( 'accordion_slider_panel_html', $html, $this->accordion_id, $this->panel_index );
 
 		return $html;
 	}
