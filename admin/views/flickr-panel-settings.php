@@ -52,6 +52,7 @@
 				<div class="info-content">
             		<p><?php _e( 'Multiple panels will be dynamically generated (one panel for each Flickr image loaded), based on the set parameters.', 'accordion-slider' ); ?></p>
                 	<p><?php _e( 'First, you need to request an API key', 'accordion-slider' ); ?> <a href="https://www.flickr.com/services/apps/create/apply/"><?php _e( 'here', 'accordion-slider' ); ?></a> <?php _e( 'and then specify it in the <i>API Key</i> field above.', 'accordion-slider' ); ?></p>
+                	<p><?php _e( 'In the <i>ID</i> field you need to enter the id of the set or the id of the username, depending on the <i>Load by</i> selection.', 'accordion-slider' ); ?></p>
                 	<p><?php _e( 'The images and their data can be fetched through <i>dynamic tags</i>, which are enumerated in the Background, Layers and HTML editors.', 'accordion-slider' ); ?></p>
             	</div>
             </div>
