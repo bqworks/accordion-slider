@@ -214,7 +214,7 @@ class BQW_Accordion_Slider_Settings {
 					'label' => __( 'Custom Class', 'accordion-slider' ),
 					'type' => 'text',
 					'default_value' => '',
-					'description' => __( 'Adds a custom class to the accordion, for use in custom css.', 'accordion-slider' )
+					'description' => __( 'Adds a custom class to the accordion, for use in custom css. Add the class name without the dot, i.e., you need to add <i>my-accordion</i>, not <i>.my-accordion</i>.', 'accordion-slider' )
 				),
 
 				'opened_panel_size' => array(
