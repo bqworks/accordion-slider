@@ -265,6 +265,15 @@ class BQW_Accordion_Slider_Admin {
 			$this->plugin_slug . '-settings',
 			array( $this, 'render_plugin_settings_page' )
 		);
+
+		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
+			$this->plugin_slug,
+			__( 'Documentation', $this->plugin_slug ),
+			__( 'Documentation', $this->plugin_slug ),
+			$access,
+			$this->plugin_slug . '-documentation',
+			array( $this, 'render_documentation_page' )
+		);
 	}
 
 	/**
@@ -453,6 +462,15 @@ class BQW_Accordion_Slider_Admin {
 		}
 		
 		include_once( 'views/plugin-settings.php' );
+	}
+
+	/**
+	 * Renders the documentation page.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function render_documentation_page() {
+		echo '<iframe class="accordion-slider-documentation" src="' . plugins_url( 'accordion-slider/documentation/documentation.html' ) . '" width="100%" height="100%"></iframe>';
 	}
 
 	/**
