@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css" media="screen"/>
+
+  <script src="assets/js/jquery-1.10.1.min.js"></script>
+  <script src="assets/js/script.js"></script>
+  <title>Accordion Slider for WordPress Documentation</title>
+</head>
+<body>
+  <h1>
+    Accordion Slider - by
+    <a href="http://bqworks.com/">bqworks</a>
+  </h1>
+  <p> <em><strong>Version 1.0.0</strong></em> 
+  </p>
+  <p>Hi, and thank you for purchasing Accordion Slider!</p>
+  <p>
+    The plugin's admin interface contains inline information, which most of the time should be sufficient for understanding how to use the plugin. However, many details are not covered there, but you can find them covered in this guide. If you have a question or technical problem that is not covered by this guide, please use
+    <a href="http://support.bqworks.com/home">the official bqworks Support Center</a>
+    .
+  </p>
+
+  <h2 id="installation">1. Installation</h2>
+  <p>The plugin can be installed from the WordPress dashboard, just like any other plugin.</p>
+  <p>
+    Go to <i>Plugins -> Add New -> Upload -> Browse</i>
+    and select the zip package you downloaded from CodeCanyon, and then click
+    <i>Install Now</i>
+    .
+  </p>
+  <p>
+    After the plugin is installed and activated, you will see the
+    <i>Accordion Slider</i>
+    menu in the admin sidebar.
+  </p>
+
+  <h2 id="updating">2. Updating</h2>
+  <p>
+    The plugin provides automatic updates, but in order to benefit from them you need to provide the purchase code you received from CodeCanyon.
+  </p>
+  <p>
+    In order to find your purchase code, go to
+    <a href="http://codecanyon.net/downloads/">http://codecanyon.net/downloads/</a>
+    and find Accordion Slider in your list of purchases. Then, click on the
+    <i>Download button</i>
+    and select
+    <i>License certificate & purchase code</i>
+    .
+  </p>
+  <a href="assets/images/find-purchase-code.png"><img src="assets/images/find-purchase-code.png"></a>
+  <p>
+    After you have the purchase code, enter it in the
+    <i>Accordion Slider -> Plugin Settings</i>
+    page, in the
+    <i>Purchase Code</i>
+    field and click the
+    <i>Verify Purchase Code</i>
+    button.
+  </p>
+  <a href="assets/images/verify-purchase-code.png"><img src="assets/images/verify-purchase-code.png"></a>
+
+  <h2 id="creating-and-publishing-accordions">3. Creating and publishing accordions</h2>
+  <p>
+    Creating accordions is simple and intuitive. Also, the admin area contains inline information that describe the settings and possibilities that the
+    <i>Accordion Slider</i>
+    plugin offers. In this chapter  we'll take a quick look at the various content types that the accordion supports and then we'll take a look at how to publish the accordion in your posts and pages.
+  </p>
+
+  <h3 id="panels">3.1. Panels</h3>
+  <p>
+    You can manually specify the images and text in an accordion, or you can let the accordion to automatically load content (e.g., featured image, post title, excerpt, etc.) from any post type. Two other possibilities provided by the accordion is to load photos from Flickr or to load images from a post's
+    <i>[gallery]</i>
+    shortcode.
+  </p>
+  <p>
+    Also, you can have panels with different content types in the same accordion. The content type can be set in the panel's
+    <i>Settings</i>
+    window, or you can directly create a panel with a specific content type from the
+    <i>Add Panel</i>
+    button. More about each panel type, later in this chapter.
+  </p>
+
+  <h4 id="panel-editors">Panel editors</h4>
+  
+  <p>
+    You can see four buttons on each panel. These are for: adding a background image, adding layers, adding HTML content or changing the panel's content type.
+  </p>
+  <a href="assets/images/panel-buttons.png"><img src="assets/images/panel-buttons.png"></a>
+  <p>
+    If you click on each of these buttons, a certain modal window will be opened, that allow you to make the respective edits.
+  </p>
+
+  <h5 id="background-image-editor">Background image editor</h5>
+  <a href="assets/images/background-editor.png"><img src="assets/images/background-editor.png"></a>
+  <p>
+    It consists of 3 sections: the
+    <i>Background Image</i>
+    section, which allows you to set the panel's main background image, the
+    <i>Opened Background Image</i>
+    section, which allows you to set the a background image that will only be visible when the panel is opened, and the
+    <i>Link</i>
+    section, which allows you to set a link for the background image.
+  </p>
+  <p>
+    When you select an image from the WordPress Media Library, chose the most appropriate size for the image from the Media Library's right sidebar.
+  </p>
+
+  <h5 id="layers-editor">Layers editor</h5>
+  <a href="assets/images/layers-editor.png"><img src="assets/images/layers-editor.png"></a>
+  <p>
+    It allows you to add static or animated layers. You can select from several layer types: paragraph layers, which allow you to add simple text paragraphs, heading layers, which allow you to add headings (e.g., H1, H2, H5, etc.), image layers, for adding images, video layers for adding several supported video types, and DIV layers, for any other HTML content.
+  </p>
+  <p>
+    After you add a layer, a group of settings will appear for that layer, allowing you to set the layer's position, size, animation effects and more. The name of the settings are intuitive and there's also inline information for those settings that have more complex roles.
+  </p>
+  <p>It's possible to set the depth of the layers by sorting them in the list of layers from the left side.</p>
+
+  <h5 id="html-editor">HTML editor</h5>
+  <a href="assets/images/html-editor.png"><img src="assets/images/html-editor.png"></a>
+  <p>It allows you to add any HTML content.</p>
+
+  <h5 id="settings-editor">Settings editor</h5>
+  <a href="assets/images/settings-editor.png"><img src="assets/images/settings-editor.png"></a>
+  <p>
+    It allows you to change the panel's content type. By default, the
+    <i>Content Type</i>
+    setting is set to
+    <i>Custom Content</i>
+    , which allows you to manually set the panel's background image and all the other content. The
+    <i>Content from Posts</i>
+    option will enable the panel to load featured images and other content from posts, the
+    <i>Images from Post's gallery</i>
+    option will fetch images added through a [gallery] shortcode, and
+    <i>Flickr images</i>
+    will load images from Flickr.
+  </p>
+
+  <h4 id="panel-types">Panel Types</h4>
+  <p>
+    The plugin tries to make it as easy as possible for you to add content, so it offers a direct way to create a certain panel type, populating it with some specific data from the start. All you have to do is hover the <i>Add Panel</i> button and click on the panel type that you want to create.
+  </p>
+  <a href="assets/images/add-panel-button.png"><img src="assets/images/add-panel-button.png"></a>
+
+  <h5 id="empty-panels">Empty Panels</h5>
+  <p>
+    This will create an empty panel, with no preset content or settings. After the panel was added, you can set a background image for it, html content, add layers, or even change its content type to something else.
+  </p>
+
+  <h5 id="image-panels">Image Panels</h5>
+  <p>
+    To add image panels, hover the
+    <i>Add Panels</i>
+    button and select
+    <i>Image panels</i>
+    . The WordPress Media Loader will be opened, where you can select a single image or multiple images (by holding the CTRL key on PC and Cmd key on Mac). After you select the images, click on the
+    <i>Insert into post</i>
+    button, and one panel for each selected image will be added in the accordion.
+  </p>
+  <a href="assets/images/add-image-panels.png"><img src="assets/images/add-image-panels.png"></a>
+
+  <h5 id="posts-panels">Posts Panels</h5>
+  <p>
+    This will add a single panel in the admin interface, but this single panel will dynamically generate multiple panels in the published accordion, based on the set parameters.</p> 
+    <a href="assets/images/add-posts-panels.png"><img src="assets/images/add-posts-panels.png"></a>
+    <p>When you select this panel type the
+    <i>Content Type</i>
+    setting in the panel's
+    <i>Settings</i>
+    window will automatically be set to
+    <i>Content from posts</i>
+    . Also, in the Background editor, some fields will be automatically populated with data. For example, the
+    <i>[as_image_src]</i>
+    will be added in the background's <i>Source</i> field and
+    <i>[as_link_url]</i>
+    in the link's <i>URL</i> field.
+  </p>
+  <a href="assets/images/add-posts-panels-2.png"><img src="assets/images/add-posts-panels-2.png"></a>
+  <p>
+    <i>[as_image_src]</i>
+    and
+    <i>[as_link_url]</i>
+    are dynamic tags and are used for fetching a specific data from the posts that were loaded. You can also use these tags in the Layers and HTML editors. Each of these editors have, in their inline info, a list of the dynamic tags that can be used inside that specific editor.
+  </p>
+  <p>This is the complete list of dynamic tags for Posts panels:</p>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Tag</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tr>
+      <td>[as_image]</td>
+      <td>The post's featured image, as an img HTML element. It accepts an optional parameter to specify the size of the image: [as_image.thumbnail]. Accepted sizes are: full, large, medium, thumbnail. The default value is full.</td>
+    </tr>
+    <tr>
+      <td>[as_image_src]</td>
+      <td>The URL of the post's featured image. It accepts an optional parameter to specify the size of the image: [as_image_src.thumbnail]. Accepted sizes are: full, large, medium, thumbnail. The default value is full.</td>
+    </tr>
+    <tr>
+      <td>[as_image_alt]</td>
+      <td>The alt text of the post's featured image.</td>
+    </tr>
+    <tr>
+      <td>[as_image_title]</td>
+      <td>The title of the post's featured image.</td>
+    </tr>
+    <tr>
+      <td>[as_image_description]</td>
+      <td>The description of the post's featured image.</td>
+    </tr>
+    <tr>
+      <td>[as_image_caption]</td>
+      <td>The caption of the post's featured image.</td>
+    </tr>
+    <tr>
+      <td>[as_title]</td>
+      <td>The post's title.</td>
+    </tr>
+    <tr>
+      <td>[as_link]</td>
+      <td>The post's link, as an anchor HTML element, with the post's title as the text of the link.</td>
+    </tr>
+    <tr>
+      <td>[as_link_url]</td>
+      <td>The post's link.</td>
+    </tr>
+    <tr>
+      <td>[as_date]</td>
+      <td>The post's date.</td>
+    </tr>
+    <tr>
+      <td>[as_excerpt]</td>
+      <td>The post's excerpt.</td>
+    </tr>
+    <tr>
+      <td>[as_content]</td>
+      <td>The post's content.</td>
+    </tr>
+    <tr>
+      <td>[as_category]</td>
+      <td>The first category that the post is assigned to.</td>
+    </tr>
+    <tr>
+      <td>[as_custom.name]</td>
+      <td>Returns the value from a custom field. The name parameter indicates the name of the custom field.</td>
+    </tr>
+  </table>
+
+  <h5 id="gallery-panels">Gallery Panels</h5>
+  <p>
+    This will add a single panel in the admin interface, but this single panel will dynamically generate multiple panels in the published accordion, one panel for each image from the
+    <i>[gallery]</i>
+    shortcode.
+  </p>
+  <a href="assets/images/add-gallery-panels.png"><img src="assets/images/add-gallery-panels.png"></a>
+  <p>
+    This is the complete list of dynamic tags for Gallery panels:
+  </p>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Tag</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tr>
+      <td>[as_image]</td>
+      <td>The gallery image, as an img HTML element. It accepts an optional parameter to specify the size of the image: [as_image.thumbnail]. Accepted sizes are: full, large, medium, thumbnail. The default value is full.</td>
+    </tr>
+    <tr>
+      <td>[as_image_src]</td>
+      <td>The URL of the gallery image. It accepts an optional parameter to specify the size of the image: [as_image_src.thumbnail]. Accepted sizes are: full, large, medium, thumbnail. The default value is full.</td>
+    </tr>
+    <tr>
+      <td>[as_image_alt]</td>
+      <td>The alt text of the gallery image.</td>
+    </tr>
+    <tr>
+      <td>[as_image_title]</td>
+      <td>The title of the gallery image</td>
+    </tr>
+    <tr>
+      <td>[as_image_description]</td>
+      <td>The description of the gallery image.</td>
+    </tr>
+  </table>
+
+  <h5 id="flickr-panels">Flickr Panels</h5>
+  <p>
+    This will add a single panel in the admin interface, but this single panel will dynamically generate multiple panels in the published accordion, one panel for each image loaded from Flickr.
+  </p>
+  <a href="assets/images/add-flickr-panels.png"><img src="assets/images/add-flickr-panels.png"></a>
+  <p>
+    First, you need to request an API key from Flickr and then specify it in the
+    <i>API Key</i>
+    field, in the Settings modal window.
+  </p>
+  <p>This is the complete list of dynamic tags for Flickr panels:</p>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Tag</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tr>
+      <td>[as_image]</td>
+      <td>The Flickr image, as an img HTML element. It accepts an optional parameter to specify the size of the image: [as_image.thumbnail]. Accepted sizes are: full, large, medium, thumbnail. The default value is full.</td>
+    </tr>
+    <tr>
+      <td>[as_image_src]</td>
+      <td>The URL of the Flickr image. It accepts an optional parameter to specify the size of the image: [as_image_src.thumbnail]. Accepted sizes are: square, thumbnail, small, medium, medium_640, large. The default value is medium.</td>
+    </tr>
+    <tr>
+      <td>[as_image_description]</td>
+      <td>The description of the Flickr image.</td>
+    </tr>
+    <tr>
+      <td>[as_image_link]</td>
+      <td>The link of the Flickr image.</td>
+    </tr>
+    <tr>
+      <td>[as_date]</td>
+      <td>The date of the Flickr image.</td>
+    </tr>
+    <tr>
+      <td>[as_username]</td>
+      <td>The username of the image's owner.</td>
+    </tr>
+    <tr>
+      <td>[as_user_link]</td>
+      <td>The link to the profile of the image's owner.</td>
+    </tr>
+  </table>
+
+  <h3 id="general-settings">3.2. General settings</h3>
+  <p>
+    The accordion's general settings can be found in the sidebar of the accordion's admin interface. The description of each setting can be seen if you hover the setting's label.
+  </p>
+  <a href="assets/images/general-settings.png"><img src="assets/images/general-settings.png"></a>
+  <p>
+    The last panel in the sidebar is for breakpoints. Breakpoints allow you to modify the look of the accordion for different window sizes. Each breakpoint allows you to set the width of the window for which the breakpoint will apply, and then add several settings which will override the general settings.
+  </p>
+
+  <h3 id="publishing-the-accordion">3.3. Publishing the accordion</h3>
+  <p>
+    The accordion can be published in posts and pages, in widgets, and also in PHP code.
+  </p>
+  <p>
+    In posts and pages you need to use the shortcode provided in the
+    <i>Accordion Slider -> All Accordions</i>
+    page, like this:
+    <pre>[accordion_slider id="3"]</pre>
+  </p>
+  <p>
+    In PHP code, you need to use the
+    <code>do_shortcode()</code>
+    call and provide the actual shortcode as an argument, like this:
+    <pre>&lt;?php echo do_shortcode( '[accordion_slider id="3"]' ); ?&gt;</pre>
+  </p>
+  
+  <p class="note">
+    <strong>Note:</strong> When you add the accordion in PHP code, the plugin won't be able to detect the presence of the accordion there so it won't be able to automatically load the necessary CSS files. Because of this, you need to go to the
+    <i>Accordion Slider -> Plugin Settings</i>
+    page and set the
+    <i>Load stylesheets</i>
+    setting to
+    <i>On homepage</i>
+    if you load the accordion on the homepage or to
+    <i>On all pages</i>
+    if you load the accordion in other pages.
+  </p>
+  <h3 id="previewing-the-accordion">3.4. Previewing the accordion</h3>
+  <p>The accordions can be previewed directly in the admin area, and you don't have to create or update the accordion before previewing the edits you make to the panels or to the general settings.</p>
+
+  <h3 id="cache">3.5. Cache</h3>
+  <p>All accordions are automatically cached the first time when they're viewed by a visitor, so next time when someone visits the page, the accordion will be served from the cache. This mechanism saves processing time and is especially useful when loading content from posts or external services.</p>
+  <p>When an accordion is updated in the admin area, the cached version of the accordion will be deleted. Also, you can deleted all cached accordions from within the <i>Accordion Slider -> Plugin Settings</i> page, by clicking on the <i>Clear all cache now</i> button.</p>
+  <p>If you want to not cache an accordion, you can set the <i>allow_cache</i> attribute to <i>false</i>, in the shortcode:</p>
+  <pre>[accordion_slider id="3" allow_cache="false"]</pre>
+
+  <h2 id="responsiveness">4. Responsiveness</h2>
+  <h3 id="responsive-modes">4.1. Responsive modes</h3>
+  <p>
+    By default, the accordion will scale proportionally in order to fit the bounds of the window or of the container it was added to. This is called
+    <i>Auto</i>
+    responsiveness, and it's useful when you don't have CSS knowledge, to be able to customize the responsive behavior yourself. In this responsive mode, the accordion will resize everything in it, like layers or HTML content, proportionally.
+  </p>
+  <p>
+    If you have CSS knowledge, it's recommended to use
+    <i>Custom</i>
+    responsiveness, by setting the
+    <i>Responsive Mode</i>
+    setting to
+    <i>Custom</i>
+    and then use CSS media queries to define different text sizes or to hide certain elements when the accordion becomes smaller, ensuring that all content remains readable without having to zoom in.
+  </p>
+  <p>
+    In both cases, the Width and Height settings can be set to fixed values, not necessarily percentage values, as the accordion will still scale down and properly. Also, the Width and Height will represent the maximum width and height that the accordion will have.
+  </p>
+  <p>
+    When you use
+    <i>Auto</i>
+    responsiveness, the Width and Height need to be set to fixed values. Setting them to percentages would not allow the accordion to properly calculate how it needs to resize itself.
+  </p>
+
+  <h3 id="aspect-ratio">4.2. Aspect ratio</h3>
+  <p>
+    If you want to set the Width and/or Height to a percentage value, like 100%, the accordion will not be able to calculate the aspect ratio that it needs to maintain while it's being resized (as it does when the Width and Height are set to fixed values). For example, if the Width is set to 960 and the Height is set to 400, that results in an aspect ratio of 2.4 (960/400). However, as you can guess, if either the Width or Height is a percentage, the division operation can't be done. To overcome this, you need to use the
+    <i>Aspect Ratio</i>
+    setting, for manually setting the aspect ratio that the accordion needs to maintain while it's resizing. 
+  </p>
+  <p>By default,
+    <i>Aspect Ratio</i>
+    is set to -1, which indicates that the aspect ratio of the accordion will be automatically calculated based on the Width and Height specified.
+  </p>
+
+  <h2 id="custom-css-and-javascript">5. Custom CSS and JavaScript</h2>
+  <p>
+    Sometimes you want to change the look of the accordion or add new functionality, and for this you can use custom CSS and/or custom JavaScript. All your custom code needs to be added in the
+    <i>Accordion Slider -> Custom CSS & JS</i>
+    page.
+  </p>
+
+  <h3 id="custom-css">5.1. Custom CSS</h3>
+  <p>
+    Before adding any custom CSS, it's recommended to give the accordion that you want to target a custom class. This can be set in the
+    <i>Custom Class</i>
+    field, in the accordion's
+    <i>Appearance</i>
+    sidebar panel.
+  </p>
+  <p class="note"><strong>Note:</strong> The custom class name you specify in the <i>Custom Class</i> field doesn't need to include the dot, only the name of the class. For example, you need to enter
+    <i>my-accordion</i>
+    , not
+    <i>.my-accordion</i>
+    .
+  </p>
+  <p>
+    After you assigned a custom class to the accordion, you can use it in the
+    <i>Custom CSS</i>
+    field, to target that specific accordion.
+  </p>
+  <a href="assets/images/custom-css.png"><img src="assets/images/custom-css.png"></a>
+  <p>
+    You could use a general selector, like
+    <i>.accordion-slider</i>
+    if you want to target all your accordion instances.
+  </p>
+
+  <h3 id="custom-javascript">5.2. Custom JavaScript</h3>
+  <p>
+    Just like with custom CSS, you need to assign a custom class to the accordion and then use it in your custom code to target that specific accordion.
+  </p>
+  <a href="assets/images/custom-js.png"><img src="assets/images/custom-js.png"></a>
+  <p>
+    The next chapter offers a presentation of the accordion's JavaScript API, which allows you to programatically control the accordion. Using this API requires some programming knowledge and familiarity with jQuery.
+  </p>
+
+  <h3 id="javascript-api">5.3 JavaScript API</h3>
+
+  <h4 id="methods">Methods</h4>
+  <p>
+    The public methods below allow you to manipulate the accordion using external controls. There are two ways of calling a public method.
+  </p>
+  <p>
+    The first way is by calling the
+    <code>accordionSlider</code>
+    plugin and passing the name of the method and additional arguments:
+  </p>
+  <pre><code>$( '.my-accordion' ).accordionSlider( 'openPanel', 3 );</code></pre>
+
+  <p>
+    The first argument represents the name of the method and the second argument represents the value which will be applied. Please note that some methods don't have a second argument. For example:
+  </p>
+  <pre><code>$( '.my-accordion' ).accordionSlider( 'nextPanel' );</code></pre>
+
+  <p>
+    The second way is by getting a reference to the AccordionSlider instance and calling the method on the instance:
+  </p>
+  <pre><code>// get a reference to the AccordionSlider instance
+var accordion = $( '.my-accordion' ).data( 'accordionSlider' );
+
+console.log( accordion.getTotalPanels() );
+
+accordion.gotoPage( 2 );
+</code></pre>
+
+  <p>
+    This way of calling a public method is mandatory when you use public methods that return data:
+    <code>getPanelAt</code>
+    ,
+    <code>getCurrentIndex</code>
+    ,
+    <code>getTotalPanels</code>
+    ,
+    <code>getVisiblePanels</code>
+    ,
+    <code>getTotalPages</code>
+    and
+    <code>getCurrentPage</code>
+    , but it can be used with all the other public methods as well.
+  </p>
+  <p>Here is the list of available methods:</p>
+  
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th width="190">Method</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tr>
+      <td>getPanelAt( index )</td>
+      <td>Gets all the data of the panel at the specified index. Returns an object that contains all the data specified for that panel.</td>
+    </tr>
+    <tr>
+      <td>getCurrentIndex()</td>
+      <td>Gets the index of the current panel.</td>
+    </tr>
+    <tr>
+      <td>getTotalPanels()</td>
+      <td>Gets the total number of panels.</td>
+    </tr>
+    <tr>
+      <td>nextPanel()</td>
+      <td>Opens the next panel.</td>
+    </tr>
+    <tr>
+      <td>previousPanel()</td>
+      <td>Opens the previous panel.</td>
+    </tr>
+    <tr>
+      <td>openPanel( index )</td>
+      <td>Opens the panel at the specified index.</td>
+    </tr>
+    <tr>
+      <td>closePanels()</td>
+      <td>Closes all the panels.</td>
+    </tr>
+    <tr>
+      <td>getVisiblePanels()</td>
+      <td>Gets the number of visible panels.</td>
+    </tr>
+    <tr>
+      <td>getTotalPages()</td>
+      <td>Gets the number of pages.</td>
+    </tr>
+    <tr>
+      <td>getCurrentPage()</td>
+      <td>Gets the index of the page currently displayed.</td>
+    </tr>
+    <tr>
+      <td>gotoPage( index )</td>
+      <td>Scrolls to the specified page.</td>
+    </tr>
+    <tr>
+      <td>nextPage()</td>
+      <td>Goes to the next page.</td>
+    </tr>
+    <tr>
+      <td>previousPage()</td>
+      <td>Goes to the previous page.</td>
+    </tr>
+    <tr>
+      <td>on( eventType, callback )</td>
+      <td>Adds an event listener to the accordion. More details about the use of this method will be presented in the 'Callbacks' chapter.</td>
+    </tr>
+    <tr>
+      <td>off( eventType )</td>
+      <td>Removes an event listener from the accordion.</td>
+    </tr>
+    <tr>
+      <td>destroy()</td>
+      <td>Destroys an accordion by removing all the visual elements and functionality added by the plugin. Basically, it leaves the accordion in the state it was before the plugin was instantiated.</td>
+    </tr>
+    <tr>
+      <td>update()</td>
+      <td>This is called by the plugin automatically when a property is changed. You can call this manually in order to refresh the accordion after changing its HTML, like removing or adding panels.</td>
+    </tr>
+    <tr>
+      <td>removePanels()</td>
+      <td>Removes all the panels.</td>
+    </tr>
+    <tr>
+      <td>resize()</td>
+      <td>This is called by the plugin automatically, when the browser window is resized. You can also call it manually if you find it necessary to have the accordion resize itself.</td>
+    </tr>
+  </table>
+
+  <h4 id="callbacks">Callbacks</h4>
+  <p>
+    Callbacks (or events) are used to detect when certain actions take place. The callbacks can be added when the accordion is instantiated, or at a later time.
+  </p>
+  <p> <em>Examples:</em>
+  </p>
+  <pre><code>
+$( '.my-accordion' ).on( 'panelOpen', function( event ) {
+    console.log( event.index );
+})
+</code></pre>
+
+  <p>
+    As you can notice, the callback functions have an <i>event</i> parameter which contains some information about that event.
+  </p>
+  <p>The list of available events:</p>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Callback</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tr>
+      <td>init</td>
+      <td>Triggered after the accordion was created.</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td>Triggered when the 'update' method is called, either automatically or manually.</td>
+    </tr>
+    <tr>
+      <td>accordionMouseOver</td>
+      <td>Triggered when the mouse pointer moves over the accordion.</td>
+    </tr>
+    <tr>
+      <td>accordionMouseOut</td>
+      <td>Triggered when the mouse pointer leaves the accordion.</td>
+    </tr>
+    <tr>
+      <td>panelClick</td>
+      <td>
+        Triggered when a panel is clicked. Returned data:
+          <ul>
+            <li>index: the index of the clicked panel</li>
+          </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>panelMouseOver</td>
+      <td>
+        Triggered when the mouse pointer moves over a panel. Returned data:
+        <ul>
+          <li>
+            index: the index of the panel over which the mouse pointer has moved
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>panelMouseOut</td>
+      <td>
+        Triggered when the mouse pointer leaves a panel. Returned data:
+        <ul>
+          <li>
+            index: the index of panel from which the mouse pointer has moved away
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>panelOpen</td>
+      <td>
+        Triggered when a panel is opened. Returned data:
+        <ul>
+          <li>index: the index of the opened panel</li>
+          <li>previousIndex: the index of the previously opened panel</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>panelsClose</td>
+      <td>
+        Triggered when the panels are closed. Returned data:
+        <ul>
+          <li>previousIndex: the index of the previously opened panel</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>pageScroll</td>
+      <td>
+        Triggered when the accordion scrolls to another page. Returned data:
+        <ul>
+          <li>index: the index of the current page</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>panelOpenComplete</td>
+      <td>
+        Triggered when the opening of a panel is completed. Returned data:
+        <ul>
+          <li>index: the index of the opened panel</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>panelsCloseComplete</td>
+      <td>
+        Triggered when the closing of the panels is completed. Returned data:
+        <ul>
+          <li>previousIndex: the index of the previously opened panel</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>pageScrollComplete</td>
+      <td>
+        Triggered when the scroll to a page is completed. Returned data:
+        <ul>
+          <li>index: the index of the current page</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>breakpointReach</td>
+      <td>
+        Triggered when a breakpoint is reached. Returned data:
+        <ul>
+          <li>size: the specified size that was reached</li>
+          <li>settings: the settings specified for the current size</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>videoPlay</td>
+      <td>Triggered when a video starts playing.</td>
+    </tr>
+    <tr>
+      <td>videoPause</td>
+      <td>Triggered when a video is paused.</td>
+    </tr>
+    <tr>
+      <td>videoEnd</td>
+      <td>Triggered when a video ends.</td>
+    </tr>
+  </table>
+
+  <h3 id="loading-custom-code-in-files">5.4. Loading custom code in files</h3>
+  <p>
+    By default, the code will be loaded inline, not in a
+    <i>.css</i>
+    or
+    <i>.js</i>
+    file, because it's simpler from a technical perspective and it's also more appropriate for small snippets of code. However, if you want to add large amounts of custom CSS or JavaScript, it's better to have the code loaded in files, rather than inline.</p>
+    <p>You can set how custom code is loaded in the 
+    <i>Accordion Slider -> Plugin Settings</i>
+    page. Then, you need to re-save the custom CSS and/or JavaScript and the plugin will automatically create the
+    <i>accordion-slider-custom</i>
+    folder inside
+    <i>wp-plugins</i>
+    and then
+    <i>custom.css</i>
+    and
+    <i>custom.js</i>
+    inside
+    <i>accordion-slider-custom</i>
+    . You might also be prompted to provide FTP credentials if the files can't be created due to folder permission issues (this is one of the reasons why it's simpler to load the code inline).</p>
+    <p>The files for the custom code are saved outside the main
+    <i>accordion-slider</i>
+    folder in order to avoid the removal of the code when the plugin is updated.
+  </p>
+
+  <h2 id="import-and-export-accordions">6. Import and export accordions</h2>
+
+  <p>
+    You can move accordions between
+    <i>Accordion Slider</i>
+    installations by exporting and then importing them. Accordions can be exported by clicking on the
+    <i>Export</i>
+    link in the
+    <i>Accordion Slider -> All Accordions</i>
+    page. The exported text is a JSON-encoded representation of the accordion's data.
+  </p>
+  <a href="assets/images/export-accordion.png"><img src="assets/images/export-accordion.png"></a>
+  <p>
+    To import an accordion, you need to click on the
+    <i>Import Accordion</i>
+    button in the
+    <i>Accordion Slider -> All Accordions</i>
+    page and, inside the modal window, copy the exported text.
+  </p>
+  <p>
+    The examples showcased on the accordion's presentation page can be found in the
+    <i>examples</i>
+    folder included in the package downloaded from CodeCanyon, and I recommend importing them into your own
+    <i>Accordion Slider</i>
+    installation to see how certain featured are used.
+  </p>
+
+  <h2 id="advanced-shortcode-use">7. Advanced shortcode use</h2>
+
+  <p>
+    Not only you can insert accordions into pages using shortcodes, but you can also override settings, add or modify panels. It's even possible to create an accordion using only shortcodes, without setting it up in the admin area.
+  </p>
+  <p>
+    You can override the accordion's settings like this:
+  </p>
+  <pre>
+[accordion_slider id="1" width="700" aspect_ratio="2" visible_panels="5"]
+</pre>
+  <p>
+    As you can notice, the name of the settings are the same as those in the admin area, but they are lower case and with an underscore between words. This applies for all settings.
+  </p>
+  <p>
+    If you want to add breakpoint settings in the shortcode, you need to add them in a JSON-encoded string, since the <i>breakpoints</i> setting accepts an associated array-like value. You can create some breakpoints in the admin area and then see how the JavaScript code generated looks like.
+  </p>
+
+  <p>
+    As mentioned before, you can add new panels or change the data of existing ones:
+  </p>
+
+  <pre>
+[accordion_slider id="1" width="700" aspect_ratio="2" visible_panels="5"]
+    [panel index="1"]
+        [panel_element type="background_source"]path/to/new_image.jpg[/panel_element]
+    [/panel]
+    [panel]
+        [panel_element type="background_source"]path/to/image.jpg[/panel_element]
+        [panel_element type="opened_background_source"]path/to/opened_image.jpg[/panel_element]
+        [panel_element type="link"]http://bqworks.com/accordion-slider/[/panel_element]
+        [panel_element type="layer" horizontal="center" show_transition="right"]some layer content[/panel_element]
+    [/panel]
+[/accordion_slider]
+</pre>
+
+  <p>
+    The first
+    <i>panel</i>
+    shortcode will override the first panel in the accordion As you can notice that it has the
+    <i>index</i>
+    attribute specified and set to 1.
+  </p>
+  <p>
+    The second
+    <i>panel</i>
+    shortcode doesn't have an index, so this will be a new panel element added after the panels created in the accordion's admin area.
+  </p>
+  <p>
+    This is the list of available types for
+    <i>panel_element</i>
+    shortcodes:
+  </p>
+  <ul>
+    <li>background_source</li>
+    <li>background_alt</li>
+    <li>background_title</li>
+    <li>background_retina_source</li>
+    <li>opened_background_source</li>
+    <li>opened_background_alt</li>
+    <li>opened_background_title</li>
+    <li>opened_background_retina_source</li>
+    <li>link_url</li>
+    <li>link_title</li>
+    <li>layer</li>
+    <li>html</li>
+  </ul>
+
+  <p>
+    When you create an accordion from scratch using only shortcodes, you need to assign it a unique
+    <i>id</i>
+    attribute that doesn't already exist in the admin area.
+  </p>
+  <pre>
+[accordion_slider id="99" width="960" height="400" responsive_mode="custom" visible_panels="5"]
+    [panel content_type="posts" posts_post_types="post,page" posts_taxonomies="tag|design;tag|development;tag|planning"]
+        [panel_element type="background_source"][as_image_src][/panel_element]
+        [panel_element type="background_alt"][as_image_alt][/panel_element]
+        [panel_element type="link_url"][as_link_url][/panel_element]
+    [/panel]
+[/accordion_slider]
+</pre>
+
+  <p>
+    The accordion above contains a panel that will load data from posts. The dynamic tags, like [as_image_src] were discussed in previous chapter. As for the attributes added to the
+    <i>panel</i>
+    shortcode, those are the equivalent of the settings from the panel's
+    <i>Settings</i>
+    modal window in the admin area.
+  </p>
+  <p>Below is a list of all the available panel settings:</p>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th width="230">Shortcode attribute</th>
+        <th>Accepted values</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>content_type</td>
+        <td>custom_content, posts, gallery or flickr</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <h5>Posts panels</h5>
+        </td>
+      </tr>
+      <tr>
+        <td>posts_post_types</td>
+        <td>post, page or any custom post type</td>
+      </tr>
+      <tr>
+        <td>posts_taxonomies</td>
+        <td>
+          must be composed of the taxonomy name and the term, separated by a vertical bar:
+          <i>category|uncategorized</i>
+        </td>
+      </tr>
+      <tr>
+        <td>posts_relation</td>
+        <td>
+          <i>OR</i>
+          or
+          <i>AND</i>
+        </td>
+      </tr>
+      <tr>
+        <td>posts_operator</td>
+        <td>
+          <i>IN</i>
+          or
+          <i>NOT IN</i>
+        </td>
+      </tr>
+      <tr>
+        <td>posts_orderby</td>
+        <td>
+          <i>date</i>
+          ,
+          <i>comments</i>
+          ,
+          <i>title</i>
+          or
+          <i>random</i>
+        </td>
+      </tr>
+      <tr>
+        <td>posts_order</td>
+        <td>
+          <i>ASC</i>
+          or
+          <i>DESC</i>
+        </td>
+      </tr>
+      <tr>
+        <td>posts_maximum</td>
+        <td>any number</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <h5>Flickr panels</h5>
+        </td>
+      </tr>
+      <tr>
+        <td>flickr_api_key</td>
+        <td>the API key provided by Flickr</td>
+      </tr>
+      <tr>
+        <td>flickr_load_by</td>
+        <td>
+          <i>set_id</i>
+          or
+          <i>username_id</i>
+        </td>
+      </tr>
+      <tr>
+        <td>flickr_id</td>
+        <td>the ID of the data</td>
+      </tr>
+      <tr>
+        <td>flickr_maximum</td>
+        <td>any number</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="action-and-filter-hooks">8. Action and filter hooks</h2>
+
+  <p>
+    Actions allow you to detect when certain actions are performed, while hooks allow to modify the output of the accordion.
+  </p>
+  <p>
+    The information in this chapter is for developers that are familiar with PHP and the WordPress API.
+  </p>
+
+  <h3 id="actions">8.1. Actions</h3>
+
+  <h4 id="">accordion_slider_enqueue_scripts</h4>
+  <p>
+    Called when the slider's JavaScript files are enqueued. You can use this action to enqueue your own JavaScript files.
+  </p>
+  <pre>
+add_action( 'accordion_slider_enqueue_scripts', 'add_my_scripts' );
+
+function add_my_scripts() {
+  wp_enqueue_script( 'my-script', 'path/to/script.js' );
+}
+</pre>
+
+  <h4 id="">accordion_slider_enqueue_styles</h4>
+  <p>
+    Called when the slider's CSS files are enqueued. You can use this action to enqueue your own CSS files.
+  </p>
+  <pre>
+add_action( 'accordion_slider_enqueue_styles', 'add_my_styles' );
+
+function add_my_styles() {
+  wp_enqueue_script( 'my-style', 'path/to/style.css' );
+}
+</pre>
+
+  <h3 id="filters">8.2. Filters</h3>
+
+  <h4 id="accordion_slider_default_settings">accordion_slider_default_settings</h4>
+  <p>It allows you to modify the default accordion settings.</p>
+  <pre>
+add_filter( 'accordion_slider_default_settings', 'change_default_settings' );
+
+function change_default_settings( $settings ) {
+  $settings['visible_panels']['default_value'] = 3;
+
+  return $settings;
+}
+</pre>
+
+  <h4 id="accordion_slider_default_panel_settings">accordion_slider_default_panel_settings</h4>
+  <p>It allows you to modify the default panel settings.</p>
+  <pre>
+add_filter( 'accordion_slider_default_panel_settings', 'change_default_panel_settings' );
+
+function change_default_panel_settings( $settings ) {
+  $settings['posts_operator']['default_value'] = 'NOT IN';
+
+  return $settings;
+}
+</pre>
+
+  <h4 id="accordion_slider_default_layer_settings">accordion_slider_default_layer_settings</h4>
+  <p>It allows you to modify the default layer settings.</p>
+  <pre>
+add_filter( 'accordion_slider_default_layer_settings', 'change_default_layer_settings' );
+
+function change_default_layer_settings( $settings ) {
+  $settings['preset_styles']['default_value'] = array( 'as-white', 'as-padding', 'as-rounded' );
+
+  return $settings;
+}
+</pre>
+
+  <h4 id="accordion_slider_posts_query_args">accordion_slider_posts_query_args</h4>
+  <p>
+    It allows you to modify the parameters passed to the
+    <i>WP_Query</i>
+    call when
+    <i>Posts</i>
+    panels are created.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_posts_query_args', 'custom_query', 10, 3 );
+
+function custom_query( $query_args, $accordion_id, $panel_index ) {
+  if ( $accordion_id === 3 && $panel_index === 1 ) {
+    $query_args['order'] = 'DESC';
+  }
+
+  return $query_args;
+}
+</pre>
+
+  <h4 id="accordion_slider_posts_tags">accordion_slider_posts_tags</h4>
+  <p>
+    It allows you to add custom tags to
+    <i>Posts</i>
+    panels.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_posts_tags', 'add_author_tag' );
+
+// add the 'author' tag to the list of supported tags
+function add_author_tag( $tags ) {
+  // associate the 'author' tag with the function that will render the tag
+  $tags['author'] = 'render_author_tag';
+  
+  return $tags;
+}
+
+// return the actual post author for the 'author' tag
+function render_author_tag( $tag_arg, $post ) {
+  return $post->post_author;
+}
+</pre>
+  <p>
+    Please note that when you use a tag in the accordion, you need to append the
+    <i>as_</i>
+    term, like this:
+    <i>[as_author]</i>
+    .
+  </p>
+  <p>
+    You can also add an argument to the tag, like
+    <i>[as_author.first]</i>
+    , and use that argument in the rendering function:
+  </p>
+  <pre>
+function render_author_tag( $tag_arg, $post ) {
+  $result = $post->post_author;
+  
+  // if the 'first' argument is present, return only the first name
+  if ( $tag_arg !== false && $tag_arg === 'first' ) {
+    $name = explode( $result, ' ' );
+    $result = $name[0];
+  }
+
+  return $result;
+}
+</pre>
+
+  <h4 id="accordion_slider_gallery_tags">accordion_slider_gallery_tags</h4>
+  <p>
+    It allows you to add custom tags to
+    <i>Gallery</i>
+    panels.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_gallery_tags', 'add_image_id_tag' );
+
+// add the 'image_id' tag to the list of supported tags
+function add_image_id_tag( $tags ) {
+  // associate the 'image_id' tag with the function that will render the tag
+  $tags['image_id'] = 'render_image_id';
+  
+  return $tags;
+}
+
+// return the actual image ID for the 'image_id' tag
+function render_image_id( $tag_arg, $image ) {
+  return $image->ID;
+}
+</pre>
+  <p>
+    Please note that when you use a tag in the accordion, you need to append the
+    <i>as_</i>
+    term, like this:
+    <i>[as_image_id]</i>
+    .
+  </p>
+  <p>
+    You can also add an argument to the tag, like
+    <i>[as_image_id.my_arg]</i>
+    , and use that argument in the rendering function:
+  </p>
+  <pre>
+function render_image_id( $tag_arg, $image ) {
+  $result = $image->ID;
+  
+  // if the 'my_arg' argument is present, do something
+  if ( $tag_arg !== false && $tag_arg === 'my_arg' ) {
+    // do something
+  }
+
+  return $result;
+}
+</pre>
+
+  <h4 id="accordion_slider_flickr_tags">accordion_slider_flickr_tags</h4>
+  <p>
+    It allows you to add custom tags to
+    <i>Flickr</i>
+    panels.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_flickr_tags', 'add_photo_id_tag' );
+
+// add the 'photo_id' tag to the list of supported tags
+function add_photo_id_tag( $tags ) {
+  // associate the 'photo_id' tag with the function that will render the tag
+  $tags['photo_id'] = 'render_photo_id';
+  
+  return $tags;
+}
+
+// return the actual photo ID for the 'photo_id' tag
+function render_photo_id( $tag_arg, $photo ) {
+  return $photo['id'];
+}
+</pre>
+  <p>
+    Please note that when you use a tag in the accordion, you need to append the
+    <i>as_</i>
+    term, like this:
+    <i>[as_photo_id]</i>
+    .
+  </p>
+  <p>
+    You can also add an argument to the tag, like
+    <i>[as_photo_id.my_arg]</i>
+    , and use that argument in the rendering function:
+  </p>
+  <pre>
+function render_photo_id( $tag_arg, $photo ) {
+  $result = $photo['id'];
+  
+  // if the 'my_arg' argument is present, do something
+  if ( $tag_arg !== false && $tag_arg === 'my_arg' ) {
+    // do something
+  }
+
+  return $result;
+}
+</pre>
+
+  <h4 id="accordion_slider_data">accordion_slider_data</h4>
+  <p>
+    It allows you to modify the accordion's set data, before the accordion's output is generated based on that data.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_data', 'change_panel_content_type', 10, 2 );
+
+function change_panel_content_type( $data, $accordion_id ) {
+  if ( $accordion_id === 2 ) {
+    $data['panels'][0]['settings']['content_type'] = 'posts';
+  }
+
+  return $data;
+}
+</pre>
+
+  <h4 id="accordion_slider_javascript">accordion_slider_javascript</h4>
+  <p>It allows you to append or prepend inline JavaScript code.</p>
+  <pre>
+add_filter( 'accordion_slider_javascript', 'add_javascript' );
+
+function add_javascript( $js_code ) {
+  $js_code .= '&lt;script&gt;alert('Hello World!');&lt;/script&gt;';
+
+  return $js_code;
+}
+</pre>
+
+  <h4 id="accordion_slider_classes">accordion_slider_classes</h4>
+  <p>It allows you to add custom classes to the accordion.</p>
+  <pre>
+add_filter( 'accordion_slider_classes', 'add_custom_accordion_class', 10, 2 );
+
+function add_custom_class( $classes, $accordion_id ) {
+  if ( $accordion_id === 2 ) {
+    $classes .= ' ' . 'my-custom-class';
+  }
+
+  return $classes;
+}
+</pre>
+
+  <h4 id="accordion_slider_panel_classes">accordion_slider_panel_classes</h4>
+  <p>It allows you to add custom classes to the panels.</p>
+  <pre>
+add_filter( 'accordion_slider_panel_classes', 'add_custom_panel_class', 10, 3 );
+
+function add_custom_panel_class( $classes, $accordion_id, $panel_index ) {
+  if ( $accordion_id === 1 && $panel_index === 2 ) {
+    $classes .= ' ' . 'my-custom-class';
+  }
+
+  return $classes;
+}
+</pre>
+
+  <h4 id="accordion_slider_layer_classes">accordion_slider_layer_classes</h4>
+  <p>It allows you to add custom classes to the layers.</p>
+  <pre>
+add_filter( 'accordion_slider_layer_classes', 'add_custom_layer_class', 10, 3 );
+
+function add_custom_layer_class( $classes, $accordion_id, $panel_index ) {
+  if ( $accordion_id === 1 && $panel_index === 2 ) {
+    $classes .= ' ' . 'my-custom-class';
+  }
+
+  return $classes;
+}
+</pre>
+
+  <h4 id="accordion_slider_markup">accordion_slider_markup</h4>
+  <p>
+    It allows you to modify the accordion's HTML markup before it's printed.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_markup', 'accordion_markup', 10, 2 );
+
+function accordion_markup( $html_markup, $accordion_id ) {
+  if ( $accordion_id === 3 ) {
+    $html_markup .= '&lt;div class="extra-element"&gt;some content&lt;/div&gt;';
+  }
+
+  return $html_markup;
+}
+</pre>
+
+  <h4 id="accordion_slider_panel_markup">accordion_slider_panel_markup</h4>
+  <p>
+    It allows you to modify the panel's HTML markup before it's printed.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_panel_markup', 'accordion_panel_markup', 10, 3 );
+
+function accordion_panel_markup( $html_markup, $accordion_id, $panel_index ) {
+  $html_markup .= '&lt;div class="extra-element"&gt;some content&lt;/div&gt;';
+
+  return $html_markup;
+}
+</pre>
+
+  <h4 id="accordion_slider_layer_markup">accordion_slider_layer_markup</h4>
+  <p>
+    It allows you to modify the layer's HTML markup before it's printed.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_layer_markup', 'accordion_layer_markup', 10, 3 );
+
+function accordion_layer_markup( $html_markup, $accordion_id, $panel_index ) {
+  $html_markup .= '&lt;div class="extra-element"&gt;some content&lt;/div&gt;';
+
+  return $html_markup;
+}
+</pre>
+
+  <h4 id="accordion_slider_panel_html">accordion_slider_panel_html</h4>
+  <p>
+    It allows you to modify the panel's inline HTML content before it's printed. Please note that this is different from
+    <i>accordion_slider_panel_markup</i>
+    , which returns the entire HTML markup of the panel, not only the inline HTML content.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_panel_html', 'panel_html', 10, 3 );
+
+function panel_html( $inline_html, $accordion_id, $panel_index ) {
+  $inline_html = '&lt;div class="wrapper"&gt;' . $inline_html . '&lt;/div&gt;';
+
+  return $inline_html;
+}
+</pre>
+
+  <h4 id="accordion_slider_panel_link_url">accordion_slider_panel_link_url</h4>
+  <p>It allows you to modify the URL of the panel's link.</p>
+  <pre>
+add_filter( 'accordion_slider_panel_link_url', 'change_url', 10, 3 );
+
+function change_url( $link_url, $accordion_id, $panel_index ) {
+  $link_url = str_replace( '/en/', '/de/', $link_url );
+
+  return $link_url;
+}
+</pre>
+
+  <h4 id="accordion_slider_layer_content">accordion_slider_layer_content</h4>
+  <p>
+    Called when the layer's inner text (in the case of paragraph or heading layers) or inner HTML (in the case of DIV or video layers) is printed. It allows you to modify the content of the layer.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_layer_content', 'change_layer_content', 10, 3 );
+
+function change_layer_content( $content, $accordion_id, $panel_index ) {
+  $content = '&lt;strong&gt;' . $content . '&lt;/strong&gt;';
+
+  return $content;
+}
+</pre>
+
+  <h4 id="accordion_slider_layer_image_link_url">accordion_slider_layer_image_link_url</h4>
+  <p>
+    It allows you to modify the URL of the link specified for an image layer.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_layer_image_link_url', 'change_image_url', 10, 3 );
+
+function change_image_url( $link_url, $accordion_id, $panel_index ) {
+  $link_url = str_replace( '/en/', '/de/', $link_url );
+
+  return $link_url;
+}
+</pre>
+
+  <h2 id="translating-the-plugin">9. Translating the plugin</h2>
+
+  <p>
+    There are several tools for translating the plugin's admin text, but I will show you how to do this using
+    <a href="http://poedit.net">Poedit</a>
+    .
+  </p>
+  <p>
+    First, download and install the software. Open Poedit and go to File -> Open and and select the <i>accordion-slider.po</i> file, which you can find in <i>accordion-slider/languages/</i>. Then go to File -> Save As and save the file using a name that corresponds to the language in which you're translating the plugin. For example, if you translate the plugin to German, save the file as "accordion-slider-de_DE"; if you're translating it to French, save the file as "accordion-slider-fr_FR".
+  </p>
+  <p>
+    After you saved the file, you're ready to begin translating the plugin. All you have to do is click on the string that you want to translate, and write the translation for it in the second box, below the English version.
+  </p>
+  <a href="assets/images/translation-poedit.png"><img src="assets/images/translation-poedit.png"></a>
+
+  <h2 id="adding-videos">10. Adding videos</h2>
+
+  <p>
+    The accordion has built-in support for YouTube, Vimeo, HTML5, VideoJS and Sublime videos. The support consists in the accordion's ability to control the videos automatically (i.e., pause the video when the panel is closed, play the video when the panel is opened, etc.).
+  </p>
+  <p>
+    In addition to these supported video types, you can add any other video, but you will also need to add your own code for implementing the automatic handling.
+  </p>
+  <p>
+    Videos can be added in
+    <i>Video Layers</i>
+    . This type of layers provide a field where you simply need to put the iframe embed, in the case of YouTube and Vimeo videos, or the HTML code in the case of HTML5 videos, and the accordion's code will take care of the rest. You might notice that the code you added is modified a little by the accordion. This is because the accordion prepares the video for allowing it to be automatically controlled.
+  </p>
+
+  <div class="main-menu">
+    <ul class="menu">
+      <li>
+        <a href="#installation">1. Installation</a>
+      </li>
+      <li>
+        <a href="#updating">2. Updating</a>
+      </li>
+      <li>
+        <a href="#creating-and-publishing-accordions">3. Creating and publishing accordions</a>
+        <ul class="submenu">
+          <li>
+            <a href="#panels">3.1. Panels</a>
+          </li>
+          <li>
+            <a href="#general-settings">3.2. General settings</a>
+          </li>
+          <li>
+            <a href="#publishing-the-accordion">3.3. Publishing the accordion</a>
+          </li>
+          <li>
+            <a href="#previewing-the-accordion">3.4. Previewing the accordion</a>
+          </li>
+          <li>
+            <a href="#cache">3.5. Cache</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#responsiveness">4. Responsiveness</a>
+        <ul class="submenu">
+          <li>
+            <a href="#responsive-modes">4.1. Responsive modes</a>
+          </li>
+          <li>
+            <a href="#aspect-ratio">4.2. Aspect Ratio</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#custom-css-and-javascript">5. Custom CSS and JavasSript</a>
+        <ul class="submenu">
+          <li>
+            <a href="#custom-css">5.1. Custom CSS</a>
+          </li>
+          <li>
+            <a href="#custom-javascript">5.2. Custom JavaScript</a>
+          </li>
+          <li>
+            <a href="#javascript-api">5.3. JavaScript API</a>
+          </li>
+          <li>
+            <a href="#loading-custom-code-in-files">5.4. Loading custom code in files</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#import-and-export-accordions">6. Import and export accordions</a>
+      </li>
+      <li>
+        <a href="#advanced-shortcode-use">7. Advanced shortcode use</a>
+      </li>
+      <li>
+        <a href="#action-and-filter-hooks">8. Action and filter hooks</a>
+        <ul class="submenu">
+          <li>
+            <a href="#actions">8.1. Actions</a>
+          </li>
+          <li>
+            <a href="#filters">8.2. Filters</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#translating-the-plugin">9. Translating the plugin</a>
+      </li>
+      <li>
+        <a href="#adding-videos">10. Adding videos</a>
+      </li>
+    </ul>
+  </div>
+
+</body>
+</html>
