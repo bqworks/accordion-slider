@@ -1219,6 +1219,10 @@ Single accordion page
 	text-decoration: none;
 }
 
+.sidebar-panel-info {
+	margin-top: 10px;
+}
+
 .breakpoints-info {
 	margin: 10px;
 }

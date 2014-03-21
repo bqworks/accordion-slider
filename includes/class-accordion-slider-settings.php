@@ -610,6 +610,10 @@ class BQW_Accordion_Slider_Settings {
 					'label' => __( 'Lightbox', 'accordion-slider' ),
 					'list' => array(
 						'lightbox'
+					),
+					'inline_info' => array(
+						__( 'By default, the accordion will open the background image in the lightbox, but at its full size.' , 'accordion-slider' ),
+						__( 'If you want to open a different image or other content, you need to specify the custom content in the <i>Background Image</i> editor, in the <i>Link</i> field.' , 'accordion-slider' )
 					)
 				),
 

@@ -94,6 +94,28 @@
                                             ?>
                                         </tbody>
                                     </table>
+                                    
+                                    <?php
+                                        $show_info = get_option( 'accordion_slider_show_inline_info', true );
+                                
+                                        if ( $show_info == true && isset( $group['inline_info'] ) ) {
+                                    ?>
+                                            <div class="inline-info sidebar-panel-info">
+                                                <input type="checkbox" id="show-hide-<?php echo $group_name; ?>-info" class="show-hide-info">
+                                                <label for="show-hide-<?php echo $group_name; ?>-info" class="show-info"><?php _e( 'Show info', 'accordion-slider' ); ?></label>
+                                                <label for="show-hide-<?php echo $group_name; ?>-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
+                                                
+                                                <div class="info-content">
+                                                    <?php 
+                                                        foreach( $group['inline_info'] as $inline_info_paragraph ) {
+                                                            echo '<p>' . $inline_info_paragraph . '</p>';
+                                                        }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                    <?php
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <?php
