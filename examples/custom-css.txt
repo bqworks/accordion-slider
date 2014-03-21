@@ -1,0 +1,65 @@
+.example1 .panel-counter {
+	font-size: 20px;
+	color: #333;
+	-moz-transform-origin: left bottom;
+	-webkit-transform-origin: left bottom;
+	transform-origin: left bottom;
+	-moz-transform: rotate(-90deg) translateY(100%);
+	-webkit-transform: rotate(-90deg) translateY(100%);
+	transform: rotate(-90deg) translateY(100%);
+}
+
+@media (max-width: 860px) {
+	.example3 .hide-medium-screen {
+		display: none;
+	}
+}
+
+@media (max-width: 640px) {
+	.example3.as-horizontal .as-layer {
+		font-size: 12px;
+	}
+
+	.example3 .hide-small-screen {
+		display: none;
+	}
+}
+
+@media (max-width: 450px) {
+	.example3.as-horizontal .as-layer {
+		font-size: 10px;
+		padding: 2px;
+	}
+}
+
+.example3 .as-panel {
+	border: 2px solid #333;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.example4 .text {
+	padding: 15px;
+	background-color: #F1F1F1;
+	color: #222;
+}
+
+.example4 .title {
+	font-size: 24px;
+	margin: 0;
+}
+
+.example4 .description {
+	font-size: 14px;
+	line-height: 1.2;
+}
+
+.example4 .link {
+	position: absolute;
+	bottom: 0;
+}
+
+.example4 .link a {
+	color: #000;
+}
