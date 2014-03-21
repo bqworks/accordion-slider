@@ -1,7 +1,7 @@
-1. In the plugin’s admin area go to Accordion Slider -> All Accordions, and click on the Import Accordion button.
+Thank you for purchasing Accordion Slider!
 
-2. Copy the content from the example’s text file and paste it in the modal window. Then, click on the Import button.
+To install the plugin, you have to upload directly the zip package downloaded from CodeCanyon.
 
-3.  In the plugin’s admin area go to Accordion Slider -> Custom CSS & JS, and in the Custom CSS field copy the content from the custom-css.txt file.
+For usage instructions please see the documentation included.
 
-That’s all.
+The 'examples' folder contains several examples that you can import into your own installation.
