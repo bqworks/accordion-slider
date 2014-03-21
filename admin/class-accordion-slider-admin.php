@@ -75,6 +75,7 @@ class BQW_Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_add_breakpoint_setting', array( $this, 'ajax_add_breakpoint_setting' ) );
 		add_action( 'wp_ajax_accordion_slider_get_taxonomies', array( $this, 'ajax_get_taxonomies' ) );
 		add_action( 'wp_ajax_accordion_slider_clear_all_cache', array( $this, 'ajax_clear_all_cache' ) );
+		add_action( 'wp_ajax_accordion_slider_getting_started_close', array( $this, 'ajax_getting_started_close' ) );
 	}
 
 	/**
@@ -1267,6 +1268,17 @@ class BQW_Accordion_Slider_Admin {
 		$wpdb->query( "DELETE FROM " . $wpdb->prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
 
 		echo true;
+
+		die();
+	}
+
+	/**
+	 * AJAX call for closing the Getting Started info box.
+	 *
+	 * @since 1.0.0
+	 */
+	public function ajax_getting_started_close() {
+		update_option( 'accordion_slider_show_getting_started_info', false );
 
 		die();
 	}

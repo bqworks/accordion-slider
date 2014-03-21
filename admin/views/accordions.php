@@ -26,6 +26,8 @@
 			<?php
 				}
 			?>
+
+			<a href="#" class="getting-started-close">Close</a>
 		</div>
 	<?php
 		}

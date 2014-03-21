@@ -217,6 +217,18 @@
 					}
 				});
 			});
+
+			$( '.getting-started-close' ).click(function( event ) {
+				event.preventDefault();
+
+				$( '.getting-started-info' ).hide();
+
+				$.ajax({
+					url: as_js_vars.ajaxurl,
+					type: 'post',
+					data: { action: 'accordion_slider_getting_started_close' }
+				});
+			});
 		},
 
 		/**

@@ -1202,8 +1202,17 @@ Single accordion page
 }
 
 .getting-started-info {
+	position: relative;
 	margin: 10px 0 20px 0;
 	background-color: #FFF;
+}
+
+.getting-started-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 .breakpoints-info {
