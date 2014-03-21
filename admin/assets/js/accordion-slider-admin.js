@@ -614,7 +614,7 @@
 				newPanelData = $.extend( true, {}, panelData ),
 				data = [{
 					settings: {
-						content_type: newPanelData.settings.content_type,
+						content_type: newPanelData.settings.content_type
 					},
 					background_source: newPanelData.background.background_source
 				}];
