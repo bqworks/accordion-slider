@@ -5,6 +5,10 @@ All accordions page
 	margin-top: 20px;
 }
 
+.accordions-list {
+	margin-top: 20px;
+}
+
 .accordions-list tr:nth-child(2n+1) {
 	background-color: #F9F9F9;
 }
@@ -1203,7 +1207,7 @@ Single accordion page
 
 .getting-started-info {
 	position: relative;
-	margin: 10px 0 20px 0;
+	margin-top: 10px;
 	background-color: #FFF;
 }
 
