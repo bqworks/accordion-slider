@@ -57,8 +57,8 @@ class BQW_AS_Dynamic_Panel_Renderer extends BQW_AS_Panel_Renderer {
 	 * @param int   $panel_index  The index of the panel.
 	 * @param bool  $lazy_loading Whether or not the panel will be lazy loaded.
 	 */
-	public function set_data( $data, $accordion_id, $panel_index, $lazy_loading ) {
-		parent::set_data( $data, $accordion_id, $panel_index, $lazy_loading );
+	public function set_data( $data, $accordion_id, $panel_index, $lazy_loading, $lightbox ) {
+		parent::set_data( $data, $accordion_id, $panel_index, $lazy_loading, $lightbox );
 
 		$this->settings = $this->data['settings'];
 	}

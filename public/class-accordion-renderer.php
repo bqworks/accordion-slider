@@ -43,15 +43,6 @@ class BQW_AS_Accordion_Renderer {
 	protected $default_settings = null;
 
 	/**
-	 * Indicates whether or not the accordion's images will be lazy loaded.
-	 *
-	 * @since 1.0.0
-	 * 
-	 * @var bool
-	 */
-	protected $lazy_loading = null;
-
-	/**
 	 * HTML markup of the accordion.
 	 *
 	 * @since 1.0.0
@@ -90,8 +81,6 @@ class BQW_AS_Accordion_Renderer {
 		$this->id = $this->data['id'];
 		$this->settings = $this->data['settings'];
 		$this->default_settings = BQW_Accordion_Slider_Settings::getSettings();
-
-		$this->lazy_loading = isset( $this->settings['lazy_loading'] ) ? $this->settings['lazy_loading'] : $this->default_settings['lazy_loading'];
 	}
 
 	/**
@@ -167,7 +156,11 @@ class BQW_AS_Accordion_Renderer {
 	 */
 	protected function create_panel( $data, $panel_counter ) {
 		$panel = BQW_AS_Panel_Renderer_Factory::create_panel( $data );
-		$panel->set_data( $data, $this->id, $panel_counter, $this->lazy_loading );
+
+		$lazy_loading = isset( $this->settings['lazy_loading'] ) ? $this->settings['lazy_loading'] : $this->default_settings['lazy_loading'];
+		$lightbox = isset( $this->settings['lightbox'] ) ? $this->settings['lightbox'] : $this->default_settings['lightbox'];
+
+		$panel->set_data( $data, $this->id, $panel_counter, $lazy_loading, $lightbox );
 		
 		return $panel->render();
 	}

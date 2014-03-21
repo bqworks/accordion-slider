@@ -43,6 +43,15 @@ class BQW_AS_Panel_Renderer {
 	protected $lazy_loading = null;
 
 	/**
+	 * Indicates whether or not the panel's image or link can be opened in a lightbox.
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @var bool
+	 */
+	protected $lightbox = null;
+
+	/**
 	 * HTML markup of the panel.
 	 *
 	 * @since 1.0.0
@@ -69,12 +78,14 @@ class BQW_AS_Panel_Renderer {
 	 * @param int   $accordion_id The id of the accordion.
 	 * @param int   $panel_index  The index of the panel.
 	 * @param bool  $lazy_loading Whether or not the panel will be lazy loaded.
+	 * @param bool  $lightbox     Whether or not the panel's image or link can be opened in a lightbox.
 	 */
-	public function set_data( $data, $accordion_id, $panel_index, $lazy_loading ) {
+	public function set_data( $data, $accordion_id, $panel_index, $lazy_loading, $lightbox ) {
 		$this->data = $data;
 		$this->accordion_id = $accordion_id;
 		$this->panel_index = $panel_index;
 		$this->lazy_loading = $lazy_loading;
+		$this->lightbox = $lightbox;
 	}
 
 	/**
@@ -189,7 +200,7 @@ class BQW_AS_Panel_Renderer {
 	 * @return boolean
 	 */
 	protected function has_background_link() {
-		if ( isset( $this->data['background_link'] ) && $this->data['background_link'] !== '' ) {
+		if ( ( isset( $this->data['background_link'] ) && $this->data['background_link'] !== '' ) || $this->lightbox === true ) {
 			return true;
 		} 
 
@@ -199,13 +210,27 @@ class BQW_AS_Panel_Renderer {
 	/**
 	 * Create a link for the background image(s).
 	 *
+	 * If the lightbox is enabled and a link was not specified,
+	 * add the background image URL as a link.
+	 *
 	 * @since 1.0.0
 	 * 
 	 * @param  string  $image The image markup.
 	 * @return string         The link markup.
 	 */
 	protected function add_link_to_background_image( $image ) {
-		$background_link_href = $this->data['background_link'];
+		$background_link_href = '';
+
+		if ( isset( $this->data['background_link'] ) && $this->data['background_link'] !== '' ) {
+			$background_link_href = $this->data['background_link'];
+		} else if ( $this->lightbox === true ) {
+			if ( $this->has_opened_background_image() ) {
+				$background_link_href = $this->data['opened_background_source'];
+			} else if ( $this->has_background_image() ) {
+				$background_link_href = $this->data['background_source'];
+			}
+		}
+
 		$background_link_href = apply_filters( 'accordion_slider_panel_link_url', $background_link_href, $this->accordion_id, $this->panel_index );
 
 		$background_link_title = isset( $this->data['background_link_title'] ) && $this->data['background_link_title'] !== '' ? ' title="' . esc_attr( $this->data['background_link_title'] ) . '"' : '';
