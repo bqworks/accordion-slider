@@ -54,8 +54,8 @@
 		$accordions = $wpdb->get_results( "SELECT * FROM " . $prefix . "accordionslider_accordions ORDER BY id" );
 		
 		if ( count( $accordions ) === 0 ) {
-			echo '<tr>' .
-					 '<td colspan="100%">' . __( 'No accordion created yet.', 'accordion-slider' ) . '</td>' .
+			echo '<tr class="no-accordion-row">' .
+					 '<td colspan="100%">' . __( 'You don\'t have saved accordions.', 'accordion-slider' ) . '</td>' .
 				 '</tr>';
 		} else {
 			foreach ( $accordions as $accordion ) {

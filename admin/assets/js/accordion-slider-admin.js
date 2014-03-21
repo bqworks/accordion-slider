@@ -1189,6 +1189,10 @@
 				type: 'post',
 				data: { action: 'accordion_slider_save_accordion', data: accordionDataString },
 				complete: function( data ) {
+					if ( $( '.accordions-list .no-accordion-row' ).length !== 0 ) {
+						$( '.accordions-list .no-accordion-row' ).remove();
+					}
+
 					var row = $( data.responseText ).appendTo( $( '.accordions-list tbody' ) );
 					
 					row.hide().fadeIn();
