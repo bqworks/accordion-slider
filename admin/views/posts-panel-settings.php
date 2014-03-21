@@ -125,7 +125,7 @@
 				<label for="show-hide-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
 				
 				<div class="info-content">
-                	<p><?php _e( 'Multiple panels will be dynamically generated (one panel for each loaded post), based on the set parameters.', 'accordion-slider' ); ?></p>
+                	<p><?php _e( 'One <i>Posts</i> panel in the admin area will dynamically generate multiple panels in the published accordion (one panel for each loaded post), based on the set parameters.', 'accordion-slider' ); ?></p>
                 	<p><?php _e( 'The list of taxonomies will be refreshed every time the list of post types is updated.', 'accordion-slider' ); ?></p>
                 	<p><?php _e( 'The <i>Match</i> parameter indicates whether, in order to be fetched, a post needs to have all the selected taxonomy terms, or at least one will be sufficient. The <i>With selected</i> parameter indicates whether posts that include the selected taxonomy terms will be loaded, or if posts that don\'t include them will be loaded.', 'accordion-slider' ); ?></p>
                 	<p><?php _e( 'The images and their data can be fetched through <i>dynamic tags</i>, which are enumerated in the Background, Layers and HTML editors.', 'accordion-slider' ); ?></p>
