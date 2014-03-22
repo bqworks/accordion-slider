@@ -83,6 +83,8 @@ class BQW_Accordion_Slider {
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_styles' ) );
 		add_action( 'wp_footer', array( $this, 'load_scripts' ) );
 
+		add_action( 'wp_print_footer_scripts', array( $this, 'print_inline_scripts' ) );
+
 		// register the shortcodes
 		add_shortcode( 'accordion_slider', array( $this, 'accordion_slider_shortcode' ) );
 		add_shortcode( 'accordion_panel', array( $this, 'accordion_panel_shortcode' ) );
@@ -422,8 +424,6 @@ class BQW_Accordion_Slider {
 		}
 
 		do_action( 'accordion_slider_enqueue_scripts' );
-
-		echo $this->get_inline_scripts();
 	}
 
 	/**
@@ -445,11 +445,20 @@ class BQW_Accordion_Slider {
 		}
 
 		$inline_js .= "\r\n" . '	});' .
-					"\r\n" . '</script>';
+					"\r\n" . '</script>' . "\r\n\r\n";
 
 		$inline_js = apply_filters( 'accordion_slider_javascript', $inline_js );
 
 		return $inline_js;
+	}
+
+	/**
+	 * Print the inline JavaScript code.
+	 *
+	 * @since 1.0.0
+	 */
+	public function print_inline_scripts() {
+		echo $this->get_inline_scripts();
 	}
 
 	/**
