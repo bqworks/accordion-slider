@@ -1518,65 +1518,118 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
     In addition to these supported video types, you can add any other video, but you will also need to add your own code for implementing the automatic handling.
   </p>
   <p>
-    Videos can be added in the <i>Layers</i> editor, as
+    Videos can be added in the
+    <i>Layers</i>
+    editor, as
     <i>Video Layers</i>
     . This type of layer provide a field where you simply need to put the iframe embed, in the case of YouTube and Vimeo videos, or the HTML code in the case of HTML5 videos.
   </p>
-    <p><i>YouTube example:</i></p>
-    <a href="assets/images/video-layer-youtube.png">
+  <p>
+    <i>YouTube example:</i>
+  </p>
+  <a href="assets/images/video-layer-youtube.png">
     <img src="assets/images/video-layer-youtube.png"></a>
 
-    <p><i>HTML5 Video example:</i></p>
-    <a href="assets/images/video-layer-html5.png">
+  <p>
+    <i>HTML5 Video example:</i>
+  </p>
+  <a href="assets/images/video-layer-html5.png">
     <img src="assets/images/video-layer-html5.png"></a>
 
-  <p>You might notice that after you save the layers, the code you added is modified a little. This is because the accordion prepares the video for allowing it to be automatically controlled. For this purpose it adds the <i>as-video</i> class to the iframe or video tag. Also, it adds the <i>enablejsapi=1</i> parameter to YouTube videos and the <i>api=1</i> parameter to Vimeo videos.</p>
+  <p>
+    You might notice that after you save the layers, the code you added is modified a little. This is because the accordion prepares the video for allowing it to be automatically controlled. For this purpose it adds the
+    <i>as-video</i>
+    class to the iframe or video tag. Also, it adds the
+    <i>enablejsapi=1</i>
+    parameter to YouTube videos and the
+    <i>api=1</i>
+    parameter to Vimeo videos.
+  </p>
 
-  <p>In the admin area, in accordion's <i>Video</i> sidebar panel, you can set how the video will react to the opening or closing of panels.</p>
+  <p>
+    In the admin area, in accordion's
+    <i>Video</i>
+    sidebar panel, you can set how the video will react to the opening or closing of panels.
+  </p>
   <a href="assets/images/video-sidebar-panel.png">
     <img src="assets/images/video-sidebar-panel.png"></a>
 
   <h2 id="troubleshooting">11. Troubleshooting</h2>
 
-  <p class="note">If something doesn't work as expected, the first thing you need is a little patience and the assurance that you have my free assistance for resolving the problem. Please see if the indications below help, and if they don't please kindly email me and I'll gladly help you. You can reach me at the support center: <u><a href="http://support.bqworks.com">support.bqworks.com</a></u>.</p>
+  <p class="note">
+    If something doesn't work as expected, the first thing you need is a little patience and the assurance that you have my free assistance for resolving the problem. Please see if the indications below help, and if they don't please kindly email me and I'll gladly help you. You can reach me at the support center: <u><a href="http://support.bqworks.com">support.bqworks.com</a></u> 
+    .
+  </p>
 
-<h3>1. The accordion doesn't show up on the page</h3>
-<h4>a) JavaScript errors</h4>
-<p>First, it's important to check if you have any JavaScript errors on the page that contains the accordion. JavaScript errors thrown by other scripts can break all the JavaScript functionality that follows on that page, including the accordion. I would like to note that <i>Accordion Slider</i> follows WordPress development best practices and is actively maintained to make sure it's bug free and works seamlessly. However, when something else (another plugin or theme) breaks in the site, it can affect the accordion as well, as mentioned before. Most of the times it's possible to check where the problem comes from, and I will show you 2 methods. If you find the instructions below too complicated, please contact me instead.</p>
+  <h3>1. The accordion doesn't show up on the page</h3>
+  <h4>a) JavaScript errors</h4>
+  <p>
+    First, it's important to check if you have any JavaScript errors on the page that contains the accordion. JavaScript errors thrown by other scripts can break all the JavaScript functionality that follows on that page, including the accordion. I would like to note that
+    <i>Accordion Slider</i>
+    follows WordPress development best practices and is actively maintained to make sure it's bug free and works seamlessly. However, when something else (another plugin or theme) breaks in the site, it can affect the accordion as well, as mentioned before. Most of the times it's possible to check where the problem comes from, and I will show you 2 methods. If you find the instructions below too complicated, please contact me instead.
+  </p>
 
-<h5>FIRST METHOD</h5>
-<p>Please open Chrome or Safari, and navigate to the page that should contain the accordion. Then, press the F12 key if you're on Windows, and Option + Command + I if you're on Mac. Alternatively, you can right-click and select "Inspect element" on both systems. After the "Developer Tools" is opened please click on the "Console" tab. You will be able to see there all the errors and warnings that occur on the page. Some of them can be ignored but others need to be addressed, especially if they are JavaScript errors.</p>
+  <h5>FIRST METHOD</h5>
+  <p>
+    Please open Chrome or Safari, and navigate to the page that should contain the accordion. Then, press the F12 key if you're on Windows, and Option + Command + I if you're on Mac. Alternatively, you can right-click and select "Inspect element" on both systems. After the "Developer Tools" is opened please click on the "Console" tab. You will be able to see there all the errors and warnings that occur on the page. Some of them can be ignored but others need to be addressed, especially if they are JavaScript errors.
+  </p>
 
-<p>On the left side you will see the error message and on the right side you will see the name/path of the script that contains the error (if the full path of the script is not displayed please hover the text, and the full path should appear). By looking at the path of the script you can identify the theme or plugin that causes the error. If the error comes from another theme or plugin, and not <i>Accordion Slider</i>, it's best to contact the developer of that theme/plugin, so he can fix the error. If you have difficulties interpreting the data from Console, please try the second method or contact me via the support center and I will be happy to assist you.</p>
+  <p>
+    On the left side you will see the error message and on the right side you will see the name/path of the script that contains the error (if the full path of the script is not displayed please hover the text, and the full path should appear). By looking at the path of the script you can identify the theme or plugin that causes the error. If the error comes from another theme or plugin, and not
+    <i>Accordion Slider</i>
+    , it's best to contact the developer of that theme/plugin, so he can fix the error. If you have difficulties interpreting the data from Console, please try the second method or contact me via the support center and I will be happy to assist you.
+  </p>
 
-<h5>SECOND METHOD</h5>
-<p>This method is very simple but normally you would use it only if you can't find the problem using the first method.</p>
+  <h5>SECOND METHOD</h5>
+  <p>
+    This method is very simple but normally you would use it only if you can't find the problem using the first method.
+  </p>
 
-<p>What you need to do is temporarily deactivate the current theme and then the plugins one by one and test each time if the problem has disappeared. This way you can find which theme/plugin causes the problem.</p>
+  <p>
+    What you need to do is temporarily deactivate the current theme and then the plugins one by one and test each time if the problem has disappeared. This way you can find which theme/plugin causes the problem.
+  </p>
 
-<p>If you identify the problem as being caused by a theme or another plugin, it's best to contact the developer of that theme/plugin, so he can fix the problem. It's in the best interests of both the developer of the theme/plugin and its user that the theme/plugin doesn't cause errors because a buggy theme/plugin could cause even more problems in the future.</p>
+  <p>
+    If you identify the problem as being caused by a theme or another plugin, it's best to contact the developer of that theme/plugin, so he can fix the problem. It's in the best interests of both the developer of the theme/plugin and its user that the theme/plugin doesn't cause errors because a buggy theme/plugin could cause even more problems in the future.
+  </p>
 
-<h4>b) Missing wp_footer() call</h4>
-<p>If you don't see any errors in the Console, it's possible that the theme is missing some elements: the wp_head() and wp_footer() calls. These calls are used by many plugins, including this accordion, to insert the necessary scrips in the page.</p>
+  <h4>b) Missing wp_footer() call</h4>
+  <p>
+    If you don't see any errors in the Console, it's possible that the theme is missing some elements: the wp_head() and wp_footer() calls. These calls are used by many plugins, including this accordion, to insert the necessary scrips in the page.
+  </p>
 
-<p>The wp_head() call should be in the theme's header.php call just above &lt;/head&gt; :</p>
+  <p>
+    The wp_head() call should be in the theme's header.php call just above &lt;/head&gt; :
+  </p>
 
-<pre>
+  <pre>
 &lt;?php wp_head(); ?&gt;
 &lt;/head&gt;
 </pre>
 
-<p>The wp_footer() call should be in the theme's footer.php call just above &lt;/body&gt; :</p>
+  <p>
+    The wp_footer() call should be in the theme's footer.php call just above &lt;/body&gt; :
+  </p>
 
-<pre>
+  <pre>
 &lt;?php wp_footer(); ?&gt;
 &lt;/body&gt;
 </pre>
 
-<p>If that wasn't the problem either, please contact me via the support center at <a href="http://support.bqworks.com">support.bqworks.com</a>, and I will gladly help you.</p>
+  <p>
+    If that wasn't the problem either, please contact me via the support center at
+    <a href="http://support.bqworks.com">support.bqworks.com</a>
+    , and I will gladly help you.
+  </p>
 
-<h3>2. The admin area doesn't work</h3>
-<p>This is most likely caused by JavaScript errors. Please try the debugging methods suggested above for point <i>a)</i> or submit a support request at <a href="http://support.bqworks.com">support.bqworks.com</a>.</p>
+  <h3>2. The admin area doesn't work</h3>
+  <p>
+    This is most likely caused by JavaScript errors. Please try the debugging methods suggested above for point
+    <i>a)</i>
+    or submit a support request at
+    <a href="http://support.bqworks.com">support.bqworks.com</a>
+    .
+  </p>
 
   <h2 id="changelog">12. Changelog</h2>
   <strong>v. 1.0.0</strong>
