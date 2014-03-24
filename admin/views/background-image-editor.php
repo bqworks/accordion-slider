@@ -99,7 +99,8 @@
 				<label for="show-hide-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
 				
 				<div class="info-content">
-	                <p><?php _e( 'The <i>Background Image</i> represents the main panel image that will be visible when the accordion loads. The <i>Opened Background Image</i> is optional and represents the image that will replace the main image when the panel is opened.', 'accordion-slider' ); ?></p>
+	                <p><?php _e( 'The <i>Background Image</i> represents the main image that will be visible when the accordion loads.', 'accordion-slider' ); ?></p>
+	                <p><?php _e( 'The <i>Opened Background Image</i> is optional and represents the image that will fade in over the main image when the panel is opened.', 'accordion-slider' ); ?></p>
 	                <p><?php _e( 'The <i>Link</i> is optional and will be added either for the <i>Background Image</i>, or for the <i>Opened Background Image</i> if one was added.', 'accordion-slider' ); ?></p>
 					
 					<?php
