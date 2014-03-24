@@ -12,9 +12,9 @@
             <label for="show-hide-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
             
             <div class="info-content">
-                <p><?php _e( 'The fields below can be used for all your custom CSS or JavaScript.', 'accordion-slider' ); ?></p>
-                <p><?php _e( 'If you want to target a specific accordion, you need to assign a <i>Custom Class</i> to the accordion, in the accordion\'s settings, and then use that custom class in the <i>Custom CSS</i> field below.', 'accordion-slider' ); ?></p>
-                <p><?php _e( 'By default, the custom CSS and JavaScript code will be loaded inline, but in the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-settings') ?>"><?php _e( 'Plugin Settings', 'accordion-slider' ); ?></a> <?php _e( 'page you can set to be load the code in files.', 'accordion-slider' ); ?></p>
+                <p><?php _e( 'The fields below can be used for all your custom CSS or JavaScript code.', 'accordion-slider' ); ?></p>
+                <p><?php _e( 'If you want to target a specific accordion, you need to assign a <i>Custom Class</i> to the accordion, in the accordion\'s settings, and then use that custom class in the <i>Custom CSS</i> or <i>Custom JavaScript</i> fields below.', 'accordion-slider' ); ?></p>
+                <p><?php _e( 'By default, the custom CSS and JavaScript code will be loaded inline, but in the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-settings') ?>"><?php _e( 'Plugin Settings', 'accordion-slider' ); ?></a> <?php _e( 'page you can set to load the code in files instead of inline.', 'accordion-slider' ); ?></p>
             </div>
         </div>
     <?php
