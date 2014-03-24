@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Accordion Slider\n"
-"POT-Creation-Date: 2014-03-21 17:48+0200\n"
-"PO-Revision-Date: 2014-03-21 17:48+0200\n"
+"POT-Creation-Date: 2014-03-24 17:22+0200\n"
+"PO-Revision-Date: 2014-03-24 17:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,7 @@ msgid "Plugin Settings"
 msgstr ""
 
 #: admin/class-accordion-slider-admin.php:272
-#: admin/class-accordion-slider-admin.php:273 admin/views/accordions.php:14
+#: admin/class-accordion-slider-admin.php:273 admin/views/accordions.php:13
 msgid "Documentation"
 msgstr ""
 
@@ -196,82 +196,76 @@ msgstr ""
 
 #: admin/views/accordions.php:12
 msgid ""
-"The examples can be found in the <i>examples</i> folder (which is inside the "
-"main downloaded package), and can be imported using the <i>Import Accordion</"
+"The examples can be found in the <i>examples</i> folder, which is included "
+"in the plugin's folder, and can be imported using the <i>Import Accordion</"
 "i> button below."
 msgstr ""
 
 #: admin/views/accordions.php:13
-msgid ""
-"You can use these examples as a starting point for your own accordions or "
-"simply to learn how certain features are achieved."
+msgid "For detailed usage instructions please see the"
 msgstr ""
 
-#: admin/views/accordions.php:14
-msgid "For other instructions please see the"
-msgstr ""
-
-#: admin/views/accordions.php:14
+#: admin/views/accordions.php:13
 msgid "page"
 msgstr ""
 
-#: admin/views/accordions.php:16
+#: admin/views/accordions.php:15
 msgid "2. Support"
 msgstr ""
 
-#: admin/views/accordions.php:17
+#: admin/views/accordions.php:16
 msgid "When you need support, please contact us at our support center:"
 msgstr ""
 
-#: admin/views/accordions.php:24
+#: admin/views/accordions.php:23
 msgid "3. Updates"
 msgstr ""
 
-#: admin/views/accordions.php:25
+#: admin/views/accordions.php:24
 msgid ""
 "In order to have access to automatic updates, please enter your purchase code"
 msgstr ""
 
-#: admin/views/accordions.php:25 admin/views/flickr-panel-settings.php:54
+#: admin/views/accordions.php:24 admin/views/flickr-panel-settings.php:54
 #: includes/class-accordion-slider-api.php:219
 msgid "here"
 msgstr ""
 
-#: admin/views/accordions.php:39 admin/views/accordions.php:76
+#: admin/views/accordions.php:38 admin/views/accordions.php:75
 #: admin/views/flickr-panel-settings.php:26
 #: includes/class-accordion-slider-settings.php:929
 msgid "ID"
 msgstr ""
 
-#: admin/views/accordions.php:40 admin/views/accordions.php:77
+#: admin/views/accordions.php:39 admin/views/accordions.php:76
 msgid "Name"
 msgstr ""
 
-#: admin/views/accordions.php:41 admin/views/accordions.php:78
+#: admin/views/accordions.php:40 admin/views/accordions.php:77
 msgid "Shortcode"
 msgstr ""
 
-#: admin/views/accordions.php:42 admin/views/accordions.php:79
+#: admin/views/accordions.php:41 admin/views/accordions.php:78
 msgid "Created"
 msgstr ""
 
-#: admin/views/accordions.php:43 admin/views/accordions.php:80
+#: admin/views/accordions.php:42 admin/views/accordions.php:79
 msgid "Modified"
 msgstr ""
 
-#: admin/views/accordions.php:44 admin/views/accordions.php:81
+#: admin/views/accordions.php:43 admin/views/accordions.php:80
 msgid "Actions"
 msgstr ""
 
-#: admin/views/accordions.php:58
+#: admin/views/accordions.php:57
 msgid "You don't have saved accordions."
 msgstr ""
 
-#: admin/views/accordions.php:87
+#: admin/views/accordions.php:86
 msgid "Create New Accordion"
 msgstr ""
 
-#: admin/views/accordions.php:88
+#: admin/views/accordions.php:87
 msgid "Import Accordion"
 msgstr ""
 
@@ -321,29 +315,33 @@ msgstr ""
 
 #: admin/views/background-image-editor.php:102
 msgid ""
-"The <i>Background Image</i> represents the main panel image that will be "
-"visible when the accordion loads. The <i>Opened Background Image</i> is "
-"optional and represents the image that will replace the main image when the "
-"panel is opened."
+"The <i>Background Image</i> represents the main image that will be visible "
+"when the accordion loads."
 msgstr ""
 
 #: admin/views/background-image-editor.php:103
+msgid ""
+"The <i>Opened Background Image</i> is optional and represents the image that "
+"will fade in over the main image when the panel is opened."
+msgstr ""
+
+#: admin/views/background-image-editor.php:104
 msgid ""
 "The <i>Link</i> is optional and will be added either for the <i>Background "
 "Image</i>, or for the <i>Opened Background Image</i> if one was added."
 msgstr ""
 
-#: admin/views/background-image-editor.php:109 admin/views/html-editor.php:25
+#: admin/views/background-image-editor.php:110 admin/views/html-editor.php:25
 #: admin/views/layers-editor.php:72
 msgid "Show dynamic tags"
 msgstr ""
 
-#: admin/views/background-image-editor.php:110 admin/views/html-editor.php:26
+#: admin/views/background-image-editor.php:111 admin/views/html-editor.php:26
 #: admin/views/layers-editor.php:73
 msgid "Hide dynamic tags"
 msgstr ""
 
-#: admin/views/background-image-editor.php:121 admin/views/html-editor.php:42
+#: admin/views/background-image-editor.php:122 admin/views/html-editor.php:42
 #: admin/views/layers-editor.php:89
 msgid ""
 "The URL of the post's featured image. It accepts an optional parameter to "
@@ -352,44 +350,44 @@ msgid ""
 "value is <i>full</i>."
 msgstr ""
 
-#: admin/views/background-image-editor.php:126 admin/views/html-editor.php:47
+#: admin/views/background-image-editor.php:127 admin/views/html-editor.php:47
 #: admin/views/layers-editor.php:94
 msgid "The <i>alt</i> text of the post's featured image."
 msgstr ""
 
-#: admin/views/background-image-editor.php:131 admin/views/html-editor.php:52
+#: admin/views/background-image-editor.php:132 admin/views/html-editor.php:52
 #: admin/views/layers-editor.php:99
 msgid "The title of the post's featured image."
 msgstr ""
 
-#: admin/views/background-image-editor.php:136 admin/views/html-editor.php:57
+#: admin/views/background-image-editor.php:137 admin/views/html-editor.php:57
 #: admin/views/layers-editor.php:104
 msgid "The description of the post's featured image."
 msgstr ""
 
-#: admin/views/background-image-editor.php:141 admin/views/html-editor.php:62
+#: admin/views/background-image-editor.php:142 admin/views/html-editor.php:62
 #: admin/views/layers-editor.php:109
 msgid "The caption of the post's featured image."
 msgstr ""
 
-#: admin/views/background-image-editor.php:146 admin/views/html-editor.php:67
+#: admin/views/background-image-editor.php:147 admin/views/html-editor.php:67
 #: admin/views/layers-editor.php:114
 msgid "The post's title."
 msgstr ""
 
-#: admin/views/background-image-editor.php:151 admin/views/html-editor.php:77
+#: admin/views/background-image-editor.php:152 admin/views/html-editor.php:77
 #: admin/views/layers-editor.php:124
 msgid "The post's link."
 msgstr ""
 
-#: admin/views/background-image-editor.php:156 admin/views/html-editor.php:102
+#: admin/views/background-image-editor.php:157 admin/views/html-editor.php:102
 #: admin/views/layers-editor.php:149
 msgid ""
 "Returns the value from a custom field. The <i>name</i> parameter indicates "
 "the name of the custom field."
 msgstr ""
 
-#: admin/views/background-image-editor.php:168 admin/views/html-editor.php:119
+#: admin/views/background-image-editor.php:169 admin/views/html-editor.php:119
 #: admin/views/layers-editor.php:166
 msgid ""
 "The URL of the gallery image. It accepts an optional parameter to specify "
@@ -398,22 +396,22 @@ msgid ""
 "value is <i>full</i>."
 msgstr ""
 
-#: admin/views/background-image-editor.php:173 admin/views/html-editor.php:124
+#: admin/views/background-image-editor.php:174 admin/views/html-editor.php:124
 #: admin/views/layers-editor.php:171
 msgid "The <i>alt</i> text of the gallery image."
 msgstr ""
 
-#: admin/views/background-image-editor.php:178 admin/views/html-editor.php:129
+#: admin/views/background-image-editor.php:179 admin/views/html-editor.php:129
 #: admin/views/layers-editor.php:176
 msgid "The title of the gallery image."
 msgstr ""
 
-#: admin/views/background-image-editor.php:183 admin/views/html-editor.php:134
+#: admin/views/background-image-editor.php:184 admin/views/html-editor.php:134
 #: admin/views/layers-editor.php:181
 msgid "The description of the gallery image."
 msgstr ""
 
-#: admin/views/background-image-editor.php:195 admin/views/html-editor.php:151
+#: admin/views/background-image-editor.php:196 admin/views/html-editor.php:151
 #: admin/views/layers-editor.php:198
 msgid ""
 "The URL of the Flickr image. It accepts an optional parameter to specify the "
@@ -422,17 +420,17 @@ msgid ""
 "<i>large</i>. The default value is <i>medium</i>."
 msgstr ""
 
-#: admin/views/background-image-editor.php:200 admin/views/html-editor.php:156
+#: admin/views/background-image-editor.php:201 admin/views/html-editor.php:156
 #: admin/views/layers-editor.php:203
 msgid "The description of the Flickr image."
 msgstr ""
 
-#: admin/views/background-image-editor.php:205 admin/views/html-editor.php:161
+#: admin/views/background-image-editor.php:206 admin/views/html-editor.php:161
 #: admin/views/layers-editor.php:208
 msgid "The link of the Flickr image."
 msgstr ""
 
-#: admin/views/background-image-editor.php:210 admin/views/html-editor.php:176
+#: admin/views/background-image-editor.php:211 admin/views/html-editor.php:176
 #: admin/views/layers-editor.php:223
 msgid "The link to the profile of the image's owner."
 msgstr ""
@@ -446,14 +444,16 @@ msgid "Add Setting"
 msgstr ""
 
 #: admin/views/custom-css-js.php:15
-msgid "The fields below can be used for all your custom CSS or JavaScript."
+msgid ""
+"The fields below can be used for all your custom CSS or JavaScript code."
 msgstr ""
 
 #: admin/views/custom-css-js.php:16
 msgid ""
 "If you want to target a specific accordion, you need to assign a <i>Custom "
 "Class</i> to the accordion, in the accordion's settings, and then use that "
-"custom class in the <i>Custom CSS</i> field below."
+"custom class in the <i>Custom CSS</i> or <i>Custom JavaScript</i> fields "
+"below."
 msgstr ""
 
 #: admin/views/custom-css-js.php:17
@@ -463,7 +463,7 @@ msgid ""
 msgstr ""
 
 #: admin/views/custom-css-js.php:17
-msgid "page you can set to be load the code in files."
+msgid "page you can set to load the code in files instead of inline."
 msgstr ""
 
 #: admin/views/custom-css-js.php:27
@@ -789,7 +789,8 @@ msgid ""
 "layer's horizontal and vertical position. The <i>Horizontal</i> and "
 "<i>Vertical</i> settings can be set to fixed or percentage values. Also, in "
 "order to center a layer, you can set the <i>Horizontal</i> and/or "
-"<i>Vertical</i> settings to <i>center</i>."
+"<i>Vertical</i> settings to <i>center</i>. The <i>Width</i> and <i>Height</"
+"i> settings can be set to fixed or percentage values, or to <i>auto</i>."
 msgstr ""
 
 #: admin/views/layers-editor.php:66
