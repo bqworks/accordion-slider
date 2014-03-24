@@ -1416,15 +1416,21 @@ Plugin settings page
 
 .plugin-settings table {
 	max-width: 960px;
+	border-spacing: 0;
 }
 
 .plugin-settings table td {
 	vertical-align: top;
 	padding: 10px 30px 10px 0;
+	border-bottom: 1px solid #DDD;
 }
 
 .plugin-settings table tr td:first-child {
 	white-space: nowrap;
+}
+
+.plugin-settings table tr:last-child td {
+	border-bottom: none;
 }
 
 .plugin-settings label {
