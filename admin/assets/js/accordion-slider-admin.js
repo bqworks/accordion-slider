@@ -2727,7 +2727,8 @@
 
 				input.on( 'change', function() {
 					isEditingLayerName = false;
-					that.$listLayer.text( input.val() );
+					var layerName = input.val() !== '' ? input.val() : 'Layer ' + that.id;
+					that.$listLayer.text( layerName );
 					input.remove();
 				});
 			});
@@ -2740,9 +2741,10 @@
 				if ( ! $( event.target ).is( 'input' ) && isEditingLayerName === true ) {
 					isEditingLayerName = false;
 
-					var input = that.$listLayer.find( 'input' );
+					var input = that.$listLayer.find( 'input' ),
+						layerName = input.val() !== '' ? input.val() : 'Layer ' + that.id;
 
-					that.$listLayer.text( input.val() );
+					that.$listLayer.text( layerName );
 					input.remove();
 				}
 			});
