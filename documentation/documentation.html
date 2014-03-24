@@ -1518,10 +1518,23 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
     In addition to these supported video types, you can add any other video, but you will also need to add your own code for implementing the automatic handling.
   </p>
   <p>
-    Videos can be added in
+    Videos can be added in the <i>Layers</i> editor, as
     <i>Video Layers</i>
-    . This type of layers provide a field where you simply need to put the iframe embed, in the case of YouTube and Vimeo videos, or the HTML code in the case of HTML5 videos, and the accordion's code will take care of the rest. You might notice that the code you added is modified a little by the accordion. This is because the accordion prepares the video for allowing it to be automatically controlled.
+    . This type of layer provide a field where you simply need to put the iframe embed, in the case of YouTube and Vimeo videos, or the HTML code in the case of HTML5 videos.
   </p>
+    <p><i>YouTube example:</i></p>
+    <a href="assets/images/video-layer-youtube.png">
+    <img src="assets/images/video-layer-youtube.png"></a>
+
+    <p><i>HTML5 Video example:</i></p>
+    <a href="assets/images/video-layer-html5.png">
+    <img src="assets/images/video-layer-html5.png"></a>
+
+  <p>You might notice that after you save the layers, the code you added is modified a little. This is because the accordion prepares the video for allowing it to be automatically controlled. For this purpose it adds the <i>as-video</i> class to the iframe or video tag. Also, it adds the <i>enablejsapi=1</i> parameter to YouTube videos and the <i>api=1</i> parameter to Vimeo videos.</p>
+
+  <p>In the admin area, in accordion's <i>Video</i> sidebar panel, you can set how the video will react to the opening or closing of panels.</p>
+  <a href="assets/images/video-sidebar-panel.png">
+    <img src="assets/images/video-sidebar-panel.png"></a>
 
   <h2 id="troubleshooting">11. Troubleshooting</h2>
 
