@@ -62,7 +62,7 @@
         			
         			<div class="has-layers-info">
 		                <p><?php _e( 'The <i>Display</i> setting from the <i>Appearance</i> tab allows you to specify if the layer will be permanently visible inside the panel, if it will appear only when the panel is opened, or if it will appear when the panel is closed.', 'accordion-slider' ); ?></p>
-		                <p><?php _e( 'The <i>Position</i> setting allows you to set the reference point for the layer\'s horizontal and vertical position. The <i>Horizontal</i> and <i>Vertical</i> settings can be set to fixed or percentage values. Also, in order to center a layer, you can set the <i>Horizontal</i> and/or <i>Vertical</i> settings to <i>center</i>.', 'accordion-slider' ); ?></p>
+		                <p><?php _e( 'The <i>Position</i> setting allows you to set the reference point for the layer\'s horizontal and vertical position. The <i>Horizontal</i> and <i>Vertical</i> settings can be set to fixed or percentage values. Also, in order to center a layer, you can set the <i>Horizontal</i> and/or <i>Vertical</i> settings to <i>center</i>. The <i>Width</i> and <i>Height</i> settings can be set to fixed or percentage values, or to <i>auto</i>.', 'accordion-slider' ); ?></p>
 						<p><?php _e( 'To style the layer, you can select one or more of the <i>Preset Styles</i>, or assign it a <i>Custom Class</i> and add some', 'accordion-slider' ); ?> <a target="_blank" href="<?php echo admin_url( 'admin.php?page=accordion-slider-custom' ); ?>"><?php _e( 'custom CSS', 'accordion-slider' ); ?></a> <?php _e( 'for it.', 'accordion-slider' ); ?></p>
 
 						<?php
