@@ -153,7 +153,11 @@ class BQW_AS_Panel_Renderer {
 		$background_width = isset( $this->data['background_width'] ) && $this->data['background_width'] != 0 ? ' width="' . esc_attr( $this->data['background_width'] ) . '"' : '';
 		$background_height = isset( $this->data['background_height'] ) && $this->data['background_height'] != 0 ? ' height="' . esc_attr( $this->data['background_height'] ) . '"' : '';
 		$background_retina_source = isset( $this->data['background_retina_source'] ) && $this->data['background_retina_source'] !== '' ? ' data-retina="' . esc_attr( $this->data['background_retina_source'] ) . '"' : '';
-		$background_image = '<img class="as-background"' . $background_source . $background_retina_source . $background_alt . $background_title . $background_width . $background_height . ' />';
+		
+		$classes = "as-background";
+
+		$classes = apply_filters( 'accordion_slider_background_image_classes', $classes, $this->accordion_id, $this->panel_index );
+		$background_image = '<img class="' . $classes . '"' . $background_source . $background_retina_source . $background_alt . $background_title . $background_width . $background_height . ' />';
 
 		return $background_image;
 	}
@@ -187,7 +191,11 @@ class BQW_AS_Panel_Renderer {
 		$opened_background_width = isset( $this->data['opened_background_width'] ) && $this->data['opened_background_width'] != 0 ? ' width="' . esc_attr( $this->data['opened_background_width'] ) . '"' : '';
 		$opened_background_height = isset( $this->data['opened_background_height'] ) && $this->data['opened_background_height'] != 0 ? ' height="' . esc_attr( $this->data['opened_background_height'] ) . '"' : '';
 		$opened_background_retina_source = isset( $this->data['opened_background_retina_source'] ) && $this->data['opened_background_retina_source'] !== '' ? ' data-retina="' . esc_attr( $this->data['opened_background_retina_source'] ) . '"' : '';
-		$opened_background_image = '<img class="as-background-opened"' . $opened_background_source . $opened_background_retina_source . $opened_background_alt . $opened_background_title . $opened_background_width . $opened_background_height . ' />';
+		
+		$classes = "as-background-opened";
+		$classes = apply_filters( 'accordion_slider_opened_background_image_classes', $classes, $this->accordion_id, $this->panel_index );
+
+		$opened_background_image = '<img class="' . $classes . '"' . $opened_background_source . $opened_background_retina_source . $opened_background_alt . $opened_background_title . $opened_background_width . $opened_background_height . ' />';
 	
 		return $opened_background_image;
 	}
@@ -233,8 +241,14 @@ class BQW_AS_Panel_Renderer {
 
 		$background_link_href = apply_filters( 'accordion_slider_panel_link_url', $background_link_href, $this->accordion_id, $this->panel_index );
 
+		$classes = "";
+		$classes = apply_filters( 'accordion_slider_panel_link_classes', $classes, $this->accordion_id, $this->panel_index );
+
 		$background_link_title = isset( $this->data['background_link_title'] ) && $this->data['background_link_title'] !== '' ? ' title="' . esc_attr( $this->data['background_link_title'] ) . '"' : '';
-		$background_link = '<a href="' . $background_link_href . '"' . $background_link_title . '>' . $image . '</a>';
+		$background_link = 
+			'<a class="' . $classes . '" href="' . $background_link_href . '"' . $background_link_title . '>' . 
+				"\r\n" . '				' . $image . 
+			"\r\n" . '			' . '</a>';
 		
 		return $background_link;
 	}
