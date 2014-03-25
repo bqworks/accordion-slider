@@ -199,19 +199,16 @@ class BQW_Accordion_Slider_Activation {
 			dbDelta( $create_panels_table );
 			dbDelta( $create_layers_table );
 		}
+
+		$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
 	}
 	
 	/**
 	 * Called for a single blog when the plugin is deactivated.
 	 *
-	 * Removes the cached accordions stored as transients.
-	 *
 	 * @since 1.0.0
 	 */
 	private static function single_deactivate() {
-		global $wpdb;
-		$prefix = $wpdb->prefix;
 		
-		$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
 	}
 }
