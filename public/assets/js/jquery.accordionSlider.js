@@ -3,7 +3,7 @@
 * Homepage: http://bqworks.com/accordion-slider/
 * Author: bqworks
 * Author URL: http://bqworks.com/
-* Date: 2014-03-14
+* Date: 2014-03-25
 */
 ;(function(window, $) {
 
@@ -130,6 +130,8 @@
 			var that = this;
 
 			this.settings = $.extend({}, this.defaults, this.options);
+
+			this.$accordion.removeClass('as-no-js');
 
 			// get reference to the panels' container and 
 			// create additional mask container, which will mask the panels' container
@@ -2129,7 +2131,7 @@
 		_setStyle: function() {
 			this.styled = true;
 
-			this.$layer.css('display', '');
+			this.$layer.css({'display': '', 'margin': 0});
 
 			// get the data attributes specified in HTML
 			this.data = this.$layer.data();
