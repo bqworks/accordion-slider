@@ -91,11 +91,11 @@ class BQW_AS_Accordion_Renderer {
 	 * @return string The HTML markup of the accordion.
 	 */
 	public function render() {
-		$classes = 'accordion-slider';
+		$classes = 'accordion-slider as-no-js';
 		$classes .= isset( $this->settings['custom_class'] ) && $this->settings['custom_class'] !== '' ? ' ' . $this->settings['custom_class'] : '';
 		$classes = apply_filters( 'accordion_slider_classes' , $classes, $this->id );
 
-		$this->html_output .= "\r\n" . '<div id="accordion-slider-' . $this->id . '" class="' . $classes . '">';
+		$this->html_output .= "\r\n" . '<div id="accordion-slider-' . $this->id . '" class="' . $classes . '" style="width: ' . $this->settings['width'] . 'px; height: ' . $this->settings['height'] . 'px;">';
 
 		if ( $this->has_panels() ) {
 			$this->html_output .= "\r\n" . '	<div class="as-panels">';
