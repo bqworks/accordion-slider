@@ -1081,6 +1081,7 @@ Single accordion page
 
 .add-breakpoint-setting-group {
 	position: relative;
+	display: inline-block;
 	margin: 15px;
 }
 
