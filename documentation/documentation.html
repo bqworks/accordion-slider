@@ -1433,6 +1433,48 @@ function accordion_layer_markup( $html_markup, $accordion_id, $panel_index ) {
 }
 </pre>
 
+<h4 id="accordion_slider_background_image_classes">accordion_slider_background_image_classes</h4>
+  <p>
+    It allows you to add custom classes to the background image.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_background_image_classes', 'add_background_image_class', 10, 3 );
+
+function add_background_image_class( $classes, $accordion_id, $panel_index ) {
+  $classes .= ' as-custom-bg-class';
+
+  return $classes;
+}
+</pre>
+
+<h4 id="accordion_slider_opened_background_image_classes">accordion_slider_opened_background_image_classes</h4>
+  <p>
+    It allows you to add custom classes to the opened background image.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_opened_background_image_classes', 'add_opened_background_image_class', 10, 3 );
+
+function add_opened_background_image_class( $classes, $accordion_id, $panel_index ) {
+  $classes .= ' as-custom-opened-bg-class';
+
+  return $classes;
+}
+</pre>
+
+<h4 id="accordion_slider_panel_link_classes">accordion_slider_panel_link_classes</h4>
+  <p>
+    It allows you to add custom classes to the panel's link.
+  </p>
+  <pre>
+add_filter( 'accordion_slider_panel_link_classes', 'add_panel_link_class', 10, 3 );
+
+function add_panel_link_class( $classes, $accordion_id, $panel_index ) {
+  $classes .= ' as-custom-link-class';
+
+  return $classes;
+}
+</pre>
+
   <h4 id="accordion_slider_panel_html">accordion_slider_panel_html</h4>
   <p>
     It allows you to modify the panel's inline HTML content before it's printed. Please note that this is different from
