@@ -1673,6 +1673,13 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
     .
   </p>
 
+  <h3>3. The accordion looks different in the page than it looks in the preview</h3>
+  <p>
+    The theme might include CSS code that gets applied to the accordion's elements. For example, if you add a paragraph layer, the style added to paragraphs by the theme, will also get applied to the paragraph layers inside the accordion. The same can happen for heading or image layers.
+  </p>
+  <p>The accordion includes some CSS code that minimizes the influence of external CSS, but it's not always possible to eliminate this influence completely. So, when you see unexpected styles in a published accordion, you will need to add some custom CSS to override the style added by the theme's CSS.</p>
+  <p>Regarding layers, another solution for preventing CSS influences from the theme would be to use <i>DIV</i> layers instead of <i>Paragraph</i> or <i>Heading</i> layers, since DIV elements are usually not styled by themes. However, my recommendation is to use <i>Paragraph</i> or <i>Heading</i> layers every time it's appropriate and simply use custom CSS to prevent theme influences.</p>
+
   <h2 id="changelog">12. Changelog</h2>
   <strong>v. 1.0.0</strong>
   <ul>
