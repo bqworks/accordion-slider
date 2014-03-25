@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Accordion Slider\n"
-"POT-Creation-Date: 2014-03-24 17:22+0200\n"
-"PO-Revision-Date: 2014-03-24 17:22+0200\n"
+"POT-Creation-Date: 2014-03-25 20:17+0200\n"
+"PO-Revision-Date: 2014-03-25 20:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -56,8 +56,8 @@ msgid "Accordion slider created."
 msgstr ""
 
 #: admin/class-accordion-slider-admin.php:236
-#: admin/class-accordion-slider-admin.php:237 admin/views/accordions.php:2
-msgid "All Accordions"
+#: admin/class-accordion-slider-admin.php:237
+msgid "Accordion Slider"
 msgstr ""
 
 #: admin/class-accordion-slider-admin.php:245 admin/views/accordion.php:2
@@ -182,6 +182,10 @@ msgstr ""
 
 #: admin/views/accordions-row.php:24
 msgid "Export"
+msgstr ""
+
+#: admin/views/accordions.php:2
+msgid "All Accordions"
 msgstr ""
 
 #: admin/views/accordions.php:10
@@ -332,17 +336,17 @@ msgid ""
 msgstr ""
 
 #: admin/views/background-image-editor.php:110 admin/views/html-editor.php:25
-#: admin/views/layers-editor.php:72
+#: admin/views/layers-editor.php:73
 msgid "Show dynamic tags"
 msgstr ""
 
 #: admin/views/background-image-editor.php:111 admin/views/html-editor.php:26
-#: admin/views/layers-editor.php:73
+#: admin/views/layers-editor.php:74
 msgid "Hide dynamic tags"
 msgstr ""
 
 #: admin/views/background-image-editor.php:122 admin/views/html-editor.php:42
-#: admin/views/layers-editor.php:89
+#: admin/views/layers-editor.php:90
 msgid ""
 "The URL of the post's featured image. It accepts an optional parameter to "
 "specify the size of the image: [as_image_src.thumbnail]. Accepted sizes are: "
@@ -351,44 +355,44 @@ msgid ""
 msgstr ""
 
 #: admin/views/background-image-editor.php:127 admin/views/html-editor.php:47
-#: admin/views/layers-editor.php:94
+#: admin/views/layers-editor.php:95
 msgid "The <i>alt</i> text of the post's featured image."
 msgstr ""
 
 #: admin/views/background-image-editor.php:132 admin/views/html-editor.php:52
-#: admin/views/layers-editor.php:99
+#: admin/views/layers-editor.php:100
 msgid "The title of the post's featured image."
 msgstr ""
 
 #: admin/views/background-image-editor.php:137 admin/views/html-editor.php:57
-#: admin/views/layers-editor.php:104
+#: admin/views/layers-editor.php:105
 msgid "The description of the post's featured image."
 msgstr ""
 
 #: admin/views/background-image-editor.php:142 admin/views/html-editor.php:62
-#: admin/views/layers-editor.php:109
+#: admin/views/layers-editor.php:110
 msgid "The caption of the post's featured image."
 msgstr ""
 
 #: admin/views/background-image-editor.php:147 admin/views/html-editor.php:67
-#: admin/views/layers-editor.php:114
+#: admin/views/layers-editor.php:115
 msgid "The post's title."
 msgstr ""
 
 #: admin/views/background-image-editor.php:152 admin/views/html-editor.php:77
-#: admin/views/layers-editor.php:124
+#: admin/views/layers-editor.php:125
 msgid "The post's link."
 msgstr ""
 
 #: admin/views/background-image-editor.php:157 admin/views/html-editor.php:102
-#: admin/views/layers-editor.php:149
+#: admin/views/layers-editor.php:150
 msgid ""
 "Returns the value from a custom field. The <i>name</i> parameter indicates "
 "the name of the custom field."
 msgstr ""
 
 #: admin/views/background-image-editor.php:169 admin/views/html-editor.php:119
-#: admin/views/layers-editor.php:166
+#: admin/views/layers-editor.php:167
 msgid ""
 "The URL of the gallery image. It accepts an optional parameter to specify "
 "the size of the image: [as_image_src.thumbnail]. Accepted sizes are: "
@@ -397,22 +401,22 @@ msgid ""
 msgstr ""
 
 #: admin/views/background-image-editor.php:174 admin/views/html-editor.php:124
-#: admin/views/layers-editor.php:171
+#: admin/views/layers-editor.php:172
 msgid "The <i>alt</i> text of the gallery image."
 msgstr ""
 
 #: admin/views/background-image-editor.php:179 admin/views/html-editor.php:129
-#: admin/views/layers-editor.php:176
+#: admin/views/layers-editor.php:177
 msgid "The title of the gallery image."
 msgstr ""
 
 #: admin/views/background-image-editor.php:184 admin/views/html-editor.php:134
-#: admin/views/layers-editor.php:181
+#: admin/views/layers-editor.php:182
 msgid "The description of the gallery image."
 msgstr ""
 
 #: admin/views/background-image-editor.php:196 admin/views/html-editor.php:151
-#: admin/views/layers-editor.php:198
+#: admin/views/layers-editor.php:199
 msgid ""
 "The URL of the Flickr image. It accepts an optional parameter to specify the "
 "size of the image: [as_image_src.thumbnail]. Accepted sizes are: <i>square</"
@@ -421,17 +425,17 @@ msgid ""
 msgstr ""
 
 #: admin/views/background-image-editor.php:201 admin/views/html-editor.php:156
-#: admin/views/layers-editor.php:203
+#: admin/views/layers-editor.php:204
 msgid "The description of the Flickr image."
 msgstr ""
 
 #: admin/views/background-image-editor.php:206 admin/views/html-editor.php:161
-#: admin/views/layers-editor.php:208
+#: admin/views/layers-editor.php:209
 msgid "The link of the Flickr image."
 msgstr ""
 
 #: admin/views/background-image-editor.php:211 admin/views/html-editor.php:176
-#: admin/views/layers-editor.php:223
+#: admin/views/layers-editor.php:224
 msgid "The link to the profile of the image's owner."
 msgstr ""
 
@@ -545,14 +549,16 @@ msgstr ""
 msgid ""
 "You just need to drop the accordion slider shortcode in a post that contains "
 "a <i>[gallery]</i> shortcode, and the images from the <i>[gallery]</i> will "
-"automatically be loaded in the accordion."
+"automatically be loaded in the accordion. Then, if you want to hide the "
+"original gallery, you can add the <i>hide</i> attribute to the <i>[gallery]</"
+"i> shortcode: <i>[gallery ids=\"1,2,3\" hide=\"true\"]</i>."
 msgstr ""
 
 #: admin/views/html-editor.php:19
 msgid "In the field above you can add raw HTML content."
 msgstr ""
 
-#: admin/views/html-editor.php:37 admin/views/layers-editor.php:84
+#: admin/views/html-editor.php:37 admin/views/layers-editor.php:85
 msgid ""
 "The post's featured image, as an <i>img</i> HTML element. It accepts an "
 "optional parameter to specify the size of the image: [as_image.thumbnail]. "
@@ -560,29 +566,29 @@ msgid ""
 "i>. The default value is <i>full</i>."
 msgstr ""
 
-#: admin/views/html-editor.php:72 admin/views/layers-editor.php:119
+#: admin/views/html-editor.php:72 admin/views/layers-editor.php:120
 msgid ""
 "The post's link, as an <i>anchor</i> HTML element, with the post's title as "
 "the text of the link."
 msgstr ""
 
-#: admin/views/html-editor.php:82 admin/views/layers-editor.php:129
+#: admin/views/html-editor.php:82 admin/views/layers-editor.php:130
 msgid "The post's date."
 msgstr ""
 
-#: admin/views/html-editor.php:87 admin/views/layers-editor.php:134
+#: admin/views/html-editor.php:87 admin/views/layers-editor.php:135
 msgid "The post's excerpt."
 msgstr ""
 
-#: admin/views/html-editor.php:92 admin/views/layers-editor.php:139
+#: admin/views/html-editor.php:92 admin/views/layers-editor.php:140
 msgid "The post's content."
 msgstr ""
 
-#: admin/views/html-editor.php:97 admin/views/layers-editor.php:144
+#: admin/views/html-editor.php:97 admin/views/layers-editor.php:145
 msgid "The first category that the post is assigned to."
 msgstr ""
 
-#: admin/views/html-editor.php:114 admin/views/layers-editor.php:161
+#: admin/views/html-editor.php:114 admin/views/layers-editor.php:162
 msgid ""
 "The gallery image, as an <i>img</i> HTML element. It accepts an optional "
 "parameter to specify the size of the image: [as_image.thumbnail]. Accepted "
@@ -590,7 +596,7 @@ msgid ""
 "default value is <i>full</i>."
 msgstr ""
 
-#: admin/views/html-editor.php:146 admin/views/layers-editor.php:193
+#: admin/views/html-editor.php:146 admin/views/layers-editor.php:194
 msgid ""
 "The Flickr image, as an <i>img</i> HTML element. It accepts an optional "
 "parameter to specify the size of the image: [as_image.thumbnail]. Accepted "
@@ -598,11 +604,11 @@ msgid ""
 "default value is <i>full</i>."
 msgstr ""
 
-#: admin/views/html-editor.php:166 admin/views/layers-editor.php:213
+#: admin/views/html-editor.php:166 admin/views/layers-editor.php:214
 msgid "The date of the Flickr image."
 msgstr ""
 
-#: admin/views/html-editor.php:171 admin/views/layers-editor.php:218
+#: admin/views/html-editor.php:171 admin/views/layers-editor.php:219
 msgid "The username of the image's owner."
 msgstr ""
 
@@ -805,6 +811,17 @@ msgstr ""
 
 #: admin/views/layers-editor.php:66
 msgid "for it."
+msgstr ""
+
+#: admin/views/layers-editor.php:67
+msgid ""
+"<strong>Note:</strong> The style of <i>Paragraph</i>, <i>Heading</i> or "
+"<i>Image</i> layers might be affected by the theme's CSS code when you "
+"publish the accordion in a page. More details in the"
+msgstr ""
+
+#: admin/views/layers-editor.php:67
+msgid "Troubleshooting chapter"
 msgstr ""
 
 #: admin/views/plugin-settings.php:64
