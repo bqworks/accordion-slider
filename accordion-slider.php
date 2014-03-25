@@ -34,12 +34,14 @@ require_once( plugin_dir_path( __FILE__ ) . 'includes/class-accordion-slider-act
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-accordion-slider-widget.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-accordion-slider-settings.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flickr.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-hideable-gallery.php' );
 
 register_activation_hook( __FILE__, array( 'BQW_Accordion_Slider_Activation', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'BQW_Accordion_Slider_Activation', 'deactivate' ) );
 
 add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider', 'get_instance' ) );
 add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Activation', 'get_instance' ) );
+add_action( 'plugins_loaded', array( 'BQW_Hideable_Gallery', 'get_instance' ) );
 
 // register the widget
 add_action( 'widgets_init', 'bqw_as_register_widget' );
