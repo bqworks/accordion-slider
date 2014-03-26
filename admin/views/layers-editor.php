@@ -58,14 +58,18 @@
 				<label for="show-hide-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
 				
 				<div class="info-content">
-					<p class="no-layers-info"><?php _e( 'To add a new layer, hover on the plus sign above and select a layer type.', 'accordion-slider' ); ?></p>
-        			
+					<div class="no-layers-info">
+						<p><?php _e( 'To add a new layer, hover on the plus sign above and select a layer type.', 'accordion-slider' ); ?></p>
+						<p><a href="https://www.youtube.com/watch?v=-6X1FAbJyYw" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
+					</div>
+
         			<div class="has-layers-info">
 		                <p><?php _e( 'The <i>Display</i> setting from the <i>Appearance</i> tab allows you to specify if the layer will be permanently visible inside the panel, if it will appear only when the panel is opened, or if it will appear when the panel is closed.', 'accordion-slider' ); ?></p>
 		                <p><?php _e( 'The <i>Position</i> setting allows you to set the reference point for the layer\'s horizontal and vertical position. The <i>Horizontal</i> and <i>Vertical</i> settings can be set to fixed or percentage values. Also, in order to center a layer, you can set the <i>Horizontal</i> and/or <i>Vertical</i> settings to <i>center</i>. The <i>Width</i> and <i>Height</i> settings can be set to fixed or percentage values, or to <i>auto</i>.', 'accordion-slider' ); ?></p>
 						<p><?php _e( 'To style the layer, you can select one or more of the <i>Preset Styles</i>, or assign it a <i>Custom Class</i> and add some', 'accordion-slider' ); ?> <a target="_blank" href="<?php echo admin_url( 'admin.php?page=accordion-slider-custom' ); ?>"><?php _e( 'custom CSS', 'accordion-slider' ); ?></a> <?php _e( 'for it.', 'accordion-slider' ); ?></p>
 						<p><?php _e( '<strong>Note:</strong> The style of <i>Paragraph</i>, <i>Heading</i> or <i>Image</i> layers might be affected by the theme\'s CSS code when you publish the accordion in a page. More details in the', 'accordion-slider' ); ?> <a target="_blank" href="<?php echo admin_url( 'admin.php?page=accordion-slider-documentation' ); ?>"><?php _e( 'Troubleshooting chapter', 'accordion-slider' ); ?></a>.</p>
-
+						<p><a href="https://www.youtube.com/watch?v=-6X1FAbJyYw" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
+						
 						<?php
 							if ( $content_type === 'posts' || $content_type === 'gallery' || $content_type === 'flickr' ) {
 						?>

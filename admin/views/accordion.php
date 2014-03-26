@@ -151,6 +151,7 @@
                                     <div class="info-content">
                                         <p><?php _e( 'Breakpoints allow you to modify the look of the accordion for different window sizes.', 'accordion-slider' ); ?></p>
                                         <p><?php _e( 'Each breakpoint allows you to set the width of the window for which the breakpoint will apply, and then add several settings which will override the global settings.', 'accordion-slider' ); ?></p>
+                                        <p><a href="https://www.youtube.com/watch?v=AatLP0QGYv8" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
                                     </div>
                                 </div>
                             <?php
