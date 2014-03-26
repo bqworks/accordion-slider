@@ -139,6 +139,18 @@ img {
   box-sizing: border-box;
 }
 
+.video-tutorials-list {
+  -moz-columns: 2;
+  -webkit-columns: 2;
+  columns: 2;
+  margin: 0;
+  padding: 0;
+}
+
+.video-tutorials-list li {
+  margin-bottom: 10px;
+}
+
 table {
   max-width: 100%;
   border-collapse: collapse;
