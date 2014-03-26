@@ -1220,6 +1220,13 @@ Single accordion page
 	text-decoration: none;
 }
 
+.video-tutorials-list {
+	-moz-columns: 3;
+	-webkit-columns: 3;
+	columns: 3;
+	width: 700px;
+}
+
 .sidebar-panel-info {
 	margin-top: 10px;
 }

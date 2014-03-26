@@ -10,7 +10,16 @@
 			<h3><?php _e( '1. Getting started', 'accordion-slider' ); ?></h3>
 			<p><?php _e( 'If you want to reproduce one of the examples showcased online, you can easily import those examples into your own Accordion Slider installation.', 'accordion-slider' ); ?></p>
 			<p><?php _e( 'The examples can be found in the <i>examples</i> folder, which is included in the plugin\'s folder, and can be imported using the <i>Import Accordion</i> button below.', 'accordion-slider' ); ?></p>
-			<p><?php _e( 'For detailed usage instructions please see the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-documentation'); ?>"><?php _e( 'Documentation', 'accordion-slider' ); ?></a> <?php _e( 'page', 'accordion-slider' ); ?>.</p>
+			<p><?php _e( 'For detailed usage instructions please see the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-documentation'); ?>"><?php _e( 'Documentation', 'accordion-slider' ); ?></a> <?php _e( 'page. You can also check these video tutorials:', 'accordion-slider' ); ?></p>
+			<ul class="video-tutorials-list">
+				<li><a href="https://www.youtube.com/watch?v=qmjgtmeLrzs" target="_blank"><?php _e( '1. Create and publish accordions', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://www.youtube.com/watch?v=sGToyxSDZLk" target="_blank"><?php _e( '2. Create accordions from posts', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://www.youtube.com/watch?v=oF3tRiuJq_k" target="_blank"><?php _e( '3. Create accordions from galleries', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://www.youtube.com/watch?v=-6X1FAbJyYw" target="_blank"><?php _e( '4. Working with layers', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://www.youtube.com/watch?v=kqU0FxrN6L4" target="_blank"><?php _e( '5. Adding custom CSS', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://www.youtube.com/watch?v=AatLP0QGYv8" target="_blank"><?php _e( '6. Wordking with breakpoints', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://www.youtube.com/watch?v=UVk_2r3f1xc" target="_blank"><?php _e( '7. Import and Export accordions', 'accordion-slider' ); ?></a></li>
+			</ul>
 
 			<h3><?php _e( '2. Support', 'accordion-slider' ); ?></h3>
 			<p><?php _e( 'When you need support, please contact us at our support center:', 'accordion-slider' ); ?> <a href="http://support.bqworks.com">support.bqworks.com</a>.</p>
