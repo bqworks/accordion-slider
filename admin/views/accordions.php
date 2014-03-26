@@ -17,7 +17,7 @@
 				<li><a href="https://www.youtube.com/watch?v=oF3tRiuJq_k" target="_blank"><?php _e( '3. Create accordions from galleries', 'accordion-slider' ); ?></a></li>
 				<li><a href="https://www.youtube.com/watch?v=-6X1FAbJyYw" target="_blank"><?php _e( '4. Working with layers', 'accordion-slider' ); ?></a></li>
 				<li><a href="https://www.youtube.com/watch?v=kqU0FxrN6L4" target="_blank"><?php _e( '5. Adding custom CSS', 'accordion-slider' ); ?></a></li>
-				<li><a href="https://www.youtube.com/watch?v=AatLP0QGYv8" target="_blank"><?php _e( '6. Wordking with breakpoints', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://www.youtube.com/watch?v=AatLP0QGYv8" target="_blank"><?php _e( '6. Working with breakpoints', 'accordion-slider' ); ?></a></li>
 				<li><a href="https://www.youtube.com/watch?v=UVk_2r3f1xc" target="_blank"><?php _e( '7. Import and Export accordions', 'accordion-slider' ); ?></a></li>
 			</ul>
 
