@@ -230,10 +230,6 @@
 	-webkit-box-shadow: none !important;
 	-mox-box-shadow: none !important;
 	box-shadow: none !important;
-	transition: none !important;
-	-moz-transition: none !important;
-	-webkit-transition: none !important;
-	-o-transition: none !important;
 }
 
 .accordion-slider a {
