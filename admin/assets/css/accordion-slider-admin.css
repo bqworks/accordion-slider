@@ -1227,6 +1227,10 @@ Single accordion page
 	width: 700px;
 }
 
+.video-tutorials-list li {
+	margin-bottom: 10px;
+}
+
 .sidebar-panel-info {
 	margin-top: 10px;
 }
