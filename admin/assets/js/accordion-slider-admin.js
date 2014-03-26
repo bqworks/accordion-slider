@@ -3447,10 +3447,10 @@
 			wp.media.editor.send.attachment = function( props, attachment ) {
 				var image = typeof attachment.sizes[ props.size ] !== 'undefined' ? attachment.sizes[ props.size ] : attachment.sizes[ 'full' ],
 					url = image.url,
+					width = image.width,
+					height = image.height,
 					alt = attachment.alt,
-					title = attachment.title,
-					width = attachment.width,
-					height = attachment.height;
+					title = attachment.title;
 
 				selection.push( { url: url, alt: alt, title: title, width: width, height: height } );
 			};
