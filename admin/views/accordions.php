@@ -10,7 +10,7 @@
 			<h3><?php _e( '1. Getting started', 'accordion-slider' ); ?></h3>
 			<p><?php _e( 'If you want to reproduce one of the examples showcased online, you can easily import those examples into your own Accordion Slider installation.', 'accordion-slider' ); ?></p>
 			<p><?php _e( 'The examples can be found in the <i>examples</i> folder, which is included in the plugin\'s folder, and can be imported using the <i>Import Accordion</i> button below.', 'accordion-slider' ); ?></p>
-			<p><?php _e( 'For detailed usage instructions please see the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-documentation'); ?>"><?php _e( 'Documentation', 'accordion-slider' ); ?></a> <?php _e( 'page. You can also check these video tutorials:', 'accordion-slider' ); ?></p>
+			<p><?php _e( 'For quick usage instructions, please see the video tutorials below. For more detailed instructions, please see the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-documentation'); ?>"><?php _e( 'Documentation', 'accordion-slider' ); ?></a> <?php _e( 'page.', 'accordion-slider' ); ?></p>
 			<ul class="video-tutorials-list">
 				<li><a href="https://www.youtube.com/watch?v=qmjgtmeLrzs" target="_blank"><?php _e( '1. Create and publish accordions', 'accordion-slider' ); ?></a></li>
 				<li><a href="https://www.youtube.com/watch?v=sGToyxSDZLk" target="_blank"><?php _e( '2. Create accordions from posts', 'accordion-slider' ); ?></a></li>
