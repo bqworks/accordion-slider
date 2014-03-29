@@ -26,16 +26,34 @@
     </a>
     .
   </p>
-  <p>Because an image is worth a thousand words, you might find these video tutorials useful:</p>
+  <p>
+    Because an image is worth a thousand words, you might find these video tutorials useful:
+  </p>
   <ul class="video-tutorials-list">
-    <li><a href="https://www.youtube.com/watch?v=epe7kU_CQaM" target="_blank">1. Installing the plugin</a></li>
-    <li><a href="https://www.youtube.com/watch?v=qmjgtmeLrzs" target="_blank">2. Create and publish accordions</a></li>
-    <li><a href="https://www.youtube.com/watch?v=sGToyxSDZLk" target="_blank">3. Create accordions from posts</a></li>
-    <li><a href="https://www.youtube.com/watch?v=oF3tRiuJq_k" target="_blank">4. Create accordions from galleries</a></li>
-    <li><a href="https://www.youtube.com/watch?v=-6X1FAbJyYw" target="_blank">5. Working with layers</a></li>
-    <li><a href="https://www.youtube.com/watch?v=kqU0FxrN6L4" target="_blank">6. Adding custom CSS</a></li>
-    <li><a href="https://www.youtube.com/watch?v=AatLP0QGYv8" target="_blank">7. Working with breakpoints</a></li>
-    <li><a href="https://www.youtube.com/watch?v=UVk_2r3f1xc" target="_blank">8. Import and Export accordions</a></li>
+    <li>
+      <a href="https://www.youtube.com/watch?v=epe7kU_CQaM" target="_blank">1. Installing the plugin</a>
+    </li>
+    <li>
+      <a href="https://www.youtube.com/watch?v=qmjgtmeLrzs" target="_blank">2. Create and publish accordions</a>
+    </li>
+    <li>
+      <a href="https://www.youtube.com/watch?v=sGToyxSDZLk" target="_blank">3. Create accordions from posts</a>
+    </li>
+    <li>
+      <a href="https://www.youtube.com/watch?v=oF3tRiuJq_k" target="_blank">4. Create accordions from galleries</a>
+    </li>
+    <li>
+      <a href="https://www.youtube.com/watch?v=-6X1FAbJyYw" target="_blank">5. Working with layers</a>
+    </li>
+    <li>
+      <a href="https://www.youtube.com/watch?v=kqU0FxrN6L4" target="_blank">6. Adding custom CSS</a>
+    </li>
+    <li>
+      <a href="https://www.youtube.com/watch?v=AatLP0QGYv8" target="_blank">7. Working with breakpoints</a>
+    </li>
+    <li>
+      <a href="https://www.youtube.com/watch?v=UVk_2r3f1xc" target="_blank">8. Import and Export accordions</a>
+    </li>
   </ul>
 
   <h2 id="installation">1. Installation</h2>
@@ -315,7 +333,19 @@
   </p>
   <a href="assets/images/add-gallery-panels.png">
     <img src="assets/images/add-gallery-panels.png"></a>
-    <p>You just need to drop the accordion slider shortcode in a post that contains a <i>[gallery]</i> shortcode, and the images from the <i>[gallery]</i> will automatically be loaded in the accordion. Then, if you want to hide the original gallery, you can add the <i>hide</i> attribute to the <i>[gallery]</i> shortcode: <i>[gallery ids="1,2,3" hide="true"]</i>.</p>
+  <p>
+    You just need to drop the accordion slider shortcode in a post that contains a
+    <i>[gallery]</i>
+    shortcode, and the images from the
+    <i>[gallery]</i>
+    will automatically be loaded in the accordion. Then, if you want to hide the original gallery, you can add the
+    <i>hide</i>
+    attribute to the
+    <i>[gallery]</i>
+    shortcode:
+    <i>[gallery ids="1,2,3" hide="true"]</i>
+    .
+  </p>
   <p>
     This is the complete list of dynamic tags for Gallery panels:
   </p>
@@ -1445,10 +1475,8 @@ function accordion_layer_markup( $html_markup, $accordion_id, $panel_index ) {
 }
 </pre>
 
-<h4 id="accordion_slider_background_image_classes">accordion_slider_background_image_classes</h4>
-  <p>
-    It allows you to add custom classes to the background image.
-  </p>
+  <h4 id="accordion_slider_background_image_classes">accordion_slider_background_image_classes</h4>
+  <p>It allows you to add custom classes to the background image.</p>
   <pre>
 add_filter( 'accordion_slider_background_image_classes', 'add_background_image_class', 10, 3 );
 
@@ -1459,7 +1487,7 @@ function add_background_image_class( $classes, $accordion_id, $panel_index ) {
 }
 </pre>
 
-<h4 id="accordion_slider_opened_background_image_classes">accordion_slider_opened_background_image_classes</h4>
+  <h4 id="accordion_slider_opened_background_image_classes">accordion_slider_opened_background_image_classes</h4>
   <p>
     It allows you to add custom classes to the opened background image.
   </p>
@@ -1473,10 +1501,8 @@ function add_opened_background_image_class( $classes, $accordion_id, $panel_inde
 }
 </pre>
 
-<h4 id="accordion_slider_panel_link_classes">accordion_slider_panel_link_classes</h4>
-  <p>
-    It allows you to add custom classes to the panel's link.
-  </p>
+  <h4 id="accordion_slider_panel_link_classes">accordion_slider_panel_link_classes</h4>
+  <p>It allows you to add custom classes to the panel's link.</p>
   <pre>
 add_filter( 'accordion_slider_panel_link_classes', 'add_panel_link_class', 10, 3 );
 
@@ -1543,7 +1569,34 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
 }
 </pre>
 
-  <h2 id="translating-the-plugin">9. Translating the plugin</h2>
+  <h2 id="deep-linking">9. Deep Linking</h2>
+  <p>
+    Deep linking provides the possibility to link to a specific panel in the accordion. For this, you need to append a hashtag to the original URL of the page. The hashtag will contain the
+    <i>id</i>
+    attribute of the accordion and the
+    <i>index</i>
+    of the panel, separated by a slash (/) character.
+  </p>
+  <i>Example:</i>
+  <pre>http://domain.com/page#accordion-slider-3/0</pre>
+  <p>
+    The link above will open the first panel (because panel indexes start with 0) in the accordion that has the
+    <i>id</i>
+    set to
+    <i>accordion-slider-3</i>
+    .
+    <p>
+      The
+      <i>id</i>
+      attributes of the accordions are assigned automatically by the plugin, and they are formed by appending the
+      <i>ID</i>
+      that the accordion has in the admin area to
+      <i>accordion-slider-</i>
+      .
+    </p>
+  </p>
+
+  <h2 id="translating-the-plugin">10. Translating the plugin</h2>
 
   <p>
     There are several tools for translating the plugin's admin text, but I will show you how to do this using
@@ -1563,7 +1616,7 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
   <a href="assets/images/translation-poedit.png">
     <img src="assets/images/translation-poedit.png"></a>
 
-  <h2 id="adding-videos">10. Adding videos</h2>
+  <h2 id="adding-videos">11. Adding videos</h2>
 
   <p>
     The accordion has built-in support for YouTube, Vimeo, HTML5, VideoJS and Sublime videos. The support consists in the accordion's ability to control the videos automatically (i.e., pause the video when the panel is closed, play the video when the panel is opened, etc.).
@@ -1608,7 +1661,7 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
   <a href="assets/images/video-sidebar-panel.png">
     <img src="assets/images/video-sidebar-panel.png"></a>
 
-  <h2 id="troubleshooting">11. Troubleshooting</h2>
+  <h2 id="troubleshooting">12. Troubleshooting</h2>
 
   <p class="note">
     If something doesn't work as expected, the first thing you need is a little patience and the assurance that you have my free assistance for resolving the problem. Please see if the indications below help, and if they don't please kindly email me and I'll gladly help you. You can reach me at the support center: <u><a href="http://support.bqworks.com">support.bqworks.com</a></u> 
@@ -1685,14 +1738,30 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
     .
   </p>
 
-  <h3>3. The accordion looks different in the page than it looks in the preview</h3>
+  <h3>
+    3. The accordion looks different in the page than it looks in the preview
+  </h3>
   <p>
     The theme might include CSS code that gets applied to the accordion's elements. For example, if you add a paragraph layer, the style added to paragraphs by the theme, will also get applied to the paragraph layers inside the accordion. The same can happen for heading or image layers.
   </p>
-  <p>The accordion includes some CSS code that minimizes the influence of external CSS, but it's not always possible to eliminate this influence completely. So, when you see unexpected styles in a published accordion, you will need to add some custom CSS to override the style added by the theme's CSS.</p>
-  <p>Regarding layers, another solution for preventing CSS influences from the theme would be to use <i>DIV</i> layers instead of <i>Paragraph</i> or <i>Heading</i> layers, since DIV elements are usually not styled by themes. However, my recommendation is to use <i>Paragraph</i> or <i>Heading</i> layers every time it's appropriate and simply use custom CSS to prevent theme influences.</p>
+  <p>
+    The accordion includes some CSS code that minimizes the influence of external CSS, but it's not always possible to eliminate this influence completely. So, when you see unexpected styles in a published accordion, you will need to add some custom CSS to override the style added by the theme's CSS.
+  </p>
+  <p>
+    Regarding layers, another solution for preventing CSS influences from the theme would be to use
+    <i>DIV</i>
+    layers instead of
+    <i>Paragraph</i>
+    or
+    <i>Heading</i>
+    layers, since DIV elements are usually not styled by themes. However, my recommendation is to use
+    <i>Paragraph</i>
+    or
+    <i>Heading</i>
+    layers every time it's appropriate and simply use custom CSS to prevent theme influences.
+  </p>
 
-  <h2 id="changelog">12. Changelog</h2>
+  <h2 id="changelog">13. Changelog</h2>
   <strong>v. 1.0.0</strong>
   <ul>
     <li>initial release</li>
@@ -1772,16 +1841,19 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
         </ul>
       </li>
       <li>
-        <a href="#translating-the-plugin">9. Translating the plugin</a>
+        <a href="#deep-linking">9. Deep Linking</a>
       </li>
       <li>
-        <a href="#adding-videos">10. Adding videos</a>
+        <a href="#translating-the-plugin">10. Translating the plugin</a>
       </li>
       <li>
-        <a href="#troubleshooting">11. Troubleshooting</a>
+        <a href="#adding-videos">11. Adding videos</a>
       </li>
       <li>
-        <a href="#changelog">12. Changelog</a>
+        <a href="#troubleshooting">12. Troubleshooting</a>
+      </li>
+      <li>
+        <a href="#changelog">13. Changelog</a>
       </li>
     </ul>
   </div>
