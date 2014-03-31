@@ -188,7 +188,7 @@ class BQW_Accordion_Slider {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'accordionslider_accordions';
 
-		$result = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table_name WHERE id = %d", $id ), ARRAY_A );
+		$result = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table_name WHERE id = %d ORDER BY id", $id ), ARRAY_A );
 
 		if ( ! is_null( $result ) ) {
 			return $result;
@@ -208,7 +208,7 @@ class BQW_Accordion_Slider {
 	public function load_panels( $id ) {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'accordionslider_panels';
-		$result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE accordion_id = %d", $id ), ARRAY_A );
+		$result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE accordion_id = %d ORDER BY position", $id ), ARRAY_A );
 
 		if ( ! is_null( $result ) ) {
 			return $result;
@@ -280,6 +280,8 @@ class BQW_Accordion_Slider {
 
 						array_push( $panel['layers'], $layer );
 					}
+
+					usort( $panel['layers'], array( $this, 'sort_layers_by_position' ) );
 				}
 
 				array_push( $accordion['panels'], $panel );
@@ -287,6 +289,19 @@ class BQW_Accordion_Slider {
 		}
 
 		return $accordion;
+	}
+
+	/**
+	 * Utility function for sorting a panel's layers
+	 *
+	 * @since 1.0.0
+	 * 
+	 * @param  array $layer1 A layer array.
+	 * @param  array $layer2 Another layer array.
+	 * @return int           The difference between the layers' position.
+	 */
+	public function sort_layers_by_position( $layer1, $layer2 ) {
+		return $layer1['position'] - $layer2['position'];
 	}
 
 	/**
