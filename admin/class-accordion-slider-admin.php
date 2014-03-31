@@ -234,7 +234,7 @@ class BQW_Accordion_Slider_Admin {
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
 			$this->plugin_slug,
 			__( 'Accordion Slider', $this->plugin_slug ),
-			__( 'Accordion Slider', $this->plugin_slug ),
+			__( 'All Accordions', $this->plugin_slug ),
 			$access,
 			$this->plugin_slug,
 			array( $this, 'render_accordion_page' )
