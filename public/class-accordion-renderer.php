@@ -255,11 +255,12 @@ class BQW_AS_Accordion_Renderer {
 		if ( isset ( $this->settings['lightbox'] ) && $this->settings['lightbox'] === true ) {
 			$this->add_js_dependency( 'lightbox' );
 			$this->add_css_dependency( 'lightbox' );
+			$accordionIdAttribute = '#accordion-slider-' . $this->id;
 
-			$js_output .= "\r\n" . '		$( \'#accordion-slider-' . $this->id . ' .as-panel > a\' ).on( \'click\', function( event ) {' .
+			$js_output .= "\r\n" . '		$( "' . $accordionIdAttribute . ' .as-panel > a" ).on( "click", function( event ) {' .
 							"\r\n" . '			event.preventDefault();' .
-							"\r\n" . '			if ( $( this ).hasClass( \'as-swiping\' ) === false ) {' .
-							"\r\n" . '				$.fancybox.open( $( \'#accordion-slider-' .$this->id . ' .as-panel > a\' ), { index: $( this ).parent().index() } );' .
+							"\r\n" . '			if ( $( "' . $accordionIdAttribute . '" ).hasClass( "as-swiping" ) === false ) {' .
+							"\r\n" . '				$.fancybox.open( $( "' . $accordionIdAttribute . ' .as-panel > a" ), { index: $( this ).parent().index() } );' .
 							"\r\n" . '			}' .
 							"\r\n" . '		});' . "\r\n";
 		}
