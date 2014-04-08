@@ -486,6 +486,15 @@ class BQW_Accordion_Slider {
 	 * @return string          The accordion's HTML.
 	 */
 	public function accordion_slider_shortcode( $atts, $content = null ) {
+		// if the CSS file(s) were not enqueued, display a warning message
+		if ( ! wp_style_is( $this->plugin_slug . '-plugin-style' ) ) {
+			echo '<div style="width: 450px; background-color: #FFF; color: #F00; border: 1px solid #F00; padding: 10px; font-size: 14px;">
+			<span style="font-weight: bold;">Warning: The stylesheets were not loaded!</span> 
+			You will need to change the <i>Load stylesheets</i> setting from <i>Automatically</i> to <i>On homepage</i> or <i>On all pages</i>. 
+			You can set that <a style="text-decoration: underline; color: #F00;" href="' . admin_url( 'admin.php?page=accordion-slider-settings' ) . '">here</a>.
+			</div>';
+		}
+
 		// get the id specified in the shortcode
 		$id = isset( $atts['id'] ) ? $atts['id'] : -1;
 
@@ -606,15 +615,6 @@ class BQW_Accordion_Slider {
 					array_push( $accordion['panels'], $panel_end );
 				}
 			}
-		}
-
-		// if the CSS file(s) were not enqueued, display a warning message
-		if ( ! wp_style_is( $this->plugin_slug . '-plugin-style' ) ) {
-			echo '<div style="width: 450px; background-color: #FFF; color: #F00; border: 1px solid #F00; padding: 10px; font-size: 14px;">
-			<span style="font-weight: bold;">Warning: The stylesheets were not loaded!</span> 
-			You are loading the accordion outside of a post or page, so you need to manually specify where to load the stylesheets (e.g., homepage, all pages). 
-			You can set that <a style="text-decoration: underline; color: #F00;" href="' . admin_url( 'admin.php?page=accordion-slider-settings' ) . '">here</a>.
-			</div>';
 		}
 		
 		return $this->output_accordion( $accordion );
