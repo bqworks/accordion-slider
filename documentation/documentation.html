@@ -962,33 +962,33 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
 
   <pre>
 [accordion_slider id="1" width="700" aspect_ratio="2" visible_panels="5"]
-    [panel index="1"]
-        [panel_element type="background_source"]path/to/new_image.jpg[/panel_element]
-    [/panel]
-    [panel]
-        [panel_element type="background_source"]path/to/image.jpg[/panel_element]
-        [panel_element type="opened_background_source"]path/to/opened_image.jpg[/panel_element]
-        [panel_element type="link"]http://bqworks.com/accordion-slider/[/panel_element]
-        [panel_element type="layer" horizontal="center" show_transition="right"]some layer content[/panel_element]
-    [/panel]
+    [accordion_panel index="1"]
+        [accordion_panel_element name="background_source"]path/to/new_image.jpg[/accordion_panel_element]
+    [/accordion_panel]
+    [accordion_panel]
+        [accordion_panel_element name="background_source"]path/to/image.jpg[/accordion_panel_element]
+        [accordion_panel_element name="opened_background_source"]path/to/opened_image.jpg[/accordion_panel_element]
+        [accordion_panel_element name="link"]http://bqworks.com/accordion-slider/[/accordion_panel_element]
+        [accordion_panel_element name="layer" horizontal="center" show_transition="right"]some layer content[/accordion_panel_element]
+    [/accordion_panel]
 [/accordion_slider]
 </pre>
 
   <p>
     The first
-    <i>panel</i>
+    <i>accordion_panel</i>
     shortcode will override the first panel in the accordion As you can notice that it has the
     <i>index</i>
     attribute specified and set to 1.
   </p>
   <p>
     The second
-    <i>panel</i>
+    <i>accordion_panel</i>
     shortcode doesn't have an index, so this will be a new panel element added after the panels created in the accordion's admin area.
   </p>
   <p>
     This is the list of available types for
-    <i>panel_element</i>
+    <i>accordion_panel_element</i>
     shortcodes:
   </p>
   <ul>
@@ -1013,11 +1013,11 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
   </p>
   <pre>
 [accordion_slider id="99" width="960" height="400" responsive_mode="custom" visible_panels="5"]
-    [panel content_type="posts" posts_post_types="post,page" posts_taxonomies="tag|design;tag|development;tag|planning"]
-        [panel_element type="background_source"][as_image_src][/panel_element]
-        [panel_element type="background_alt"][as_image_alt][/panel_element]
-        [panel_element type="link_url"][as_link_url][/panel_element]
-    [/panel]
+    [accordion_panel content_type="posts" posts_post_types="post,page" posts_taxonomies="tag|design;tag|development;tag|planning"]
+        [accordion_panel_element name="background_source"][as_image_src][/accordion_panel_element]
+        [accordion_panel_element name="background_alt"][as_image_alt][/accordion_panel_element]
+        [accordion_panel_element name="link_url"][as_link_url][/accordion_panel_element]
+    [/accordion_panel]
 [/accordion_slider]
 </pre>
 
