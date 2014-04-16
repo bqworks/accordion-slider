@@ -283,6 +283,10 @@ class BQW_Accordion_Slider_Admin {
 	 * Based on the 'action' parameter, it will render
 	 * either an individual accordion page or the list
 	 * of all the accordions.
+	 *
+	 * If an individual accordion page is rendered, delete
+	 * the transients that store the post names and posts data,
+	 * in order to trigger a new fetching of them.
 	 * 
 	 * @since 1.0.0
 	 */
@@ -298,6 +302,9 @@ class BQW_Accordion_Slider_Admin {
 
 				$panels = isset( $accordion['panels'] ) ? $accordion['panels'] : false;
 
+				delete_transient( 'accordion_slider_post_names' );
+				delete_transient( 'accordion_slider_posts_data' );
+
 				include_once( 'views/accordion.php' );
 			} else {
 				include_once( 'views/accordions.php' );
@@ -309,11 +316,18 @@ class BQW_Accordion_Slider_Admin {
 
 	/**
 	 * Renders the page for a new accordion.
+	 *
+	 * Also, delete the transients that store
+	 * the post names and posts data,
+	 * in order to trigger a new fetching of them.
 	 * 
 	 * @since 1.0.0
 	 */
 	public function render_new_accordion_page() {
 		$accordion_name = 'My Accordion';
+
+		delete_transient( 'accordion_slider_post_names' );
+		delete_transient( 'accordion_slider_posts_data' );
 
 		include_once( 'views/accordion.php' );
 	}
