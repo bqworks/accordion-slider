@@ -689,16 +689,12 @@ class BQW_Accordion_Slider {
 	public function accordion_panel_element_shortcode( $atts, $content = null ) {
 		$content = do_shortcode( $content );
 
-		$attributes = array();
+		$attributes = array( 'layer_settings' => array() );
 
 		foreach ( $atts as $key => $value ) {
 			if ( $key === 'name' ) {
 				$attributes[ $atts['name'] ] = $content;
 			} else if ( isset( $atts['name'] ) && $atts['name'] === 'layer' ) {
-				if ( ! isset( $attributes['layer_settings'] ) ) {
-					$attributes['layer_settings'] = array();
-				}
-
 				if ( $value === 'true' ) {
 					$value = true;
 				} else if ( $value === 'false' ) {
