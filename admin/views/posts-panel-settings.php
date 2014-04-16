@@ -129,7 +129,7 @@
                 	<p><?php _e( 'The list of taxonomies will be refreshed every time the list of post types is updated.', 'accordion-slider' ); ?></p>
                 	<p><?php _e( 'The <i>Match</i> parameter indicates whether, in order to be fetched, a post needs to have all the selected taxonomy terms, or at least one will be sufficient. The <i>With selected</i> parameter indicates whether posts that include the selected taxonomy terms will be loaded, or if posts that don\'t include them will be loaded.', 'accordion-slider' ); ?></p>
                 	<p><?php _e( 'The images and their data can be fetched through <i>dynamic tags</i>, which are enumerated in the Background, Layers and HTML editors.', 'accordion-slider' ); ?></p>
-                	<p><a href="https://www.youtube.com/watch?v=sGToyxSDZLk" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
+                	<p><a href="https://www.youtube.com/watch?v=sGToyxSDZLk&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
             	</div>
             </div>
         <?php

@@ -15,7 +15,7 @@
                 <p><?php _e( 'The fields below can be used for all your custom CSS or JavaScript code.', 'accordion-slider' ); ?></p>
                 <p><?php _e( 'If you want to target a specific accordion, you need to assign a <i>Custom Class</i> to the accordion, in the accordion\'s settings, and then use that custom class in the <i>Custom CSS</i> or <i>Custom JavaScript</i> fields below.', 'accordion-slider' ); ?></p>
                 <p><?php _e( 'By default, the custom CSS and JavaScript code will be loaded inline, but in the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-settings') ?>"><?php _e( 'Plugin Settings', 'accordion-slider' ); ?></a> <?php _e( 'page you can set to load the code in files instead of inline.', 'accordion-slider' ); ?></p>
-                <p><a href="https://www.youtube.com/watch?v=kqU0FxrN6L4" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
+                <p><a href="https://www.youtube.com/watch?v=kqU0FxrN6L4&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
             </div>
         </div>
     <?php
