@@ -277,6 +277,7 @@ class BQW_AS_Panel_Renderer {
 	 */
 	protected function create_html() {
 		$html = $this->data['html'];
+		$html = do_shortcode( $html );
 		$html = apply_filters( 'accordion_slider_panel_html', $html, $this->accordion_id, $this->panel_index );
 
 		return $html;
