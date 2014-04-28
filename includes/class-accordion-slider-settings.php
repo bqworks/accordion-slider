@@ -194,7 +194,7 @@ class BQW_Accordion_Slider_Settings {
 					'js_name' => 'startPanel',
 					'label' => __( 'Start Panel', 'accordion-slider' ),
 					'type' => 'number',
-					'default_value' => 0,
+					'default_value' => -1,
 					'description' => __( 'Indicates which panel will be opened when the accordion loads (0 for the first panel, 1 for the second panel, etc.). If set to -1, no panel will be opened.', 'accordion-slider' )
 				),
 				'start_page' => array(
