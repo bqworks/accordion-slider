@@ -1,5 +1,5 @@
 /*!
-* Accordion Slider - v2.3.0
+* Accordion Slider - v2.4.0
 * Homepage: http://bqworks.com/accordion-slider/
 * Author: bqworks
 * Author URL: http://bqworks.com/
@@ -157,7 +157,10 @@
 			// set a panel to be opened from the start
 			this.currentIndex = this.settings.startPanel;
 
-			if (this.currentIndex !== -1)
+
+			if (this.currentIndex === -1)
+				this.$accordion.addClass('as-closed');
+			else
 				this.$accordion.addClass('as-opened');
 
 			// if a panels was not set to be opened but a page was specified,
@@ -989,6 +992,9 @@
 				this.$accordion.removeClass('as-opened');
 				this.$accordion.addClass('as-closed');
 			}
+
+			// remove the "opened" class from the previously opened panel
+			this.$accordion.find('.as-panel.as-opened').removeClass('as-opened');
 
 			clearTimeout(this.mouseDelayTimer);
 
@@ -3607,7 +3613,7 @@ JWPlayerVideo.prototype.replay = function() {
 						that._fadeOutBackground(background);
 				}
 
-				if (event.previousIndex !== -1) {
+				if (event.previousIndex !== -1 && event.index !== event.previousIndex) {
 					// get the previously opened panel
 					var previousPanel = that.getPanelAt(event.previousIndex),
 						previousBackground = previousPanel.$panel.find('.as-background'),
