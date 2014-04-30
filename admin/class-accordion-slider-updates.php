@@ -91,6 +91,8 @@ class BQW_Accordion_Slider_Updates {
 		if ( version_compare( $this->db_version, '1.0.5', '<' ) ) {
 			$this->update_to_105();
 		}
+
+		update_option( 'accordion_slider_version', BQW_Accordion_Slider::VERSION );
 	}
 
 	/**
@@ -121,7 +123,5 @@ class BQW_Accordion_Slider_Updates {
 				}
 			}
 		}
-
-		update_option( 'accordion_slider_version', '1.0.5' );
 	}
 }

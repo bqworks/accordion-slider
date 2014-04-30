@@ -199,7 +199,7 @@ class BQW_Accordion_Slider_Activation {
 			dbDelta( $create_panels_table );
 			dbDelta( $create_layers_table );
 
-			update_option( 'accordion_slider_version', '1.0.5' );
+			update_option( 'accordion_slider_version', BQW_Accordion_Slider::VERSION );
 		}
 
 		$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
