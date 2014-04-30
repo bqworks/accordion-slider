@@ -198,15 +198,11 @@ class BQW_Accordion_Slider_Activation {
 			dbDelta( $create_accordions_table );
 			dbDelta( $create_panels_table );
 			dbDelta( $create_layers_table );
-		} else {
-			require_once( plugin_dir_path( __FILE__ ) . 'class-accordion-slider-updates.php' );
 
-			$updates = new BQW_Accordion_Slider_Updates();
-			$updates->init();
+			update_option( 'accordion_slider_version', '1.0.5' );
 		}
 
 		$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
-		update_option( 'accordion_slider_version', '1.0.5' );
 	}
 	
 	/**
