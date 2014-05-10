@@ -3,7 +3,7 @@
 if ( class_exists( 'BQW_Flickr' ) === false ) {
 	class BQW_Flickr {
 
-		protected $rest = 'http://api.flickr.com/services/rest/';
+		protected $rest = 'https://api.flickr.com/services/rest/';
 
 		protected $api_key = '';
 
