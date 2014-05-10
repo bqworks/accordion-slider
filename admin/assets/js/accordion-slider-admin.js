@@ -2030,10 +2030,22 @@
 		 * @since 1.0.0
 		 */
 		initViewport: function() {
-			var accordionWidth = parseInt( $( '.sidebar-settings' ).find( '.setting[name="width"]' ).val(), 10 ),
-				accordionHeight = parseInt( $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(), 10 ),
+			var accordionWidth = $( '.sidebar-settings' ).find( '.setting[name="width"]' ).val(),
+				accordionHeight = $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(),
 				orientation = $( '.sidebar-settings' ).find( '.setting[name="orientation"]' ).val(),
 				backgroundData = this.currentPanel.getData( 'background' );
+
+			if ( accordionWidth.indexOf( '%' ) !== -1 ) {
+				accordionWidth = $( window ).width() - 200;
+			} else {
+				accordionWidth = parseInt( accordionWidth, 10 );
+			}
+
+			if ( accordionHeight.indexOf( '%' ) !== -1 ) {
+				accordionHeight = $( window ).height() - 200;
+			} else {
+				accordionHeight = parseInt( accordionHeight, 10 );
+			}
 
 			var $viewport = this.$editor.find( '.layer-viewport' ),
 				$viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' ).appendTo( $viewport );
