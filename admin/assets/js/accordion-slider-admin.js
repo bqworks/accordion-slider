@@ -3553,17 +3553,31 @@
 			});
 
 			var accordionWidth = this.accordionData[ 'settings' ][ 'width' ],
-				isPercetageWidth = accordionWidth.indexOf( '%' ) !== -1;
+				accordionHeight = this.accordionData[ 'settings' ][ 'height' ],
+				isPercetageWidth = accordionWidth.indexOf( '%' ) !== -1,
+				isPercetageHeight = accordionHeight.indexOf( '%' ) !== -1;
 
-			if ( isPercetageWidth === false ) {
+			if ( isPercetageWidth === true ) {
+				this.accordion.accordionSlider('width', '100%');
+			} else {
 				accordionWidth = parseInt( accordionWidth, 10 );
 			}
 
+			if ( isPercetageHeight === true ) {
+				this.accordion.accordionSlider('height', '100%');
+			}
+
 			$( window ).on( 'resize.accordionSlider', function() {
-				if ( isPercetageWidth === true || $( window ).width() <= accordionWidth + 100 ) {
+				if ( isPercetageWidth === true ) {
+					that.previewWindow.css( 'width', $( window ).width() * ( parseInt( accordionWidth, 10 ) / 100 ) - 100 );
+				} else if ( accordionWidth >= $( window ).width() - 100 ) {
 					that.previewWindow.css( 'width', $( window ).width() - 100 );
 				} else {
 					that.previewWindow.css( 'width', accordionWidth );
+				}
+
+				if ( isPercetageHeight === true ) {
+					that.previewWindow.css( 'height', $( window ).height() * ( parseInt( accordionHeight, 10 ) / 100 ) - 200 );
 				}
 			});
 
