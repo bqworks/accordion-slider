@@ -14,7 +14,7 @@
     Accordion Slider - by
     <a href="http://bqworks.com/">bqworks</a>
   </h1>
-  <p> <em><strong>Version 1.0.5</strong></em> 
+  <p> <em><strong>Version 1.0.6</strong></em> 
   </p>
   <p>Hi, and thank you for purchasing Accordion Slider!</p>
   <p>
@@ -962,33 +962,33 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
 
   <pre>
 [accordion_slider id="1" width="700" aspect_ratio="2" visible_panels="5"]
-    [accordion_panel index="1"]
-        [accordion_panel_element name="background_source"]path/to/new_image.jpg[/accordion_panel_element]
-    [/accordion_panel]
-    [accordion_panel]
-        [accordion_panel_element name="background_source"]path/to/image.jpg[/accordion_panel_element]
-        [accordion_panel_element name="opened_background_source"]path/to/opened_image.jpg[/accordion_panel_element]
-        [accordion_panel_element name="link"]http://bqworks.com/accordion-slider/[/accordion_panel_element]
-        [accordion_panel_element name="layer" horizontal="center" show_transition="right"]some layer content[/accordion_panel_element]
-    [/accordion_panel]
+    [accordion_slider_panel index="1"]
+        [accordion_slider_panel_element name="background_source"]path/to/new_image.jpg[/accordion_slider_panel_element]
+    [/accordion_slider_panel]
+    [accordion_slider_panel]
+        [accordion_slider_panel_element name="background_source"]path/to/image.jpg[/accordion_slider_panel_element]
+        [accordion_slider_panel_element name="opened_background_source"]path/to/opened_image.jpg[/accordion_slider_panel_element]
+        [accordion_slider_panel_element name="link"]http://bqworks.com/accordion-slider/[/accordion_slider_panel_element]
+        [accordion_slider_panel_element name="layer" horizontal="center" show_transition="right"]some layer content[/accordion_slider_panel_element]
+    [/accordion_slider_panel]
 [/accordion_slider]
 </pre>
 
   <p>
     The first
-    <i>accordion_panel</i>
+    <i>accordion_slider_panel</i>
     shortcode will override the first panel in the accordion As you can notice that it has the
     <i>index</i>
     attribute specified and set to 1.
   </p>
   <p>
     The second
-    <i>accordion_panel</i>
+    <i>accordion_slider_panel</i>
     shortcode doesn't have an index, so this will be a new panel element added after the panels created in the accordion's admin area.
   </p>
   <p>
     This is the list of available types for
-    <i>accordion_panel_element</i>
+    <i>accordion_slider_panel_element</i>
     shortcodes:
   </p>
   <ul>
@@ -1013,11 +1013,11 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
   </p>
   <pre>
 [accordion_slider id="99" width="960" height="400" responsive_mode="custom" visible_panels="5"]
-    [accordion_panel content_type="posts" posts_post_types="post,page" posts_taxonomies="tag|design;tag|development;tag|planning"]
-        [accordion_panel_element name="background_source"][as_image_src][/accordion_panel_element]
-        [accordion_panel_element name="background_alt"][as_image_alt][/accordion_panel_element]
-        [accordion_panel_element name="link_url"][as_link_url][/accordion_panel_element]
-    [/accordion_panel]
+    [accordion_slider_panel content_type="posts" posts_post_types="post,page" posts_taxonomies="tag|design;tag|development;tag|planning"]
+        [accordion_slider_panel_element name="background_source"][as_image_src][/accordion_slider_panel_element]
+        [accordion_slider_panel_element name="background_alt"][as_image_alt][/accordion_slider_panel_element]
+        [accordion_slider_panel_element name="link_url"][as_link_url][/accordion_slider_panel_element]
+    [/accordion_slider_panel]
 [/accordion_slider]
 </pre>
 
@@ -1762,6 +1762,14 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
   </p>
 
   <h2 id="changelog">13. Changelog</h2>
+  <p><strong>v. 1.0.6</strong> (10 May 14)</p>
+  <ul>
+    <li>changed 'accordion_panel' shortcode to 'accordion_slider_panel', and 'accordion_panel_element' to 'accordion_slider_panel_element', to prevent conflicts with identical shortcode names</li>
+    <li>improved admin preview handling for percentage sizes</li>
+    <li>improved Layers editor handling for percentage sizes</li>
+    <li>added compatibility with latest Flickr changes</li>
+    <li>other minor fixes and improvements</li>
+  </ul>
   <p><strong>v. 1.0.5</strong> (30 April 14)</p>
   <ul>
     <li>corrected default value for 'Start Panel' to -1</li>

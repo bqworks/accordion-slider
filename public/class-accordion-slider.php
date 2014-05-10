@@ -13,7 +13,7 @@ class BQW_Accordion_Slider {
 	 * 
 	 * @var string
 	 */
-	const VERSION = '1.0.5';
+	const VERSION = '1.0.6';
 
 	/**
 	 * Plugin slug.
@@ -96,8 +96,8 @@ class BQW_Accordion_Slider {
 
 		// register the shortcodes
 		add_shortcode( 'accordion_slider', array( $this, 'accordion_slider_shortcode' ) );
-		add_shortcode( 'accordion_panel', array( $this, 'accordion_panel_shortcode' ) );
-		add_shortcode( 'accordion_panel_element', array( $this, 'accordion_panel_element_shortcode' ) );
+		add_shortcode( 'accordion_slider_panel', array( $this, 'accordion_slider_panel_shortcode' ) );
+		add_shortcode( 'accordion_slider_panel_element', array( $this, 'accordion_slider_panel_element_shortcode' ) );
 	}
 
 	/**
@@ -654,7 +654,7 @@ class BQW_Accordion_Slider {
 	 * @param  string $content The content added inside the shortcode.
 	 * @return string          JSON-encoded data for the panel.
 	 */
-	public function accordion_panel_shortcode( $atts, $content = null ) {
+	public function accordion_slider_panel_shortcode( $atts, $content = null ) {
 		// initialize the settings
 		$panel = array( 'settings' => array( 'index' => 'end' ) );
 
@@ -711,7 +711,7 @@ class BQW_Accordion_Slider {
 	 * @param  string $content The content added inside the shortcode.
 	 * @return string          JSON-encoded data for the panel element.
 	 */
-	public function accordion_panel_element_shortcode( $atts, $content = null ) {
+	public function accordion_slider_panel_element_shortcode( $atts, $content = null ) {
 		$content = do_shortcode( $content );
 
 		$attributes = array( 'layer_settings' => array() );
