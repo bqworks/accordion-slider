@@ -58,13 +58,22 @@ class BQW_Accordion_Slider {
 	protected $js_output = '';
 
 	/**
-	 * Flickr class instance.
+	 * Indicates if stylesheets need to be loaded.
 	 * 
-	 * @since 1.0.0
+	 * @since 1.0.6
 	 * 
-	 * @var object
+	 * @var bool
 	 */
-	protected $flickr_instance = null;
+	protected $styles_loaded = false;
+
+	/**
+	 * Indicates if stylesheets were checked.
+	 * 
+	 * @since 1.0.6
+	 * 
+	 * @var bool
+	 */
+	protected $styles_checked = false;
 
 	/**
 	 * Initialize the Accordion Slider plugin.
@@ -369,28 +378,29 @@ class BQW_Accordion_Slider {
 			return;
 		}
 
+		$this->styles_checked = true;
+
 		global $posts;
-		$load_styles = false;
 		
-		if ( ( $load_stylesheets = get_option( 'accordion_slider_load_stylesheets' ) ) !== false ) {
+		if ( $this->styles_loaded === false && ( $load_stylesheets = get_option( 'accordion_slider_load_stylesheets' ) ) !== false ) {
 			if ( ( $load_stylesheets === 'all' ) || ( $load_stylesheets === 'homepage' && ( is_home() || is_front_page() ) ) ) {
-				$load_styles = true;
+				$this->styles_loaded = true;
 			}
 		}
 
-		if ( $load_styles === false && isset( $posts ) && ! empty( $posts ) ) {
+		if ( $this->styles_loaded === false && isset( $posts ) && ! empty( $posts ) ) {
 			foreach ( $posts as $post ) {
 				if ( strpos( $post->post_content, '[accordion_slider' ) !== false ) {
-					$load_styles = true;
+					$this->styles_loaded = true;
 				}
 			}
 		}
 
-		if ( $load_styles === false && is_active_widget( false, false, 'bqw-accordion-slider-widget' ) ) {
-			$load_styles = true;
+		if ( $this->styles_loaded === false && is_active_widget( false, false, 'bqw-accordion-slider-widget' ) ) {
+			$this->styles_loaded = true;
 		}
 
-		if ( $load_styles === true ) {
+		if ( $this->styles_loaded === true ) {
 			wp_enqueue_style( $this->plugin_slug . '-plugin-style' );
 
 			if ( get_option( 'accordion_slider_is_custom_css') == true ) {
@@ -487,12 +497,27 @@ class BQW_Accordion_Slider {
 	 */
 	public function accordion_slider_shortcode( $atts, $content = null ) {
 		// if the CSS file(s) were not enqueued, display a warning message
-		if ( ! wp_style_is( $this->plugin_slug . '-plugin-style' ) ) {
-			echo '<div style="width: 450px; background-color: #FFF; color: #F00; border: 1px solid #F00; padding: 10px; font-size: 14px;">
-			<span style="font-weight: bold;">Warning: The stylesheets were not loaded!</span> 
-			You will need to change the <i>Load stylesheets</i> setting from <i>Automatically</i> to <i>On homepage</i> or <i>On all pages</i>. 
-			You can set that <a style="text-decoration: underline; color: #F00;" href="' . admin_url( 'admin.php?page=accordion-slider-settings' ) . '">here</a>.
-			</div>';
+		if ( $this->styles_loaded === false ) {
+			$show_warning = true;
+			
+			// If styles were not checked, check them now, and then check again if they were set to load.
+			// This check is necessary because with some themes the shortcodes are parsed before the
+			// 'wp_enqueue_script' action is called.
+			if ( $this->styles_checked === false ) {
+				$this->load_styles();
+
+				if ( $this->styles_loaded === true ) {
+					$show_warning = false;
+				}
+			}
+
+			if ( $show_warning === true ) {
+				echo '<div class="as-styles-warning" style="width: 450px; background-color: #FFF; color: #F00; border: 1px solid #F00; padding: 10px; font-size: 14px;">
+				<span style="font-weight: bold;">Warning: The stylesheets were not loaded!</span> 
+				You will need to change the <i>Load stylesheets</i> setting from <i>Automatically</i> to <i>On homepage</i> or <i>On all pages</i>. 
+				You can set that <a style="text-decoration: underline; color: #F00;" href="' . admin_url( 'admin.php?page=accordion-slider-settings' ) . '">here</a>.
+				</div>';
+			}
 		}
 
 		// get the id specified in the shortcode
