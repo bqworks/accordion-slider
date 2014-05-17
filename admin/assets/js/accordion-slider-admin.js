@@ -2076,8 +2076,9 @@
 
 				// set the size of the layer's container after the image has
 				// loaded and its size can be retrieved
-				setInterval( function() {
+				var checkImageLoaded = setInterval( function() {
 					if ( $viewportImage[0].complete === true ) {
+						clearInterval( checkImageLoaded );
 						$viewportLayers.css( {
 							'width': $viewportImage.width(),
 							'height': $viewportImage.height(),
