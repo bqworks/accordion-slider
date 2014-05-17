@@ -96,9 +96,9 @@
                                     </table>
                                     
                                     <?php
-                                        $show_info = get_option( 'accordion_slider_show_inline_info', true );
+                                        $hide_info = get_option( 'accordion_slider_hide_inline_info' );
                                 
-                                        if ( $show_info == true && isset( $group['inline_info'] ) ) {
+                                        if ( $hide_info != true && isset( $group['inline_info'] ) ) {
                                     ?>
                                             <div class="inline-info sidebar-panel-info">
                                                 <input type="checkbox" id="show-hide-<?php echo $group_name; ?>-info" class="show-hide-info">
@@ -139,9 +139,9 @@
                             </div>
                             <a class="button add-breakpoint" href="#"><?php _e( 'Add Breakpoint', 'accordion-slider' ); ?></a>
                             <?php
-                                $show_info = get_option( 'accordion_slider_show_inline_info', true );
+                                $hide_info = get_option( 'accordion_slider_hide_inline_info' );
 
-                                if ( $show_info == true ) {
+                                if ( $hide_info != true ) {
                             ?>
                                 <div class="inline-info breakpoints-info">
                                     <input type="checkbox" id="show-hide-breakpoint-info" class="show-hide-info">

@@ -67,24 +67,24 @@
             </tr>
             <tr>
                 <td>
-                    <label for="show-inline-info"><?php echo $plugin_settings['show_inline_info']['label']; ?></label>
+                    <label for="hide-inline-info"><?php echo $plugin_settings['hide_inline_info']['label']; ?></label>
                 </td>
                 <td>
-                    <input type="checkbox" id="show-inline-info" name="show_inline_info" <?php echo $show_inline_info == true ? 'checked="checked"' : ''; ?>>
+                    <input type="checkbox" id="hide-inline-info" name="hide_inline_info" <?php echo $hide_inline_info == true ? 'checked="checked"' : ''; ?>>
                 </td>
                 <td>
-                    <?php echo $plugin_settings['show_inline_info']['description']; ?>
+                    <?php echo $plugin_settings['hide_inline_info']['description']; ?>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="show-getting-started-info"><?php echo $plugin_settings['show_getting_started_info']['label']; ?></label>
+                    <label for="hide-getting-started-info"><?php echo $plugin_settings['hide_getting_started_info']['label']; ?></label>
                 </td>
                 <td>
-                    <input type="checkbox" id="show-getting-started-info" name="show_getting_started_info" <?php echo $show_getting_started_info == true ? 'checked="checked"' : ''; ?>>
+                    <input type="checkbox" id="hide-getting-started-info" name="hide_getting_started_info" <?php echo $hide_getting_started_info == true ? 'checked="checked"' : ''; ?>>
                 </td>
                 <td>
-                    <?php echo $plugin_settings['show_getting_started_info']['description']; ?>
+                    <?php echo $plugin_settings['hide_getting_started_info']['description']; ?>
                 </td>
             </tr>
             <tr>

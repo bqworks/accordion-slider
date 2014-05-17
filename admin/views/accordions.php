@@ -2,9 +2,9 @@
 	<h2><?php _e( 'All Accordions' ); ?></h2>
 	
 	<?php
-		$show_info = get_option( 'accordion_slider_show_getting_started_info', true );
+		$hide_info = get_option( 'accordion_slider_hide_getting_started_info' );
 
-		if ( $show_info == true ) {
+		if ( $hide_info != true ) {
 	?>
 	    <div class="inline-info getting-started-info">
 			<h3><?php _e( '1. Getting started', 'accordion-slider' ); ?></h3>

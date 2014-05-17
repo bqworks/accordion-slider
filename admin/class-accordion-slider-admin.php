@@ -394,8 +394,8 @@ class BQW_Accordion_Slider_Admin {
 		$load_custom_css_js = get_option( 'accordion_slider_load_custom_css_js', $plugin_settings['load_custom_css_js']['default_value'] );
 		$load_unminified_scripts = get_option( 'accordion_slider_load_unminified_scripts', $plugin_settings['load_unminified_scripts']['default_value'] );
 		$cache_expiry_interval = get_option( 'accordion_slider_cache_expiry_interval', $plugin_settings['cache_expiry_interval']['default_value'] );
-		$show_inline_info = get_option( 'accordion_slider_show_inline_info', $plugin_settings['show_inline_info']['default_value'] );
-		$show_getting_started_info = get_option( 'accordion_slider_show_getting_started_info', $plugin_settings['show_getting_started_info']['default_value'] );
+		$hide_inline_info = get_option( 'accordion_slider_hide_inline_info', $plugin_settings['hide_inline_info']['default_value'] );
+		$hide_getting_started_info = get_option( 'accordion_slider_hide_getting_started_info', $plugin_settings['hide_getting_started_info']['default_value'] );
 		$access = get_option( 'accordion_slider_access', $plugin_settings['access']['default_value'] );
 
 		if ( isset( $_POST['plugin_settings_update'] ) ) {
@@ -424,20 +424,20 @@ class BQW_Accordion_Slider_Admin {
 				update_option( 'accordion_slider_cache_expiry_interval', $cache_expiry_interval );
 			}
 
-			if ( isset( $_POST['show_inline_info'] ) ) {
-				$show_inline_info = true;
-				update_option( 'accordion_slider_show_inline_info', true );
+			if ( isset( $_POST['hide_inline_info'] ) ) {
+				$hide_inline_info = true;
+				update_option( 'accordion_slider_hide_inline_info', true );
 			} else {
-				$show_inline_info = false;
-				update_option( 'accordion_slider_show_inline_info', false );
+				$hide_inline_info = false;
+				update_option( 'accordion_slider_hide_inline_info', false );
 			}
 
-			if ( isset( $_POST['show_getting_started_info'] ) ) {
-				$show_getting_started_info = true;
-				update_option( 'accordion_slider_show_getting_started_info', true );
+			if ( isset( $_POST['hide_getting_started_info'] ) ) {
+				$hide_getting_started_info = true;
+				update_option( 'accordion_slider_hide_getting_started_info', true );
 			} else {
-				$show_getting_started_info = false;
-				update_option( 'accordion_slider_show_getting_started_info', false );
+				$hide_getting_started_info = false;
+				update_option( 'accordion_slider_hide_getting_started_info', false );
 			}
 
 			if ( isset( $_POST['access'] ) ) {
@@ -1292,7 +1292,7 @@ class BQW_Accordion_Slider_Admin {
 	 * @since 1.0.0
 	 */
 	public function ajax_getting_started_close() {
-		update_option( 'accordion_slider_show_getting_started_info', false );
+		update_option( 'accordion_slider_hide_getting_started_info', true );
 
 		die();
 	}

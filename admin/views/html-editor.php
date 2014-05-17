@@ -6,9 +6,9 @@
 		<textarea><?php echo isset( $html_content ) ? esc_textarea( stripslashes( $html_content ) ) : ''; ?></textarea>
 
 		<?php
-            $show_info = get_option( 'accordion_slider_show_inline_info', true );
+            $hide_info = get_option( 'accordion_slider_hide_inline_info' );
 
-            if ( $show_info == true ) {
+            if ( $hide_info != true ) {
         ?>
             <div class="inline-info html-editor-info">
             	<input type="checkbox" id="show-hide-info" class="show-hide-info">

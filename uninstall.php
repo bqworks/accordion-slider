@@ -40,8 +40,8 @@ function bqw_accordion_slider_delete_all_data() {
 	delete_option( 'accordion_slider_purchase_code' );
 	delete_option( 'accordion_slider_purchase_code_message' );
 	delete_option( 'accordion_slider_purchase_code_status' );
-	delete_option( 'accordion_slider_show_inline_info' );
-	delete_option( 'accordion_slider_show_getting_started_info' );
+	delete_option( 'accordion_slider_hide_inline_info' );
+	delete_option( 'accordion_slider_hide_getting_started_info' );
 	delete_option( 'accordion_slider_version' );
 
 	delete_transient( 'accordion_slider_post_names' );
