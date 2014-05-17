@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Accordion Slider\n"
-"POT-Creation-Date: 2014-03-27 10:54+0200\n"
-"PO-Revision-Date: 2014-03-27 10:54+0200\n"
+"POT-Creation-Date: 2014-05-17 18:03+0200\n"
+"PO-Revision-Date: 2014-05-17 18:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -56,8 +56,11 @@ msgid "Accordion slider created."
 msgstr ""
 
 #: admin/class-accordion-slider-admin.php:236
-#: admin/class-accordion-slider-admin.php:237
 msgid "Accordion Slider"
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:237 admin/views/accordions.php:2
+msgid "All Accordions"
 msgstr ""
 
 #: admin/class-accordion-slider-admin.php:245 admin/views/accordion.php:2
@@ -189,10 +192,6 @@ msgstr ""
 
 #: admin/views/accordions-row.php:24
 msgid "Export"
-msgstr ""
-
-#: admin/views/accordions.php:2
-msgid "All Accordions"
 msgstr ""
 
 #: admin/views/accordions.php:10
@@ -1746,7 +1745,7 @@ msgid ""
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:988
-msgid "Show inline info"
+msgid "Hide inline info"
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:990
@@ -1756,7 +1755,7 @@ msgid ""
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:993
-msgid "Show <i>Getting Started</i> info"
+msgid "Hide <i>Getting Started</i> info"
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:995
