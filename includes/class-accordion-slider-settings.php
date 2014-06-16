@@ -586,7 +586,8 @@ class BQW_Accordion_Slider_Settings {
 					'label' => __( 'Keyboard', 'accordion-slider' ),
 					'list' => array(
 						'keyboard',
-						'keyboard_only_on_focus'
+						'keyboard_only_on_focus',
+						'keyboard_target'
 					)
 				),
 
