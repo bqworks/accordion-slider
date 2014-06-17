@@ -121,7 +121,7 @@
                             <?php
                         }
                     ?>
-                    <?php $panel_class = isset( $accordion_panels_state ) ? $accordion_panels_state['breakpoints'] : $panels_state[ $group_name ]; ?>
+                    <?php $panel_class = isset( $accordion_panels_state ) && isset( $accordion_panels_state['breakpoints'] ) ? $accordion_panels_state['breakpoints'] : $panels_state[ $group_name ]; ?>
                     <div class="postbox breakpoints-box <?php echo $panel_class; ?>" data-name="breakpoints">
                         <div class="handlediv"></div>
                         <h3 class="hndle"><?php _e( 'Breakpoints', 'accordion-slider' ); ?></h3>
