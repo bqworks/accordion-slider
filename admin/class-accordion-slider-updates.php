@@ -34,6 +34,10 @@ class BQW_Accordion_Slider_Updates {
 	public function __construct() {
 		$this->db_version = get_option( 'accordion_slider_version', '1.0.0' );
 
+		if ( class_exists( 'BQW_Accordion_Slider_Lite' ) ) {
+			deactivate_plugins( 'accordion-slider-lite/accordion-slider-lite.php' );
+		}
+
 		if ( version_compare( $this->db_version, BQW_Accordion_Slider::VERSION, '>=' ) ) {
 			return;
 		}
