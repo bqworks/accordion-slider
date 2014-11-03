@@ -222,7 +222,7 @@ class BQW_Accordion_Slider_Settings {
 					'label' => __( 'Opened Panel Size', 'accordion-slider' ),
 					'type' => 'mixed',
 					'default_value' => 'max',
-					'description' => __( 'Sets the size (width if the accordion\'s Orientation is Horizontal; height if the accordion\'s Orientation is Vertical) of the opened panel. Possible values are: \'max\', which will open the panel to its maximum size, so that all the inner content is visible, a percentage value, like \'50%\', which indicates the percentage of the total size (width or height, depending on the Rrientation) of the accordion, or a fixed value.', 'accordion-slider' )
+					'description' => __( 'Sets the size (width if the accordion\'s Orientation is Horizontal; height if the accordion\'s Orientation is Vertical) of the opened panel. Possible values are: \'max\', which will open the panel to its maximum size, so that all the inner content is visible, a percentage value, like \'50%\', which indicates the percentage of the total size (width or height, depending on the Orientation) of the accordion, or a fixed value.', 'accordion-slider' )
 				),
 				'max_opened_panel_size' => array(
 					'js_name' => 'maxOpenedPanelSize',
