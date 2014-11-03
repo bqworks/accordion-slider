@@ -34,7 +34,7 @@
 		<label for="flickr-limit"><?php _e( 'Limit', 'accordion-slider' ); ?>:</label>
 	</td>
 	<td class="setting-cell">
-		<input id="flickr-limit" class="panel-setting" type="text" name="flickr_maximum" value="<?php echo isset( $panel_settings['flickr_per_page'] ) ? esc_attr( $panel_settings['flickr_per_page'] ) : $panel_default_settings['flickr_per_page']['default_value']; ?>" />
+		<input id="flickr-limit" class="panel-setting" type="text" name="flickr_per_page" value="<?php echo isset( $panel_settings['flickr_per_page'] ) ? esc_attr( $panel_settings['flickr_per_page'] ) : $panel_default_settings['flickr_per_page']['default_value']; ?>" />
 	</td>
 </tr>
 <tr>
