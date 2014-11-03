@@ -204,6 +204,13 @@ class BQW_Accordion_Slider_Settings {
 					'default_value' => 0,
 					'description' => __( 'Indicates which page will be opened when the accordion loads, if the panels are displayed on more than one page.', 'accordion-slider' )
 				),
+				'shuffle' => array(
+					'js_name' => 'shuffle',
+					'label' => __( 'Shuffle', 'accordion-slider' ),
+					'type' => 'boolean',
+					'default_value' => false,
+					'description' => __( 'Indicates if the panels will be randomized.', 'accordion-slider' )
+				),
 				'lazy_loading' => array(
 					'label' => __( 'Lazy Loading', 'accordion-slider' ),
 					'type' => 'boolean',
@@ -543,6 +550,7 @@ class BQW_Accordion_Slider_Settings {
 						'visible_panels',
 						'start_panel',
 						'start_page',
+						'shuffle',
 						'lazy_loading',
 						'custom_class'
 					)
