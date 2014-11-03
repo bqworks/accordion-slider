@@ -1159,7 +1159,7 @@ class BQW_Accordion_Slider_Admin {
 						$result[ $post_name ][ $taxonomy->name ]['terms'][ $term->name ] = array(
 							'name' => $term->name,
 							'slug' => $term->slug,
-							'full' => $taxonomy->name . '|' . $term->name
+							'full' => $taxonomy->name . '|' . $term->slug
 						);
 					}
 				}
