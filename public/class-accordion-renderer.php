@@ -162,8 +162,9 @@ class BQW_AS_Accordion_Renderer {
 
 		$lazy_loading = isset( $this->settings['lazy_loading'] ) ? $this->settings['lazy_loading'] : $this->default_settings['lazy_loading'];
 		$lightbox = isset( $this->settings['lightbox'] ) ? $this->settings['lightbox'] : $this->default_settings['lightbox'];
+		$hide_image_title = isset( $this->settings['hide_image_title'] ) ? $this->settings['hide_image_title'] : $this->default_settings['hide_image_title'];
 
-		$panel->set_data( $data, $this->id, $panel_counter, $lazy_loading, $lightbox );
+		$panel->set_data( $data, $this->id, $panel_counter, $lazy_loading, $lightbox, $hide_image_title );
 		
 		return $panel->render();
 	}
