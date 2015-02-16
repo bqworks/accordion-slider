@@ -52,6 +52,15 @@ class BQW_AS_Panel_Renderer {
 	protected $lightbox = null;
 
 	/**
+	 * Indicates the target of the panel links.
+	 *
+	 * @since 1.2.0
+	 * 
+	 * @var bool
+	 */
+	protected $link_target = null;
+
+	/**
 	 * HTML markup of the panel.
 	 *
 	 * @since 1.0.0
@@ -74,20 +83,19 @@ class BQW_AS_Panel_Renderer {
 	 *
 	 * @since 1.0.0
 	 * 
-	 * @param array $data             The data of the panel.
-	 * @param int   $accordion_id     The id of the accordion.
-	 * @param int   $panel_index      The index of the panel.
-	 * @param bool  $lazy_loading     Whether or not the panel will be lazy loaded.
-	 * @param bool  $lightbox         Whether or not the panel's image or link can be opened in a lightbox.
-	 * @param bool  $hide_image_title Whether the image's title tag will be removed.
+	 * @param array $data         The data of the panel.
+	 * @param int   $accordion_id The id of the accordion.
+	 * @param int   $panel_index  The index of the panel.
+	 * @param bool  $extra_data   Extra settings data for the slider.
 	 */
-	public function set_data( $data, $accordion_id, $panel_index, $lazy_loading, $lightbox, $hide_image_title ) {
+	public function set_data( $data, $accordion_id, $panel_index, $extra_data ) {
 		$this->data = $data;
 		$this->accordion_id = $accordion_id;
 		$this->panel_index = $panel_index;
-		$this->lazy_loading = $lazy_loading;
-		$this->lightbox = $lightbox;
-		$this->hide_image_title = $hide_image_title;
+		$this->lazy_loading = $extra_data->lazy_loading;
+		$this->lightbox = $extra_data->lightbox;
+		$this->hide_image_title = $extra_data->hide_image_title;
+		$this->link_target = $extra_data->link_target;
 	}
 
 	/**
@@ -248,7 +256,7 @@ class BQW_AS_Panel_Renderer {
 
 		$background_link_title = isset( $this->data['background_link_title'] ) && $this->data['background_link_title'] !== '' ? ' title="' . esc_attr( $this->data['background_link_title'] ) . '"' : '';
 		$background_link = 
-			'<a class="' . $classes . '" href="' . $background_link_href . '"' . $background_link_title . '>' . 
+			'<a class="' . $classes . '" href="' . $background_link_href . '"' . $background_link_title . ' target="' . $this->link_target . '">' .
 				"\r\n" . '				' . $image . 
 			"\r\n" . '			' . '</a>';
 		

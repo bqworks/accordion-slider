@@ -89,6 +89,7 @@ class BQW_Accordion_Slider_Settings {
 		'touch_swipe' => 'closed',
 		'lightbox' => 'closed',
 		'video' => 'closed',
+		'miscellaneous' => 'closed',
 		'breakpoints'  => 'closed'
 	);
 
@@ -210,18 +211,6 @@ class BQW_Accordion_Slider_Settings {
 					'type' => 'boolean',
 					'default_value' => false,
 					'description' => __( 'Indicates if the panels will be randomized.', 'accordion-slider' )
-				),
-				'lazy_loading' => array(
-					'label' => __( 'Lazy Loading', 'accordion-slider' ),
-					'type' => 'boolean',
-					'default_value' => false,
-					'description' => __( 'Indicates if the background images will be loaded only when they are visible. Images from accordion pages that are not visible, will not be loaded.', 'accordion-slider' )
-				),
-				'hide_image_title' => array(
-					'label' => __( 'Hide Image Title', 'accordion-slider' ),
-					'type' => 'boolean',
-					'default_value' => true,
-					'description' => __( 'Indicates if the title tag will be removed from images in order to prevent the title to show up in a tooltip when the image is hovered.', 'accordion-slider' )
 				),
 				'custom_class' => array(
 					'label' => __( 'Custom Class', 'accordion-slider' ),
@@ -518,6 +507,32 @@ class BQW_Accordion_Slider_Settings {
 						'none' => 'None'
 					),
 					'description' => __( 'Sets what the accordion will do when a video ends. Can be set to \'Start Autoplay\', \'Next Panel\', \'Replay Video\' or \'None\'.', 'accordion-slider' )
+				),
+
+				'lazy_loading' => array(
+					'label' => __( 'Lazy Loading', 'accordion-slider' ),
+					'type' => 'boolean',
+					'default_value' => false,
+					'description' => __( 'Indicates if the background images will be loaded only when they are visible. Images from accordion pages that are not visible, will not be loaded.', 'accordion-slider' )
+				),
+				'hide_image_title' => array(
+					'label' => __( 'Hide Image Title', 'accordion-slider' ),
+					'type' => 'boolean',
+					'default_value' => true,
+					'description' => __( 'Indicates if the title tag will be removed from images in order to prevent the title to show up in a tooltip when the image is hovered.', 'accordion-slider' )
+				),
+				'link_target' => array(
+					'js_name' => 'linkTarget',
+					'label' => __( 'Link Target', 'accordion-slider' ),
+					'type' => 'select',
+					'default_value' => '_self',
+					'available_values' => array(
+						'_self' => __( 'Self', 'accordion-slider' ),
+						'_blank' => __( 'Blank', 'accordion-slider' ),
+						'_parent' => __( 'Parent', 'accordion-slider' ),
+						'_top' => __( 'Top', 'accordion-slider' )
+					),
+					'description' => __( 'Sets the location where the slide links will be opened.', 'accordion-slider' )
 				)
 			);
 
@@ -557,8 +572,6 @@ class BQW_Accordion_Slider_Settings {
 						'start_panel',
 						'start_page',
 						'shuffle',
-						'lazy_loading',
-						'hide_image_title',
 						'custom_class'
 					)
 				),
@@ -641,6 +654,15 @@ class BQW_Accordion_Slider_Settings {
 						'play_video_action',
 						'pause_video_action',
 						'end_video_action'
+					)
+				),
+
+				'miscellaneous' => array(
+					'label' => __( 'Miscellaneous', 'accordion-slider' ),
+					'list' => array(
+						'lazy_loading',
+						'hide_image_title',
+						'link_target'
 					)
 				)
 			);

@@ -163,8 +163,15 @@ class BQW_AS_Accordion_Renderer {
 		$lazy_loading = isset( $this->settings['lazy_loading'] ) ? $this->settings['lazy_loading'] : $this->default_settings['lazy_loading'];
 		$lightbox = isset( $this->settings['lightbox'] ) ? $this->settings['lightbox'] : $this->default_settings['lightbox'];
 		$hide_image_title = isset( $this->settings['hide_image_title'] ) ? $this->settings['hide_image_title'] : $this->default_settings['hide_image_title'];
+		$link_target = isset( $this->settings['link_target'] ) ? $this->settings['link_target'] : $this->default_settings['link_target'];
 
-		$panel->set_data( $data, $this->id, $panel_counter, $lazy_loading, $lightbox, $hide_image_title );
+		$extra_data = new stdClass();
+		$extra_data->lazy_loading = $lazy_loading;
+		$extra_data->lightbox = $lightbox;
+		$extra_data->hide_image_title = $hide_image_title;
+		$extra_data->link_target = $link_target;
+
+		$panel->set_data( $data, $this->id, $panel_counter, $extra_data );
 		
 		return $panel->render();
 	}

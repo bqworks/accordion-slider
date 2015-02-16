@@ -52,14 +52,13 @@ class BQW_AS_Dynamic_Panel_Renderer extends BQW_AS_Panel_Renderer {
 	 *
 	 * @since 1.0.0
 	 * 
-	 * @param array $data             The data of the panel.
-	 * @param int   $accordion_id     The id of the accordion.
-	 * @param int   $panel_index      The index of the panel.
-	 * @param bool  $lazy_loading     Whether or not the panel will be lazy loaded.
-	 * @param bool  $hide_image_title Whether the image's title tag will be removed.
+	 * @param array $data         The data of the panel.
+	 * @param int   $accordion_id The id of the accordion.
+	 * @param int   $panel_index  The index of the panel.
+	 * @param bool  $extra_data   Extra settings data for the slider.
 	 */
-	public function set_data( $data, $accordion_id, $panel_index, $lazy_loading, $lightbox, $hide_image_title ) {
-		parent::set_data( $data, $accordion_id, $panel_index, $lazy_loading, $lightbox, $hide_image_title );
+	public function set_data( $data, $accordion_id, $panel_index, $extra_data ) {
+		parent::set_data( $data, $accordion_id, $panel_index, $extra_data );
 
 		$this->settings = $this->data['settings'];
 	}
