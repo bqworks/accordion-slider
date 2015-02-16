@@ -189,7 +189,7 @@ class BQW_AS_Panel_Renderer {
 	protected function create_opened_background_image() {
 		$opened_background_source = $this->lazy_loading === true ? ' src="' . plugins_url( 'accordion-slider/public/assets/css/images/blank.gif' ) . '" data-src="' . esc_attr( $this->data['opened_background_source'] ) . '"' : ' src="' . esc_attr( $this->data['opened_background_source'] ) . '"';
 		$opened_background_alt = isset( $this->data['opened_background_alt'] ) && $this->data['opened_background_alt'] !== '' ? ' alt="' . esc_attr( $this->data['opened_background_alt'] ) . '"' : '';
-		$opened_background_title = isset( $this->data['opened_background_title'] ) && $this->data['opened_background_title'] !== '' ? ' title="' . esc_attr( $this->data['opened_background_title'] ) . '"' : '';
+		$opened_background_title = isset( $this->data['opened_background_title'] ) && $this->data['opened_background_title'] !== '' && $this->hide_image_title === false ? ' title="' . esc_attr( $this->data['opened_background_title'] ) . '"' : '';
 		$opened_background_width = isset( $this->data['opened_background_width'] ) && $this->data['opened_background_width'] != 0 ? ' width="' . esc_attr( $this->data['opened_background_width'] ) . '"' : '';
 		$opened_background_height = isset( $this->data['opened_background_height'] ) && $this->data['opened_background_height'] != 0 ? ' height="' . esc_attr( $this->data['opened_background_height'] ) . '"' : '';
 		$opened_background_retina_source = isset( $this->data['opened_background_retina_source'] ) && $this->data['opened_background_retina_source'] !== '' ? ' data-retina="' . esc_attr( $this->data['opened_background_retina_source'] ) . '"' : '';
