@@ -1669,6 +1669,8 @@
 			if ( imageLoader.find( 'img' ).length !== 0 ) {
 				imageLoader.find( 'img' ).remove();
 				$( '<p class="no-image">' + as_js_vars.no_image + '</p>' ).appendTo( imageLoader );
+
+				this.needsPreviewUpdate = true;
 			}
 		},
 
