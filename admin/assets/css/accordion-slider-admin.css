@@ -57,10 +57,6 @@ Single accordion page
 		float: none;
 		width: 100%;
 	}
-
-	.add-panel-group {
-		float: none;
-	}
 }
 
 /* Panels container
@@ -252,6 +248,7 @@ Single accordion page
 /* Add panel button
 --------------------------------------------------*/
 .add-panel-group {
+	display: inline-block;
 	float: left;
 	overflow: hidden;
 	margin: 10px 0 180px;
@@ -289,6 +286,13 @@ Single accordion page
 	display: block;
 	padding: 8px;
 	text-decoration: none;
+}
+
+@media (max-width: 650px) {
+	.add-panel-group {
+		float: none !important;
+		display: inline-block;
+	}
 }
 
 /* Accordion sidebar settings
