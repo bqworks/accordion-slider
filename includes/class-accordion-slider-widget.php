@@ -18,7 +18,7 @@ class BQW_Accordion_Slider_Widget extends WP_Widget {
 			'description' => 'Display an Accordion Slider instance in the widgets area.'
 		);
 		
-		$this->WP_Widget( 'bqw-accordion-slider-widget', 'Accordion Slider', $widget_opts );
+		parent::__construct( 'bqw-accordion-slider-widget', 'Accordion Slider', $widget_opts );
 	}
 	
 	/**
