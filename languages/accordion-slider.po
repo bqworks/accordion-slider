@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Accordion Slider\n"
-"POT-Creation-Date: 2014-11-03 22:55+0200\n"
-"PO-Revision-Date: 2014-11-03 22:55+0200\n"
+"POT-Creation-Date: 2015-02-27 19:50+0200\n"
+"PO-Revision-Date: 2015-02-27 19:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -273,7 +273,7 @@ msgstr ""
 
 #: admin/views/accordions.php:47 admin/views/accordions.php:84
 #: admin/views/flickr-panel-settings.php:26
-#: includes/class-accordion-slider-settings.php:945
+#: includes/class-accordion-slider-settings.php:967
 msgid "ID"
 msgstr ""
 
@@ -529,19 +529,19 @@ msgid ""
 msgstr ""
 
 #: admin/views/flickr-panel-settings.php:3
-#: includes/class-accordion-slider-settings.php:929
+#: includes/class-accordion-slider-settings.php:951
 msgid "API Key"
 msgstr ""
 
 #: admin/views/flickr-panel-settings.php:11
-#: includes/class-accordion-slider-settings.php:935
+#: includes/class-accordion-slider-settings.php:957
 msgid "Load By"
 msgstr ""
 
 #: admin/views/flickr-panel-settings.php:34
 #: admin/views/posts-panel-settings.php:109
-#: includes/class-accordion-slider-settings.php:923
-#: includes/class-accordion-slider-settings.php:951
+#: includes/class-accordion-slider-settings.php:945
+#: includes/class-accordion-slider-settings.php:973
 msgid "Limit"
 msgstr ""
 
@@ -663,7 +663,7 @@ msgid "Content"
 msgstr ""
 
 #: admin/views/layer-settings.php:21
-#: includes/class-accordion-slider-settings.php:698
+#: includes/class-accordion-slider-settings.php:720
 msgid "Heading Type"
 msgstr ""
 
@@ -684,24 +684,24 @@ msgid "Video Embed/Code"
 msgstr ""
 
 #: admin/views/layer-settings.php:88
-#: includes/class-accordion-slider-settings.php:545
+#: includes/class-accordion-slider-settings.php:560
 msgid "Appearance"
 msgstr ""
 
 #: admin/views/layer-settings.php:94
-#: includes/class-accordion-slider-settings.php:712
+#: includes/class-accordion-slider-settings.php:734
 msgid "Display"
 msgstr ""
 
 #: admin/views/layer-settings.php:105
-#: includes/class-accordion-slider-settings.php:160
-#: includes/class-accordion-slider-settings.php:747
+#: includes/class-accordion-slider-settings.php:161
+#: includes/class-accordion-slider-settings.php:769
 msgid "Horizontal"
 msgstr ""
 
 #: admin/views/layer-settings.php:109
-#: includes/class-accordion-slider-settings.php:117
-#: includes/class-accordion-slider-settings.php:735
+#: includes/class-accordion-slider-settings.php:118
+#: includes/class-accordion-slider-settings.php:757
 msgid "Width"
 msgstr ""
 
@@ -710,25 +710,25 @@ msgid "Preset styles"
 msgstr ""
 
 #: admin/views/layer-settings.php:126
-#: includes/class-accordion-slider-settings.php:723
+#: includes/class-accordion-slider-settings.php:745
 msgid "Position"
 msgstr ""
 
 #: admin/views/layer-settings.php:137
-#: includes/class-accordion-slider-settings.php:161
-#: includes/class-accordion-slider-settings.php:753
+#: includes/class-accordion-slider-settings.php:162
+#: includes/class-accordion-slider-settings.php:775
 msgid "Vertical"
 msgstr ""
 
 #: admin/views/layer-settings.php:141
-#: includes/class-accordion-slider-settings.php:124
-#: includes/class-accordion-slider-settings.php:741
+#: includes/class-accordion-slider-settings.php:125
+#: includes/class-accordion-slider-settings.php:763
 msgid "Height"
 msgstr ""
 
 #: admin/views/layer-settings.php:145
-#: includes/class-accordion-slider-settings.php:227
-#: includes/class-accordion-slider-settings.php:771
+#: includes/class-accordion-slider-settings.php:216
+#: includes/class-accordion-slider-settings.php:793
 msgid "Custom Class"
 msgstr ""
 
@@ -737,42 +737,42 @@ msgid "Animation"
 msgstr ""
 
 #: admin/views/layer-settings.php:162
-#: includes/class-accordion-slider-settings.php:777
+#: includes/class-accordion-slider-settings.php:799
 msgid "Show Transition"
 msgstr ""
 
 #: admin/views/layer-settings.php:173
-#: includes/class-accordion-slider-settings.php:790
+#: includes/class-accordion-slider-settings.php:812
 msgid "Show Offset"
 msgstr ""
 
 #: admin/views/layer-settings.php:177
-#: includes/class-accordion-slider-settings.php:796
+#: includes/class-accordion-slider-settings.php:818
 msgid "Show Delay"
 msgstr ""
 
 #: admin/views/layer-settings.php:181
-#: includes/class-accordion-slider-settings.php:802
+#: includes/class-accordion-slider-settings.php:824
 msgid "Show Duration"
 msgstr ""
 
 #: admin/views/layer-settings.php:187
-#: includes/class-accordion-slider-settings.php:808
+#: includes/class-accordion-slider-settings.php:830
 msgid "Hide Transition"
 msgstr ""
 
 #: admin/views/layer-settings.php:198
-#: includes/class-accordion-slider-settings.php:821
+#: includes/class-accordion-slider-settings.php:843
 msgid "Hide Offset"
 msgstr ""
 
 #: admin/views/layer-settings.php:202
-#: includes/class-accordion-slider-settings.php:827
+#: includes/class-accordion-slider-settings.php:849
 msgid "Hide Delay"
 msgstr ""
 
 #: admin/views/layer-settings.php:206
-#: includes/class-accordion-slider-settings.php:833
+#: includes/class-accordion-slider-settings.php:855
 msgid "Hide Duration"
 msgstr ""
 
@@ -888,32 +888,32 @@ msgid "Purchase Code:"
 msgstr ""
 
 #: admin/views/posts-panel-settings.php:3
-#: includes/class-accordion-slider-settings.php:869
+#: includes/class-accordion-slider-settings.php:891
 msgid "Post Types"
 msgstr ""
 
 #: admin/views/posts-panel-settings.php:18
-#: includes/class-accordion-slider-settings.php:875
+#: includes/class-accordion-slider-settings.php:897
 msgid "Taxonomies"
 msgstr ""
 
 #: admin/views/posts-panel-settings.php:49
-#: includes/class-accordion-slider-settings.php:881
+#: includes/class-accordion-slider-settings.php:903
 msgid "Match"
 msgstr ""
 
 #: admin/views/posts-panel-settings.php:64
-#: includes/class-accordion-slider-settings.php:891
+#: includes/class-accordion-slider-settings.php:913
 msgid "With selected"
 msgstr ""
 
 #: admin/views/posts-panel-settings.php:79
-#: includes/class-accordion-slider-settings.php:901
+#: includes/class-accordion-slider-settings.php:923
 msgid "Order By"
 msgstr ""
 
 #: admin/views/posts-panel-settings.php:94
-#: includes/class-accordion-slider-settings.php:913
+#: includes/class-accordion-slider-settings.php:935
 msgid "Order"
 msgstr ""
 
@@ -940,7 +940,7 @@ msgid ""
 msgstr ""
 
 #: admin/views/settings-editor.php:10
-#: includes/class-accordion-slider-settings.php:857
+#: includes/class-accordion-slider-settings.php:879
 msgid "Content Type"
 msgstr ""
 
@@ -948,7 +948,7 @@ msgstr ""
 msgid " To activate automatic updates, you need to enter your purchase code "
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:120
+#: includes/class-accordion-slider-settings.php:121
 msgid ""
 "Sets the width of the accordion. Can be set to a fixed value, like 900 "
 "(indicating 900 pixels), or to a percentage value, like 100%. In order to "
@@ -956,7 +956,7 @@ msgid ""
 "More about this in the description of the Responsive option."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:127
+#: includes/class-accordion-slider-settings.php:128
 msgid ""
 "Sets the height of the accordion. Can be set to a fixed value, like 400 "
 "(indicating 400 pixels). It's not recommended to set this to a percentage "
@@ -964,30 +964,30 @@ msgid ""
 "with a fixed value set for the height."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:131
+#: includes/class-accordion-slider-settings.php:132
 msgid "Responsive"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:134
+#: includes/class-accordion-slider-settings.php:135
 msgid ""
 "Makes the accordion responsive. The accordion can be responsive even if the "
 "Width and/or Height options are set to fixed values. In this situation, the "
 "Width and Height will act as the maximum width and height of the accordion."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:138
+#: includes/class-accordion-slider-settings.php:139
 msgid "Responsive Mode"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:142
+#: includes/class-accordion-slider-settings.php:143
 msgid "Auto"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:143
+#: includes/class-accordion-slider-settings.php:144
 msgid "Custom"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:145
+#: includes/class-accordion-slider-settings.php:146
 msgid ""
 "'Auto' resizes the accordion and all of its elements (e.g., layers, videos) "
 "automatically, while 'Custom' resizes only the accordion container and "
@@ -1001,11 +1001,11 @@ msgid ""
 "scale."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:149
+#: includes/class-accordion-slider-settings.php:150
 msgid "Aspect Ratio"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:152
+#: includes/class-accordion-slider-settings.php:153
 msgid ""
 "Sets the aspect ratio of the accordion. The accordion will set its height "
 "depending on what value its width has, so that this ratio is maintained. For "
@@ -1014,115 +1014,94 @@ msgid ""
 "'Aspect Ratio' needs to remain -1."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:156
+#: includes/class-accordion-slider-settings.php:157
 msgid "Orientation"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:163
+#: includes/class-accordion-slider-settings.php:164
 msgid "Sets the orientation of the panels."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:167
+#: includes/class-accordion-slider-settings.php:168
 msgid "Shadow"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:170
+#: includes/class-accordion-slider-settings.php:171
 msgid "Indicates if the panels will have a drop shadow effect."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:174
+#: includes/class-accordion-slider-settings.php:175
 msgid "Panel Distance"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:177
+#: includes/class-accordion-slider-settings.php:178
 msgid ""
 "Sets the distance between consecutive panels. Can be set to a percentage or "
 "fixed value."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:181
+#: includes/class-accordion-slider-settings.php:182
 msgid "Panel Overlap"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:184
+#: includes/class-accordion-slider-settings.php:185
 msgid ""
 "Indicates if the panels will be overlapped. If set to false, the panels will "
 "have their width or height set so that they are next to each other, but not "
 "overlapped."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:188
+#: includes/class-accordion-slider-settings.php:189
 msgid "Visible Panels"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:191
+#: includes/class-accordion-slider-settings.php:192
 msgid ""
 "Indicates the number of panels visible per page. If set to -1, all the "
 "panels will be displayed on one page."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:195
+#: includes/class-accordion-slider-settings.php:196
 msgid "Start Panel"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:198
+#: includes/class-accordion-slider-settings.php:199
 msgid ""
 "Indicates which panel will be opened when the accordion loads (0 for the "
 "first panel, 1 for the second panel, etc.). If set to -1, no panel will be "
 "opened."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:202
+#: includes/class-accordion-slider-settings.php:203
 msgid "Start Page"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:205
+#: includes/class-accordion-slider-settings.php:206
 msgid ""
 "Indicates which page will be opened when the accordion loads, if the panels "
 "are displayed on more than one page."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:209
+#: includes/class-accordion-slider-settings.php:210
 msgid "Shuffle"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:212
+#: includes/class-accordion-slider-settings.php:213
 msgid "Indicates if the panels will be randomized."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:215
-msgid "Lazy Loading"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:218
-msgid ""
-"Indicates if the background images will be loaded only when they are "
-"visible. Images from accordion pages that are not visible, will not be "
-"loaded."
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:221
-msgid "Hide Image Title"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:224
-msgid ""
-"Indicates if the title tag will be removed from images in order to prevent "
-"the title to show up in a tooltip when the image is hovered."
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:230
+#: includes/class-accordion-slider-settings.php:219
 msgid ""
 "Adds a custom class to the accordion, for use in custom css. Add the class "
 "name without the dot, i.e., you need to add <i>my-accordion</i>, not <i>.my-"
 "accordion</i>."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:235
+#: includes/class-accordion-slider-settings.php:224
 msgid "Opened Panel Size"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:238
+#: includes/class-accordion-slider-settings.php:227
 msgid ""
 "Sets the size (width if the accordion's Orientation is Horizontal; height if "
 "the accordion's Orientation is Vertical) of the opened panel. Possible "
@@ -1132,11 +1111,11 @@ msgid ""
 "the Orientation) of the accordion, or a fixed value."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:242
+#: includes/class-accordion-slider-settings.php:231
 msgid "Max Opened Panel Size"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:245
+#: includes/class-accordion-slider-settings.php:234
 msgid ""
 "Sets the maximum allowed size of the opened panel. This should be used when "
 "the 'Opened Panel Size' is set to 'max', because sometimes the maximum size "
@@ -1145,44 +1124,44 @@ msgid ""
 "value."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:249
+#: includes/class-accordion-slider-settings.php:238
 msgid "Open Panel On"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:253
+#: includes/class-accordion-slider-settings.php:242
 msgid "Hover"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:254
+#: includes/class-accordion-slider-settings.php:243
 msgid "Click"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:255
+#: includes/class-accordion-slider-settings.php:244
 msgid "Never"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:257
+#: includes/class-accordion-slider-settings.php:246
 msgid ""
 "If set to 'Hover', the panels will be opened by moving the mouse pointer "
 "over them; if set to 'Click', the panels will open when clicked. Can also be "
 "set to 'never' to disable the opening of the panels."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:261
+#: includes/class-accordion-slider-settings.php:250
 msgid "Close Panels On Mouse Out"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:264
+#: includes/class-accordion-slider-settings.php:253
 msgid ""
 "Determines whether the opened panel closes or remains open when the mouse "
 "pointer is moved away."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:268
+#: includes/class-accordion-slider-settings.php:257
 msgid "Mouse Delay"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:271
+#: includes/class-accordion-slider-settings.php:260
 msgid ""
 "Sets the delay in milliseconds between the movement of the mouse pointer and "
 "the opening of the panel. Setting a delay ensures that panels are not opened "
@@ -1190,133 +1169,133 @@ msgid ""
 "panel."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:275
+#: includes/class-accordion-slider-settings.php:264
 msgid "Open Panel Duration"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:278
+#: includes/class-accordion-slider-settings.php:267
 msgid ""
 "Determines the duration in milliseconds for the opening animation of the "
 "panel."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:282
+#: includes/class-accordion-slider-settings.php:271
 msgid "Close Panel Duration"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:285
+#: includes/class-accordion-slider-settings.php:274
 msgid ""
 "Determines the duration in milliseconds for the closing animation of the "
 "panel."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:289
+#: includes/class-accordion-slider-settings.php:278
 msgid "Page Scroll Duration"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:292
+#: includes/class-accordion-slider-settings.php:281
 msgid "Indicates the duration of the page scrolling animation."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:296
+#: includes/class-accordion-slider-settings.php:285
 msgid "Page Scroll Easing"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:332
+#: includes/class-accordion-slider-settings.php:321
 msgid "Indicates the easing type of the page scrolling animation."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:337
-#: includes/class-accordion-slider-settings.php:582
+#: includes/class-accordion-slider-settings.php:326
+#: includes/class-accordion-slider-settings.php:595
 msgid "Autoplay"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:340
+#: includes/class-accordion-slider-settings.php:329
 msgid "Indicates if the autoplay will be enabled."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:344
+#: includes/class-accordion-slider-settings.php:333
 msgid "Autoplay Delay"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:347
+#: includes/class-accordion-slider-settings.php:336
 msgid "Sets the delay, in milliseconds, of the autoplay cycle."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:351
+#: includes/class-accordion-slider-settings.php:340
 msgid "Autoplay Direction"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:355
+#: includes/class-accordion-slider-settings.php:344
 msgid "Normal"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:356
+#: includes/class-accordion-slider-settings.php:345
 msgid "Backwards"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:358
+#: includes/class-accordion-slider-settings.php:347
 msgid ""
 "Sets the direction in which the panels will be opened. Can be set to "
 "'Normal' (ascending order) or 'Backwards' (descending order)."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:362
+#: includes/class-accordion-slider-settings.php:351
 msgid "Autoplay On Hover"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:366
+#: includes/class-accordion-slider-settings.php:355
 msgid "Pause"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:367
+#: includes/class-accordion-slider-settings.php:356
 msgid "Stop"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:368
-#: includes/class-accordion-slider-settings.php:472
-#: includes/class-accordion-slider-settings.php:494
+#: includes/class-accordion-slider-settings.php:357
+#: includes/class-accordion-slider-settings.php:461
+#: includes/class-accordion-slider-settings.php:483
 msgid "None"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:370
+#: includes/class-accordion-slider-settings.php:359
 msgid "Indicates if the autoplay will be paused when the accordion is hovered."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:375
-#: includes/class-accordion-slider-settings.php:592
+#: includes/class-accordion-slider-settings.php:364
+#: includes/class-accordion-slider-settings.php:605
 msgid "Mouse Wheel"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:378
+#: includes/class-accordion-slider-settings.php:367
 msgid "Indicates if the accordion will respond to mouse wheel input."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:382
+#: includes/class-accordion-slider-settings.php:371
 msgid "Mouse Wheel Sensitivity"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:385
+#: includes/class-accordion-slider-settings.php:374
 msgid ""
 "Sets how sensitive the accordion will be to mouse wheel input. Lower values "
 "indicate stronger sensitivity."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:389
+#: includes/class-accordion-slider-settings.php:378
 msgid "Mouse Wheel Target"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:393
-#: includes/class-accordion-slider-settings.php:421
+#: includes/class-accordion-slider-settings.php:382
+#: includes/class-accordion-slider-settings.php:410
 msgid "Panel"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:394
-#: includes/class-accordion-slider-settings.php:422
+#: includes/class-accordion-slider-settings.php:383
+#: includes/class-accordion-slider-settings.php:411
 msgid "Page"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:396
+#: includes/class-accordion-slider-settings.php:385
 msgid ""
 "Sets what elements will be targeted by the mouse wheel input. Can be set to "
 "'Panel' or 'Page'. Setting it to 'Panel' will indicate that the panels will "
@@ -1324,30 +1303,30 @@ msgid ""
 "scrolled."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:401
-#: includes/class-accordion-slider-settings.php:601
+#: includes/class-accordion-slider-settings.php:390
+#: includes/class-accordion-slider-settings.php:614
 msgid "Keyboard"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:404
+#: includes/class-accordion-slider-settings.php:393
 msgid "Indicates if the accordion will respond to keyboard input."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:409
+#: includes/class-accordion-slider-settings.php:398
 msgid "Keyboard Only On Focus"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:412
+#: includes/class-accordion-slider-settings.php:401
 msgid ""
 "Indicates if the accordion will respond to keyboard input only if the "
 "accordion has focus."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:417
+#: includes/class-accordion-slider-settings.php:406
 msgid "Keyboard Target"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:424
+#: includes/class-accordion-slider-settings.php:413
 msgid ""
 "Sets what elements will be targeted by the keyboard input. Can be set to "
 "'Panel' or 'Page'. Setting it to 'Panel' will indicate that the panels will "
@@ -1355,357 +1334,406 @@ msgid ""
 "scrolled."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:429
+#: includes/class-accordion-slider-settings.php:418
 msgid "Swap Background Duration"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:432
+#: includes/class-accordion-slider-settings.php:421
 msgid "Sets the duration, in milliseconds, of the transition effect."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:436
+#: includes/class-accordion-slider-settings.php:425
 msgid "Fade Out Background"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:439
+#: includes/class-accordion-slider-settings.php:428
 msgid ""
 "Indicates if the main image background will be faded out when the opened/"
 "alternative background fades in."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:444
-#: includes/class-accordion-slider-settings.php:618
+#: includes/class-accordion-slider-settings.php:433
+#: includes/class-accordion-slider-settings.php:631
 msgid "Touch Swipe"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:447
+#: includes/class-accordion-slider-settings.php:436
 msgid "Indicates if the touch swipe functionality will be enabled."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:451
+#: includes/class-accordion-slider-settings.php:440
 msgid "Touch Swipe Threshold"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:454
+#: includes/class-accordion-slider-settings.php:443
 msgid ""
 "Sets how many pixels the distance of the swipe gesture needs to be in order "
 "to trigger a page change."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:459
-#: includes/class-accordion-slider-settings.php:626
+#: includes/class-accordion-slider-settings.php:448
+#: includes/class-accordion-slider-settings.php:639
 msgid "Lightbox"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:462
+#: includes/class-accordion-slider-settings.php:451
 msgid ""
 "Indicates if the links specified to the background images will be opened in "
 "a lightbox."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:467
+#: includes/class-accordion-slider-settings.php:456
 msgid "Open Panel Video Action"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:471
+#: includes/class-accordion-slider-settings.php:460
 msgid "Play Video"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:474
+#: includes/class-accordion-slider-settings.php:463
 msgid ""
 "Sets what the video will do when the panel is opened. Can be set to 'Play "
 "Video' or 'None'."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:478
+#: includes/class-accordion-slider-settings.php:467
 msgid "Close Panel Video Action"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:482
+#: includes/class-accordion-slider-settings.php:471
 msgid "Pause Video"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:483
+#: includes/class-accordion-slider-settings.php:472
 msgid "Stop Video"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:485
+#: includes/class-accordion-slider-settings.php:474
 msgid ""
 "Sets what the video will do when the panel is closed. Can be set to 'Pause "
 "Video' or 'Stop Video'."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:489
+#: includes/class-accordion-slider-settings.php:478
 msgid "Play Video Action"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:493
+#: includes/class-accordion-slider-settings.php:482
 msgid "Stop Autoplay"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:496
+#: includes/class-accordion-slider-settings.php:485
 msgid ""
 "Sets what the accordion will do when a video starts playing. Can be set to "
 "'Stop Autoplay' or 'None'."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:500
+#: includes/class-accordion-slider-settings.php:489
 msgid "Pause Video Action"
 msgstr ""
 
+#: includes/class-accordion-slider-settings.php:493
 #: includes/class-accordion-slider-settings.php:504
-#: includes/class-accordion-slider-settings.php:515
 msgid "Start Autoplay"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:507
+#: includes/class-accordion-slider-settings.php:496
 msgid ""
 "Sets what the accordion will do when a video is paused. Can be set to 'Start "
 "Autoplay' or 'None'."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:511
+#: includes/class-accordion-slider-settings.php:500
 msgid "End Video Action"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:516
+#: includes/class-accordion-slider-settings.php:505
 msgid "Next Panel"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:517
+#: includes/class-accordion-slider-settings.php:506
 msgid "Replay Video"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:520
+#: includes/class-accordion-slider-settings.php:509
 msgid ""
 "Sets what the accordion will do when a video ends. Can be set to 'Start "
 "Autoplay', 'Next Panel', 'Replay Video' or 'None'."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:567
+#: includes/class-accordion-slider-settings.php:513
+msgid "Lazy Loading"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:516
+msgid ""
+"Indicates if the background images will be loaded only when they are "
+"visible. Images from accordion pages that are not visible, will not be "
+"loaded."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:519
+msgid "Hide Image Title"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:522
+msgid ""
+"Indicates if the title tag will be removed from images in order to prevent "
+"the title to show up in a tooltip when the image is hovered."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:526
+msgid "Link Target"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:530
+msgid "Self"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:531
+msgid "Blank"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:532
+msgid "Parent"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:533
+msgid "Top"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:535
+msgid "Sets the location where the slide links will be opened."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:580
 msgid "Animations"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:610
+#: includes/class-accordion-slider-settings.php:623
 msgid "Swap Background"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:631
+#: includes/class-accordion-slider-settings.php:644
 msgid ""
 "By default, the accordion will open the background image in the lightbox, "
 "but at its full size."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:632
+#: includes/class-accordion-slider-settings.php:645
 msgid ""
 "If you want to open a different image or other content, you need to specify "
 "the custom content in the <i>Background Image</i> editor, in the <i>Link</i> "
 "field."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:637
-#: includes/class-accordion-slider-settings.php:692
+#: includes/class-accordion-slider-settings.php:650
+#: includes/class-accordion-slider-settings.php:714
 msgid "Video"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:685
-msgid "Type"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:689
-msgid "Paragraph"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:690
-msgid "Heading"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:691
-msgid "Image"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:693
-msgid "DIV"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:702
-msgid "H1"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:703
-msgid "H2"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:704
-msgid "H3"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:705
-msgid "H4"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:706
-msgid "H5"
+#: includes/class-accordion-slider-settings.php:661
+msgid "Miscellaneous"
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:707
-msgid "H6"
+msgid "Type"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:716
-msgid "Always"
+#: includes/class-accordion-slider-settings.php:711
+msgid "Paragraph"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:717
-msgid "When opened"
+#: includes/class-accordion-slider-settings.php:712
+msgid "Heading"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:718
-msgid "When closed"
+#: includes/class-accordion-slider-settings.php:713
+msgid "Image"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:715
+msgid "DIV"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:724
+msgid "H1"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:725
+msgid "H2"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:726
+msgid "H3"
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:727
-msgid "Top Left"
+msgid "H4"
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:728
-msgid "Top Right"
+msgid "H5"
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:729
+msgid "H6"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:738
+msgid "Always"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:739
+msgid "When opened"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:740
+msgid "When closed"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:749
+msgid "Top Left"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:750
+msgid "Top Right"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:751
 msgid "Bottom Left"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:730
+#: includes/class-accordion-slider-settings.php:752
 msgid "Bottom Right"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:759
+#: includes/class-accordion-slider-settings.php:781
 msgid "Preset Styles"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:763
+#: includes/class-accordion-slider-settings.php:785
 msgid "Black"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:764
+#: includes/class-accordion-slider-settings.php:786
 msgid "White"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:765
+#: includes/class-accordion-slider-settings.php:787
 msgid "Padding"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:766
+#: includes/class-accordion-slider-settings.php:788
 msgid "Round Corners"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:781
-#: includes/class-accordion-slider-settings.php:812
+#: includes/class-accordion-slider-settings.php:803
+#: includes/class-accordion-slider-settings.php:834
 msgid "Fade"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:782
-#: includes/class-accordion-slider-settings.php:813
+#: includes/class-accordion-slider-settings.php:804
+#: includes/class-accordion-slider-settings.php:835
 msgid "Left"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:783
-#: includes/class-accordion-slider-settings.php:814
+#: includes/class-accordion-slider-settings.php:805
+#: includes/class-accordion-slider-settings.php:836
 msgid "Right"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:784
-#: includes/class-accordion-slider-settings.php:815
+#: includes/class-accordion-slider-settings.php:806
+#: includes/class-accordion-slider-settings.php:837
 msgid "Up"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:785
-#: includes/class-accordion-slider-settings.php:816
+#: includes/class-accordion-slider-settings.php:807
+#: includes/class-accordion-slider-settings.php:838
 msgid "Down"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:861
+#: includes/class-accordion-slider-settings.php:883
 msgid "Custom Content"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:862
+#: includes/class-accordion-slider-settings.php:884
 msgid "Content from posts"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:863
+#: includes/class-accordion-slider-settings.php:885
 msgid "Images from post's gallery"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:864
+#: includes/class-accordion-slider-settings.php:886
 msgid "Flickr images"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:885
+#: includes/class-accordion-slider-settings.php:907
 msgid "At least one"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:886
+#: includes/class-accordion-slider-settings.php:908
 msgid "All"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:895
+#: includes/class-accordion-slider-settings.php:917
 msgid "Include"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:896
+#: includes/class-accordion-slider-settings.php:918
 msgid "Exclude"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:905
+#: includes/class-accordion-slider-settings.php:927
 msgid "Date"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:906
+#: includes/class-accordion-slider-settings.php:928
 msgid "Comments"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:907
+#: includes/class-accordion-slider-settings.php:929
 msgid "Title"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:908
+#: includes/class-accordion-slider-settings.php:930
 msgid "Random"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:917
+#: includes/class-accordion-slider-settings.php:939
 msgid "Descending"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:918
+#: includes/class-accordion-slider-settings.php:940
 msgid "Ascending"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:939
+#: includes/class-accordion-slider-settings.php:961
 msgid "Set ID"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:940
+#: includes/class-accordion-slider-settings.php:962
 msgid "User ID"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:975
+#: includes/class-accordion-slider-settings.php:997
 msgid "Load stylesheets"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:978
+#: includes/class-accordion-slider-settings.php:1000
 msgid "Automatically"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:979
+#: includes/class-accordion-slider-settings.php:1001
 msgid "On homepage"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:980
+#: includes/class-accordion-slider-settings.php:1002
 msgid "On all pages"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:982
+#: includes/class-accordion-slider-settings.php:1004
 msgid ""
 "The plugin can detect the presence of the accordion in a post, page or "
 "widget, and will automatically load the necessary stylesheets. However, when "
@@ -1716,19 +1744,19 @@ msgid ""
 "multiple pages, select <i>On all pages</i>."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:985
+#: includes/class-accordion-slider-settings.php:1007
 msgid "Load custom CSS and JavaScript"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:988
+#: includes/class-accordion-slider-settings.php:1010
 msgid "Inline"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:989
+#: includes/class-accordion-slider-settings.php:1011
 msgid "In files"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:991
+#: includes/class-accordion-slider-settings.php:1013
 msgid ""
 "By default, custom CSS and JavaScript code added to the accordion will be "
 "loaded inline. However, if you want to add large amounts of custom CSS or "
@@ -1741,42 +1769,42 @@ msgid ""
 "credentials if the files can't be created due to folder permission issues."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:994
+#: includes/class-accordion-slider-settings.php:1016
 msgid "Load unminified scripts"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:996
+#: includes/class-accordion-slider-settings.php:1018
 msgid ""
 "Check this option if you want to load the unminified/uncompressed CSS and "
 "JavaScript files for the accordion. This is useful for debugging purposes."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:999
+#: includes/class-accordion-slider-settings.php:1021
 msgid "Cache expiry interval"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1001
+#: includes/class-accordion-slider-settings.php:1023
 msgid ""
 "Indicates the time interval after which a slider's cache will expire. If the "
 "cache of a slider has expired, the slider will be rendered again and cached "
 "the next time it is viewed."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1004
+#: includes/class-accordion-slider-settings.php:1026
 msgid "Hide inline info"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1006
+#: includes/class-accordion-slider-settings.php:1028
 msgid ""
 "Indicates whether the inline information will be displayed in admin panels "
 "and wherever it's available."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1009
+#: includes/class-accordion-slider-settings.php:1031
 msgid "Hide <i>Getting Started</i> info"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1011
+#: includes/class-accordion-slider-settings.php:1033
 msgid ""
 "Indicates whether the <i>Getting Started</i> information will be displayed "
 "in the <i>All Accordions</i> page, above the list of accordions. This "
@@ -1784,27 +1812,27 @@ msgid ""
 "information box."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1014
+#: includes/class-accordion-slider-settings.php:1036
 msgid "Access"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1017
+#: includes/class-accordion-slider-settings.php:1039
 msgid "Administrator"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1018
+#: includes/class-accordion-slider-settings.php:1040
 msgid "Editor"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1019
+#: includes/class-accordion-slider-settings.php:1041
 msgid "Author"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1020
+#: includes/class-accordion-slider-settings.php:1042
 msgid "Contributor"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1022
+#: includes/class-accordion-slider-settings.php:1044
 msgid ""
 "Sets what category of users will have access to the plugin's admin area."
 msgstr ""
