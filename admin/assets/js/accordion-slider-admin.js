@@ -204,7 +204,7 @@
 			$( '.clear-all-cache' ).on( 'click', function( event ) {
 				event.preventDefault();
 
-				$( '.clear-cache-spinner' ).css( 'display', 'inline-block' );
+				$( '.clear-cache-spinner' ).css( { 'display': 'inline-block', 'visibility': 'visible' } );
 
 				var nonce = $( this ).attr( 'data-nonce' );
 
@@ -213,7 +213,7 @@
 					type: 'post',
 					data: { action: 'accordion_slider_clear_all_cache', nonce: nonce },
 					complete: function( data ) {
-						$( '.clear-cache-spinner' ).css( 'display', '' );
+						$( '.clear-cache-spinner' ).css( { 'display': '', 'visibility': '' } );
 					}
 				});
 			});
@@ -243,7 +243,7 @@
 		loadAccordionData: function() {
 			var that = this;
 
-			$( '.panel-spinner' ).css( 'display', 'inline-block' );
+			$( '.panel-spinner' ).css( { 'display': 'inline-block', 'visibility': 'visible' } );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -269,7 +269,7 @@
 						that.getPanel( index ).setData( 'all', panelData );
 					});
 
-					$( '.panel-spinner' ).css( 'display', '' );
+					$( '.panel-spinner' ).css( { 'display': '', 'visibility': '' } );
 				}
 			});
 		},
@@ -289,14 +289,14 @@
 
 			var accordionDataString = JSON.stringify( accordionData );
 
-			var spinner = $( '.update-spinner' ).css( 'display', 'inline-block' );
+			var spinner = $( '.update-spinner' ).css( { 'display': 'inline-block', 'visibility': 'visible' } );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				data: { action: 'accordion_slider_save_accordion', data: accordionDataString },
 				complete: function( data ) {
-					spinner.css( 'display', '' );
+					spinner.css( { 'display': '', 'visibility': '' } );
 
 					if ( parseInt( as_js_vars.id, 10 ) === -1 && isNaN( data.responseText ) === false ) {
 						$( 'h2' ).after( '<div class="updated"><p>' + as_js_vars.accordion_create + '</p></div>' );
@@ -1536,7 +1536,7 @@
 			var that = this,
 				data = this.currentPanel.getData( 'background' ),
 				contentType = this.currentPanel.getData( 'settings' )[ 'content_type' ],
-				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
+				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( { 'display': 'inline-block', 'visibility': 'visible' } );
 
 			if ( typeof contentType === 'undefined' ) {
 				contentType = 'custom';
@@ -1551,7 +1551,7 @@
 					$( 'body' ).append( data.responseText );
 					that.init();
 
-					spinner.css( 'display', '' );
+					spinner.css( { 'display': '', 'visibility': '' } );
 				}
 			});
 		},
@@ -1759,7 +1759,7 @@
 			
 			var that = this,
 				data = this.currentPanel.getData( 'html' ),
-				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' ),
+				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( { 'display': 'inline-block', 'visibility': 'visible' } ),
 				contentType = this.currentPanel.getData( 'settings' )[ 'content_type' ];
 
 			$.ajax({
@@ -1771,7 +1771,7 @@
 					$( 'body' ).append( data.responseText );
 					that.init();
 
-					spinner.css( 'display', '' );
+					spinner.css( { 'display': '', 'visibility': '' } );
 				}
 			});
 		},
@@ -1897,7 +1897,7 @@
 			this.layersData = this.currentPanel.getData( 'layers' );
 
 			var that = this,
-				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' ),
+				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( { 'display': 'inline-block', 'visibility': 'visible' } ),
 				contentType = this.currentPanel.getData( 'settings' )[ 'content_type' ];
 
 			$.ajax({
@@ -1909,7 +1909,7 @@
 					$( 'body' ).append( data.responseText );
 					that.init();
 
-					spinner.css( 'display', '' );
+					spinner.css( { 'display': '', 'visibility': '' } );
 				}
 			});
 		},
@@ -3232,7 +3232,7 @@
 
 			var that = this,
 				data = this.currentPanel.getData( 'settings' ),
-				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( 'display', 'inline-block' );
+				spinner = $( '.panel[data-id="' + id + '"]' ).find( '.panel-spinner' ).css( { 'display': 'inline-block', 'visibility': 'visible' } );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -3243,7 +3243,7 @@
 					$( 'body' ).append( data.responseText );
 					that.init();
 
-					spinner.css( 'display', '' );
+					spinner.css( { 'display': '', 'visibility': '' } );
 				}
 			});
 		},
@@ -3531,7 +3531,7 @@
 			this.accordionData = data;
 
 			var that = this,
-				spinner = $( '.preview-spinner' ).css( 'display', 'inline-block' );
+				spinner = $( '.preview-spinner' ).css( { 'display': 'inline-block', 'visibility': 'visible' } );
 
 			$.ajax({
 				url: as_js_vars.ajaxurl,
@@ -3541,7 +3541,7 @@
 					$( 'body' ).append( data.responseText );
 					that.init();
 
-					spinner.css( 'display', '' );
+					spinner.css( { 'display': '', 'visibility': '' } );
 				}
 			});
 		},

@@ -144,6 +144,8 @@ Single accordion page
 }
 
 .panel .panel-spinner {
+	display: none;
+    vertical-align: middle;
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -312,6 +314,8 @@ Single accordion page
 .action .spinner {
 	margin-top: 0;
 	float: none;
+	display: none;
+    vertical-align: middle;
 }
 
 .postbox.closed .hndle {
@@ -1466,6 +1470,8 @@ Plugin settings page
 
 .clear-cache-spinner {
 	float: none;
+	display: none;
+    vertical-align: middle;
 }
 
 .purchase-code {
