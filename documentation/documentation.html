@@ -968,7 +968,7 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
     [accordion_slider_panel]
         [accordion_slider_panel_element name="background_source"]path/to/image.jpg[/accordion_slider_panel_element]
         [accordion_slider_panel_element name="opened_background_source"]path/to/opened_image.jpg[/accordion_slider_panel_element]
-        [accordion_slider_panel_element name="link"]http://bqworks.com/accordion-slider/[/accordion_slider_panel_element]
+        [accordion_slider_panel_element name="background_link"]http://bqworks.com/accordion-slider/[/accordion_slider_panel_element]
         [accordion_slider_panel_element name="layer" horizontal="center" show_transition="right"]some layer content[/accordion_slider_panel_element]
     [/accordion_slider_panel]
 [/accordion_slider]
@@ -1000,8 +1000,8 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
     <li>opened_background_alt</li>
     <li>opened_background_title</li>
     <li>opened_background_retina_source</li>
-    <li>link_url</li>
-    <li>link_title</li>
+    <li>background_link</li>
+    <li>background_link_title</li>
     <li>layer</li>
     <li>html</li>
   </ul>
@@ -1016,14 +1016,14 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
     [accordion_slider_panel content_type="posts" posts_post_types="post,page" posts_taxonomies="tag|design;tag|development;tag|planning"]
         [accordion_slider_panel_element name="background_source"][as_image_src][/accordion_slider_panel_element]
         [accordion_slider_panel_element name="background_alt"][as_image_alt][/accordion_slider_panel_element]
-        [accordion_slider_panel_element name="link_url"][as_link_url][/accordion_slider_panel_element]
+        [accordion_slider_panel_element name="background_link"][as_link_url][/accordion_slider_panel_element]
     [/accordion_slider_panel]
 [/accordion_slider]
 </pre>
 
   <p>
     The accordion above contains a panel that will load data from posts. The dynamic tags, like [as_image_src] were discussed in previous chapter. As for the attributes added to the
-    <i>panel</i>
+    <i>accordion_slider_panel</i>
     shortcode, those are the equivalent of the settings from the panel's
     <i>Settings</i>
     modal window in the admin area.
