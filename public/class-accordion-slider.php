@@ -13,7 +13,7 @@ class BQW_Accordion_Slider {
 	 * 
 	 * @var string
 	 */
-	const VERSION = '1.3';
+	const VERSION = '1.4.0';
 
 	/**
 	 * Plugin slug.
@@ -501,7 +501,7 @@ class BQW_Accordion_Slider {
 	 */
 	public function accordion_slider_shortcode( $atts, $content = null ) {
 		// if the CSS file(s) were not enqueued, display a warning message
-		if ( $this->styles_loaded === false ) {
+		if ( $this->styles_loaded === false && is_admin() === false ) {
 			$show_warning = true;
 			
 			// If styles were not checked, check them now, and then check again if they were set to load.
