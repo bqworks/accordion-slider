@@ -145,6 +145,7 @@ img {
   columns: 2;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .video-tutorials-list li {
