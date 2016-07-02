@@ -326,6 +326,21 @@ Single accordion page
 	display: none;
 }
 
+.handlediv {
+	cursor: pointer;
+}
+
+.handlediv:before {
+    content: "\f142";
+    font: 400 20px/1 dashicons;
+    display: inline-block;
+    margin: 6px;
+}
+
+.closed .handlediv:before {
+    content: "\f140";
+}
+
 .sidebar-settings td {
 	padding: 5px;
 }
@@ -1504,6 +1519,14 @@ Plugin settings page
 
 .not-valid-code {
 	border-color: #D9534F;
+}
+
+/*----------------------------------------------------------------------
+Documentation page
+----------------------------------------------------------------------*/
+
+.accordion-slider-documentation {
+	height: 100vh;
 }
 
 /*----------------------------------------------------------------------
