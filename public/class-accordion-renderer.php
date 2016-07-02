@@ -268,10 +268,46 @@ class BQW_AS_Accordion_Renderer {
 			$this->add_css_dependency( 'lightbox' );
 			$accordionIdAttribute = '#accordion-slider-' . $this->id;
 
+			$lightbox_options = array();
+			$lightbox_options = apply_filters( 'accordion_slider_lightbox_options', $lightbox_options, $this->id );
+			$lightbox_options_string = '';
+
+			if ( is_null( $lightbox_options ) === false && empty( $lightbox_options ) === false ) {
+				foreach ( $lightbox_options as $key => $value) {
+					$lightbox_option_value = $value;
+
+					if ( is_bool( $lightbox_option_value ) ) {
+						$lightbox_option_value = $lightbox_option_value === true ? 'true' : 'false';
+					} else if ( is_numeric( $lightbox_option_value ) === false ) {
+						$lightbox_option_value = "'" . $lightbox_option_value . "'";
+					}
+
+					$lightbox_options_string .= ', ' . $key . ': ' . $lightbox_option_value;
+				}
+			}
+
 			$js_output .= "\r\n" . '		$( "' . $accordionIdAttribute . ' .as-panel > a" ).on( "click", function( event ) {' .
 							"\r\n" . '			event.preventDefault();' .
 							"\r\n" . '			if ( $( "' . $accordionIdAttribute . '" ).hasClass( "as-swiping" ) === false ) {' .
-							"\r\n" . '				$.fancybox.open( $( "' . $accordionIdAttribute . ' .as-panel > a" ), { index: $( this ).parent().index() } );' .
+							"\r\n" . '				var sliderInstance = $( "' . $accordionIdAttribute . '" ).data( "accordionSlider" ),' .
+							"\r\n" . '					isAutoplay = sliderInstance.settings.autoplay;' .
+							"\r\n" .
+							"\r\n" . '				$.fancybox.open( $( "' . $accordionIdAttribute . ' .as-panel > a" ), {' .
+							"\r\n" . '					index: $( this ).parent().index(),' .
+							"\r\n" . '					afterShow: function() {' .
+							"\r\n" . '						if ( isAutoplay === true ) {' .
+							"\r\n" . '							sliderInstance.settings.autoplay = false;' .
+							"\r\n" . '							sliderInstance.stopAutoplay();' .
+							"\r\n" . '						}' .
+							"\r\n" . '					},' .
+							"\r\n" . '					afterClose: function() {' .
+							"\r\n" . '						if ( isAutoplay === true ) {' .
+							"\r\n" . '							sliderInstance.settings.autoplay = true;' .
+							"\r\n" . '							sliderInstance.startAutoplay();' .
+							"\r\n" . '						}' .
+							"\r\n" . '					}' .
+							"\r\n" . '					' . $lightbox_options_string . 
+							"\r\n" . '				});' .
 							"\r\n" . '			}' .
 							"\r\n" . '		});' . "\r\n";
 		}
