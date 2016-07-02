@@ -143,7 +143,13 @@
 			} );
 
 			$( '.postbox .hndle, .postbox .handlediv' ).on( 'click', function() {
-				$( this ).parent( '.postbox' ).toggleClass( 'closed' );
+				var postbox = $( this ).parent( '.postbox' );
+				
+				if ( postbox.hasClass( 'closed' ) === true ) {
+					postbox.removeClass( 'closed' );
+				} else {
+					postbox.addClass( 'closed' );
+				}
 			});
 
 			$( '.sidebar-settings' ).on( 'mouseover', 'label', function() {
