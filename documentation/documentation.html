@@ -1569,6 +1569,21 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
 }
 </pre>
 
+  <h4 id="accordion_slider_lightbox_options">accordion_slider_lightbox_options</h4>
+  <p>
+    It allows you to add options for the bundled lightbox script (FancyBox).
+  </p>
+  <pre>
+  add_filter( 'accordion_slider_lightbox_options', 'lightbox_options' );
+
+  function lightbox_options( $options ) {
+    $options[ 'autoPlay' ] = true;
+    $options[ 'arrows' ] = false;
+
+    return $options;
+  }
+</pre>
+
   <h2 id="deep-linking">9. Deep Linking</h2>
   <p>
     Deep linking provides the possibility to link to a specific panel in the accordion. For this, you need to append a hashtag to the original URL of the page. The hashtag will contain the
