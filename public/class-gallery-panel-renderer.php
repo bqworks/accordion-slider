@@ -61,18 +61,12 @@ class BQW_AS_Gallery_Panel_Renderer extends BQW_AS_Dynamic_Panel_Renderer {
 	protected function get_gallery_images() {
 		global $post;
 
-		$pattern = get_shortcode_regex();
-
-		preg_match_all( '/' . $pattern . '/s', $post->post_content, $matches, PREG_SET_ORDER );
+		preg_match_all( '/\[gallery.*ids=.(.*).\]/', $post->post_content, $matches, PREG_SET_ORDER );
 
 		$images = array();
 
 		foreach ( $matches as $match ) {
-			if ( $match[2] !== 'gallery' ) {
-				continue;
-			}
-
-			$atts = shortcode_parse_atts( $match[3] );
+			$atts = shortcode_parse_atts( $match[0] );
 
 			if ( ! isset( $atts[ 'ids' ] ) ) {
 				continue;
