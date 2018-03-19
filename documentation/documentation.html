@@ -1199,6 +1199,18 @@ function change_default_layer_settings( $settings ) {
 }
 </pre>
 
+  <h4 id="accordion_slider_breakpoint_settings">accordion_slider_breakpoint_settings</h4>
+  <p>It allows you to add/remove settings for the Breakpoints.</p>
+  <pre>
+  add_filter( 'accordion_slider_breakpoint_settings', 'add_breakpoint_settings' );
+ 
+  function add_breakpoint_settings( $settings ) {
+    $settings[] = 'opened_panel_size';
+ 
+    return $settings;
+  }
+  </pre>
+
   <h4 id="accordion_slider_posts_query_args">accordion_slider_posts_query_args</h4>
   <p>
     It allows you to modify the parameters passed to the
