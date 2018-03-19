@@ -290,10 +290,11 @@ class BQW_AS_Accordion_Renderer {
 							"\r\n" . '			event.preventDefault();' .
 							"\r\n" . '			if ( $( "' . $accordionIdAttribute . '" ).hasClass( "as-swiping" ) === false ) {' .
 							"\r\n" . '				var sliderInstance = $( "' . $accordionIdAttribute . '" ).data( "accordionSlider" ),' .
-							"\r\n" . '					isAutoplay = sliderInstance.settings.autoplay;' .
+							"\r\n" . '					isAutoplay = sliderInstance.settings.autoplay,' .
+							"\r\n" . '					index = $( "' . $accordionIdAttribute . ' .as-panel > a" ).index( $( this ) );' .
 							"\r\n" .
 							"\r\n" . '				$.fancybox.open( $( "' . $accordionIdAttribute . ' .as-panel > a" ), {' .
-							"\r\n" . '					index: $( this ).parent().index(),' .
+							"\r\n" . '					index: index,' .
 							"\r\n" . '					afterShow: function() {' .
 							"\r\n" . '						if ( isAutoplay === true ) {' .
 							"\r\n" . '							sliderInstance.settings.autoplay = false;' .
