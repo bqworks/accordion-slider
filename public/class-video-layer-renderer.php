@@ -28,7 +28,7 @@ class BQW_AS_Video_Layer_Renderer extends BQW_AS_Layer_Renderer {
 		$insert_pos = strpos( $content, ' ' );
 
 		if ( $insert_pos !== false ) {
-			$content = substr_replace( $content, $this->get_attributes(), $insert_pos, 1 );
+			$content = substr_replace( $content, ' ' . $this->get_attributes(), $insert_pos, 1 );
 		}
 
 		$html_output = "\r\n" . '			' . $content;
