@@ -785,7 +785,8 @@ class BQW_Accordion_Slider_Settings {
 						'as-black' => __( 'Black', 'accordion-slider' ),
 						'as-white' => __( 'White', 'accordion-slider' ),
 						'as-padding' => __( 'Padding', 'accordion-slider' ),
-						'as-rounded' => __( 'Round Corners', 'accordion-slider' )
+						'as-rounded' => __( 'Round Corners', 'accordion-slider' ),
+						'as-vertical' => __( 'Vertical', 'accordion-slider' )
 					),
 					'description' => ''
 				),
