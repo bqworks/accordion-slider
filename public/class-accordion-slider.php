@@ -500,28 +500,24 @@ class BQW_Accordion_Slider {
 	 * @return string          The accordion's HTML.
 	 */
 	public function accordion_slider_shortcode( $atts, $content = null ) {
+		
 		// if the CSS file(s) were not enqueued, display a warning message
-		if ( $this->styles_loaded === false && is_admin() === false ) {
-			$show_warning = true;
-			
-			// If styles were not checked, check them now, and then check again if they were set to load.
-			// This check is necessary because with some themes the shortcodes are parsed before the
-			// 'wp_enqueue_script' action is called.
-			if ( $this->styles_checked === false ) {
-				$this->load_styles();
+		$styles_warning = '<div class="as-styles-warning" style="width: 450px; background-color: #FFF; color: #F00; border: 1px solid #F00; padding: 10px; font-size: 14px;">
+			<span style="font-weight: bold;">Warning: The stylesheets were not loaded!</span> 
+			You will need to change the <i>Load stylesheets</i> setting from <i>Automatically</i> to <i>On homepage</i> or <i>On all pages</i>. 
+			You can set that <a style="text-decoration: underline; color: #F00;" href="' . admin_url( 'admin.php?page=accordion-slider-settings' ) . '">here</a>.
+			</div>';
 
-				if ( $this->styles_loaded === true ) {
-					$show_warning = false;
-				}
-			}
-
-			if ( $show_warning === true ) {
-				echo '<div class="as-styles-warning" style="width: 450px; background-color: #FFF; color: #F00; border: 1px solid #F00; padding: 10px; font-size: 14px;">
-				<span style="font-weight: bold;">Warning: The stylesheets were not loaded!</span> 
-				You will need to change the <i>Load stylesheets</i> setting from <i>Automatically</i> to <i>On homepage</i> or <i>On all pages</i>. 
-				You can set that <a style="text-decoration: underline; color: #F00;" href="' . admin_url( 'admin.php?page=accordion-slider-settings' ) . '">here</a>.
-				</div>';
-			}
+		// If styles were not checked, check them now.
+		// This check is necessary because with some themes the shortcodes are parsed before the
+		// 'wp_enqueue_script' action is called.
+		if ( $this->styles_checked === false ) {
+			$this->load_styles();
+		}
+ 
+		// don't show the warning if the styles are loaded
+		if ( $this->styles_loaded === true || is_admin() === true ) {
+			$styles_warning = '';
 		}
 
 		// get the id specified in the shortcode
@@ -546,7 +542,7 @@ class BQW_Accordion_Slider {
 
 			$this->js_output .= $accordion_cache['js_output'];
 			
-			return $accordion_cache['html_output'];
+			return $styles_warning . $accordion_cache['html_output'];
 		}
 
 		// parse the inner content of the shortcode
@@ -646,7 +642,7 @@ class BQW_Accordion_Slider {
 			}
 		}
 		
-		return $this->output_accordion( $accordion );
+		return $styles_warning . $this->output_accordion( $accordion );
 	}
 
 	/**
