@@ -89,6 +89,17 @@
             </tr>
             <tr>
                 <td>
+                    <label for="hide-image-size-warning"><?php echo $plugin_settings['hide_image_size_warning']['label']; ?></label>
+                </td>
+                <td>
+                    <input type="checkbox" id="hide-image-size-warning" name="hide_image_size_warning" <?php echo $hide_image_size_warning == true ? 'checked="checked"' : ''; ?>>
+                </td>
+                <td>
+                    <?php echo $plugin_settings['hide_image_size_warning']['description']; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <label for="access"><?php echo $plugin_settings['access']['label']; ?></label>
                 </td>
                 <td>

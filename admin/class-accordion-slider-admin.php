@@ -76,6 +76,7 @@ class BQW_Accordion_Slider_Admin {
 		add_action( 'wp_ajax_accordion_slider_get_taxonomies', array( $this, 'ajax_get_taxonomies' ) );
 		add_action( 'wp_ajax_accordion_slider_clear_all_cache', array( $this, 'ajax_clear_all_cache' ) );
 		add_action( 'wp_ajax_accordion_slider_getting_started_close', array( $this, 'ajax_getting_started_close' ) );
+		add_action( 'wp_ajax_accordion_slider_close_image_size_warning', array( $this, 'ajax_close_image_size_warning' ) );
 	}
 
 	/**
@@ -396,6 +397,7 @@ class BQW_Accordion_Slider_Admin {
 		$cache_expiry_interval = get_option( 'accordion_slider_cache_expiry_interval', $plugin_settings['cache_expiry_interval']['default_value'] );
 		$hide_inline_info = get_option( 'accordion_slider_hide_inline_info', $plugin_settings['hide_inline_info']['default_value'] );
 		$hide_getting_started_info = get_option( 'accordion_slider_hide_getting_started_info', $plugin_settings['hide_getting_started_info']['default_value'] );
+		$hide_image_size_warning = get_option( 'accordion_slider_hide_image_size_warning', $plugin_settings['hide_image_size_warning']['default_value'] );
 		$access = get_option( 'accordion_slider_access', $plugin_settings['access']['default_value'] );
 
 		if ( isset( $_POST['plugin_settings_update'] ) ) {
@@ -438,6 +440,14 @@ class BQW_Accordion_Slider_Admin {
 			} else {
 				$hide_getting_started_info = false;
 				update_option( 'accordion_slider_hide_getting_started_info', false );
+			}
+
+			if ( isset( $_POST['hide_image_size_warning'] ) ) {
+				$hide_image_size_warning = true;
+				update_option( 'accordion_slider_hide_image_size_warning', true );
+			} else {
+				$hide_image_size_warning = false;
+				update_option( 'accordion_slider_hide_image_size_warning', false );
 			}
 
 			if ( isset( $_POST['access'] ) ) {
@@ -1298,4 +1308,16 @@ class BQW_Accordion_Slider_Admin {
 
 		die();
 	}
+
+	/**
+	 * AJAX call for closing the image size warning box.
+	 *
+	 * @since 4.6.0
+	 */
+	public function ajax_close_image_size_warning() {
+		update_option( 'accordion_slider_hide_image_size_warning', true );
+ 
+		die();
+	}
+	
 }

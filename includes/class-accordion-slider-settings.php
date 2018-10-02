@@ -1033,6 +1033,11 @@ class BQW_Accordion_Slider_Settings {
 					'default_value' => false,
 					'description' => __( 'Indicates whether the <i>Getting Started</i> information will be displayed in the <i>All Accordions</i> page, above the list of accordions. This setting will be disabled if the <i>Close</i> button is clicked in the information box.', 'accordion-slider' )
 				),
+				'hide_image_size_warning' => array(
+					'label' => __( 'Hide image size warning', 'accordion-slider' ),
+					'default_value' => false,
+					'description' => __( 'Indicates whether a warning will be displayed if the size of the background images is smaller than the size of the panels.', 'accordion-slider' )
+				),
 				'access' => array(
 					'label' => __( 'Access', 'accordion-slider' ),
 					'default_value' => 'manage_options',

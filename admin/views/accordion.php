@@ -8,6 +8,18 @@
                     <div id="titlediv">
                     	<input name="name" id="title" type="text" value="<?php echo esc_attr( $accordion_name ); ?>" />
                     </div>
+
+                    <?php
+                        if ( get_option( 'accordion_slider_hide_image_size_warning' ) != true ) {
+                    ?>
+                            <div class="image-size-warning">
+                                <p><?php _e( 'Some of the background images are smaller than the size of the panel, so they might appear blurred when viewed in the accordion.', 'accordion-slider' ); ?></p>
+                                <p><?php _e( 'When you select images to insert them into the panels, you can set their size from the right column of the Media Library window, as you can see in <a href="https://www.youtube.com/watch?v=qmjgtmeLrzs" target="_blank">this video</a> at 0:05.', 'accordion-slider' ); ?></p>
+                                <a href="#" class="image-size-warning-close"><?php _e( 'Don\'t show this again.', 'accordion-slider' ); ?></a>
+                            </div>
+                    <?php
+                        }
+                    ?>
 					
 					<div class="panels-container">
                     	<?php
