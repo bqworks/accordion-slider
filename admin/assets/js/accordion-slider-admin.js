@@ -2101,22 +2101,22 @@
 			var accordionWidth = $( '.sidebar-settings' ).find( '.setting[name="width"]' ).val(),
 				accordionHeight = $( '.sidebar-settings' ).find( '.setting[name="height"]' ).val(),
 				orientation = $( '.sidebar-settings' ).find( '.setting[name="orientation"]' ).val(),
-				backgroundData = this.currentPanel.getData( 'background' );
+				customClass = $( '.sidebar-settings' ).find( '.setting[name="custom_class"]' ).val(),
+				backgroundSource = this.currentPanel.getData( 'background' )[ 'background_source' ],
+				$viewport = this.$editor.find( '.layer-viewport' ),
+				$viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' ).appendTo( $viewport );
 
-			if ( accordionWidth.indexOf( '%' ) !== -1 ) {
-				accordionWidth = $( window ).width() - 200;
+			if ( isNaN( accordionWidth ) ) {
+				accordionWidth = $( window ).width() * ( parseInt( accordionWidth, 10 ) / 100 );
 			} else {
 				accordionWidth = parseInt( accordionWidth, 10 );
 			}
 
-			if ( accordionHeight.indexOf( '%' ) !== -1 ) {
-				accordionHeight = $( window ).height() - 200;
+			if ( isNaN( accordionHeight ) ) {
+				accordionHeight = $( window ).height() * ( parseInt( accordionHeight, 10 ) / 100 );
 			} else {
 				accordionHeight = parseInt( accordionHeight, 10 );
 			}
-
-			var $viewport = this.$editor.find( '.layer-viewport' ),
-				$viewportLayers = $( '<div class="accordion-slider viewport-layers"></div>' ).appendTo( $viewport );
 
 			if ( orientation === 'horizontal' ) {
 				$viewport.css( 'height', accordionHeight );
@@ -2124,17 +2124,12 @@
 				$viewport.css( 'width', accordionWidth );
 			}
 
-			var customClass = $( '.sidebar-settings' ).find( '.setting[name="custom_class"]' ).val();
-
 			if ( customClass !== '' ) {
 				$viewportLayers.addClass( customClass );
 			}
 
-			if ( typeof backgroundData.background_source !== 'undefined' &&
-				backgroundData.background_source !== '' &&
-				backgroundData.background_source.indexOf( '[' ) === -1 ) {
-				
-				var $viewportImage = $( '<img class="viewport-image" src="' + backgroundData.background_source + '" />' ).prependTo( $viewport );
+			if ( typeof backgroundSource!== 'undefined' && backgroundSource !== '' && backgroundSource.indexOf( '[' ) === -1 ) {
+				var $viewportImage = $( '<img class="viewport-image" src="' + backgroundSource + '" />' ).prependTo( $viewport );
 
 				if ( orientation === 'horizontal' ) {
 					$viewportImage.css( 'height', '100%' );
@@ -2149,9 +2144,7 @@
 						clearInterval( checkImageLoaded );
 						$viewportLayers.css( {
 							'width': $viewportImage.width(),
-							'height': $viewportImage.height(),
-							'left': $viewportImage.position().left,
-							'top': $viewportImage.position().top
+							'height': $viewportImage.height()
 						});
 					}
 				}, 10 );
@@ -2163,14 +2156,16 @@
 
 				// calculate the maximum allowed size for the panels
 				if ( panelSize === 'max' ) {
-					viewportSize = maxPanelSize.indexOf('%') !== -1 ? ( parseInt( maxPanelSize, 10 ) / 100 ) * accordionSize : parseInt( maxPanelSize, 10 );
+					viewportSize = isNaN( maxPanelSize ) ? ( parseInt( maxPanelSize, 10 ) / 100 ) * accordionSize : parseInt( maxPanelSize, 10 );
 				} else {
-					viewportSize = panelSize.indexOf('%') !== -1 ? ( parseInt( panelSize, 10 ) / 100 ) * accordionSize : parseInt( panelSize, 10 );
+					viewportSize = isNaN( panelSize ) ? ( parseInt( panelSize, 10 ) / 100 ) * accordionSize : parseInt( panelSize, 10 );
 				}
 
 				if ( orientation === 'horizontal' ) {
+					$viewportLayers.css( 'width', viewportSize );
 					$viewport.css( 'width', viewportSize );
 				} else {
+					$viewportLayers.css( 'height', viewportSize );
 					$viewport.css( 'height', viewportSize );
 				}
 			}
