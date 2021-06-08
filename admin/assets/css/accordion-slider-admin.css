@@ -319,8 +319,16 @@ Single accordion page
     vertical-align: middle;
 }
 
+.postbox .hndle {
+    cursor: pointer !important;
+}
+
 .postbox.closed .hndle {
 	border-bottom: none;
+}
+
+.postbox.closed {
+	border-bottom: 1px solid #c3c4c7;
 }
 
 .postbox.closed .inside {
@@ -328,6 +336,7 @@ Single accordion page
 }
 
 .handlediv {
+	float: right;
 	cursor: pointer;
 }
 
