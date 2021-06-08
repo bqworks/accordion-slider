@@ -1067,7 +1067,7 @@
 		 * Only check images that have a non-zero width and height. Skip slides that
 		 * have dynamic images or images from outside the Media Library.
 		 *
-		 * @since 4.6.0
+		 * @since 1.7.0
 		 */
 		checkBackgroundImageSize: function() {
 			if ( $( '.image-size-warning' ).length === 0 ) {
