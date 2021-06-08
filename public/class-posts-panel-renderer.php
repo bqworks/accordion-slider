@@ -109,6 +109,8 @@ class BQW_AS_Posts_Panel_Renderer extends BQW_AS_Dynamic_Panel_Renderer {
 		
 		$query = new WP_Query( $query_args );
 
+		$query = apply_filters( 'accordion_slider_posts_query_result' , $query, $this->accordion_id, $this->panel_index );
+
 		return $query;
 	}
 
