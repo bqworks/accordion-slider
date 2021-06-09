@@ -22,7 +22,7 @@
 			</ul>
 
 			<h3><?php _e( '2. Support', 'accordion-slider' ); ?></h3>
-			<p><?php _e( 'When you need support, please contact us at our support center:', 'accordion-slider' ); ?> <a href="http://support.bqworks.com">support.bqworks.com</a>.</p>
+			<p><?php _e( 'When you need support, please contact us at our support center:', 'accordion-slider' ); ?> <a href="http://support.bqworks.net">support.bqworks.net</a>.</p>
 
 			<a href="#" class="getting-started-close">Close</a>
 		</div>

@@ -13,7 +13,7 @@ class BQW_Accordion_Slider_API {
 	 *
 	 * @var string
 	 */
-	const ACCORDION_SLIDER_API = 'http://api.bqworks.com/accordion-slider/';
+	const ACCORDION_SLIDER_API = 'http://api.bqworks.net/accordion-slider/';
 
 	/**
 	 * Current class instance.
