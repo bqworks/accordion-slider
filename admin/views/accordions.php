@@ -23,17 +23,6 @@
 
 			<h3><?php _e( '2. Support', 'accordion-slider' ); ?></h3>
 			<p><?php _e( 'When you need support, please contact us at our support center:', 'accordion-slider' ); ?> <a href="http://support.bqworks.com">support.bqworks.com</a>.</p>
-			
-			<?php
-				$purchase_code_status = get_option( 'accordion_slider_purchase_code_status', '0' );
-
-				if ( $purchase_code_status !== '1' ) {
-			?>
-					<h3><?php _e( '3. Updates', 'accordion-slider' ); ?></h3>
-					<p><?php _e( 'In order to have access to automatic updates, please enter your purchase code', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-settings'); ?>"><?php _e( 'here', 'accordion-slider' ); ?></a>.</p>
-			<?php
-				}
-			?>
 
 			<a href="#" class="getting-started-close">Close</a>
 		</div>

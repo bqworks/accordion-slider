@@ -16,15 +16,9 @@
   </h1>
   <p> <em><strong>Version 1.7</strong></em> 
   </p>
-  <p>Hi, and thank you for purchasing Accordion Slider!</p>
+  <p>Hi!</p>
   <p>
     The plugin's admin interface contains inline information, which most of the time should be sufficient for understanding how to use the plugin. However, many details are not covered there, but you can find them covered in this guide.
-  </p>
-  <p class="note">
-    If you have a question or technical problem that is not covered by this guide, please contact us through the
-    <a href="http://support.bqworks.com/home"> <u>Support Center</u>
-    </a>
-    .
   </p>
   <p>
     Because an image is worth a thousand words, you might find these video tutorials useful:
@@ -55,57 +49,14 @@
       <a href="https://www.youtube.com/watch?v=UVk_2r3f1xc&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank">8. Import and Export accordions</a>
     </li>
   </ul>
-
-  <h2 id="installation">1. Installation</h2>
-  <p>
-    The plugin can be installed from the WordPress dashboard, just like any other plugin.
-  </p>
-  <p>
-    Go to <i>Plugins -> Add New -> Upload -> Browse</i>
-    and select the zip package you downloaded from CodeCanyon, and then click <i>Install Now</i>
-    .
-  </p>
-  <p>
-    After the plugin is installed and activated, you will see the
-    <i>Accordion Slider</i>
-    menu in the admin sidebar.
-  </p>
-
-  <h2 id="updating">2. Updating</h2>
-  <p>
-    The plugin provides automatic updates, but in order to benefit from them you need to provide the purchase code you received from CodeCanyon.
-  </p>
-  <p>
-    In order to find your purchase code, go to
-    <a href="http://codecanyon.net/downloads/">http://codecanyon.net/downloads/</a>
-    and find Accordion Slider in your list of purchases. Then, click on the
-    <i>Download</i> button
-    and select
-    <i>License certificate & purchase code</i>
-    .
-  </p>
-  <a href="assets/images/find-purchase-code.png">
-    <img src="assets/images/find-purchase-code.png"></a>
-  <p>
-    After you have the purchase code, enter it in the
-    <i>Accordion Slider -> Plugin Settings</i>
-    page, in the
-    <i>Purchase Code</i>
-    field and click the
-    <i>Verify Purchase Code</i>
-    button.
-  </p>
-  <a href="assets/images/verify-purchase-code.png">
-    <img src="assets/images/verify-purchase-code.png"></a>
-
-  <h2 id="creating-and-publishing-accordions">3. Creating and publishing accordions</h2>
+  <h2 id="creating-and-publishing-accordions">1. Creating and publishing accordions</h2>
   <p>
     Creating accordions is simple and intuitive. Also, the admin area contains inline information that describe the settings and possibilities that the
     <i>Accordion Slider</i>
     plugin offers. In this chapter  we'll take a quick look at the various content types that the accordion supports and then we'll take a look at how to publish the accordion in your posts and pages.
   </p>
 
-  <h3 id="panels">3.1. Panels</h3>
+  <h3 id="panels">1.1. Panels</h3>
   <p>
     You can manually specify the images and text in an accordion, or you can let the accordion to automatically load content (e.g., featured image, post title, excerpt, etc.) from any post type. Two other possibilities provided by the accordion is to load photos from Flickr or to load images from a post's
     <i>[gallery]</i>
@@ -437,7 +388,7 @@
     </tr>
   </table>
 
-  <h3 id="general-settings">3.2. General settings</h3>
+  <h3 id="general-settings">1.2. General settings</h3>
   <p>
     The accordion's general settings can be found in the sidebar of the accordion's admin interface. The description of each setting can be seen if you hover the setting's label.
   </p>
@@ -447,7 +398,7 @@
     The last panel in the sidebar is for breakpoints. Breakpoints allow you to modify the look of the accordion for different window sizes. Each breakpoint allows you to set the width of the window for which the breakpoint will apply, and then add several settings which will override the general settings.
   </p>
 
-  <h3 id="publishing-the-accordion">3.3. Publishing the accordion</h3>
+  <h3 id="publishing-the-accordion">1.3. Publishing the accordion</h3>
   <p>
     The accordion can be published in posts and pages, in widgets, and also in PHP code.
   </p>
@@ -476,12 +427,12 @@
     <i>On all pages</i>
     if you load the accordion in other pages.
   </p>
-  <h3 id="previewing-the-accordion">3.4. Previewing the accordion</h3>
+  <h3 id="previewing-the-accordion">1.4. Previewing the accordion</h3>
   <p>
     The accordions can be previewed directly in the admin area, and you don't have to create or update the accordion before previewing the edits you make to the panels or to the general settings.
   </p>
 
-  <h3 id="cache">3.5. Cache</h3>
+  <h3 id="cache">1.5. Cache</h3>
   <p>
     All accordions are automatically cached the first time when they're viewed by a visitor, so next time when someone visits the page, the accordion will be served from the cache. This mechanism saves processing time and is especially useful when loading content from posts or external services.
   </p>
@@ -501,8 +452,8 @@
   </p>
   <pre>[accordion_slider id="3" allow_cache="false"]</pre>
 
-  <h2 id="responsiveness">4. Responsiveness</h2>
-  <h3 id="responsive-modes">4.1. Responsive modes</h3>
+  <h2 id="responsiveness">2. Responsiveness</h2>
+  <h3 id="responsive-modes">2.1. Responsive modes</h3>
   <p>
     By default, the accordion will scale proportionally in order to fit the bounds of the window or of the container it was added to. This is called
     <i>Auto</i>
@@ -526,7 +477,7 @@
     responsiveness, the Width and Height need to be set to fixed values. Setting them to percentages would not allow the accordion to properly calculate how it needs to resize itself.
   </p>
 
-  <h3 id="aspect-ratio">4.2. Aspect ratio</h3>
+  <h3 id="aspect-ratio">2.2. Aspect ratio</h3>
   <p>
     If you want to set the Width and/or Height to a percentage value, like 100%, the accordion will not be able to calculate the aspect ratio that it needs to maintain while it's being resized (as it does when the Width and Height are set to fixed values). For example, if the Width is set to 960 and the Height is set to 400, that results in an aspect ratio of 2.4 (960/400). However, as you can guess, if either the Width or Height is a percentage, the division operation can't be done. To overcome this, you need to use the
     <i>Aspect Ratio</i>
@@ -538,14 +489,14 @@
     is set to -1, which indicates that the aspect ratio of the accordion will be automatically calculated based on the Width and Height specified.
   </p>
 
-  <h2 id="custom-css-and-javascript">5. Custom CSS and JavaScript</h2>
+  <h2 id="custom-css-and-javascript">3. Custom CSS and JavaScript</h2>
   <p>
     Sometimes you want to change the look of the accordion or add new functionality, and for this you can use custom CSS and/or custom JavaScript. All your custom code needs to be added in the
     <i>Accordion Slider -> Custom CSS & JS</i>
     page.
   </p>
 
-  <h3 id="custom-css">5.1. Custom CSS</h3>
+  <h3 id="custom-css">3.1. Custom CSS</h3>
   <p>
     Before adding any custom CSS, it's recommended to give the accordion that you want to target a custom class. This can be set in the
     <i>Custom Class</i>
@@ -576,7 +527,7 @@
     if you want to target all your accordion instances.
   </p>
 
-  <h3 id="custom-javascript">5.2. Custom JavaScript</h3>
+  <h3 id="custom-javascript">3.2. Custom JavaScript</h3>
   <p>
     Just like with custom CSS, you need to assign a custom class to the accordion and then use it in your custom code to target that specific accordion.
   </p>
@@ -586,7 +537,7 @@
     The next chapter offers a presentation of the accordion's JavaScript API, which allows you to programatically control the accordion. Using this API requires some programming knowledge and familiarity with jQuery.
   </p>
 
-  <h3 id="javascript-api">5.3 JavaScript API</h3>
+  <h3 id="javascript-api">3.3 JavaScript API</h3>
 
   <h4 id="methods">Methods</h4>
   <p>
@@ -881,7 +832,7 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
     </tr>
   </table>
 
-  <h3 id="loading-custom-code-in-files">5.4. Loading custom code in files</h3>
+  <h3 id="loading-custom-code-in-files">3.4. Loading custom code in files</h3>
   <p>
     By default, the code will be loaded inline, not in a
     <i>.css</i>
@@ -910,7 +861,7 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
     folder in order to avoid the removal of the code when the plugin is updated.
   </p>
 
-  <h2 id="import-and-export-accordions">6. Import and export accordions</h2>
+  <h2 id="import-and-export-accordions">4. Import and export accordions</h2>
 
   <p>
     You can move accordions between
@@ -938,7 +889,7 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
     installation to see how certain featured are used.
   </p>
 
-  <h2 id="advanced-shortcode-use">7. Advanced shortcode use</h2>
+  <h2 id="advanced-shortcode-use">5. Advanced shortcode use</h2>
 
   <p>
     Not only you can insert accordions into pages using shortcodes, but you can also override settings, add or modify panels. It's even possible to create an accordion using only shortcodes, without setting it up in the admin area.
@@ -1126,7 +1077,7 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
     </tbody>
   </table>
 
-  <h2 id="action-and-filter-hooks">8. Action and filter hooks</h2>
+  <h2 id="action-and-filter-hooks">6. Action and filter hooks</h2>
 
   <p>
     Actions allow you to detect when certain actions are performed, while hooks allow to modify the output of the accordion.
@@ -1135,7 +1086,7 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
     The information in this chapter is for developers that are familiar with PHP and the WordPress API.
   </p>
 
-  <h3 id="actions">8.1. Actions</h3>
+  <h3 id="actions">6.1. Actions</h3>
 
   <h4 id="">accordion_slider_enqueue_scripts</h4>
   <p>
@@ -1161,7 +1112,7 @@ function add_my_styles() {
 }
 </pre>
 
-  <h3 id="filters">8.2. Filters</h3>
+  <h3 id="filters">6.2. Filters</h3>
   <p class="note"><strong>Note:</strong> The accordions are cached by default, so applying filters will not have an immediate effect, until the cache is cleared. However, you can disable the caching while testing in order to see your changes immediately. To do this, you need to add the allow_cache="false" attribute to the shortcode: [accordion_slider id="3" allow_cache="false"].</p>
   <h4 id="accordion_slider_default_settings">accordion_slider_default_settings</h4>
   <p>It allows you to modify the default accordion settings.</p>
@@ -1596,7 +1547,7 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
   }
 </pre>
 
-  <h2 id="deep-linking">9. Deep Linking</h2>
+  <h2 id="deep-linking">7. Deep Linking</h2>
   <p>
     Deep linking provides the possibility to link to a specific panel in the accordion. For this, you need to append a hashtag to the original URL of the page. The hashtag will contain the
     <i>id</i>
@@ -1623,7 +1574,7 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
     </p>
   </p>
 
-  <h2 id="translating-the-plugin">10. Translating the plugin</h2>
+  <h2 id="translating-the-plugin">8. Translating the plugin</h2>
 
   <p>
     There are several tools for translating the plugin's admin text, but I will show you how to do this using
@@ -1643,7 +1594,7 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
   <a href="assets/images/translation-poedit.png">
     <img src="assets/images/translation-poedit.png"></a>
 
-  <h2 id="adding-videos">11. Adding videos</h2>
+  <h2 id="adding-videos">9. Adding videos</h2>
 
   <p>
     The accordion has built-in support for YouTube, Vimeo, HTML5, VideoJS and Sublime videos. The support consists in the accordion's ability to control the videos automatically (i.e., pause the video when the panel is closed, play the video when the panel is opened, etc.).
@@ -1688,19 +1639,14 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
   <a href="assets/images/video-sidebar-panel.png">
     <img src="assets/images/video-sidebar-panel.png"></a>
 
-  <h2 id="troubleshooting">12. Troubleshooting</h2>
-
-  <p class="note">
-    If something doesn't work as expected, the first thing you need is a little patience and the assurance that you have my free assistance for resolving the problem. Please see if the indications below help, and if they don't please kindly email me and I'll gladly help you. You can reach me at the support center: <u><a href="http://support.bqworks.com">support.bqworks.com</a></u> 
-    .
-  </p>
+  <h2 id="troubleshooting">10. Troubleshooting</h2>
 
   <h3>1. The accordion doesn't show up on the page</h3>
   <h4>a) JavaScript errors</h4>
   <p>
     First, it's important to check if you have any JavaScript errors on the page that contains the accordion. JavaScript errors thrown by other scripts can break all the JavaScript functionality that follows on that page, including the accordion. I would like to note that
     <i>Accordion Slider</i>
-    follows WordPress development best practices and is actively maintained to make sure it's bug free and works seamlessly. However, when something else (another plugin or theme) breaks in the site, it can affect the accordion as well, as mentioned before. Most of the times it's possible to check where the problem comes from, and I will show you 2 methods. If you find the instructions below too complicated, please contact me instead.
+    follows WordPress development best practices and is actively maintained to make sure it's bug free and works seamlessly. However, when something else (another plugin or theme) breaks in the site, it can affect the accordion as well, as mentioned before. Most of the times it's possible to check where the problem comes from, and I will show you 2 methods.
   </p>
 
   <h5>FIRST METHOD</h5>
@@ -1711,7 +1657,7 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
   <p>
     On the left side you will see the error message and on the right side you will see the name/path of the script that contains the error (if the full path of the script is not displayed please hover the text, and the full path should appear). By looking at the path of the script you can identify the theme or plugin that causes the error. If the error comes from another theme or plugin, and not
     <i>Accordion Slider</i>
-    , it's best to contact the developer of that theme/plugin, so he can fix the error. If you have difficulties interpreting the data from Console, please try the second method or contact me via the support center and I will be happy to assist you.
+    , it's best to contact the developer of that theme/plugin, so he can fix the error. If you have difficulties interpreting the data from Console, please try the second method.
   </p>
 
   <h5>SECOND METHOD</h5>
@@ -1750,18 +1696,10 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
 &lt;/body&gt;
 </pre>
 
-  <p>
-    If that wasn't the problem either, please contact me via the support center at
-    <a href="http://support.bqworks.com">support.bqworks.com</a>
-    , and I will gladly help you.
-  </p>
-
   <h3>2. The admin area doesn't work</h3>
   <p>
     This is most likely caused by JavaScript errors. Please try the debugging methods suggested above for point
     <i>a)</i>
-    or submit a support request at
-    <a href="http://support.bqworks.com">support.bqworks.com</a>
     .
   </p>
 
@@ -1788,210 +1726,84 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
     layers every time it's appropriate and simply use custom CSS to prevent theme influences.
   </p>
 
-  <h2 id="changelog">13. Changelog</h2>
-
-  <p><strong>v. 1.7</strong> (24 October 18)</p>
-  <ul>
-    <li>fix Gutenberg compatibility</li>
-    <li>update Vimeo API</li>
-    <li>display a warning if the background size is smaller than the panel size</li>
-    <li>fix the aspect ratio when the height has a relative value</li>
-    <li>improve mouse/touch event handling</li>
-    <li>add 'vertical' style for layers</li>
-    <li>other fixes and improvements</li>
-  </ul>
-
-  <p><strong>v. 1.6</strong> (20 March 18)</p>
-  <ul>
-    <li>fixed incorrect update notifications</li>
-    <li>improved tap/click event handling for touch-swipe</li>
-    <li>added option to edit the list of Breakpoints settings</li>
-    <li>other fixes and improvements</li>
-  </ul>
-
-  <p><strong>v. 1.5</strong> (11 July 16)</p>
-  <ul>
-    <li>added the possibility to change the lightbox settings</li>
-    <li>other minor fixes and improvements</li>
-  </ul>
-
-  <p><strong>v. 1.4</strong> (14 November 15)</p>
-  <ul>
-    <li>edited the plugin update API for better integration with the latest WordPress versions</li>
-  </ul>
-  
-  <p><strong>v. 1.3</strong> (5 October 15)</p>
-  <ul>
-    <li>fixed some compatibility issues with WordPress 4.3</li>
-  </ul>
-
-  <p><strong>v. 1.2</strong> (28 February 15)</p>
-  <ul>
-    <li>added Link Target option</li>
-    <li>improved touch-swipe support for touch-enabled desktop browsers</li>
-    <li>fixed occasionally unresponsive admin panel buttons</li>
-    <li>fixed invisible image when Fade Out Background option is enabled</li>
-    <li>fixed appearance when responsiveness is disabled</li>
-    <li>other minor fixes and improvements</li>
-  </ul>
-
-  <p><strong>v. 1.1.1</strong> (12 December 14)</p>
-  <ul>
-    <li>some bug fixes</li>
-  </ul>
-
-  <p><strong>v. 1.1</strong> (4 November 14)</p>
-  <ul>
-    <li>add shuffle option</li>
-    <li>add option to hide image title tag</li>
-    <li>various fixes and improvements</li>
-  </ul>
-
-  <p><strong>v. 1.0.8</strong> (20 June 14)</p>
-  <ul>
-    <li>prevent max-width and max-height for background images</li>
-    <li>added 'Keyboard Target' setting</li>
-  </ul>
-
-  <p><strong>v. 1.0.7</strong> (17 May 14)</p>
-  <ul>
-    <li>several minor fixes and improvements</li>
-  </ul>
-
-  <p><strong>v. 1.0.6</strong> (10 May 14)</p>
-  <ul>
-    <li>changed 'accordion_panel' shortcode to 'accordion_slider_panel' and 'accordion_panel_element' to 'accordion_slider_panel_element', to prevent conflicts with identical shortcode names</li>
-    <li>improved admin preview handling for percentage sizes</li>
-    <li>improved Layers editor handling for percentage sizes</li>
-    <li>added compatibility with latest Flickr changes</li>
-    <li>other minor fixes and improvements</li>
-  </ul>
-
-  <p><strong>v. 1.0.5</strong> (30 April 14)</p>
-  <ul>
-    <li>corrected default value for 'Start Panel' to -1</li>
-    <li>fixed background image swap when startPanel is used</li>
-    <li>added the 'as-closed' class by default when the accordion is initially closed</li>
-    <li>fixed the 'as-opened' class removal from the last opened panel</li>
-    <li>added 0 margin and padding to background images to prevent unwanted styling</li>
-  </ul>
-
-  <p><strong>v. 1.0.4</strong> (17 April 14)</p>
-  <ul>
-    <li>add inner shortcode support</li>
-    <li>correct shortcode elements names in documentation</li>
-    <li>reset post data transient every time the accordion's admin page is refreshed</li>
-    <li>fix shortcode parsing when width and height are not specified</li>
-    <li>fix shortcode parsing when layer settings are not specified</li>
-  </ul>
-
-  <p><strong>v. 1.0.3</strong> (10 April 14)</p>
-  <ul>
-    <li>add compatibility with older jQuery versions</li>
-  </ul>
-
-  <p><strong>v. 1.0.2</strong> (8 April 14)</p>
-  <ul>
-    <li>fix: show missing stylesheets warning even if accordion is cached</li>
-  </ul>
-
-  <p><strong>v. 1.0.1</strong> (5 April 14)</p>
-  <ul>
-    <li>fix: disable lightbox when the accordion is swiped</li>
-  </ul>
-  
-  <p><strong>v. 1.0.0</strong> (3 April 14)</p>
-  <ul>
-    <li>initial release</li>
-  </ul>
-
   <div class="main-menu">
     <ul class="menu">
       <li>
-        <a href="#installation">1. Installation</a>
-      </li>
-      <li>
-        <a href="#updating">2. Updating</a>
-      </li>
-      <li>
-        <a href="#creating-and-publishing-accordions">3. Creating and publishing accordions</a>
+        <a href="#creating-and-publishing-accordions">1. Creating and publishing accordions</a>
         <ul class="submenu">
           <li>
-            <a href="#panels">3.1. Panels</a>
+            <a href="#panels">1.1. Panels</a>
           </li>
           <li>
-            <a href="#general-settings">3.2. General settings</a>
+            <a href="#general-settings">1.2. General settings</a>
           </li>
           <li>
-            <a href="#publishing-the-accordion">3.3. Publishing the accordion</a>
+            <a href="#publishing-the-accordion">1.3. Publishing the accordion</a>
           </li>
           <li>
-            <a href="#previewing-the-accordion">3.4. Previewing the accordion</a>
+            <a href="#previewing-the-accordion">1.4. Previewing the accordion</a>
           </li>
           <li>
-            <a href="#cache">3.5. Cache</a>
+            <a href="#cache">1.5. Cache</a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="#responsiveness">4. Responsiveness</a>
+        <a href="#responsiveness">2. Responsiveness</a>
         <ul class="submenu">
           <li>
-            <a href="#responsive-modes">4.1. Responsive modes</a>
+            <a href="#responsive-modes">2.1. Responsive modes</a>
           </li>
           <li>
-            <a href="#aspect-ratio">4.2. Aspect Ratio</a>
+            <a href="#aspect-ratio">2.2. Aspect Ratio</a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="#custom-css-and-javascript">5. Custom CSS and JavasSript</a>
+        <a href="#custom-css-and-javascript">3. Custom CSS and JavasSript</a>
         <ul class="submenu">
           <li>
-            <a href="#custom-css">5.1. Custom CSS</a>
+            <a href="#custom-css">3.1. Custom CSS</a>
           </li>
           <li>
-            <a href="#custom-javascript">5.2. Custom JavaScript</a>
+            <a href="#custom-javascript">3.2. Custom JavaScript</a>
           </li>
           <li>
-            <a href="#javascript-api">5.3. JavaScript API</a>
+            <a href="#javascript-api">3.3. JavaScript API</a>
           </li>
           <li>
-            <a href="#loading-custom-code-in-files">5.4. Loading custom code in files</a>
+            <a href="#loading-custom-code-in-files">3.4. Loading custom code in files</a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="#import-and-export-accordions">6. Import and export accordions</a>
+        <a href="#import-and-export-accordions">4. Import and export accordions</a>
       </li>
       <li>
-        <a href="#advanced-shortcode-use">7. Advanced shortcode use</a>
+        <a href="#advanced-shortcode-use">5. Advanced shortcode use</a>
       </li>
       <li>
-        <a href="#action-and-filter-hooks">8. Action and filter hooks</a>
+        <a href="#action-and-filter-hooks">6. Action and filter hooks</a>
         <ul class="submenu">
           <li>
-            <a href="#actions">8.1. Actions</a>
+            <a href="#actions">6.1. Actions</a>
           </li>
           <li>
-            <a href="#filters">8.2. Filters</a>
+            <a href="#filters">6.2. Filters</a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="#deep-linking">9. Deep Linking</a>
+        <a href="#deep-linking">7. Deep Linking</a>
       </li>
       <li>
-        <a href="#translating-the-plugin">10. Translating the plugin</a>
+        <a href="#translating-the-plugin">8. Translating the plugin</a>
       </li>
       <li>
-        <a href="#adding-videos">11. Adding videos</a>
+        <a href="#adding-videos">9. Adding videos</a>
       </li>
       <li>
-        <a href="#troubleshooting">12. Troubleshooting</a>
-      </li>
-      <li>
-        <a href="#changelog">13. Changelog</a>
+        <a href="#troubleshooting">10. Troubleshooting</a>
       </li>
     </ul>
   </div>

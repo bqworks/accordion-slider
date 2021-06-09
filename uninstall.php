@@ -38,9 +38,6 @@ function bqw_accordion_slider_delete_all_data() {
 	delete_option( 'accordion_slider_load_custom_css_js' );
 	delete_option( 'accordion_slider_load_unminified_scripts' );
 	delete_option( 'accordion_slider_cache_expiry_interval' );
-	delete_option( 'accordion_slider_purchase_code' );
-	delete_option( 'accordion_slider_purchase_code_message' );
-	delete_option( 'accordion_slider_purchase_code_status' );
 	delete_option( 'accordion_slider_hide_inline_info' );
 	delete_option( 'accordion_slider_hide_getting_started_info' );
 	delete_option( 'accordion_slider_version' );

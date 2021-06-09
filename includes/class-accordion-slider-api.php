@@ -43,35 +43,11 @@ class BQW_Accordion_Slider_API {
 	protected $plugin_reference = 'accordion-slider/accordion-slider.php';
 
 	/**
-	 * The plugin's purchase code received from envato.
-	 * 
-	 * @since 1.0.0
-	 * 
-	 * @var string
-	 */
-	protected $purchase_code = null;
-
-	/**
-	 * The status of the purchase code.
-	 *
-	 * Can be 0, if the purcahse code is empty, 1 if the purchase 
-	 * code is valid, or 2 if the purchase code is not valid.
-	 * 
-	 * @since 1.0.0
-	 * 
-	 * @var string
-	 */
-	protected $purchase_code_status = null;
-
-	/**
 	 * Initialize the API handling
 	 *
 	 * @since 1.0.0
 	 */
 	private function __construct() {
-		$this->purchase_code = get_option( 'accordion_slider_purchase_code', '' );
-		$this->purchase_code_status = get_option( 'accordion_slider_purchase_code_status', '0' );
-
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update_check' ) );
 		add_filter( 'plugins_api', array( $this, 'update_info' ), 10, 3 );
 		add_action( 'in_plugin_update_message-' . $this->slug, array( $this, 'update_notification_message' ) );
@@ -137,9 +113,7 @@ class BQW_Accordion_Slider_API {
 		}
 		
 		$args = array(
-			'action' => 'update-check',
-			'purchase_code' => $this->purchase_code,
-			'purchase_code_status' => $this->purchase_code_status
+			'action' => 'update-check'
 		);
 
 		$response = $this->api_request( $args );
@@ -171,9 +145,7 @@ class BQW_Accordion_Slider_API {
 		}
 
 		$args = array(
-			'action' => 'plugin-info',
-			'purchase_code' => $this->purchase_code,
-			'purchase_code_status' => $this->purchase_code_status
+			'action' => 'plugin-info'
 		);
 
 		$response = $this->api_request( $args );
@@ -190,10 +162,6 @@ class BQW_Accordion_Slider_API {
 	 *
 	 * Checks the transient for a cached message and sends a new
 	 * request to the server if no cached message is found.
-	 *
-	 * Also, if the purchase code was not entered or is not valid, 
-	 * append a text to the update message that prompts the user
-	 * to enter the purchase code.
 	 *
 	 * @since 1.0.0
 	 * 
@@ -215,67 +183,7 @@ class BQW_Accordion_Slider_API {
 				set_transient( 'accordion_slider_update_notification_message', $message, 60 * 60 * 12 );
 			}
 		}
-
-		if ( $this->purchase_code_status !== '1' ) {
-			$message = 
-				__( ' To activate automatic updates, you need to enter your purchase code ', 'accordion-slider' ) . 
-				'<a href="' . admin_url( 'admin.php?page=accordion-slider-settings' ) . '">' . 
-					__( 'here', 'accordion-slider' ) . 
-				'</a>.<br/> ' . 
-				$message;
-		}
 		
 		echo $message;
-	}
-
-	/**
-	 * Verify the purchase code.
-	 *
-	 * Sends the purchase code to the remote API to verify
-	 * if it's valid. This verification is merely done to 
-	 * display useful information for the user, like the validity
-	 * of the purchase code, or in order to decide if the update button
-	 * should be displayed.
-	 * 
-	 * (In order to actually do an update, the purchase code is
-	 * verified once again, server-side, and the new version
-	 * is served only if the purchase code is found to be valid there.)
-	 *
-	 * Also, it deletes the transient that stores the plugin's 
-	 * update notification message because changes in the purchase
-	 * code status need to be reflected in the message. 
-	 * 
-	 * It also deletes the 'update_plugins' transient because
-	 * the transient may include the download link for the plugin.
-	 * If the purchase code is valid, the download link is included
-	 * in the transient, but if the purchase code is not valid,
-	 * the download link is not included. The addition, if it's needed,
-	 * is done when the 'pre_set_site_transient_update_plugins' filter runs.
-	 *
-	 * @since 1.0.0
-	 * 
-	 * @param  string $purchase_code The entered purchase code.
-	 * @return bool                  Whether or not the purchase code is valid.
-	 */
-	public function verify_purchase_code( $purchase_code ) {
-		$args = array(
-			'action' => 'verify-purchase',
-			'purchase_code' => $purchase_code
-		);
-
-		$response = $this->api_request( $args );
-
-		delete_site_transient( 'update_plugins' );
-		delete_transient( 'accordion_slider_update_notification_message' );
-
-		if ( $response !== false && isset( $response->is_valid ) ) {
-			if ( $response->is_valid === 'yes' ) {
-				return 'yes';
-			} else {
-				return 'no';
-			}
-		} else {
-			return 'error';
-		}
 	}
 }
