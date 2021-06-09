@@ -49,8 +49,6 @@ add_action( 'widgets_init', 'bqw_as_register_widget' );
 if ( is_admin() ) {
 	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-accordion-slider-admin.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-accordion-slider-updates.php' );
-	require_once( plugin_dir_path( __FILE__ ) . 'includes/class-accordion-slider-api.php' );
 	add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Admin', 'get_instance' ) );
-	add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_API', 'get_instance' ) );
 	add_action( 'admin_init', array( 'BQW_Accordion_Slider_Updates', 'get_instance' ) );
 }
