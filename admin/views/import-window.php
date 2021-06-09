@@ -21,7 +21,7 @@
 		            
 		            <div class="info-content">
 		                <p><?php _e( 'In the field above you need to copy the new accordion\'s data, as it was exported. Then, click in the <i>Import</i> button.', 'accordion-slider' ); ?></p>
-		            	<p><a href="https://www.youtube.com/watch?v=UVk_2r3f1xc&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
+		            	<p><a href="http://bqworks.net/accordion-slider/screencasts/#import-export" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
 		            </div>
 		        </div>
 		<?php

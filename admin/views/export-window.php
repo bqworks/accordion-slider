@@ -17,7 +17,7 @@
                     
                     <div class="info-content">
                         <p><?php _e( 'The text above represents the data of the accordion. Please copy the text and then paste it in the import accordion window, by clicking on the <i>Import Accordion</i> button in the <i>Accordion Slider</i> installation where you want to import the accordion.', 'accordion-slider' ); ?></p>
-                        <p><a href="https://www.youtube.com/watch?v=UVk_2r3f1xc&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
+                        <p><a href="http://bqworks.net/accordion-slider/screencasts/#import-export" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
                     </div>
                 </div>
         <?php

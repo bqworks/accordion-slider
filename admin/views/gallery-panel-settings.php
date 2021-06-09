@@ -14,7 +14,7 @@
                     <p><?php _e( 'One <i>Gallery</i> panel in the admin area will dynamically generate multiple panels in the published accordion (one panel for each image from the <i>[gallery]</i> shortcode).', 'accordion-slider' ); ?></p>
                     <p><?php _e( 'You just need to drop the accordion slider shortcode in a post that contains a <i>[gallery]</i> shortcode, and the images from the <i>[gallery]</i> will automatically be loaded in the accordion. Then, if you want to hide the original gallery, you can add the <i>hide</i> attribute to the <i>[gallery]</i> shortcode: <i>[gallery ids="1,2,3" hide="true"]</i>.', 'accordion-slider' ); ?></p>
                     <p><?php _e( 'The images and their data can be fetched through <i>dynamic tags</i>, which are enumerated in the Background, Layers and HTML editors.', 'accordion-slider' ); ?></p>
-                    <p><a href="https://www.youtube.com/watch?v=oF3tRiuJq_k&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
+                    <p><a href="http://bqworks.net/accordion-slider/screencasts/#accordion-from-gallery" target="_blank"><?php _e( 'See the video tutorial', 'accordion-slider' ); ?> &rarr;</a></p>
                 </div>
             </div>
         <?php

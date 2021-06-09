@@ -7,23 +7,19 @@
 		if ( $hide_info != true ) {
 	?>
 	    <div class="inline-info getting-started-info">
-			<h3><?php _e( '1. Getting started', 'accordion-slider' ); ?></h3>
+			<h3><?php _e( 'Getting started', 'accordion-slider' ); ?></h3>
 			<p><?php _e( 'If you want to reproduce one of the examples showcased online, you can easily import those examples into your own Accordion Slider installation.', 'accordion-slider' ); ?></p>
 			<p><?php _e( 'The examples can be found in the <i>examples</i> folder, which is included in the plugin\'s folder, and can be imported using the <i>Import Accordion</i> button below.', 'accordion-slider' ); ?></p>
 			<p><?php _e( 'For quick usage instructions, please see the video tutorials below. For more detailed instructions, please see the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-documentation'); ?>"><?php _e( 'Documentation', 'accordion-slider' ); ?></a> <?php _e( 'page.', 'accordion-slider' ); ?></p>
 			<ul class="video-tutorials-list">
-				<li><a href="https://www.youtube.com/watch?v=qmjgtmeLrzs&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( '1. Create and publish accordions', 'accordion-slider' ); ?></a></li>
-				<li><a href="https://www.youtube.com/watch?v=sGToyxSDZLk&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( '2. Create accordions from posts', 'accordion-slider' ); ?></a></li>
-				<li><a href="https://www.youtube.com/watch?v=oF3tRiuJq_k&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( '3. Create accordions from galleries', 'accordion-slider' ); ?></a></li>
-				<li><a href="https://www.youtube.com/watch?v=-6X1FAbJyYw&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( '4. Working with layers', 'accordion-slider' ); ?></a></li>
-				<li><a href="https://www.youtube.com/watch?v=kqU0FxrN6L4&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( '5. Adding custom CSS', 'accordion-slider' ); ?></a></li>
-				<li><a href="https://www.youtube.com/watch?v=AatLP0QGYv8&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( '6. Working with breakpoints', 'accordion-slider' ); ?></a></li>
-				<li><a href="https://www.youtube.com/watch?v=UVk_2r3f1xc&list=PLh-6IaZNuPo58lYbFPNV_nOzKYoOwHBKG" target="_blank"><?php _e( '7. Import and Export accordions', 'accordion-slider' ); ?></a></li>
+				<li><a href="http://bqworks.net/accordion-slider/screencasts/#simple-accordion" target="_blank"><?php _e( '1. Create and publish accordions', 'accordion-slider' ); ?></a></li>
+				<li><a href="http://bqworks.net/accordion-slider/screencasts/#accordion-from-posts" target="_blank"><?php _e( '2. Create accordions from posts', 'accordion-slider' ); ?></a></li>
+				<li><a href="http://bqworks.net/accordion-slider/screencasts/#accordion-from-gallery" target="_blank"><?php _e( '3. Create accordions from galleries', 'accordion-slider' ); ?></a></li>
+				<li><a href="http://bqworks.net/accordion-slider/screencasts/#adding-layers" target="_blank"><?php _e( '4. Working with layers', 'accordion-slider' ); ?></a></li>
+				<li><a href="http://bqworks.net/accordion-slider/screencasts/#custom-css" target="_blank"><?php _e( '5. Adding custom CSS', 'accordion-slider' ); ?></a></li>
+				<li><a href="http://bqworks.net/accordion-slider/screencasts/#working-with-breakpoints" target="_blank"><?php _e( '6. Working with breakpoints', 'accordion-slider' ); ?></a></li>
+				<li><a href="http://bqworks.net/accordion-slider/screencasts/#import-export" target="_blank"><?php _e( '7. Import and Export accordions', 'accordion-slider' ); ?></a></li>
 			</ul>
-
-			<h3><?php _e( '2. Support', 'accordion-slider' ); ?></h3>
-			<p><?php _e( 'When you need support, please contact us at our support center:', 'accordion-slider' ); ?> <a href="http://support.bqworks.net">support.bqworks.net</a>.</p>
-
 			<a href="#" class="getting-started-close">Close</a>
 		</div>
 	<?php
