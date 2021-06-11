@@ -1,92 +1,94 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Accordion Slider\n"
-"POT-Creation-Date: 2015-02-27 19:50+0200\n"
-"PO-Revision-Date: 2015-02-27 19:51+0200\n"
+"POT-Creation-Date: 2021-06-11 12:27+0300\n"
+"PO-Revision-Date: 2021-06-11 12:27+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-Basepath: ../\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/class-accordion-slider-admin.php:202
+#: admin/class-accordion-slider-admin.php:203
 #: admin/views/background-image-editor.php:12
 #: admin/views/background-image-editor.php:47 admin/views/panel.php:10
 msgid "Click to add image"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:203
+#: admin/class-accordion-slider-admin.php:204
 msgid "Posts panels"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:204
+#: admin/class-accordion-slider-admin.php:205
 msgid "Gallery panels"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:205
+#: admin/class-accordion-slider-admin.php:206
 msgid "Flickr panels"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:206
+#: admin/class-accordion-slider-admin.php:207
 msgid "Are you sure you want to delete this accordion?"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:207
+#: admin/class-accordion-slider-admin.php:208
 msgid "Are you sure you want to delete this panel?"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:208
+#: admin/class-accordion-slider-admin.php:209
 msgid "Yes"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:209
+#: admin/class-accordion-slider-admin.php:210
 msgid "Cancel"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:210
+#: admin/class-accordion-slider-admin.php:211
 msgid "Accordion slider updated."
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:211
+#: admin/class-accordion-slider-admin.php:212
 msgid "Accordion slider created."
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:236
+#: admin/class-accordion-slider-admin.php:237
 msgid "Accordion Slider"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:237 admin/views/accordions.php:2
+#: admin/class-accordion-slider-admin.php:238 admin/views/accordions.php:2
 msgid "All Accordions"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:245 admin/views/accordion.php:2
+#: admin/class-accordion-slider-admin.php:246 admin/views/accordion.php:2
 msgid "Add New Accordion"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:246
+#: admin/class-accordion-slider-admin.php:247
 msgid "Add New"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:254 admin/views/custom-css-js.php:2
+#: admin/class-accordion-slider-admin.php:255 admin/views/custom-css-js.php:2
 msgid "Custom CSS and JavaScript"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:255
+#: admin/class-accordion-slider-admin.php:256
 msgid "Custom CSS & JS"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:263
-#: admin/class-accordion-slider-admin.php:264 admin/views/custom-css-js.php:17
+#: admin/class-accordion-slider-admin.php:264
+#: admin/class-accordion-slider-admin.php:265 admin/views/custom-css-js.php:17
 #: admin/views/plugin-settings.php:2
 msgid "Plugin Settings"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:272
-#: admin/class-accordion-slider-admin.php:273 admin/views/accordions.php:13
+#: admin/class-accordion-slider-admin.php:273
+#: admin/class-accordion-slider-admin.php:274 admin/views/accordions.php:13
 msgid "Documentation"
 msgstr ""
 
@@ -94,43 +96,61 @@ msgstr ""
 msgid "Edit Accordion"
 msgstr ""
 
-#: admin/views/accordion.php:27
+#: admin/views/accordion.php:16
+msgid ""
+"Some of the background images are smaller than the size of the panel, so "
+"they might appear blurred when viewed in the accordion."
+msgstr ""
+
+#: admin/views/accordion.php:17
+msgid ""
+"When you select images to insert them into the panels, you can set their "
+"size from the right column of the Media Library window, as you can see in <a "
+"href=\"http://bqworks.net/accordion-slider/screencasts/#simple-accordion\" "
+"target=\"_blank\">this video</a> at 0:05."
+msgstr ""
+
+#: admin/views/accordion.php:18
+msgid "Don't show this again."
+msgstr ""
+
+#: admin/views/accordion.php:39
 msgid "Add Panels"
 msgstr ""
 
-#: admin/views/accordion.php:29
+#: admin/views/accordion.php:41
 msgid "Image Panels"
 msgstr ""
 
-#: admin/views/accordion.php:30 admin/views/panel.php:13
+#: admin/views/accordion.php:42 admin/views/panel.php:13
 msgid "Posts Panels"
 msgstr ""
 
-#: admin/views/accordion.php:31 admin/views/panel.php:15
+#: admin/views/accordion.php:43 admin/views/panel.php:15
 msgid "Gallery Panels"
 msgstr ""
 
-#: admin/views/accordion.php:32 admin/views/panel.php:17
+#: admin/views/accordion.php:44 admin/views/panel.php:17
 msgid "Flickr Panels"
 msgstr ""
 
-#: admin/views/accordion.php:33
+#: admin/views/accordion.php:45
 msgid "Empty Panel"
 msgstr ""
 
-#: admin/views/accordion.php:42
+#: admin/views/accordion.php:54
 msgid "Update"
 msgstr ""
 
-#: admin/views/accordion.php:42
+#: admin/views/accordion.php:54
 msgid "Create"
 msgstr ""
 
-#: admin/views/accordion.php:44 admin/views/accordions-row.php:21
+#: admin/views/accordion.php:56 admin/views/accordions-row.php:21
 msgid "Preview"
 msgstr ""
 
-#: admin/views/accordion.php:105 admin/views/accordion.php:148
+#: admin/views/accordion.php:117 admin/views/accordion.php:160
 #: admin/views/background-image-editor.php:98 admin/views/custom-css-js.php:11
 #: admin/views/custom-panel-settings.php:10 admin/views/export-window.php:15
 #: admin/views/flickr-panel-settings.php:49
@@ -140,7 +160,7 @@ msgstr ""
 msgid "Show info"
 msgstr ""
 
-#: admin/views/accordion.php:106 admin/views/accordion.php:149
+#: admin/views/accordion.php:118 admin/views/accordion.php:161
 #: admin/views/background-image-editor.php:99 admin/views/custom-css-js.php:12
 #: admin/views/custom-panel-settings.php:11 admin/views/export-window.php:16
 #: admin/views/flickr-panel-settings.php:50
@@ -150,28 +170,28 @@ msgstr ""
 msgid "Hide info"
 msgstr ""
 
-#: admin/views/accordion.php:127
+#: admin/views/accordion.php:139
 msgid "Breakpoints"
 msgstr ""
 
-#: admin/views/accordion.php:140
+#: admin/views/accordion.php:152
 msgid "Add Breakpoint"
 msgstr ""
 
-#: admin/views/accordion.php:152
+#: admin/views/accordion.php:164
 msgid ""
 "Breakpoints allow you to modify the look of the accordion for different "
 "window sizes."
 msgstr ""
 
-#: admin/views/accordion.php:153
+#: admin/views/accordion.php:165
 msgid ""
 "Each breakpoint allows you to set the width of the window for which the "
 "breakpoint will apply, and then add several settings which will override the "
 "global settings."
 msgstr ""
 
-#: admin/views/accordion.php:154 admin/views/custom-css-js.php:18
+#: admin/views/accordion.php:166 admin/views/custom-css-js.php:18
 #: admin/views/export-window.php:20 admin/views/gallery-panel-settings.php:17
 #: admin/views/import-window.php:24 admin/views/layers-editor.php:63
 #: admin/views/layers-editor.php:71 admin/views/posts-panel-settings.php:132
@@ -195,7 +215,7 @@ msgid "Export"
 msgstr ""
 
 #: admin/views/accordions.php:10
-msgid "1. Getting started"
+msgid "Getting started"
 msgstr ""
 
 #: admin/views/accordions.php:11
@@ -249,63 +269,41 @@ msgstr ""
 msgid "7. Import and Export accordions"
 msgstr ""
 
-#: admin/views/accordions.php:24
-msgid "2. Support"
-msgstr ""
-
-#: admin/views/accordions.php:25
-msgid "When you need support, please contact us at our support center:"
-msgstr ""
-
-#: admin/views/accordions.php:32
-msgid "3. Updates"
-msgstr ""
-
-#: admin/views/accordions.php:33
-msgid ""
-"In order to have access to automatic updates, please enter your purchase code"
-msgstr ""
-
-#: admin/views/accordions.php:33 admin/views/flickr-panel-settings.php:54
-#: includes/class-accordion-slider-api.php:219
-msgid "here"
-msgstr ""
-
-#: admin/views/accordions.php:47 admin/views/accordions.php:84
+#: admin/views/accordions.php:32 admin/views/accordions.php:69
 #: admin/views/flickr-panel-settings.php:26
-#: includes/class-accordion-slider-settings.php:967
+#: includes/class-accordion-slider-settings.php:968
 msgid "ID"
 msgstr ""
 
-#: admin/views/accordions.php:48 admin/views/accordions.php:85
+#: admin/views/accordions.php:33 admin/views/accordions.php:70
 msgid "Name"
 msgstr ""
 
-#: admin/views/accordions.php:49 admin/views/accordions.php:86
+#: admin/views/accordions.php:34 admin/views/accordions.php:71
 msgid "Shortcode"
 msgstr ""
 
-#: admin/views/accordions.php:50 admin/views/accordions.php:87
+#: admin/views/accordions.php:35 admin/views/accordions.php:72
 msgid "Created"
 msgstr ""
 
-#: admin/views/accordions.php:51 admin/views/accordions.php:88
+#: admin/views/accordions.php:36 admin/views/accordions.php:73
 msgid "Modified"
 msgstr ""
 
-#: admin/views/accordions.php:52 admin/views/accordions.php:89
+#: admin/views/accordions.php:37 admin/views/accordions.php:74
 msgid "Actions"
 msgstr ""
 
-#: admin/views/accordions.php:66
+#: admin/views/accordions.php:51
 msgid "You don't have saved accordions."
 msgstr ""
 
-#: admin/views/accordions.php:95
+#: admin/views/accordions.php:80
 msgid "Create New Accordion"
 msgstr ""
 
-#: admin/views/accordions.php:96
+#: admin/views/accordions.php:81
 msgid "Import Accordion"
 msgstr ""
 
@@ -344,8 +342,7 @@ msgstr ""
 msgid "Opened Background Image"
 msgstr ""
 
-#: admin/views/background-image-editor.php:76
-#: admin/views/layer-settings.php:59
+#: admin/views/background-image-editor.php:76 admin/views/layer-settings.php:59
 msgid "Link"
 msgstr ""
 
@@ -529,19 +526,19 @@ msgid ""
 msgstr ""
 
 #: admin/views/flickr-panel-settings.php:3
-#: includes/class-accordion-slider-settings.php:951
+#: includes/class-accordion-slider-settings.php:952
 msgid "API Key"
 msgstr ""
 
 #: admin/views/flickr-panel-settings.php:11
-#: includes/class-accordion-slider-settings.php:957
+#: includes/class-accordion-slider-settings.php:958
 msgid "Load By"
 msgstr ""
 
 #: admin/views/flickr-panel-settings.php:34
 #: admin/views/posts-panel-settings.php:109
-#: includes/class-accordion-slider-settings.php:945
-#: includes/class-accordion-slider-settings.php:973
+#: includes/class-accordion-slider-settings.php:946
+#: includes/class-accordion-slider-settings.php:974
 msgid "Limit"
 msgstr ""
 
@@ -554,6 +551,10 @@ msgstr ""
 
 #: admin/views/flickr-panel-settings.php:54
 msgid "First, you need to request an API key"
+msgstr ""
+
+#: admin/views/flickr-panel-settings.php:54
+msgid "here"
 msgstr ""
 
 #: admin/views/flickr-panel-settings.php:54
@@ -717,6 +718,7 @@ msgstr ""
 #: admin/views/layer-settings.php:137
 #: includes/class-accordion-slider-settings.php:162
 #: includes/class-accordion-slider-settings.php:775
+#: includes/class-accordion-slider-settings.php:789
 msgid "Vertical"
 msgstr ""
 
@@ -728,7 +730,7 @@ msgstr ""
 
 #: admin/views/layer-settings.php:145
 #: includes/class-accordion-slider-settings.php:216
-#: includes/class-accordion-slider-settings.php:793
+#: includes/class-accordion-slider-settings.php:794
 msgid "Custom Class"
 msgstr ""
 
@@ -737,42 +739,42 @@ msgid "Animation"
 msgstr ""
 
 #: admin/views/layer-settings.php:162
-#: includes/class-accordion-slider-settings.php:799
+#: includes/class-accordion-slider-settings.php:800
 msgid "Show Transition"
 msgstr ""
 
 #: admin/views/layer-settings.php:173
-#: includes/class-accordion-slider-settings.php:812
+#: includes/class-accordion-slider-settings.php:813
 msgid "Show Offset"
 msgstr ""
 
 #: admin/views/layer-settings.php:177
-#: includes/class-accordion-slider-settings.php:818
+#: includes/class-accordion-slider-settings.php:819
 msgid "Show Delay"
 msgstr ""
 
 #: admin/views/layer-settings.php:181
-#: includes/class-accordion-slider-settings.php:824
+#: includes/class-accordion-slider-settings.php:825
 msgid "Show Duration"
 msgstr ""
 
 #: admin/views/layer-settings.php:187
-#: includes/class-accordion-slider-settings.php:830
+#: includes/class-accordion-slider-settings.php:831
 msgid "Hide Transition"
 msgstr ""
 
 #: admin/views/layer-settings.php:198
-#: includes/class-accordion-slider-settings.php:843
+#: includes/class-accordion-slider-settings.php:844
 msgid "Hide Offset"
 msgstr ""
 
 #: admin/views/layer-settings.php:202
-#: includes/class-accordion-slider-settings.php:849
+#: includes/class-accordion-slider-settings.php:850
 msgid "Hide Delay"
 msgstr ""
 
 #: admin/views/layer-settings.php:206
-#: includes/class-accordion-slider-settings.php:855
+#: includes/class-accordion-slider-settings.php:856
 msgid "Hide Duration"
 msgstr ""
 
@@ -864,56 +866,33 @@ msgstr ""
 msgid "Clear all cache now"
 msgstr ""
 
-#: admin/views/plugin-settings.php:119
-msgid ""
-"Please enter your purchase code in order to have access to automatic updates."
-msgstr ""
-
-#: admin/views/plugin-settings.php:122
-msgid "The purchase code is valid."
-msgstr ""
-
-#: admin/views/plugin-settings.php:125
-msgid "The purchase code is not valid."
-msgstr ""
-
-#: admin/views/plugin-settings.php:128
-msgid ""
-"An error occurred during the validation. Please try again later and if the "
-"error persists, contact the plugin's author."
-msgstr ""
-
-#: admin/views/plugin-settings.php:134
-msgid "Purchase Code:"
-msgstr ""
-
 #: admin/views/posts-panel-settings.php:3
-#: includes/class-accordion-slider-settings.php:891
+#: includes/class-accordion-slider-settings.php:892
 msgid "Post Types"
 msgstr ""
 
 #: admin/views/posts-panel-settings.php:18
-#: includes/class-accordion-slider-settings.php:897
+#: includes/class-accordion-slider-settings.php:898
 msgid "Taxonomies"
 msgstr ""
 
 #: admin/views/posts-panel-settings.php:49
-#: includes/class-accordion-slider-settings.php:903
+#: includes/class-accordion-slider-settings.php:904
 msgid "Match"
 msgstr ""
 
 #: admin/views/posts-panel-settings.php:64
-#: includes/class-accordion-slider-settings.php:913
+#: includes/class-accordion-slider-settings.php:914
 msgid "With selected"
 msgstr ""
 
 #: admin/views/posts-panel-settings.php:79
-#: includes/class-accordion-slider-settings.php:923
+#: includes/class-accordion-slider-settings.php:924
 msgid "Order By"
 msgstr ""
 
 #: admin/views/posts-panel-settings.php:94
-#: includes/class-accordion-slider-settings.php:935
+#: includes/class-accordion-slider-settings.php:936
 msgid "Order"
 msgstr ""
 
@@ -940,12 +919,8 @@ msgid ""
 msgstr ""
 
 #: admin/views/settings-editor.php:10
-#: includes/class-accordion-slider-settings.php:879
+#: includes/class-accordion-slider-settings.php:880
 msgid "Content Type"
-msgstr ""
-
-#: includes/class-accordion-slider-api.php:217
-msgid " To activate automatic updates, you need to enter your purchase code "
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:121
@@ -1628,112 +1603,112 @@ msgstr ""
 msgid "Round Corners"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:803
-#: includes/class-accordion-slider-settings.php:834
-msgid "Fade"
-msgstr ""
-
 #: includes/class-accordion-slider-settings.php:804
 #: includes/class-accordion-slider-settings.php:835
-msgid "Left"
+msgid "Fade"
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:805
 #: includes/class-accordion-slider-settings.php:836
-msgid "Right"
+msgid "Left"
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:806
 #: includes/class-accordion-slider-settings.php:837
-msgid "Up"
+msgid "Right"
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:807
 #: includes/class-accordion-slider-settings.php:838
+msgid "Up"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:808
+#: includes/class-accordion-slider-settings.php:839
 msgid "Down"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:883
+#: includes/class-accordion-slider-settings.php:884
 msgid "Custom Content"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:884
+#: includes/class-accordion-slider-settings.php:885
 msgid "Content from posts"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:885
+#: includes/class-accordion-slider-settings.php:886
 msgid "Images from post's gallery"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:886
+#: includes/class-accordion-slider-settings.php:887
 msgid "Flickr images"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:907
+#: includes/class-accordion-slider-settings.php:908
 msgid "At least one"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:908
+#: includes/class-accordion-slider-settings.php:909
 msgid "All"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:917
+#: includes/class-accordion-slider-settings.php:918
 msgid "Include"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:918
+#: includes/class-accordion-slider-settings.php:919
 msgid "Exclude"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:927
+#: includes/class-accordion-slider-settings.php:928
 msgid "Date"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:928
+#: includes/class-accordion-slider-settings.php:929
 msgid "Comments"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:929
+#: includes/class-accordion-slider-settings.php:930
 msgid "Title"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:930
+#: includes/class-accordion-slider-settings.php:931
 msgid "Random"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:939
+#: includes/class-accordion-slider-settings.php:940
 msgid "Descending"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:940
+#: includes/class-accordion-slider-settings.php:941
 msgid "Ascending"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:961
+#: includes/class-accordion-slider-settings.php:962
 msgid "Set ID"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:962
+#: includes/class-accordion-slider-settings.php:963
 msgid "User ID"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:997
+#: includes/class-accordion-slider-settings.php:998
 msgid "Load stylesheets"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1000
+#: includes/class-accordion-slider-settings.php:1001
 msgid "Automatically"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1001
+#: includes/class-accordion-slider-settings.php:1002
 msgid "On homepage"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1002
+#: includes/class-accordion-slider-settings.php:1003
 msgid "On all pages"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1004
+#: includes/class-accordion-slider-settings.php:1005
 msgid ""
 "The plugin can detect the presence of the accordion in a post, page or "
 "widget, and will automatically load the necessary stylesheets. However, when "
@@ -1744,19 +1719,19 @@ msgid ""
 "multiple pages, select <i>On all pages</i>."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1007
+#: includes/class-accordion-slider-settings.php:1008
 msgid "Load custom CSS and JavaScript"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1010
+#: includes/class-accordion-slider-settings.php:1011
 msgid "Inline"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1011
+#: includes/class-accordion-slider-settings.php:1012
 msgid "In files"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1013
+#: includes/class-accordion-slider-settings.php:1014
 msgid ""
 "By default, custom CSS and JavaScript code added to the accordion will be "
 "loaded inline. However, if you want to add large amounts of custom CSS or "
@@ -1769,42 +1744,42 @@ msgid ""
 "credentials if the files can't be created due to folder permission issues."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1016
+#: includes/class-accordion-slider-settings.php:1017
 msgid "Load unminified scripts"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1018
+#: includes/class-accordion-slider-settings.php:1019
 msgid ""
 "Check this option if you want to load the unminified/uncompressed CSS and "
 "JavaScript files for the accordion. This is useful for debugging purposes."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1021
+#: includes/class-accordion-slider-settings.php:1022
 msgid "Cache expiry interval"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1023
+#: includes/class-accordion-slider-settings.php:1024
 msgid ""
 "Indicates the time interval after which a slider's cache will expire. If the "
 "cache of a slider has expired, the slider will be rendered again and cached "
 "the next time it is viewed."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1026
+#: includes/class-accordion-slider-settings.php:1027
 msgid "Hide inline info"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1028
+#: includes/class-accordion-slider-settings.php:1029
 msgid ""
 "Indicates whether the inline information will be displayed in admin panels "
 "and wherever it's available."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1031
+#: includes/class-accordion-slider-settings.php:1032
 msgid "Hide <i>Getting Started</i> info"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1033
+#: includes/class-accordion-slider-settings.php:1034
 msgid ""
 "Indicates whether the <i>Getting Started</i> information will be displayed "
 "in the <i>All Accordions</i> page, above the list of accordions. This "
@@ -1812,27 +1787,37 @@ msgid ""
 "information box."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1036
-msgid "Access"
+#: includes/class-accordion-slider-settings.php:1037
+msgid "Hide image size warning"
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:1039
-msgid "Administrator"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:1040
-msgid "Editor"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:1041
-msgid "Author"
+msgid ""
+"Indicates whether a warning will be displayed if the size of the background "
+"images is smaller than the size of the panels."
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:1042
+msgid "Access"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1045
+msgid "Administrator"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1046
+msgid "Editor"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1047
+msgid "Author"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1048
 msgid "Contributor"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1044
+#: includes/class-accordion-slider-settings.php:1050
 msgid ""
 "Sets what category of users will have access to the plugin's admin area."
 msgstr ""
