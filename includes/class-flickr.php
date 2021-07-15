@@ -44,13 +44,15 @@ if ( class_exists( 'BQW_Flickr' ) === false ) {
 		}
 
 		protected function post( $data ) {
-			$curl = curl_init( $this->rest );
-			curl_setopt( $curl, CURLOPT_POST, true );
-			curl_setopt( $curl, CURLOPT_POSTFIELDS, $data );
-			curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
-			curl_setopt( $curl, CURLOPT_TIMEOUT, 5 );
-			$response = curl_exec( $curl );
-			curl_close( $curl ); 
+			$response = wp_remote_retrieve_body( wp_remote_post( $this->rest, array(
+				'body' => $data,
+				'timeout' => 20,
+				'redirection' => 5,
+				'httpversion' => '1.0',
+				'blocking' => true,
+				'headers' => array(),
+				'cookies' => array()
+			)));
 
 			return $response;
 		}
