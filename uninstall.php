@@ -40,6 +40,8 @@ function bqw_accordion_slider_delete_all_data() {
 	delete_option( 'accordion_slider_cache_expiry_interval' );
 	delete_option( 'accordion_slider_hide_inline_info' );
 	delete_option( 'accordion_slider_hide_getting_started_info' );
+	delete_option( 'accordion_slider_hide_custom_css_js_warning' );
+	delete_option( 'accordion_slider_hide_image_size_warning' );
 	delete_option( 'accordion_slider_version' );
 
 	delete_transient( 'accordion_slider_post_names' );

@@ -34,13 +34,10 @@
       <a href="http://bqworks.net/accordion-slider/screencasts/#adding-layers" target="_blank">4. Working with layers</a>
     </li>
     <li>
-      <a href="http://bqworks.net/accordion-slider/screencasts/#custom-css" target="_blank">5. Adding custom CSS</a>
+      <a href="http://bqworks.net/accordion-slider/screencasts/#working-with-breakpoints" target="_blank">5. Working with breakpoints</a>
     </li>
     <li>
-      <a href="http://bqworks.net/accordion-slider/screencasts/#working-with-breakpoints" target="_blank">6. Working with breakpoints</a>
-    </li>
-    <li>
-      <a href="http://bqworks.net/accordion-slider/screencasts/#import-export" target="_blank">7. Import and Export accordions</a>
+      <a href="http://bqworks.net/accordion-slider/screencasts/#import-export" target="_blank">6. Import and Export accordions</a>
     </li>
   </ul>
   <h2 id="creating-and-publishing-accordions">1. Creating and publishing accordions</h2>
@@ -485,9 +482,7 @@
 
   <h2 id="custom-css-and-javascript">3. Custom CSS and JavaScript</h2>
   <p>
-    Sometimes you want to change the look of the accordion or add new functionality, and for this you can use custom CSS and/or custom JavaScript. All your custom code needs to be added in the
-    <i>Accordion Slider -> Custom CSS & JS</i>
-    page.
+    Sometimes you want to change the look of the accordion or add new functionality, and for this you can use custom CSS and/or custom JavaScript. As of version <i>1.9.0</i>, the plugin doesn't provide an editor for custom CSS or JavaScript. Instead you will have to add the code in the WordPress' built-in CSS editor, in the Customize page, or a different place.
   </p>
 
   <h3 id="custom-css">3.1. Custom CSS</h3>
@@ -513,8 +508,6 @@
     <i>Custom CSS</i>
     field, to target that specific accordion.
   </p>
-  <a href="assets/images/custom-css.png">
-    <img src="assets/images/custom-css.png"></a>
   <p>
     You could use a general selector, like
     <i>.accordion-slider</i>
@@ -525,8 +518,6 @@
   <p>
     Just like with custom CSS, you need to assign a custom class to the accordion and then use it in your custom code to target that specific accordion.
   </p>
-  <a href="assets/images/custom-js.png">
-    <img src="assets/images/custom-js.png"></a>
   <p>
     The next chapter offers a presentation of the accordion's JavaScript API, which allows you to programatically control the accordion. Using this API requires some programming knowledge and familiarity with jQuery.
   </p>
@@ -825,35 +816,6 @@ $( '.my-accordion' ).on( 'panelOpen', function( event ) {
       <td>Triggered when a video ends.</td>
     </tr>
   </table>
-
-  <h3 id="loading-custom-code-in-files">3.4. Loading custom code in files</h3>
-  <p>
-    By default, the code will be loaded inline, not in a
-    <i>.css</i>
-    or
-    <i>.js</i>
-    file, because it's simpler from a technical perspective and it's also more appropriate for small snippets of code. However, if you want to add large amounts of custom CSS or JavaScript, it's better to have the code loaded in files, rather than inline.
-  </p>
-  <p>
-    You can set how custom code is loaded in the
-    <i>Accordion Slider -> Plugin Settings</i>
-    page. Then, you need to re-save the custom CSS and/or JavaScript and the plugin will automatically create the
-    <i>accordion-slider-custom</i>
-    folder inside
-    <i>wp-plugins</i>
-    and then
-    <i>custom.css</i>
-    and
-    <i>custom.js</i>
-    inside
-    <i>accordion-slider-custom</i>
-    . You might also be prompted to provide FTP credentials if the files can't be created due to folder permission issues (this is one of the reasons why it's simpler to load the code inline).
-  </p>
-  <p>
-    The files for the custom code are saved outside the main
-    <i>accordion-slider</i>
-    folder in order to avoid the removal of the code when the plugin is updated.
-  </p>
 
   <h2 id="import-and-export-accordions">4. Import and export accordions</h2>
 
@@ -1764,9 +1726,6 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
           </li>
           <li>
             <a href="#javascript-api">3.3. JavaScript API</a>
-          </li>
-          <li>
-            <a href="#loading-custom-code-in-files">3.4. Loading custom code in files</a>
           </li>
         </ul>
       </li>

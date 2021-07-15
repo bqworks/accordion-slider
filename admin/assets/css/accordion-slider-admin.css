@@ -13,6 +13,78 @@ All accordions page
 	background-color: #F9F9F9;
 }
 
+.inline-info {
+	padding: 1px 10px;
+	background-color: #F4FAFF;
+	color: #333;
+	border-left: 4px solid #5BC0DE;
+	-moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.getting-started-info {
+	position: relative;
+	margin-top: 10px;
+	background-color: #FFF;
+}
+
+.getting-started-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.video-tutorials-list {
+	-moz-columns: 3;
+	-webkit-columns: 3;
+	columns: 3;
+	width: 700px;
+}
+
+.video-tutorials-list li {
+	margin-bottom: 10px;
+}
+
+.custom-css-js-warning {
+	padding: 1px 10px 10px;
+	margin: 10px 0;
+	background-color: #FFF;
+	color: #333;
+	border-left: 4px solid #FFE000;
+	-moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+ 
+.custom-css-js-warning-code {
+	display: inline-block;
+	margin-right: 50px;
+}
+ 
+.custom-css-js-warning-code textarea {
+	width: 300px;
+	height: 200px;
+	border-color: #CCC;
+	overflow: scroll;
+	resize: none;
+}
+ 
+.custom-css-js-warning-close {
+	display: block;
+	font-weight: bold;
+	text-decoration: none;
+	padding-top: 10px;
+}
+
 /*----------------------------------------------------------------------
 Single accordion page
 ----------------------------------------------------------------------*/
@@ -1232,44 +1304,6 @@ Single accordion page
 	margin-top: -5px;
 }
 
-.inline-info {
-	padding: 1px 10px;
-	background-color: #F4FAFF;
-	color: #333;
-	border-left: 4px solid #5BC0DE;
-	-moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-.getting-started-info {
-	position: relative;
-	margin-top: 10px;
-	background-color: #FFF;
-}
-
-.getting-started-close {
-	position: absolute;
-	top: 15px;
-	right: 15px;
-	font-weight: bold;
-	text-decoration: none;
-}
-
-.video-tutorials-list {
-	-moz-columns: 3;
-	-webkit-columns: 3;
-	columns: 3;
-	width: 700px;
-}
-
-.video-tutorials-list li {
-	margin-bottom: 10px;
-}
-
 .image-size-warning {
 	display: none;
 	padding: 10px;
@@ -1343,10 +1377,6 @@ Single accordion page
 .import-info {
 	max-width: 500px;
 	margin-top: 30px;
-}
-
-.custom-css-js-info {
-	margin: 15px 0 30px 0;
 }
 
 .info-content,
@@ -1469,20 +1499,6 @@ Single accordion page
 
 .multi-check .single-check-container {
 	padding: 5px;
-}
-
-/*----------------------------------------------------------------------
-Custom CSS and JavaScript page
-----------------------------------------------------------------------*/
-.button-primary.custom-css-js-update {
-	display: block;
-	margin-left: 3px;
-	margin-bottom: 40px;
-}
-
-.custom-css,
-.custom-js {
-	margin-bottom: 20px;
 }
 
 /*----------------------------------------------------------------------

@@ -371,7 +371,7 @@ class BQW_Accordion_Slider {
 	 *
 	 * If either of these checks return a positive result, the accordion's CSS file will be loaded.
 	 *
-	 * Then, it also loads the custom CSS, either from a file or from the database and print it as inline CSS.
+	 * Then, it also loads the custom CSS.
 	 * 
 	 * @since 1.0.0
 	 */
@@ -406,16 +406,7 @@ class BQW_Accordion_Slider {
 			wp_enqueue_style( $this->plugin_slug . '-plugin-style' );
 
 			if ( get_option( 'accordion_slider_is_custom_css') == true ) {
-				if ( get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
-					$custom_css_path = plugins_url( 'accordion-slider-custom/custom.css' );
-					$custom_css_dir_path = WP_PLUGIN_DIR . '/accordion-slider-custom/custom.css';
-
-					if ( file_exists( $custom_css_dir_path ) ) {
-						wp_enqueue_style( $this->plugin_slug . '-plugin-custom-style', $custom_css_path, array(), self::VERSION );
-					}
-				} else {
-					wp_add_inline_style( $this->plugin_slug . '-plugin-style', stripslashes( get_option( 'accordion_slider_custom_css' ) ) );
-				}
+				wp_add_inline_style( $this->plugin_slug . '-plugin-style', stripslashes( get_option( 'accordion_slider_custom_css' ) ) );
 			}
 
 			do_action( 'accordion_slider_enqueue_styles' );
@@ -431,15 +422,6 @@ class BQW_Accordion_Slider {
 	public function load_scripts() {
 		if ( empty( $this->scripts_to_load ) ) {
 			return;
-		}
-
-		if ( get_option( 'accordion_slider_is_custom_js' ) == true && get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
-			$custom_js_path = plugins_url( 'accordion-slider-custom/custom.js' );
-			$custom_js_dir_path = WP_PLUGIN_DIR . '/accordion-slider-custom/custom.js';
-
-			if ( file_exists( $custom_js_dir_path ) ) {
-				$this->add_script_to_load( $this->plugin_slug . '-plugin-custom-script', $custom_js_path );
-			}
 		}
 
 		foreach ( $this->scripts_to_load as $key => $value ) {
@@ -469,7 +451,7 @@ class BQW_Accordion_Slider {
 					"\r\n" . '	jQuery( document ).ready(function( $ ) {' .
 					$this->js_output;
 
-		if ( get_option( 'accordion_slider_is_custom_js' ) == true && get_option( 'accordion_slider_load_custom_css_js' ) !== 'in_files' ) {
+		if ( get_option( 'accordion_slider_is_custom_js' ) == true ) {
 			$custom_js = "\r\n" . '	' . stripslashes( get_option( 'accordion_slider_custom_js' ) );
 
 			$inline_js .= $custom_js;

@@ -25,24 +25,6 @@
             </tr>
             <tr>
                 <td>
-                    <label for="load-custom-css-js"><?php echo $plugin_settings['load_custom_css_js']['label']; ?></label>
-                </td>
-                <td>
-                    <select id="load-custom-css-js" name="load_custom_css_js">
-                        <?php
-                            foreach ( $plugin_settings['load_custom_css_js']['available_values'] as $value_name => $value_label ) {
-                                $selected = $value_name === $load_custom_css_js  ? ' selected="selected"' : '';
-                                echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
-                            }
-                        ?>
-                    </select>
-                </td>
-                <td>
-                    <?php echo $plugin_settings['load_custom_css_js']['description']; ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <label for="load-unminified-scripts"><?php echo $plugin_settings['load_unminified_scripts']['label']; ?></label>
                 </td>
                 <td>

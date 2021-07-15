@@ -16,11 +16,39 @@
 				<li><a href="http://bqworks.net/accordion-slider/screencasts/#accordion-from-posts" target="_blank"><?php _e( '2. Create accordions from posts', 'accordion-slider' ); ?></a></li>
 				<li><a href="http://bqworks.net/accordion-slider/screencasts/#accordion-from-gallery" target="_blank"><?php _e( '3. Create accordions from galleries', 'accordion-slider' ); ?></a></li>
 				<li><a href="http://bqworks.net/accordion-slider/screencasts/#adding-layers" target="_blank"><?php _e( '4. Working with layers', 'accordion-slider' ); ?></a></li>
-				<li><a href="http://bqworks.net/accordion-slider/screencasts/#custom-css" target="_blank"><?php _e( '5. Adding custom CSS', 'accordion-slider' ); ?></a></li>
-				<li><a href="http://bqworks.net/accordion-slider/screencasts/#working-with-breakpoints" target="_blank"><?php _e( '6. Working with breakpoints', 'accordion-slider' ); ?></a></li>
-				<li><a href="http://bqworks.net/accordion-slider/screencasts/#import-export" target="_blank"><?php _e( '7. Import and Export accordions', 'accordion-slider' ); ?></a></li>
+				<li><a href="http://bqworks.net/accordion-slider/screencasts/#working-with-breakpoints" target="_blank"><?php _e( '5. Working with breakpoints', 'accordion-slider' ); ?></a></li>
+				<li><a href="http://bqworks.net/accordion-slider/screencasts/#import-export" target="_blank"><?php _e( '6. Import and Export accordions', 'accordion-slider' ); ?></a></li>
 			</ul>
 			<a href="#" class="getting-started-close">Close</a>
+		</div>
+	<?php
+		}
+
+		if ( ( get_option( 'accordion_slider_is_custom_css') == true || get_option( 'accordion_slider_is_custom_js') == true ) && get_option( 'accordion_slider_hide_custom_css_js_warning' ) != true ) {
+	?>
+		<div class="custom-css-js-warning">
+			<h3><?php _e( 'Custom CSS & JS', 'accordion-slider' ); ?></h3>
+			<p><?php _e( 'Your accordion sliders contain custom CSS and/or JavaScript. Please move this code in the Wordpress\' CSS editor, in Customize, or a different place. Your current code will still work for now, but you won\'t be able to edit it. You can see your custom CSS/JS below.', 'accordion-slider' )?></p>
+			<?php
+			if ( get_option( 'accordion_slider_is_custom_css') == true ) {
+			?>
+			<div class="custom-css-js-warning-code">
+				<h4> <?php _e( 'Custom CSS', 'accordion-slider' ); ?></h4>
+				<textarea><?php echo stripslashes( get_option( 'accordion_slider_custom_css' ) ); ?></textarea>
+			</div>
+			<?php
+			}
+
+			if ( get_option( 'accordion_slider_is_custom_js') == true ) {
+			?>
+			<div class="custom-css-js-warning-code">
+				<h4><?php _e( 'Custom JS', 'accordion-slider' ); ?></h4>
+				<textarea><?php echo stripslashes( get_option( 'accordion_slider_custom_js' ) ); ?></textarea>
+			</div>
+			<?php
+			}
+			?>
+			<a href="#" class="custom-css-js-warning-close"><?php _e( 'Don\'t show this again.', 'accordion-slider' ); ?></a>
 		</div>
 	<?php
 		}

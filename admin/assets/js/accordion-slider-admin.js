@@ -247,6 +247,18 @@
 					data: { action: 'accordion_slider_getting_started_close' }
 				});
 			});
+
+			$( '.custom-css-js-warning-close' ).click(function( event ) {
+				event.preventDefault();
+ 
+				$( '.custom-css-js-warning' ).hide();
+ 
+				$.ajax({
+					url: sp_js_vars.ajaxurl,
+					type: 'post',
+					data: { action: 'accordion_slider_close_custom_css_js_warning' }
+				});
+			});
 		},
 
 		/**
