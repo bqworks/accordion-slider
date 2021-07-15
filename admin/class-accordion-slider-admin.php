@@ -112,12 +112,13 @@ class BQW_Accordion_Slider_Admin {
 			if ( get_option( 'accordion_slider_load_unminified_scripts' ) == true ) {
 				wp_enqueue_style( $this->plugin_slug . '-admin-style', plugins_url( 'accordion-slider/admin/assets/css/accordion-slider-admin.css' ), array(), BQW_Accordion_Slider::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-plugin-style', plugins_url( 'accordion-slider/public/assets/css/accordion-slider.css' ), array(), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_style( $this->plugin_slug . '-lightbox-style', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.css' ), array(), BQW_Accordion_Slider::VERSION );
 			} else {
 				wp_enqueue_style( $this->plugin_slug . '-admin-style', plugins_url( 'accordion-slider/admin/assets/css/accordion-slider-admin.min.css' ), array(), BQW_Accordion_Slider::VERSION );
 				wp_enqueue_style( $this->plugin_slug . '-plugin-style', plugins_url( 'accordion-slider/public/assets/css/accordion-slider.min.css' ), array(), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_style( $this->plugin_slug . '-lightbox-style', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.min.css' ), array(), BQW_Accordion_Slider::VERSION );
 			}
-
-			wp_enqueue_style( $this->plugin_slug . '-lightbox-style', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.css' ), array(), BQW_Accordion_Slider::VERSION );
+			
 			wp_enqueue_style( $this->plugin_slug . '-video-js-style', plugins_url( 'accordion-slider/public/assets/libs/video-js/video-js.min.css' ), array(), BQW_Accordion_Slider::VERSION );
 
 			if ( get_option( 'accordion_slider_is_custom_css') == true ) {
@@ -165,13 +166,14 @@ class BQW_Accordion_Slider_Admin {
 			if ( get_option( 'accordion_slider_load_unminified_scripts' ) == true ) {
 				wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'accordion-slider/admin/assets/js/accordion-slider-admin.js' ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
 				wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'accordion-slider/public/assets/js/jquery.accordionSlider.js' ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_script( $this->plugin_slug . '-lightbox-script', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.js' ), array(), BQW_Accordion_Slider::VERSION );
 			} else {
 				wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'accordion-slider/admin/assets/js/accordion-slider-admin.min.js' ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
 				wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'accordion-slider/public/assets/js/jquery.accordionSlider.min.js' ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_script( $this->plugin_slug . '-lightbox-script', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.min.js' ), array(), BQW_Accordion_Slider::VERSION );
 			}
 
 			wp_enqueue_script( $this->plugin_slug . '-easing-script', plugins_url( 'accordion-slider/public/assets/libs/easing/jquery.easing.1.3.min.js' ), array(), BQW_Accordion_Slider::VERSION );
-			wp_enqueue_script( $this->plugin_slug . '-lightbox-script', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.pack.js' ), array(), BQW_Accordion_Slider::VERSION );
 			wp_enqueue_script( $this->plugin_slug . '-video-js-script', plugins_url( 'accordion-slider/public/assets/libs/video-js/video.js' ), array(), BQW_Accordion_Slider::VERSION );
 
 			if ( get_option( 'accordion_slider_is_custom_js' ) == true && get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
