@@ -160,10 +160,10 @@ class BQW_AS_Accordion_Renderer {
 	protected function create_panel( $data, $panel_counter ) {
 		$panel = BQW_AS_Panel_Renderer_Factory::create_panel( $data );
 
-		$lazy_loading = isset( $this->settings['lazy_loading'] ) ? $this->settings['lazy_loading'] : $this->default_settings['lazy_loading'];
-		$lightbox = isset( $this->settings['lightbox'] ) ? $this->settings['lightbox'] : $this->default_settings['lightbox'];
-		$hide_image_title = isset( $this->settings['hide_image_title'] ) ? $this->settings['hide_image_title'] : $this->default_settings['hide_image_title'];
-		$link_target = isset( $this->settings['link_target'] ) ? $this->settings['link_target'] : $this->default_settings['link_target'];
+		$lazy_loading = isset( $this->settings['lazy_loading'] ) ? $this->settings['lazy_loading'] : $this->default_settings['lazy_loading']['default_value'];
+		$lightbox = isset( $this->settings['lightbox'] ) ? $this->settings['lightbox'] : $this->default_settings['lightbox']['default_value'];
+		$hide_image_title = isset( $this->settings['hide_image_title'] ) ? $this->settings['hide_image_title'] : $this->default_settings['hide_image_title']['default_value'];
+		$link_target = isset( $this->settings['link_target'] ) ? $this->settings['link_target'] : $this->default_settings['link_target']['default_value'];
 
 		$extra_data = new stdClass();
 		$extra_data->lazy_loading = $lazy_loading;
