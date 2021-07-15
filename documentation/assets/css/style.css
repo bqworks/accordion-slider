@@ -252,9 +252,12 @@ table {
 }
 
 .menu li:hover .submenu {
-  
+  max-height: 300px;
 }
 
 .submenu {
+  overflow: hidden;
   margin: 0;
+  max-height: 0;
+  transition: max-height 0.5s;
 }
