@@ -110,16 +110,16 @@ class BQW_Accordion_Slider_Admin {
 
 		if ( in_array( $screen->id, $this->plugin_screen_hook_suffixes ) ) {
 			if ( get_option( 'accordion_slider_load_unminified_scripts' ) == true ) {
-				wp_enqueue_style( $this->plugin_slug . '-admin-style', plugins_url( 'accordion-slider/admin/assets/css/accordion-slider-admin.css' ), array(), BQW_Accordion_Slider::VERSION );
-				wp_enqueue_style( $this->plugin_slug . '-plugin-style', plugins_url( 'accordion-slider/public/assets/css/accordion-slider.css' ), array(), BQW_Accordion_Slider::VERSION );
-				wp_enqueue_style( $this->plugin_slug . '-lightbox-style', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.css' ), array(), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_style( $this->plugin_slug . '-admin-style', plugins_url( 'admin/assets/css/accordion-slider-admin.css', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_style( $this->plugin_slug . '-plugin-style', plugins_url( 'public/assets/css/accordion-slider.css', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_style( $this->plugin_slug . '-lightbox-style', plugins_url( 'public/assets/libs/fancybox/jquery.fancybox.css', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
 			} else {
-				wp_enqueue_style( $this->plugin_slug . '-admin-style', plugins_url( 'accordion-slider/admin/assets/css/accordion-slider-admin.min.css' ), array(), BQW_Accordion_Slider::VERSION );
-				wp_enqueue_style( $this->plugin_slug . '-plugin-style', plugins_url( 'accordion-slider/public/assets/css/accordion-slider.min.css' ), array(), BQW_Accordion_Slider::VERSION );
-				wp_enqueue_style( $this->plugin_slug . '-lightbox-style', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.min.css' ), array(), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_style( $this->plugin_slug . '-admin-style', plugins_url( 'admin/assets/css/accordion-slider-admin.min.css', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_style( $this->plugin_slug . '-plugin-style', plugins_url( 'public/assets/css/accordion-slider.min.css', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_style( $this->plugin_slug . '-lightbox-style', plugins_url( 'public/assets/libs/fancybox/jquery.fancybox.min.css', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
 			}
 			
-			wp_enqueue_style( $this->plugin_slug . '-video-js-style', plugins_url( 'accordion-slider/public/assets/libs/video-js/video-js.min.css' ), array(), BQW_Accordion_Slider::VERSION );
+			wp_enqueue_style( $this->plugin_slug . '-video-js-style', plugins_url( 'public/assets/libs/video-js/video-js.min.css', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
 
 			if ( get_option( 'accordion_slider_is_custom_css') == true ) {
 				if ( get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
@@ -164,17 +164,17 @@ class BQW_Accordion_Slider_Admin {
 			}
 			
 			if ( get_option( 'accordion_slider_load_unminified_scripts' ) == true ) {
-				wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'accordion-slider/admin/assets/js/accordion-slider-admin.js' ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
-				wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'accordion-slider/public/assets/js/jquery.accordionSlider.js' ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
-				wp_enqueue_script( $this->plugin_slug . '-lightbox-script', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.js' ), array(), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'admin/assets/js/accordion-slider-admin.js', dirname( __FILE__ ) ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'public/assets/js/jquery.accordionSlider.js', dirname( __FILE__ ) ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_script( $this->plugin_slug . '-lightbox-script', plugins_url( 'public/assets/libs/fancybox/jquery.fancybox.js', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
 			} else {
-				wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'accordion-slider/admin/assets/js/accordion-slider-admin.min.js' ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
-				wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'accordion-slider/public/assets/js/jquery.accordionSlider.min.js' ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
-				wp_enqueue_script( $this->plugin_slug . '-lightbox-script', plugins_url( 'accordion-slider/public/assets/libs/fancybox/jquery.fancybox.min.js' ), array(), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'admin/assets/js/accordion-slider-admin.min.js', dirname( __FILE__ ) ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'public/assets/js/jquery.accordionSlider.min.js', dirname( __FILE__ ) ), array( 'jquery' ), BQW_Accordion_Slider::VERSION );
+				wp_enqueue_script( $this->plugin_slug . '-lightbox-script', plugins_url( 'public/assets/libs/fancybox/jquery.fancybox.min.js', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
 			}
 
-			wp_enqueue_script( $this->plugin_slug . '-easing-script', plugins_url( 'accordion-slider/public/assets/libs/easing/jquery.easing.1.3.min.js' ), array(), BQW_Accordion_Slider::VERSION );
-			wp_enqueue_script( $this->plugin_slug . '-video-js-script', plugins_url( 'accordion-slider/public/assets/libs/video-js/video.js' ), array(), BQW_Accordion_Slider::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-easing-script', plugins_url( 'public/assets/libs/easing/jquery.easing.1.3.min.js', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-video-js-script', plugins_url( 'public/assets/libs/video-js/video.js', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
 
 			if ( get_option( 'accordion_slider_is_custom_js' ) == true && get_option( 'accordion_slider_load_custom_css_js' ) === 'in_files' ) {
 				global $blog_id;
@@ -197,7 +197,7 @@ class BQW_Accordion_Slider_Admin {
 			wp_localize_script( $this->plugin_slug . '-admin-script', 'as_js_vars', array(
 				'admin' => admin_url( 'admin.php' ),
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'plugin' => plugins_url( 'accordion-slider' ),
+				'plugin' => plugins_url( '', dirname( __FILE__ ) ),
 				'page' => isset( $_GET['page'] ) && ( $_GET['page'] === 'accordion-slider-new' || ( isset( $_GET['id'] ) && isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) ) ? 'single' : 'all',
 				'id' => $id,
 				'lad_nonce' => wp_create_nonce( 'load-accordion-data' . $id ),
@@ -231,7 +231,7 @@ class BQW_Accordion_Slider_Admin {
 			$access,
 			$this->plugin_slug,
 			array( $this, 'render_accordion_page' ),
-			plugins_url( '/accordion-slider/admin/assets/css/images/as-icon.png' )
+			plugins_url( 'admin/assets/css/images/as-icon.png', dirname( __FILE__ ) )
 		);
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
@@ -464,7 +464,7 @@ class BQW_Accordion_Slider_Admin {
 	 * @since 1.0.0
 	 */
 	public function render_documentation_page() {
-		echo '<iframe class="accordion-slider-documentation" src="' . plugins_url( 'accordion-slider/documentation/documentation.html' ) . '" width="100%" height="100%"></iframe>';
+		echo '<iframe class="accordion-slider-documentation" src="' . plugins_url( 'documentation/documentation.html', dirname( __FILE__ ) ) . '" width="100%" height="100%"></iframe>';
 	}
 
 	/**

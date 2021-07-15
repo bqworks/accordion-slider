@@ -157,7 +157,7 @@ class BQW_AS_Panel_Renderer {
 	 * @return string HTML markup
 	 */
 	protected function create_background_image() {
-		$background_source = $this->lazy_loading === true ? ' src="' . plugins_url( 'accordion-slider/public/assets/css/images/blank.gif' ) . '" data-src="' . esc_attr( $this->data['background_source'] ) . '"' : ' src="' . esc_attr( $this->data['background_source'] ) . '"';
+		$background_source = $this->lazy_loading === true ? ' src="' . plugins_url( 'public/assets/css/images/blank.gif', dirname( __FILE__ ) ) . '" data-src="' . esc_attr( $this->data['background_source'] ) . '"' : ' src="' . esc_attr( $this->data['background_source'] ) . '"';
 		$background_alt = isset( $this->data['background_alt'] ) && $this->data['background_alt'] !== '' ? ' alt="' . esc_attr( $this->data['background_alt'] ) . '"' : '';
 		$background_title = isset( $this->data['background_title'] ) && $this->data['background_title'] !== '' && $this->hide_image_title === false ? ' title="' . esc_attr( $this->data['background_title'] ) . '"' : '';
 		$background_width = isset( $this->data['background_width'] ) && $this->data['background_width'] != 0 ? ' width="' . esc_attr( $this->data['background_width'] ) . '"' : '';
@@ -195,7 +195,7 @@ class BQW_AS_Panel_Renderer {
 	 * @return string HTML markup
 	 */
 	protected function create_opened_background_image() {
-		$opened_background_source = $this->lazy_loading === true ? ' src="' . plugins_url( 'accordion-slider/public/assets/css/images/blank.gif' ) . '" data-src="' . esc_attr( $this->data['opened_background_source'] ) . '"' : ' src="' . esc_attr( $this->data['opened_background_source'] ) . '"';
+		$opened_background_source = $this->lazy_loading === true ? ' src="' . plugins_url( 'public/assets/css/images/blank.gif', dirname( __FILE__ ) ) . '" data-src="' . esc_attr( $this->data['opened_background_source'] ) . '"' : ' src="' . esc_attr( $this->data['opened_background_source'] ) . '"';
 		$opened_background_alt = isset( $this->data['opened_background_alt'] ) && $this->data['opened_background_alt'] !== '' ? ' alt="' . esc_attr( $this->data['opened_background_alt'] ) . '"' : '';
 		$opened_background_title = isset( $this->data['opened_background_title'] ) && $this->data['opened_background_title'] !== '' && $this->hide_image_title === false ? ' title="' . esc_attr( $this->data['opened_background_title'] ) . '"' : '';
 		$opened_background_width = isset( $this->data['opened_background_width'] ) && $this->data['opened_background_width'] != 0 ? ' width="' . esc_attr( $this->data['opened_background_width'] ) . '"' : '';
