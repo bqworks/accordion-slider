@@ -254,7 +254,7 @@
 				$( '.custom-css-js-warning' ).hide();
  
 				$.ajax({
-					url: sp_js_vars.ajaxurl,
+					url: as_js_vars.ajaxurl,
 					type: 'post',
 					data: { action: 'accordion_slider_close_custom_css_js_warning' }
 				});
