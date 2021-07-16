@@ -3773,9 +3773,9 @@
 
 			this.$multiCheckContent.find( '.single-check' ).on( 'change.multiCheck', function() {
 				if ( $( this ).is( ':checked' ) ) {
-					$( this ).data( 'option' ).attr( 'selected', 'selected' );
+					$( this ).data( 'option' ).prop( 'selected', true );
 				} else {
-					$( this ).data( 'option' ).removeAttr( 'selected' );
+					$( this ).data( 'option' ).prop( 'selected', false );
 				}
 
 				that.$select.trigger( 'change' );
