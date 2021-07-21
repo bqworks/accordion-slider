@@ -2,14 +2,14 @@
 /**
  * Contains the validation functions for the accordion slider settings, panels, layers etc.
  * 
- * @since 1.9.0
+ * @since 1.8.0
  */
 class BQW_Accordion_Slider_Validation {
 
 	/**
 	 * Validate the accordion slider's data.
 	 *
-	 * @since 1.9.0
+	 * @since 1.8.0
 	 * 
 	 * @param array  $data Posted accordion slider data.
 	 * @return array       Validated accordion slider data.
@@ -29,7 +29,7 @@ class BQW_Accordion_Slider_Validation {
 	/**
 	 * Validate the accordion slider's panels state.
 	 *
-	 * @since 1.9.0
+	 * @since 1.8.0
 	 * 
 	 * @param array  $data Posted accordion slider panels state.
 	 * @return array       Validated accordion slider panels state.
@@ -50,7 +50,7 @@ class BQW_Accordion_Slider_Validation {
 	/**
 	 * Validate the accordion slider's settings.
 	 *
-	 * @since 1.9.0
+	 * @since 1.8.0
 	 * 
 	 * @param array  $data Posted accordion slider settings.
 	 * @return array       Validated accordion slider settings.
@@ -90,7 +90,7 @@ class BQW_Accordion_Slider_Validation {
 	/**
 	 * Validate the accordion slider's breakpoint settings.
 	 *
-	 * @since 1.9.0
+	 * @since 1.8.0
 	 * 
 	 * @param array  $data Posted breakpoint settings.
 	 * @return array       Validated breakpoint settings.
@@ -130,7 +130,7 @@ class BQW_Accordion_Slider_Validation {
 	/**
 	 * Validate the accordion slider's panels data.
 	 *
-	 * @since 1.9.0
+	 * @since 1.8.0
 	 * 
 	 * @param array  $data Posted accordion slider panels data.
 	 * @return array       Validated accordion slider panels.
@@ -164,7 +164,7 @@ class BQW_Accordion_Slider_Validation {
 	/**
 	 * Validate the panel settings.
 	 *
-	 * @since 1.9.0
+	 * @since 1.8.0
 	 * 
 	 * @param array  $data Posted panel settings.
 	 * @return array       Validated panel settings.
@@ -203,7 +203,7 @@ class BQW_Accordion_Slider_Validation {
 	/**
 	 * Validate the panel layers.
 	 *
-	 * @since 1.9.0
+	 * @since 1.8.0
 	 * 
 	 * @param array  $data Posted panel layers.
 	 * @return array       Validated panel layers.
@@ -254,7 +254,7 @@ class BQW_Accordion_Slider_Validation {
 	/**
 	 * Validate the layer settings.
 	 *
-	 * @since 1.9.0
+	 * @since 1.8.0
 	 * 
 	 * @param array  $data Posted layer settings.
 	 * @return array       Validated panel layers.
