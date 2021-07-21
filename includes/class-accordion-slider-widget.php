@@ -44,16 +44,16 @@ class BQW_Accordion_Slider_Widget extends WP_Widget {
 		$accordions = $wpdb->get_results( "SELECT id, name FROM $table_name", ARRAY_A );
 		
 		echo '<p>';
-		echo '<label for="' . $this->get_field_name( 'title' ) . '">Title: </label>';
-		echo '<input type="text" value="' . $title . '" name="' . $this->get_field_name( 'title' ) . '" id="' . $this->get_field_name( 'title' ) . '" class="widefat">';
+		echo '<label for="' . esc_attr( $this->get_field_name( 'title' ) ) . '">Title: </label>';
+		echo '<input type="text" value="' . esc_attr( $title ) . '" name="' . esc_attr( $this->get_field_name( 'title' ) ) . '" id="' . esc_attr( $this->get_field_name( 'title' ) ) . '" class="widefat">';
 		echo '</p>';
 		
 		echo '<p>';
-		echo '<label for="' . $this->get_field_name( 'accordion_id' ) . '">Select the accordion: </label>';
-		echo '<select name="' . $this->get_field_name( 'accordion_id' ) . '" id="' . $this->get_field_name( 'accordion_id' ) . '" class="widefat">';
+		echo '<label for="' . esc_attr( $this->get_field_name( 'accordion_id' ) ) . '">Select the accordion: </label>';
+		echo '<select name="' . esc_attr( $this->get_field_name( 'accordion_id' ) ) . '" id="' . esc_attr( $this->get_field_name( 'accordion_id' ) ) . '" class="widefat">';
 			foreach ( $accordions as $accordion ) {
 				$selected = $accordion_id == $accordion['id'] ? 'selected="selected"' : "";
-				echo "<option value=". $accordion['id'] ." $selected>" . stripslashes( $accordion['name'] ) . ' (' . $accordion['id'] . ')' . "</option>";
+				echo "<option value=". esc_attr( $accordion['id'] ) ." $selected>" . esc_html( stripslashes( $accordion['name'] ) ) . ' (' . intval( $accordion['id'] ) . ')' . "</option>";
 			}
 		echo '</select>';
 		echo '</p>';
@@ -88,14 +88,14 @@ class BQW_Accordion_Slider_Widget extends WP_Widget {
 		extract( $args, EXTR_SKIP );
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		
-		echo $before_widget;
+		echo wp_kses_post( $before_widget );
 		
 		if ( $title ) {
-			echo $before_title . $title . $after_title;
+			echo wp_kses_post( $before_title ) . esc_html( $title ) . wp_kses_post( $after_title );
 		}
 
-		echo do_shortcode( '[accordion_slider id="' . $instance['accordion_id'] . '"]' );
-		echo $after_widget;
+		echo do_shortcode( '[accordion_slider id="' . intval( $instance['accordion_id'] ) . '"]' );
+		echo wp_kses_post( $after_widget );
 	}
 }
 

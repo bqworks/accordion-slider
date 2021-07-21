@@ -28,7 +28,7 @@
 						foreach ( $layers as $layer ) {
 							$layer_id = $layer[ 'id' ];
 							$layer_name = $layer[ 'name' ];
-							echo '<li class="list-layer" data-id="' . $layer_id . '">' . $layer_name . '</li>';
+							echo '<li class="list-layer" data-id="' . esc_attr( $layer_id ) . '">' . esc_html( $layer_name ) . '</li>';
 						}
 					?>
 				</ul>

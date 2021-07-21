@@ -7,7 +7,7 @@
 			<div class="image-loader">
 				<?php
 					if ( isset( $data['background_source'] ) && $data['background_source'] !== '' ) {
-						echo '<img src="' . $data['background_source'] . '" />';
+						echo '<img src="' . esc_url( $data['background_source'] ) . '" />';
 					} else {
 						echo '<p class="no-image">' . __( 'Click to add image', 'accordion-slider' ) . '</p>';
 					}

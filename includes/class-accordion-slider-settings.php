@@ -732,7 +732,7 @@ class BQW_Accordion_Slider_Settings {
 				),
 				'display' => array(
 					'label' => __( 'Display', 'accordion-slider' ),
-					'type' => 'radio',
+					'type' => 'select',
 					'default_value' => 'always',
 					'available_values' => array(
 						'always' => __( 'Always', 'accordion-slider' ),

@@ -6,8 +6,6 @@
 			<div class="layer-setting-fields layer-content-fields">
 
 				<?php 
-					$layer_type = isset( $layer_type ) ? $layer_type : $layer_default_settings['type']['default_value'];
-
 					if ( $layer_type === 'paragraph' ) {
 				?>
 						<textarea name="text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : 'New layer'; ?></textarea>
@@ -84,7 +82,7 @@
 			</div>
 		</li>
 		<li>
-			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="layer-settings-tab" id="appearance-tab-<?php echo $layer_id; ?>">
+			<input type="radio" name="tab-<?php echo esc_attr( $layer_id ); ?>" class="layer-settings-tab" id="appearance-tab-<?php echo esc_attr( $layer_id ); ?>">
 			<label for="appearance-tab-<?php echo esc_attr( $layer_id ); ?>" class="layer-settings-tab-label"><?php _e( 'Appearance', 'accordion-slider' ); ?></label>
 			<div class="layer-setting-fields">
 				<table>

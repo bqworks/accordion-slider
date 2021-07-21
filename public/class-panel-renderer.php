@@ -109,7 +109,7 @@ class BQW_AS_Panel_Renderer {
 		$classes = 'as-panel';
 		$classes = apply_filters( 'accordion_slider_panel_classes' , $classes, $this->accordion_id, $this->panel_index );
 
-		$this->html_output = "\r\n" . '		<div class="' . $classes . '">';
+		$this->html_output = "\r\n" . '		<div class="' . esc_attr( $classes ) . '">';
 
 		if ( $this->has_background_image() ) {
 			$this->html_output .= "\r\n" . '			' . ( $this->has_background_link() && ! $this->has_opened_background_image() ? $this->add_link_to_background_image( $this->create_background_image() ) : $this->create_background_image() );
@@ -167,7 +167,7 @@ class BQW_AS_Panel_Renderer {
 		$classes = "as-background";
 
 		$classes = apply_filters( 'accordion_slider_background_image_classes', $classes, $this->accordion_id, $this->panel_index );
-		$background_image = '<img class="' . $classes . '"' . $background_source . $background_retina_source . $background_alt . $background_title . $background_width . $background_height . ' />';
+		$background_image = '<img class="' . esc_attr( $classes ) . '"' . $background_source . $background_retina_source . $background_alt . $background_title . $background_width . $background_height . ' />';
 
 		return $background_image;
 	}
@@ -205,7 +205,7 @@ class BQW_AS_Panel_Renderer {
 		$classes = "as-background-opened";
 		$classes = apply_filters( 'accordion_slider_opened_background_image_classes', $classes, $this->accordion_id, $this->panel_index );
 
-		$opened_background_image = '<img class="' . $classes . '"' . $opened_background_source . $opened_background_retina_source . $opened_background_alt . $opened_background_title . $opened_background_width . $opened_background_height . ' />';
+		$opened_background_image = '<img class="' . esc_attr( $classes ) . '"' . $opened_background_source . $opened_background_retina_source . $opened_background_alt . $opened_background_title . $opened_background_width . $opened_background_height . ' />';
 	
 		return $opened_background_image;
 	}
@@ -256,7 +256,7 @@ class BQW_AS_Panel_Renderer {
 
 		$background_link_title = isset( $this->data['background_link_title'] ) && $this->data['background_link_title'] !== '' ? ' title="' . esc_attr( $this->data['background_link_title'] ) . '"' : '';
 		$background_link = 
-			'<a class="' . $classes . '" href="' . $background_link_href . '"' . $background_link_title . ' target="' . $this->link_target . '">' .
+			'<a class="' . esc_attr( $classes ) . '" href="' . esc_attr( $background_link_href ) . '"' . $background_link_title . ' target="' . esc_attr( $this->link_target ) . '">' .
 				"\r\n" . '				' . $image . 
 			"\r\n" . '			' . '</a>';
 		

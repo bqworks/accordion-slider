@@ -3,7 +3,7 @@
 	<div class="modal-window">
 		<span class="close-x"></span>
 		
-		<textarea><?php echo isset( $export_string ) ? $export_string : ''; ?></textarea>
+		<textarea><?php echo isset( $export_string ) ? esc_textarea( $export_string ) : ''; ?></textarea>
         
         <?php
             $hide_info = get_option( 'accordion_slider_hide_inline_info' );

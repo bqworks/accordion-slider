@@ -98,7 +98,7 @@ class BQW_AS_Accordion_Renderer {
 		$width = isset( $this->settings['width'] ) ? $this->settings['width'] : $this->default_settings['width']['default_value'];
 		$height = isset( $this->settings['height'] ) ? $this->settings['height'] : $this->default_settings['height']['default_value'];
 
-		$this->html_output .= "\r\n" . '<div id="accordion-slider-' . $this->id . '" class="' . $classes . '" style="width: ' . $width . 'px; height: ' . $height . 'px;">';
+		$this->html_output .= "\r\n" . '<div id="accordion-slider-' . esc_attr( $this->id ) . '" class="' . esc_attr( $classes ) . '" style="width: ' . floatval( $width ) . 'px; height: ' . floatval( $height ) . 'px;">';
 
 		if ( $this->has_panels() ) {
 			$this->html_output .= "\r\n" . '	<div class="as-panels">';
@@ -203,8 +203,10 @@ class BQW_AS_Accordion_Renderer {
 
 				if ( is_bool( $setting_value ) ) {
 					$setting_value = $setting_value === true ? 'true' : 'false';
-				} else if ( is_numeric( $setting_value ) === false ) {
-					$setting_value = "'" . $setting_value . "'";
+				} else if ( is_numeric( $setting_value ) ) {
+					$setting_value = floatval( $setting_value );
+				} else {
+					$setting_value = json_encode( $setting_value );
 				}
 
 				$settings_js .= "\r\n" . '			' . $setting['js_name'] . ': ' . $setting_value;
@@ -237,8 +239,10 @@ class BQW_AS_Accordion_Renderer {
 
 						if ( is_bool( $value ) ) {
 							$value = $value === true ? 'true' : 'false';
-						} else if ( is_numeric( $value ) === false ) {
-							$value = "'" . $value . "'";
+						} else if ( is_numeric( $value ) ) {
+							$value = floatval( $value );
+						} else {
+							$value = json_encode( $value );
 						}
 
 						$breakpoint_setting_js .= "\r\n" . '					' . $this->default_settings[ $name ]['js_name'] . ': ' . $value;

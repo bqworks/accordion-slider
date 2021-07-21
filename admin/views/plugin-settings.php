@@ -39,7 +39,7 @@
                     <label for="cache-expiry-interval"><?php echo $plugin_settings['cache_expiry_interval']['label']; ?></label>
                 </td>
                 <td>
-                    <input type="text" id="cache-expiry-interval" name="cache_expiry_interval" value="<?php echo $cache_expiry_interval; ?>"><span>hours</span>
+                    <input type="text" id="cache-expiry-interval" name="cache_expiry_interval" value="<?php echo esc_attr( $cache_expiry_interval ); ?>"><span>hours</span>
                 </td>
                 <td>
                     <?php echo $plugin_settings['cache_expiry_interval']['description']; ?>

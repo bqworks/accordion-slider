@@ -299,7 +299,7 @@ class BQW_Accordion_Slider {
 			}
 		}
 
-		return $accordion;
+		return BQW_Accordion_Slider_Validation::validate_accordion_slider_data( $accordion );
 	}
 
 	/**
@@ -505,7 +505,7 @@ class BQW_Accordion_Slider {
 		}
 
 		// get the id specified in the shortcode
-		$id = isset( $atts['id'] ) ? $atts['id'] : -1;
+		$id = isset( $atts['id'] ) ? intval( $atts['id'] ) : -1;
 
 		// check whether cache is allowed
 		$allow_cache = ( isset( $atts['allow_cache'] ) && $atts['allow_cache'] === 'false' ) ? false : true;
