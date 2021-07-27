@@ -62,9 +62,15 @@ When you select an image from the Media Library, in the right columns, under 'AT
 
 == Screenshots ==
 
-1. The list with all the created accordion sliders.
-2. The user interface for creating and editing an accordion.
-3. The preview window in the admin area.
+1. Accordion slider with text layers.
+2. Simple accordion slider.
+3. Vertical accordion slider.
+4. Accordion slider with mixed content.
+5. The admin interface for creating and editing an accordion.
+6. The preview window in the admin area.
+7. The layer editor in the admin area.
+8. The background image editor in the admin area.
+9. Adding dynamic tags for accordions generated from posts.
 
 == Changelog ==
 
