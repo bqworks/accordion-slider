@@ -210,6 +210,7 @@ class BQW_Accordion_Slider_Validation {
 	 */
 	public static function validate_panel_layers( $layers_data ) {
 		$layers = array();
+		global $allowedposttags;
 
 		foreach ( $layers_data as $layer_data ) {
 			$layer = array();
@@ -223,7 +224,7 @@ class BQW_Accordion_Slider_Validation {
 
 					// for other layer fields, like name, text, image source etc.
 					$allowed_html = array_merge(
-						wp_kses_allowed_html( 'post' ),
+						$allowedposttags,
 						array(
 							'iframe' => array(
 								'src' => true,
@@ -232,7 +233,8 @@ class BQW_Accordion_Slider_Validation {
 								'allow' => true,
 								'allowfullscreen' => true,
 								'class' => true,
-								'id' => true
+								'id' => true,
+								'data-*' => true
 							),
 							'source' => array(
 								'src' => true,

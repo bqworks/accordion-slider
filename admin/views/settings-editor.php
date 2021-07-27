@@ -14,7 +14,7 @@
 							<?php
 								foreach ( $panel_default_settings['content_type']['available_values'] as $value_name => $value_label ) {
 									$selected = ( $content_type === $value_name ) ? ' selected="selected"' : '';
-									echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
+									echo '<option value="' . esc_attr( $value_name ) . '"' . $selected . '>' . esc_html( $value_label ) . '</option>';
 		                        }
 							?>
 						</select>

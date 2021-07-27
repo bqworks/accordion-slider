@@ -36,7 +36,7 @@
 				foreach ( $default_breakpoint_settings as $setting_name ) {
 					if ( $setting_name !== 'breakpoint_width' ) {
 						$setting = BQW_Accordion_Slider_Settings::getSettings( $setting_name );
-						echo '<li><a href="#" data-type="' . $setting_name . '">' . $setting['label'] . '</a></li>';
+						echo '<li><a href="#" data-type="' . esc_attr( $setting_name ) . '">' . esc_html( $setting['label'] ) . '</a></li>';
 					}
 				}
 			?>

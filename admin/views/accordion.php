@@ -67,9 +67,9 @@
                             $panel_state_class = isset( $accordion_panels_state ) && isset( $accordion_panels_state[ $group_name ] ) ? $accordion_panels_state[ $group_name ] : $panels_state[ $group_name ];
                             $panel_name_class = $group_name . '-panel';
                             ?>
-                            <div class="postbox <?php echo $panel_name_class . ' ' . $panel_state_class; ?>" data-name="<?php echo $group_name; ?>">
+                            <div class="postbox <?php echo esc_attr( $panel_name_class ) . ' ' . esc_attr( $panel_state_class ); ?>" data-name="<?php echo esc_attr( $group_name ); ?>">
                                 <div class="handlediv"></div>
-                                <h3 class="hndle"><?php echo $group['label']; ?></h3>
+                                <h3 class="hndle"><?php echo esc_html( $group['label'] ); ?></h3>
                                 <div class="inside">
                                     <table>
                                         <tbody>
@@ -79,21 +79,21 @@
                                             ?>
                                                     <tr>
                                                         <td>
-                                                            <label data-info="<?php echo $setting['description']; ?>" for="<?php echo $setting_name; ?>"><?php echo $setting['label']; ?></label>
+                                                            <label data-info="<?php echo wp_kses_post( $setting['description'] ); ?>" for="<?php echo esc_attr( $setting_name ); ?>"><?php echo esc_html( $setting['label'] ); ?></label>
                                                         </td>
                                                         <td>
                                                             <?php
                                                                 $value = isset( $accordion_settings ) && isset( $accordion_settings[ $setting_name ] ) ? $accordion_settings[ $setting_name ] : $setting['default_value'];
 
                                                                 if ( $setting['type'] === 'number' || $setting['type'] === 'text' || $setting['type'] === 'mixed' ) {
-                                                                    echo '<input id="' . $setting_name . '" class="setting" type="text" name="' . $setting_name . '" value="' . esc_attr( $value ) . '" />';
+                                                                    echo '<input id="' . esc_attr( $setting_name ) . '" class="setting" type="text" name="' . esc_attr( $setting_name ) . '" value="' . esc_attr( $value ) . '" />';
                                                                 } else if ( $setting['type'] === 'boolean' ) {
-                                                                    echo '<input id="' . $setting_name . '" class="setting" type="checkbox" name="' . $setting_name . '"' . ( $value === true ? ' checked="checked"' : '' ) . ' />';
+                                                                    echo '<input id="' . esc_attr( $setting_name ) . '" class="setting" type="checkbox" name="' . esc_attr( $setting_name ) . '"' . ( $value === true ? ' checked="checked"' : '' ) . ' />';
                                                                 } else if ( $setting['type'] === 'select' ) {
-                                                                    echo'<select id="' . $setting_name . '" class="setting" name="' . $setting_name . '">';
+                                                                    echo'<select id="' . esc_attr( $setting_name ) . '" class="setting" name="' . esc_attr( $setting_name ) . '">';
                                                                     
                                                                     foreach ( $setting['available_values'] as $value_name => $value_label ) {
-                                                                        echo '<option value="' . $value_name . '"' . ( $value === $value_name ? ' selected="selected"' : '' ) . '>' . $value_label . '</option>';
+                                                                        echo '<option value="' . esc_attr( $value_name ) . '"' . ( $value === $value_name ? ' selected="selected"' : '' ) . '>' . esc_html( $value_label ) . '</option>';
                                                                     }
                                                                     
                                                                     echo '</select>';
@@ -113,14 +113,14 @@
                                         if ( $hide_info != true && isset( $group['inline_info'] ) ) {
                                     ?>
                                             <div class="inline-info sidebar-panel-info">
-                                                <input type="checkbox" id="show-hide-<?php echo $group_name; ?>-info" class="show-hide-info">
-                                                <label for="show-hide-<?php echo $group_name; ?>-info" class="show-info"><?php _e( 'Show info', 'accordion-slider' ); ?></label>
-                                                <label for="show-hide-<?php echo $group_name; ?>-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
+                                                <input type="checkbox" id="show-hide-<?php echo esc_attr( $group_name ); ?>-info" class="show-hide-info">
+                                                <label for="show-hide-<?php echo esc_attr( $group_name ); ?>-info" class="show-info"><?php _e( 'Show info', 'accordion-slider' ); ?></label>
+                                                <label for="show-hide-<?php echo esc_attr( $group_name ); ?>-info" class="hide-info"><?php _e( 'Hide info', 'accordion-slider' ); ?></label>
                                                 
                                                 <div class="info-content">
                                                     <?php 
                                                         foreach( $group['inline_info'] as $inline_info_paragraph ) {
-                                                            echo '<p>' . $inline_info_paragraph . '</p>';
+                                                            echo '<p>' . wp_kses_post( $inline_info_paragraph ) . '</p>';
                                                         }
                                                     ?>
                                                 </div>
@@ -134,7 +134,7 @@
                         }
                     ?>
                     <?php $panel_class = isset( $accordion_panels_state ) && isset( $accordion_panels_state['breakpoints'] ) ? $accordion_panels_state['breakpoints'] : $panels_state[ $group_name ]; ?>
-                    <div class="postbox breakpoints-box <?php echo $panel_class; ?>" data-name="breakpoints">
+                    <div class="postbox breakpoints-box <?php echo esc_attr( $panel_class ); ?>" data-name="breakpoints">
                         <div class="handlediv"></div>
                         <h3 class="hndle"><?php _e( 'Breakpoints', 'accordion-slider' ); ?></h3>
                         <div class="inside">

@@ -282,8 +282,10 @@ class BQW_AS_Accordion_Renderer {
 
 					if ( is_bool( $lightbox_option_value ) ) {
 						$lightbox_option_value = $lightbox_option_value === true ? 'true' : 'false';
-					} else if ( is_numeric( $lightbox_option_value ) === false ) {
-						$lightbox_option_value = "'" . $lightbox_option_value . "'";
+					} else if ( is_numeric( $lightbox_option_value ) ) {
+						$lightbox_option_value = floatval( $lightbox_option_value );
+					} else {
+						$lightbox_option_value = json_encode( $lightbox_option_value );
 					}
 
 					$lightbox_options_string .= ', ' . $key . ': ' . $lightbox_option_value;

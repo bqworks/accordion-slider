@@ -7,7 +7,7 @@
 			<?php
 				foreach ( $post_names as $value ) {
 					$selected = ( isset( $panel_settings['posts_post_types'] ) && in_array( $value['name'], $panel_settings['posts_post_types'] ) ) || ( ! isset( $panel_settings['posts_post_types'] ) && in_array( $value['name'], $panel_default_settings['posts_post_types']['default_value'] ) ) ? ' selected="selected"' : '';
-					echo '<option value="' . $value['name'] . '"' . $selected . '>' . $value['label'] . '</option>';
+					echo '<option value="' . esc_attr( $value['name'] ) . '"' . $selected . '>' . esc_html( $value['label'] ) . '</option>';
 				}
 			?>
 		</select>
@@ -29,11 +29,11 @@
 						$taxonomies = $all_taxonomies[ $post_type ];
 
 						foreach ( $taxonomies as $taxonomy ) {
-							echo '<optgroup label="' . $taxonomy['label'] . '">';
+							echo '<optgroup label="' . esc_attr( $taxonomy['label'] ) . '">';
 
 							foreach ( $taxonomy['terms'] as $term ) {
 								$selected = isset( $panel_settings['posts_taxonomies'] ) && in_array( $term[ 'full' ], $panel_settings['posts_taxonomies'] ) ? ' selected="selected"' : '';
-								echo '<option value="' . $term[ 'full' ] . '"' . $selected . '>' . $term[ 'name' ] . '</option>';
+								echo '<option value="' . esc_attr( $term[ 'full' ] ) . '"' . $selected . '>' . esc_html( $term[ 'name' ] ) . '</option>';
 							}
 
 							echo '</optgroup>';
@@ -53,7 +53,7 @@
 			<?php
 				foreach ( $panel_default_settings['posts_relation']['available_values'] as $value_name => $value_label ) {
 					$selected = ( isset( $panel_settings['posts_relation'] ) && $value_name === $panel_settings['posts_relation'] ) || ( ! isset( $panel_settings['posts_relation'] ) && $value_name === $panel_default_settings['posts_relation']['default_value'] ) ? ' selected="selected"' : '';
-					echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
+					echo '<option value="' . esc_attr( $value_name ) . '"' . $selected . '>' . esc_html( $value_label ) . '</option>';
 	            }
 			?>
 		</select>
@@ -68,7 +68,7 @@
 			<?php
 				foreach ( $panel_default_settings['posts_operator']['available_values'] as $value_name => $value_label ) {
 					$selected = ( isset( $panel_settings['posts_operator'] ) && $value_name === $panel_settings['posts_operator'] ) || ( ! isset( $panel_settings['posts_operator'] ) && $value_name === $panel_default_settings['posts_operator']['default_value'] ) ? ' selected="selected"' : '';
-					echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
+					echo '<option value="' . esc_attr( $value_name ) . '"' . $selected . '>' . esc_html( $value_label ) . '</option>';
 	            }
 			?>
 		</select>
@@ -83,7 +83,7 @@
 			<?php
 				foreach ( $panel_default_settings['posts_order_by']['available_values'] as $value_name => $value_label ) {
 					$selected = ( isset( $panel_settings['posts_order_by'] ) && $value_name === $panel_settings['posts_order_by'] ) || ( ! isset( $panel_settings['posts_order_by'] ) && $value_name === $panel_default_settings['posts_order_by']['default_value'] ) ? ' selected="selected"' : '';
-					echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
+					echo '<option value="' . esc_attr( $value_name ) . '"' . $selected . '>' . esc_html( $value_label ) . '</option>';
 	            }
 			?>
 		</select>
@@ -98,7 +98,7 @@
 			<?php
 				foreach ( $panel_default_settings['posts_order']['available_values'] as $value_name => $value_label ) {
 					$selected = ( isset( $panel_settings['posts_order'] ) && $value_name === $panel_settings['posts_order'] ) || ( ! isset( $panel_settings['posts_order'] ) && $value_name === $panel_default_settings['posts_order']['default_value'] ) ? ' selected="selected"' : '';
-					echo '<option value="' . $value_name . '"' . $selected . '>' . $value_label . '</option>';
+					echo '<option value="' . esc_attr( $value_name ) . '"' . $selected . '>' . esc_html( $value_label ) . '</option>';
 	            }
 			?>
 		</select>
@@ -109,7 +109,7 @@
 		<label for="posts-maximum"><?php _e( 'Limit', 'accordion-slider' ); ?>:</label>
 	</td>
 	<td class="setting-cell">
-		<input id="posts-maximum" class="panel-setting" type="text" name="posts_maximum" value="<?php echo isset( $panel_settings['posts_maximum'] ) ? esc_attr( $panel_settings['posts_maximum'] ) : $panel_default_settings['posts_maximum']['default_value']; ?>" />
+		<input id="posts-maximum" class="panel-setting" type="text" name="posts_maximum" value="<?php echo isset( $panel_settings['posts_maximum'] ) ? esc_attr( $panel_settings['posts_maximum'] ) : esc_attr( $panel_default_settings['posts_maximum']['default_value'] ); ?>" />
 	</td>
 </tr>
 <tr>

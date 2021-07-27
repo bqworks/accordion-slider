@@ -316,9 +316,12 @@ class BQW_Accordion_Slider_Admin {
 		if ( isset( $_POST['plugin_settings_update'] ) ) {
 			check_admin_referer( 'plugin-settings-update', 'plugin-settings-nonce' );
 
-			if ( isset( $_POST['load_stylesheets'] ) && array_key_exists( $_POST['load_stylesheets'] , $plugin_settings['load_stylesheets']['available_values'] ) ) {
-				$load_stylesheets = $_POST['load_stylesheets'];
-				update_option( 'accordion_slider_load_stylesheets', $load_stylesheets );
+			if ( isset( $_POST['load_stylesheets'] ) ) {
+				$load_stylesheets = sanitize_text_field( $_POST['load_stylesheets'] );
+
+				if ( array_key_exists( $load_stylesheets , $plugin_settings['load_stylesheets']['available_values'] ) ) {
+					update_option( 'accordion_slider_load_stylesheets', $load_stylesheets );
+				}
 			}
 
 			if ( isset( $_POST['load_unminified_scripts'] ) ) {
@@ -358,9 +361,12 @@ class BQW_Accordion_Slider_Admin {
 				update_option( 'accordion_slider_hide_image_size_warning', false );
 			}
 
-			if ( isset( $_POST['access'] ) && array_key_exists( $_POST['access'], $plugin_settings['access']['available_values'] ) ) {
-				$access = $_POST['access'];
-				update_option( 'accordion_slider_access', $access );
+			if ( isset( $_POST['access'] ) ) {
+				$access = sanitize_text_field( $_POST['access'] );
+
+				if ( array_key_exists( $access, $plugin_settings['access']['available_values'] ) ) {
+					update_option( 'accordion_slider_access', $access );
+				}
 			}
 		}
 		
@@ -420,11 +426,10 @@ class BQW_Accordion_Slider_Admin {
 	 * @since 1.0.0
 	 */
 	public function ajax_save_accordion() {
-		$data = json_decode( stripslashes( $_POST['data'] ), true );
-		$nonce = $data['nonce'];
-		$action = $data['action'];
+		$nonce = $_POST['nonce'];
+		$action = sanitize_text_field( $_POST['action'] );
  
-		$accordion_data = BQW_Accordion_Slider_Validation::validate_accordion_slider_data( $data );
+		$accordion_data = BQW_Accordion_Slider_Validation::validate_accordion_slider_data( json_decode( stripslashes( $_POST['data'] ), true ) );
 		$id = $accordion_data['id'];
 
 		if ( ! wp_verify_nonce( $nonce, 'save-accordion' . $id ) ) {
@@ -768,7 +773,8 @@ class BQW_Accordion_Slider_Admin {
 					'allow' => true,
 					'allowfullscreen' => true,
 					'class' => true,
-					'id' => true
+					'id' => true,
+					'data-*' => true
 				),
 				'source' => array(
 					'src' => true,
@@ -833,7 +839,8 @@ class BQW_Accordion_Slider_Admin {
 						'allow' => true,
 						'allowfullscreen' => true,
 						'class' => true,
-						'id' => true
+						'id' => true,
+						'data-*' => true
 					),
 					'source' => array(
 						'src' => true,
@@ -1115,10 +1122,10 @@ class BQW_Accordion_Slider_Admin {
             $setting_html = '
             	<tr>
             		<td>
-            			<label data-info="' . $setting['description'] . '" for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
+            			<label data-info="' . wp_kses_post( $setting['description'] ) . '" for="breakpoint-' . esc_attr( $name ) . '-' . $uid . '">' . esc_html( $setting['label'] ) . '</label>
             		</td>
             		<td class="setting-cell">
-            			<input id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" type="text" name="' . $name . '" value="' . esc_attr( $setting_value ) . '" />
+            			<input id="breakpoint-' . esc_attr( $name ) . '-' . $uid . '" class="breakpoint-setting" type="text" name="' . esc_attr( $name ) . '" value="' . esc_attr( $setting_value ) . '" />
             			<span class="remove-breakpoint-setting"></span>
             		</td>
             	</tr>';
@@ -1126,10 +1133,10 @@ class BQW_Accordion_Slider_Admin {
             $setting_html = '
             	<tr>
             		<td>
-            			<label data-info="' . $setting['description'] . '" for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
+            			<label data-info="' . wp_kses_post( $setting['description'] ) . '" for="breakpoint-' . esc_attr( $name ) . '-' . $uid . '">' . esc_html( $setting['label'] ) . '</label>
             		</td>
             		<td class="setting-cell">
-            			<input id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" type="checkbox" name="' . $name . '"' . ( $setting_value === true ? ' checked="checked"' : '' ) . ' />
+            			<input id="breakpoint-' . esc_attr( $name ) . '-' . $uid . '" class="breakpoint-setting" type="checkbox" name="' . esc_attr( $name ) . '"' . ( $setting_value === true ? ' checked="checked"' : '' ) . ' />
             			<span class="remove-breakpoint-setting"></span>
             		</td>
             	</tr>';
@@ -1137,13 +1144,13 @@ class BQW_Accordion_Slider_Admin {
             $setting_html ='
             	<tr>
             		<td>
-            			<label data-info="' . $setting['description'] . '" for="breakpoint-' . $name . '-' . $uid . '">' . $setting['label'] . '</label>
+            			<label data-info="' . wp_kses_post( $setting['description'] ) . '" for="breakpoint-' . esc_attr( $name ) . '-' . $uid . '">' . $setting['label'] . '</label>
             		</td>
             		<td class="setting-cell">
-            			<select id="breakpoint-' . $name . '-' . $uid . '" class="breakpoint-setting" name="' . $name . '">';
+            			<select id="breakpoint-' . esc_attr( $name ) . '-' . $uid . '" class="breakpoint-setting" name="' . esc_attr( $name ) . '">';
             
             foreach ( $setting['available_values'] as $value_name => $value_label ) {
-                $setting_html .= '<option value="' . $value_name . '"' . ( $setting_value == $value_name ? ' selected="selected"' : '' ) . '>' . $value_label . '</option>';
+                $setting_html .= '<option value="' . esc_attr( $value_name ) . '"' . ( $setting_value == $value_name ? ' selected="selected"' : '' ) . '>' . esc_html( $value_label ) . '</option>';
             }
             
             $setting_html .= '

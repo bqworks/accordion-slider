@@ -23,7 +23,31 @@ class BQW_AS_Video_Layer_Renderer extends BQW_AS_Layer_Renderer {
 	 * @return string The layer HTML.
 	 */
 	public function render() {
+		global $allowedposttags;
 		$content = isset( $this->data['text'] ) && $this->data['text'] !== '' ? $this->data['text'] : '';
+		
+		$allowed_html = array_merge(
+			$allowedposttags,
+			array(
+				'iframe' => array(
+					'src' => true,
+					'width' => true,
+					'height' => true,
+					'allow' => true,
+					'allowfullscreen' => true,
+					'class' => true,
+					'id' => true,
+					'data-*' => true
+				),
+				'source' => array(
+					'src' => true,
+					'type' => true
+				)
+			)
+		);
+
+		$content = wp_kses( $content, $allowed_html );
+
 		$content = str_replace( 'as-video' , 'as-video ' . $this->get_classes() , $content );
 		$insert_pos = strpos( $content, ' ' );
 

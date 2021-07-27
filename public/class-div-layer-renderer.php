@@ -37,7 +37,8 @@ class BQW_AS_Div_Layer_Renderer extends BQW_AS_Layer_Renderer {
 					'allow' => true,
 					'allowfullscreen' => true,
 					'class' => true,
-					'id' => true
+					'id' => true,
+					'data-*' => true
 				),
 				'source' => array(
 					'src' => true,
