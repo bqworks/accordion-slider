@@ -116,14 +116,14 @@ class BQW_Accordion_Slider_Settings {
 				'width' => array(
 					'js_name' => 'width',
 					'label' => __( 'Width', 'accordion-slider' ),
-					'type' => 'number',
+					'type' => 'mixed',
 					'default_value' => 800,
 					'description' => __( 'Sets the width of the accordion. Can be set to a fixed value, like 900 (indicating 900 pixels), or to a percentage value, like 100%. In order to make the accordion responsive, it\'s not necessary to use percentage values. More about this in the description of the Responsive option.', 'accordion-slider' )
 				),
 				'height' => array(
 					'js_name' => 'height',
 					'label' => __( 'Height', 'accordion-slider' ),
-					'type' => 'number',
+					'type' => 'mixed',
 					'default_value' => 400,
 					'description' => __( 'Sets the height of the accordion. Can be set to a fixed value, like 400 (indicating 400 pixels). It\'s not recommended to set this to a percentage value, and it\'s not usually needed, as the accordion will be responsive even with a fixed value set for the height.', 'accordion-slider' )
 				),
