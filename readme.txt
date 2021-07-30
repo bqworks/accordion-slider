@@ -3,7 +3,7 @@ Contributors: bqworks
 Tags: accordion slider, responsive slider, responsive accordion, image accordion, accordion plugin, vertical accordion
 Requires at least: 3.6
 Tested up to: 5.8
-Stable tag: 1.8.0
+Stable tag: 1.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,3 +76,6 @@ When you select an image from the Media Library, in the right columns, under 'AT
 
 = 1.8.0 =
 * initial WordPress.org release
+
+= 1.8.1 =
+* fixed type of Width and Height from 'number' to 'mixed' to address validation issue
