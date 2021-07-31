@@ -426,10 +426,11 @@ class BQW_Accordion_Slider_Admin {
 	 * @since 1.0.0
 	 */
 	public function ajax_save_accordion() {
-		$nonce = $_POST['nonce'];
-		$action = sanitize_text_field( $_POST['action'] );
+		$data = json_decode( stripslashes( $_POST['data'] ), true );
+		$nonce = $data['nonce'];
+		$action = $data['action'];
  
-		$accordion_data = BQW_Accordion_Slider_Validation::validate_accordion_slider_data( json_decode( stripslashes( $_POST['data'] ), true ) );
+		$accordion_data = BQW_Accordion_Slider_Validation::validate_accordion_slider_data( $data );
 		$id = $accordion_data['id'];
 
 		if ( ! wp_verify_nonce( $nonce, 'save-accordion' . $id ) ) {
