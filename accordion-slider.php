@@ -4,7 +4,7 @@
 	Plugin Name: Accordion Slider
 	Plugin URI:  http://bqworks.net/accordion-slider/
 	Description: Responsive and touch-enabled accordion slider.
-	Version:     1.8.1
+	Version:     1.8.2
 	Author:      bqworks
 	Author URI:  http://bqworks.net
 */
