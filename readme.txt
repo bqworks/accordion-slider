@@ -2,7 +2,7 @@
 Contributors: bqworks
 Tags: accordion slider, responsive slider, responsive accordion, image accordion, accordion plugin, vertical accordion
 Requires at least: 3.6
-Tested up to: 5.8
+Tested up to: 5.8.1
 Stable tag: 1.8.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
