@@ -3,7 +3,7 @@ Contributors: bqworks
 Tags: accordion slider, responsive slider, responsive accordion, image accordion, accordion plugin, vertical accordion
 Requires at least: 3.6
 Tested up to: 5.8.1
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,3 +82,6 @@ When you select an image from the Media Library, in the right columns, under 'AT
 
 = 1.8.2 =
 * fixed the saving/updating functionality
+
+= 1.8.3 =
+* fixed the inline CSS width and height of the accordion
