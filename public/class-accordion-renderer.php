@@ -98,7 +98,7 @@ class BQW_AS_Accordion_Renderer {
 		$width = isset( $this->settings['width'] ) ? $this->settings['width'] : $this->default_settings['width']['default_value'];
 		$height = isset( $this->settings['height'] ) ? $this->settings['height'] : $this->default_settings['height']['default_value'];
 
-		$this->html_output .= "\r\n" . '<div id="accordion-slider-' . esc_attr( $this->id ) . '" class="' . esc_attr( $classes ) . '" style="width: ' . floatval( $width ) . 'px; height: ' . floatval( $height ) . 'px;">';
+		$this->html_output .= "\r\n" . '<div id="accordion-slider-' . esc_attr( $this->id ) . '" class="' . esc_attr( $classes ) . '" style="width: ' . $width . 'px; height: ' . $height . 'px;">';
 
 		if ( $this->has_panels() ) {
 			$this->html_output .= "\r\n" . '	<div class="as-panels">';
