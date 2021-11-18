@@ -171,6 +171,7 @@ class BQW_Accordion_Slider_Admin {
 				'id' => $id,
 				'lad_nonce' => wp_create_nonce( 'load-accordion-data' . $id ),
 				'sa_nonce' => wp_create_nonce( 'save-accordion' . $id ),
+				'remove_custom_css_js_warning' => __( 'Are you sure you want to remove the existing custom CSS and/or JavaScript? <br/> Only do this after you\'ve copied the existing code in another place.', 'accordion-slider' ),
 				'no_image' => __( 'Click to add image', 'accordion-slider' ),
 				'posts_panels' => __( 'Posts panels', 'accordion-slider' ),
 				'gallery_panels' => __( 'Gallery panels', 'accordion-slider' ),
@@ -1206,6 +1207,11 @@ class BQW_Accordion_Slider_Admin {
 	 */
 	public function ajax_close_custom_css_js_warning() {
 		update_option( 'accordion_slider_hide_custom_css_js_warning', true );
+
+		delete_option( 'accordion_slider_custom_css' );
+		delete_option( 'accordion_slider_custom_js' );
+		delete_option( 'accordion_slider_is_custom_css' );
+		delete_option( 'accordion_slider_is_custom_js' );
  
 		die();
 	}

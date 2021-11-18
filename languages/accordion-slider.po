@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Accordion Slider\n"
-"POT-Creation-Date: 2021-06-11 12:27+0300\n"
-"PO-Revision-Date: 2021-06-11 12:27+0300\n"
+"POT-Creation-Date: 2021-11-17 18:29+0200\n"
+"PO-Revision-Date: 2021-11-17 18:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -15,80 +15,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/class-accordion-slider-admin.php:203
+#: admin/class-accordion-slider-admin.php:174
+msgid ""
+"Are you sure you want to remove the existing custom CSS and/or JavaScript? "
+"<br/> Only do this after you've copied the existing code in another place."
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:175
 #: admin/views/background-image-editor.php:12
 #: admin/views/background-image-editor.php:47 admin/views/panel.php:10
 msgid "Click to add image"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:204
+#: admin/class-accordion-slider-admin.php:176
 msgid "Posts panels"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:205
+#: admin/class-accordion-slider-admin.php:177
 msgid "Gallery panels"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:206
+#: admin/class-accordion-slider-admin.php:178
 msgid "Flickr panels"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:207
+#: admin/class-accordion-slider-admin.php:179
 msgid "Are you sure you want to delete this accordion?"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:208
+#: admin/class-accordion-slider-admin.php:180
 msgid "Are you sure you want to delete this panel?"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:209
+#: admin/class-accordion-slider-admin.php:181
 msgid "Yes"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:210
+#: admin/class-accordion-slider-admin.php:182
 msgid "Cancel"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:211
+#: admin/class-accordion-slider-admin.php:183
 msgid "Accordion slider updated."
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:212
+#: admin/class-accordion-slider-admin.php:184
 msgid "Accordion slider created."
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:237
+#: admin/class-accordion-slider-admin.php:209
 msgid "Accordion Slider"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:238 admin/views/accordions.php:2
+#: admin/class-accordion-slider-admin.php:210 admin/views/accordions.php:2
 msgid "All Accordions"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:246 admin/views/accordion.php:2
+#: admin/class-accordion-slider-admin.php:218 admin/views/accordion.php:2
 msgid "Add New Accordion"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:247
+#: admin/class-accordion-slider-admin.php:219
 msgid "Add New"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:255 admin/views/custom-css-js.php:2
-msgid "Custom CSS and JavaScript"
-msgstr ""
-
-#: admin/class-accordion-slider-admin.php:256
-msgid "Custom CSS & JS"
-msgstr ""
-
-#: admin/class-accordion-slider-admin.php:264
-#: admin/class-accordion-slider-admin.php:265 admin/views/custom-css-js.php:17
-#: admin/views/plugin-settings.php:2
+#: admin/class-accordion-slider-admin.php:227
+#: admin/class-accordion-slider-admin.php:228 admin/views/plugin-settings.php:2
 msgid "Plugin Settings"
 msgstr ""
 
-#: admin/class-accordion-slider-admin.php:273
-#: admin/class-accordion-slider-admin.php:274 admin/views/accordions.php:13
+#: admin/class-accordion-slider-admin.php:236
+#: admin/class-accordion-slider-admin.php:237 admin/views/accordions.php:13
 msgid "Documentation"
 msgstr ""
 
@@ -151,7 +148,7 @@ msgid "Preview"
 msgstr ""
 
 #: admin/views/accordion.php:117 admin/views/accordion.php:160
-#: admin/views/background-image-editor.php:98 admin/views/custom-css-js.php:11
+#: admin/views/background-image-editor.php:98
 #: admin/views/custom-panel-settings.php:10 admin/views/export-window.php:15
 #: admin/views/flickr-panel-settings.php:49
 #: admin/views/gallery-panel-settings.php:10 admin/views/html-editor.php:15
@@ -161,7 +158,7 @@ msgid "Show info"
 msgstr ""
 
 #: admin/views/accordion.php:118 admin/views/accordion.php:161
-#: admin/views/background-image-editor.php:99 admin/views/custom-css-js.php:12
+#: admin/views/background-image-editor.php:99
 #: admin/views/custom-panel-settings.php:11 admin/views/export-window.php:16
 #: admin/views/flickr-panel-settings.php:50
 #: admin/views/gallery-panel-settings.php:11 admin/views/html-editor.php:16
@@ -191,10 +188,10 @@ msgid ""
 "global settings."
 msgstr ""
 
-#: admin/views/accordion.php:166 admin/views/custom-css-js.php:18
-#: admin/views/export-window.php:20 admin/views/gallery-panel-settings.php:17
-#: admin/views/import-window.php:24 admin/views/layers-editor.php:63
-#: admin/views/layers-editor.php:71 admin/views/posts-panel-settings.php:132
+#: admin/views/accordion.php:166 admin/views/export-window.php:20
+#: admin/views/gallery-panel-settings.php:17 admin/views/import-window.php:24
+#: admin/views/layers-editor.php:63 admin/views/layers-editor.php:71
+#: admin/views/posts-panel-settings.php:132
 msgid "See the video tutorial"
 msgstr ""
 
@@ -258,52 +255,72 @@ msgid "4. Working with layers"
 msgstr ""
 
 #: admin/views/accordions.php:19
-msgid "5. Adding custom CSS"
+msgid "5. Working with breakpoints"
 msgstr ""
 
 #: admin/views/accordions.php:20
-msgid "6. Working with breakpoints"
+msgid "6. Import and Export accordions"
 msgstr ""
 
-#: admin/views/accordions.php:21
-msgid "7. Import and Export accordions"
+#: admin/views/accordions.php:30
+msgid "Custom CSS & JS"
 msgstr ""
 
-#: admin/views/accordions.php:32 admin/views/accordions.php:69
+#: admin/views/accordions.php:31
+msgid ""
+"Your accordion sliders contain custom CSS and/or JavaScript. Please move "
+"this code in the Wordpress' CSS editor, in Customize, or a different place. "
+"Your current code will still work for now, but you won't be able to edit it. "
+"You can see your custom CSS/JS below."
+msgstr ""
+
+#: admin/views/accordions.php:36
+msgid "Custom CSS"
+msgstr ""
+
+#: admin/views/accordions.php:45
+msgid "Custom JS"
+msgstr ""
+
+#: admin/views/accordions.php:51
+msgid "Delete the custom CSS & JS, and remove this note."
+msgstr ""
+
+#: admin/views/accordions.php:60 admin/views/accordions.php:97
 #: admin/views/flickr-panel-settings.php:26
 #: includes/class-accordion-slider-settings.php:968
 msgid "ID"
 msgstr ""
 
-#: admin/views/accordions.php:33 admin/views/accordions.php:70
+#: admin/views/accordions.php:61 admin/views/accordions.php:98
 msgid "Name"
 msgstr ""
 
-#: admin/views/accordions.php:34 admin/views/accordions.php:71
+#: admin/views/accordions.php:62 admin/views/accordions.php:99
 msgid "Shortcode"
 msgstr ""
 
-#: admin/views/accordions.php:35 admin/views/accordions.php:72
+#: admin/views/accordions.php:63 admin/views/accordions.php:100
 msgid "Created"
 msgstr ""
 
-#: admin/views/accordions.php:36 admin/views/accordions.php:73
+#: admin/views/accordions.php:64 admin/views/accordions.php:101
 msgid "Modified"
 msgstr ""
 
-#: admin/views/accordions.php:37 admin/views/accordions.php:74
+#: admin/views/accordions.php:65 admin/views/accordions.php:102
 msgid "Actions"
 msgstr ""
 
-#: admin/views/accordions.php:51
+#: admin/views/accordions.php:79
 msgid "You don't have saved accordions."
 msgstr ""
 
-#: admin/views/accordions.php:80
+#: admin/views/accordions.php:108
 msgid "Create New Accordion"
 msgstr ""
 
-#: admin/views/accordions.php:81
+#: admin/views/accordions.php:109
 msgid "Import Accordion"
 msgstr ""
 
@@ -342,7 +359,7 @@ msgstr ""
 msgid "Opened Background Image"
 msgstr ""
 
-#: admin/views/background-image-editor.php:76 admin/views/layer-settings.php:59
+#: admin/views/background-image-editor.php:76 admin/views/layer-settings.php:57
 msgid "Link"
 msgstr ""
 
@@ -478,37 +495,6 @@ msgstr ""
 
 #: admin/views/breakpoint.php:31
 msgid "Add Setting"
-msgstr ""
-
-#: admin/views/custom-css-js.php:15
-msgid ""
-"The fields below can be used for all your custom CSS or JavaScript code."
-msgstr ""
-
-#: admin/views/custom-css-js.php:16
-msgid ""
-"If you want to target a specific accordion, you need to assign a <i>Custom "
-"Class</i> to the accordion, in the accordion's settings, and then use that "
-"custom class in the <i>Custom CSS</i> or <i>Custom JavaScript</i> fields "
-"below."
-msgstr ""
-
-#: admin/views/custom-css-js.php:17
-msgid ""
-"By default, the custom CSS and JavaScript code will be loaded inline, but in "
-"the"
-msgstr ""
-
-#: admin/views/custom-css-js.php:17
-msgid "page you can set to load the code in files instead of inline."
-msgstr ""
-
-#: admin/views/custom-css-js.php:28
-msgid "Custom CSS"
-msgstr ""
-
-#: admin/views/custom-css-js.php:33
-msgid "Custom JavaScript"
 msgstr ""
 
 #: admin/views/custom-panel-settings.php:14
@@ -656,124 +642,124 @@ msgstr ""
 #: admin/views/import-window.php:23
 msgid ""
 "In the field above you need to copy the new accordion's data, as it was "
-"exported. Then, click in the <i>Import</i> button."
+"exported. Then, click the <i>Import</i> button."
 msgstr ""
 
 #: admin/views/layer-settings.php:5
 msgid "Content"
 msgstr ""
 
-#: admin/views/layer-settings.php:21
+#: admin/views/layer-settings.php:19
 #: includes/class-accordion-slider-settings.php:720
 msgid "Heading Type"
 msgstr ""
 
-#: admin/views/layer-settings.php:46
+#: admin/views/layer-settings.php:44
 msgid "Source"
 msgstr ""
 
-#: admin/views/layer-settings.php:53
+#: admin/views/layer-settings.php:51
 msgid "Alt"
 msgstr ""
 
-#: admin/views/layer-settings.php:63
+#: admin/views/layer-settings.php:61
 msgid "Retina"
 msgstr ""
 
-#: admin/views/layer-settings.php:79
+#: admin/views/layer-settings.php:77
 msgid "Video Embed/Code"
 msgstr ""
 
-#: admin/views/layer-settings.php:88
+#: admin/views/layer-settings.php:86
 #: includes/class-accordion-slider-settings.php:560
 msgid "Appearance"
 msgstr ""
 
-#: admin/views/layer-settings.php:94
+#: admin/views/layer-settings.php:92
 #: includes/class-accordion-slider-settings.php:734
 msgid "Display"
 msgstr ""
 
-#: admin/views/layer-settings.php:105
+#: admin/views/layer-settings.php:103
 #: includes/class-accordion-slider-settings.php:161
 #: includes/class-accordion-slider-settings.php:769
 msgid "Horizontal"
 msgstr ""
 
-#: admin/views/layer-settings.php:109
+#: admin/views/layer-settings.php:107
 #: includes/class-accordion-slider-settings.php:118
 #: includes/class-accordion-slider-settings.php:757
 msgid "Width"
 msgstr ""
 
-#: admin/views/layer-settings.php:113
+#: admin/views/layer-settings.php:111
 msgid "Preset styles"
 msgstr ""
 
-#: admin/views/layer-settings.php:126
+#: admin/views/layer-settings.php:124
 #: includes/class-accordion-slider-settings.php:745
 msgid "Position"
 msgstr ""
 
-#: admin/views/layer-settings.php:137
+#: admin/views/layer-settings.php:135
 #: includes/class-accordion-slider-settings.php:162
 #: includes/class-accordion-slider-settings.php:775
 #: includes/class-accordion-slider-settings.php:789
 msgid "Vertical"
 msgstr ""
 
-#: admin/views/layer-settings.php:141
+#: admin/views/layer-settings.php:139
 #: includes/class-accordion-slider-settings.php:125
 #: includes/class-accordion-slider-settings.php:763
 msgid "Height"
 msgstr ""
 
-#: admin/views/layer-settings.php:145
+#: admin/views/layer-settings.php:143
 #: includes/class-accordion-slider-settings.php:216
 #: includes/class-accordion-slider-settings.php:794
 msgid "Custom Class"
 msgstr ""
 
-#: admin/views/layer-settings.php:156
+#: admin/views/layer-settings.php:154
 msgid "Animation"
 msgstr ""
 
-#: admin/views/layer-settings.php:162
+#: admin/views/layer-settings.php:160
 #: includes/class-accordion-slider-settings.php:800
 msgid "Show Transition"
 msgstr ""
 
-#: admin/views/layer-settings.php:173
+#: admin/views/layer-settings.php:171
 #: includes/class-accordion-slider-settings.php:813
 msgid "Show Offset"
 msgstr ""
 
-#: admin/views/layer-settings.php:177
+#: admin/views/layer-settings.php:175
 #: includes/class-accordion-slider-settings.php:819
 msgid "Show Delay"
 msgstr ""
 
-#: admin/views/layer-settings.php:181
+#: admin/views/layer-settings.php:179
 #: includes/class-accordion-slider-settings.php:825
 msgid "Show Duration"
 msgstr ""
 
-#: admin/views/layer-settings.php:187
+#: admin/views/layer-settings.php:185
 #: includes/class-accordion-slider-settings.php:831
 msgid "Hide Transition"
 msgstr ""
 
-#: admin/views/layer-settings.php:198
+#: admin/views/layer-settings.php:196
 #: includes/class-accordion-slider-settings.php:844
 msgid "Hide Offset"
 msgstr ""
 
-#: admin/views/layer-settings.php:202
+#: admin/views/layer-settings.php:200
 #: includes/class-accordion-slider-settings.php:850
 msgid "Hide Delay"
 msgstr ""
 
-#: admin/views/layer-settings.php:206
+#: admin/views/layer-settings.php:204
 #: includes/class-accordion-slider-settings.php:856
 msgid "Hide Duration"
 msgstr ""
@@ -862,7 +848,7 @@ msgstr ""
 msgid "Troubleshooting chapter"
 msgstr ""
 
-#: admin/views/plugin-settings.php:64
+#: admin/views/plugin-settings.php:46
 msgid "Clear all cache now"
 msgstr ""
 
@@ -1720,66 +1706,41 @@ msgid ""
 msgstr ""
 
 #: includes/class-accordion-slider-settings.php:1008
-msgid "Load custom CSS and JavaScript"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:1011
-msgid "Inline"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:1012
-msgid "In files"
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:1014
-msgid ""
-"By default, custom CSS and JavaScript code added to the accordion will be "
-"loaded inline. However, if you want to add large amounts of custom CSS or "
-"JavaScript, it's better to have the code loaded in files, rather than "
-"inline. If you chose to load the custom code in files, after selecting this "
-"option, you need to re-save the custom CSS and/or JavaScript and the plugin "
-"will automatically create the <i>accordion-slider-custom</i> folder inside "
-"<i>wp-plugins</i> and then <i>custom.css</i> and <i>custom.js</i> inside "
-"<i>accordion-slider-custom</i>. You might also be prompted to provide "
-"credentials if the files can't be created due to folder permission issues."
-msgstr ""
-
-#: includes/class-accordion-slider-settings.php:1017
 msgid "Load unminified scripts"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1019
+#: includes/class-accordion-slider-settings.php:1010
 msgid ""
 "Check this option if you want to load the unminified/uncompressed CSS and "
 "JavaScript files for the accordion. This is useful for debugging purposes."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1022
+#: includes/class-accordion-slider-settings.php:1013
 msgid "Cache expiry interval"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1024
+#: includes/class-accordion-slider-settings.php:1015
 msgid ""
 "Indicates the time interval after which a slider's cache will expire. If the "
 "cache of a slider has expired, the slider will be rendered again and cached "
 "the next time it is viewed."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1027
+#: includes/class-accordion-slider-settings.php:1018
 msgid "Hide inline info"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1029
+#: includes/class-accordion-slider-settings.php:1020
 msgid ""
 "Indicates whether the inline information will be displayed in admin panels "
 "and wherever it's available."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1032
+#: includes/class-accordion-slider-settings.php:1023
 msgid "Hide <i>Getting Started</i> info"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1034
+#: includes/class-accordion-slider-settings.php:1025
 msgid ""
 "Indicates whether the <i>Getting Started</i> information will be displayed "
 "in the <i>All Accordions</i> page, above the list of accordions. This "
@@ -1787,37 +1748,37 @@ msgid ""
 "information box."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1037
+#: includes/class-accordion-slider-settings.php:1028
 msgid "Hide image size warning"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1039
+#: includes/class-accordion-slider-settings.php:1030
 msgid ""
 "Indicates whether a warning will be displayed if the size of the background "
 "images is smaller than the size of the panels."
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1042
+#: includes/class-accordion-slider-settings.php:1033
 msgid "Access"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1045
+#: includes/class-accordion-slider-settings.php:1036
 msgid "Administrator"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1046
+#: includes/class-accordion-slider-settings.php:1037
 msgid "Editor"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1047
+#: includes/class-accordion-slider-settings.php:1038
 msgid "Author"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1048
+#: includes/class-accordion-slider-settings.php:1039
 msgid "Contributor"
 msgstr ""
 
-#: includes/class-accordion-slider-settings.php:1050
+#: includes/class-accordion-slider-settings.php:1041
 msgid ""
 "Sets what category of users will have access to the plugin's admin area."
 msgstr ""
