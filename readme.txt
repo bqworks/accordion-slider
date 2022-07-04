@@ -35,7 +35,7 @@ Features:
 * Action and filter hooks
 * Import and export accordion sliders
 
-[These videos](http://bqworks.net/accordion-slider/screencasts/) demonstrate the full capabilities of the plugin.
+[These videos](https://bqworks.net/accordion-slider/screencasts/) demonstrate the full capabilities of the plugin.
 
 == Installation ==
 

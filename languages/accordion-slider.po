@@ -103,7 +103,7 @@ msgstr ""
 msgid ""
 "When you select images to insert them into the panels, you can set their "
 "size from the right column of the Media Library window, as you can see in <a "
-"href=\"http://bqworks.net/accordion-slider/screencasts/#simple-accordion\" "
+"href=\"https://bqworks.net/accordion-slider/screencasts/#simple-accordion\" "
 "target=\"_blank\">this video</a> at 0:05."
 msgstr ""
 

@@ -1,4 +1,4 @@
-# [Accordion Slider - WordPress accordion plugin](http://bqworks.net/accordion-slider/) #
+# [Accordion Slider - WordPress accordion plugin](https://bqworks.net/accordion-slider/) #
 
 >Accordion Slider is a WordPress plugin that combines the look and functionality of a slider with that of an accordion, allowing you to create horizontal or vertical accordion sliders which are fully responsive and mobile-friendly.
 
@@ -24,19 +24,19 @@ Main features:
 * Action and filter hooks
 * Import and export accordion sliders
 
-Check the plugin's [presentation page](http://bqworks.net/accordion-slider/) for examples and more details of the available features.
+Check the plugin's [presentation page](https://bqworks.net/accordion-slider/) for examples and more details of the available features.
 
 ## Getting started ##
 
 You can download the plugin from its [wordpress.org page](https://wordpress.org/plugins/accordion-slider/).
 
-For quick usage instructions please see these [video tutorials](http://bqworks.net/accordion-slider/screencasts/).
+For quick usage instructions please see these [video tutorials](https://bqworks.net/accordion-slider/screencasts/).
 
 ## Support ##
 
 If you found a bug or have a feature suggestion, please submit it in the [Issues tracker](https://github.com/bqworks/accordion-slider/issues) or in the [WordPress.org forum](https://wordpress.org/support/plugin/accordion-slider/).
 
-If you need help with implementing the slider in your project, please use the address indicated on [http://bqworks.net](http://bqworks.net).
+If you need help with implementing the slider in your project, please use the address indicated on [https://bqworks.net](https://bqworks.net).
 
 ## License ##
 

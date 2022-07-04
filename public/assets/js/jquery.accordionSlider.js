@@ -1,8 +1,8 @@
 /*!
 * Accordion Slider - v2.8
-* Homepage: http://bqworks.net/accordion-slider/
+* Homepage: https://bqworks.net/accordion-slider/
 * Author: bqworks
-* Author URL: http://bqworks.net/
+* Author URL: https://bqworks.net/
 */
 ;(function(window, $) {
 

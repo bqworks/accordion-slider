@@ -12,12 +12,12 @@
 			<p><?php _e( 'The examples can be found in the <i>examples</i> folder, which is included in the plugin\'s folder, and can be imported using the <i>Import Accordion</i> button below.', 'accordion-slider' ); ?></p>
 			<p><?php _e( 'For quick usage instructions, please see the video tutorials below. For more detailed instructions, please see the', 'accordion-slider' ); ?> <a href="<?php echo admin_url('admin.php?page=accordion-slider-documentation'); ?>"><?php _e( 'Documentation', 'accordion-slider' ); ?></a> <?php _e( 'page.', 'accordion-slider' ); ?></p>
 			<ul class="video-tutorials-list">
-				<li><a href="http://bqworks.net/accordion-slider/screencasts/#simple-accordion" target="_blank"><?php _e( '1. Create and publish accordions', 'accordion-slider' ); ?></a></li>
-				<li><a href="http://bqworks.net/accordion-slider/screencasts/#accordion-from-posts" target="_blank"><?php _e( '2. Create accordions from posts', 'accordion-slider' ); ?></a></li>
-				<li><a href="http://bqworks.net/accordion-slider/screencasts/#accordion-from-gallery" target="_blank"><?php _e( '3. Create accordions from galleries', 'accordion-slider' ); ?></a></li>
-				<li><a href="http://bqworks.net/accordion-slider/screencasts/#adding-layers" target="_blank"><?php _e( '4. Working with layers', 'accordion-slider' ); ?></a></li>
-				<li><a href="http://bqworks.net/accordion-slider/screencasts/#working-with-breakpoints" target="_blank"><?php _e( '5. Working with breakpoints', 'accordion-slider' ); ?></a></li>
-				<li><a href="http://bqworks.net/accordion-slider/screencasts/#import-export" target="_blank"><?php _e( '6. Import and Export accordions', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://bqworks.net/accordion-slider/screencasts/#simple-accordion" target="_blank"><?php _e( '1. Create and publish accordions', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://bqworks.net/accordion-slider/screencasts/#accordion-from-posts" target="_blank"><?php _e( '2. Create accordions from posts', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://bqworks.net/accordion-slider/screencasts/#accordion-from-gallery" target="_blank"><?php _e( '3. Create accordions from galleries', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://bqworks.net/accordion-slider/screencasts/#adding-layers" target="_blank"><?php _e( '4. Working with layers', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://bqworks.net/accordion-slider/screencasts/#working-with-breakpoints" target="_blank"><?php _e( '5. Working with breakpoints', 'accordion-slider' ); ?></a></li>
+				<li><a href="https://bqworks.net/accordion-slider/screencasts/#import-export" target="_blank"><?php _e( '6. Import and Export accordions', 'accordion-slider' ); ?></a></li>
 			</ul>
 			<a href="#" class="getting-started-close">Close</a>
 		</div>
