@@ -239,6 +239,8 @@ class BQW_Accordion_Slider_Admin {
 			$this->plugin_slug . '-documentation',
 			array( $this, 'render_documentation_page' )
 		);
+
+		do_action('accordion_slider_admin_menu');
 	}
 
 	/**
