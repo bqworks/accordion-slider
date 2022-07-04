@@ -409,7 +409,7 @@ class BQW_Accordion_Slider {
 				wp_add_inline_style( $this->plugin_slug . '-plugin-style', stripslashes( get_option( 'accordion_slider_custom_css' ) ) );
 			}
 
-			do_action( 'accordion_slider_enqueue_styles' );
+			do_action( 'accordion_slider_enqueue_styles', $this->plugin_slug . '-plugin-style' );
 		}
 	}
 
