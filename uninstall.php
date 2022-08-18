@@ -47,6 +47,7 @@ function bqw_accordion_slider_delete_all_data() {
 	delete_transient( 'accordion_slider_post_names' );
 	delete_transient( 'accordion_slider_posts_data' );
 	delete_transient( 'accordion_slider_update_notification_message' );
+	delete_transient( 'accordion_slider_add_ons_cached_data' );
 	
-	$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache%'" );
+	$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache_%'" );
 }

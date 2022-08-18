@@ -202,7 +202,7 @@ class BQW_Accordion_Slider_Activation {
 			update_option( 'accordion_slider_version', BQW_Accordion_Slider::VERSION );
 		}
 
-		$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache%' AND NOT option_name = 'accordion_slider_cache_expiry_interval'" );
+		$wpdb->query( "DELETE FROM " . $prefix . "options WHERE option_name LIKE '%accordion_slider_cache_%' AND NOT option_name = 'accordion_slider_cache_expiry_interval'" );
 	}
 	
 	/**

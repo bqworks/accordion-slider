@@ -4,7 +4,7 @@
 	Plugin Name: Accordion Slider
 	Plugin URI:  https://bqworks.net/accordion-slider/
 	Description: Responsive and touch-enabled accordion slider.
-	Version:     1.8.4
+	Version:     1.9.0
 	Author:      bqworks
 	Author URI:  https://bqworks.net
 */
@@ -48,8 +48,12 @@ add_action( 'plugins_loaded', array( 'BQW_Hideable_Gallery', 'get_instance' ) );
 add_action( 'widgets_init', 'bqw_as_register_widget' );
 
 if ( is_admin() ) {
+	require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
+	require_once( ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-accordion-slider-admin.php' );
+	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-accordion-slider-add-ons.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-accordion-slider-updates.php' );
 	add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Admin', 'get_instance' ) );
+	add_action( 'plugins_loaded', array( 'BQW_Accordion_Slider_Add_Ons', 'get_instance' ) );
 	add_action( 'admin_init', array( 'BQW_Accordion_Slider_Updates', 'get_instance' ) );
 }

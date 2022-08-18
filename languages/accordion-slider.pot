@@ -1,0 +1,1970 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Accordion Slider\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-17 11:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.2; wp-6.1-alpha-53897\n"
+"X-Domain: accordion-slider"
+
+#: includes/class-accordion-slider-settings.php:146
+msgid ""
+"'Auto' resizes the accordion and all of its elements (e.g., layers, videos) "
+"automatically, while 'Custom' resizes only the accordion container and "
+"panels, and you are given flexibility over the way inner elements (e.g., "
+"layers, videos) will respond to smaller sizes. For example, you could use "
+"CSS media queries to define different text sizes or to hide certain elements "
+"when the accordion becomes smaller, ensuring that all content remains "
+"readable without having to zoom in. It's important to note that, if 'Auto' "
+"responsiveness is used, the 'Width' and 'Height' need to be set to fixed "
+"values, so that the accordion can calculate correctly how much it needs to "
+"scale."
+msgstr ""
+
+#: admin/views/accordions.php:16
+msgid "1. Create and publish accordions"
+msgstr ""
+
+#: admin/views/accordions.php:17
+msgid "2. Create accordions from posts"
+msgstr ""
+
+#: admin/views/accordions.php:18
+msgid "3. Create accordions from galleries"
+msgstr ""
+
+#: admin/views/accordions.php:19
+msgid "4. Working with layers"
+msgstr ""
+
+#: admin/views/accordions.php:20
+msgid "5. Working with breakpoints"
+msgstr ""
+
+#: admin/views/accordions.php:21
+msgid "6. Import and Export accordions"
+msgstr ""
+
+#: admin/views/custom-panel-settings.php:14
+msgid ""
+"<i>Custom Content</i> panels allow you to manually specify the image(s), "
+"link and all the other data for the panel."
+msgstr ""
+
+#: admin/views/layers-editor.php:70
+msgid ""
+"<strong>Note:</strong> The style of <i>Paragraph</i>, <i>Heading</i> or <i>"
+"Image</i> layers might be affected by the theme's CSS code when you publish "
+"the accordion in a page. More details in the"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1033
+msgid "Access"
+msgstr ""
+
+#. Name of the plugin
+msgid "Accordion Slider"
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:202
+msgid "Accordion slider created."
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:201
+msgid "Accordion slider updated."
+msgstr ""
+
+#: admin/views/accordions.php:75 admin/views/accordions.php:112
+msgid "Actions"
+msgstr ""
+
+#: admin/views/add-ons.php:37
+msgid "Activate"
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:191
+msgid "Activated"
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:188
+msgid "Activating the add-on..."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:190
+msgid "Activating..."
+msgstr ""
+
+#: admin/views/layers-editor.php:12
+msgid "Add"
+msgstr ""
+
+#: admin/views/accordion.php:152
+msgid "Add Breakpoint"
+msgstr ""
+
+#: admin/views/layers-editor.php:12
+msgid "Add Layer"
+msgstr ""
+
+#: admin/views/accordion.php:2
+msgid "Add New Accordion"
+msgstr ""
+
+#: admin/views/accordion.php:39
+msgid "Add Panels"
+msgstr ""
+
+#: admin/views/breakpoint.php:31
+msgid "Add Setting"
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:624
+msgid "Add-on activated successfully."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:664
+msgid "Add-on deactivated successfully."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:572
+msgid "Add-on installed successfully."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:145
+#: admin/class-accordion-slider-add-ons.php:146 admin/views/accordions.php:25
+#: admin/views/add-ons.php:2
+msgid "Add-ons"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:219
+msgid ""
+"Adds a custom class to the accordion, for use in custom css. Add the class "
+"name without the dot, i.e., you need to add <i>my-accordion</i>, not <i>.my-"
+"accordion</i>."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1036
+msgid "Administrator"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:909
+msgid "All"
+msgstr ""
+
+#: admin/views/layer-settings.php:51
+msgid "Alt"
+msgstr ""
+
+#: admin/views/background-image-editor.php:23
+#: admin/views/background-image-editor.php:58
+msgid "Alt:"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:738
+msgid "Always"
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:626
+msgid "An error occurred during activation."
+msgstr ""
+
+#: admin/views/flickr-panel-settings.php:54
+msgid "and then specify it in the <i>API Key</i> field above."
+msgstr ""
+
+#: admin/views/layer-settings.php:154
+msgid "Animation"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:580
+msgid "Animations"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:952
+#: admin/views/flickr-panel-settings.php:3
+msgid "API Key"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:560
+#: admin/views/layer-settings.php:86
+msgid "Appearance"
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:197
+msgid "Are you sure you want to delete this accordion?"
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:198
+msgid "Are you sure you want to delete this panel?"
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:192
+msgid ""
+"Are you sure you want to remove the existing custom CSS and/or JavaScript? "
+"<br/> Only do this after you've copied the existing code in another place."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:941
+msgid "Ascending"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:150
+msgid "Aspect Ratio"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:908
+msgid "At least one"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1038
+msgid "Author"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:143
+msgid "Auto"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1001
+msgid "Automatically"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:326
+#: includes/class-accordion-slider-settings.php:595
+msgid "Autoplay"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:333
+msgid "Autoplay Delay"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:340
+msgid "Autoplay Direction"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:351
+msgid "Autoplay On Hover"
+msgstr ""
+
+#: admin/views/background-image-editor.php:6
+msgid "Background Image"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:345
+msgid "Backwards"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:785
+msgid "Black"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:531
+msgid "Blank"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:751
+msgid "Bottom Left"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:752
+msgid "Bottom Right"
+msgstr ""
+
+#. Author of the plugin
+msgid "bqworks"
+msgstr ""
+
+#: admin/views/accordion.php:139
+msgid "Breakpoints"
+msgstr ""
+
+#: admin/views/accordion.php:164
+msgid ""
+"Breakpoints allow you to modify the look of the accordion for different "
+"window sizes."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:644
+msgid ""
+"By default, the accordion will open the background image in the lightbox, "
+"but at its full size."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1013
+msgid "Cache expiry interval"
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:200
+msgid "Cancel"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1010
+msgid ""
+"Check this option if you want to load the unminified/uncompressed CSS and "
+"JavaScript files for the accordion. This is useful for debugging purposes."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:186
+msgid "Checking the license key..."
+msgstr ""
+
+#: admin/views/background-image-editor.php:6
+#: admin/views/background-image-editor.php:41
+#: admin/views/background-image-editor.php:76
+msgid "Clear"
+msgstr ""
+
+#: admin/views/plugin-settings.php:46
+msgid "Clear all cache now"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:243
+msgid "Click"
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:193
+#: admin/views/background-image-editor.php:12
+#: admin/views/background-image-editor.php:47 admin/views/panel.php:10
+msgid "Click to add image"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:271
+msgid "Close Panel Duration"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:467
+msgid "Close Panel Video Action"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:250
+msgid "Close Panels On Mouse Out"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:929
+msgid "Comments"
+msgstr ""
+
+#: admin/views/layer-settings.php:5
+msgid "Content"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:885
+msgid "Content from posts"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:880
+#: admin/views/settings-editor.php:10
+msgid "Content Type"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1039
+msgid "Contributor"
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:221
+msgid ""
+"Could not retrieve add-ons' information from the server. Please try again "
+"later."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:330
+msgid ""
+"Could not retrieve the add-on's information from the server. Please try "
+"again later."
+msgstr ""
+
+#: admin/views/accordion.php:54
+msgid "Create"
+msgstr ""
+
+#: admin/views/accordions.php:118
+msgid "Create New Accordion"
+msgstr ""
+
+#: admin/views/accordions.php:73 admin/views/accordions.php:110
+msgid "Created"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:144
+msgid "Custom"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:216
+#: includes/class-accordion-slider-settings.php:794
+#: admin/views/layer-settings.php:143
+msgid "Custom Class"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:884
+msgid "Custom Content"
+msgstr ""
+
+#: admin/views/accordions.php:46
+msgid "Custom CSS"
+msgstr ""
+
+#: admin/views/layers-editor.php:69
+msgid "custom CSS"
+msgstr ""
+
+#: admin/views/accordions.php:40
+msgid "Custom CSS & JS"
+msgstr ""
+
+#: admin/views/accordions.php:55
+msgid "Custom JS"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:928
+msgid "Date"
+msgstr ""
+
+#: admin/views/add-ons.php:45
+msgid "Deactivate"
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:193
+msgid "Deactivated"
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:192
+msgid "Deactivating..."
+msgstr ""
+
+#: admin/views/accordions-row.php:22 admin/views/layers-editor.php:22
+msgid "Delete"
+msgstr ""
+
+#: admin/views/layers-editor.php:22
+msgid "Delete Layer"
+msgstr ""
+
+#: admin/views/accordions.php:61
+msgid "Delete the custom CSS & JS, and remove this note."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:940
+msgid "Descending"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:274
+msgid ""
+"Determines the duration in milliseconds for the closing animation of the "
+"panel."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:267
+msgid ""
+"Determines the duration in milliseconds for the opening animation of the "
+"panel."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:253
+msgid ""
+"Determines whether the opened panel closes or remains open when the mouse "
+"pointer is moved away."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:734
+#: admin/views/layer-settings.php:92
+msgid "Display"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:715
+msgid "DIV"
+msgstr ""
+
+#: admin/views/layers-editor.php:15
+msgid "DIV Layer"
+msgstr ""
+
+#: admin/views/accordions.php:14
+msgid "Documentation"
+msgstr ""
+
+#: admin/views/accordion.php:18
+msgid "Don't show this again."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:808
+#: includes/class-accordion-slider-settings.php:839
+msgid "Down"
+msgstr ""
+
+#: admin/views/accordions-row.php:23 admin/views/layers-editor.php:23
+msgid "Duplicate"
+msgstr ""
+
+#: admin/views/layers-editor.php:23
+msgid "Duplicate Layer"
+msgstr ""
+
+#: admin/views/accordion.php:165
+msgid ""
+"Each breakpoint allows you to set the width of the window for which the "
+"breakpoint will apply, and then add several settings which will override the "
+"global settings."
+msgstr ""
+
+#: admin/views/accordions-row.php:20
+msgid "Edit"
+msgstr ""
+
+#: admin/views/accordion.php:2
+msgid "Edit Accordion"
+msgstr ""
+
+#: admin/views/add-on.php:24
+msgid "Edit license key"
+msgstr ""
+
+#: admin/views/accordion.php:45
+msgid "Empty Panel"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:500
+msgid "End Video Action"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:919
+msgid "Exclude"
+msgstr ""
+
+#: admin/views/accordions-row.php:24
+msgid "Export"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:804
+#: includes/class-accordion-slider-settings.php:835
+msgid "Fade"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:425
+msgid "Fade Out Background"
+msgstr ""
+
+#: admin/views/flickr-panel-settings.php:54
+msgid "First, you need to request an API key"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:887
+msgid "Flickr images"
+msgstr ""
+
+#: admin/views/accordion.php:44 admin/views/panel.php:17
+msgid "Flickr Panels"
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:196
+msgid "Flickr panels"
+msgstr ""
+
+#: admin/views/layers-editor.php:69
+msgid "for it."
+msgstr ""
+
+#: admin/views/accordions.php:14
+msgid ""
+"For quick usage instructions, please see the video tutorials below. For more "
+"detailed instructions, please see the"
+msgstr ""
+
+#: admin/views/accordion.php:43 admin/views/panel.php:15
+msgid "Gallery Panels"
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:195
+msgid "Gallery panels"
+msgstr ""
+
+#: admin/views/accordions.php:11
+msgid "Getting started"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:724
+msgid "H1"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:725
+msgid "H2"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:726
+msgid "H3"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:727
+msgid "H4"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:728
+msgid "H5"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:729
+msgid "H6"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:712
+msgid "Heading"
+msgstr ""
+
+#: admin/views/layers-editor.php:17
+msgid "Heading Layer"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:720
+#: admin/views/layer-settings.php:19
+msgid "Heading Type"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:125
+#: includes/class-accordion-slider-settings.php:763
+#: admin/views/layer-settings.php:139
+msgid "Height"
+msgstr ""
+
+#: admin/views/flickr-panel-settings.php:54
+msgid "here"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1023
+msgid "Hide <i>Getting Started</i> info"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:850
+#: admin/views/layer-settings.php:200
+msgid "Hide Delay"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:856
+#: admin/views/layer-settings.php:204
+msgid "Hide Duration"
+msgstr ""
+
+#: admin/views/background-image-editor.php:111 admin/views/html-editor.php:26
+#: admin/views/layers-editor.php:78
+msgid "Hide dynamic tags"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1028
+msgid "Hide image size warning"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:519
+msgid "Hide Image Title"
+msgstr ""
+
+#: admin/views/accordion.php:118 admin/views/accordion.php:161
+#: admin/views/background-image-editor.php:99
+#: admin/views/custom-panel-settings.php:11 admin/views/export-window.php:16
+#: admin/views/flickr-panel-settings.php:50
+#: admin/views/gallery-panel-settings.php:11 admin/views/html-editor.php:16
+#: admin/views/import-window.php:20 admin/views/layers-editor.php:58
+#: admin/views/posts-panel-settings.php:125
+msgid "Hide info"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1018
+msgid "Hide inline info"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:844
+#: admin/views/layer-settings.php:196
+msgid "Hide Offset"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:831
+#: admin/views/layer-settings.php:185
+msgid "Hide Transition"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:161
+#: includes/class-accordion-slider-settings.php:769
+#: admin/views/layer-settings.php:103
+msgid "Horizontal"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:242
+msgid "Hover"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://bqworks.net"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://bqworks.net/accordion-slider/"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:968
+#: admin/views/accordions.php:70 admin/views/accordions.php:107
+#: admin/views/flickr-panel-settings.php:26
+msgid "ID"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:246
+msgid ""
+"If set to 'Hover', the panels will be opened by moving the mouse pointer "
+"over them; if set to 'Click', the panels will open when clicked. Can also be "
+"set to 'never' to disable the opening of the panels."
+msgstr ""
+
+#: admin/views/accordions.php:30
+#, php-format
+msgid ""
+"If you need assistance with using the plugin, you can ask in the <a "
+"href=\"%s\">plugin's public forum</a>. Private and priority support is "
+"available for users that have at least one valid add-on license."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:645
+msgid ""
+"If you want to open a different image or other content, you need to specify "
+"the custom content in the <i>Background Image</i> editor, in the <i>Link</i> "
+"field."
+msgstr ""
+
+#: admin/views/accordions.php:12
+msgid ""
+"If you want to reproduce one of the examples showcased online, you can "
+"easily import those examples into your own Accordion Slider installation."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:713
+msgid "Image"
+msgstr ""
+
+#: admin/views/layers-editor.php:16
+msgid "Image Layer"
+msgstr ""
+
+#: admin/views/accordion.php:41
+msgid "Image Panels"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:886
+msgid "Images from post's gallery"
+msgstr ""
+
+#: admin/views/import-window.php:9
+msgid "Import"
+msgstr ""
+
+#: admin/views/accordions.php:119
+msgid "Import Accordion"
+msgstr ""
+
+#: admin/views/flickr-panel-settings.php:55
+msgid ""
+"In the <i>ID</i> field you need to enter the id of the set or the id of the "
+"username, depending on the <i>Load by</i> selection."
+msgstr ""
+
+#: admin/views/html-editor.php:19
+msgid "In the field above you can add raw HTML content."
+msgstr ""
+
+#: admin/views/import-window.php:23
+msgid ""
+"In the field above you need to copy the new accordion's data, as it was "
+"exported. Then, click the <i>Import</i> button."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:918
+msgid "Include"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:401
+msgid ""
+"Indicates if the accordion will respond to keyboard input only if the "
+"accordion has focus."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:393
+msgid "Indicates if the accordion will respond to keyboard input."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:367
+msgid "Indicates if the accordion will respond to mouse wheel input."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:329
+msgid "Indicates if the autoplay will be enabled."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:359
+msgid "Indicates if the autoplay will be paused when the accordion is hovered."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:516
+msgid ""
+"Indicates if the background images will be loaded only when they are visible."
+" Images from accordion pages that are not visible, will not be loaded."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:451
+msgid ""
+"Indicates if the links specified to the background images will be opened in "
+"a lightbox."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:428
+msgid ""
+"Indicates if the main image background will be faded out when the "
+"opened/alternative background fades in."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:185
+msgid ""
+"Indicates if the panels will be overlapped. If set to false, the panels will "
+"have their width or height set so that they are next to each other, but not "
+"overlapped."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:213
+msgid "Indicates if the panels will be randomized."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:171
+msgid "Indicates if the panels will have a drop shadow effect."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:522
+msgid ""
+"Indicates if the title tag will be removed from images in order to prevent "
+"the title to show up in a tooltip when the image is hovered."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:436
+msgid "Indicates if the touch swipe functionality will be enabled."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:281
+msgid "Indicates the duration of the page scrolling animation."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:321
+msgid "Indicates the easing type of the page scrolling animation."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:192
+msgid ""
+"Indicates the number of panels visible per page. If set to -1, all the "
+"panels will be displayed on one page."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1015
+msgid ""
+"Indicates the time interval after which a slider's cache will expire. If the "
+"cache of a slider has expired, the slider will be rendered again and cached "
+"the next time it is viewed."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1030
+msgid ""
+"Indicates whether a warning will be displayed if the size of the background "
+"images is smaller than the size of the panels."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1025
+msgid ""
+"Indicates whether the <i>Getting Started</i> information will be displayed "
+"in the <i>All Accordions</i> page, above the list of accordions. This "
+"setting will be disabled if the <i>Close</i> button is clicked in the "
+"information box."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1020
+msgid ""
+"Indicates whether the inline information will be displayed in admin panels "
+"and wherever it's available."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:206
+msgid ""
+"Indicates which page will be opened when the accordion loads, if the panels "
+"are displayed on more than one page."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:199
+msgid ""
+"Indicates which panel will be opened when the accordion loads (0 for the "
+"first panel, 1 for the second panel, etc.). If set to -1, no panel will be "
+"opened."
+msgstr ""
+
+#: admin/views/add-ons.php:27
+msgid "Install"
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:187
+msgid "Installing the add-on..."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:390
+#: includes/class-accordion-slider-settings.php:614
+msgid "Keyboard"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:398
+msgid "Keyboard Only On Focus"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:406
+msgid "Keyboard Target"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:513
+msgid "Lazy Loading"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:805
+#: includes/class-accordion-slider-settings.php:836
+msgid "Left"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:448
+#: includes/class-accordion-slider-settings.php:639
+msgid "Lightbox"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:946
+#: includes/class-accordion-slider-settings.php:974
+#: admin/views/flickr-panel-settings.php:34
+#: admin/views/posts-panel-settings.php:109
+msgid "Limit"
+msgstr ""
+
+#: admin/views/background-image-editor.php:76 admin/views/layer-settings.php:57
+msgid "Link"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:526
+msgid "Link Target"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:958
+#: admin/views/flickr-panel-settings.php:11
+msgid "Load By"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:998
+msgid "Load stylesheets"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1008
+msgid "Load unminified scripts"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:135
+msgid ""
+"Makes the accordion responsive. The accordion can be responsive even if the "
+"Width and/or Height options are set to fixed values. In this situation, the "
+"Width and Height will act as the maximum width and height of the accordion."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:904
+#: admin/views/posts-panel-settings.php:49
+msgid "Match"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:231
+msgid "Max Opened Panel Size"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:661
+msgid "Miscellaneous"
+msgstr ""
+
+#: admin/views/accordions.php:74 admin/views/accordions.php:111
+msgid "Modified"
+msgstr ""
+
+#: admin/views/add-on.php:14
+msgid "More details"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:257
+msgid "Mouse Delay"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:364
+#: includes/class-accordion-slider-settings.php:605
+msgid "Mouse Wheel"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:371
+msgid "Mouse Wheel Sensitivity"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:378
+msgid "Mouse Wheel Target"
+msgstr ""
+
+#: admin/views/accordions.php:71 admin/views/accordions.php:108
+msgid "Name"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:244
+msgid "Never"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:505
+msgid "Next Panel"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:357
+#: includes/class-accordion-slider-settings.php:461
+#: includes/class-accordion-slider-settings.php:483
+msgid "None"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:344
+msgid "Normal"
+msgstr ""
+
+#: admin/views/add-ons.php:20
+msgid "Not available"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1003
+msgid "On all pages"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1002
+msgid "On homepage"
+msgstr ""
+
+#: admin/views/flickr-panel-settings.php:53
+msgid ""
+"One <i>Flickr</i> panel in the admin area will dynamically generate multiple "
+"panels in the published accordion (one panel for each Flickr image loaded), "
+"based on the set parameters."
+msgstr ""
+
+#: admin/views/gallery-panel-settings.php:14
+msgid ""
+"One <i>Gallery</i> panel in the admin area will dynamically generate "
+"multiple panels in the published accordion (one panel for each image from "
+"the <i>[gallery]</i> shortcode)."
+msgstr ""
+
+#: admin/views/posts-panel-settings.php:128
+msgid ""
+"One <i>Posts</i> panel in the admin area will dynamically generate multiple "
+"panels in the published accordion (one panel for each loaded post), based on "
+"the set parameters."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:264
+msgid "Open Panel Duration"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:238
+msgid "Open Panel On"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:456
+msgid "Open Panel Video Action"
+msgstr ""
+
+#: admin/views/background-image-editor.php:41
+msgid "Opened Background Image"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:224
+msgid "Opened Panel Size"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:936
+#: admin/views/posts-panel-settings.php:94
+msgid "Order"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:924
+#: admin/views/posts-panel-settings.php:79
+msgid "Order By"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:157
+msgid "Orientation"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:787
+msgid "Padding"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:383
+#: includes/class-accordion-slider-settings.php:411
+msgid "Page"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:278
+msgid "Page Scroll Duration"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:285
+msgid "Page Scroll Easing"
+msgstr ""
+
+#: admin/views/accordions.php:14
+msgid "page."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:382
+#: includes/class-accordion-slider-settings.php:410
+msgid "Panel"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:175
+msgid "Panel Distance"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:182
+msgid "Panel Overlap"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:711
+msgid "Paragraph"
+msgstr ""
+
+#: admin/views/layers-editor.php:18
+msgid "Paragraph Layer"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:532
+msgid "Parent"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:355
+msgid "Pause"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:471
+msgid "Pause Video"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:489
+msgid "Pause Video Action"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:460
+msgid "Play Video"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:478
+msgid "Play Video Action"
+msgstr ""
+
+#: admin/views/edit-license-key.php:5 admin/views/install-add-on.php:5
+msgid "Please enter the license key here."
+msgstr ""
+
+#: admin/views/plugin-settings.php:2
+msgid "Plugin Settings"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:745
+#: admin/views/layer-settings.php:124
+msgid "Position"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:892
+#: admin/views/posts-panel-settings.php:3
+msgid "Post Types"
+msgstr ""
+
+#: admin/views/accordion.php:42 admin/views/panel.php:13
+msgid "Posts Panels"
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:194
+msgid "Posts panels"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:781
+msgid "Preset Styles"
+msgstr ""
+
+#: admin/views/layer-settings.php:111
+msgid "Preset styles"
+msgstr ""
+
+#: admin/views/accordion.php:56 admin/views/accordions-row.php:21
+msgid "Preview"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:931
+msgid "Random"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:506
+msgid "Replay Video"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:132
+msgid "Responsive"
+msgstr ""
+
+#. Description of the plugin
+msgid "Responsive and touch-enabled accordion slider."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:139
+msgid "Responsive Mode"
+msgstr ""
+
+#: admin/views/layer-settings.php:61
+msgid "Retina"
+msgstr ""
+
+#: admin/views/background-image-editor.php:31
+#: admin/views/background-image-editor.php:66
+msgid "Retina Source:"
+msgstr ""
+
+#: admin/views/background-image-editor.php:157 admin/views/html-editor.php:102
+#: admin/views/layers-editor.php:154
+msgid ""
+"Returns the value from a custom field. The <i>name</i> parameter indicates "
+"the name of the custom field."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:806
+#: includes/class-accordion-slider-settings.php:837
+msgid "Right"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:788
+msgid "Round Corners"
+msgstr ""
+
+#: admin/views/accordion.php:166 admin/views/export-window.php:20
+#: admin/views/gallery-panel-settings.php:17 admin/views/import-window.php:24
+#: admin/views/layers-editor.php:63 admin/views/layers-editor.php:71
+#: admin/views/posts-panel-settings.php:132
+msgid "See the video tutorial"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:530
+msgid "Self"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:962
+msgid "Set ID"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:443
+msgid ""
+"Sets how many pixels the distance of the swipe gesture needs to be in order "
+"to trigger a page change."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:374
+msgid ""
+"Sets how sensitive the accordion will be to mouse wheel input. Lower values "
+"indicate stronger sensitivity."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:153
+msgid ""
+"Sets the aspect ratio of the accordion. The accordion will set its height "
+"depending on what value its width has, so that this ratio is maintained. For "
+"this reason, the set 'Height' might be overridden. This property can be used "
+"only when 'Responsive Mode' is set to 'Custom'. When it's set to 'Auto', the "
+"'Aspect Ratio' needs to remain -1."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:260
+msgid ""
+"Sets the delay in milliseconds between the movement of the mouse pointer and "
+"the opening of the panel. Setting a delay ensures that panels are not opened "
+"if the mouse pointer only moves over them without an intent to open the "
+"panel."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:336
+msgid "Sets the delay, in milliseconds, of the autoplay cycle."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:347
+msgid ""
+"Sets the direction in which the panels will be opened. Can be set to "
+"'Normal' (ascending order) or 'Backwards' (descending order)."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:178
+msgid ""
+"Sets the distance between consecutive panels. Can be set to a percentage or "
+"fixed value."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:421
+msgid "Sets the duration, in milliseconds, of the transition effect."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:128
+msgid ""
+"Sets the height of the accordion. Can be set to a fixed value, like 400 "
+"(indicating 400 pixels). It's not recommended to set this to a percentage "
+"value, and it's not usually needed, as the accordion will be responsive even "
+"with a fixed value set for the height."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:535
+msgid "Sets the location where the slide links will be opened."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:234
+msgid ""
+"Sets the maximum allowed size of the opened panel. This should be used when "
+"the 'Opened Panel Size' is set to 'max', because sometimes the maximum size "
+"of the panel might be too big and we want to set a limit. The property can "
+"be set to a percentage (of the total size of the accordion) or to a fixed "
+"value."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:164
+msgid "Sets the orientation of the panels."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:227
+msgid ""
+"Sets the size (width if the accordion's Orientation is Horizontal; height if "
+"the accordion's Orientation is Vertical) of the opened panel. Possible "
+"values are: 'max', which will open the panel to its maximum size, so that "
+"all the inner content is visible, a percentage value, like '50%', which "
+"indicates the percentage of the total size (width or height, depending on "
+"the Orientation) of the accordion, or a fixed value."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:121
+msgid ""
+"Sets the width of the accordion. Can be set to a fixed value, like 900 "
+"(indicating 900 pixels), or to a percentage value, like 100%. In order to "
+"make the accordion responsive, it's not necessary to use percentage values. "
+"More about this in the description of the Responsive option."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1041
+msgid ""
+"Sets what category of users will have access to the plugin's admin area."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:413
+msgid ""
+"Sets what elements will be targeted by the keyboard input. Can be set to "
+"'Panel' or 'Page'. Setting it to 'Panel' will indicate that the panels will "
+"be scrolled, while setting it to 'Page' indicate that the pages will be "
+"scrolled."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:385
+msgid ""
+"Sets what elements will be targeted by the mouse wheel input. Can be set to "
+"'Panel' or 'Page'. Setting it to 'Panel' will indicate that the panels will "
+"be scrolled, while setting it to 'Page' indicate that the pages will be "
+"scrolled."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:509
+msgid ""
+"Sets what the accordion will do when a video ends. Can be set to 'Start "
+"Autoplay', 'Next Panel', 'Replay Video' or 'None'."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:496
+msgid ""
+"Sets what the accordion will do when a video is paused. Can be set to 'Start "
+"Autoplay' or 'None'."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:485
+msgid ""
+"Sets what the accordion will do when a video starts playing. Can be set to "
+"'Stop Autoplay' or 'None'."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:474
+msgid ""
+"Sets what the video will do when the panel is closed. Can be set to 'Pause "
+"Video' or 'Stop Video'."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:463
+msgid ""
+"Sets what the video will do when the panel is opened. Can be set to 'Play "
+"Video' or 'None'."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:168
+msgid "Shadow"
+msgstr ""
+
+#: admin/views/accordions.php:72 admin/views/accordions.php:109
+msgid "Shortcode"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:819
+#: admin/views/layer-settings.php:175
+msgid "Show Delay"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:825
+#: admin/views/layer-settings.php:179
+msgid "Show Duration"
+msgstr ""
+
+#: admin/views/background-image-editor.php:110 admin/views/html-editor.php:25
+#: admin/views/layers-editor.php:77
+msgid "Show dynamic tags"
+msgstr ""
+
+#: admin/views/accordion.php:117 admin/views/accordion.php:160
+#: admin/views/background-image-editor.php:98
+#: admin/views/custom-panel-settings.php:10 admin/views/export-window.php:15
+#: admin/views/flickr-panel-settings.php:49
+#: admin/views/gallery-panel-settings.php:10 admin/views/html-editor.php:15
+#: admin/views/import-window.php:19 admin/views/layers-editor.php:57
+#: admin/views/posts-panel-settings.php:124
+msgid "Show info"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:813
+#: admin/views/layer-settings.php:171
+msgid "Show Offset"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:800
+#: admin/views/layer-settings.php:160
+msgid "Show Transition"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:210
+msgid "Shuffle"
+msgstr ""
+
+#: admin/views/accordion.php:16
+msgid ""
+"Some of the background images are smaller than the size of the panel, so "
+"they might appear blurred when viewed in the accordion."
+msgstr ""
+
+#: admin/views/layer-settings.php:44
+msgid "Source"
+msgstr ""
+
+#: admin/views/background-image-editor.php:19
+#: admin/views/background-image-editor.php:54
+msgid "Source:"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:493
+#: includes/class-accordion-slider-settings.php:504
+msgid "Start Autoplay"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:203
+msgid "Start Page"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:196
+msgid "Start Panel"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:356
+msgid "Stop"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:482
+msgid "Stop Autoplay"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:472
+msgid "Stop Video"
+msgstr ""
+
+#: admin/views/install-add-on.php:6
+msgid "Submit"
+msgstr ""
+
+#: admin/views/accordions.php:29
+msgid "Support"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:623
+msgid "Swap Background"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:418
+msgid "Swap Background Duration"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:898
+#: admin/views/posts-panel-settings.php:18
+msgid "Taxonomies"
+msgstr ""
+
+#: admin/views/background-image-editor.php:174 admin/views/html-editor.php:124
+#: admin/views/layers-editor.php:176
+msgid "The <i>alt</i> text of the gallery image."
+msgstr ""
+
+#: admin/views/background-image-editor.php:127 admin/views/html-editor.php:47
+#: admin/views/layers-editor.php:99
+msgid "The <i>alt</i> text of the post's featured image."
+msgstr ""
+
+#: admin/views/background-image-editor.php:102
+msgid ""
+"The <i>Background Image</i> represents the main image that will be visible "
+"when the accordion loads."
+msgstr ""
+
+#: admin/views/layers-editor.php:67
+msgid ""
+"The <i>Display</i> setting from the <i>Appearance</i> tab allows you to "
+"specify if the layer will be permanently visible inside the panel, if it "
+"will appear only when the panel is opened, or if it will appear when the "
+"panel is closed."
+msgstr ""
+
+#: admin/views/background-image-editor.php:104
+msgid ""
+"The <i>Link</i> is optional and will be added either for the <i>Background "
+"Image</i>, or for the <i>Opened Background Image</i> if one was added."
+msgstr ""
+
+#: admin/views/posts-panel-settings.php:130
+msgid ""
+"The <i>Match</i> parameter indicates whether, in order to be fetched, a post "
+"needs to have all the selected taxonomy terms, or at least one will be "
+"sufficient. The <i>With selected</i> parameter indicates whether posts that "
+"include the selected taxonomy terms will be loaded, or if posts that don't "
+"include them will be loaded."
+msgstr ""
+
+#: admin/views/background-image-editor.php:103
+msgid ""
+"The <i>Opened Background Image</i> is optional and represents the image that "
+"will fade in over the main image when the panel is opened."
+msgstr ""
+
+#: admin/views/layers-editor.php:68
+msgid ""
+"The <i>Position</i> setting allows you to set the reference point for the "
+"layer's horizontal and vertical position. The <i>Horizontal</i> and <i>"
+"Vertical</i> settings can be set to fixed or percentage values. Also, in "
+"order to center a layer, you can set the <i>Horizontal</i> and/or <i>"
+"Vertical</i> settings to <i>center</i>. The <i>Width</i> and <i>Height</i> "
+"settings can be set to fixed or percentage values, or to <i>auto</i>."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:617
+msgid "The add-on is already activated."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:666
+msgid "The add-on is already deactivated."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:578
+msgid "The add-on is already installed."
+msgstr ""
+
+#: admin/views/background-image-editor.php:142 admin/views/html-editor.php:62
+#: admin/views/layers-editor.php:114
+msgid "The caption of the post's featured image."
+msgstr ""
+
+#: admin/views/html-editor.php:166 admin/views/layers-editor.php:218
+msgid "The date of the Flickr image."
+msgstr ""
+
+#: admin/views/background-image-editor.php:201 admin/views/html-editor.php:156
+#: admin/views/layers-editor.php:208
+msgid "The description of the Flickr image."
+msgstr ""
+
+#: admin/views/background-image-editor.php:184 admin/views/html-editor.php:134
+#: admin/views/layers-editor.php:186
+msgid "The description of the gallery image."
+msgstr ""
+
+#: admin/views/background-image-editor.php:137 admin/views/html-editor.php:57
+#: admin/views/layers-editor.php:109
+msgid "The description of the post's featured image."
+msgstr ""
+
+#: admin/views/accordions.php:13
+msgid ""
+"The examples can be found in the <i>examples</i> folder, which is included "
+"in the plugin's folder, and can be imported using the <i>Import Accordion</i>"
+" button below."
+msgstr ""
+
+#: admin/views/html-editor.php:97 admin/views/layers-editor.php:149
+msgid "The first category that the post is assigned to."
+msgstr ""
+
+#: admin/views/html-editor.php:146 admin/views/layers-editor.php:198
+msgid ""
+"The Flickr image, as an <i>img</i> HTML element. It accepts an optional "
+"parameter to specify the size of the image: [as_image.thumbnail]. Accepted "
+"sizes are: <i>full</i>, <i>large</i>, <i>medium</i>, <i>thumbnail</i>. The "
+"default value is <i>full</i>."
+msgstr ""
+
+#: admin/views/html-editor.php:114 admin/views/layers-editor.php:166
+msgid ""
+"The gallery image, as an <i>img</i> HTML element. It accepts an optional "
+"parameter to specify the size of the image: [as_image.thumbnail]. Accepted "
+"sizes are: <i>full</i>, <i>large</i>, <i>medium</i>, <i>thumbnail</i>. The "
+"default value is <i>full</i>."
+msgstr ""
+
+#: admin/views/flickr-panel-settings.php:56
+#: admin/views/gallery-panel-settings.php:16
+#: admin/views/posts-panel-settings.php:131
+msgid ""
+"The images and their data can be fetched through <i>dynamic tags</i>, which "
+"are enumerated in the Background, Layers and HTML editors."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:401
+msgid "The license key is expired."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:411
+msgid "The license key is not valid."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:407
+msgid "The license key is valid, but already used."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:395
+msgid "The license key is valid."
+msgstr ""
+
+#: admin/views/background-image-editor.php:206 admin/views/html-editor.php:161
+#: admin/views/layers-editor.php:213
+msgid "The link of the Flickr image."
+msgstr ""
+
+#: admin/views/background-image-editor.php:211 admin/views/html-editor.php:176
+#: admin/views/layers-editor.php:228
+msgid "The link to the profile of the image's owner."
+msgstr ""
+
+#: admin/views/posts-panel-settings.php:129
+msgid ""
+"The list of taxonomies will be refreshed every time the list of post types "
+"is updated."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:1005
+msgid ""
+"The plugin can detect the presence of the accordion in a post, page or "
+"widget, and will automatically load the necessary stylesheets. However, when "
+"the accordion is loaded in PHP code, like in the theme's header or another "
+"template file, you need to manually specify where the stylesheets should "
+"load. If you load the accordion only on the homepage, select <i>On "
+"homepage</i>, or if you load it in the header or another section that is "
+"visible on multiple pages, select <i>On all pages</i>."
+msgstr ""
+
+#: admin/views/html-editor.php:92 admin/views/layers-editor.php:144
+msgid "The post's content."
+msgstr ""
+
+#: admin/views/html-editor.php:82 admin/views/layers-editor.php:134
+msgid "The post's date."
+msgstr ""
+
+#: admin/views/html-editor.php:87 admin/views/layers-editor.php:139
+msgid "The post's excerpt."
+msgstr ""
+
+#: admin/views/html-editor.php:37 admin/views/layers-editor.php:89
+msgid ""
+"The post's featured image, as an <i>img</i> HTML element. It accepts an "
+"optional parameter to specify the size of the image: [as_image.thumbnail]. "
+"Accepted sizes are: <i>full</i>, <i>large</i>, <i>medium</i>, <i>"
+"thumbnail</i>. The default value is <i>full</i>."
+msgstr ""
+
+#: admin/views/html-editor.php:72 admin/views/layers-editor.php:124
+msgid ""
+"The post's link, as an <i>anchor</i> HTML element, with the post's title as "
+"the text of the link."
+msgstr ""
+
+#: admin/views/background-image-editor.php:152 admin/views/html-editor.php:77
+#: admin/views/layers-editor.php:129
+msgid "The post's link."
+msgstr ""
+
+#: admin/views/background-image-editor.php:147 admin/views/html-editor.php:67
+#: admin/views/layers-editor.php:119
+msgid "The post's title."
+msgstr ""
+
+#: admin/views/export-window.php:19
+msgid ""
+"The text above represents the data of the accordion. Please copy the text "
+"and then paste it in the import accordion window, by clicking on the <i>"
+"Import Accordion</i> button in the <i>Accordion Slider</i> installation "
+"where you want to import the accordion."
+msgstr ""
+
+#: admin/views/background-image-editor.php:179 admin/views/html-editor.php:129
+#: admin/views/layers-editor.php:181
+msgid "The title of the gallery image."
+msgstr ""
+
+#: admin/views/background-image-editor.php:132 admin/views/html-editor.php:52
+#: admin/views/layers-editor.php:104
+msgid "The title of the post's featured image."
+msgstr ""
+
+#: admin/views/background-image-editor.php:196 admin/views/html-editor.php:151
+#: admin/views/layers-editor.php:203
+msgid ""
+"The URL of the Flickr image. It accepts an optional parameter to specify the "
+"size of the image: [as_image_src.thumbnail]. Accepted sizes are: <i>"
+"square</i>, <i>thumbnail</i>, <i>small</i>, <i>medium</i>, <i>medium_640</i>,"
+" <i>large</i>. The default value is <i>medium</i>."
+msgstr ""
+
+#: admin/views/background-image-editor.php:169 admin/views/html-editor.php:119
+#: admin/views/layers-editor.php:171
+msgid ""
+"The URL of the gallery image. It accepts an optional parameter to specify "
+"the size of the image: [as_image_src.thumbnail]. Accepted sizes are: <i>"
+"full</i>, <i>large</i>, <i>medium</i>, <i>thumbnail</i>. The default value "
+"is <i>full</i>."
+msgstr ""
+
+#: admin/views/background-image-editor.php:122 admin/views/html-editor.php:42
+#: admin/views/layers-editor.php:94
+msgid ""
+"The URL of the post's featured image. It accepts an optional parameter to "
+"specify the size of the image: [as_image_src.thumbnail]. Accepted sizes are: "
+"<i>full</i>, <i>large</i>, <i>medium</i>, <i>thumbnail</i>. The default "
+"value is <i>full</i>."
+msgstr ""
+
+#: admin/views/html-editor.php:171 admin/views/layers-editor.php:223
+msgid "The username of the image's owner."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:228
+msgid ""
+"There was an error retrieving add-ons' information from the server. Please "
+"try again later."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:341
+msgid ""
+"There was an error retrieving the add-on's information from the server. "
+"Please try again later."
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:381
+msgid "There was an error with the license key verification process."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:930
+msgid "Title"
+msgstr ""
+
+#: admin/views/background-image-editor.php:27
+#: admin/views/background-image-editor.php:62
+#: admin/views/background-image-editor.php:84
+msgid "Title:"
+msgstr ""
+
+#: admin/views/layers-editor.php:62
+msgid ""
+"To add a new layer, hover on the plus sign above and select a layer type."
+msgstr ""
+
+#: admin/views/add-ons.php:6
+msgid ""
+"To install an add-on, just click on the <em>Install</em> button and provide "
+"a license key. Information about licensing are provided in the <em>More "
+"details</em> link."
+msgstr ""
+
+#: admin/views/layers-editor.php:69
+msgid ""
+"To style the layer, you can select one or more of the <i>Preset Styles</i>, "
+"or assign it a <i>Custom Class</i> and add some"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:533
+msgid "Top"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:749
+msgid "Top Left"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:750
+msgid "Top Right"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:433
+#: includes/class-accordion-slider-settings.php:631
+msgid "Touch Swipe"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:440
+msgid "Touch Swipe Threshold"
+msgstr ""
+
+#: admin/views/layers-editor.php:70
+msgid "Troubleshooting chapter"
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:194
+msgid "Try again"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:707
+msgid "Type"
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:583
+msgid "Unable to connect to the filesystem."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:807
+#: includes/class-accordion-slider-settings.php:838
+msgid "Up"
+msgstr ""
+
+#: admin/views/accordion.php:54 admin/views/edit-license-key.php:6
+msgid "Update"
+msgstr ""
+
+#: admin/class-accordion-slider-add-ons.php:189
+msgid "Updating..."
+msgstr ""
+
+#: admin/views/add-ons.php:7
+msgid ""
+"Upon providing a license key, the add-on will be downloaded and installed "
+"automatically, but if plugin installation is restricted on your site, you "
+"can install the add-on manually."
+msgstr ""
+
+#: admin/views/background-image-editor.php:80
+msgid "URL:"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:963
+msgid "User ID"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:162
+#: includes/class-accordion-slider-settings.php:775
+#: includes/class-accordion-slider-settings.php:789
+#: admin/views/layer-settings.php:135
+msgid "Vertical"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:650
+#: includes/class-accordion-slider-settings.php:714
+msgid "Video"
+msgstr ""
+
+#: admin/views/layer-settings.php:77
+msgid "Video Embed/Code"
+msgstr ""
+
+#: admin/views/layers-editor.php:14
+msgid "Video Layer"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:189
+msgid "Visible Panels"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:740
+msgid "When closed"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:739
+msgid "When opened"
+msgstr ""
+
+#: admin/views/accordion.php:17
+msgid ""
+"When you select images to insert them into the panels, you can set their "
+"size from the right column of the Media Library window, as you can see in <a "
+"href=\"https://bqworks.net/accordion-slider/screencasts/#simple-accordion\" "
+"target=\"_blank\">this video</a> at 0:05."
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:786
+msgid "White"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:118
+#: includes/class-accordion-slider-settings.php:757
+#: admin/views/layer-settings.php:107
+msgid "Width"
+msgstr ""
+
+#: admin/views/breakpoint.php:6
+msgid "Window width:"
+msgstr ""
+
+#: includes/class-accordion-slider-settings.php:914
+#: admin/views/posts-panel-settings.php:64
+msgid "With selected"
+msgstr ""
+
+#: admin/class-accordion-slider-admin.php:199
+msgid "Yes"
+msgstr ""
+
+#: admin/views/accordions.php:26
+#, php-format
+msgid ""
+"You can extend the functionality of the plugin with the use of add-ons. By "
+"acquiring <a href=\"%s\">premium add-ons</a>, you also support the "
+"development of the plugin."
+msgstr ""
+
+#: admin/views/accordions.php:89
+msgid "You don't have saved accordions."
+msgstr ""
+
+#: admin/views/gallery-panel-settings.php:15
+msgid ""
+"You just need to drop the accordion slider shortcode in a post that contains "
+"a <i>[gallery]</i> shortcode, and the images from the <i>[gallery]</i> will "
+"automatically be loaded in the accordion. Then, if you want to hide the "
+"original gallery, you can add the <i>hide</i> attribute to the <i>[gallery]"
+"</i> shortcode: <i>[gallery ids=\"1,2,3\" hide=\"true\"]</i>."
+msgstr ""
+
+#: admin/views/accordions.php:41
+msgid ""
+"Your accordion sliders contain custom CSS and/or JavaScript. Please move "
+"this code in the Wordpress' CSS editor, in Customize, or a different place. "
+"Your current code will still work for now, but you won't be able to edit it. "
+"You can see your custom CSS/JS below."
+msgstr ""
