@@ -224,8 +224,8 @@ class BQW_Accordion_Slider_Admin {
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
 			$this->plugin_slug,
-			__( 'Accordion Slider', $this->plugin_slug ),
-			__( 'All Accordions', $this->plugin_slug ),
+			__( 'Accordion Slider', 'accordion-slider' ),
+			__( 'All Accordions', 'accordion-slider' ),
 			$access,
 			$this->plugin_slug,
 			array( $this, 'render_accordion_page' )
@@ -233,8 +233,8 @@ class BQW_Accordion_Slider_Admin {
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
 			$this->plugin_slug,
-			__( 'Add New Accordion', $this->plugin_slug ),
-			__( 'Add New', $this->plugin_slug ),
+			__( 'Add New Accordion', 'accordion-slider' ),
+			__( 'Add New', 'accordion-slider' ),
 			$access,
 			$this->plugin_slug . '-new',
 			array( $this, 'render_new_accordion_page' )
@@ -242,8 +242,8 @@ class BQW_Accordion_Slider_Admin {
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
 			$this->plugin_slug,
-			__( 'Plugin Settings', $this->plugin_slug ),
-			__( 'Plugin Settings', $this->plugin_slug ),
+			__( 'Plugin Settings', 'accordion-slider' ),
+			__( 'Plugin Settings', 'accordion-slider' ),
 			$access,
 			$this->plugin_slug . '-settings',
 			array( $this, 'render_plugin_settings_page' )
@@ -251,8 +251,8 @@ class BQW_Accordion_Slider_Admin {
 
 		$this->plugin_screen_hook_suffixes[] = add_submenu_page(
 			$this->plugin_slug,
-			__( 'Documentation', $this->plugin_slug ),
-			__( 'Documentation', $this->plugin_slug ),
+			__( 'Documentation', 'accordion-slider' ),
+			__( 'Documentation', 'accordion-slider' ),
 			$access,
 			$this->plugin_slug . '-documentation',
 			array( $this, 'render_documentation_page' )
