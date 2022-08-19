@@ -1541,6 +1541,10 @@ Single accordion page
 Plugin settings page
 ----------------------------------------------------------------------*/
 
+.plugin-settings p {
+    margin: 0;
+}
+
 .plugin-settings table {
 	max-width: 960px;
 	border-spacing: 0;
@@ -1573,6 +1577,10 @@ Plugin settings page
 	width: 50px;
 	margin-right: 10px;
 	text-align: center;
+}
+
+.clear-all-cache {
+	margin-top: 10px !important;
 }
 
 .clear-cache-spinner {
