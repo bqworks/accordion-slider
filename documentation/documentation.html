@@ -1503,6 +1503,34 @@ function change_image_url( $link_url, $accordion_id, $panel_index ) {
   }
 </pre>
 
+<h4 id="accordion_slider_restricted_pages">accordion_slider_restricted_pages</h4>
+  <p>
+    It allows you to hide the plugin's admin pages. For example, you could hide the 'Plugins Settings' page from 'Editors'.
+  </p>
+  <pre>
+  add_filter( 'accordion_slider_restricted_pages', 'restricted_pages' );
+
+  function restricted_pages( $restricted_pages ) {
+    $restricted_pages[] = 'accordion-slider-settings';
+
+    return $restricted_pages;
+  }
+  </pre>
+
+  <h4 id="accordion_slider_allowed_html">accordion_slider_allowed_html</h4>
+  <p>
+    It allows you to filter what HTML tags and attributes are allowed in the HTML/text areas.
+  </p>
+  <pre>
+  add_filter( 'accordion_slider_allowed_html', 'filter_allowed_html' );
+
+  function filter_allowed_html( $allowed_html ) {
+    $allowed_html[] = 'iframe' => array( 'src' => true, 'width' => true, 'height' => true );
+
+    return $allowed_html;
+  }
+  </pre>
+
   <h2 id="deep-linking">7. Deep Linking</h2>
   <p>
     Deep linking provides the possibility to link to a specific panel in the accordion. For this, you need to append a hashtag to the original URL of the page. The hashtag will contain the

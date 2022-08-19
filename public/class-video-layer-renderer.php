@@ -46,6 +46,8 @@ class BQW_AS_Video_Layer_Renderer extends BQW_AS_Layer_Renderer {
 			)
 		);
 
+		$allowed_html = apply_filters( 'accordion_slider_allowed_html', $allowed_html );
+
 		$content = wp_kses( $content, $allowed_html );
 
 		$content = str_replace( 'as-video' , 'as-video ' . $this->get_classes() , $content );

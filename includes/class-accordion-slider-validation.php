@@ -243,6 +243,8 @@ class BQW_Accordion_Slider_Validation {
 						)
 					);
 
+					$allowed_html = apply_filters( 'accordion_slider_allowed_html', $allowed_html );
+
 					$layer[ $name ] = wp_kses( $value, $allowed_html );
 				}
 			}
