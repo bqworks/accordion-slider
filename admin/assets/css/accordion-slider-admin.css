@@ -5,6 +5,10 @@ All accordions page
 	margin-top: 20px;
 }
 
+.new-accordion-buttons .import-accordion {
+	margin-left: 15px;
+}
+
 .accordions-list {
 	margin-top: 20px;
 }
