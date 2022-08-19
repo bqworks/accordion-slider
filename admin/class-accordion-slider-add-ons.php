@@ -136,8 +136,7 @@ class BQW_Accordion_Slider_Add_Ons {
 		$plugin_settings = BQW_Accordion_Slider_Settings::getPluginSettings();
 		$access = get_option( 'accordion_slider_access', $plugin_settings['access']['default_value'] );
 
-		$restricted_pages = array();
-		$restricted_pages = apply_filters( 'accordion_slider_restricted_pages' , $restricted_pages );
+		$restricted_pages = apply_filters( 'accordion_slider_restricted_pages' , array() );
 
 		if ( ! in_array( $this->plugin_slug . '-add-ons', $restricted_pages ) ) {
 			$this->add_ons_screen = add_submenu_page(
