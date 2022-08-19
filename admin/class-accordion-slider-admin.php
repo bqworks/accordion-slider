@@ -344,7 +344,7 @@ class BQW_Accordion_Slider_Admin {
 		$hide_image_size_warning = get_option( 'accordion_slider_hide_image_size_warning', $plugin_settings['hide_image_size_warning']['default_value'] );
 		$access = get_option( 'accordion_slider_access', $plugin_settings['access']['default_value'] );
 
-		if ( isset( $_POST['plugin_settings_update'] ) ) {
+		if ( isset( $_POST['plugin_settings_update'] ) && current_user_can( 'customize' ) ) {
 			check_admin_referer( 'plugin-settings-update', 'plugin-settings-nonce' );
 
 			if ( isset( $_POST['load_stylesheets'] ) ) {
@@ -464,7 +464,7 @@ class BQW_Accordion_Slider_Admin {
 		$accordion_data = BQW_Accordion_Slider_Validation::validate_accordion_slider_data( $data );
 		$id = $accordion_data['id'];
 
-		if ( ! wp_verify_nonce( $nonce, 'save-accordion' . $id ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'save-accordion' . $id ) || ! current_user_can( 'customize' ) ) {
 			die( 'This action was stopped for security purposes.' );
 		}
 
@@ -613,7 +613,7 @@ class BQW_Accordion_Slider_Admin {
 		$nonce = $_POST['nonce'];
 		$original_accordion_id = intval( $_POST['id'] );
 
-		if ( ! wp_verify_nonce( $nonce, 'duplicate-accordion' . $original_accordion_id ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'duplicate-accordion' . $original_accordion_id ) || ! current_user_can( 'customize' ) ) {
 			die( 'This action was stopped for security purposes.' );
 		}
 
@@ -645,7 +645,7 @@ class BQW_Accordion_Slider_Admin {
 		$nonce = $_POST['nonce'];
 		$id = intval( $_POST['id'] );
 
-		if ( ! wp_verify_nonce( $nonce, 'delete-accordion' . $id ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'delete-accordion' . $id ) || ! current_user_can( 'customize' )  ) {
 			die( 'This action was stopped for security purposes.' );
 		}
 
@@ -1210,7 +1210,7 @@ class BQW_Accordion_Slider_Admin {
 	public function ajax_clear_all_cache() {
 		$nonce = $_POST['nonce'];
 
-		if ( ! wp_verify_nonce( $nonce, 'clear-all-cache' ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'clear-all-cache' ) || ! current_user_can( 'customize' ) ) {
 			die( 'This action was stopped for security purposes.' );
 		}
 
