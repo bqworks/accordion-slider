@@ -140,6 +140,12 @@ class BQW_Accordion_Slider_Admin {
 			
 			wp_enqueue_style( $this->plugin_slug . '-video-js-style', plugins_url( 'public/assets/libs/video-js/video-js.min.css', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
 
+			$id = isset( $_GET['id'] ) ? intval( $_GET['id'] ) : -1;
+
+			if ( strpos( $screen->id, $this->plugin_slug . '-new' ) || $id !== -1 ) {
+				wp_enqueue_style( 'wp-codemirror' );
+			}
+
 			if ( get_option( 'accordion_slider_is_custom_css') == true ) {
 				wp_add_inline_style( $this->plugin_slug . '-plugin-style', stripslashes( get_option( 'accordion_slider_custom_css' ) ) );
 			}
@@ -180,6 +186,10 @@ class BQW_Accordion_Slider_Admin {
 			wp_enqueue_script( $this->plugin_slug . '-video-js-script', plugins_url( 'public/assets/libs/video-js/video.js', dirname( __FILE__ ) ), array(), BQW_Accordion_Slider::VERSION );
 
 			$id = isset( $_GET['id'] ) ? intval( $_GET['id'] ) : -1;
+
+			if ( strpos( $screen->id, $this->plugin_slug . '-new' ) || $id !== -1 ) {
+				wp_enqueue_code_editor( array( 'type' => 'text/html' ) );
+			}
 
 			wp_localize_script( $this->plugin_slug . '-admin-script', 'as_js_vars', array(
 				'admin' => admin_url( 'admin.php' ),

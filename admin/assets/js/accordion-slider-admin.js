@@ -1905,6 +1905,8 @@
 
 			this.$editor = $( '.html-editor' );
 
+			this.$editor.find( '.html-code' ).codeEditor();
+
 			this.$editor.find( '.close-x' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.save();
@@ -1918,7 +1920,7 @@
 		 * @since 1.0.0
 		 */
 		save: function() {
-			this.currentPanel.setData( 'html', this.$editor.find( 'textarea' ).val() );
+			this.currentPanel.setData( 'html', this.$editor.find( '.html-code' ).data('codeEditor').getValue() );
 		},
 
 		/**
@@ -1930,6 +1932,7 @@
 		 */
 		close: function() {
 			this.$editor.find( '.close-x' ).off( 'click' );
+			this.$editor.find( '.html-code' ).codeEditor( 'destroy' );
 
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
@@ -2753,6 +2756,11 @@
 			this.$viewportLayer.on( 'mousedown', function() {
 				that.triggerSelect();
 			});
+
+			// prevent link navigation for links inside layers
+			this.$viewportLayer.on( 'click', 'a', function( event ) {
+				event.preventDefault();
+			});
 		},
 
 		/**
@@ -3186,10 +3194,14 @@
 
 		this.text = this.data.createMode === 'new' ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
 
-		this.$layerSettings.find( 'textarea[name="text"]' ).on( 'input', function() {
-			that.text = $( this ).val();
-			that.$viewportLayer.html( that.text );
-		});
+		// initialize the code editor with a delay to prevent rendering issues
+		setTimeout(function() {
+			that.$layerSettings.find( '.div-layer-html-code' ).codeEditor()
+				.on( 'edit', function( event ) {
+					that.text = event.value;
+					that.$viewportLayer.html( that.text );
+				});
+		}, 1);
 	};
 
 	DivLayer.prototype.initViewportLayer = function() {
@@ -3207,7 +3219,7 @@
 
 	DivLayer.prototype.destroy = function() {
 		this.$layerSettings.find( 'textarea[name="text"]' ).off( 'input' );
-
+		this.$layerSettings.find( '.div-layer-html-code' ).codeEditor( 'destroy' );
 		Layer.prototype.destroy.call( this );
 	};
 
@@ -4165,6 +4177,104 @@
 		});
 
 		return result;
+	};
+
+})( jQuery );
+
+/*
+ * ======================================================================
+ * CodeEditor
+ * ======================================================================
+ */
+	
+;(function( $ ) {
+
+	var CodeEditor = function( instance, options = {} ) {
+
+		this.options = options;
+		this.$textarea = $( instance );
+		this.isCodeMirror = false;
+		this.codeMirror = null;
+
+		this.init();
+	};
+
+	CodeEditor.prototype = {
+
+		init: function() {
+			var that = this;
+
+			this.settings = $.extend( {}, this.defaults, this.options );
+
+			if ( typeof wp.codeEditor.initialize !== 'undefined' ) {
+				var cm = wp.codeEditor.initialize( this.$textarea, this.setting );
+
+				this.codeMirror = cm.codemirror;
+				this.isCodeMirror = true;
+
+				this.codeMirror.on( 'change', function() {
+					that.trigger({ type: 'edit', value: that.codeMirror.getValue() });
+				});
+			} else {
+				this.$textarea.on( 'input', function() {
+					that.trigger({ type: 'edit', value: that.$textarea.val() });
+				});
+			}
+		},
+
+		getValue: function() {
+			return this.isCodeMirror === true ? this.codeMirror.getValue() : this.$textarea.val();
+		},
+
+		// Attach an event handler to the textarea
+		on: function( type, callback ) {
+			return this.$textarea.on( type, callback );
+		},
+
+		// Detach an event handler to the textarea
+		off: function( type ) {
+			return this.$textarea.off( type );
+		},
+
+		// Trigger an event on the textarea
+		trigger: function( data ) {
+			return this.$textarea.triggerHandler( data );
+		},
+
+		destroy: function() {
+			this.$textarea.removeData( 'codeEditor' );
+
+			if ( this.isCodeMirror === true ) {
+				this.codeMirror.toTextArea();
+				this.codeMirror.off( 'change' );
+			} else {
+				this.$textarea.off( 'input' );
+			}
+		},
+
+		defaults: {
+			
+		}
+	};
+
+	$.fn.codeEditor = function( options ) {
+		var args = Array.prototype.slice.call( arguments, 1 );
+		
+		return this.each(function() {
+			if ( typeof $( this ).data( 'codeEditor' ) === 'undefined' ) {
+				var newInstance = new CodeEditor( this, options );
+
+				$( this ).data( 'codeEditor', newInstance );
+			} else if ( typeof options !== 'undefined' ) {
+				var	currentInstance = $( this ).data( 'codeEditor' );
+
+				if ( typeof currentInstance[ options ] === 'function' ) {
+					currentInstance[ options ].apply( currentInstance, args );
+				} else {
+					$.error( options + ' does not exist in codeEditor.' );
+				}
+			}
+		});
 	};
 
 })( jQuery );

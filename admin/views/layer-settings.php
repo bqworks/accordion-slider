@@ -70,7 +70,7 @@
 				<?php
 					} else if ( $layer_type === 'div' ) {
 				?>
-						<textarea name="text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : '<h3>New layer title</h3><p>New layer description</p>'; ?></textarea>
+						<textarea class="div-layer-html-code" name="text"><?php echo isset( $layer[ 'text' ] ) ? stripslashes( esc_textarea( $layer[ 'text' ] ) ) : '<h3>New layer title</h3><p>New layer description</p>'; ?></textarea>
 				<?php
 					} else if ( $layer_type === 'video' ) {
 				?>
