@@ -3184,6 +3184,20 @@
 	
 	var DivLayer = function( data ) {
 		Layer.call( this, data );
+
+		var that = this;
+
+		this.on( 'select', function() {
+			setTimeout( function() {
+				that.$layerSettings.find( '.div-layer-html-code' ).codeEditor( 'refresh' );
+			}, 1 );
+		});
+
+		this.$layerSettings.find( '.layer-settings-tab-label' ).on( 'click', function() {
+			setTimeout( function() {
+				that.$layerSettings.find( '.div-layer-html-code' ).codeEditor( 'refresh' );
+			}, 1 );
+		});
 	};
 
 	DivLayer.prototype = Object.create( Layer.prototype );
@@ -3194,14 +3208,11 @@
 
 		this.text = this.data.createMode === 'new' ? this.$layerSettings.find( 'textarea[name="text"]' ).val() : this.data.text;
 
-		// initialize the code editor with a delay to prevent rendering issues
-		setTimeout(function() {
-			that.$layerSettings.find( '.div-layer-html-code' ).codeEditor()
-				.on( 'edit', function( event ) {
-					that.text = event.value;
-					that.$viewportLayer.html( that.text );
-				});
-		}, 1);
+		that.$layerSettings.find( '.div-layer-html-code' ).codeEditor()
+			.on( 'edit', function( event ) {
+				that.text = event.value;
+				that.$viewportLayer.html( that.text );
+			});
 	};
 
 	DivLayer.prototype.initViewportLayer = function() {
@@ -4239,6 +4250,12 @@
 		// Trigger an event on the textarea
 		trigger: function( data ) {
 			return this.$textarea.triggerHandler( data );
+		},
+
+		refresh: function() {
+			if ( this.isCodeMirror === true ) {
+				this.codeMirror.refresh();
+			}
 		},
 
 		destroy: function() {
