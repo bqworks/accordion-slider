@@ -586,6 +586,10 @@ Single accordion page
 	min-height: 300px;
 }
 
+.import-window .save {
+	margin-top: 10px;
+}
+
 /* Background editor
 --------------------------------------------------*/
 .background-image-editor .modal-window {
