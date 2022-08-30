@@ -1436,7 +1436,7 @@ Single accordion page
 
 .info-content,
 .dynamic-tags {
-	display: none;
+	display: none !important;
 }
 
 .show-hide-info,
@@ -1477,7 +1477,7 @@ Single accordion page
 
 .show-hide-info:checked ~ .info-content,
 .show-hide-dynamic-tags:checked ~ .dynamic-tags {
-	display: block;
+	display: block !important;
 }
 
 .show-hide-info:checked ~ .show-info,
