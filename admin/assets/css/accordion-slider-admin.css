@@ -552,6 +552,15 @@ Single accordion page
 	font-weight: bold;
 }
 
+.modal-window-left .close-x {
+	right: 8px;
+	top: 8px;
+}
+
+.modal-window-left .close-x:before {
+	color: #000;
+}
+
 .modal-window .heading {
 	margin: 0 0 10px 0;
 	font-size: 20px;
