@@ -1,13 +1,13 @@
 === Accordion Slider ===
 Contributors: bqworks
-Tags: accordion slider, responsive slider, responsive accordion, image accordion, accordion plugin, vertical accordion
+Tags: accordion slider, responsive slider, responsive accordion, post accordion, image accordion, accordion plugin, vertical accordion, animated layers, accordion lightbox
 Requires at least: 4.0
 Tested up to: 6.0
-Stable tag: 1.9.1
+Stable tag: 1.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Fully responsive and touch-enabled accordion slider plugin for WordPress.
+Accordion Slider is a responsive accordion plugin that includes Premium features for FREE, including animated layers, post content, full width layout.
 
 == Description ==
 
@@ -73,6 +73,9 @@ When you select an image from the Media Library, in the right columns, under 'AT
 9. Adding dynamic tags for accordions generated from posts.
 
 == Changelog ==
+
+= 1.9.2 =
+* some fixes and improvements
 
 = 1.9.1 =
 * added code mirror editor to HTML textareas
