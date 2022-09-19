@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "bqworks/accordion-slider",
+  "version": "1.0.0",
+  "title": "Accordion Slider",
+  "category": "widgets",
+  "icon": "slides",
+  "description": "Insert a Accordion Slider instance.",
+  "keywords": [
+    "slider",
+    "accordion"
+  ],
+  "attributes": {
+    "accordionId": {
+      "type": "integer",
+      "default": -1
+    }
+  },
+  "supports": {
+    "html": false,
+    "customClassName": false
+  },
+  "example": {
+    "attributes": {
+      "accordionId": 1
+    }
+  },
+  "textdomain": "accordion-slider",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}
