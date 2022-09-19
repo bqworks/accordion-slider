@@ -60,7 +60,7 @@ class BQW_Accordion_Slider_Block {
 			));
 		} );
 
-		wp_localize_script( 'bqworks-accordion-slider-editor-script', 'ga_gutenberg_js_vars', array(
+		wp_localize_script( 'bqworks-accordion-slider-editor-script', 'as_gutenberg_js_vars', array(
 			'admin_url' => admin_url( 'admin.php' )
 		));
 	}
