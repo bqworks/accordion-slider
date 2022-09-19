@@ -3,11 +3,11 @@ Contributors: bqworks
 Tags: accordion slider, responsive slider, responsive accordion, post accordion, image accordion, accordion plugin, vertical accordion, animated layers, accordion lightbox
 Requires at least: 4.0
 Tested up to: 6.0
-Stable tag: 1.9.2
+Stable tag: 1.9.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Accordion Slider is a responsive accordion plugin that includes Premium features for FREE, including animated layers, post content, full width layout.
+Accordion Slider is a responsive accordion plugin that offers Premium features for FREE, like animated layers, post content, full width layout.
 
 == Description ==
 

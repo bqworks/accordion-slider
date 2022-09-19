@@ -2,14 +2,14 @@
 /**
  * Handles the server side functionality of the Accordion Slider Gutenberg block.
  * 
- * @since 1.9.2
+ * @since 1.9.3
  */
 class BQW_Accordion_Slider_Block {
 
 	/**
 	 * Current class instance.
 	 * 
-	 * @since 1.9.2
+	 * @since 1.9.3
 	 * 
 	 * @var object
 	 */
@@ -18,7 +18,7 @@ class BQW_Accordion_Slider_Block {
 	/**
 	 * Add initialization logic for the block.
 	 *
-	 * @since 1.9.2
+	 * @since 1.9.3
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
@@ -27,7 +27,7 @@ class BQW_Accordion_Slider_Block {
 	/**
 	 * Return the current class instance.
 	 *
-	 * @since 1.9.2
+	 * @since 1.9.3
 	 * 
 	 * @return object The instance of the current class.
 	 */
@@ -43,7 +43,7 @@ class BQW_Accordion_Slider_Block {
 	 * Register the block using the block.json file.
 	 * Register a route that will allow the fetching of some slider data (name and id).
 	 *
-	 * @since 1.9.2
+	 * @since 1.9.3
 	 */
 	public function init() {
 		if ( ! function_exists( 'register_block_type' ) || ! function_exists( 'register_rest_route' ) ) {
@@ -69,7 +69,7 @@ class BQW_Accordion_Slider_Block {
 	 * Endpoint for the 'accordion-slider/v1/accordions' route that returns
 	 * the id and name of the sliders.
 	 *
-	 * @since 1.9.2
+	 * @since 1.9.3
 	 */
 	public function get_accordions( $request ) {
 		global $wpdb;
