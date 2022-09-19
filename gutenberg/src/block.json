@@ -6,7 +6,7 @@
 	"title": "Accordion Slider",
 	"category": "widgets",
 	"icon": "slides",
-	"description": "Insert a Accordion Slider instance.",
+	"description": "Insert an Accordion Slider instance.",
 	"keywords": ["slider", "accordion"],
 	"attributes": {
 		"accordionId": {
