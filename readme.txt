@@ -74,6 +74,9 @@ When you select an image from the Media Library, in the right columns, under 'AT
 
 == Changelog ==
 
+= 1.9.3 =
+* add Gutenberg block
+
 = 1.9.2 =
 * some fixes and improvements
 
