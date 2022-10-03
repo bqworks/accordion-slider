@@ -539,11 +539,15 @@ class BQW_Accordion_Slider_Settings {
 			self::$settings = apply_filters( 'accordion_slider_default_settings', self::$settings );
 		}
 
-		if ( ! is_null( $name ) ) {
-			return self::$settings[ $name ];
+		if ( is_null( $name ) ) {
+			return self::$settings;
 		}
 
-		return self::$settings;
+		if ( is_null( self::$settings[ $name ] ) ) {
+			return null;
+		}
+
+		return self::$settings[ $name ];
 	}
 
 	/**
@@ -715,9 +719,10 @@ class BQW_Accordion_Slider_Settings {
 	 *
 	 * @since 1.0.0
 	 * 
-	 * @return array The array of layer settings.
+	 * @param  string $name The name of the setting. Optional.
+	 * @return array        The array of layer settings.
 	 */
-	public static function getLayerSettings() {
+	public static function getLayerSettings( $name = null ) {
 		if ( empty( self::$layer_settings ) ) {
 			self::$layer_settings = array(
 				'type' => array(
@@ -880,7 +885,15 @@ class BQW_Accordion_Slider_Settings {
 			self::$layer_settings = apply_filters( 'accordion_slider_default_layer_settings', self::$layer_settings );
 		}
 
-		return self::$layer_settings;
+		if ( is_null( $name ) ) {
+			return self::$layer_settings;
+		}
+
+		if ( is_null( self::$layer_settings[ $name ] ) ) {
+			return null;
+		}
+
+		return self::$layer_settings[ $name ];
 	}
 
 	/**
@@ -888,9 +901,10 @@ class BQW_Accordion_Slider_Settings {
 	 *
 	 * @since 1.0.0
 	 * 
-	 * @return array The array of panel settings.
+	 * @param  string $name The name of the setting. Optional.
+	 * @return array        The array of panel settings.
 	 */
-	public static function getPanelSettings() {
+	public static function getPanelSettings( $name = null ) {
 		if ( empty( self::$panel_settings ) ) {
 			self::$panel_settings = array(
 				'content_type' => array(
@@ -998,7 +1012,15 @@ class BQW_Accordion_Slider_Settings {
 			self::$panel_settings = apply_filters( 'accordion_slider_default_panel_settings', self::$panel_settings );
 		}
 
-		return self::$panel_settings;
+		if ( is_null( $name ) ) {
+			return self::$panel_settings;
+		}
+
+		if ( is_null( self::$panel_settings[ $name ] ) ) {
+			return null;
+		}
+		
+		return self::$panel_settings[ $name ];
 	}
 
 	/**
