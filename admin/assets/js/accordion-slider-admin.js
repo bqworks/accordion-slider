@@ -3832,6 +3832,11 @@
 		AccordionSliderAdmin.init();
 	});
 
+	window.accordionSlider = window.accordionSlider || {};
+
+	window.accordionSlider.admin = AccordionSliderAdmin;
+	window.accordionSlider.preview = PreviewWindow;
+
 })( jQuery );
 
 /*
