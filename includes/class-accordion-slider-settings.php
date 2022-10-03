@@ -19,16 +19,16 @@ class BQW_Accordion_Slider_Settings {
 	protected static $settings = array();
 
 	/**
-	 * The groups of settings.
+	 * The groups of accordion settings panels.
 	 *
 	 * The settings are grouped for the purpose of generating
-	 * the accordion's admin sidebar.
+	 * the accordion's admin sidebar panels.
 	 *
 	 * @since 1.0.0
 	 * 
 	 * @var array
 	 */
-	protected static $setting_groups = array();
+	protected static $accordion_settings_panels = array();
 
 	/**
 	 * Layer settings.
@@ -547,15 +547,15 @@ class BQW_Accordion_Slider_Settings {
 	}
 
 	/**
-	 * Return the setting groups.
+	 * Return the accordion settings panels.
 	 *
 	 * @since 1.0.0
 	 * 
-	 * @return array The array of setting groups.
+	 * @return array The array of settings panels.
 	 */
-	public static function getSettingGroups() {
-		if ( empty( self::$setting_groups ) ) {
-			self::$setting_groups = array(
+	public static function getAccordionSettingsPanels() {
+		if ( empty( self::$accordion_settings_panels ) ) {
+			self::$accordion_settings_panels = array(
 				'appearance' => array(
 					'label' => __( 'Appearance', 'accordion-slider' ),
 					'list' => array(
@@ -573,7 +573,8 @@ class BQW_Accordion_Slider_Settings {
 						'start_page',
 						'shuffle',
 						'custom_class'
-					)
+					),
+					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/default-panel.php'
 				),
 
 				'animations' => array(
@@ -588,7 +589,8 @@ class BQW_Accordion_Slider_Settings {
 						'close_panel_duration',
 						'page_scroll_duration',
 						'page_scroll_easing'
-					)
+					),
+					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/default-panel.php'
 				),
 
 				'autoplay' => array(
@@ -598,7 +600,8 @@ class BQW_Accordion_Slider_Settings {
 						'autoplay_delay',
 						'autoplay_direction',
 						'autoplay_on_hover'
-					)
+					),
+					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/default-panel.php'
 				),
 
 				'mouse_wheel' => array(
@@ -607,7 +610,8 @@ class BQW_Accordion_Slider_Settings {
 						'mouse_wheel',
 						'mouse_wheel_sensitivity',
 						'mouse_wheel_target'
-					)
+					),
+					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/default-panel.php'
 				),
 
 				'keyboard' => array(
@@ -616,7 +620,8 @@ class BQW_Accordion_Slider_Settings {
 						'keyboard',
 						'keyboard_only_on_focus',
 						'keyboard_target'
-					)
+					),
+					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/default-panel.php'
 				),
 
 				'swap_background' => array(
@@ -624,7 +629,8 @@ class BQW_Accordion_Slider_Settings {
 					'list' => array(
 						'swap_background_duration',
 						'fade_out_background'
-					)
+					),
+					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/default-panel.php'
 				),
 
 				'touch_swipe' => array(
@@ -632,7 +638,8 @@ class BQW_Accordion_Slider_Settings {
 					'list' => array(
 						'touch_swipe',
 						'touch_swipe_threshold'
-					)
+					),
+					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/default-panel.php'
 				),
 
 				'lightbox' => array(
@@ -643,7 +650,8 @@ class BQW_Accordion_Slider_Settings {
 					'inline_info' => array(
 						__( 'By default, the accordion will open the background image in the lightbox, but at its full size.' , 'accordion-slider' ),
 						__( 'If you want to open a different image or other content, you need to specify the custom content in the <i>Background Image</i> editor, in the <i>Link</i> field.' , 'accordion-slider' )
-					)
+					),
+					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/default-panel.php'
 				),
 
 				'video' => array(
@@ -654,7 +662,8 @@ class BQW_Accordion_Slider_Settings {
 						'play_video_action',
 						'pause_video_action',
 						'end_video_action'
-					)
+					),
+					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/default-panel.php'
 				),
 
 				'miscellaneous' => array(
@@ -663,12 +672,20 @@ class BQW_Accordion_Slider_Settings {
 						'lazy_loading',
 						'hide_image_title',
 						'link_target'
-					)
+					),
+					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/default-panel.php'
+				),
+
+				'breakpoints' => array(
+					'label' => __( 'Breakpoints', 'sliderpro' ),
+					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/breakpoints-panel.php'
 				)
 			);
 		}
 
-		return self::$setting_groups;
+		self::$accordion_settings_panels = apply_filters( 'accordion_slider_accordion_settings_panels', self::$accordion_settings_panels );
+
+		return self::$accordion_settings_panels;
 	}
 	
 	/**

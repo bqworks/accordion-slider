@@ -229,7 +229,7 @@ class BQW_Accordion_Slider_Add_Ons {
 			}
 		}
 		
-		include( 'views/add-ons.php' );
+		include( 'views/add-ons/add-ons.php' );
 	}
 
 	/**
@@ -345,7 +345,7 @@ class BQW_Accordion_Slider_Add_Ons {
 			}
 		}
 
-		include( 'views/add-on-more-details.php' );
+		include( 'views/add-ons/add-on-more-details.php' );
 
 		die();
 	}
@@ -425,7 +425,7 @@ class BQW_Accordion_Slider_Add_Ons {
 	public function ajax_load_install_add_on() {
 		$add_on_slug = sanitize_text_field( $_POST['add_on_slug'] );
 
-		include( 'views/install-add-on.php' );
+		include( 'views/add-ons/install-add-on.php' );
 
 		die();
 	}
@@ -488,7 +488,7 @@ class BQW_Accordion_Slider_Add_Ons {
 		$license_key_info = is_null( $add_on_data['license_key_info'] ) ? '' : wp_kses( $add_on_data['license_key_info'], $allowed_remote_html );
 		$license_key_info_class = $license_key_status === 'valid' ? 'license-key-valid' : 'license-key-not-valid';
 
-		include( 'views/edit-license-key.php' );
+		include( 'views/add-ons/edit-license-key.php' );
 
 		die();
 	}

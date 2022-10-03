@@ -1201,12 +1201,12 @@ Single accordion page
 
 /* Breakpoint settings
 --------------------------------------------------*/
-.breakpoints-box .inside {
+.breakpoints-panel .inside {
 	margin: 0;
 	padding: 0;
 }
 
-.breakpoints-box .add-breakpoint {
+.breakpoints-panel .add-breakpoint {
 	display: block;
 	margin: 10px;
 	text-align: center;
@@ -1216,18 +1216,18 @@ Single accordion page
 	background-color: #FFF;
 }
 
-.breakpoints-box table {
+.breakpoints-panel table {
 	width: 100%;
 	border-spacing: 0;
 	white-space: nowrap;
 }
 
-.breakpoints-box table th {
+.breakpoints-panel table th {
 	font-weight: normal;
 	padding: 10px 10px 10px 20px;
 }
 
-.breakpoints-box table td {
+.breakpoints-panel table td {
 	padding-left: 20px;
 }
 
