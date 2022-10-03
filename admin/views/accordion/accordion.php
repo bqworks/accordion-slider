@@ -61,11 +61,10 @@
                 <div class="sidebar-settings">
                     <?php 
                         $settings_panels = BQW_Accordion_Slider_Settings::getAccordionSettingsPanels();
-                        $panels_state = BQW_Accordion_Slider_Settings::getPanelsState();
+                        $default_panels_state = BQW_Accordion_Slider_Settings::getPanelsState();
 
                         foreach ( $settings_panels as $panel_name => $panel ) {
-                            $panel_state_class = isset( $panels_state ) && isset( $panels_state[ $panel_name ] ) ? $panels_state[ $panel_name ] : $panels_state[ $panel_name ];
-                            $panel_name_class = $panel_name . '-panel';
+                            $panel_state_class = isset( $panels_state ) && isset( $panels_state[ $panel_name ] ) ? $panels_state[ $panel_name ] : ( isset( $default_panels_state[ $panel_name ] ) ? $default_panels_state[ $panel_name ] : 'closed' );
                     ?>
                             <div class="postbox <?php echo esc_attr( $panel_name . '-panel' ) . ' ' . esc_attr( $panel_state_class ); ?>" data-name="<?php echo esc_attr( $panel_name ); ?>">
                                 <div class="handlediv"></div>
