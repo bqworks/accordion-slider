@@ -79,6 +79,7 @@
 			if ( parseInt( as_js_vars.id, 10 ) !== -1 ) {
 				this.loadAccordionData( function() {
 					that.checkBackgroundImageSize();
+					$( '.panels-container' ).attr( 'data-loaded', 'true' );
 				});
 			}
 
