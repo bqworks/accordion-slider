@@ -3,7 +3,7 @@ Contributors: bqworks
 Tags: accordion slider, responsive slider, responsive accordion, post accordion, image accordion, accordion plugin, vertical accordion, animated layers, accordion lightbox
 Requires at least: 4.0
 Tested up to: 6.0
-Stable tag: 1.9.3
+Stable tag: 1.9.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,10 @@ When you select an image from the Media Library, in the right columns, under 'AT
 9. Adding dynamic tags for accordions generated from posts.
 
 == Changelog ==
+
+= 1.9.4 =
+* add possiblity to extend the sidebar settings panels
+* other fixes and improvements
 
 = 1.9.3 =
 * add Gutenberg block
