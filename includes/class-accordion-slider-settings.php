@@ -681,7 +681,7 @@ class BQW_Accordion_Slider_Settings {
 				),
 
 				'breakpoints' => array(
-					'label' => __( 'Breakpoints', 'sliderpro' ),
+					'label' => __( 'Breakpoints', 'accordion-slider' ),
 					'renderer' => ACCORDION_SLIDER_DIR_PATH . 'admin/views/accordion-settings/breakpoints-panel.php'
 				)
 			);
