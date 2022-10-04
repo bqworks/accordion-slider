@@ -3753,6 +3753,8 @@
 					that.previewWindow.append( data.responseText );
 					that.previewWindow.css( 'visibility', '' );
 					spinner.css( { 'display': '', 'visibility': '' } );
+
+					$( window ).trigger( 'resize' );
 				}
 			});
 		},
@@ -3818,9 +3820,6 @@
 					that.previewWindow.parent().removeClass( 'modal-window-top' );
 				}
 			});
-
-			$( window ).trigger( 'resize' );
-			$( window ).trigger( 'resize' );
 		},
 
 		/**
