@@ -603,7 +603,7 @@ class BQW_Accordion_Slider_Admin {
 		$accordion = BQW_Accordion_Slider_Validation::validate_accordion_slider_data( json_decode( stripslashes( $_POST['data'] ), true ) );
 		$accordion_output = $this->plugin->output_accordion( $accordion, false ) . $this->plugin->get_inline_scripts();
 
-		include( 'views/accordion/preview-window.php' );
+		echo $accordion_output;
 
 		die();	
 	}

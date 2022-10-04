@@ -3736,14 +3736,22 @@
 			var that = this,
 				spinner = $( '.preview-spinner' ).css( { 'display': 'inline-block', 'visibility': 'visible' } );
 
+			$( 'body' ).append( '<div class="modal-overlay"></div>' +
+				'<div class="modal-window-container preview-window">' +
+				'	<div class="modal-window">' +
+				'		<span class="close-x"></span>' +
+				'	</div>' +
+				'</div>');
+
+			this.init();
+
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
 				data: { action: 'accordion_slider_preview_accordion', data: JSON.stringify( data ) },
 				complete: function( data ) {
-					$( 'body' ).append( data.responseText );
-					that.init();
-
+					that.previewWindow.append( data.responseText );
+					that.previewWindow.css( 'visibility', '' );
 					spinner.css( { 'display': '', 'visibility': '' } );
 				}
 			});
@@ -3763,6 +3771,8 @@
 
 			this.previewWindow = $( '.preview-window .modal-window' );
 			this.accordion = this.previewWindow.find( '.accordion-slider' );
+
+			this.previewWindow.css( 'visibility', 'hidden' );
 
 			this.previewWindow.find( '.close-x' ).on( 'click', function( event ) {
 				that.close();
