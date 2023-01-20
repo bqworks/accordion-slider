@@ -1,3 +1,8 @@
+[![Version](https://img.shields.io/wordpress/plugin/v/accordion-slider)](https://wordpress.org/plugins/accordion-slider/)
+[![License](https://img.shields.io/github/license/bqworks/accordion-slider)](https://wordpress.org/plugins/accordion-slider/)
+[![Downloads](https://img.shields.io/wordpress/plugin/dt/accordion-slider)](https://wordpress.org/plugins/accordion-slider/)
+[![Installs](https://img.shields.io/wordpress/plugin/installs/accordion-slider)](https://wordpress.org/plugins/accordion-slider/)
+
 # [Accordion Slider - WordPress accordion plugin](https://bqworks.net/accordion-slider/) #
 
 >Accordion Slider is a WordPress plugin that combines the look and functionality of a slider with that of an accordion, allowing you to create horizontal or vertical accordion sliders which are fully responsive and mobile-friendly.
