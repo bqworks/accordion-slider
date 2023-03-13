@@ -448,11 +448,11 @@ class BQW_Accordion_Slider {
 		}
 		
 		$inline_js = "\r\n" . '<script type="text/javascript">' .
-					"\r\n" . 'if (window.jQuery && window.jQuery?.fn.accordionSlider) {' .
+					"\r\n" . 'if (window.jQuery && window.jQuery.fn.accordionSlider) {' .
 					"\r\n" . '	initAccordionSlider();' .
 					"\r\n" . '} else {' .
 					"\r\n" . '	const initAccordionSliderTimer = setInterval(() => {' .
-					"\r\n" . '		if (window.jQuery && window.jQuery?.fn.accordionSlider) {' .
+					"\r\n" . '		if (window.jQuery && window.jQuery.fn.accordionSlider) {' .
 					"\r\n" . '			initAccordionSlider();' .
 					"\r\n" . '			clearInterval(initAccordionSliderTimer);' .
 					"\r\n" . '		}' .
