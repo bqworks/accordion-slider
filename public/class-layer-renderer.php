@@ -82,7 +82,7 @@ class BQW_AS_Layer_Renderer {
 		$this->data = $data;
 		$this->accordion_id = $accordion_id;
 		$this->panel_index = $panel_index;
-		$this->settings = $this->data['settings'];
+		$this->settings = isset( $this->data['settings'] ) ? $this->data['settings'] : [];
 	}
 
 	/**
