@@ -169,7 +169,10 @@
 				$.ajax({
 					url: as_js_vars.ajaxurl,
 					type: 'post',
-					data: { action: 'accordion_slider_close_image_size_warning' }
+					data: { 
+						action: 'accordion_slider_close_image_size_warning',
+						nonce: as_js_vars.cp_nonce
+					}
 				});
 			});
 
@@ -245,7 +248,10 @@
 				$.ajax({
 					url: as_js_vars.ajaxurl,
 					type: 'post',
-					data: { action: 'accordion_slider_getting_started_close' }
+					data: { 
+						action: 'accordion_slider_getting_started_close',
+						nonce: as_js_vars.cp_nonce
+					}
 				});
 			});
 
@@ -273,7 +279,10 @@
 					$.ajax({
 						url: as_js_vars.ajaxurl,
 						type: 'post',
-						data: { action: 'accordion_slider_close_custom_css_js_warning' }
+						data: {
+							action: 'accordion_slider_close_custom_css_js_warning',
+							nonce: as_js_vars.cp_nonce
+						}
 					});
 
 					dialog.remove();
