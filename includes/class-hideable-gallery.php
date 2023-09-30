@@ -46,7 +46,7 @@ if ( class_exists( 'BQW_Hideable_Gallery' ) === false ) {
 		 * @param  array $atts   The attributes passed to the shortcode.
 		 * @return string        The gallery output.
 		 */
-		public function overwrite_gallery( $output = '', $atts ) {
+		public function overwrite_gallery( $output = '', $atts = null ) {
 			if ( isset( $atts['hide'] ) && $atts['hide'] === 'true' ) {
 				$output = ' ';
 			}
