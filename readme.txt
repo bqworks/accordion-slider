@@ -3,7 +3,7 @@ Contributors: bqworks
 Donate link: https://bqworks.net/premium-add-ons/
 Tags: accordion slider, responsive slider, responsive accordion, post accordion, image accordion, accordion plugin, vertical accordion, animated layers, accordion lightbox
 Requires at least: 4.0
-Tested up to: 6.3
+Tested up to: 6.4
 Stable tag: 1.9.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
