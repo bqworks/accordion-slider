@@ -979,9 +979,11 @@ class BQW_Accordion_Slider_Admin {
             $post_names = $this->get_post_names();
 
             include( 'views/panel-settings/posts-panel-settings.php' );
-        } else if ( $type === 'gallery' ) {
+        } elseif ($type === 'posts_ids') {
+            include('views/panel-settings/posts-ids-panel-settings.php');
+        } elseif ( $type === 'gallery' ) {
             include( 'views/panel-settings/gallery-panel-settings.php' );
-        } else if ( $type === 'flickr' ) {
+        } elseif ( $type === 'flickr' ) {
             include( 'views/panel-settings/flickr-panel-settings.php' );
         } else {
             include( 'views/panel-settings/custom-panel-settings.php' );
