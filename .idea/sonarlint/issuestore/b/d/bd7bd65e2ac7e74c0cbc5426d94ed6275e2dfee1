@@ -1,9 +1,0 @@
-
-{	php:S1131"@Remove the useless trailing whitespaces at the end of this line.(óËµ¤J$8fdd839a-7353-41f3-9123-1baa23af76dd
-{	php:S1131'"@Remove the useless trailing whitespaces at the end of this line.(óËµ¤J$f3d844ab-c49b-47ca-83eb-237f6ee6a853
-wphp:S105"EReplace all tab characters in this file by sequences of white-spaces.J$727c33e0-ef45-4443-ad50-26c5508211ad
-php:S100+"SRename function "create_panel" to match the regular expression ^[a-z][a-zA-Z0-9]*$.(Ê—ìJ$962bee29-7073-4ae4-aec6-f517dd2496c6
- php:S101	"aRename class "BQW_AS_Panel_Renderer_Factory" to match the regular expression ^[A-Z][a-zA-Z0-9]*$.(‹şš©øÿÿÿÿJ$c865cd4b-8a08-4236-bc69-d32d2a63e511
-™php:S116"ZRename this field "$registered_types" to match the regular expression ^[a-z][a-zA-Z0-9]*$.(ÛïÉ†şÿÿÿÿJ$a1ee1547-8767-46bb-ace6-47d66ec06165
-•php:S116!"VRename this field "$default_type" to match the regular expression ^[a-z][a-zA-Z0-9]*$.(‘ØŠÿÿÿÿÿJ$329a6d3a-d1fc-492f-8976-273c6d0ad83d
-Yphp:S113"'Add a new line at the end of this file.J$5718e45e-7aaa-46d6-b5bd-6b30695a5da1
