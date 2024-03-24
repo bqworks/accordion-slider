@@ -876,10 +876,7 @@
 		 *
 		 * Add a posts IDs panel and pre-populate it with dynamic tags.
 		 *
-		 * Also, automatically open the Setting editor to allow the
-		 * user to configurate the WordPress query.
-		 *
-		 * @since 1.0.0
+		 * @since 1.9.8
 		 */
 		addPostsIDsPanels: function() {
 			var that = this,
