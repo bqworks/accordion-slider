@@ -136,6 +136,11 @@ class BQW_AS_Posts_Panel_Renderer extends BQW_AS_Dynamic_Panel_Renderer {
 
 			foreach ( $tags as $tag ) {
 				$result = $this->render_tag( $tag['name'], $tag['arg'], $post );
+
+				if ( is_null( $result ) ) {
+					$result = "";
+				}
+				
 				$content = str_replace( $tag['full'], $result, $content );
 			}
 

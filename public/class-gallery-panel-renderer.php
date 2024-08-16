@@ -111,6 +111,11 @@ class BQW_AS_Gallery_Panel_Renderer extends BQW_AS_Dynamic_Panel_Renderer {
 
 			foreach ( $tags as $tag ) {
 				$result = $this->render_tag( $tag['name'], $tag['arg'], $image );
+
+				if ( is_null( $result ) ) {
+					$result = "";
+				}
+				
 				$content = str_replace( $tag['full'], $result, $content );
 			}
 

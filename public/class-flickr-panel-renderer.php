@@ -120,6 +120,11 @@ class BQW_AS_Flickr_Panel_Renderer extends BQW_AS_Dynamic_Panel_Renderer {
 
 			foreach ( $tags as $tag ) {
 				$result = $this->render_tag( $tag['name'], $tag['arg'], $photo );
+
+				if ( is_null( $result ) ) {
+					$result = "";
+				}
+				
 				$content = str_replace( $tag['full'], $result, $content );
 			}
 
