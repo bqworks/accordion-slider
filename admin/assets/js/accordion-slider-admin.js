@@ -1744,6 +1744,14 @@
 				AccordionSliderAdmin.checkBackgroundImageSize();
 			});
 
+			$( window ).on( 'keydown.backgroundImageEditor', function( event ) {
+				if (event.key === 'Escape') {
+					event.preventDefault();
+					that.save();
+					that.close();
+				}
+			});
+
 			this.$editor.find( '.image-loader, .retina-loader' ).on( 'click', function( event ) {
 				event.preventDefault();
 				that.openMediaLibrary( event );
@@ -1905,6 +1913,7 @@
 			this.$editor.find( '.clear-fieldset' ).off( 'click' );
 			this.$editor.find( 'input[name="background_source"]' ).off( 'input' );
 			$( window ).off( 'resize.backgroundImageEditor' );
+			$( window ).off( 'keydown.backgroundImageEditor' );
 
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
@@ -1985,6 +1994,14 @@
 				that.close();
 			});
 
+			$( window ).on( 'keydown.htmlEditor', function( event ) {
+				if (event.key === 'Escape') {
+					event.preventDefault();
+					that.save();
+					that.close();
+				}
+			});
+
 			$( window ).on( 'resize.htmlEditor', function() {
 				if ( that.$editor.find( '.modal-window' ).outerWidth() >= $( window ).width() ) {
 					that.$editor.addClass( 'modal-window-left' );
@@ -2026,7 +2043,8 @@
 			this.$editor.find( '.close-x' ).off( 'click' );
 			this.$editor.find( '.html-code' ).codeEditor( 'destroy' );
 
-			$( 'window' ).off( 'resize.htmlEditor' );
+			$( window ).off( 'resize.htmlEditor' );
+			$( window ).off( 'keydown.htmlEditor' );
 
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
 		}
@@ -2148,6 +2166,14 @@
 				event.preventDefault();
 				that.save();
 				that.close();
+			});
+
+			$( window ).on( 'keydown.layersEditor', function( event ) {
+				if (event.key === 'Escape') {
+					event.preventDefault();
+					that.save();
+					that.close();
+				}
 			});
 
 			$( window ).on( 'resize.layersEditor', function() {
@@ -2548,6 +2574,7 @@
 			this.$editor.find( '.delete-layer' ).off( 'click' );
 			this.$editor.find( '.duplicate-layer' ).off( 'click' );
 			$( window ).off( 'resize.layersEditor' );
+			$( window ).off( 'keydown.layersEditor' );
 
 			$( '.list-layers' ).lightSortable( 'destroy' );
 
@@ -3516,6 +3543,14 @@
 				that.close();
 			});
 
+			$( window ).on( 'keydown.settingsEditor', function( event ) {
+				if (event.key === 'Escape') {
+					event.preventDefault();
+					that.save();
+					that.close();
+				}
+			});
+
 			// Listen when the content type changes in order to load a new 
 			// set of input fields, associated with the new content type.
 			this.$editor.find( '.panel-setting[name="content_type"]' ).on( 'change', function() {
@@ -3695,6 +3730,7 @@
 			this.$editor.find( '.close-x' ).off( 'click' );
 
 			$( window ).off( 'resize.settingsEditor' );
+			$( window ).off( 'keydown.settingsEditor' );
 
 			this.$editor.find( 'select[name="posts_post_types"]' ).multiCheck( 'destroy' );
 			this.$editor.find( 'select[name="posts_taxonomies"]' ).multiCheck( 'destroy' );
@@ -3847,6 +3883,13 @@
 				that.close();
 			});
 
+			$( window ).on( 'keydown.accordionSlider', function( event ) {
+				if (event.key === 'Escape') {
+					event.preventDefault();
+					that.close();
+				}
+			});
+
 			var accordionWidth = this.accordionData[ 'settings' ][ 'width' ],
 				accordionHeight = this.accordionData[ 'settings' ][ 'height' ],
 				isPercentageWidth = accordionWidth.toString().indexOf( '%' ) !== -1,
@@ -3899,6 +3942,7 @@
 		close: function() {
 			this.previewWindow.find( '.close-x' ).off( 'click' );
 			$( window ).off( 'resize.accordionSlider' );
+			$( window ).off( 'keydown.accordionSlider' );
 
 			this.accordion.accordionSlider( 'destroy' );
 			$( 'body' ).find( '.modal-overlay, .modal-window-container' ).remove();
