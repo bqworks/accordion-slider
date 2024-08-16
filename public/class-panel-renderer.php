@@ -61,6 +61,15 @@ class BQW_AS_Panel_Renderer {
 	protected $link_target = null;
 
 	/**
+	 * Indicates whether the image title will be hidden.
+	 *
+	 * @since 1.9.11
+	 * 
+	 * @var bool
+	 */
+	protected $hide_image_title = null;
+
+	/**
 	 * HTML markup of the panel.
 	 *
 	 * @since 1.0.0
