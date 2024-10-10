@@ -134,6 +134,7 @@ class BQW_Accordion_Slider_Validation {
 	 * @return array       Validated accordion slider panels.
 	 */
 	public static function validate_accordion_slider_panels( $panels_data ) {
+		global $allowedposttags;
 		$panels = array();
 		
 		foreach ( $panels_data as $panel_data ) {
@@ -147,7 +148,29 @@ class BQW_Accordion_Slider_Validation {
 				} else if ( $name === 'layers' ) {
 					$panel['layers'] = self::validate_panel_layers( $value );
 				} else if ( $name === 'html' ) {
-					$panel[ $name ] = $value;
+					$allowed_html = array_merge(
+						$allowedposttags,
+						array(
+							'iframe' => array(
+								'src' => true,
+								'width' => true,
+								'height' => true,
+								'allow' => true,
+								'allowfullscreen' => true,
+								'class' => true,
+								'id' => true,
+								'data-*' => true
+							),
+							'source' => array(
+								'src' => true,
+								'type' => true
+							)
+						)
+					);
+
+					$allowed_html = apply_filters( 'accordion_slider_allowed_html', $allowed_html );
+
+					$panel[ $name ] = wp_kses( $value, $allowed_html );
 				} else {
 					$panel[ $name ] = sanitize_text_field( $value );
 				}
