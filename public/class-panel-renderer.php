@@ -115,6 +115,30 @@ class BQW_AS_Panel_Renderer {
 	 * @return string the HTML markup of the panel.
 	 */
 	public function render() {
+		global $allowedposttags;
+		
+		$allowed_html = array_merge(
+			$allowedposttags,
+			array(
+				'iframe' => array(
+					'src' => true,
+					'width' => true,
+					'height' => true,
+					'allow' => true,
+					'allowfullscreen' => true,
+					'class' => true,
+					'id' => true,
+					'data-*' => true
+				),
+				'source' => array(
+					'src' => true,
+					'type' => true
+				)
+			)
+		);
+
+		$allowed_html = apply_filters( 'accordion_slider_allowed_html', $allowed_html );
+
 		$classes = 'as-panel';
 		$classes = apply_filters( 'accordion_slider_panel_classes' , $classes, $this->accordion_id, $this->panel_index );
 
@@ -129,7 +153,7 @@ class BQW_AS_Panel_Renderer {
 		}
 
 		if ( $this->has_html() ) {
-			$this->html_output .= "\r\n" . '			' . $this->create_html();
+			$this->html_output .= "\r\n" . '			' . wp_kses( $this->create_html(), $allowed_html );
 		}
 
 		if ( $this->has_layers() ) {
