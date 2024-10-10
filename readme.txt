@@ -80,6 +80,10 @@ When you select an image from the Media Library, in the right columns, under 'AT
 
 == Changelog ==
 
+= 1.9.12 =
+* sanitize html content output, to prevent JavaScript code
+added by users who have access to the plugin's editing area
+
 = 1.9.11 =
 * improve accessibility for admin editor panels
 * fix deprecation notices
