@@ -13,7 +13,7 @@ class BQW_Accordion_Slider {
 	 * 
 	 * @var string
 	 */
-	const VERSION = '1.9.13';
+	const VERSION = '1.9.14';
 
 	/**
 	 * Plugin slug.
@@ -662,6 +662,8 @@ class BQW_Accordion_Slider {
 			foreach ( $atts as $key => $value ) {
 				if ( $key === 'posts_post_types' || $key === 'posts_taxonomies' ) {
 					$value = explode( ',', $value );
+				} else {
+					$value = sanitize_text_field( $value );
 				}
 
 				$panel['settings'][ $key ] = $value;
@@ -719,9 +721,11 @@ class BQW_Accordion_Slider {
 		$attributes = array( 'layer_settings' => array() );
 
 		foreach ( $atts as $key => $value ) {
+			$name = sanitize_text_field( $atts[$key] );
+
 			if ( $key === 'name' ) {
-				$attributes[ $atts['name'] ] = $content;
-			} else if ( isset( $atts['name'] ) && $atts['name'] === 'layer' ) {
+				$attributes[ $name ] = $content;
+			} else if ( isset( $name ) && $name === 'layer' ) {
 				if ( $value === 'true' ) {
 					$value = true;
 				} else if ( $value === 'false' ) {
@@ -730,7 +734,9 @@ class BQW_Accordion_Slider {
 					$value = explode( ',', $value );
 				}
 
-				$attributes['layer_settings'][ $key ] = $value;
+				$attributes['layer_settings'][ $key ] = sanitize_text_field( $value );
+			} else {
+				$value = sanitize_text_field( $value );
 			}
 		}
 
