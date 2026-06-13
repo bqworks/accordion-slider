@@ -3851,7 +3851,7 @@
 			$.ajax({
 				url: as_js_vars.ajaxurl,
 				type: 'post',
-				data: { action: 'accordion_slider_preview_accordion', data: JSON.stringify( data ) },
+				data: { action: 'accordion_slider_preview_accordion', data: JSON.stringify( data ), nonce: as_js_vars.pa_nonce },
 				complete: function( data ) {
 					that.previewWindow.append( data.responseText );
 					that.previewWindow.css( 'visibility', '' );
