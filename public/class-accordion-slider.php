@@ -568,7 +568,9 @@ class BQW_Accordion_Slider {
 		// override the accordion's settings with those specified in the shortcode
 		foreach ( $atts as $key => $value ) {
 			if ( $key === 'breakpoints' ) {
-				$value = json_decode( stripslashes( $value ), true );
+				// pass the breakpoints through the same validation that is applied to the
+				// breakpoints loaded from the database
+				$value = BQW_Accordion_Slider_Validation::validate_accordion_slider_breakpoint_settings( json_decode( stripslashes( $value ), true ) );
 			} else if ( $value === 'true' ) {
 				$value = true;
 			} else if ( $value === 'false' ) {

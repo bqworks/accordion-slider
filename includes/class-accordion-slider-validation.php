@@ -98,13 +98,21 @@ class BQW_Accordion_Slider_Validation {
 		$default_breakpoint_settings = BQW_Accordion_Slider_Settings::getBreakpointSettings();
 		$breakpoints = array();
 
+		if ( ! is_array( $breakpoints_data ) ) {
+			return $breakpoints;
+		}
+
 		foreach ( $breakpoints_data as $breakpoint_data ) {
+			if ( ! is_array( $breakpoint_data ) || ! isset( $breakpoint_data['breakpoint_width'] ) || is_scalar( $breakpoint_data['breakpoint_width'] ) === false ) {
+				continue;
+			}
+
 			$breakpoint = array(
 				'breakpoint_width' => floatval( $breakpoint_data['breakpoint_width'] )
 			);
 
 			foreach ( $breakpoint_data as $name => $value ) {
-				if ( in_array( $name, $default_breakpoint_settings ) ) {
+				if ( in_array( $name, $default_breakpoint_settings ) && is_scalar( $value ) ) {
 					$type = $default_accordion_slider_settings[ $name ][ 'type' ];
 
 					if ( $type === 'boolean' ) {
